@@ -1,0 +1,285 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# Martin Raiber <urpc@gmx.de>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup 0.34\n"
+"Report-Msgid-Bugs-To: urpc@gmx.de\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2011-01-16 19:43+0100\n"
+"Last-Translator: Martin Raiber <urpc@gmx.de>\n"
+"Language-Team: ENGLISH <urpc@gmx.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: gui/GUI.cpp:26
+msgid "Intervall für inkrementelle Backups:"
+msgstr "Interval for incremental file backups:"
+
+#: gui/GUI.cpp:30
+msgid "Intervall für volle Backups:"
+msgstr "Interval for full file backups:"
+
+#: gui/GUI.cpp:34
+msgid "Intervall für inkrementelle Image-Backups:"
+msgstr "Interval for incremental image backups:"
+
+#: gui/GUI.cpp:38
+msgid "Intervall für volle Image-Backups:"
+msgstr "Interval for full image backups:"
+
+#: gui/GUI.cpp:46
+msgid "Minimale Anzahl an inkrementellen Backups:"
+msgstr "Minimal number of incremental file backups:"
+
+#: gui/GUI.cpp:50
+msgid "Maximale Anzahl an inkrementellen Backups:"
+msgstr "Maximal number of incremental file backups:"
+
+#: gui/GUI.cpp:54
+msgid "Minimale Anzahl an vollen Backups:"
+msgstr "Minimal number of full file backups:"
+
+#: gui/GUI.cpp:58
+msgid "Maximale Anzahl an vollen Backups:"
+msgstr "Maximal number of full file backups:"
+
+#: gui/GUI.cpp:66
+msgid "Minimale Anzahl an inkrementellen Image-Backups:"
+msgstr "Minimal number of incremental image backups:"
+
+#: gui/GUI.cpp:70
+msgid "Maximale Anzahl an inkrementellen Image-Backups:"
+msgstr "Maximal number of incremental image backups:"
+
+#: gui/GUI.cpp:74
+msgid "Minimale Anzahl an vollen Image-Backups:"
+msgstr "Minimal number of full image backups:"
+
+#: gui/GUI.cpp:78
+msgid "Maximale Anzahl an vollen Image-Backups:"
+msgstr "Maximal number of full image backups:"
+
+#: gui/GUI.cpp:93
+msgid "Stunden"
+msgstr "hours"
+
+#: gui/GUI.cpp:105
+#: gui/GUI.cpp:117
+#: gui/GUI.cpp:137
+msgid "Tage"
+msgstr "days"
+
+#: gui/GUI.cpp:124
+msgid "Aktiv"
+msgstr "Active"
+
+#: gui/GUI.cpp:232
+#: gui/GUI.cpp:389
+msgid "OK"
+msgstr "Ok"
+
+#: gui/GUI.cpp:237
+#: ConfigPath.cpp:13
+msgid "Abbrechen"
+msgstr "Abort"
+
+#: gui/GUI.cpp:282
+msgid "Filter:"
+msgstr "Filter:"
+
+#: gui/GUI.cpp:286
+#: TrayIcon.cpp:119
+msgid "Info"
+msgstr "Infos"
+
+#: gui/GUI.cpp:286
+msgid "Warnings"
+msgstr "Warnings"
+
+#: gui/GUI.cpp:286
+msgid "Errors"
+msgstr "Errors"
+
+#: gui/GUI.cpp:303
+msgid "Verlassen"
+msgstr "Exit"
+
+#: gui/GUI.cpp:356
+msgid "Version:"
+msgstr "Version:"
+
+#: gui/GUI.cpp:368
+msgid "Autor:"
+msgstr "Author:"
+
+#: ConfigPath.cpp:6
+msgid "Pfade hinzufügen und entfernen"
+msgstr "Remove/Add backup paths"
+
+#: ConfigPath.cpp:12
+msgid "Ok"
+msgstr "Ok"
+
+#: ConfigPath.cpp:14
+msgid "Neuer Pfad"
+msgstr "Add path"
+
+#: ConfigPath.cpp:15
+msgid "Pfad entfernen"
+msgstr "Remove path"
+
+#: ConfigPath.cpp:26
+#: Logs.cpp:10
+msgid "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgstr "There was an error. Currently nothing can be backed up."
+
+#: ConfigPath.cpp:54
+msgid "Bitte Verzeichnis das gesichert werden soll auswählen"
+msgstr "Please select the directory that will be backed up."
+
+#: main.cpp:125
+msgid "UrBackup: Update verfügbar"
+msgstr "UrBackup: Update available"
+
+#: main.cpp:125
+msgid "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+msgstr "A new version of UrBackup is available. Please click here to install it now."
+
+#: main.cpp:143
+msgid "Keine Verbindung zum Backupserver möglich"
+msgstr "Cannot connect to backup server"
+
+#: main.cpp:163
+msgid "Inkrementelles Backup läuft. "
+msgstr "Incremental file backup running."
+
+#: main.cpp:175
+msgid "Volles Backup läuft. "
+msgstr "Full file backup running."
+
+#: main.cpp:186
+msgid "Inkrementelles Image-Backup läuft. "
+msgstr "Incremental image backup running."
+
+#: main.cpp:197
+msgid "Volles Image-Backup läuft. "
+msgstr "Full image backup running."
+
+#: main.cpp:208
+msgid "Kein aktuelles Backup. "
+msgstr "No current backup."
+
+#: main.cpp:219
+msgid "Letztes Backup am "
+msgstr "Last backup on "
+
+#: Settings.cpp:156
+msgid "Die inkrementelle Backupzeit ist keine Zahl"
+msgstr "The incremental backup interval is not a number"
+
+#: Settings.cpp:162
+msgid "Die volle Backupzeit ist keine Zahl"
+msgstr "The full backup interval  is not a number"
+
+#: Settings.cpp:168
+msgid "Die volle Imagebackupzeit ist keine Zahl"
+msgstr "The full image backup interval  is not a number"
+
+#: Settings.cpp:174
+msgid "Die inkrementelle Imagebackupzeit ist keine Zahl"
+msgstr "The incremental image backup time is not a number"
+
+#: Settings.cpp:180
+msgid "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "The maximal number of incremental file backups  is not a number"
+
+#: Settings.cpp:186
+msgid "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "The minimal number of incremental file backups is not a number"
+
+#: Settings.cpp:192
+msgid "Die maximale Anzahl an vollen Backups ist keine Zahl"
+msgstr "The maximal number of full file backups is not a number"
+
+#: Settings.cpp:198
+msgid "Die minimale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Minimal number of full file backups is not a number"
+
+#: Settings.cpp:204
+msgid "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Minimal number of incremental image backups is not a number"
+
+#: Settings.cpp:210
+msgid "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Maximal number of incremental image backups is not a number"
+
+#: Settings.cpp:216
+msgid "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Minimal number of full image backups is not a number"
+
+#: Settings.cpp:222
+msgid "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Maximal number of full image backups is not a number"
+
+#: TrayIcon.cpp:49
+#: TrayIcon.cpp:72
+msgid "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+msgstr "A backup is already running. Could not start another one."
+
+#: TrayIcon.cpp:51
+#: TrayIcon.cpp:74
+msgid "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+msgstr "Could not start backup, because no backup server was found."
+
+#: TrayIcon.cpp:86
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+msgstr "Pausing failed: No connection to backup server."
+
+#: TrayIcon.cpp:99
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+msgstr "Continuing failed: No connection to backup server."
+
+#: TrayIcon.cpp:111
+msgid "Volles Backup jetzt"
+msgstr "Do full file backup"
+
+#: TrayIcon.cpp:112
+msgid "Inkremetelles Backup jetzt"
+msgstr "Do incremental file backup"
+
+#: TrayIcon.cpp:113
+msgid "Volles Image-Backup jetzt"
+msgstr "Do full image backup"
+
+#: TrayIcon.cpp:114
+msgid "Inkremetelles Image-Backup jetzt"
+msgstr "Do incremental image backup"
+
+#: TrayIcon.cpp:116
+msgid "Einstellungen"
+msgstr "Settings"
+
+#: TrayIcon.cpp:117
+msgid "Pfade konfigurieren"
+msgstr "Add/Remove backup paths"
+
+#: TrayIcon.cpp:118
+msgid "Logs"
+msgstr "Logs"
+
+#: TrayIcon.cpp:124
+msgid "Pausieren"
+msgstr "Pause"
+
+#: TrayIcon.cpp:128
+msgid "Fortfahren"
+msgstr "Continue"
+
+#: Gui.h:144
+msgid "Informationen"
+msgstr "Informations"
+

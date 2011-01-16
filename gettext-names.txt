@@ -1,0 +1,7 @@
+gui/GUI.cpp
+ConfigPath.cpp
+Logs.cpp
+main.cpp
+Settings.cpp
+TaskBarBaloon.cpp
+TrayIcon.cpp
