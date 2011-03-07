@@ -21,13 +21,26 @@
 
 std::string ConvertToUTF8(const std::wstring &input);
 
+bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *settings)
+{
+	if(!settings->getValue(key, ret) )
+	{
+		if(!settings->getValue(key+L"_def", ret) )
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
 	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
 	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
 
 	std::wstring t;
-	if(settings->getValue(L"update_freq_incr", &t))
+	if(getSettingsValue(L"update_freq_incr", &t, settings))
 	{
 		m_textCtrl1->SetValue(wxString(convert(watoi(t)/60/60).c_str()));
 	}
@@ -35,7 +48,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl1->SetValue(wxT("1"));
 	}
-	if(settings->getValue(L"update_freq_full", &t))
+	if(getSettingsValue(L"update_freq_full", &t, settings))
 	{
 		m_textCtrl2->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
 	}
@@ -43,7 +56,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl1->SetValue(wxT("30"));
 	}
-	if(settings->getValue(L"update_freq_image_full", &t))
+	if(getSettingsValue(L"update_freq_image_full", &t, settings))
 	{
 		if(watoi(t)>0)
 		{
@@ -66,7 +79,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		m_textCtrl21->SetValue(wxT("60"));
 		m_checkBox1->SetValue(true);
 	}
-	if(settings->getValue(L"update_freq_image_incr", &t))
+	if(getSettingsValue(L"update_freq_image_incr", &t, settings))
 	{
 		m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
 	}
@@ -74,7 +87,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl21->SetValue(wxT("7"));
 	}
-	if(settings->getValue(L"max_file_incr", &t))
+	if(getSettingsValue(L"max_file_incr", &t, settings))
 	{
 		m_textCtrl131->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -82,7 +95,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl131->SetValue(wxT("100"));
 	}
-	if(settings->getValue(L"min_file_incr", &t))
+	if(getSettingsValue(L"min_file_incr", &t, settings))
 	{
 		m_textCtrl13->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -90,7 +103,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl13->SetValue(wxT("40"));
 	}
-	if(settings->getValue(L"max_file_full", &t))
+	if(getSettingsValue(L"max_file_full", &t, settings))
 	{
 		m_textCtrl133->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -98,7 +111,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl133->SetValue(wxT("10"));
 	}
-	if(settings->getValue(L"min_file_full", &t))
+	if(getSettingsValue(L"min_file_full", &t,settings))
 	{
 		m_textCtrl132->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -106,7 +119,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl132->SetValue(wxT("2"));
 	}
-	if(settings->getValue(L"min_image_incr", &t))
+	if(getSettingsValue(L"min_image_incr", &t,settings))
 	{
 		m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -114,7 +127,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl134->SetValue(wxT("4"));
 	}
-	if(settings->getValue(L"max_image_incr", &t))
+	if(getSettingsValue(L"max_image_incr", &t, settings))
 	{
 		m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -122,7 +135,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl135->SetValue(wxT("30"));
 	}
-	if(settings->getValue(L"min_image_full", &t))
+	if(getSettingsValue(L"min_image_full", &t, settings))
 	{
 		m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
@@ -130,7 +143,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl136->SetValue(wxT("2"));
 	}
-	if(settings->getValue(L"max_image_full", &t))
+	if(getSettingsValue(L"max_image_full", &t, settings))
 	{
 		m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
