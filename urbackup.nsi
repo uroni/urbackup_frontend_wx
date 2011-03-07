@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 0.35"
-OutFile "UrBackup Client 0.35-1.exe"
+Name "UrBackup 0.36"
+OutFile "UrBackup Client 0.36-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -44,16 +44,15 @@ Section "install"
 	${EndIf}
 	
 	${If} ${RunningX64}
-		ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\Runtimes\x64" 'Installed'
-		${If} $0 != '1'
-			ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x64" 'Installed'
-			${If} $0 != '1'
-				inetc::get "http://www.urserver.de/vc10/vcredist_x64.exe" $TEMP\vcredist_x64.exe
-				Pop $0
-				ExecWait '"$TEMP\vcredist_x64.exe" /q'  
-				Delete '$TEMP\vcredist_x64.exe'
-			${EndIf}
-		${EndIf}
+		Push $R0
+   		ClearErrors
+   		ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{DA5E371C-6333-3D8A-93A4-6FD5B20BCC6E}" "Version"
+	   	IfErrors 0 VSRedistInstalled64
+		inetc::get "http://www.urserver.de/vc10/vcredist_x64.exe" $TEMP\vcredist_x64.exe
+		Pop $0
+		ExecWait '"$TEMP\vcredist_x64.exe" /q'  
+		Delete '$TEMP\vcredist_x64.exe'
+VSRedistInstalled64:
 	${Else}
 		ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\Runtimes\x86" 'Installed'
 		${If} $0 != '1'
@@ -70,6 +69,8 @@ Section "install"
 	StrCpy $0 "UrBackupClient.exe"
 	KillProc::KillProcesses
 	
+	SetOutPath "$INSTDIR"
+	
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
@@ -84,8 +85,6 @@ Section "install"
 	;SimpleSC::RemoveService "UrBackupServer"
 	;Pop $0
 	
-	SetOutPath "$INSTDIR"
-	
 	Sleep 500
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -99,6 +98,7 @@ Section "install"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "Path" "$INSTDIR"
 	
 	File "data\args.txt"
+	File "data\prefilebackup.bat"
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
@@ -208,7 +208,6 @@ Section "Uninstall"
 	KillProc::KillProcesses
 	
 	${If} ${RunningX64}
-		File "data_x64\KillProc.exe"		
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 
@@ -253,7 +252,7 @@ Function un.onInit
 FunctionEnd
  
 Function un.onUninstSuccess
-  MessageBox MB_OK "UrBackup wurde erfolgreich deinstalliert."
+  ;MessageBox MB_OK "UrBackup wurde erfolgreich deinstalliert."
 FunctionEnd
 
 Function myGuiInit
