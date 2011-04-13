@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 0.35"
+!define MUI_BRANDINGTEXT "UrBackup 0.37"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 0.36"
-OutFile "UrBackup Client 0.36-1.exe"
+Name "UrBackup 0.37"
+OutFile "UrBackup Client 0.37-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
