@@ -155,23 +155,27 @@ msgstr "Cannot connect to backup server"
 
 #: main.cpp:163
 msgid "Inkrementelles Backup läuft. "
-msgstr "Incremental file backup running."
+msgstr "Incremental file backup running. "
 
 #: main.cpp:175
 msgid "Volles Backup läuft. "
-msgstr "Full file backup running."
+msgstr "Full file backup running. "
 
 #: main.cpp:186
 msgid "Inkrementelles Image-Backup läuft. "
-msgstr "Incremental image backup running."
+msgstr "Incremental image backup running. "
 
 #: main.cpp:197
 msgid "Volles Image-Backup läuft. "
-msgstr "Full image backup running."
+msgstr "Full image backup running. "
+
+#: main.cpp:205
+msgid "% fertig. "
+msgstr "% done. "
 
 #: main.cpp:208
 msgid "Kein aktuelles Backup. "
-msgstr "No current backup."
+msgstr "No current backup. "
 
 #: main.cpp:219
 msgid "Letztes Backup am "
@@ -282,4 +286,3 @@ msgstr "Continue"
 #: Gui.h:144
 msgid "Informationen"
 msgstr "Informations"
-

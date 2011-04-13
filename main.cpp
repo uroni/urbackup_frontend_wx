@@ -202,7 +202,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=wxT("% fertig. ");
+			status_text+=_("% fertig. ");
 		}
 		icon_type=1;
 		working_status=1;
@@ -214,7 +214,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=wxT("% fertig. ");
+			status_text+=_("% fertig. ");
 		}
 		icon_type=1;
 		working_status=2;
@@ -225,7 +225,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=wxT("% fertig. ");
+			status_text+=_("% fertig. ");
 		}
 		icon_type=1;
 		working_status=3;
@@ -236,7 +236,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=wxT("% fertig. ");
+			status_text+=_("% fertig. ");
 		}
 		icon_type=1;
 		working_status=4;
