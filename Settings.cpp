@@ -359,9 +359,9 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["max_image_incr"]=nconvert(l_max_image_incr);
 	n_vals["min_image_full"]=nconvert(l_min_image_full);
 	n_vals["max_image_full"]=nconvert(l_max_image_full);
-	n_vals["computername"]=computername.c_str();
-	n_vals["backup_window"]=backup_window.c_str();
-	n_vals["exclude_files"]=exclude_files.c_str();
+	n_vals["computername"]=computername.ToUTF8();
+	n_vals["backup_window"]=backup_window.ToUTF8();
+	n_vals["exclude_files"]=exclude_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay);
 
 	std::string ndata;
