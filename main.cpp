@@ -58,6 +58,8 @@ public:
     TheFrame(void) : wxFrame(NULL, -1, wxT("UrBackupGUI")) { }
 };
 
+std::string g_lang="en";
+
 
 bool MyApp::OnInit()
 {
@@ -79,6 +81,16 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_GERMAN_LUXEMBOURG:
 	case wxLANGUAGE_GERMAN_SWISS:
 		lang=wxLANGUAGE_GERMAN;
+		g_lang="de";
+		break;
+	case wxLANGUAGE_FRENCH:
+	case wxLANGUAGE_FRENCH_BELGIAN:
+	case wxLANGUAGE_FRENCH_CANADIAN:
+	case wxLANGUAGE_FRENCH_LUXEMBOURG:
+	case wxLANGUAGE_FRENCH_MONACO:
+	case wxLANGUAGE_FRENCH_SWISS:
+		lang=wxLANGUAGE_FRENCH;
+		g_lang="fr";
 		break;
 	}
 
@@ -188,6 +200,7 @@ void MyTimer::Notify()
 	}
 
 	int last_icon_type=icon_type;
+	bool refresh=false;
 	
 	if(status.status==wxT("DONE") )
 	{
@@ -195,6 +208,7 @@ void MyTimer::Notify()
 		lastbackuptime=startuptime_passed+passed;
 		icon_type=0;
 		working_status=0;
+		refresh=true;
 	}
 	else if(status.status==wxT("INCR") )
 	{
@@ -272,7 +286,7 @@ void MyTimer::Notify()
 		icon_type=3;
 	}
 
-	if(icon_type!=last_icon_type || last_status!=status_text)
+	if(icon_type!=last_icon_type || last_status!=status_text || refresh)
 	{
 		last_status=status_text;
 		switch(icon_type)

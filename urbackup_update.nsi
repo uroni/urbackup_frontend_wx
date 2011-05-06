@@ -18,6 +18,8 @@ RequestExecutionLevel highest
 
 
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "French"
  
 
 Section "install"
@@ -83,7 +85,7 @@ VSRedistInstalled64:
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "Path" "$INSTDIR"
 	
 	File "data\args.txt"
-	File "data\prefilebackup.bat"
+	File "data\prefilebackup_new.bat"
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
@@ -118,6 +120,8 @@ VSRedistInstalled64:
 	File "data\license.txt"
 	SetOutPath "$INSTDIR\en"
 	File "data\en\trans.mo"
+	SetOutPath "$INSTDIR\fr"
+	File "data\fr\trans.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
@@ -164,8 +168,19 @@ do_copy:
 	Pop $0
 next_s:	
 	Delete "$INSTDIR\urbackup\backup_client_new.db"
+	
 	nsisFirewall::AddAuthorizedApplication "$INSTDIR\urbackupsrv.exe" "UrBackup Server"
 	Pop $0
+	
+	IfFileExists "$INSTDIR\prefilebackup.bat" next_s_pfb do_copy_pfb
+do_copy_pfb:
+	StrCpy $0 "$INSTDIR\prefilebackup_new.bat" ;Path of copy file from
+	StrCpy $1 "$INSTDIR\prefilebackup.bat"   ;Path of copy file to
+	StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
+	System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
+	Pop $0
+next_s_pfb:	
+	Delete "$INSTDIR\prefilebackup_new.bat"
 	
 	SimpleSC::ExistsService "UrBackupServer"
 	Pop $0

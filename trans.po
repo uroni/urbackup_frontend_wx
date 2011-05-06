@@ -286,3 +286,26 @@ msgstr "Continue"
 #: Gui.h:144
 msgid "Informationen"
 msgstr "Informations"
+
+#:Gui.cpp
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Backupverzögerung nach Systemstart:"
+msgstr "Backup delay after system start:"
+
+msgid "Backup Zeitfenster:"
+msgstr "Backup window:"
+
+msgid "Vom Backup auszuschließen (mit Wildcards):"
+msgstr "Exclude from backup (with wildcards):"
+
+msgid "Computername:"
+msgstr "Computer name:"
+
+msgid "min"
+msgstr "min"
+
+#:Settings.cpp
+msgid "Die Verzögerung bei Systemstart ist keine Zahl"
+msgstr "Backup delay after system start is not a number"
