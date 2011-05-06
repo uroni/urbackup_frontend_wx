@@ -118,6 +118,7 @@ VSRedistInstalled64:
 	File "data\curr_version.txt"
 	File "data\updates_h.dat"
 	File "data\license.txt"
+	File "data\info.txt"
 	SetOutPath "$INSTDIR\en"
 	File "data\en\trans.mo"
 	SetOutPath "$INSTDIR\fr"
