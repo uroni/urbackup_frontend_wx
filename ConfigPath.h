@@ -20,19 +20,25 @@
 #include <wx/listctrl.h>
 
 #include "Connector.h"
+#include "gui/GUI.h"
 
 
-class ConfigPath : public wxFrame
+class ConfigPath : public GUIConfigPath
 {
 public:
-	ConfigPath(void);
+	ConfigPath(wxWindow* parent);
 
 	void OnClickOk(wxCommandEvent &evt);
 	void OnClickAbort(wxCommandEvent &evt);
 	void OnClickNew(wxCommandEvent &evt);
 	void OnClickDel(wxCommandEvent &evt);
+	void OnPathSelected(wxCommandEvent &evt);
+	void OnNameTextChange(wxCommandEvent &evt);
+	
 
 private:
 	std::vector<SBackupDir> dirs;
-	wxListBox *listbox;
+
+	std::string getDefaultDirname(const std::string &path);
+	bool findPathName(const std::string &pn);
 };

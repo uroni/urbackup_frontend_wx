@@ -131,13 +131,19 @@ bool Connector::hasError(void)
 std::vector<SBackupDir> Connector::getSharedPaths(void)
 {
 	std::vector<SBackupDir> ret;
-	std::string d=getResponse("GET BACKUP DIRS","");
+	std::string d=getResponse("1GET BACKUP DIRS","");
 	int lc=linecount(d);
 	for(int i=0;i<lc;i+=2)
 	{
 		SBackupDir bd;
 		bd.id=atoi(getline(i, d).c_str() );
 		bd.path=wxString::FromUTF8(getline(i+1, d).c_str() );
+		std::string path=bd.path.c_str();
+		if(path.find("|")!=std::string::npos)
+		{
+			bd.path=getafter("|", path);
+			bd.name=getuntil("|", path);
+		}
 		ret.push_back( bd );
 	}
 	return ret;
@@ -152,6 +158,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 			args+="&";
 
 		args+="dir_"+nconvert(i)+"="+(std::string)res[i].path.ToUTF8().data();
+		args+="&dir_"+nconvert(i)+"_name="+(std::string)res[i].name.ToUTF8().data();
 	}
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args);

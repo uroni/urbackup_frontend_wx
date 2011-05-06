@@ -51,7 +51,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 	}
 	if(evt.GetId()==ID_TI_ADD_PATH)
 	{
-		ConfigPath *cp=new ConfigPath();
+		ConfigPath *cp=new ConfigPath(NULL);
 	}
 	else if(evt.GetId()==ID_TI_BACKUP_FULL || evt.GetId()==ID_TI_BACKUP_INCR)
 	{

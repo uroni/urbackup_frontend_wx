@@ -17,25 +17,18 @@
 **************************************************************************/
 
 #include "ConfigPath.h"
+#include "stringtools.h"
 
 #define CP_ID_OK 100
 
-ConfigPath::ConfigPath(void)
-: wxFrame(NULL, wxID_ANY, _("Pfade hinzufügen und entfernen"), wxDefaultPosition, wxSize(500, 600))
+std::string ConvertToUTF8(const std::wstring &input);
+wxTextValidator getPathValidator(void);
+
+ConfigPath::ConfigPath(wxWindow* parent)
+: GUIConfigPath(parent)
 
 {
 	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
-	wxPanel *panel = new wxPanel(this, wxID_ANY);
-	listbox=new wxListBox(panel, wxID_ANY, wxPoint(17,5), wxSize(450,500));
-	wxButton *btnOk=new wxButton(panel, wxID_ANY, _("Ok"), wxPoint(17,517), wxSize(60,30) );
-	wxButton *btnAbort=new wxButton(panel, wxID_ANY, _("Abbrechen"), wxPoint(85,517), wxSize(70,30) );
-	wxButton *btnNew=new wxButton(panel, wxID_ANY, _("Neuer Pfad"), wxPoint(286,517), wxSize(80,30) );
-	wxButton *btnDel=new wxButton(panel, wxID_ANY, _("Pfad entfernen"), wxPoint(377,517), wxSize(90,30) );
-
-	btnOk->Connect(wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&ConfigPath::OnClickOk, NULL, this);
-	btnAbort->Connect(wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&ConfigPath::OnClickAbort, NULL, this);
-	btnNew->Connect(wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&ConfigPath::OnClickNew, NULL, this);
-	btnDel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&ConfigPath::OnClickDel, NULL, this);
 
 	dirs=Connector::getSharedPaths();
 
@@ -44,13 +37,20 @@ ConfigPath::ConfigPath(void)
 		wxMessageBox(_("Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."), wxT("UrBackup"), wxOK|wxICON_ERROR);
 		Hide();
 		Close();
+		return;
 	}
 
 
 	for(size_t i=0;i<dirs.size();++i)
 	{
 		listbox->Append(dirs[i].path);
+		if(dirs[i].name.IsEmpty())
+		{
+			dirs[i].name=getDefaultDirname(wnarrow(dirs[i].path.wc_str()));
+		}
 	}
+
+	m_textCtrl18->SetValidator(getPathValidator());
 
 	Centre();
 	Show(true);
@@ -76,6 +76,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		listbox->Append(ed.GetPath() );
 		SBackupDir ad;
 		ad.path=ed.GetPath();
+		ad.name=getDefaultDirname(wnarrow(ad.path.wc_str()));
 		dirs.push_back(ad);
 	}
 }
@@ -87,5 +88,77 @@ void ConfigPath::OnClickDel(wxCommandEvent &evt)
 	{
 		listbox->Delete(sel);
 		dirs.erase(dirs.begin()+sel);
+	}
+}
+
+std::string replaceChars(std::string in)
+{
+	char legalchars[] = {'_', '-'};
+	for(size_t i=0;i<in.size();++i)
+	{
+		bool found=false;
+		for(size_t j=0;j<sizeof(legalchars);++j)
+		{
+			if(legalchars[j]==in[i])
+			{
+				found=true;
+				break;
+			}
+		}
+		if( !isletter(in[i]) && !isnumber(in[i]) && !found )
+		{
+			in[i]='_';
+		}
+	}
+	return in;
+}
+
+bool ConfigPath::findPathName(const std::string &pn)
+{
+	for(size_t i=0;i<dirs.size();++i)
+	{
+		if(dirs[i].name==pn)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+std::string ConfigPath::getDefaultDirname(const std::string &path)
+{
+	std::string dirname=ExtractFileName(path);
+
+	if(findPathName(dirname) )
+	{
+		for(int k=0;k<100;++k)
+		{
+			if(!findPathName(dirname+"_"+nconvert(k)) )
+			{
+				dirname=dirname+"_"+nconvert(k);
+				break;
+			}
+		}
+	}
+
+	return replaceChars(dirname);
+}
+
+void ConfigPath::OnPathSelected(wxCommandEvent &evt)
+{
+	int sel=listbox->GetSelection();
+	if(sel>=0)
+	{
+		m_textCtrl18->Enable();
+		m_textCtrl18->SetValue(dirs[sel].name);
+	}
+}
+
+void ConfigPath::OnNameTextChange(wxCommandEvent &evt)
+{
+	int sel=listbox->GetSelection();
+	if(sel>=0)
+	{
+		dirs[sel].name=m_textCtrl18->GetValue();
 	}
 }

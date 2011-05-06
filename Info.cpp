@@ -17,9 +17,18 @@
 **************************************************************************/
 
 #include "Info.h"
+#include "stringtools.h"
+
+extern std::string g_lang;
 
 Info::Info(wxWindow* parent) : GUIInfo(parent)
 {
+	std::string inf=getFile("info_"+g_lang+".txt");
+	if(inf.empty())
+	{
+		inf=getFile("info.txt");
+	}
+	m_textCtrl14->SetValue(inf);
 	Show(true);
 }
 

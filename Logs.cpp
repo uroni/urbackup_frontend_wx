@@ -28,6 +28,7 @@ Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 		wxMessageBox(_("Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."), wxT("UrBackup"), wxOK|wxICON_ERROR);
 		Hide();
 		Close();
+		return;
 	}
 
 	for(size_t i=0;i<logentries.size();++i)

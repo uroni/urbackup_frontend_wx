@@ -19,6 +19,27 @@
 #include "Settings.h"
 #include "stringtools.h"
 
+std::string getServerName(void)
+{
+#ifdef _WIN32
+	char hostname[MAX_PATH];
+    int rc=gethostname(hostname, MAX_PATH);
+
+	if(rc!=SOCKET_ERROR)
+		return hostname;
+	else
+		return "_error_";
+#else
+	char hostname[300];
+	_i32 rc=gethostname(hostname,300);
+	
+	if( rc!=-1 )
+		return hostname;
+	else
+		return "_error_";
+#endif
+}
+
 std::string ConvertToUTF8(const std::wstring &input);
 
 bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *settings)
@@ -32,6 +53,24 @@ bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *
 	}
 
 	return true;
+}
+
+wxTextValidator getPathValidator(void)
+{	
+	wxTextValidator val=wxTextValidator(wxFILTER_EXCLUDE_LIST);
+	wxArrayString il;
+	il.Add("/");
+	il.Add(" ");
+	il.Add("\\");
+	il.Add(":");
+	il.Add("?");
+	il.Add("*");
+	il.Add("\"");
+	il.Add("<");
+	il.Add(">");
+	il.Add("|");
+	val.SetExcludes(il);
+	return val;
 }
 
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
@@ -151,7 +190,40 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl137->SetValue(wxT("5"));
 	}
+	if(settings->getValue(L"computername", &t) )
+	{
+		m_textCtrl15->SetValue(t);
+	}
+	else
+	{
+		m_textCtrl15->SetValue(getServerName());
+	}
+	if(getSettingsValue(L"backup_window", &t, settings))
+	{
+		m_textCtrl17->SetValue(t);
+	}
+	else
+	{
+		m_textCtrl17->SetValue("1-7/0-24");
+	}
+	if(getSettingsValue(L"exclude_files", &t, settings))
+	{
+		m_textCtrl16->SetValue(t);
+	}
+	else
+	{
+		m_textCtrl16->SetValue("");
+	}
+	if(getSettingsValue(L"startup_backup_delay", &t, settings))
+	{
+		m_textCtrl19->SetValue(t);
+	}
+	else
+	{
+		m_textCtrl19->SetValue("0");
+	}
 
+	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
 }
 
@@ -170,10 +242,14 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	wxString min_file_incr=m_textCtrl13->GetValue();
 	wxString max_file_full=m_textCtrl133->GetValue();
 	wxString min_file_full=m_textCtrl132->GetValue();
-	wxString min_image_incr=m_textCtrl135->GetValue();
-	wxString max_image_incr=m_textCtrl134->GetValue();
+	wxString min_image_incr=m_textCtrl134->GetValue();
+	wxString max_image_incr=m_textCtrl135->GetValue();
 	wxString min_image_full=m_textCtrl136->GetValue();
 	wxString max_image_full=m_textCtrl137->GetValue();
+	wxString computername=m_textCtrl15->GetValue();
+	wxString backup_window=m_textCtrl17->GetValue();
+	wxString exclude_files=m_textCtrl16->GetValue();
+	wxString startup_backup_delay=m_textCtrl19->GetValue();
 
 	long l_update_freq_incr,l_update_freq_full;
 	long l_update_freq_image_full, l_update_freq_image_full_orig, l_update_freq_image_incr;
@@ -181,6 +257,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	long l_max_file_full, l_min_file_full;
 	long l_min_image_incr, l_max_image_incr;
 	long l_min_image_full, l_max_image_full;
+	long l_startup_backup_delay;
 
 	if(update_freq_incr.ToLong(&l_update_freq_incr)==false )
 	{
@@ -254,6 +331,13 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl137->SetFocus();
 		return;
 	}
+	if(startup_backup_delay.ToLong(&l_startup_backup_delay)==false)
+	{
+		wxMessageBox( _("Die Verzögerung bei Systemstart ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		m_textCtrl19->SetFocus();
+		return;
+	}
+
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
 	if(m_checkBox1->GetValue()==false)
@@ -275,6 +359,10 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["max_image_incr"]=nconvert(l_max_image_incr);
 	n_vals["min_image_full"]=nconvert(l_min_image_full);
 	n_vals["max_image_full"]=nconvert(l_max_image_full);
+	n_vals["computername"]=computername.c_str();
+	n_vals["backup_window"]=backup_window.c_str();
+	n_vals["exclude_files"]=exclude_files.c_str();
+	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay);
 
 	std::string ndata;
 	std::vector<std::wstring> keys=settings->getKeys();
