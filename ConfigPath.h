@@ -41,4 +41,6 @@ private:
 
 	std::string getDefaultDirname(const std::string &path);
 	bool findPathName(const std::string &pn);
+
+	bool mod;
 };

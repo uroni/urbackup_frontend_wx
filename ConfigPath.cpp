@@ -28,6 +28,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 : GUIConfigPath(parent)
 
 {
+	mod=false;
 	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
 
 	dirs=Connector::getSharedPaths();
@@ -58,7 +59,10 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 void ConfigPath::OnClickOk(wxCommandEvent &evt)
 {
-	Connector::saveSharedPaths(dirs);
+	if(mod)
+	{
+		Connector::saveSharedPaths(dirs);
+	}
 	Close();
 }
 
@@ -78,6 +82,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		ad.path=ed.GetPath();
 		ad.name=getDefaultDirname(wnarrow(ad.path.wc_str()));
 		dirs.push_back(ad);
+		mod=true;
 	}
 }
 
@@ -88,6 +93,7 @@ void ConfigPath::OnClickDel(wxCommandEvent &evt)
 	{
 		listbox->Delete(sel);
 		dirs.erase(dirs.begin()+sel);
+		mod=true;
 	}
 }
 
@@ -160,5 +166,6 @@ void ConfigPath::OnNameTextChange(wxCommandEvent &evt)
 	if(sel>=0)
 	{
 		dirs[sel].name=m_textCtrl18->GetValue();
+		mod=true;
 	}
 }
