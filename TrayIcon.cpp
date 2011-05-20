@@ -64,9 +64,9 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				timer->Start(1000);
 		}
 		else if(rc==2)
-			wxMessageBox( _("Ein Backup läuft bereits. Konnte leider kein weiteres starten."), wxT("UrBackup"), wxICON_EXCLAMATION);
+			wxMessageBox( _("Ein Backup läuft bereits. Konnte leider kein weiteres starten."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
 		else
-			wxMessageBox( _("Konnte kein Backup starten, da leider kein Server gefunden wurde"), wxT("UrBackup"), wxICON_ERROR);
+			wxMessageBox( _("Konnte kein Backup starten, da leider kein Server gefunden wurde"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 	}
 	else if(evt.GetId()==ID_TI_SETTINGS)
 	{
