@@ -216,7 +216,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	if(getSettingsValue(L"startup_backup_delay", &t, settings))
 	{
-		m_textCtrl19->SetValue(t);
+		m_textCtrl19->SetValue(convert(watoi(t)/60));
 	}
 	else
 	{
