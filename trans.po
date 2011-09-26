@@ -309,3 +309,8 @@ msgstr "min"
 #:Settings.cpp
 msgid "Die Verzögerung bei Systemstart ist keine Zahl"
 msgstr "Backup delay after system start is not a number"
+
+#:TrayIcon.cpp
+msgid "Warte auf Server..."
+msgstr "Waiting for server..."
+

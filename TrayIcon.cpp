@@ -82,7 +82,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startImage(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), wxT("Warte auf Server..."));
+			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), _("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
