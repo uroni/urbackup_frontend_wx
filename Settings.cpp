@@ -31,7 +31,7 @@ std::string getServerName(void)
 		return "_error_";
 #else
 	char hostname[300];
-	_i32 rc=gethostname(hostname,300);
+	int rc=gethostname(hostname,300);
 	
 	if( rc!=-1 )
 		return hostname;
@@ -41,6 +41,13 @@ std::string getServerName(void)
 }
 
 std::string ConvertToUTF8(const std::wstring &input);
+std::wstring ConvertToUnicode(const std::string &str);
+
+#ifdef wxUSE_WCHAR_T
+#define ConvertToWX(x) ConvertToUnicode(x)
+#else
+#define ConvertToWX(x)
+#endif
 
 bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *settings)
 {
@@ -59,16 +66,16 @@ wxTextValidator getPathValidator(void)
 {	
 	wxTextValidator val=wxTextValidator(wxFILTER_EXCLUDE_LIST);
 	wxArrayString il;
-	il.Add("/");
-	il.Add(" ");
-	il.Add("\\");
-	il.Add(":");
-	il.Add("?");
-	il.Add("*");
-	il.Add("\"");
-	il.Add("<");
-	il.Add(">");
-	il.Add("|");
+	il.Add(wxT("/"));
+	il.Add(wxT(" "));
+	il.Add(wxT("\\"));
+	il.Add(wxT(":"));
+	il.Add(wxT("?"));
+	il.Add(wxT("*"));
+	il.Add(wxT("\""));
+	il.Add(wxT("<"));
+	il.Add(wxT(">"));
+	il.Add(wxT("|"));
 	val.SetExcludes(il);
 	return val;
 }
@@ -196,7 +203,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl15->SetValue(getServerName());
+		m_textCtrl15->SetValue(ConvertToWX(getServerName()));
 	}
 	if(getSettingsValue(L"backup_window", &t, settings))
 	{
@@ -204,7 +211,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl17->SetValue("1-7/0-24");
+		m_textCtrl17->SetValue(wxT("1-7/0-24"));
 	}
 	if(getSettingsValue(L"exclude_files", &t, settings))
 	{
@@ -212,7 +219,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl16->SetValue("");
+		m_textCtrl16->SetValue(wxT(""));
 	}
 	if(getSettingsValue(L"startup_backup_delay", &t, settings))
 	{
@@ -220,7 +227,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl19->SetValue("0");
+		m_textCtrl19->SetValue(wxT("0"));
 	}
 
 	m_textCtrl15->SetValidator(getPathValidator());

@@ -50,6 +50,7 @@ std::wstring convert(unsigned long long int i);
 std::wstring convert(unsigned int i);
 std::string nconvert(bool pBool);
 std::string nconvert(int i);
+std::string nconvert(long int i);
 std::string nconvert(long long int i);
 std::string nconvert(size_t i);
 std::string nconvert(unsigned long long int i);

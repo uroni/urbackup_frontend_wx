@@ -81,6 +81,8 @@ void TaskBarBaloon::showBaloon(unsigned int iTimeout)
     this->timer->Start(iTimeout,wxTIMER_ONE_SHOT);
 }
 
+#ifdef _WIN32
+
 HANDLE ExecuteProcessO( const std::string & CommandLine, const std::string & WorkDir )
 {
    STARTUPINFOA sStartInfo;
@@ -133,10 +135,14 @@ HANDLE ExecuteProcess( const std::string & exe, const std::string &args, const s
 		return NULL;
 }
 
+#endif
+
 void TaskBarBaloon::OnClick(wxMouseEvent & event)
 {
+#ifdef _WIN32
 	this->Show(false);
 	wxStandardPaths sp;
 	std::string e_pstr=ExtractFilePath(sp.GetExecutablePath().ToStdString());
 	ExecuteProcess(e_pstr+"\\UrBackupUpdate.exe","","");
+#endif
 }
