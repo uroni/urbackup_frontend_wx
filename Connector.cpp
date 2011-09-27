@@ -27,6 +27,16 @@ bool Connector::error=false;
 const size_t conn_retries=4;
 bool Connector::busy=false;
 
+#ifdef wxUSE_WCHAR_T
+#define std_string std::wstring
+std::string ConvertToUTF8(const std::wstring &str);
+std::wstring ConvertToUnicode(const std::string &str);
+#else
+#define std_string std::string
+#define ConvertToUTF8(x)
+#define ConvertToUnicode(x)
+#endif
+
 
 std::string Connector::getResponse(const std::string &cmd, const std::string &args)
 {
@@ -48,7 +58,11 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			{
 				break;
 			}
+#ifdef _WIN32
 			wxTheApp->SafeYield(NULL, false);
+#else
+			wxTheApp->Yield(false);
+#endif
 		}
 	}
 	if(!client.IsConnected())
@@ -82,7 +96,11 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 				conn=true;
 				break;
 			}
+			#ifdef _WIN32
 			wxTheApp->SafeYield(NULL, false);
+			#else
+			wxTheApp->Yield(false);
+			#endif
 			if(client.Error())
 				break;
 		}
@@ -138,11 +156,11 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 		SBackupDir bd;
 		bd.id=atoi(getline(i, d).c_str() );
 		bd.path=wxString::FromUTF8(getline(i+1, d).c_str() );
-		std::string path=bd.path.c_str();
+		std::string path=ConvertToUTF8(bd.path.c_str());
 		if(path.find("|")!=std::string::npos)
 		{
-			bd.path=getafter("|", path);
-			bd.name=getuntil("|", path);
+			bd.path=ConvertToUnicode(getafter("|", path));
+			bd.name=ConvertToUnicode(getuntil("|", path));
 		}
 		ret.push_back( bd );
 	}

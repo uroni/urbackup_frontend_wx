@@ -444,6 +444,12 @@ std::string nconvert(s32 i){
 	return ss.str();
 }
 
+std::string nconvert(int long i) {
+	ostringstream ss;
+	ss << i;
+	return ss.str();
+}
+
 #ifdef _WIN64
 std::string nconvert(unsigned int i){
 	ostringstream ss;

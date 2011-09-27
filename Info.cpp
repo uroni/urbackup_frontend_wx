@@ -21,6 +21,13 @@
 
 extern std::string g_lang;
 
+#ifdef wxUSE_WCHAR_T
+std::wstring ConvertToUnicode(const std::string &str);
+#else
+#define ConvertToUnicode(x)
+#endif
+
+
 Info::Info(wxWindow* parent) : GUIInfo(parent)
 {
 	std::string inf=getFile("info_"+g_lang+".txt");
@@ -28,7 +35,7 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 	{
 		inf=getFile("info.txt");
 	}
-	m_textCtrl14->SetValue(inf);
+	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);
 }
 

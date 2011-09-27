@@ -22,6 +22,12 @@
 #define CP_ID_OK 100
 
 std::string ConvertToUTF8(const std::wstring &input);
+#ifndef wxUSE_WCHART_T
+std::wstring ConvertToUnicode(const std::string &input);
+#else
+#define ConvertToUnicode(x)
+#endif
+
 wxTextValidator getPathValidator(void);
 
 ConfigPath::ConfigPath(wxWindow* parent)
@@ -47,7 +53,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 		listbox->Append(dirs[i].path);
 		if(dirs[i].name.IsEmpty())
 		{
-			dirs[i].name=getDefaultDirname(wnarrow(dirs[i].path.wc_str()));
+			dirs[i].name=ConvertToUnicode(getDefaultDirname(wnarrow(dirs[i].path.wc_str())).c_str());
 		}
 	}
 
@@ -80,7 +86,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		listbox->Append(ed.GetPath() );
 		SBackupDir ad;
 		ad.path=ed.GetPath();
-		ad.name=getDefaultDirname(wnarrow(ad.path.wc_str()));
+		ad.name=ConvertToUnicode(getDefaultDirname(ConvertToUTF8(ad.path.wc_str())));
 		dirs.push_back(ad);
 		mod=true;
 	}
@@ -123,7 +129,7 @@ bool ConfigPath::findPathName(const std::string &pn)
 {
 	for(size_t i=0;i<dirs.size();++i)
 	{
-		if(dirs[i].name==pn)
+		if(dirs[i].name==ConvertToUnicode(pn) )
 		{
 			return true;
 		}

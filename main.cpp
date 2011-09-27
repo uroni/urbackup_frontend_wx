@@ -94,8 +94,8 @@ bool MyApp::OnInit()
 		break;
 	}
 
-	m_locale.Init(lang, wxLOCALE_DONT_LOAD_DEFAULT);
-	m_locale.AddCatalog("trans");
+	m_locale.Init(lang, wxLOCALE_LOAD_DEFAULT);
+	m_locale.AddCatalog(L"trans");
 
 
 
@@ -152,7 +152,7 @@ void MyTimer::Notify()
 	{
 		startuptime_passed=atoi(getFile((cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() ).c_str() );
 		startuptime_passed+=atoi(getFile((cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() ).c_str() );
-		writestring(nconvert(startuptime_passed), (cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() );
+		writestring(nconvert((int)startuptime_passed), (cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() );
 		lastbackuptime=atoi(getFile((cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() ).c_str() );
 		if(lastbackuptime==0)
 			lastbackuptime=-5*60*1000;
@@ -181,7 +181,7 @@ void MyTimer::Notify()
 
 	long passed=( ct-starttime );
 
-	writestring(nconvert(passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
+	writestring(nconvert((int)passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
 
 	wxString status_text;
 	SStatus status=Connector::getStatus();
@@ -204,7 +204,7 @@ void MyTimer::Notify()
 	
 	if(status.status==wxT("DONE") )
 	{
-		writestring(nconvert(startuptime_passed+passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
+		writestring(nconvert((int)startuptime_passed+(int)passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
 		lastbackuptime=startuptime_passed+passed;
 		icon_type=0;
 		working_status=0;
