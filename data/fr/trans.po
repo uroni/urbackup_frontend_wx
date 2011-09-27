@@ -1,0 +1,289 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# Martin Raiber <urpc@gmx.de>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup 0.34\n"
+"Report-Msgid-Bugs-To: urpc@gmx.de\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2011-04-28 14:06+0100\n"
+"Last-Translator: mymybib@gmail.com <mymybib@gmail.com>\n"
+"Language-Team: ENGLISH <urpc@gmx.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: gui/GUI.cpp:26
+msgid "Intervall für inkrementelle Backups:"
+msgstr "Temps entre les sauvegarde incrémentales de fichier:"
+
+#: gui/GUI.cpp:30
+msgid "Intervall für volle Backups:"
+msgstr "Temps entre les sauvegardes complètes de fichier:"
+
+#: gui/GUI.cpp:34
+msgid "Intervall für inkrementelle Image-Backups:"
+msgstr "Temps entre les images disque incrémentales:"
+
+#: gui/GUI.cpp:38
+msgid "Intervall für volle Image-Backups:"
+msgstr "Temps entre les images disque complète:"
+
+#: gui/GUI.cpp:46
+msgid "Minimale Anzahl an inkrementellen Backups:"
+msgstr "Nombre minimal de sauvegarde incrémentale:"
+
+#: gui/GUI.cpp:50
+msgid "Maximale Anzahl an inkrementellen Backups:"
+msgstr "Nombre maximal de sauvegarde incrémentale de fichier:"
+
+#: gui/GUI.cpp:54
+msgid "Minimale Anzahl an vollen Backups:"
+msgstr "Nombre minimal de sauvegarde complète de fichier:"
+
+#: gui/GUI.cpp:58
+msgid "Maximale Anzahl an vollen Backups:"
+msgstr "Nombre maximal de sauvegarde complète de fichier:"
+
+#: gui/GUI.cpp:66
+msgid "Minimale Anzahl an inkrementellen Image-Backups:"
+msgstr "Nombre minimum d'image disque incrémentale:"
+
+#: gui/GUI.cpp:70
+msgid "Maximale Anzahl an inkrementellen Image-Backups:"
+msgstr "Nombre maximal d'image disque incrémentale:"
+
+#: gui/GUI.cpp:74
+msgid "Minimale Anzahl an vollen Image-Backups:"
+msgstr "Nombre minimum d'image disque complète:"
+
+#: gui/GUI.cpp:78
+msgid "Maximale Anzahl an vollen Image-Backups:"
+msgstr "Nombre maximal d'image disque complète:"
+
+#: gui/GUI.cpp:93
+msgid "Stunden"
+msgstr "heures"
+
+#: gui/GUI.cpp:105
+#: gui/GUI.cpp:117
+#: gui/GUI.cpp:137
+msgid "Tage"
+msgstr "jours"
+
+#: gui/GUI.cpp:124
+msgid "Aktiv"
+msgstr "Actif"
+
+#: gui/GUI.cpp:232
+#: gui/GUI.cpp:389
+msgid "OK"
+msgstr "Ok"
+
+#: gui/GUI.cpp:237
+#: ConfigPath.cpp:13
+msgid "Abbrechen"
+msgstr "Abandonner"
+
+#: gui/GUI.cpp:282
+msgid "Filter:"
+msgstr "Filtre:"
+
+#: gui/GUI.cpp:286
+#: TrayIcon.cpp:119
+msgid "Info"
+msgstr "Info"
+
+#: gui/GUI.cpp:286
+msgid "Warnings"
+msgstr "Avertissement"
+
+#: gui/GUI.cpp:286
+msgid "Errors"
+msgstr "Erreurs"
+
+#: gui/GUI.cpp:303
+msgid "Verlassen"
+msgstr "Sortie"
+
+#: gui/GUI.cpp:356
+msgid "Version:"
+msgstr "Version:"
+
+#: gui/GUI.cpp:368
+msgid "Autor:"
+msgstr "Autheur:"
+
+#: ConfigPath.cpp:6
+msgid "Pfade hinzufügen und entfernen"
+msgstr "Supprimer/Ajouter un chemin de sauvegarde"
+
+#: ConfigPath.cpp:12
+msgid "Ok"
+msgstr "Ok"
+
+#: ConfigPath.cpp:14
+msgid "Neuer Pfad"
+msgstr "Ajouter un chemin"
+
+#: ConfigPath.cpp:15
+msgid "Pfad entfernen"
+msgstr "Supprimer un chemin"
+
+#: ConfigPath.cpp:26
+#: Logs.cpp:10
+msgid "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgstr "Il y a eu une erreur. Rien ne peut être sauvegarder actuellement."
+
+#: ConfigPath.cpp:54
+msgid "Bitte Verzeichnis das gesichert werden soll auswählen"
+msgstr "Selectionner le repertoire a sauvegarder."
+
+#: main.cpp:125
+msgid "UrBackup: Update verfügbar"
+msgstr "UrBackup: Mise à jour disponible"
+
+#: main.cpp:125
+msgid "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+msgstr "Une nouvelle version de UrBackup est disponible. Cliquer pour l'installer maintenant."
+
+#: main.cpp:143
+msgid "Keine Verbindung zum Backupserver möglich"
+msgstr "Impossible de se connecter au serveur de sauvegarde"
+
+#: main.cpp:163
+msgid "Inkrementelles Backup läuft. "
+msgstr "Sauvegarde incrémentielle des fichiers en cours "
+
+#: main.cpp:175
+msgid "Volles Backup läuft. "
+msgstr "Sauvegarde complète des fichiers en cours."
+
+#: main.cpp:186
+msgid "Inkrementelles Image-Backup läuft. "
+msgstr "Image disque incrémentielle en cours. "
+
+#: main.cpp:197
+msgid "Volles Image-Backup läuft. "
+msgstr "Image disque complète en cours."
+
+#: main.cpp:205
+msgid "% fertig. "
+msgstr "% fait."
+
+#: main.cpp:208
+msgid "Kein aktuelles Backup. "
+msgstr "Pas de sauvegarde récente."
+
+#: main.cpp:219
+msgid "Letztes Backup am "
+msgstr "Dernière sauvegarde le "
+
+#: Settings.cpp:156
+msgid "Die inkrementelle Backupzeit ist keine Zahl"
+msgstr "L'interval de sauvegarde n'est pas un nombre"
+
+#: Settings.cpp:162
+msgid "Die volle Backupzeit ist keine Zahl"
+msgstr "L'intervale de sauvegarde complète n'est pas un nombre"
+
+#: Settings.cpp:168
+msgid "Die volle Imagebackupzeit ist keine Zahl"
+msgstr "L'intervale pour l'image disque complète n'est pas un nombre"
+
+#: Settings.cpp:174
+msgid "Die inkrementelle Imagebackupzeit ist keine Zahl"
+msgstr "L'intervale pour l'image disque incrémentale n'est pas un nombre"
+
+#: Settings.cpp:180
+msgid "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Le nombre maximal de sauvegarde incrémentale de fichier n'est pas un nombre"
+
+#: Settings.cpp:186
+msgid "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Le nombre minimal de sauvegarde incrémentale de fichier n'est pas un nombre"
+
+#: Settings.cpp:192
+msgid "Die maximale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Le nombre maximal  de sauvegarde complète des fichiers n'est pas un nombre"
+
+#: Settings.cpp:198
+msgid "Die minimale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombrer"
+
+#: Settings.cpp:204
+msgid "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Le nombre minimal d'image disque incrémentale n'est pas un nombre"
+
+#: Settings.cpp:210
+msgid "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Le nombre maximal d'image disque incrémentale n'est pas un nombre"
+
+#: Settings.cpp:216
+msgid "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Le nombre minimall d'image disque complète n'est pas un nombre"
+
+#: Settings.cpp:222
+msgid "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Le nombre maximal d'image disque complète n'est pas un nombre"
+
+#: TrayIcon.cpp:49
+#: TrayIcon.cpp:72
+msgid "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+msgstr "Une sauvegarde est actuellement en cours. Vous ne pouvez pas en lancer une autre."
+
+#: TrayIcon.cpp:51
+#: TrayIcon.cpp:74
+msgid "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+msgstr "Impossible de demarrer la sauvegarde. Aucun serveur de sauvegarde n'a été trouvé."
+
+#: TrayIcon.cpp:86
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+msgstr "Echec de la mise en pause : pas de connexion au serveur de sauvegarde."
+
+#: TrayIcon.cpp:99
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+msgstr "Echec de la reprise : Pas de connexion au serveur de sauvegarde."
+
+#: TrayIcon.cpp:111
+msgid "Volles Backup jetzt"
+msgstr "Faire une sauvegarde complète des fichiers"
+
+#: TrayIcon.cpp:112
+msgid "Inkremetelles Backup jetzt"
+msgstr "Faire une sauvegarde incrémentale des fichiers"
+
+#: TrayIcon.cpp:113
+msgid "Volles Image-Backup jetzt"
+msgstr "Faire une image disque complète"
+
+#: TrayIcon.cpp:114
+msgid "Inkremetelles Image-Backup jetzt"
+msgstr "Faire une image disque incrémentale"
+
+#: TrayIcon.cpp:116
+msgid "Einstellungen"
+msgstr "Paramètres"
+
+#: TrayIcon.cpp:117
+msgid "Pfade konfigurieren"
+msgstr "Ajouter/Retirer un chemin à sauvegarder"
+
+#: TrayIcon.cpp:118
+msgid "Logs"
+msgstr "Logs"
+
+#: TrayIcon.cpp:124
+msgid "Pausieren"
+msgstr "Pause"
+
+#: TrayIcon.cpp:128
+msgid "Fortfahren"
+msgstr "Continuer"
+
+#: Gui.h:144
+msgid "Informationen"
+msgstr "Informations"
+
