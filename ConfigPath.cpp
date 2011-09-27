@@ -28,6 +28,10 @@ std::wstring ConvertToUnicode(const std::string &input);
 #define ConvertToUnicode(x)
 #endif
 
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
+
 wxTextValidator getPathValidator(void);
 
 ConfigPath::ConfigPath(wxWindow* parent)
@@ -35,7 +39,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 {
 	mod=false;
-	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
+	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
 
 	dirs=Connector::getSharedPaths();
 

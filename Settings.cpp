@@ -19,6 +19,10 @@
 #include "Settings.h"
 #include "stringtools.h"
 
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
+
 std::string getServerName(void)
 {
 #ifdef _WIN32
@@ -82,7 +86,7 @@ wxTextValidator getPathValidator(void)
 
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
-	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
+	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
 	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
 
 	std::wstring t;
@@ -92,7 +96,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl1->SetValue(wxT("1"));
+		m_textCtrl1->SetValue(wxT("12"));
 	}
 	if(getSettingsValue(L"update_freq_full", &t, settings))
 	{
@@ -100,8 +104,9 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl1->SetValue(wxT("30"));
+		m_textCtrl2->SetValue(wxT("30"));
 	}
+#ifdef _WIN32
 	if(getSettingsValue(L"update_freq_image_full", &t, settings))
 	{
 		if(watoi(t)>0)
@@ -133,6 +138,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl21->SetValue(wxT("7"));
 	}
+#endif
 	if(getSettingsValue(L"max_file_incr", &t, settings))
 	{
 		m_textCtrl131->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -165,6 +171,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl132->SetValue(wxT("2"));
 	}
+#ifdef _WIN32
 	if(getSettingsValue(L"min_image_incr", &t,settings))
 	{
 		m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -197,6 +204,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl137->SetValue(wxT("5"));
 	}
+#endif
 	if(settings->getValue(L"computername", &t) )
 	{
 		m_textCtrl15->SetValue(t);
@@ -243,16 +251,20 @@ void Settings::OnOkClick( wxCommandEvent& event )
 {
 	wxString update_freq_incr=m_textCtrl1->GetValue();
 	wxString update_freq_full=m_textCtrl2->GetValue();
+#ifdef _WIN32
 	wxString update_freq_image_full=m_textCtrl22->GetValue();
 	wxString update_freq_image_incr=m_textCtrl21->GetValue();
+#endif
 	wxString max_file_incr=m_textCtrl131->GetValue();
 	wxString min_file_incr=m_textCtrl13->GetValue();
 	wxString max_file_full=m_textCtrl133->GetValue();
 	wxString min_file_full=m_textCtrl132->GetValue();
+#ifdef _WIN32
 	wxString min_image_incr=m_textCtrl134->GetValue();
 	wxString max_image_incr=m_textCtrl135->GetValue();
 	wxString min_image_full=m_textCtrl136->GetValue();
 	wxString max_image_full=m_textCtrl137->GetValue();
+#endif
 	wxString computername=m_textCtrl15->GetValue();
 	wxString backup_window=m_textCtrl17->GetValue();
 	wxString exclude_files=m_textCtrl16->GetValue();
@@ -278,6 +290,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl2->SetFocus();
 		return;
 	}
+#ifdef _WIN32
 	if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false )
 	{
 		wxMessageBox( _("Die volle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
@@ -290,6 +303,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl21->SetFocus();
 		return;
 	}
+#endif
 	if(max_file_incr.ToLong(&l_max_file_incr)==false )
 	{
 		wxMessageBox( _("Die maximale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
@@ -314,6 +328,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl132->SetFocus();
 		return;
 	}
+#ifdef _WIN32
 	if(min_image_incr.ToLong(&l_min_image_incr)==false )
 	{
 		wxMessageBox( _("Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
@@ -338,6 +353,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl137->SetFocus();
 		return;
 	}
+#endif
 	if(startup_backup_delay.ToLong(&l_startup_backup_delay)==false)
 	{
 		wxMessageBox( _("Die Verzögerung bei Systemstart ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);

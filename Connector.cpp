@@ -21,6 +21,7 @@
 #include "stringtools.h"
 #include <wx/socket.h>
 #include "escape.h"
+#include <iostream>
 
 std::string Connector::pw;
 bool Connector::error=false;
@@ -44,7 +45,18 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	error=false;
 	if(pw.empty())
 	{
-		pw=getFile("pw.txt");
+		if(FileExists("pw.txt"))
+			pw=getFile("pw.txt");
+		else if(FileExists("/usr/local/var/urbackup/pw.txt"))
+			pw=getFile("/usr/local/var/urbackup/pw.txt");
+		else if(FileExists("/var/urbackup/pw.txt"))
+			pw=getFile("/var/urbackup/pw.txt");
+		else if(FileExists("/var/lib/urbackup/pw.txt"))
+			pw=getFile("/var/lib/urbackup/pw.txt");
+		if(pw.empty())
+		{
+			std::cout << "Could not load password file!" << std::endl;
+		}
 	}
 	wxSocketClient client(wxSOCKET_BLOCK);
 	wxIPV4address addr;

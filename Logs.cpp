@@ -18,9 +18,13 @@
 
 #include "Logs.h"
 
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
+
 Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 {
-	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
+	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
 	logentries=Connector::getLogEntries();
 
 	if(Connector::hasError())

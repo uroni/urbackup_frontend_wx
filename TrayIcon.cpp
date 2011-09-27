@@ -42,6 +42,10 @@ extern int working_status;
 bool b_is_pausing=false;
 extern MyTimer *timer;
 
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
+
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
 	if(evt.GetId()==ID_TI_EXIT)
@@ -59,7 +63,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startBackup(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), wxT("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), wxT("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -82,7 +86,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startImage(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), _("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), _("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -128,8 +132,10 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	wxMenu *mnu=new wxMenu();
 	mnu->Append(ID_TI_BACKUP_FULL, _("Volles Backup jetzt"), wxT("Jetzt ein volles Backup ausführen"));
 	mnu->Append(ID_TI_BACKUP_INCR, _("Inkremetelles Backup jetzt"), wxT("Jetzt ein inkrementelles Backup ausführen"));
+#ifdef _WIN32
 	mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Volles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
 	mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Inkremetelles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+#endif
 	mnu->AppendSeparator();
 	mnu->Append(ID_TI_SETTINGS, _("Einstellungen") );
 	mnu->Append(ID_TI_ADD_PATH, _("Pfade konfigurieren"));

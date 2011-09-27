@@ -450,7 +450,7 @@ std::string nconvert(int long i) {
 	return ss.str();
 }
 
-#ifdef _WIN64
+#if defined(_WIN64) || defined(_LP64)
 std::string nconvert(unsigned int i){
 	ostringstream ss;
 	ss << i;
@@ -498,7 +498,7 @@ std::wstring convert(size_t i){
 	return ss.str();
 }
 
-#ifndef _WIN64
+#if defined(_WIN64) || defined(_LP64)
 //--------------------------------------------------------------------
 /**
 *	integer in string

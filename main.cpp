@@ -59,6 +59,15 @@ public:
 };
 
 std::string g_lang="en";
+wxString res_path;
+std::string g_res_path;
+#ifdef _WIN32
+wxString ico_ext=wxT("ico");
+wxBitmapType ico_type=wxBITMAP_TYPE_ICO;
+#else
+wxString ico_ext=wxT("xpm");
+wxBitmapType ico_type=wxBITMAP_TYPE_XPM;
+#endif
 
 
 bool MyApp::OnInit()
@@ -69,6 +78,17 @@ bool MyApp::OnInit()
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
 	SetCurrentDirectoryW(ExtractFilePath(buf).c_str() );
 #endif
+#else
+	if(FileExists("/usr/share/urbackup/info.txt"))
+	{
+		res_path=wxT("/usr/share/urbackup/");
+		g_res_path="/usr/share/urbackup/";
+	}
+	if(FileExists("/usr/local/share/urbackup/info.txt"))
+	{
+		res_path=wxT("/usr/local/share/urbackup/");
+		g_res_path="/usr/local/share/urbackup/";
+	}
 #endif
 	wxLanguage lang=wxLANGUAGE_ENGLISH;
 	wxLanguage sysdef=(wxLanguage)wxLocale::GetSystemLanguage();
@@ -94,16 +114,26 @@ bool MyApp::OnInit()
 		break;
 	}
 
-	m_locale.Init(lang, wxLOCALE_LOAD_DEFAULT);
+	//std::cout << "Lang: " << g_lang << std::endl;
+#ifndef _WIN32
+	m_locale.AddCatalogLookupPathPrefix(res_path);
+#endif
+	m_locale.Init(lang, 0);
 	m_locale.AddCatalog(L"trans");
+	
+	if(!m_locale.IsOk() )
+	{
+		std::cout << "Selected language is wrong!" << std::endl;
+	}
 
 
 
 	this->SetTopWindow(new TheFrame);
 	wxImage::AddHandler(new wxPNGHandler);
+	//wxInitAllImageHandlers();
 
 	tray=new TrayIcon;
-	bool b=tray->SetIcon(wxIcon(wxT("backup-ok.ico"), wxBITMAP_TYPE_ICO), wxT("UrBackup Client"));
+	bool b=tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type), wxT("UrBackup Client"));
 	if(!b)
 	{
 		std::cout << "Setting icon failed." << std::endl;
@@ -142,6 +172,10 @@ void MyTimer::Notify()
 	static long startuptime_passed=0;
 	static long lastbackuptime=-5*60*1000;
 	static long lastversioncheck=starttime;
+	
+#ifndef _WIN32
+	cfgDir+=wxT("/.urbackup");
+#endif
 
 	if(!wxDir::Exists(cfgDir) )
 	{
@@ -192,7 +226,7 @@ void MyTimer::Notify()
 		{
 			last_status=_("Keine Verbindung zum Backupserver möglich");
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(wxT("backup-bad.ico"), wxBITMAP_TYPE_ICO), last_status);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type), last_status);
 			icon_type=4;
 		}
 		working=false;
@@ -293,25 +327,25 @@ void MyTimer::Notify()
 		{
 		case 0:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(wxT("backup-ok.ico"), wxBITMAP_TYPE_ICO), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type), status_text);
 			if(timer!=NULL)
 				timer->Start(60000);
 			break;
 		case 1:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), status_text);
 			if(timer!=NULL)
 				timer->Start(10000);
 			break;
 		case 2:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(wxT("backup-bad.ico"), wxBITMAP_TYPE_ICO), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type), status_text);
 			if(timer!=NULL)
 				timer->Start(60000);
 			break;
 		case 3:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(wxT("backup-progress-pause.ico"), wxBITMAP_TYPE_ICO), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-progress-pause.")+ico_ext, ico_type), status_text);
 
 			if(timer!=NULL)
 				timer->Start(60000);

@@ -7,6 +7,9 @@
 
 #include "GUI.h"
 
+
+extern wxString res_path;
+
 ///////////////////////////////////////////////////////////////////////////
 
 GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -48,6 +51,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer1->Add( bSizer30, 1, wxEXPAND, 5 );
 	
+#ifdef _WIN32
 	wxBoxSizer* bSizer31;
 	bSizer31 = new wxBoxSizer( wxHORIZONTAL );
 	
@@ -88,6 +92,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	bSizer1->Add( bSizer32, 1, wxEXPAND, 5 );
+#endif
 	
 	wxBoxSizer* bSizer33;
 	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
@@ -155,6 +160,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer1->Add( bSizer38, 1, wxEXPAND, 5 );
 	
+#ifdef _WIN32
 	wxBoxSizer* bSizer39;
 	bSizer39 = new wxBoxSizer( wxHORIZONTAL );
 	
@@ -211,6 +217,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer43->Add( m_staticText28, 0, wxALL, 5 );
 	
 	bSizer1->Add( bSizer43, 1, wxEXPAND, 5 );
+#endif
 	
 	wxBoxSizer* bSizer28;
 	bSizer28 = new wxBoxSizer( wxHORIZONTAL );
@@ -292,7 +299,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+#ifdef _WIN32
 	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
+#endif
 	m_button1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnOkClick ), NULL, this );
 	m_button2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnAbortClick ), NULL, this );
 }
@@ -389,7 +398,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer25->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, wxBitmap( _("logo1.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, wxBitmap( res_path+_("logo1.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
 	m_bitmap1->SetMinSize( wxSize( 100,91 ) );
 	
 	bSizer25->Add( m_bitmap1, 0, wxALL, 5 );
