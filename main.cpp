@@ -153,6 +153,12 @@ int MyApp::OnExit()
 	return 0;
 }
 
+MyTimer::MyTimer(void) : 
+	wxTimer()
+{
+	capa=0;
+}
+
 void MyTimer::Notify()
 {
 	static bool working=false;
@@ -232,6 +238,8 @@ void MyTimer::Notify()
 		working=false;
 		return;
 	}
+
+	capa=status.capa;
 
 	int last_icon_type=icon_type;
 	bool refresh=false;
@@ -353,6 +361,11 @@ void MyTimer::Notify()
 	}
 
 	working=false;
+}
+
+bool MyTimer::hasCapability(int capa_bit)
+{
+	return (capa & capa_bit)>0;
 }
 
 #ifndef DD_RELEASE

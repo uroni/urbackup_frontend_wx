@@ -21,6 +21,7 @@
 #include <fstream>
 #include <sstream> 
 #include <map>
+#include "utf8/utf8.h"
 
 #ifndef _WIN32
 #include <memory.h>
@@ -1120,7 +1121,7 @@ wstring htmldecode(string str, bool html, char xc)
 			{
 				str.erase(i,3);
 				if( ch!='-' && ch!=',' && ch!='#' )
-					str.insert(i,"&#"+nconvert((int)ch)+";" );
+					str.insert(i,"&#"+nconvert((s32)ch)+";" );
 				else
 				{
 					std::string c;
@@ -1136,6 +1137,14 @@ wstring htmldecode(string str, bool html, char xc)
 		}
 	}
 	std::wstring ret;
+	try
+	{
+	    if( sizeof(wchar_t)==2 )
+    		utf8::utf8to16(str.begin(), str.end(), back_inserter(ret));
+    	    else if( sizeof(wchar_t)==4 )
+    		utf8::utf8to32(str.begin(), str.end(), back_inserter(ret));
+    	}
+    	catch(...){}
 	return ret;
 }
 

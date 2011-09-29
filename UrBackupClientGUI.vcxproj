@@ -195,6 +195,7 @@
     <ClCompile Include="gui\GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="capa_bits.h" />
     <ClInclude Include="ConfigPath.h" />
     <ClInclude Include="Connector.h" />
     <ClInclude Include="escape.h" />
