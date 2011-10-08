@@ -139,7 +139,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		any_prev=true;
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_ALLOW_STARTING_IMAGE_BACKUPS))
+	if(!timer->hasCapability(DONT_ALLOW_STARTING_IMAGE_BACKUPS) && !timer->hasCapability(DONT_DO_IMAGE_BACKUPS) )
 	{
 		mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Volles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
 		mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Inkremetelles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));

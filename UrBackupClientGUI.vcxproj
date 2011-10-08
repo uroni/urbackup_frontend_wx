@@ -97,6 +97,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalOptions>/analyze %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxpngd.lib;wxbase29ud.lib;wxmsw29ud_core.lib;wxmsw29ud_adv.lib;wxexpatd.lib;comctl32.lib;Rpcrt4.lib;wxbase29ud_net.lib;ws2_32.lib;wxpngd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>

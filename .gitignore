@@ -3,7 +3,6 @@ backup-bad.png
 backup-bad.psb
 backup-bad32.ico
 backup-bad32.png
-backup-ok-big.ico
 backup-ok.png
 backup-ok.psb
 backup-ok32.png
@@ -11,7 +10,6 @@ BaseImage.psb
 BaseImage_ok.psb
 comp.uri
 curr_version.txt
-data/*
 data_dbg/*
 data_x64/*
 Debug/*
@@ -51,3 +49,16 @@ x64/*
 UrBackupClientGUI.exe
 UrBackupClientGUI.opensdf
 gui/settings.fbp.bak
+new.txt
+data/*.dll
+data/desktop.ini
+data/install.reg
+data/prefilebackup_new.bat
+data/uninstall/*
+data/updates_h.dat
+data/urbackup/backup_client_new.db
+data/urbackup/data/*
+data/*.exe
+data/urbackup_dsa.pub
+backup-ok-big.ico
+data/*.txt

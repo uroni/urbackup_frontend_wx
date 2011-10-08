@@ -314,3 +314,10 @@ msgstr "Backup delay after system start is not a number"
 msgid "Warte auf Server..."
 msgstr "Waiting for server..."
 
+#:GUI.cpp
+msgid "Image Backups von folgenden Laufwerken:"
+msgstr "Volumes to backup:"
+
+#:Settings.cpp
+msgid " ist kein Laufwerk"
+msgstr " is not a volume"

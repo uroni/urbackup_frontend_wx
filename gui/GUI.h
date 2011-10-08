@@ -79,6 +79,8 @@ class GUISettings : public wxDialog
 		wxStaticText* m_staticText281;
 		wxTextCtrl* m_textCtrl19;
 		wxStaticText* m_staticText291;
+		wxTextCtrl* m_textCtrl23;
+		wxStaticText* m_staticText301;
 		
 		wxButton* m_button1;
 		wxButton* m_button2;
