@@ -101,6 +101,9 @@
     <ClInclude Include="TaskBarBaloon.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="capa_bits.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="icon1.ico">
