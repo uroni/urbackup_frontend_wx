@@ -62,3 +62,7 @@ data/*.exe
 data/urbackup_dsa.pub
 backup-ok-big.ico
 data/*.txt
+UrBackup Client*.wixpdb
+UrBackup Client*.msi
+urbackup.wixobj
+urbackup.wixpdb
