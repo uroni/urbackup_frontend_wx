@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 0.38"
+!define MUI_BRANDINGTEXT "UrBackup 0.39"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 0.38"
-OutFile "UrBackup Client 0.38-1.exe"
+Name "UrBackup 0.39"
+OutFile "UrBackup Client 0.39-3.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -45,27 +45,32 @@ Section "install"
 		SetRegView 64
 	${EndIf}
 	
+	SetOutPath "$TEMP"
 	${If} ${RunningX64}
-		Push $R0
-   		ClearErrors
-   		ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{DA5E371C-6333-3D8A-93A4-6FD5B20BCC6E}" "Version"
-	   	IfErrors 0 VSRedistInstalled64
-		inetc::get "http://www.urserver.de/vc10/vcredist_x64.exe" $TEMP\vcredist_x64.exe
-		Pop $0
-		ExecWait '"$TEMP\vcredist_x64.exe" /q'  
-		Delete '$TEMP\vcredist_x64.exe'
-VSRedistInstalled64:
+		; Push $R0
+   		; ClearErrors
+   		; ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{DA5E371C-6333-3D8A-93A4-6FD5B20BCC6E}" "Version"
+	   	; IfErrors 0 VSRedistInstalled64
+		; inetc::get "http://www.urserver.de/vc10/vcredist_x64.exe" $TEMP\vcredist_x64.exe
+		; Pop $0
+		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
+		; Delete '$TEMP\vcredist_x64.exe'
+; VSRedistInstalled64:
+		File "vcredist\vcredist_2010sp1_x64.exe"
+		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart'
 	${Else}
-		ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\Runtimes\x86" 'Installed'
-		${If} $0 != '1'
-			ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x86" 'Installed'
-			${If} $0 != '1'
-				inetc::get "http://www.urserver.de/vc10/vcredist_x86.exe" $TEMP\vcredist_x86.exe
-				Pop $0
-				ExecWait '"$TEMP\vcredist_x86.exe" /q'   
-				Delete '$TEMP\vcredist_x86.exe'
-			${EndIf}
-		${EndIf}
+		; ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\Runtimes\x86" 'Installed'
+		; ${If} $0 != '1'
+			; ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x86" 'Installed'
+			; ${If} $0 != '1'
+				; inetc::get "http://www.urserver.de/vc10/vcredist_x86.exe" $TEMP\vcredist_x86.exe
+				; Pop $0
+				; ExecWait '"$TEMP\vcredist_x86.exe" /q'   
+				; Delete '$TEMP\vcredist_x86.exe'
+			; ${EndIf}
+		; ${EndIf}
+		File "vcredist\vcredist_2010sp1_x86.exe"
+		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart'
 	${EndIf}
 	
 	StrCpy $0 "UrBackupClient.exe"
@@ -83,9 +88,16 @@ VSRedistInstalled64:
 	${If} $0 == '0'
 		SimpleSC::StopService "UrBackupServer"
 		Pop $0
+		SimpleSC::RemoveService "UrBackupServer"
+		Pop $0
 	${EndIf}
-	;SimpleSC::RemoveService "UrBackupServer"
-	;Pop $0
+	
+	SimpleSC::ExistsService "UrBackupClientBackend"
+	Pop $0
+	${If} $0 == '0'
+		SimpleSC::StopService "UrBackupClientBackend"
+		Pop $0
+	${EndIf}
 	
 	Sleep 500
 	
@@ -110,7 +122,7 @@ VSRedistInstalled64:
 		File "data\urbackup_server03.dll"
 		File "data\urbackup_xp.dll"
 		File "data\UrBackupClient.exe"
-		File "data\urbackupsrv.exe"
+		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
 		File "data\UrBackupClient_cmd.exe"
 	${Else}
@@ -120,7 +132,7 @@ VSRedistInstalled64:
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
 		File "data_x64\UrBackupClient.exe"
-		File "data_x64\urbackupsrv.exe"
+		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\UrBackupClient_cmd.exe"
 	${EndIf}
@@ -158,6 +170,14 @@ VSRedistInstalled64:
 			Pop $0
 			;SetRebootFlag true
 		${EndIf}
+		${If} ${IsWin2000}
+			StrCpy $0 "$INSTDIR\args_xp.txt" ;Path of copy file from
+			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
+			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
+			System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
+			Pop $0
+			;SetRebootFlag true
+		${EndIf}
 		${If} ${IsWin2003}
 			StrCpy $0 "$INSTDIR\args_server03.txt" ;Path of copy file from
 			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
@@ -187,7 +207,13 @@ do_copy:
 next_s:	
 	Delete "$INSTDIR\urbackup\backup_client_new.db"
 	
-	nsisFirewall::AddAuthorizedApplication "$INSTDIR\urbackupsrv.exe" "UrBackup Server"
+	${If} ${IsWinXP}
+		nsisFirewall::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+	${ElseIf} ${IsWin2003}
+		nsisFirewall::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+	${Else}
+		liteFirewall::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+	${EndIf}
 	Pop $0
 	
 	IfFileExists "$INSTDIR\prefilebackup.bat" next_s_pfb do_copy_pfb
@@ -200,13 +226,13 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
-	SimpleSC::ExistsService "UrBackupServer"
+	SimpleSC::ExistsService "UrBackupClientBackend"
 	Pop $0
 	${If} $0 != '0'
-		SimpleSC::InstallService "UrBackupServer" "UrBackup Server for doing backups" "16" "2" "$INSTDIR\urbackupsrv.exe" "" "" ""
+		SimpleSC::InstallService "UrBackupClientBackend" "UrBackup Client Service for Backups" "16" "2" "$INSTDIR\UrBackupClientBackend.exe" "" "" ""
 		Pop $0
 	${EndIf}	
-	SimpleSC::StartService "UrBackupServer" ""
+	SimpleSC::StartService "UrBackupClientBackend" ""
 	Pop $0
 	
 	${If} ${RunningX64}
@@ -229,9 +255,9 @@ Section "Uninstall"
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 
-	SimpleSC::StopService "UrBackupServer"
+	SimpleSC::StopService "UrBackupClientBackend"
 	Pop $0
-	SimpleSC::RemoveService "UrBackupServer"
+	SimpleSC::RemoveService "UrBackupClientBackend"
 	Pop $0
 	
 	Sleep 500
