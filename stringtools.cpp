@@ -499,7 +499,7 @@ std::wstring convert(size_t i){
 	return ss.str();
 }
 
-#if defined(_WIN64) || defined(_LP64)
+#if defined(_LP64)
 //--------------------------------------------------------------------
 /**
 *	integer in string
