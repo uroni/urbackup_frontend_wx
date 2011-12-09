@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 0.39"
+!define MUI_BRANDINGTEXT "UrBackup 0.39"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,12 +7,26 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup Update"
-OutFile "UrBackupUpdate.exe"
+Name "UrBackup 0.39"
+OutFile "UrBackup Client NoTray 0.39-3.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
+!insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+
+!define MUI_LANGDLL_ALLLANGUAGES
+
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
+
+!define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
+!define MUI_LANGDLL_REGISTRY_KEY "Software\UrBackup" 
+!define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+
 
 !define MUI_CUSTOMFUNCTION_GUIINIT myGuiInit
 
@@ -20,6 +34,9 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
+
+
+!insertmacro MUI_RESERVEFILE_LANGDLL
  
 
 Section "install"
@@ -71,18 +88,7 @@ Section "install"
 	${If} $0 == '0'
 		SimpleSC::StopService "UrBackupServer"
 		Pop $0
-		Sleep 2000
 		SimpleSC::RemoveService "UrBackupServer"
-		Pop $0
-	${EndIf}
-	
-	SimpleSC::ExistsService "UrBackupClient Backend"
-	Pop $0
-	${If} $0 == '0'
-		SimpleSC::StopService "UrBackupClient Backend"
-		Pop $0
-		Sleep 2000
-		SimpleSC::RemoveService "UrBackupClient Backend"
 		Pop $0
 	${EndIf}
 	
@@ -115,20 +121,16 @@ Section "install"
 		File "data\urbackup.dll"
 		File "data\urbackup_server03.dll"
 		File "data\urbackup_xp.dll"
-		File "data\UrBackupClient.exe"
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
-		File "data\UrBackupClient_cmd.exe"
 	${Else}
 		File "data\args_server03.txt"
 		File "data_x64\urbackup_server03.dll"
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
-		File "data_x64\UrBackupClient.exe"
 		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
-		File "data_x64\UrBackupClient_cmd.exe"
 	${EndIf}
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
@@ -151,9 +153,7 @@ Section "install"
 	
 	File "data\urbackup\backup_client_new.db"
 	
-	CreateDirectory "$INSTDIR\urbackup\data"	
-	
-	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "UrBackupClient" "$INSTDIR\UrBackupClient.exe"
+	CreateDirectory "$INSTDIR\urbackup\data"
 	
 	${IfNot} ${RunningX64}
 		${If} ${IsWinXP}
@@ -246,7 +246,6 @@ Section "Uninstall"
 	KillProc::KillProcesses
 	
 	${If} ${RunningX64}
-		File "data_x64\KillProc.exe"		
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 
@@ -269,6 +268,9 @@ Section "Uninstall"
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32
 	${EndIf}
+	
+	DeleteRegKey /ifempty HKCU "Software\UrBackup"
+	
 SectionEnd
 
 Function .onInstSuccess
@@ -282,7 +284,10 @@ Function .onInstSuccess
 		SetRegView 32
 	${EndIf}
 FunctionEnd
- 
+
+Function un.onInit
+	!insertmacro MUI_UNGETLANGUAGE
+FunctionEnd
  
 Function un.onUninstSuccess
   ;MessageBox MB_OK "UrBackup wurde erfolgreich deinstalliert."
@@ -299,15 +304,8 @@ FunctionEnd
 Function .onInit
 	${If} ${RunningX64}
 		strcpy $INSTDIR "$PROGRAMFILES64\UrBackup"
-		SetRegView 64
 	${EndIf}
-	
-	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" 'Path'
-	strcpy $INSTDIR $0
-	
-	${If} ${RunningX64}
-		SetRegView 32
-	${EndIf}
+	!insertmacro MUI_LANGDLL_DISPLAY
 FunctionEnd
 
 
