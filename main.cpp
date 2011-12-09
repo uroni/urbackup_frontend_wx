@@ -178,10 +178,6 @@ void MyTimer::Notify()
 	static long startuptime_passed=0;
 	static long lastbackuptime=-5*60*1000;
 	static long lastversioncheck=starttime;
-	
-#ifndef _WIN32
-	cfgDir+=wxT("/.urbackup");
-#endif
 
 	if(!wxDir::Exists(cfgDir) )
 	{
