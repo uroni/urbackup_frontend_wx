@@ -132,7 +132,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		}
 		else
 		{
-			m_textCtrl21->SetValue(wxT("60"));
+			m_textCtrl22->SetValue(wxT("60"));
 			m_checkBox1->SetValue(true);
 		}
 		if(getSettingsValue(L"update_freq_image_incr", &t, settings))
