@@ -8,7 +8,7 @@ SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
 Name "UrBackup 0.39"
-OutFile "UrBackup Client 0.39-3.exe"
+OutFile "UrBackup Client NoTray 0.39-3.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -121,20 +121,16 @@ Section "install"
 		File "data\urbackup.dll"
 		File "data\urbackup_server03.dll"
 		File "data\urbackup_xp.dll"
-		File "data\UrBackupClient.exe"
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
-		File "data\UrBackupClient_cmd.exe"
 	${Else}
 		File "data\args_server03.txt"
 		File "data_x64\urbackup_server03.dll"
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
-		File "data_x64\UrBackupClient.exe"
 		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
-		File "data_x64\UrBackupClient_cmd.exe"
 	${EndIf}
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
@@ -157,9 +153,7 @@ Section "install"
 	
 	File "data\urbackup\backup_client_new.db"
 	
-	CreateDirectory "$INSTDIR\urbackup\data"	
-	
-	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "UrBackupClient" "$INSTDIR\UrBackupClient.exe"
+	CreateDirectory "$INSTDIR\urbackup\data"
 	
 	${IfNot} ${RunningX64}
 		${If} ${IsWinXP}

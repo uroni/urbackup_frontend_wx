@@ -33,5 +33,12 @@ private:
 class MyTimer : public wxTimer
 {
 public:
+	MyTimer(void);
+
 	void Notify(void);
+
+	bool hasCapability(int capa_bit);
+
+private:
+	int capa;
 };

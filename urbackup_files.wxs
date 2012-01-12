@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLLOCATION">
+            <Component Id="cmpC4EA56FDE5101088BC7CB71877CDBFA1" Guid="{257DCC4B-CC37-4F58-B8E4-D674F187226E}">
+                <File Id="fil1012EAC28990D6837EBB626B697B8BE6" KeyPath="yes" Source="$(var.shared_data_dir)\args.txt" />
+            </Component>
+            <Component Id="cmpD944BAE9A92866728CAD4B2D5A0D62FA" Guid="{CDBDB045-0A52-430A-AD87-6B392959D8D8}">
+                <File Id="fil41745C75C1B91307BFA4972F37448E23" KeyPath="yes" Source="$(var.shared_data_dir)\args_server03.txt" />
+            </Component>
+            <Component Id="cmpE91D3579E574CEA2796DF681B01F95F2" Guid="{575E8856-61AC-421C-8C86-B22940B7F3D2}">
+                <File Id="fil448806A8CBAA257FFB16595F8A3F4331" KeyPath="yes" Source="$(var.shared_data_dir)\args_xp.txt" />
+            </Component>
+            <Component Id="cmp93F292ADAF785F399E42E4F60E954A12" Guid="{47D632C6-7824-4E4D-9146-FA14C8DF0EF8}">
+                <File Id="fil6903CF037991ECFEDD00F4EC883D55AD" KeyPath="yes" Source="$(var.shared_data_dir)\backup-bad.ico" />
+            </Component>
+            <Component Id="cmp7F064BB9CB158683EB9DFDFFA59B7242" Guid="{2AA4B0CE-D4A5-474F-B798-6338F27C9C8D}">
+                <File Id="fil02E279E0D08659221D368B5E9D5A07C7" KeyPath="yes" Source="$(var.shared_data_dir)\backup-bad.xpm" />
+            </Component>
+            <Component Id="cmp626E98B55240F06A04651A5E42EABE32" Guid="{61595C86-30F9-4CB7-A7F9-6B688A121368}">
+                <File Id="fil5CC8929F98211DB018868163DA9DBAA0" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok-big.ico" />
+            </Component>
+            <Component Id="cmpFA3D189DB630D92413C53068DBA5A4C0" Guid="{F98693D0-9687-41A2-9788-DFD009AC79EC}">
+                <File Id="fil7C635045A4ECFCFF5546C54361A3277E" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok-big.xpm" />
+            </Component>
+            <Component Id="cmpA3688A751E01CECC3FC213B9110D8650" Guid="{CA7EB480-D752-46BE-8C58-658A06E77FF0}">
+                <File Id="fil69521D7DB4FE874627D88AD1977BBD48" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok.ico" />
+            </Component>
+            <Component Id="cmp31410D976F25B636855A52803C251151" Guid="{3CEADF08-88E2-4D5D-846C-3580C319D227}">
+                <File Id="fil96D835ACCAA204EB087A54BB6A5E4D8B" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok.xpm" />
+            </Component>
+            <Component Id="cmp743471C3E6B3C2A36D480B78348AB71A" Guid="{C0BF71F5-5674-45CB-BAC9-63A173FDF70D}">
+                <File Id="filBD83A58B9BFC14A227C27DF1EA8A063D" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress-pause.ico" />
+            </Component>
+            <Component Id="cmpC87724F824311B6739335CA53E946620" Guid="{9DC82404-3893-4A18-ACDE-9937DCACC062}">
+                <File Id="fil0356819F5D188A6756903CA8AC0ED786" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress-pause.xpm" />
+            </Component>
+            <Component Id="cmpA506A755F6439AB0DED04F16F9519F36" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3003}">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA690" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress.ico" />
+            </Component>
+            <Component Id="cmp46C548C314EC503FB33DDAD10C79401A" Guid="{A6D7CDB0-72FD-4F1C-961D-2D406EF6ABD4}">
+                <File Id="filBB80DA90431F0F19681A979A27BDF244" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress.xpm" />
+            </Component>
+            <Component Id="cmp389545D08870D46A732CEF4DF0D7B990" Guid="{2C73BBA6-0E40-4834-B6AA-3239799AC1F0}">
+                <File Id="filDE5F342F49642BBC72EA2151C0F062F7" KeyPath="yes" Source="$(var.shared_data_dir)\cryptoplugin.dll" />
+            </Component>
+            <Component Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" Guid="{A8C77B9A-482B-4282-939A-E454AA8B94F3}">
+                <File Id="fil8F2E72C5A068C923F426772A12CB28F5" KeyPath="yes" Source="$(var.shared_data_dir)\curr_version.txt" />
+            </Component>
+            <Component Id="cmpEF2E01BDF034BF14751BEC5F25BEEA6A" Guid="{18319C42-BF7E-4B27-B6C2-7A2293FE1516}">
+                <File Id="fil3487B7EAF750238D572EAF9848C50206" KeyPath="yes" Source="$(var.shared_data_dir)\desktop.ini" />
+            </Component>
+            <Component Id="cmpAE4221E23D16E8039BF45822D0E1F1BD" Guid="{E9341BF0-A429-42E8-BC4A-7DE8D07F9FFB}">
+                <File Id="filD84912F7614C268169F513C550ECBCBF" KeyPath="yes" Source="$(var.shared_data_dir)\fileservplugin.dll" />
+            </Component>
+            <Component Id="cmp8F7A07B22E62ECFB5E5C5FBD5A33180C" Guid="{361E1617-6E93-43F2-B03D-5A73D1AA4D58}">
+                <File Id="filE51BA38949EC4FEE13D904E3CF7681A1" KeyPath="yes" Source="$(var.shared_data_dir)\fsimageplugin.dll" />
+            </Component>
+            <Component Id="cmpABF00809AEDF68FD55CB21FD6A79E6F1" Guid="{E5C2E61E-11CD-4B7D-A19F-ECEFA0229187}">
+                <File Id="fil537298D957BE70C2055CF77D449FB765" KeyPath="yes" Source="$(var.shared_data_dir)\info.txt" />
+            </Component>
+            <Component Id="cmpFD679FD43442A53105E73C5F2C180334" Guid="{12DDFC4F-6DCD-48E1-A5E3-8BB7819E887E}">
+                <File Id="fil562B9B6DD56E491036C22927B23A43D6" KeyPath="yes" Source="$(var.shared_data_dir)\install.reg" />
+            </Component>
+            <Component Id="cmpA3C8DD197BD7132D070BA95A0D0737A9" Guid="{C4E48CB3-A26C-4454-B118-1A94C55827E1}">
+                <File Id="fil12A13679A0DE648F394113047E40AC74" KeyPath="yes" Source="$(var.shared_data_dir)\license.txt" />
+            </Component>
+            <Component Id="cmpB61E9C9B65B365882BCDEC02FD186348" Guid="{4E386F14-9893-442B-84B5-452ABD304A13}">
+                <File Id="fil546F0226153E9851C05E1F76661B2DF6" KeyPath="yes" Source="$(var.shared_data_dir)\logo1.png" />
+            </Component>
+            <Component Id="cmpE1C73D0402801F2E7299130A65DEDFF4" Guid="{FB944ED2-A199-4133-B5FF-627BC8BDC45A}">
+                <File Id="fil24D23E45263FDF8C9B4716EC1DC21EC1" KeyPath="yes" Source="$(var.shared_data_dir)\new.txt" />
+            </Component>
+            <Component Id="cmp6DBAA93640CA327C41F10FD0D0391D07" Guid="{B1922D29-FB63-4C09-A907-529C3A9FB207}">
+                <File Id="fil5DC184508CE6C8A9F5CE6B5D0A6AE2FB" KeyPath="yes" Source="$(var.shared_data_dir)\prefilebackup_new.bat" />
+            </Component>
+            <Component Id="cmpCF4899F41946CAE795F36EC0B9414B31" Guid="{D51EB209-6D95-4F8C-9487-E68CCB89DEAD}">
+                <File Id="filBA1AFDB5114DD60BEDBD3377F3DE7D06" KeyPath="yes" Source="$(var.shared_data_dir)\updates_h.dat" />
+            </Component>
+            <Component Id="cmp4A226790FF8DDBE0BB4FD60A56D2CA1E" Guid="{CDFD5348-2F17-4437-BE07-D6890795295C}">
+                <File Id="fil8BB0AB5335557C95753B39818DF16A31" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup.dll" />
+            </Component>
+            <Component Id="cmp9F1CB2C4F5AC1CC41EC895F3A3756D00" Guid="{AACE51FA-79F2-434E-BE2E-AFC5BCAE4BB6}">
+                <File Id="fil70DAC4DCA04B2F6D3E6B5AA76B352BDA" KeyPath="yes" Source="$(var.shared_data_dir)\UrBackupClient.exe" />
+            </Component>
+            <Component Id="cmp2097D63EEEEC1D89CCC843956E111F51" Guid="{C547B6EF-872F-4410-9F73-38278ADCDFF6}">
+                <File Id="fil852FF0FB9076DE804FA9A7882CB5797C" KeyPath="yes" Source="$(var.shared_data_dir)\UrBackupClient_cmd.exe" />
+            </Component>
+            <Component Id="cmp99B64428EA1D1E55AF40D018B8B3FCEB" Guid="{2EA66C69-226E-44F5-A806-0A3780BE0420}">
+                <File Id="fil096FFEC5B4640F13D34F47D50FF7689E" KeyPath="yes" Source="$(var.shared_data_dir)\urbackupsrv.exe" />
+            </Component>
+            <Component Id="cmp37A94814CB169DB3ED2881E715547442" Guid="{37B02F8D-AF00-4CAA-9B68-4D5F26F2431F}">
+                <File Id="filAD7AA45493CFD8B8331044CD7393799C" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_dsa.pub" />
+            </Component>
+            <Component Id="cmp39158C5F3145B1468CB0F49C7B831D71" Guid="{8B84599C-8B9D-4338-A653-5300BBF6829E}">
+                <File Id="filCF007BAA14B02B1C223E9B0204540DC4" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_server03.dll" />
+            </Component>
+            <Component Id="cmpEBCA5816EBB4857E2608C55244B7D91B" Guid="{29D29DB8-3792-4D49-838D-60A9919C976F}">
+                <File Id="filDB09A5AE0B869E2220C7CC2E433244D3" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_xp.dll" />
+            </Component>
+            <Directory Id="dir77A47C9F143A7502466C548C9FCBAD08" Name="en">
+                <Component Id="cmp3ADCE127861514104F3F9990F4DCEE67" Guid="{6FA6EDD9-8A38-4136-92A6-D6F3E008188A}">
+                    <File Id="filE01BABC064CA6E3C82340AF8F7CE898E" KeyPath="yes" Source="$(var.shared_data_dir)\en\trans.mo" />
+                </Component>
+            </Directory>
+            <Directory Id="dir72226116A8527C99EDF529487A911522" Name="fr">
+                <Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" Guid="{68E7C236-8C59-4216-8240-587BC451CD73}">
+                    <File Id="fil4AAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\fr\trans.mo" />
+                </Component>
+                <Component Id="cmpED2ADCE79B3B015C4CFB302C4B4D6D9F" Guid="{0E7A1C88-D841-4E33-90A0-B6D1FC0CB473}">
+                    <File Id="filC97F12BA740CEAB784D0CCCAC27B024F" KeyPath="yes" Source="$(var.shared_data_dir)\fr\trans.po" />
+                </Component>
+            </Directory>
+            <Directory Id="dir478DAC6711999A86715A581491FA55ED" Name="uninstall">
+                <Component Id="cmp8D4A829D401C549C26AC689ADEABC2D5" Guid="{395EFB72-DEB8-4D39-B25A-F751C65FBAA4}">
+                    <File Id="fil4481167E2E7D022B0076BF42DF7B4186" KeyPath="yes" Source="$(var.shared_data_dir)\uninstall\install.lua" />
+                </Component>
+                <Component Id="cmpAFFA2ED40B36BFD0B41DF79EE142056C" Guid="{9AB1017E-E090-4E83-AC9C-A74245CB4C3A}">
+                    <File Id="filB39F1C47C318CC6DE11BE6D978D0AA80" KeyPath="yes" Source="$(var.shared_data_dir)\uninstall\uninstall.exe" />
+                </Component>
+            </Directory>
+            <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
+                <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}">
+                    <File Id="fil5186247F1A463F798D5080E6795495D3" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup\backup_client_new.db" />
+                </Component>
+                <Directory Id="dirEC170182D8F256F50CFEE910C4E436EA" Name="data">
+                    <Component Id="cmp146035BB0A33B65BB459A78C1BA9938B" Guid="{B4ED2659-34AB-47CA-A976-4C39EB0709FD}">
+                        <File Id="fil6E1D9D3FE5220570D063E923B17CDBF3" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup\data\dummy" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="CommonFiles">
+            <ComponentRef Id="cmpC4EA56FDE5101088BC7CB71877CDBFA1" />
+            <ComponentRef Id="cmpD944BAE9A92866728CAD4B2D5A0D62FA" />
+            <ComponentRef Id="cmpE91D3579E574CEA2796DF681B01F95F2" />
+            <ComponentRef Id="cmp93F292ADAF785F399E42E4F60E954A12" />
+            <ComponentRef Id="cmp7F064BB9CB158683EB9DFDFFA59B7242" />
+            <ComponentRef Id="cmp626E98B55240F06A04651A5E42EABE32" />
+            <ComponentRef Id="cmpFA3D189DB630D92413C53068DBA5A4C0" />
+            <ComponentRef Id="cmpA3688A751E01CECC3FC213B9110D8650" />
+            <ComponentRef Id="cmp31410D976F25B636855A52803C251151" />
+            <ComponentRef Id="cmp743471C3E6B3C2A36D480B78348AB71A" />
+            <ComponentRef Id="cmpC87724F824311B6739335CA53E946620" />
+            <ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F36" />
+            <ComponentRef Id="cmp46C548C314EC503FB33DDAD10C79401A" />
+            <ComponentRef Id="cmp389545D08870D46A732CEF4DF0D7B990" />
+            <ComponentRef Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" />
+            <ComponentRef Id="cmpEF2E01BDF034BF14751BEC5F25BEEA6A" />
+            <ComponentRef Id="cmpAE4221E23D16E8039BF45822D0E1F1BD" />
+            <ComponentRef Id="cmp8F7A07B22E62ECFB5E5C5FBD5A33180C" />
+            <ComponentRef Id="cmpABF00809AEDF68FD55CB21FD6A79E6F1" />
+            <ComponentRef Id="cmpFD679FD43442A53105E73C5F2C180334" />
+            <ComponentRef Id="cmpA3C8DD197BD7132D070BA95A0D0737A9" />
+            <ComponentRef Id="cmpB61E9C9B65B365882BCDEC02FD186348" />
+            <ComponentRef Id="cmpE1C73D0402801F2E7299130A65DEDFF4" />
+            <ComponentRef Id="cmp6DBAA93640CA327C41F10FD0D0391D07" />
+            <ComponentRef Id="cmpCF4899F41946CAE795F36EC0B9414B31" />
+            <ComponentRef Id="cmp4A226790FF8DDBE0BB4FD60A56D2CA1E" />
+            <ComponentRef Id="cmp9F1CB2C4F5AC1CC41EC895F3A3756D00" />
+            <ComponentRef Id="cmp2097D63EEEEC1D89CCC843956E111F51" />
+            <ComponentRef Id="cmp99B64428EA1D1E55AF40D018B8B3FCEB" />
+            <ComponentRef Id="cmp37A94814CB169DB3ED2881E715547442" />
+            <ComponentRef Id="cmp39158C5F3145B1468CB0F49C7B831D71" />
+            <ComponentRef Id="cmpEBCA5816EBB4857E2608C55244B7D91B" />
+            <ComponentRef Id="cmp3ADCE127861514104F3F9990F4DCEE67" />
+            <ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" />
+            <ComponentRef Id="cmpED2ADCE79B3B015C4CFB302C4B4D6D9F" />
+            <ComponentRef Id="cmp8D4A829D401C549C26AC689ADEABC2D5" />
+            <ComponentRef Id="cmpAFFA2ED40B36BFD0B41DF79EE142056C" />
+            <ComponentRef Id="cmpF989989B3E76DC136F5507BF8CDAE791" />
+            <ComponentRef Id="cmp146035BB0A33B65BB459A78C1BA9938B" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

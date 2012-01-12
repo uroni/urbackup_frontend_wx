@@ -23,6 +23,7 @@
 #include "main.h"
 #include "Connector.h"
 #include "Info.h"
+#include "capa_bits.h"
 
 #define ID_TI_EXIT 100
 #define ID_TI_ADD_PATH 101
@@ -42,6 +43,10 @@ extern int working_status;
 bool b_is_pausing=false;
 extern MyTimer *timer;
 
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
+
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
 	if(evt.GetId()==ID_TI_EXIT)
@@ -59,7 +64,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startBackup(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), wxT("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), wxT("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -82,7 +87,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startImage(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(wxT("backup-progress.ico"), wxBITMAP_TYPE_ICO), _("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), _("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -126,20 +131,46 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 wxMenu* TrayIcon::CreatePopupMenu(void)
 {
 	wxMenu *mnu=new wxMenu();
-	mnu->Append(ID_TI_BACKUP_FULL, _("Volles Backup jetzt"), wxT("Jetzt ein volles Backup ausführen"));
-	mnu->Append(ID_TI_BACKUP_INCR, _("Inkremetelles Backup jetzt"), wxT("Jetzt ein inkrementelles Backup ausführen"));
-	mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Volles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
-	mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Inkremetelles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
-	mnu->AppendSeparator();
-	mnu->Append(ID_TI_SETTINGS, _("Einstellungen") );
-	mnu->Append(ID_TI_ADD_PATH, _("Pfade konfigurieren"));
-	mnu->Append(ID_TI_LOGS, _("Logs") );
+	bool any_prev=false;
+	if(!timer->hasCapability(DONT_ALLOW_STARTING_FILE_BACKUPS))
+	{
+		mnu->Append(ID_TI_BACKUP_FULL, _("Volles Backup jetzt"), wxT("Jetzt ein volles Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_INCR, _("Inkremetelles Backup jetzt"), wxT("Jetzt ein inkrementelles Backup ausführen"));
+		any_prev=true;
+	}
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_ALLOW_STARTING_IMAGE_BACKUPS) && !timer->hasCapability(DONT_DO_IMAGE_BACKUPS) )
+	{
+		mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Volles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Inkremetelles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+		any_prev=true;
+	}
+#endif
+	if(any_prev)
+	{
+		mnu->AppendSeparator();
+	}
+	if(!timer->hasCapability(DONT_SHOW_SETTINGS))
+	{
+		mnu->Append(ID_TI_SETTINGS, _("Einstellungen") );
+	}
+	if(!timer->hasCapability(DONT_ALLOW_CONFIG_PATHS))
+	{
+		mnu->Append(ID_TI_ADD_PATH, _("Pfade konfigurieren"));
+	}
+	if(!timer->hasCapability(DONT_SHOW_LOGS))
+	{
+		mnu->Append(ID_TI_LOGS, _("Logs") );
+	}
 	mnu->Append(ID_TI_INFO, _("Info") );
 	if(working_status>0)
 	{
 		if(b_is_pausing==false)
 		{
-			mnu->Append(ID_TI_PAUSE, _("Pausieren"));
+			if(!timer->hasCapability(DONT_ALLOW_PAUSE))
+			{
+				mnu->Append(ID_TI_PAUSE, _("Pausieren"));
+			}
 		}
 		else
 		{

@@ -20,6 +20,7 @@
 #include "stringtools.h"
 
 extern std::string g_lang;
+extern std::string g_res_path;
 
 #ifdef wxUSE_WCHAR_T
 std::wstring ConvertToUnicode(const std::string &str);
@@ -30,10 +31,10 @@ std::wstring ConvertToUnicode(const std::string &str);
 
 Info::Info(wxWindow* parent) : GUIInfo(parent)
 {
-	std::string inf=getFile("info_"+g_lang+".txt");
+	std::string inf=getFile(g_res_path+"info_"+g_lang+".txt");
 	if(inf.empty())
 	{
-		inf=getFile("info.txt");
+		inf=getFile(g_res_path+"info.txt");
 	}
 	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);

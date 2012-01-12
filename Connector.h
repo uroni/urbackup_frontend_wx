@@ -36,6 +36,7 @@ struct SStatus
 	wxString status;
 	wxString pcdone;
 	bool pause;
+	int capa;
 };
 
 struct SLogEntry

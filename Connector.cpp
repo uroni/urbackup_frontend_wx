@@ -21,6 +21,7 @@
 #include "stringtools.h"
 #include <wx/socket.h>
 #include "escape.h"
+#include <iostream>
 
 std::string Connector::pw;
 bool Connector::error=false;
@@ -28,7 +29,6 @@ const size_t conn_retries=4;
 bool Connector::busy=false;
 
 #ifdef wxUSE_WCHAR_T
-#define std_string std::wstring
 std::string ConvertToUTF8(const std::wstring &str);
 std::wstring ConvertToUnicode(const std::string &str);
 #else
@@ -44,7 +44,18 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	error=false;
 	if(pw.empty())
 	{
-		pw=getFile("pw.txt");
+		if(FileExists("pw.txt"))
+			pw=getFile("pw.txt");
+		else if(FileExists("/usr/local/var/urbackup/pw.txt"))
+			pw=getFile("/usr/local/var/urbackup/pw.txt");
+		else if(FileExists("/var/urbackup/pw.txt"))
+			pw=getFile("/var/urbackup/pw.txt");
+		else if(FileExists("/var/lib/urbackup/pw.txt"))
+			pw=getFile("/var/lib/urbackup/pw.txt");
+		if(pw.empty())
+		{
+			std::cout << "Could not load password file!" << std::endl;
+		}
 	}
 	wxSocketClient client(wxSOCKET_BLOCK);
 	wxIPV4address addr;
@@ -155,8 +166,8 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 	{
 		SBackupDir bd;
 		bd.id=atoi(getline(i, d).c_str() );
-		bd.path=wxString::FromUTF8(getline(i+1, d).c_str() );
-		std::string path=ConvertToUTF8(bd.path.c_str());
+		std::string path=getline(i+1, d);
+		bd.path=wxString::FromUTF8(path.c_str() );
 		if(path.find("|")!=std::string::npos)
 		{
 			bd.path=ConvertToUnicode(getafter("|", path));
@@ -196,6 +207,7 @@ SStatus Connector::getStatus(void)
 
 	SStatus ret;
 	ret.pause=false;
+	ret.capa=0;
 	if(toks.size()>0)
 		ret.lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
 	if(toks.size()>1)
@@ -209,7 +221,16 @@ SStatus Connector::getStatus(void)
 		else if(toks[3]=="NP")
 			ret.pause=false;
 	}
-
+	if(toks.size()>4)
+	{
+		std::map<std::wstring,std::wstring> params;
+		ParseParamStr(toks[4], &params);
+		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
+		if(it_capa!=params.end())
+		{
+			ret.capa=watoi(it_capa->second);
+		}
+	}
 
 	return ret;
 }

@@ -18,6 +18,13 @@
 
 #include "Settings.h"
 #include "stringtools.h"
+#include "main.h"
+#include "capa_bits.h"
+
+extern MyTimer *timer;
+extern wxString res_path;
+extern wxString ico_ext;
+extern wxBitmapType ico_type;
 
 std::string getServerName(void)
 {
@@ -82,7 +89,7 @@ wxTextValidator getPathValidator(void)
 
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
-	SetIcon(wxIcon(wxT("backup-ok-big.ico"), wxBITMAP_TYPE_ICO));
+	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
 	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
 
 	std::wstring t;
@@ -92,7 +99,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl1->SetValue(wxT("1"));
+		m_textCtrl1->SetValue(wxT("12"));
 	}
 	if(getSettingsValue(L"update_freq_full", &t, settings))
 	{
@@ -100,39 +107,44 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	}
 	else
 	{
-		m_textCtrl1->SetValue(wxT("30"));
+		m_textCtrl2->SetValue(wxT("30"));
 	}
-	if(getSettingsValue(L"update_freq_image_full", &t, settings))
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
-		if(watoi(t)>0)
+		if(getSettingsValue(L"update_freq_image_full", &t, settings))
 		{
-			m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
-			m_checkBox1->SetValue(true);
+			if(watoi(t)>0)
+			{
+				m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+				m_checkBox1->SetValue(true);
+			}
+			else
+			{
+				if(settings->getValue(L"update_freq_image_full_orig", &t))
+				{
+					m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+				}
+				m_textCtrl21->Enable(false);
+				m_textCtrl22->Enable(false);
+				m_checkBox1->SetValue(false);
+			}
 		}
 		else
 		{
-			if(settings->getValue(L"update_freq_image_full_orig", &t))
-			{
-				m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
-			}
-			m_textCtrl21->Enable(false);
-			m_textCtrl22->Enable(false);
-			m_checkBox1->SetValue(false);
+			m_textCtrl21->SetValue(wxT("60"));
+			m_checkBox1->SetValue(true);
+		}
+		if(getSettingsValue(L"update_freq_image_incr", &t, settings))
+		{
+			m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+		}
+		else
+		{
+			m_textCtrl21->SetValue(wxT("7"));
 		}
 	}
-	else
-	{
-		m_textCtrl21->SetValue(wxT("60"));
-		m_checkBox1->SetValue(true);
-	}
-	if(getSettingsValue(L"update_freq_image_incr", &t, settings))
-	{
-		m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
-	}
-	else
-	{
-		m_textCtrl21->SetValue(wxT("7"));
-	}
+#endif
 	if(getSettingsValue(L"max_file_incr", &t, settings))
 	{
 		m_textCtrl131->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -165,38 +177,43 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl132->SetValue(wxT("2"));
 	}
-	if(getSettingsValue(L"min_image_incr", &t,settings))
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
-		m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
+		if(getSettingsValue(L"min_image_incr", &t,settings))
+		{
+			m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl134->SetValue(wxT("4"));
+		}
+		if(getSettingsValue(L"max_image_incr", &t, settings))
+		{
+			m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl135->SetValue(wxT("30"));
+		}
+		if(getSettingsValue(L"min_image_full", &t, settings))
+		{
+			m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl136->SetValue(wxT("2"));
+		}
+		if(getSettingsValue(L"max_image_full", &t, settings))
+		{
+			m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl137->SetValue(wxT("5"));
+		}
 	}
-	else
-	{
-		m_textCtrl134->SetValue(wxT("4"));
-	}
-	if(getSettingsValue(L"max_image_incr", &t, settings))
-	{
-		m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
-	}
-	else
-	{
-		m_textCtrl135->SetValue(wxT("30"));
-	}
-	if(getSettingsValue(L"min_image_full", &t, settings))
-	{
-		m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
-	}
-	else
-	{
-		m_textCtrl136->SetValue(wxT("2"));
-	}
-	if(getSettingsValue(L"max_image_full", &t, settings))
-	{
-		m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
-	}
-	else
-	{
-		m_textCtrl137->SetValue(wxT("5"));
-	}
+#endif
 	if(settings->getValue(L"computername", &t) )
 	{
 		m_textCtrl15->SetValue(t);
@@ -229,6 +246,19 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl19->SetValue(wxT("0"));
 	}
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		if(getSettingsValue(L"image_letters", &t, settings))
+		{
+			m_textCtrl23->SetValue(t);
+		}
+		else
+		{
+			m_textCtrl23->SetValue(wxT("C"));
+		}
+	}
+#endif
 
 	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
@@ -243,20 +273,43 @@ void Settings::OnOkClick( wxCommandEvent& event )
 {
 	wxString update_freq_incr=m_textCtrl1->GetValue();
 	wxString update_freq_full=m_textCtrl2->GetValue();
-	wxString update_freq_image_full=m_textCtrl22->GetValue();
-	wxString update_freq_image_incr=m_textCtrl21->GetValue();
+#ifdef _WIN32
+	wxString update_freq_image_full;
+	wxString update_freq_image_incr;
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		update_freq_image_full=m_textCtrl22->GetValue();
+		update_freq_image_incr=m_textCtrl21->GetValue();
+	}
+#endif
 	wxString max_file_incr=m_textCtrl131->GetValue();
 	wxString min_file_incr=m_textCtrl13->GetValue();
 	wxString max_file_full=m_textCtrl133->GetValue();
 	wxString min_file_full=m_textCtrl132->GetValue();
-	wxString min_image_incr=m_textCtrl134->GetValue();
-	wxString max_image_incr=m_textCtrl135->GetValue();
-	wxString min_image_full=m_textCtrl136->GetValue();
-	wxString max_image_full=m_textCtrl137->GetValue();
+#ifdef _WIN32
+	wxString min_image_incr;
+	wxString max_image_incr;
+	wxString min_image_full;
+	wxString max_image_full;
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		min_image_incr=m_textCtrl134->GetValue();
+		max_image_incr=m_textCtrl135->GetValue();
+		min_image_full=m_textCtrl136->GetValue();
+		max_image_full=m_textCtrl137->GetValue();
+	}
+#endif
 	wxString computername=m_textCtrl15->GetValue();
 	wxString backup_window=m_textCtrl17->GetValue();
 	wxString exclude_files=m_textCtrl16->GetValue();
 	wxString startup_backup_delay=m_textCtrl19->GetValue();
+#ifdef _WIN32
+	wxString image_letters;
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		image_letters=m_textCtrl23->GetValue();
+	}
+#endif
 
 	long l_update_freq_incr,l_update_freq_full;
 	long l_update_freq_image_full, l_update_freq_image_full_orig, l_update_freq_image_incr;
@@ -268,83 +321,112 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	if(update_freq_incr.ToLong(&l_update_freq_incr)==false )
 	{
-		wxMessageBox( _("Die inkrementelle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die inkrementelle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
 		return;
 	}
 	if(update_freq_full.ToLong(&l_update_freq_full)==false )
 	{
-		wxMessageBox( _("Die volle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die volle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
 		return;
 	}
-	if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false )
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
-		wxMessageBox( _("Die volle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl22->SetFocus();
-		return;
+		if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false && m_checkBox1->GetValue() )
+		{
+			wxMessageBox( _("Die volle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl22->SetFocus();
+			return;
+		}
+		if(update_freq_image_incr.ToLong(&l_update_freq_image_incr)==false && m_checkBox1->GetValue()  )
+		{
+			wxMessageBox( _("Die inkrementelle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl21->SetFocus();
+			return;
+		}
 	}
-	if(update_freq_image_incr.ToLong(&l_update_freq_image_incr)==false )
-	{
-		wxMessageBox( _("Die inkrementelle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl21->SetFocus();
-		return;
-	}
+#endif
 	if(max_file_incr.ToLong(&l_max_file_incr)==false )
 	{
-		wxMessageBox( _("Die maximale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die maximale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl131->SetFocus();
 		return;
 	}
 	if(min_file_incr.ToLong(&l_min_file_incr)==false )
 	{
-		wxMessageBox( _("Die minimale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die minimale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl13->SetFocus();
 		return;
 	}
 	if(max_file_full.ToLong(&l_max_file_full)==false )
 	{
-		wxMessageBox( _("Die maximale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die maximale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl133->SetFocus();
 		return;
 	}
 	if(min_file_full.ToLong(&l_min_file_full)==false )
 	{
-		wxMessageBox( _("Die minimale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die minimale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl132->SetFocus();
 		return;
 	}
-	if(min_image_incr.ToLong(&l_min_image_incr)==false )
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
-		wxMessageBox( _("Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl134->SetFocus();
-		return;
+		if(min_image_incr.ToLong(&l_min_image_incr)==false )
+		{
+			wxMessageBox( _("Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl134->SetFocus();
+			return;
+		}
+		if(max_image_incr.ToLong(&l_max_image_incr)==false )
+		{
+			wxMessageBox( _("Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl135->SetFocus();
+			return;
+		}
+		if(min_image_full.ToLong(&l_min_image_full)==false )
+		{
+			wxMessageBox( _("Die minimale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl136->SetFocus();
+			return;
+		}
+		if(max_image_full.ToLong(&l_max_image_full)==false )
+		{
+			wxMessageBox( _("Die maximale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl137->SetFocus();
+			return;
+		}
 	}
-	if(max_image_incr.ToLong(&l_max_image_incr)==false )
-	{
-		wxMessageBox( _("Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl135->SetFocus();
-		return;
-	}
-	if(min_image_full.ToLong(&l_min_image_full)==false )
-	{
-		wxMessageBox( _("Die minimale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl136->SetFocus();
-		return;
-	}
-	if(max_image_full.ToLong(&l_max_image_full)==false )
-	{
-		wxMessageBox( _("Die maximale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
-		m_textCtrl137->SetFocus();
-		return;
-	}
+#endif
 	if(startup_backup_delay.ToLong(&l_startup_backup_delay)==false)
 	{
-		wxMessageBox( _("Die Verzögerung bei Systemstart ist keine Zahl"), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Die Verzögerung bei Systemstart ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl19->SetFocus();
 		return;
 	}
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		std::string s_image_letters=image_letters.ToUTF8();
+		std::vector<std::string> img_paths;
+		Tokenize(s_image_letters, img_paths, ";,");
 
+		for(size_t i=0;i<img_paths.size();++i)
+		{
+			char outb[1000];
+			BOOL b=GetVolumePathNameA((img_paths[i]+":\\").c_str(), outb, 1000);
+			if(b==FALSE)
+			{
+				wxMessageBox( ConvertToUnicode(img_paths[i])+_(" ist kein Laufwerk"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				m_textCtrl23->SetFocus();
+				return;
+			}
+		}
+	}
+#endif
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
 	if(m_checkBox1->GetValue()==false)
@@ -370,6 +452,9 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["backup_window"]=backup_window.ToUTF8();
 	n_vals["exclude_files"]=exclude_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
+#ifdef _WIN32
+	n_vals["image_letters"]=image_letters.ToUTF8();
+#endif
 
 	std::string ndata;
 	std::vector<std::wstring> keys=settings->getKeys();

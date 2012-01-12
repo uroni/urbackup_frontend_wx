@@ -6,6 +6,11 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "GUI.h"
+#include "../main.h"
+#include "../capa_bits.h"
+
+extern MyTimer *timer;
+extern wxString res_path;
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -48,46 +53,51 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer1->Add( bSizer30, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer31;
-	bSizer31 = new wxBoxSizer( wxHORIZONTAL );
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		wxBoxSizer* bSizer31;
+		bSizer31 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText6 = new wxStaticText( this, wxID_ANY, _("Intervall für inkrementelle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText6->Wrap( -1 );
-	bSizer31->Add( m_staticText6, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText6 = new wxStaticText( this, wxID_ANY, _("Intervall für inkrementelle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText6->Wrap( -1 );
+		bSizer31->Add( m_staticText6, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl21 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer31->Add( m_textCtrl21, 0, wxALL, 5 );
+		m_textCtrl21 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer31->Add( m_textCtrl21, 0, wxALL, 5 );
 	
-	m_staticText41 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText41->Wrap( -1 );
-	m_staticText41->SetMinSize( wxSize( 50,-1 ) );
+		m_staticText41 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText41->Wrap( -1 );
+		m_staticText41->SetMinSize( wxSize( 50,-1 ) );
 	
-	bSizer31->Add( m_staticText41, 0, wxALIGN_CENTER|wxALL, 5 );
+		bSizer31->Add( m_staticText41, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	
-	bSizer31->Add( 0, 0, 1, wxEXPAND, 5 );
+		bSizer31->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	m_checkBox1 = new wxCheckBox( this, wxID_ANY, _("Aktiv"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_checkBox1->SetValue(true); 
-	bSizer31->Add( m_checkBox1, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_checkBox1 = new wxCheckBox( this, wxID_ANY, _("Aktiv"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_checkBox1->SetValue(true); 
+		bSizer31->Add( m_checkBox1, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	bSizer1->Add( bSizer31, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer31, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer32;
-	bSizer32 = new wxBoxSizer( wxHORIZONTAL );
+		wxBoxSizer* bSizer32;
+		bSizer32 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText7 = new wxStaticText( this, wxID_ANY, _("Intervall für volle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText7->Wrap( -1 );
-	bSizer32->Add( m_staticText7, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText7 = new wxStaticText( this, wxID_ANY, _("Intervall für volle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText7->Wrap( -1 );
+		bSizer32->Add( m_staticText7, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl22 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer32->Add( m_textCtrl22, 0, wxALL, 5 );
+		m_textCtrl22 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer32->Add( m_textCtrl22, 0, wxALL, 5 );
 	
-	m_staticText42 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText42->Wrap( -1 );
-	bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText42 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText42->Wrap( -1 );
+		bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	bSizer1->Add( bSizer32, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer32, 1, wxEXPAND, 5 );
+	}
+#endif
 	
 	wxBoxSizer* bSizer33;
 	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
@@ -155,62 +165,67 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer1->Add( bSizer38, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer39;
-	bSizer39 = new wxBoxSizer( wxHORIZONTAL );
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		wxBoxSizer* bSizer39;
+		bSizer39 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText14 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText14->Wrap( -1 );
-	bSizer39->Add( m_staticText14, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText14 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText14->Wrap( -1 );
+		bSizer39->Add( m_staticText14, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl134 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer39->Add( m_textCtrl134, 0, wxALL, 5 );
+		m_textCtrl134 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer39->Add( m_textCtrl134, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer39, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer39, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer40;
-	bSizer40 = new wxBoxSizer( wxHORIZONTAL );
+		wxBoxSizer* bSizer40;
+		bSizer40 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText15 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText15->Wrap( -1 );
-	bSizer40->Add( m_staticText15, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText15 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText15->Wrap( -1 );
+		bSizer40->Add( m_staticText15, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl135 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer40->Add( m_textCtrl135, 0, wxALL, 5 );
+		m_textCtrl135 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer40->Add( m_textCtrl135, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer40, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer40, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer41;
-	bSizer41 = new wxBoxSizer( wxHORIZONTAL );
+		wxBoxSizer* bSizer41;
+		bSizer41 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText16 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText16->Wrap( -1 );
-	bSizer41->Add( m_staticText16, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText16 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText16->Wrap( -1 );
+		bSizer41->Add( m_staticText16, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl136 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer41->Add( m_textCtrl136, 0, wxALL, 5 );
+		m_textCtrl136 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer41->Add( m_textCtrl136, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer41, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer41, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer42;
-	bSizer42 = new wxBoxSizer( wxHORIZONTAL );
+		wxBoxSizer* bSizer42;
+		bSizer42 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText17 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	m_staticText17->Wrap( -1 );
-	bSizer42->Add( m_staticText17, 0, wxALIGN_CENTER|wxALL, 5 );
+		m_staticText17 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText17->Wrap( -1 );
+		bSizer42->Add( m_staticText17, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl137 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer42->Add( m_textCtrl137, 0, wxALL, 5 );
+		m_textCtrl137 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizer42->Add( m_textCtrl137, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer42, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer42, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer43;
-	bSizer43 = new wxBoxSizer( wxVERTICAL );
+		wxBoxSizer* bSizer43;
+		bSizer43 = new wxBoxSizer( wxVERTICAL );
 	
-	m_staticText28 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText28->Wrap( -1 );
-	bSizer43->Add( m_staticText28, 0, wxALL, 5 );
+		m_staticText28 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText28->Wrap( -1 );
+		bSizer43->Add( m_staticText28, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer43, 1, wxEXPAND, 5 );
+		bSizer1->Add( bSizer43, 1, wxEXPAND, 5 );
+	}
+#endif
 	
 	wxBoxSizer* bSizer28;
 	bSizer28 = new wxBoxSizer( wxHORIZONTAL );
@@ -265,6 +280,23 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer331->Add( m_staticText291, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	bSizer1->Add( bSizer331, 1, wxEXPAND, 5 );
+
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		wxBoxSizer* bSizer441;
+		bSizer441 = new wxBoxSizer( wxHORIZONTAL );
+	
+		m_staticText301 = new wxStaticText( this, wxID_ANY, _("Image Backups von folgenden Laufwerken:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText301->Wrap( -1 );
+		bSizer441->Add( m_staticText301, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+		m_textCtrl23 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+		bSizer441->Add( m_textCtrl23, 0, wxALL, 5 );
+	
+		bSizer1->Add( bSizer441, 1, wxEXPAND, 5 );
+	}
+#endif
 	
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
@@ -292,7 +324,12 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
+	}
+#endif
 	m_button1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnOkClick ), NULL, this );
 	m_button2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnAbortClick ), NULL, this );
 }
@@ -389,7 +426,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer25->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, wxBitmap( _("logo1.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, wxBitmap( res_path+_("logo1.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
 	m_bitmap1->SetMinSize( wxSize( 100,91 ) );
 	
 	bSizer25->Add( m_bitmap1, 0, wxALL, 5 );
@@ -404,7 +441,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.38"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.39"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
 	
