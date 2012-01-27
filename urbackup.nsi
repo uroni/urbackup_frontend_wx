@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 0.39"
+!define MUI_BRANDINGTEXT "UrBackup 0.39.1"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 0.39"
-OutFile "UrBackup Client 0.39-3.exe"
+Name "UrBackup 0.39.1"
+OutFile "UrBackup Client 0.39.1-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -57,7 +57,19 @@ Section "install"
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
 		File "vcredist\vcredist_2010sp1_x64.exe"
-		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart'
+		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
+		${If} $0 != '0'
+		${If} $0 != '3010'
+			ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /passive /norestart' $0
+			${If} $0 != '0'
+			${If} $0 != '3010'
+				MessageBox MB_OK "Unable to install Visual Studio 2010SP1 runtime. UrBackup needs that runtime."
+				Quit
+			${EndIf}
+			${EndIf}
+		${EndIf}
+		${EndIf}
+			
 	${Else}
 		; ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\Runtimes\x86" 'Installed'
 		; ${If} $0 != '1'
@@ -70,7 +82,18 @@ Section "install"
 			; ${EndIf}
 		; ${EndIf}
 		File "vcredist\vcredist_2010sp1_x86.exe"
-		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart'
+		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
+		${If} $0 != '0'
+		${If} $0 != '3010'
+			ExecWait '"$TEMP\vcredist_2010sp1_x86.exe"  /passive /norestart' $0
+			${If} $0 != '0'
+			${If} $0 != '3010'
+				MessageBox MB_OK "Unable to install Visual Studio 2010SP1 runtime. UrBackup needs that runtime."
+				Quit
+			${EndIf}
+			${EndIf}
+		${EndIf}
+		${EndIf}
 	${EndIf}
 	
 	StrCpy $0 "UrBackupClient.exe"
