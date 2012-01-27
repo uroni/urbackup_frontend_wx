@@ -57,7 +57,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 		listbox->Append(dirs[i].path);
 		if(dirs[i].name.IsEmpty())
 		{
-			dirs[i].name=ConvertToUnicode(getDefaultDirname(wnarrow(dirs[i].path.wc_str())).c_str());
+			dirs[i].name=getDefaultDirname(dirs[i].path.wc_str());
 		}
 	}
 
@@ -90,7 +90,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		listbox->Append(ed.GetPath() );
 		SBackupDir ad;
 		ad.path=ed.GetPath();
-		ad.name=ConvertToUnicode(getDefaultDirname(ConvertToUTF8(ad.path.wc_str())));
+		ad.name=getDefaultDirname(ad.path.wc_str());
 		dirs.push_back(ad);
 		mod=true;
 	}
@@ -129,11 +129,11 @@ std::string replaceChars(std::string in)
 	return in;
 }
 
-bool ConfigPath::findPathName(const std::string &pn)
+bool ConfigPath::findPathName(const std::wstring &pn)
 {
 	for(size_t i=0;i<dirs.size();++i)
 	{
-		if(dirs[i].name==ConvertToUnicode(pn) )
+		if(dirs[i].name==pn )
 		{
 			return true;
 		}
@@ -141,23 +141,23 @@ bool ConfigPath::findPathName(const std::string &pn)
 	return false;
 }
 
-std::string ConfigPath::getDefaultDirname(const std::string &path)
+std::wstring ConfigPath::getDefaultDirname(const std::wstring &path)
 {
-	std::string dirname=ExtractFileName(path);
+	std::wstring dirname=ExtractFileName(path);
 
 	if(findPathName(dirname) )
 	{
 		for(int k=0;k<100;++k)
 		{
-			if(!findPathName(dirname+"_"+nconvert(k)) )
+			if(!findPathName(dirname+L"_"+convert(k)) )
 			{
-				dirname=dirname+"_"+nconvert(k);
+				dirname=dirname+L"_"+convert(k);
 				break;
 			}
 		}
 	}
 
-	return replaceChars(dirname);
+	return dirname;
 }
 
 void ConfigPath::OnPathSelected(wxCommandEvent &evt)

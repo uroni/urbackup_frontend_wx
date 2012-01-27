@@ -39,6 +39,7 @@ int linecount(const std::string &str);
 std::string getFile(std::string filename);
 std::wstring getFileUTF8(std::string filename);
 std::string ExtractFileName(std::string fulln);
+std::wstring ExtractFileName(std::wstring fulln);
 std::string ExtractFilePath(std::string fulln);
 std::wstring ExtractFilePath(std::wstring fulln);
 std::wstring convert(bool pBool);

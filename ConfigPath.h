@@ -39,8 +39,8 @@ public:
 private:
 	std::vector<SBackupDir> dirs;
 
-	std::string getDefaultDirname(const std::string &path);
-	bool findPathName(const std::string &pn);
+	std::wstring getDefaultDirname(const std::wstring &path);
+	bool findPathName(const std::wstring &pn);
 
 	bool mod;
 };

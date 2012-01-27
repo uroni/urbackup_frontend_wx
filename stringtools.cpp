@@ -339,6 +339,25 @@ string ExtractFileName(string fulln)
 	return filename;
 }
 
+wstring ExtractFileName(wstring fulln)
+{
+	wstring filename;
+
+	s32 off=0;
+	for(s32 i=(s32)fulln.length()-1;i>-1;i--)
+	{
+		if(fulln[i]=='/'||fulln[i]=='\\')
+		{
+			if(i<(s32)fulln.length()-2)
+				break;
+		}
+		if(fulln[i]!=0&&fulln[i]!='/')
+			filename=fulln[i]+filename;
+	}
+
+	return filename;
+}
+
 //--------------------------------------------------------------------
 /**
 *	pfad aus pfadangabe (inkl. dateiname) extrahieren
