@@ -6,6 +6,8 @@
     <Package Description='Client for UrBackup Server'
              Comments='Client for UrBackup Server. Allows file and image backups'
              Manufacturer='Martin Raiber' InstallerVersion='300' Compressed='yes' Platform='$(var.Platform)'/>
+			 
+	<MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 	
     <Media Id='1' Cabinet='urbackup.cab' EmbedCab='yes' />
 	
@@ -47,7 +49,6 @@
 					Name="UrBackup Client Backend"
 					Scope="any"
 					Profile="all"
-					Program="[#WindowsService]"
 					/>
 				</File>
 				  

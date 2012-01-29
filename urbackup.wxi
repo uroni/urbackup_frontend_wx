@@ -2,15 +2,14 @@
 <Include>
 	<?define Platform  = "x64"?>
 	<?define shared_data_dir  = "data"?>
+	<?define ProductID="8d683a82-797a-4748-aee1-7c4794c37416"?>
 	<?if $(var.Platform)=x64 ?>
-		<?define ProgramFilesFolder="ProgramFiles64Folder"?>
-		<?define ProductID="1aff7a9b-0e65-4adb-8833-bd8904963ff2"?>
+		<?define ProgramFilesFolder="ProgramFiles64Folder"?>		
 		<?define ComponentID="52a333d2-0896-4720-854e-f48985525657"?>
 		<?define isx64="yes"?>
 		<?define datadir="data_x64"?>
 	<?else?>
 		<?define ProgramFilesFolder="ProgramFilesFolder"?>
-		<?define ProductID="a4db741e-b16d-43a3-b771-3f66ab7f0412"?>
 		<?define ComponentID="4b0a9c6b-5ead-441f-9efb-776a615a9ffb"?>
 		<?define isx64="no"?>
 		<?define datadir="data"?>
