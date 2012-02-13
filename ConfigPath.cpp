@@ -107,26 +107,27 @@ void ConfigPath::OnClickDel(wxCommandEvent &evt)
 	}
 }
 
-std::string replaceChars(std::string in)
+std::wstring removeChars(std::wstring in)
 {
-	char legalchars[] = {'_', '-'};
+	wchar_t illegalchars[] = {'*', ':', '/' , '\\'};
+	std::wstring ret;
 	for(size_t i=0;i<in.size();++i)
 	{
 		bool found=false;
-		for(size_t j=0;j<sizeof(legalchars);++j)
+		for(size_t j=0;j<sizeof(illegalchars);++j)
 		{
-			if(legalchars[j]==in[i])
+			if(illegalchars[j]==in[i])
 			{
 				found=true;
 				break;
 			}
 		}
-		if( !isletter(in[i]) && !isnumber(in[i]) && !found )
+		if(!found)
 		{
-			in[i]='_';
+			ret+=in[i];
 		}
 	}
-	return in;
+	return ret;
 }
 
 bool ConfigPath::findPathName(const std::wstring &pn)
@@ -143,7 +144,10 @@ bool ConfigPath::findPathName(const std::wstring &pn)
 
 std::wstring ConfigPath::getDefaultDirname(const std::wstring &path)
 {
-	std::wstring dirname=ExtractFileName(path);
+	std::wstring dirname=removeChars(ExtractFileName(path));
+
+	if(dirname.empty())
+		dirname=L"root";
 
 	if(findPathName(dirname) )
 	{
