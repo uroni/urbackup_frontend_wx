@@ -429,9 +429,12 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
-	if(m_checkBox1->GetValue()==false)
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
-		l_update_freq_image_full=-1;
+		if(m_checkBox1->GetValue()==false)
+		{
+			l_update_freq_image_full=-1;
+		}
 	}
 
 	std::map<std::string, std::string> n_vals;
