@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 0.39"
+!define MUI_BRANDINGTEXT "UrBackup Update 0.39.2"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
