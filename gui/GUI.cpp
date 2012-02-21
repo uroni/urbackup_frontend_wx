@@ -441,7 +441,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.39.2"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.39.3"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
 	
