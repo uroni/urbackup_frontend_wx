@@ -22,6 +22,9 @@ extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));

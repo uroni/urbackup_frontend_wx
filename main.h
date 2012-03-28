@@ -39,6 +39,9 @@ public:
 
 	bool hasCapability(int capa_bit);
 
+	void resetDisplayedUpdateInfo(void);
+
 private:
 	int capa;
+	bool displayed_update_info;
 };

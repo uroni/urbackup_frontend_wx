@@ -25,6 +25,9 @@
 #include "Info.h"
 #include "capa_bits.h"
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 #define ID_TI_EXIT 100
 #define ID_TI_ADD_PATH 101
 #define ID_TI_BACKUP_FULL 102
@@ -46,6 +49,14 @@ extern MyTimer *timer;
 extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
+
+TrayIcon::TrayIcon(void)
+	: wxTaskBarIcon()
+{
+#ifdef wxUSE_TASKBARICON_BALLOONS
+	Connect(wxEVT_TASKBAR_BALLOON_CLICK, (wxObjectEventFunction)&TrayIcon::OnBalloonClick, NULL, this);
+#endif
+}
 
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
@@ -179,4 +190,12 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	}
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);
 	return mnu;
+}
+
+
+void update_urbackup(void);
+
+void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
+{
+	update_urbackup();
 }

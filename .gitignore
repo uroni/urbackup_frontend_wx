@@ -66,3 +66,5 @@ UrBackup Client*.wixpdb
 UrBackup Client*.msi
 urbackup.wixobj
 urbackup.wixpdb
+Kiwi_LogViewer_2.1.0_Win32.setup.exe
+pdbs/*

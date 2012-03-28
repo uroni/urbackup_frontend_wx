@@ -23,6 +23,8 @@
 class TrayIcon : public wxTaskBarIcon
 {
 public:
+	TrayIcon(void);
 	wxMenu* CreatePopupMenu(void);
 	void OnPopupClick(wxCommandEvent &evt);
+	void OnBalloonClick(wxCommandEvent &evt);
 };

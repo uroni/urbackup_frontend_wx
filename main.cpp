@@ -41,6 +41,9 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 #include <windows.h>
 #endif
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 TrayIcon *tray;
 MyTimer *timer;
 int icon_type=0;
@@ -157,6 +160,7 @@ MyTimer::MyTimer(void) :
 	wxTimer()
 {
 	capa=0;
+	resetDisplayedUpdateInfo();
 }
 
 void MyTimer::Notify()
@@ -199,7 +203,7 @@ void MyTimer::Notify()
 
 	long ct=wxGetLocalTime();
 
-	if(ct-lastversioncheck>300)
+	if(ct-lastversioncheck>300 && !displayed_update_info)
 	{
 		std::string n_version=getFile("version.txt");
 		std::string c_version=getFile("curr_version.txt");
@@ -208,8 +212,13 @@ void MyTimer::Notify()
 
 		if( atoi(n_version.c_str())>atoi(c_version.c_str()))
 		{
+#ifndef wxUSE_TASKBARICON_BALLOONS
 			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"));
 			tbb->showBaloon(80000);
+#else
+			tray->ShowBalloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"), 30000, wxICON_INFORMATION);
+			displayed_update_info=true;
+#endif
 		}
 		ct=wxGetLocalTime();
 		lastversioncheck=ct;
@@ -362,6 +371,11 @@ void MyTimer::Notify()
 bool MyTimer::hasCapability(int capa_bit)
 {
 	return (capa & capa_bit)>0;
+}
+
+void MyTimer::resetDisplayedUpdateInfo(void)
+{
+	displayed_update_info=false;
 }
 
 #ifndef DD_RELEASE

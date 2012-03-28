@@ -34,6 +34,9 @@ extern wxBitmapType ico_type;
 
 wxTextValidator getPathValidator(void);
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 ConfigPath::ConfigPath(wxWindow* parent)
 : GUIConfigPath(parent)
 

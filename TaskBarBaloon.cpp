@@ -2,8 +2,10 @@
 #include <wx/utils.h>
 #include <wx/stdpaths.h>
 #include "stringtools.h"
+#include "main.h"
 
 const int TIMER_BALOON=34;
+extern MyTimer *timer;
 
 BEGIN_EVENT_TABLE(TaskBarBaloon, wxFrame)
     EVT_PAINT(TaskBarBaloon::OnPaint)
@@ -137,12 +139,18 @@ HANDLE ExecuteProcess( const std::string & exe, const std::string &args, const s
 
 #endif
 
-void TaskBarBaloon::OnClick(wxMouseEvent & event)
+void update_urbackup(void)
 {
 #ifdef _WIN32
-	this->Show(false);
 	wxStandardPaths sp;
 	std::string e_pstr=ExtractFilePath(sp.GetExecutablePath().ToStdString());
 	ExecuteProcess(e_pstr+"\\UrBackupUpdate.exe","","");
+	timer->resetDisplayedUpdateInfo();
 #endif
+}
+
+void TaskBarBaloon::OnClick(wxMouseEvent & event)
+{
+	this->Show(false);
+	update_urbackup();
 }

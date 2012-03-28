@@ -321,3 +321,7 @@ msgstr "Volumes to backup:"
 #:Settings.cpp
 msgid " ist kein Laufwerk"
 msgstr " is not a volume"
+
+#:GUI.cpp
+msgid "Ins Backup einzuschließen (mit Wildcards):"
+msgstr "Include in backup (with wildcards):"

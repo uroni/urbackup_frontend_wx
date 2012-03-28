@@ -21,6 +21,9 @@
 #include "main.h"
 #include "capa_bits.h"
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 extern MyTimer *timer;
 extern wxString res_path;
 extern wxString ico_ext;
@@ -238,6 +241,14 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl16->SetValue(wxT(""));
 	}
+	if(getSettingsValue(L"include_files", &t, settings))
+	{
+		m_textCtrl161->SetValue(t);
+	}
+	else
+	{
+		m_textCtrl161->SetValue(wxT(""));
+	}
 	if(getSettingsValue(L"startup_backup_delay", &t, settings))
 	{
 		m_textCtrl19->SetValue(convert(watoi(t)/60));
@@ -302,6 +313,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	wxString computername=m_textCtrl15->GetValue();
 	wxString backup_window=m_textCtrl17->GetValue();
 	wxString exclude_files=m_textCtrl16->GetValue();
+	wxString include_files=m_textCtrl161->GetValue();
 	wxString startup_backup_delay=m_textCtrl19->GetValue();
 #ifdef _WIN32
 	wxString image_letters;
@@ -454,6 +466,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["computername"]=computername.ToUTF8();
 	n_vals["backup_window"]=backup_window.ToUTF8();
 	n_vals["exclude_files"]=exclude_files.ToUTF8();
+	n_vals["include_files"]=include_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
 #ifdef _WIN32
 	n_vals["image_letters"]=image_letters.ToUTF8();

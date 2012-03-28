@@ -12,6 +12,9 @@
 extern MyTimer *timer;
 extern wxString res_path;
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
+
 ///////////////////////////////////////////////////////////////////////////
 
 GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -250,6 +253,18 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer44->Add( m_textCtrl16, 0, wxALL, 5 );
 	
 	bSizer1->Add( bSizer44, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer441;
+	bSizer441 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText261 = new wxStaticText( this, wxID_ANY, _("Ins Backup einzuschließen (mit Wildcards):"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText261->Wrap( -1 );
+	bSizer441->Add( m_staticText261, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_textCtrl161 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	bSizer441->Add( m_textCtrl161, 0, wxALL, 5 );
+	
+	bSizer1->Add( bSizer441, 1, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer45;
 	bSizer45 = new wxBoxSizer( wxHORIZONTAL );
@@ -441,7 +456,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.39.3"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.40"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
 	
