@@ -452,24 +452,35 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	std::map<std::string, std::string> n_vals;
 	n_vals["update_freq_incr"]=nconvert(l_update_freq_incr*60*60);
 	n_vals["update_freq_full"]=nconvert(l_update_freq_full*24*60*60);
-	n_vals["update_freq_image_full"]=nconvert(l_update_freq_image_full*24*60*60);
-	n_vals["update_freq_image_full_orig"]=nconvert(l_update_freq_image_full_orig*24*60*60);
-	n_vals["update_freq_image_incr"]=nconvert(l_update_freq_image_incr*24*60*60);
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		n_vals["update_freq_image_full"]=nconvert(l_update_freq_image_full*24*60*60);
+		n_vals["update_freq_image_full_orig"]=nconvert(l_update_freq_image_full_orig*24*60*60);
+		n_vals["update_freq_image_incr"]=nconvert(l_update_freq_image_incr*24*60*60);
+	}
 	n_vals["max_file_incr"]=nconvert(l_max_file_incr);
 	n_vals["min_file_incr"]=nconvert(l_min_file_incr);
 	n_vals["max_file_full"]=nconvert(l_max_file_full);
 	n_vals["min_file_full"]=nconvert(l_min_file_full);
-	n_vals["min_image_incr"]=nconvert(l_min_image_incr);
-	n_vals["max_image_incr"]=nconvert(l_max_image_incr);
-	n_vals["min_image_full"]=nconvert(l_min_image_full);
-	n_vals["max_image_full"]=nconvert(l_max_image_full);
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		n_vals["min_image_incr"]=nconvert(l_min_image_incr);
+		n_vals["max_image_incr"]=nconvert(l_max_image_incr);
+		n_vals["min_image_full"]=nconvert(l_min_image_full);
+		n_vals["max_image_full"]=nconvert(l_max_image_full);
+	}
+#endif
 	n_vals["computername"]=computername.ToUTF8();
 	n_vals["backup_window"]=backup_window.ToUTF8();
 	n_vals["exclude_files"]=exclude_files.ToUTF8();
 	n_vals["include_files"]=include_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
 #ifdef _WIN32
-	n_vals["image_letters"]=image_letters.ToUTF8();
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		n_vals["image_letters"]=image_letters.ToUTF8();
+	}
 #endif
 
 	std::string ndata;
