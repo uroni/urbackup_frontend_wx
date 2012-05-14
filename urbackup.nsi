@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 0.40"
+!define MUI_BRANDINGTEXT "UrBackup 0.40.1"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 0.40"
-OutFile "UrBackup Client 0.40-1.exe"
+Name "UrBackup 0.40.1"
+OutFile "UrBackup Client 0.40.1-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -34,9 +34,17 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "Russian"
 
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
+
+!define Unicode2Ansi "!insertmacro Unicode2Ansi"
+
+!macro Unicode2Ansi String outVar
+  System::Call 'kernel32::WideCharToMultiByte(i 0, i 0, w "${String}", i -1, t .s, i ${NSIS_MAX_STRLEN}, i 0, i 0) i'
+  Pop "${outVar}"
+!macroend  
  
 
 Section "install"
@@ -96,8 +104,7 @@ Section "install"
 		${EndIf}
 	${EndIf}
 	
-	StrCpy $0 "UrBackupClient.exe"
-	KillProc::KillProcesses
+	KillProcDLL::KillProc "UrBackupClient.exe"
 	
 	SetOutPath "$INSTDIR"
 	
@@ -106,19 +113,22 @@ Section "install"
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
-	SimpleSC::ExistsService "UrBackupServer"
+	
+	${Unicode2Ansi} "UrBackupServer" $R0 	
+	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 == '0'
-		SimpleSC::StopService "UrBackupServer"
+		SimpleSC::StopService "$R0"
 		Pop $0
-		SimpleSC::RemoveService "UrBackupServer"
+		SimpleSC::RemoveService "$R0"
 		Pop $0
 	${EndIf}
 	
-	SimpleSC::ExistsService "UrBackupClientBackend"
+	${Unicode2Ansi} "UrBackupClientBackend" $R0
+	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 == '0'
-		SimpleSC::StopService "UrBackupClientBackend"
+		SimpleSC::StopService "$R0"
 		Pop $0
 	${EndIf}
 	
@@ -175,6 +185,8 @@ Section "install"
 	File "data\en\trans.mo"
 	SetOutPath "$INSTDIR\fr"
 	File "data\fr\trans.mo"
+	SetOutPath "$INSTDIR\ru"
+	File "data\ru\trans.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
@@ -231,11 +243,11 @@ next_s:
 	Delete "$INSTDIR\urbackup\backup_client_new.db"
 	
 	${If} ${IsWinXP}
-		nsisFirewall::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${ElseIf} ${IsWin2003}
-		nsisFirewall::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${Else}
-		liteFirewall::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+		liteFirewallW::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${EndIf}
 	Pop $0
 	
@@ -249,13 +261,18 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
-	SimpleSC::ExistsService "UrBackupClientBackend"
+	${Unicode2Ansi} "UrBackupClientBackend" $R0
+	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
+	${Unicode2Ansi} "16" $R2
+	${Unicode2Ansi} "2" $R3
+	${Unicode2Ansi} "$INSTDIR\UrBackupClientBackend.exe" $R4
+	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 != '0'
-		SimpleSC::InstallService "UrBackupClientBackend" "UrBackup Client Service for Backups" "16" "2" "$INSTDIR\UrBackupClientBackend.exe" "" "" ""
+		SimpleSC::InstallService "$R0" "$R1" "$R2" "$R3" "$R4" "" "" ""
 		Pop $0
 	${EndIf}	
-	SimpleSC::StartService "UrBackupClientBackend" ""
+	SimpleSC::StartService "$R0" ""
 	Pop $0
 	
 	${If} ${RunningX64}
@@ -271,16 +288,16 @@ Section "Uninstall"
 		SetRegView 64
 	${EndIf}
 	
-	StrCpy $0 "UrBackupClient.exe"
-	KillProc::KillProcesses
+	KillProcDLL::KillProc "UrBackupClient.exe"
 	
 	${If} ${RunningX64}
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 
-	SimpleSC::StopService "UrBackupClientBackend"
+	${Unicode2Ansi} "UrBackupClientBackend" $R0
+	SimpleSC::StopService "$R0"
 	Pop $0
-	SimpleSC::RemoveService "UrBackupClientBackend"
+	SimpleSC::RemoveService "$R0"
 	Pop $0
 	
 	Sleep 500
