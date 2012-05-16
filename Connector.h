@@ -37,6 +37,7 @@ struct SStatus
 	wxString pcdone;
 	bool pause;
 	int capa;
+	std::string new_server;
 };
 
 struct SLogEntry
@@ -64,6 +65,7 @@ public:
 	static std::vector<SLogEntry> getLogEntries(void);
 	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
 	static bool setPause(bool b_pause);
+	static bool addNewServer(const std::string &ident);
 
 
 	static bool hasError(void);

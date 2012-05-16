@@ -5,7 +5,7 @@
 class TaskBarBaloon : public wxFrame
 {
     public:
-        TaskBarBaloon(wxString sTitle, wxString sMessage);
+        TaskBarBaloon(wxString sTitle, wxString sMessage, std::string new_ident="");
         virtual ~TaskBarBaloon() { delete timer; }
  
         /** painting bg */
@@ -21,6 +21,7 @@ class TaskBarBaloon : public wxFrame
         void showBaloon(unsigned int iTimeout);
     private:
         wxTimer * timer;
+		std::string new_ident;
  
         DECLARE_EVENT_TABLE();
  
