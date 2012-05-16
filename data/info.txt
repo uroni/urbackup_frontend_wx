@@ -4,3 +4,4 @@ Martin Raiber
 Translators:
 Martin Raiber (German)
 aureliensegeco (French)
+Artem Alabin (Russian)
