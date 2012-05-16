@@ -325,3 +325,27 @@ msgstr " is not a volume"
 #:GUI.cpp
 msgid "Ins Backup einzuschließen (mit Wildcards):"
 msgstr "Include in backup (with wildcards):"
+
+#:GUI.cpp
+msgid "Datei Backups"
+msgstr "File backups"
+
+#:GUI.cpp
+msgid "Image Backups"
+msgstr "Image backups"
+
+#:GUI.cpp
+msgid "Client"
+msgstr "Client"
+
+#:GUI.cpp
+msgid "Internet"
+msgstr "Internet"
+
+#:main.cpp
+msgid "UrBackup: Neuer Server"
+msgstr "UrBackup: New server"
+
+#:main.cpp
+msgid "Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
+msgstr "A new backup server has been found. Click here to use it"
