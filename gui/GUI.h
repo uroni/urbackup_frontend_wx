@@ -29,6 +29,8 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))

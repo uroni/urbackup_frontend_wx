@@ -1,0 +1,322 @@
+# UrBackup Russian translation
+# Copyright (C) 2012 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# Martin Raiber <urpc@gmx.de>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup 0.34\n"
+"Report-Msgid-Bugs-To: urpc@gmx.de\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2012-05-13 17:28+0300\n"
+"Last-Translator: Artem Alabin <kirpicheff@yandex.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+
+#: gui/GUI.cpp:26
+msgid "Intervall für inkrementelle Backups:"
+msgstr "Интервал добавочных файловых бэкапов"
+
+#: gui/GUI.cpp:30
+msgid "Intervall für volle Backups:"
+msgstr "Интервал полных бэкапов файлов"
+
+#: gui/GUI.cpp:34
+msgid "Intervall für inkrementelle Image-Backups:"
+msgstr "Интервал добавочных бэкапов образа"
+
+#: gui/GUI.cpp:38
+msgid "Intervall für volle Image-Backups:"
+msgstr "Интервал полных бэкапов образа"
+
+#: gui/GUI.cpp:46
+msgid "Minimale Anzahl an inkrementellen Backups:"
+msgstr "Минимальное количество добавочных бэкапов файлов"
+
+#: gui/GUI.cpp:50
+msgid "Maximale Anzahl an inkrementellen Backups:"
+msgstr "Максимальное количество добавочных бэкапов файлов"
+
+#: gui/GUI.cpp:54
+msgid "Minimale Anzahl an vollen Backups:"
+msgstr "Минимальное количество полных бэкапов файлов"
+
+#: gui/GUI.cpp:58
+msgid "Maximale Anzahl an vollen Backups:"
+msgstr "Максимальное количество полных бэкапов файлов"
+
+#: gui/GUI.cpp:66
+msgid "Minimale Anzahl an inkrementellen Image-Backups:"
+msgstr "Минимальное количество добавочных бэкапов образа"
+
+#: gui/GUI.cpp:70
+msgid "Maximale Anzahl an inkrementellen Image-Backups:"
+msgstr "Максимальное количество добавочных бэкапов образа"
+
+#: gui/GUI.cpp:74
+msgid "Minimale Anzahl an vollen Image-Backups:"
+msgstr "Минимальное количество полных бэкапов образа"
+
+#: gui/GUI.cpp:78
+msgid "Maximale Anzahl an vollen Image-Backups:"
+msgstr "Максимальное количество полных бэкапов образа"
+
+#: gui/GUI.cpp:93
+msgid "Stunden"
+msgstr "часов"
+
+#: gui/GUI.cpp:105
+#: gui/GUI.cpp:117
+#: gui/GUI.cpp:137
+msgid "Tage"
+msgstr "дней"
+
+#: gui/GUI.cpp:124
+msgid "Aktiv"
+msgstr "Активнен"
+
+#: gui/GUI.cpp:232
+#: gui/GUI.cpp:389
+msgid "OK"
+msgstr "Ок"
+
+#: gui/GUI.cpp:237
+#: ConfigPath.cpp:13
+msgid "Abbrechen"
+msgstr "Отмена"
+
+#: gui/GUI.cpp:282
+msgid "Filter:"
+msgstr "Фильтр:"
+
+#: gui/GUI.cpp:286
+#: TrayIcon.cpp:119
+msgid "Info"
+msgstr "Информация"
+
+#: gui/GUI.cpp:286
+msgid "Warnings"
+msgstr "Предупреждения"
+
+#: gui/GUI.cpp:286
+msgid "Errors"
+msgstr "Ошибки"
+
+#: gui/GUI.cpp:303
+msgid "Verlassen"
+msgstr "Выход"
+
+#: gui/GUI.cpp:356
+msgid "Version:"
+msgstr "Версия:"
+
+#: gui/GUI.cpp:368
+msgid "Autor:"
+msgstr "Автор:"
+
+#: ConfigPath.cpp:6
+msgid "Pfade hinzufügen und entfernen"
+msgstr "Добавить/Удалить пути бэкапа"
+
+#: ConfigPath.cpp:12
+msgid "Ok"
+msgstr "Ок"
+
+#: ConfigPath.cpp:14
+msgid "Neuer Pfad"
+msgstr "Добавить путь"
+
+#: ConfigPath.cpp:15
+msgid "Pfad entfernen"
+msgstr "Удалить путь"
+
+#: ConfigPath.cpp:26
+#: Logs.cpp:10
+msgid "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgstr "Произошла ошибка. Нечего бэкапить"
+
+#: ConfigPath.cpp:54
+msgid "Bitte Verzeichnis das gesichert werden soll auswählen"
+msgstr "Пожалуйста выберите директорию для бэкапа"
+
+#: main.cpp:125
+msgid "UrBackup: Update verfügbar"
+msgstr "UrBackup: Доступно обновление"
+
+#: main.cpp:125
+msgid "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+msgstr "Доступна новая версия. Пожалуйста нажмите здесь, чтобы установить сейчас."
+
+#: main.cpp:143
+msgid "Keine Verbindung zum Backupserver möglich"
+msgstr "Не удается подключиться к серверу"
+
+#: main.cpp:163
+msgid "Inkrementelles Backup läuft. "
+msgstr "Добавочный бэкап выполняется. "
+
+#: main.cpp:175
+msgid "Volles Backup läuft. "
+msgstr "Полный бэкап выполняется. "
+
+#: main.cpp:186
+msgid "Inkrementelles Image-Backup läuft. "
+msgstr "Добавочный бэкап образа выполняется. "
+
+#: main.cpp:197
+msgid "Volles Image-Backup läuft. "
+msgstr "Полный бэкап образа выполняется. "
+
+#: main.cpp:205
+msgid "% fertig. "
+msgstr "% завершено. "
+
+#: main.cpp:208
+msgid "Kein aktuelles Backup. "
+msgstr "Нет текущего бэкапа."
+
+#: main.cpp:219
+msgid "Letztes Backup am "
+msgstr "Последний бэкап был"
+
+#: Settings.cpp:156
+msgid "Die inkrementelle Backupzeit ist keine Zahl"
+msgstr "Интервал добавочной копии не является числом"
+
+#: Settings.cpp:162
+msgid "Die volle Backupzeit ist keine Zahl"
+msgstr "Интервал полных бэкапов не является числом"
+
+#: Settings.cpp:168
+msgid "Die volle Imagebackupzeit ist keine Zahl"
+msgstr "Интервал полных бэкапов образа не является числом"
+
+#: Settings.cpp:174
+msgid "Die inkrementelle Imagebackupzeit ist keine Zahl"
+msgstr "Интервал добавочных бэкапов образа не является числом"
+
+#: Settings.cpp:180
+msgid "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Максимальное количество добавочных бэкапов файлов не является числом"
+
+#: Settings.cpp:186
+msgid "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Минимальное количество добавочных бэкапов файлов не является числом"
+
+#: Settings.cpp:192
+msgid "Die maximale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Максимальное количество полных бэкапов файлов не является числом"
+
+#: Settings.cpp:198
+msgid "Die minimale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Минимальное количество полных бэкапов файлов не является числом"
+
+#: Settings.cpp:204
+msgid "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Минимальное количество добавочных бэкапов образа не является числом"
+
+#: Settings.cpp:210
+msgid "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Максимальное количество добавочных бэкапов образа не является числом"
+
+#: Settings.cpp:216
+msgid "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Минимальное количество полных бэкапов образа не является числом"
+
+#: Settings.cpp:222
+msgid "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Максимальное количество полных бэкапов образа не является числом"
+
+#: TrayIcon.cpp:49
+#: TrayIcon.cpp:72
+msgid "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+msgstr "Бэкап уже запущен. Невозможно запустить ещё один."
+
+#: TrayIcon.cpp:51
+#: TrayIcon.cpp:74
+msgid "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+msgstr "Невозможно запустить бэкап, сервер не найден"
+
+#: TrayIcon.cpp:86
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+msgstr "Приостановить не удалось. Нет соединения с сервером"
+
+#: TrayIcon.cpp:99
+msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+msgstr "Продолжить не удалось. Нет соединения с сервером"
+
+#: TrayIcon.cpp:111
+msgid "Volles Backup jetzt"
+msgstr "Запустить полный бэкап файлов"
+
+#: TrayIcon.cpp:112
+msgid "Inkremetelles Backup jetzt"
+msgstr "Запустить добавочный бэкап файлов"
+
+#: TrayIcon.cpp:113
+msgid "Volles Image-Backup jetzt"
+msgstr "Запустить полный бэкап образа"
+
+#: TrayIcon.cpp:114
+msgid "Inkremetelles Image-Backup jetzt"
+msgstr "Запустить добавочный бэкап образа"
+
+#: TrayIcon.cpp:116
+msgid "Einstellungen"
+msgstr "Настройки"
+
+#: TrayIcon.cpp:117
+msgid "Pfade konfigurieren"
+msgstr "Добавить/Удалить пути бэкапа"
+
+#: TrayIcon.cpp:118
+msgid "Logs"
+msgstr "Логи"
+
+#: TrayIcon.cpp:124
+msgid "Pausieren"
+msgstr "Пауза"
+
+#: TrayIcon.cpp:128
+msgid "Fortfahren"
+msgstr "Продолжить"
+
+#: Gui.h:144
+msgid "Informationen"
+msgstr "Информация"
+
+msgid "Name:"
+msgstr "Имя:"
+
+msgid "Backupverzögerung nach Systemstart:"
+msgstr "Задержка копирования после старта системы:"
+
+msgid "Backup Zeitfenster:"
+msgstr "Расписание бэкапа:"
+
+msgid "Vom Backup auszuschließen (mit Wildcards):"
+msgstr "Исключить из бэкапа (с шаблоном):"
+
+msgid "Computername:"
+msgstr "Имя компьютера:"
+
+msgid "min"
+msgstr "минут"
+
+msgid "Die Verzögerung bei Systemstart ist keine Zahl"
+msgstr "Задержка копирования после старта системы не является числом"
+
+msgid "Warte auf Server..."
+msgstr "Ожидание сервера..."
+
+msgid "Image Backups von folgenden Laufwerken:"
+msgstr "Разделы для бэкапа"
+
+msgid " ist kein Laufwerk"
+msgstr " это не раздел"
+
+msgid "Ins Backup einzuschließen (mit Wildcards):"
+msgstr "Включить в бэкап (с шаблоном):"
+
