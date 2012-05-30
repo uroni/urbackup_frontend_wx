@@ -535,10 +535,10 @@ GUILogfiles::GUILogfiles( wxWindow* parent, wxWindowID id, const wxString& title
 	m_staticText5->Wrap( -1 );
 	bSizer11->Add( m_staticText5, 0, wxALL, 5 );
 	
-	wxString m_choice1Choices[] = { _("Errors"), _("Warnings"), _("Info") };
+	wxString m_choice1Choices[] = { _("Info"), _("Warnings"), _("Errors") };
 	int m_choice1NChoices = sizeof( m_choice1Choices ) / sizeof( wxString );
 	m_choice1 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice1NChoices, m_choice1Choices, 0 );
-	m_choice1->SetSelection( 2 );
+	m_choice1->SetSelection( 0 );
 	bSizer11->Add( m_choice1, 0, wxALL, 5 );
 	
 	bSizer9->Add( bSizer11, 1, wxEXPAND, 5 );

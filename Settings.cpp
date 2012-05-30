@@ -650,12 +650,12 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["internet_authkey"]=internet_authkey.ToUTF8();
 
 	if(internet_speed!=wxT("-") && !internet_speed.empty())
-		n_vals["internet_speed"]=l_internet_speed;
+		n_vals["internet_speed"]=nconvert(l_internet_speed);
 	else
 		n_vals["internet_speed"]="-1";
 
 	if(local_speed!=wxT("-") && !local_speed.empty())
-		n_vals["local_speed"]=l_local_speed;
+		n_vals["local_speed"]=nconvert(l_local_speed);
 	else
 		n_vals["local_speed"]="-1";
 	n_vals["internet_encrypt"]=nconvert(internet_encrypt);

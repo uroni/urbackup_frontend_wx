@@ -203,7 +203,7 @@ void MyTimer::Notify()
 
 	long ct=wxGetLocalTime();
 
-	if(ct-lastversioncheck>300 && !displayed_update_info)
+	if(ct-lastversioncheck>600 && !displayed_update_info)
 	{
 		std::string n_version=getFile("version.txt");
 		std::string c_version=getFile("curr_version.txt");
