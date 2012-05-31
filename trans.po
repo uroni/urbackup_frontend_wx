@@ -349,3 +349,43 @@ msgstr "UrBackup: New server"
 #:main.cpp
 msgid "Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
 msgstr "A new backup server has been found. Click here to use it"
+
+#:GUI.cpp
+msgid "Geschwindigkeitslimit lokal:"
+msgstr "Max backup speed for local network:"
+
+#:GUI.cpp
+msgid "Aktiviere Internetverbindung zu Server:"
+msgstr "Enable backup via internet:"
+
+#:GUI.cpp
+msgid "Internetserver Name oder IP:"
+msgstr "Internet server name/IP:"
+
+#:GUI.cpp
+msgid "Internetserver Port:"
+msgstr "Internet server port:"
+
+#:GUI.cpp
+msgid "Internetserver Passwort:"
+msgstr "Internet server password:"
+
+#:GUI.cpp
+msgid "Image-backups über Internetverbindung:"
+msgstr "Do image backups over internet:"
+
+#:GUI.cpp
+msgid "Volle Datei-backups über Internetverbindung:"
+msgstr "Do full file backups over internet:"
+
+#:GUI.cpp
+msgid "Geschwindigkeitslimit über Internetverbindung:"
+msgstr "Max backups speed for internet connection:"
+
+#:GUI.cpp
+msgid "Internettransfer komprimieren:"
+msgstr "Compressed transfer:"
+
+#:GUI.cpp
+msgid "Internettransfer verschlüsseln:"
+msgstr "Encrypted transfer:"
