@@ -53,6 +53,7 @@ extern wxBitmapType ico_type;
 TrayIcon::TrayIcon(void)
 	: wxTaskBarIcon()
 {
+	balloon_action=0;
 #ifdef wxUSE_TASKBARICON_BALLOONS
 	Connect(wxEVT_TASKBAR_BALLOON_CLICK, (wxObjectEventFunction)&TrayIcon::OnBalloonClick, NULL, this);
 #endif
@@ -192,10 +193,27 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	return mnu;
 }
 
+void TrayIcon::BalloonActionNewServer(const std::string &ident)
+{
+	balloon_action=1;
+	new_ident=ident;
+}
+
+void TrayIcon::BalloonActionUpgrade(void)
+{
+	balloon_action=0;
+}
 
 void update_urbackup(void);
 
 void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
 {
-	update_urbackup();
+	if(balloon_action==0)
+	{
+		update_urbackup();
+	}
+	else
+	{
+		Connector::addNewServer(new_ident);
+	}
 }

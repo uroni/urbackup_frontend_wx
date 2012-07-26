@@ -21,6 +21,12 @@
 #include "main.h"
 #include "capa_bits.h"
 
+#include <wx/valtext.h>
+
+#ifndef wxFILTER_DIGITS
+#define wxFILTER_DIGITS wxFILTER_NUMERIC
+#endif
+
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
 
@@ -87,6 +93,25 @@ wxTextValidator getPathValidator(void)
 	il.Add(wxT(">"));
 	il.Add(wxT("|"));
 	val.SetExcludes(il);
+	return val;
+}
+
+wxTextValidator getDigitSlashValidator(void)
+{	
+	wxTextValidator val=wxTextValidator(wxFILTER_INCLUDE_LIST);
+	wxArrayString il;
+	il.Add(wxT("0"));
+	il.Add(wxT("1"));
+	il.Add(wxT("2"));
+	il.Add(wxT("3"));
+	il.Add(wxT("4"));
+	il.Add(wxT("5"));
+	il.Add(wxT("6"));
+	il.Add(wxT("7"));
+	il.Add(wxT("8"));
+	il.Add(wxT("9"));
+	il.Add(wxT("-"));
+	val.SetIncludes(il);
 	return val;
 }
 
@@ -270,7 +295,119 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		}
 	}
 #endif
+	if(getSettingsValue(L"internet_mode_enabled", &t, settings) && t==L"true")
+	{
+		m_checkBoxInternetEnabled->SetValue(true);
+	}
+	else
+	{
+		m_checkBoxInternetEnabled->SetValue(false);
+	}
+	if(getSettingsValue(L"internet_full_file_backups", &t, settings) && t==L"true")
+	{
+		m_checkBoxInternetFullFile->SetValue(true);
+	}
+	else
+	{
+		m_checkBoxInternetFullFile->SetValue(false);
+	}
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		if(getSettingsValue(L"internet_image_backups", &t, settings) && t==L"true")
+		{
+			m_checkBoxInternetImage->SetValue(true);
+		}
+		else
+		{
+			m_checkBoxInternetImage->SetValue(false);
+		}
+	}
+#endif
+	if(getSettingsValue(L"internet_server", &t, settings))
+	{
+		m_textCtrlInternetServer->SetValue(t);
+	}
+	else
+	{
+		m_textCtrlInternetServer->SetValue(wxT(""));
+	}
+	if(getSettingsValue(L"internet_server_port", &t, settings))
+	{
+		m_textCtrlInternetServerPort->SetValue(t);
+	}
+	else
+	{
+		m_textCtrlInternetServerPort->SetValue(wxT("55415"));
+	}
+	if(getSettingsValue(L"internet_authkey", &t, settings))
+	{
+		m_textCtrlInternetServerAuthkey->SetValue(t);
+	}
+	else
+	{
+		m_textCtrlInternetServerAuthkey->SetValue(wxT(""));
+	}
+	if(getSettingsValue(L"local_speed", &t, settings))
+	{
+		if(watoi(t)>0) 
+			m_textCtrlLocalSpeed->SetValue(convert(watoi(t)/((1024*1024)/8)) );
+		else
+			m_textCtrlLocalSpeed->SetValue(wxT("-"));
+	}
+	else
+	{
+		m_textCtrlLocalSpeed->SetValue(wxT("-"));
+	}
+	if(getSettingsValue(L"internet_speed", &t, settings))
+	{
+		if(watoi(t)>0) 
+			m_textCtrlInternetSpeed->SetValue(convert(watoi(t)/((1024)/8)) );
+		else
+			m_textCtrlInternetSpeed->SetValue(wxT("-"));
+	}
+	else
+	{
+		m_textCtrlInternetSpeed->SetValue(wxT("-"));
+	}
+	if(getSettingsValue(L"internet_compress", &t, settings) && t==L"true")
+	{
+		m_checkBoxInternetCompress->SetValue(true);
+	}
+	else
+	{
+		m_checkBoxInternetCompress->SetValue(false);
+	}
+	if(getSettingsValue(L"internet_encrypt", &t, settings) && t==L"true")
+	{
+		m_checkBoxInternetEncrypt->SetValue(true);
+	}
+	else
+	{
+		m_checkBoxInternetEncrypt->SetValue(false);
+	}
 
+	m_textCtrlInternetSpeed->SetValidator(getDigitSlashValidator());
+	m_textCtrlLocalSpeed->SetValidator(getDigitSlashValidator());	
+	m_textCtrl1->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl2->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl131->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl13->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl133->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl132->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		m_textCtrl22->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl21->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl134->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl135->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl136->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl137->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	}
+#endif
+	m_textCtrl19->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrlInternetServerPort->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
 }
@@ -322,6 +459,22 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		image_letters=m_textCtrl23->GetValue();
 	}
 #endif
+	bool internet_mode_enabled=m_checkBoxInternetEnabled->GetValue();
+	wxString internet_server=m_textCtrlInternetServer->GetValue();
+	wxString internet_server_port=m_textCtrlInternetServerPort->GetValue();
+#ifdef _WIN32
+	bool internet_image_backups=false;
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		internet_image_backups=m_checkBoxInternetImage->GetValue();
+	}
+#endif
+	bool internet_full_file_backups=m_checkBoxInternetFullFile->GetValue();
+	wxString internet_authkey=m_textCtrlInternetServerAuthkey->GetValue();
+	wxString internet_speed=m_textCtrlInternetSpeed->GetValue();
+	wxString local_speed=m_textCtrlLocalSpeed->GetValue();
+	bool internet_encrypt=m_checkBoxInternetEncrypt->GetValue();
+	bool internet_compress=m_checkBoxInternetCompress->GetValue();
 
 	long l_update_freq_incr,l_update_freq_full;
 	long l_update_freq_image_full, l_update_freq_image_full_orig, l_update_freq_image_incr;
@@ -330,6 +483,8 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	long l_min_image_incr, l_max_image_incr;
 	long l_min_image_full, l_max_image_full;
 	long l_startup_backup_delay;
+	long l_internet_server_port;
+	long l_internet_speed, l_local_speed;
 
 	if(update_freq_incr.ToLong(&l_update_freq_incr)==false )
 	{
@@ -439,6 +594,17 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		}
 	}
 #endif
+	if(internet_server_port.ToLong(&l_internet_server_port)==false)
+	{
+		wxMessageBox( _("Der Server Port ist nicht gültig"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		m_textCtrlInternetServerPort->SetFocus();
+		return;
+	}
+
+	internet_speed.ToLong(&l_internet_speed);
+	l_internet_speed*=1024/8;
+	local_speed.ToLong(&l_local_speed);
+	l_local_speed*=(1024*1024)/8;
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
@@ -480,8 +646,27 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
 		n_vals["image_letters"]=image_letters.ToUTF8();
+		n_vals["internet_image_backups"]=nconvert(internet_image_backups);
 	}
 #endif
+	n_vals["internet_mode_enabled"]=nconvert(internet_mode_enabled);
+	n_vals["internet_full_file_backups"]=nconvert(internet_full_file_backups);
+	n_vals["internet_server"]=internet_server.ToUTF8();
+	n_vals["internet_server_port"]=nconvert(l_internet_server_port);
+	n_vals["internet_authkey"]=internet_authkey.ToUTF8();
+
+	if(internet_speed!=wxT("-") && !internet_speed.empty())
+		n_vals["internet_speed"]=nconvert(l_internet_speed);
+	else
+		n_vals["internet_speed"]="-1";
+
+	if(local_speed!=wxT("-") && !local_speed.empty())
+		n_vals["local_speed"]=nconvert(l_local_speed);
+	else
+		n_vals["local_speed"]="-1";
+	n_vals["internet_encrypt"]=nconvert(internet_encrypt);
+	n_vals["internet_compress"]=nconvert(internet_compress);
+	
 
 	std::string ndata;
 	std::vector<std::wstring> keys=settings->getKeys();

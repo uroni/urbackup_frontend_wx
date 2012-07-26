@@ -27,4 +27,11 @@ public:
 	wxMenu* CreatePopupMenu(void);
 	void OnPopupClick(wxCommandEvent &evt);
 	void OnBalloonClick(wxCommandEvent &evt);
+	void BalloonActionUpgrade(void);
+	void BalloonActionNewServer(const std::string &ident);
+
+
+private:
+	int balloon_action;
+	std::string new_ident;
 };

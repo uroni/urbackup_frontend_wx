@@ -3,6 +3,7 @@
 #include <wx/stdpaths.h>
 #include "stringtools.h"
 #include "main.h"
+#include "Connector.h"
 
 const int TIMER_BALOON=34;
 extern MyTimer *timer;
@@ -14,8 +15,9 @@ BEGIN_EVENT_TABLE(TaskBarBaloon, wxFrame)
     EVT_TIMER(TIMER_BALOON,TaskBarBaloon::OnTimerTick)
 END_EVENT_TABLE()
  
-TaskBarBaloon::TaskBarBaloon(wxString sTitle, wxString sMessage)
-    : wxFrame(NULL,-1,wxT("no title"),wxDefaultPosition,wxDefaultSize,wxNO_BORDER | wxSTAY_ON_TOP | wxFRAME_SHAPED | wxFRAME_NO_TASKBAR)
+TaskBarBaloon::TaskBarBaloon(wxString sTitle, wxString sMessage, std::string new_ident)
+    : wxFrame(NULL,-1,wxT("no title"),wxDefaultPosition,wxDefaultSize,wxNO_BORDER | wxSTAY_ON_TOP | wxFRAME_SHAPED | wxFRAME_NO_TASKBAR),
+	  new_ident(new_ident)
 {
     wxColour bgColour(255,255,231); // yellow BG
     this->SetBackgroundColour(bgColour);
@@ -152,5 +154,12 @@ void update_urbackup(void)
 void TaskBarBaloon::OnClick(wxMouseEvent & event)
 {
 	this->Show(false);
-	update_urbackup();
+	if(new_ident.empty())
+	{
+		update_urbackup();
+	}
+	else
+	{
+		Connector::addNewServer(new_ident);
+	}
 }

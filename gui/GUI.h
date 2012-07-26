@@ -25,8 +25,13 @@
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/statbmp.h>
+#include <wx/notebook.h>
+#include <wx/panel.h>
 
 ///////////////////////////////////////////////////////////////////////////
+
+#undef _
+#define _(s) wxGetTranslation(wxT(s))
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -85,9 +90,38 @@ class GUISettings : public wxDialog
 		wxStaticText* m_staticText291;
 		wxTextCtrl* m_textCtrl23;
 		wxStaticText* m_staticText301;
+		wxStaticText* m_staticTextLocalSpeed;
+		wxTextCtrl* m_textCtrlLocalSpeed;
+		wxStaticText* m_staticTextLocalSpeedUnit;
+
+		wxStaticText* m_staticTextInternetEnabled;
+		wxCheckBox* m_checkBoxInternetEnabled;
+		wxStaticText* m_staticInternetServer;
+		wxTextCtrl* m_textCtrlInternetServer;
+		wxStaticText* m_staticInternetServerPort;
+		wxTextCtrl* m_textCtrlInternetServerPort;
+		wxStaticText* m_staticInternetServerAuthkey;
+		wxTextCtrl* m_textCtrlInternetServerAuthkey;
+		wxStaticText* m_staticTextInternetFullFile;
+		wxCheckBox* m_checkBoxInternetFullFile;
+		wxStaticText* m_staticTextInternetImage;
+		wxCheckBox* m_checkBoxInternetImage;
+		wxStaticText* m_staticTextInternetSpeed;
+		wxTextCtrl* m_textCtrlInternetSpeed;
+		wxStaticText* m_staticTextInternetSpeedUnit;
+		wxStaticText* m_staticTextInternetCompress;
+		wxCheckBox* m_checkBoxInternetCompress;
+		wxStaticText* m_staticTextInternetEncrypt;
+		wxCheckBox* m_checkBoxInternetEncrypt;
 		
 		wxButton* m_button1;
 		wxButton* m_button2;
+
+		wxNotebook *m_notebook;
+		wxPanel *m_tab_filebackups;
+		wxPanel *m_tab_imagebackups;
+		wxPanel *m_tab_client;
+		wxPanel *m_tab_internet;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnDisableImageBackups( wxCommandEvent& event ) { event.Skip(); }

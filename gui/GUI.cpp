@@ -23,38 +23,59 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	wxBoxSizer* bSizer1;
 	bSizer1 = new wxBoxSizer( wxVERTICAL );
+
+	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,  wxNB_DEFAULT);
+
+	m_tab_filebackups=new wxPanel(m_notebook, wxID_ANY);
+	m_tab_imagebackups=NULL;
+	m_tab_client=new wxPanel(m_notebook, wxID_ANY);
+	m_tab_internet=new wxPanel(m_notebook, wxID_ANY);;
+
+	wxBoxSizer* bSizer_filebackups=new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* bSizer_imagebackups=NULL;
+	wxBoxSizer* bSizer_client=new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* bSizer_internet=new wxBoxSizer( wxVERTICAL );
+
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		m_tab_imagebackups=new wxPanel(m_notebook, wxID_ANY);
+		bSizer_imagebackups=new wxBoxSizer( wxVERTICAL );
+	}
+#endif
 	
+
 	wxBoxSizer* bSizer29;
 	bSizer29 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText1 = new wxStaticText( this, wxID_ANY, _("Intervall für inkrementelle Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText1 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Intervall für inkrementelle Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText1->Wrap( -1 );
 	bSizer29->Add( m_staticText1, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl1 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer29->Add( m_textCtrl1, 0, wxALL, 5 );
 	
-	m_staticText2 = new wxStaticText( this, wxID_ANY, _("Stunden"), wxPoint( -1,-1 ), wxSize( -1,-1 ), 0 );
+	m_staticText2 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Stunden"), wxPoint( -1,-1 ), wxSize( -1,-1 ), 0 );
 	m_staticText2->Wrap( -1 );
 	bSizer29->Add( m_staticText2, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	bSizer1->Add( bSizer29, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer29, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer30;
 	bSizer30 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText3 = new wxStaticText( this, wxID_ANY, _("Intervall für volle Backups:"), wxPoint( -1,-1 ), wxSize( 300,-1 ), 0 );
+	m_staticText3 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Intervall für volle Backups:"), wxPoint( -1,-1 ), wxSize( 300,-1 ), 0 );
 	m_staticText3->Wrap( -1 );
 	bSizer30->Add( m_staticText3, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl2 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl2 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer30->Add( m_textCtrl2, 0, wxALL, 5 );
 	
-	m_staticText4 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText4 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText4->Wrap( -1 );
 	bSizer30->Add( m_staticText4, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	bSizer1->Add( bSizer30, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer30, 0, wxEXPAND, 5 );
 	
 #ifdef _WIN32
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
@@ -62,239 +83,245 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		wxBoxSizer* bSizer31;
 		bSizer31 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText6 = new wxStaticText( this, wxID_ANY, _("Intervall für inkrementelle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText6 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Intervall für inkrementelle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText6->Wrap( -1 );
 		bSizer31->Add( m_staticText6, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl21 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl21 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer31->Add( m_textCtrl21, 0, wxALL, 5 );
 	
-		m_staticText41 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText41 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
 		m_staticText41->Wrap( -1 );
 		m_staticText41->SetMinSize( wxSize( 50,-1 ) );
 	
 		bSizer31->Add( m_staticText41, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	
-		bSizer31->Add( 0, 0, 1, wxEXPAND, 5 );
-	
-		m_checkBox1 = new wxCheckBox( this, wxID_ANY, _("Aktiv"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_checkBox1 = new wxCheckBox( m_tab_imagebackups, wxID_ANY, _("Aktiv"), wxDefaultPosition, wxDefaultSize, 0 );
 		m_checkBox1->SetValue(true); 
 		bSizer31->Add( m_checkBox1, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		bSizer1->Add( bSizer31, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer31, 0, wxEXPAND, 5 );
 	
 		wxBoxSizer* bSizer32;
 		bSizer32 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText7 = new wxStaticText( this, wxID_ANY, _("Intervall für volle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText7 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Intervall für volle Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText7->Wrap( -1 );
 		bSizer32->Add( m_staticText7, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl22 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl22 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer32->Add( m_textCtrl22, 0, wxALL, 5 );
 	
-		m_staticText42 = new wxStaticText( this, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText42 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Tage"), wxDefaultPosition, wxDefaultSize, 0 );
 		m_staticText42->Wrap( -1 );
 		bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		bSizer1->Add( bSizer32, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer32, 0, wxEXPAND, 5 );
 	}
 #endif
 	
 	wxBoxSizer* bSizer33;
 	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText30 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30 = new wxStaticText( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText30->Wrap( -1 );
 	bSizer33->Add( m_staticText30, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer33, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer33, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer341;
 	bSizer341 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText9 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an inkrementellen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText9 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Minimale Anzahl an inkrementellen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText9->Wrap( -1 );
 	bSizer341->Add( m_staticText9, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl13 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl13 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer341->Add( m_textCtrl13, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer341, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer341, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer35;
 	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText10 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an inkrementellen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText10 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Maximale Anzahl an inkrementellen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText10->Wrap( -1 );
 	bSizer35->Add( m_staticText10, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl131 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl131 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer35->Add( m_textCtrl131, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer35, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer35, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer36;
 	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText11 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an vollen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText11 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Minimale Anzahl an vollen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText11->Wrap( -1 );
 	bSizer36->Add( m_staticText11, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl132 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl132 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer36->Add( m_textCtrl132, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer36, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer36, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer37;
 	bSizer37 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText12 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an vollen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText12 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Maximale Anzahl an vollen Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText12->Wrap( -1 );
 	bSizer37->Add( m_staticText12, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl133 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl133 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer37->Add( m_textCtrl133, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer37, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer37, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer38;
 	bSizer38 = new wxBoxSizer( wxVERTICAL );
 	
-	m_staticText29 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29 = new wxStaticText( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText29->Wrap( -1 );
 	bSizer38->Add( m_staticText29, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer38, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer38, 0, wxEXPAND, 5 );
 	
 #ifdef _WIN32
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
+		wxBoxSizer* bSizer38s;
+		bSizer38s = new wxBoxSizer( wxVERTICAL );
+
+		wxStaticText *m_staticText29s = new wxStaticText( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText29s->Wrap( -1 );
+		bSizer38s->Add( m_staticText29s, 0, wxALL, 5 );
+	
+		bSizer_imagebackups->Add( bSizer38s, 0, wxEXPAND, 5 );
+
 		wxBoxSizer* bSizer39;
 		bSizer39 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText14 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText14 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Minimale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText14->Wrap( -1 );
 		bSizer39->Add( m_staticText14, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl134 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl134 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer39->Add( m_textCtrl134, 0, wxALL, 5 );
 	
-		bSizer1->Add( bSizer39, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer39, 0, wxEXPAND, 5 );
 	
 		wxBoxSizer* bSizer40;
 		bSizer40 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText15 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText15 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Maximale Anzahl an inkrementellen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText15->Wrap( -1 );
 		bSizer40->Add( m_staticText15, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl135 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl135 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer40->Add( m_textCtrl135, 0, wxALL, 5 );
 	
-		bSizer1->Add( bSizer40, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer40, 0, wxEXPAND, 5 );
 	
 		wxBoxSizer* bSizer41;
 		bSizer41 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText16 = new wxStaticText( this, wxID_ANY, _("Minimale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText16 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Minimale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText16->Wrap( -1 );
 		bSizer41->Add( m_staticText16, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl136 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl136 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer41->Add( m_textCtrl136, 0, wxALL, 5 );
 	
-		bSizer1->Add( bSizer41, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer41, 0, wxEXPAND, 5 );
 	
 		wxBoxSizer* bSizer42;
 		bSizer42 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText17 = new wxStaticText( this, wxID_ANY, _("Maximale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText17 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Maximale Anzahl an vollen Image-Backups:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText17->Wrap( -1 );
 		bSizer42->Add( m_staticText17, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl137 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_textCtrl137 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer42->Add( m_textCtrl137, 0, wxALL, 5 );
 	
-		bSizer1->Add( bSizer42, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer42, 0, wxEXPAND, 5 );
 	
 		wxBoxSizer* bSizer43;
 		bSizer43 = new wxBoxSizer( wxVERTICAL );
 	
-		m_staticText28 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText28 = new wxStaticText( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		m_staticText28->Wrap( -1 );
-		bSizer43->Add( m_staticText28, 0, wxALL, 5 );
+		bSizer43->Add( m_staticText28, 1, wxEXPAND, 5 );
 	
-		bSizer1->Add( bSizer43, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer43, 0, wxEXPAND, 5 );
 	}
 #endif
 	
 	wxBoxSizer* bSizer28;
 	bSizer28 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText25 = new wxStaticText( this, wxID_ANY, _("Computername:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText25 = new wxStaticText( m_tab_client, wxID_ANY, _("Computername:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText25->Wrap( -1 );
 	bSizer28->Add( m_staticText25, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl15 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	m_textCtrl15 = new wxTextCtrl( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
 	bSizer28->Add( m_textCtrl15, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer28, 1, wxEXPAND, 5 );
+	bSizer_client->Add( bSizer28, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer44;
 	bSizer44 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText26 = new wxStaticText( this, wxID_ANY, _("Vom Backup auszuschließen (mit Wildcards):"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText26 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Vom Backup auszuschließen (mit Wildcards):"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText26->Wrap( -1 );
 	bSizer44->Add( m_staticText26, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl16 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	m_textCtrl16 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
 	bSizer44->Add( m_textCtrl16, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer44, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer44, 0, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer441;
 	bSizer441 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText261 = new wxStaticText( this, wxID_ANY, _("Ins Backup einzuschließen (mit Wildcards):"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText261 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Ins Backup einzuschließen (mit Wildcards):"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText261->Wrap( -1 );
 	bSizer441->Add( m_staticText261, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl161 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	m_textCtrl161 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
 	bSizer441->Add( m_textCtrl161, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer441, 1, wxEXPAND, 5 );
+	bSizer_filebackups->Add( bSizer441, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer45;
 	bSizer45 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText27 = new wxStaticText( this, wxID_ANY, _("Backup Zeitfenster:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticText27 = new wxStaticText( m_tab_client, wxID_ANY, _("Backup Zeitfenster:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticText27->Wrap( -1 );
 	bSizer45->Add( m_staticText27, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl17 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	m_textCtrl17 = new wxTextCtrl( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
 	bSizer45->Add( m_textCtrl17, 0, wxALL, 5 );
 	
-	bSizer1->Add( bSizer45, 1, wxEXPAND, 5 );
+	bSizer_client->Add( bSizer45, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer331;
 	bSizer331 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText281 = new wxStaticText( this, wxID_ANY, _("Backupverzögerung nach Systemstart:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText281 = new wxStaticText( m_tab_client, wxID_ANY, _("Backupverzögerung nach Systemstart:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText281->Wrap( -1 );
 	m_staticText281->SetMinSize( wxSize( 300,-1 ) );
 	
 	bSizer331->Add( m_staticText281, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_textCtrl19 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl19 = new wxTextCtrl( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer331->Add( m_textCtrl19, 0, wxALL, 5 );
 	
-	m_staticText291 = new wxStaticText( this, wxID_ANY, _("min"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText291 = new wxStaticText( m_tab_client, wxID_ANY, _("min"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText291->Wrap( -1 );
 	bSizer331->Add( m_staticText291, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	bSizer1->Add( bSizer331, 1, wxEXPAND, 5 );
+	bSizer_client->Add( bSizer331, 0, wxEXPAND, 5 );
 
 #ifdef _WIN32
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
@@ -302,16 +329,145 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		wxBoxSizer* bSizer441;
 		bSizer441 = new wxBoxSizer( wxHORIZONTAL );
 	
-		m_staticText301 = new wxStaticText( this, wxID_ANY, _("Image Backups von folgenden Laufwerken:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticText301 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("Image Backups von folgenden Laufwerken:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 		m_staticText301->Wrap( -1 );
 		bSizer441->Add( m_staticText301, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-		m_textCtrl23 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+		m_textCtrl23 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
 		bSizer441->Add( m_textCtrl23, 0, wxALL, 5 );
 	
-		bSizer1->Add( bSizer441, 1, wxEXPAND, 5 );
+		bSizer_imagebackups->Add( bSizer441, 0, wxEXPAND, 5 );
+
+		wxBoxSizer* bSizer38s;
+		bSizer38s = new wxBoxSizer( wxVERTICAL );
+
+		wxStaticText *m_staticText29s = new wxStaticText( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		m_staticText29s->Wrap( -1 );
+		bSizer38s->Add( m_staticText29s, 0, wxALL, 5 );
+
+		bSizer_imagebackups->Add( bSizer38s, 5, wxALL, 5 );
 	}
 #endif
+
+	wxBoxSizer* bSizerH;
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextLocalSpeed = new wxStaticText( m_tab_client, wxID_ANY, _("Geschwindigkeitslimit lokal:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextLocalSpeed->Wrap( -1 );
+	bSizerH->Add( m_staticTextLocalSpeed, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_textCtrlLocalSpeed = new wxTextCtrl( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	bSizerH->Add( m_textCtrlLocalSpeed, 0, wxALL, 5 );	
+	m_staticTextLocalSpeedUnit = new wxStaticText( m_tab_client, wxID_ANY, _("MBit/s"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+	m_staticTextLocalSpeedUnit->Wrap( -1 );
+	bSizerH->Add( m_staticTextLocalSpeedUnit, 0, wxALIGN_CENTER|wxALL, 5 );	
+	bSizer_client->Add( bSizerH, 0, wxEXPAND, 5 );
+
+
+	//Internet tab
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextInternetEnabled = new wxStaticText( m_tab_internet, wxID_ANY, _("Aktiviere Internetverbindung zu Server:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextInternetEnabled->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetEnabled, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_checkBoxInternetEnabled = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerH->Add( m_checkBoxInternetEnabled, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticInternetServer = new wxStaticText( m_tab_internet, wxID_ANY, _("Internetserver Name oder IP:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticInternetServer->Wrap( -1 );
+	bSizerH->Add( m_staticInternetServer, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_textCtrlInternetServer = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	bSizerH->Add( m_textCtrlInternetServer, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticInternetServerPort = new wxStaticText( m_tab_internet, wxID_ANY, _("Internetserver Port:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticInternetServerPort->Wrap( -1 );
+	bSizerH->Add( m_staticInternetServerPort, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_textCtrlInternetServerPort = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	bSizerH->Add( m_textCtrlInternetServerPort, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticInternetServerAuthkey = new wxStaticText( m_tab_internet, wxID_ANY, _("Internetserver Passwort:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticInternetServerAuthkey->Wrap( -1 );
+	bSizerH->Add( m_staticInternetServerAuthkey, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_textCtrlInternetServerAuthkey = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
+	bSizerH->Add( m_textCtrlInternetServerAuthkey, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+		m_staticTextInternetImage = new wxStaticText( m_tab_internet, wxID_ANY, _("Image-backups über Internetverbindung:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+		m_staticTextInternetImage->Wrap( -1 );
+		bSizerH->Add( m_staticTextInternetImage, 0, wxALIGN_CENTER|wxALL, 5 );	
+		m_checkBoxInternetImage = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+		bSizerH->Add( m_checkBoxInternetImage, 0, wxALL, 5 );	
+		bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+	}
+#endif
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextInternetFullFile = new wxStaticText( m_tab_internet, wxID_ANY, _("Volle Datei-backups über Internetverbindung:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextInternetFullFile->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetFullFile, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_checkBoxInternetFullFile = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerH->Add( m_checkBoxInternetFullFile, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextInternetSpeed = new wxStaticText( m_tab_internet, wxID_ANY, _("Geschwindigkeitslimit über Internetverbindung:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextInternetSpeed->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetSpeed, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_textCtrlInternetSpeed = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	bSizerH->Add( m_textCtrlInternetSpeed, 0, wxALL, 5 );	
+	m_staticTextInternetSpeedUnit = new wxStaticText( m_tab_internet, wxID_ANY, _("KBit/s"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+	m_staticTextInternetSpeedUnit->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetSpeedUnit, 0, wxALIGN_CENTER|wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextInternetCompress = new wxStaticText( m_tab_internet, wxID_ANY, _("Internettransfer komprimieren:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextInternetCompress->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetCompress, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_checkBoxInternetCompress = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerH->Add( m_checkBoxInternetCompress, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
+	m_staticTextInternetEncrypt = new wxStaticText( m_tab_internet, wxID_ANY, _("Internettransfer verschlüsseln:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_staticTextInternetEncrypt->Wrap( -1 );
+	bSizerH->Add( m_staticTextInternetEncrypt, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_checkBoxInternetEncrypt = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerH->Add( m_checkBoxInternetEncrypt, 0, wxALL, 5 );	
+	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
+
+
+
+	{
+		bSizer_client->Add( 0, 0, 10, wxEXPAND, 5 );
+		bSizer_filebackups->Add( 0, 0, 5, wxEXPAND, 5 );
+		bSizer_internet->Add( 0, 0, 10, wxEXPAND, 5 );
+	}
+
+	m_tab_filebackups->SetSizerAndFit( bSizer_filebackups);
+	m_tab_client->SetSizerAndFit( bSizer_client );
+	m_tab_internet->SetSizerAndFit( bSizer_internet );
+
+	m_notebook->AddPage(m_tab_filebackups, _("Datei Backups"));
+#ifdef _WIN32
+	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	{
+		m_tab_imagebackups->SetSizerAndFit( bSizer_imagebackups );
+		m_notebook->AddPage(m_tab_imagebackups, _("Image Backups"));
+	}
+#endif
+	m_notebook->AddPage(m_tab_client, _("Client") );
+	m_notebook->AddPage(m_tab_internet, _("Internet") );
+
+	bSizer1->Add(m_notebook);
 	
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
@@ -332,10 +488,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer1->Add( bSizer4, 0, wxEXPAND|wxFIXED_MINSIZE, 5 );
 	
-	this->SetSizer( bSizer1 );
-	this->Layout();
-	bSizer1->Fit( this );
-	
+	this->SetSizerAndFit( bSizer1 );
+	this->Layout();	
 	this->Centre( wxBOTH );
 	
 	// Connect Events
@@ -384,7 +538,7 @@ GUILogfiles::GUILogfiles( wxWindow* parent, wxWindowID id, const wxString& title
 	wxString m_choice1Choices[] = { _("Info"), _("Warnings"), _("Errors") };
 	int m_choice1NChoices = sizeof( m_choice1Choices ) / sizeof( wxString );
 	m_choice1 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice1NChoices, m_choice1Choices, 0 );
-	m_choice1->SetSelection( 2 );
+	m_choice1->SetSelection( 0 );
 	bSizer11->Add( m_choice1, 0, wxALL, 5 );
 	
 	bSizer9->Add( bSizer11, 1, wxEXPAND, 5 );
@@ -456,7 +610,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    0.40.1"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    1.0"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
 	
@@ -588,3 +742,4 @@ GUIConfigPath::~GUIConfigPath()
 	m_button8->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickDel ), NULL, this );
 	
 }
+

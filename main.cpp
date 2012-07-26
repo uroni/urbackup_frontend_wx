@@ -208,7 +208,7 @@ void MyTimer::Notify()
 
 	long ct=wxGetLocalTime();
 
-	if(ct-lastversioncheck>300 && !displayed_update_info)
+	if(ct-lastversioncheck>600 && !displayed_update_info)
 	{
 		std::string n_version=getFile("version.txt");
 		std::string c_version=getFile("curr_version.txt");
@@ -221,6 +221,7 @@ void MyTimer::Notify()
 			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"));
 			tbb->showBaloon(80000);
 #else
+			tray->BalloonActionUpgrade();
 			tray->ShowBalloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"), 30000, wxICON_INFORMATION);
 			displayed_update_info=true;
 #endif
@@ -368,6 +369,17 @@ void MyTimer::Notify()
 			if(timer!=NULL)
 				timer->Start(60000);
 		}
+	}
+
+	if(!status.new_server.empty())
+	{
+#ifndef wxUSE_TASKBARICON_BALLOONS
+			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Neuer Server"), _("Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"), status.new_server);
+			tbb->showBaloon(80000);
+#else
+			tray->BalloonActionNewServer(status.new_server);
+			tray->ShowBalloon(_("UrBackup: Neuer Server"), _("Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"), 80000, wxICON_INFORMATION);
+#endif
 	}
 
 	working=false;

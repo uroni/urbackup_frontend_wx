@@ -230,6 +230,11 @@ SStatus Connector::getStatus(void)
 		{
 			ret.capa=watoi(it_capa->second);
 		}
+		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
+		if(it_new_server!=params.end())
+		{
+			ret.new_server=wnarrow(it_new_server->second);
+		}
 	}
 
 	return ret;
@@ -340,4 +345,14 @@ bool Connector::setPause(bool b_pause)
 bool Connector::isBusy(void)
 {
 	return busy;
+}
+
+bool Connector::addNewServer(const std::string &ident)
+{
+	std::string d=getResponse("NEW SERVER","ident="+ident);
+
+	if(d!="OK")
+		return false;
+	else
+		return true;
 }
