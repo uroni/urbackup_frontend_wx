@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: UrBackup 0.34\n"
 "Report-Msgid-Bugs-To: urpc@gmx.de\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2012-05-13 17:28+0300\n"
+"PO-Revision-Date: 2012-05-14 23:40+0300\n"
 "Last-Translator: Artem Alabin <kirpicheff@yandex.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -175,11 +175,11 @@ msgstr "% завершено. "
 
 #: main.cpp:208
 msgid "Kein aktuelles Backup. "
-msgstr "Нет текущего бэкапа."
+msgstr "Нет бэкапа."
 
 #: main.cpp:219
 msgid "Letztes Backup am "
-msgstr "Последний бэкап был"
+msgstr "Последний бэкап был "
 
 #: Settings.cpp:156
 msgid "Die inkrementelle Backupzeit ist keine Zahl"
