@@ -21,6 +21,12 @@
 #include "main.h"
 #include "capa_bits.h"
 
+#include <wx/valtext.h>
+
+#ifndef wxFILTER_DIGITS
+#define wxFILTER_DIGITS wxFILTER_NUMERIC
+#endif
+
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
 
@@ -347,7 +353,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		if(watoi(t)>0) 
 			m_textCtrlLocalSpeed->SetValue(convert(watoi(t)/((1024*1024)/8)) );
 		else
-			m_textCtrlLocalSpeed->SetValue("-");
+			m_textCtrlLocalSpeed->SetValue(wxT("-"));
 	}
 	else
 	{
@@ -358,7 +364,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		if(watoi(t)>0) 
 			m_textCtrlInternetSpeed->SetValue(convert(watoi(t)/((1024)/8)) );
 		else
-			m_textCtrlInternetSpeed->SetValue("-");
+			m_textCtrlInternetSpeed->SetValue(wxT("-"));
 	}
 	else
 	{

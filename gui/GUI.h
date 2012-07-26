@@ -26,6 +26,7 @@
 #include <wx/icon.h>
 #include <wx/statbmp.h>
 #include <wx/notebook.h>
+#include <wx/panel.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
