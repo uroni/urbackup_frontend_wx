@@ -607,6 +607,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	l_local_speed*=(1024*1024)/8;
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
+#ifdef _WIN32
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
 		if(m_checkBox1->GetValue()==false)
@@ -614,6 +615,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			l_update_freq_image_full=-1;
 		}
 	}
+#endif
 
 	std::map<std::string, std::string> n_vals;
 	n_vals["update_freq_incr"]=nconvert(l_update_freq_incr*60*60);
