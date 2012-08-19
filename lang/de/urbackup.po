@@ -1,0 +1,293 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# Martin Raiber <martin@urbackup.org>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup Client Frontend(wx) 1.0\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2011-01-16 19:43+0100\n"
+"Last-Translator: Martin Raiber <martin@urbackup.org>\n"
+"Language-Team: ENGLISH <martin@urbackup.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Encrypted transfer:"
+msgstr "Internettransfer verschlüsseln:"
+
+msgid "Compressed transfer:"
+msgstr "Internettransfer komprimieren:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Geschwindigkeitslimit über Internetverbindung:"
+
+msgid "Do full file backups over internet:"
+msgstr "Volle Datei-backups über Internetverbindung:"
+
+msgid "Do image backups over internet:"
+msgstr "Image-backups über Internetverbindung:"
+
+msgid "Internet server password:"
+msgstr "Internetserver Passwort:"
+
+msgid "Internet server port:"
+msgstr "Internetserver Port:"
+
+msgid "Internet server name/IP:"
+msgstr "Internetserver Name oder IP:"
+
+msgid "Enable backup via internet:"
+msgstr "Aktiviere Internetverbindung zu Server:"
+
+msgid "Max backup speed for local network:"
+msgstr "Geschwindigkeitslimit lokal:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Neuer Server"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Image backups"
+msgstr "Image Backups"
+
+msgid "File backups"
+msgstr "Datei Backups"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Ins Backup einzuschließen (mit Wildcards):"
+
+msgid " is not a volume"
+msgstr " ist kein Laufwerk"
+
+msgid "Volumes to backup:"
+msgstr "Image Backups von folgenden Laufwerken:"
+
+msgid "Waiting for server..."
+msgstr "Warte auf Server..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Die Verzögerung bei Systemstart ist keine Zahl"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Computername:"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Vom Backup auszuschließen (mit Wildcards):"
+
+msgid "Backup window:"
+msgstr "Backup Zeitfenster:"
+
+msgid "Backup delay after system start:"
+msgstr "Backupverzögerung nach Systemstart:"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Informations"
+msgstr "Informationen"
+
+msgid "Continue"
+msgstr "Fortfahren"
+
+msgid "Pause"
+msgstr "Pausieren"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Add/Remove backup paths"
+msgstr "Pfade konfigurieren"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Do incremental image backup"
+msgstr "Inkremetelles Image-Backup jetzt"
+
+msgid "Do full image backup"
+msgstr "Volles Image-Backup jetzt"
+
+msgid "Do incremental file backup"
+msgstr "Inkremetelles Backup jetzt"
+
+msgid "Do full file backup"
+msgstr "Volles Backup jetzt"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Die minimale Anzahl an vollen Backups ist keine Zahl"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Die maximale Anzahl an vollen Backups ist keine Zahl"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+
+msgid "The incremental image backup time is not a number"
+msgstr "Die inkrementelle Imagebackupzeit ist keine Zahl"
+
+msgid "The full image backup interval  is not a number"
+msgstr "Die volle Imagebackupzeit ist keine Zahl"
+
+msgid "The full backup interval  is not a number"
+msgstr "Die volle Backupzeit ist keine Zahl"
+
+msgid "The incremental backup interval is not a number"
+msgstr "Die inkrementelle Backupzeit ist keine Zahl"
+
+msgid "Last backup on "
+msgstr "Letztes Backup am "
+
+msgid "No current backup. "
+msgstr "Kein aktuelles Backup. "
+
+msgid "% done. "
+msgstr "% fertig. "
+
+msgid "Full image backup running. "
+msgstr "Volles Image-Backup läuft. "
+
+msgid "Incremental image backup running. "
+msgstr "Inkrementelles Image-Backup läuft. "
+
+msgid "Full file backup running. "
+msgstr "Volles Backup läuft. "
+
+msgid "Incremental file backup running. "
+msgstr "Inkrementelles Backup läuft. "
+
+msgid "Cannot connect to backup server"
+msgstr "Keine Verbindung zum Backupserver möglich"
+
+msgid "A new version of UrBackup is available. Please click here to install it now."
+msgstr "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Update verfügbar"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Bitte Verzeichnis das gesichert werden soll auswählen"
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+
+msgid "Remove path"
+msgstr "Pfad entfernen"
+
+msgid "Add path"
+msgstr "Neuer Pfad"
+
+msgid "Remove/Add backup paths"
+msgstr "Pfade hinzufügen und entfernen"
+
+msgid "Author:"
+msgstr "Autor:"
+
+msgid "Version:"
+msgstr "Version:"
+
+msgid "Exit"
+msgstr "Verlassen"
+
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Warnings"
+msgstr "Warnings"
+
+msgid "Infos"
+msgstr "Info"
+
+msgid "Filter:"
+msgstr "Filter:"
+
+msgid "Abort"
+msgstr "Abbrechen"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "days"
+msgstr "Tage"
+
+msgid "hours"
+msgstr "Stunden"
+
+msgid "Maximal number of full image backups:"
+msgstr "Maximale Anzahl an vollen Image-Backups:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Minimale Anzahl an vollen Image-Backups:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Maximale Anzahl an inkrementellen Image-Backups:"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimale Anzahl an inkrementellen Image-Backups:"
+
+msgid "Maximal number of full file backups:"
+msgstr "Maximale Anzahl an vollen Backups:"
+
+msgid "Minimal number of full file backups:"
+msgstr "Minimale Anzahl an vollen Backups:"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Maximale Anzahl an inkrementellen Backups:"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimale Anzahl an inkrementellen Backups:"
+
+msgid "Interval for full image backups:"
+msgstr "Intervall für volle Image-Backups:"
+
+msgid "Interval for incremental image backups:"
+msgstr "Intervall für inkrementelle Image-Backups:"
+
+msgid "Interval for full file backups:"
+msgstr "Intervall für volle Backups:"
+
+msgid "Interval for incremental file backups:"
+msgstr "Intervall für inkrementelle Backups:"
+

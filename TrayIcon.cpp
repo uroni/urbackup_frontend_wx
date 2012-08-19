@@ -81,9 +81,9 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				timer->Start(1000);
 		}
 		else if(rc==2)
-			wxMessageBox( _("Ein Backup läuft bereits. Konnte leider kein weiteres starten."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
+			wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
 		else
-			wxMessageBox( _("Konnte kein Backup starten, da leider kein Server gefunden wurde"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 	}
 	else if(evt.GetId()==ID_TI_SETTINGS)
 	{
@@ -99,14 +99,14 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startImage(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), _("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), _("Waiting for server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
 		else if(rc==2)
-			wxMessageBox( _("Ein Backup läuft bereits. Konnte leider kein weiteres starten."), wxT("UrBackup"), wxICON_EXCLAMATION);
+			wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);
 		else
-			wxMessageBox( _("Konnte kein Backup starten, da leider kein Server gefunden wurde"), wxT("UrBackup"), wxICON_ERROR);
+			wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
 	}
 	else if(evt.GetId()==ID_TI_PAUSE)
 	{
@@ -118,7 +118,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		}
 		else
 		{
-			wxMessageBox( _("Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."), wxT("UrBackup"), wxICON_ERROR);
+			wxMessageBox( _("Pausing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
 		}
 	}
 	else if(evt.GetId()==ID_TI_CONTINUE)
@@ -131,7 +131,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		}
 		else
 		{
-			wxMessageBox( _("Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."), wxT("UrBackup"), wxICON_ERROR);
+			wxMessageBox( _("Continuing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
 		}
 	}
 	else if(evt.GetId()==ID_TI_INFO )
@@ -146,15 +146,15 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	bool any_prev=false;
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_FILE_BACKUPS))
 	{
-		mnu->Append(ID_TI_BACKUP_FULL, _("Volles Backup jetzt"), wxT("Jetzt ein volles Backup ausführen"));
-		mnu->Append(ID_TI_BACKUP_INCR, _("Inkremetelles Backup jetzt"), wxT("Jetzt ein inkrementelles Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), wxT("Jetzt ein inkrementelles Backup ausführen"));
 		any_prev=true;
 	}
 #ifdef _WIN32
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_IMAGE_BACKUPS) && !timer->hasCapability(DONT_DO_IMAGE_BACKUPS) )
 	{
-		mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Volles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
-		mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Inkremetelles Image-Backup jetzt"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Do full image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+		mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
 		any_prev=true;
 	}
 #endif
@@ -164,29 +164,29 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	}
 	if(!timer->hasCapability(DONT_SHOW_SETTINGS))
 	{
-		mnu->Append(ID_TI_SETTINGS, _("Einstellungen") );
+		mnu->Append(ID_TI_SETTINGS, _("Settings") );
 	}
 	if(!timer->hasCapability(DONT_ALLOW_CONFIG_PATHS))
 	{
-		mnu->Append(ID_TI_ADD_PATH, _("Pfade konfigurieren"));
+		mnu->Append(ID_TI_ADD_PATH, _("Add/Remove backup paths"));
 	}
 	if(!timer->hasCapability(DONT_SHOW_LOGS))
 	{
 		mnu->Append(ID_TI_LOGS, _("Logs") );
 	}
-	mnu->Append(ID_TI_INFO, _("Info") );
+	mnu->Append(ID_TI_INFO, _("Infos") );
 	if(working_status>0)
 	{
 		if(b_is_pausing==false)
 		{
 			if(!timer->hasCapability(DONT_ALLOW_PAUSE))
 			{
-				mnu->Append(ID_TI_PAUSE, _("Pausieren"));
+				mnu->Append(ID_TI_PAUSE, _("Pause"));
 			}
 		}
 		else
 		{
-			mnu->Append(ID_TI_CONTINUE, _("Fortfahren"));
+			mnu->Append(ID_TI_CONTINUE, _("Continue"));
 		}
 	}
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);

@@ -1,90 +1,89 @@
-# UrBackup Russian translation
-# Copyright (C) 2012 Martin Raiber
+# Copyright (C) 2012 Artem Alabin
 # This file is distributed under the same license as the UrBackup package.
-# Martin Raiber <urpc@gmx.de>, 2012.
+# Artem Alabin 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: UrBackup 0.34\n"
-"Report-Msgid-Bugs-To: urpc@gmx.de\n"
+"Project-Id-Version: UrBackup Client Frontend(wx) 1.0\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2012-05-14 23:40+0300\n"
-"Last-Translator: Artem Alabin <kirpicheff@yandex.ru>\n"
+"PO-Revision-Date: 2012-08-19 18:07+0100\n"
+"Last-Translator: Martin Raiber <martin@urbackup.org>\n"
+"Language-Team: RUSSIAN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language-Team: \n"
 
 #: gui/GUI.cpp:26
-msgid "Intervall für inkrementelle Backups:"
+msgid "Interval for incremental file backups:"
 msgstr "Интервал добавочных файловых бэкапов"
 
 #: gui/GUI.cpp:30
-msgid "Intervall für volle Backups:"
+msgid "Interval for full file backups:"
 msgstr "Интервал полных бэкапов файлов"
 
 #: gui/GUI.cpp:34
-msgid "Intervall für inkrementelle Image-Backups:"
+msgid "Interval for incremental image backups:"
 msgstr "Интервал добавочных бэкапов образа"
 
 #: gui/GUI.cpp:38
-msgid "Intervall für volle Image-Backups:"
+msgid "Interval for full image backups:"
 msgstr "Интервал полных бэкапов образа"
 
 #: gui/GUI.cpp:46
-msgid "Minimale Anzahl an inkrementellen Backups:"
+msgid "Minimal number of incremental file backups:"
 msgstr "Минимальное количество добавочных бэкапов файлов"
 
 #: gui/GUI.cpp:50
-msgid "Maximale Anzahl an inkrementellen Backups:"
+msgid "Maximal number of incremental file backups:"
 msgstr "Максимальное количество добавочных бэкапов файлов"
 
 #: gui/GUI.cpp:54
-msgid "Minimale Anzahl an vollen Backups:"
+msgid "Minimal number of full file backups:"
 msgstr "Минимальное количество полных бэкапов файлов"
 
 #: gui/GUI.cpp:58
-msgid "Maximale Anzahl an vollen Backups:"
+msgid "Maximal number of full file backups:"
 msgstr "Максимальное количество полных бэкапов файлов"
 
 #: gui/GUI.cpp:66
-msgid "Minimale Anzahl an inkrementellen Image-Backups:"
+msgid "Minimal number of incremental image backups:"
 msgstr "Минимальное количество добавочных бэкапов образа"
 
 #: gui/GUI.cpp:70
-msgid "Maximale Anzahl an inkrementellen Image-Backups:"
+msgid "Maximal number of incremental image backups:"
 msgstr "Максимальное количество добавочных бэкапов образа"
 
 #: gui/GUI.cpp:74
-msgid "Minimale Anzahl an vollen Image-Backups:"
+msgid "Minimal number of full image backups:"
 msgstr "Минимальное количество полных бэкапов образа"
 
 #: gui/GUI.cpp:78
-msgid "Maximale Anzahl an vollen Image-Backups:"
+msgid "Maximal number of full image backups:"
 msgstr "Максимальное количество полных бэкапов образа"
 
 #: gui/GUI.cpp:93
-msgid "Stunden"
+msgid "hours"
 msgstr "часов"
 
 #: gui/GUI.cpp:105
 #: gui/GUI.cpp:117
 #: gui/GUI.cpp:137
-msgid "Tage"
+msgid "days"
 msgstr "дней"
 
 #: gui/GUI.cpp:124
-msgid "Aktiv"
+msgid "Active"
 msgstr "Активнен"
 
 #: gui/GUI.cpp:232
 #: gui/GUI.cpp:389
-msgid "OK"
+msgid "Ok"
 msgstr "Ок"
 
 #: gui/GUI.cpp:237
 #: ConfigPath.cpp:13
-msgid "Abbrechen"
+msgid "Abort"
 msgstr "Отмена"
 
 #: gui/GUI.cpp:282
@@ -93,7 +92,7 @@ msgstr "Фильтр:"
 
 #: gui/GUI.cpp:286
 #: TrayIcon.cpp:119
-msgid "Info"
+msgid "Infos"
 msgstr "Информация"
 
 #: gui/GUI.cpp:286
@@ -105,7 +104,7 @@ msgid "Errors"
 msgstr "Ошибки"
 
 #: gui/GUI.cpp:303
-msgid "Verlassen"
+msgid "Exit"
 msgstr "Выход"
 
 #: gui/GUI.cpp:356
@@ -113,162 +112,158 @@ msgid "Version:"
 msgstr "Версия:"
 
 #: gui/GUI.cpp:368
-msgid "Autor:"
+msgid "Author:"
 msgstr "Автор:"
 
 #: ConfigPath.cpp:6
-msgid "Pfade hinzufügen und entfernen"
+msgid "Remove/Add backup paths"
 msgstr "Добавить/Удалить пути бэкапа"
 
-#: ConfigPath.cpp:12
-msgid "Ok"
-msgstr "Ок"
-
 #: ConfigPath.cpp:14
-msgid "Neuer Pfad"
+msgid "Add path"
 msgstr "Добавить путь"
 
 #: ConfigPath.cpp:15
-msgid "Pfad entfernen"
+msgid "Remove path"
 msgstr "Удалить путь"
 
 #: ConfigPath.cpp:26
 #: Logs.cpp:10
-msgid "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgid "There was an error. Currently nothing can be backed up."
 msgstr "Произошла ошибка. Нечего бэкапить"
 
 #: ConfigPath.cpp:54
-msgid "Bitte Verzeichnis das gesichert werden soll auswählen"
+msgid "Please select the directory that will be backed up."
 msgstr "Пожалуйста выберите директорию для бэкапа"
 
 #: main.cpp:125
-msgid "UrBackup: Update verfügbar"
+msgid "UrBackup: Update available"
 msgstr "UrBackup: Доступно обновление"
 
 #: main.cpp:125
-msgid "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+msgid "A new version of UrBackup is available. Please click here to install it now."
 msgstr "Доступна новая версия. Пожалуйста нажмите здесь, чтобы установить сейчас."
 
 #: main.cpp:143
-msgid "Keine Verbindung zum Backupserver möglich"
+msgid "Cannot connect to backup server"
 msgstr "Не удается подключиться к серверу"
 
 #: main.cpp:163
-msgid "Inkrementelles Backup läuft. "
+msgid "Incremental file backup running. "
 msgstr "Добавочный бэкап выполняется. "
 
 #: main.cpp:175
-msgid "Volles Backup läuft. "
+msgid "Full file backup running. "
 msgstr "Полный бэкап выполняется. "
 
 #: main.cpp:186
-msgid "Inkrementelles Image-Backup läuft. "
+msgid "Incremental image backup running. "
 msgstr "Добавочный бэкап образа выполняется. "
 
 #: main.cpp:197
-msgid "Volles Image-Backup läuft. "
+msgid "Full image backup running. "
 msgstr "Полный бэкап образа выполняется. "
 
 #: main.cpp:205
-msgid "% fertig. "
+msgid "% done. "
 msgstr "% завершено. "
 
 #: main.cpp:208
-msgid "Kein aktuelles Backup. "
+msgid "No current backup. "
 msgstr "Нет бэкапа."
 
 #: main.cpp:219
-msgid "Letztes Backup am "
+msgid "Last backup on "
 msgstr "Последний бэкап был "
 
 #: Settings.cpp:156
-msgid "Die inkrementelle Backupzeit ist keine Zahl"
+msgid "The incremental backup interval is not a number"
 msgstr "Интервал добавочной копии не является числом"
 
 #: Settings.cpp:162
-msgid "Die volle Backupzeit ist keine Zahl"
+msgid "The full backup interval  is not a number"
 msgstr "Интервал полных бэкапов не является числом"
 
 #: Settings.cpp:168
-msgid "Die volle Imagebackupzeit ist keine Zahl"
+msgid "The full image backup interval  is not a number"
 msgstr "Интервал полных бэкапов образа не является числом"
 
 #: Settings.cpp:174
-msgid "Die inkrementelle Imagebackupzeit ist keine Zahl"
+msgid "The incremental image backup time is not a number"
 msgstr "Интервал добавочных бэкапов образа не является числом"
 
 #: Settings.cpp:180
-msgid "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+msgid "The maximal number of incremental file backups  is not a number"
 msgstr "Максимальное количество добавочных бэкапов файлов не является числом"
 
 #: Settings.cpp:186
-msgid "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+msgid "The minimal number of incremental file backups is not a number"
 msgstr "Минимальное количество добавочных бэкапов файлов не является числом"
 
 #: Settings.cpp:192
-msgid "Die maximale Anzahl an vollen Backups ist keine Zahl"
+msgid "The maximal number of full file backups is not a number"
 msgstr "Максимальное количество полных бэкапов файлов не является числом"
 
 #: Settings.cpp:198
-msgid "Die minimale Anzahl an vollen Backups ist keine Zahl"
+msgid "Minimal number of full file backups is not a number"
 msgstr "Минимальное количество полных бэкапов файлов не является числом"
 
 #: Settings.cpp:204
-msgid "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgid "Minimal number of incremental image backups is not a number"
 msgstr "Минимальное количество добавочных бэкапов образа не является числом"
 
 #: Settings.cpp:210
-msgid "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgid "Maximal number of incremental image backups is not a number"
 msgstr "Максимальное количество добавочных бэкапов образа не является числом"
 
 #: Settings.cpp:216
-msgid "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+msgid "Minimal number of full image backups is not a number"
 msgstr "Минимальное количество полных бэкапов образа не является числом"
 
 #: Settings.cpp:222
-msgid "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+msgid "Maximal number of full image backups is not a number"
 msgstr "Максимальное количество полных бэкапов образа не является числом"
 
 #: TrayIcon.cpp:49
 #: TrayIcon.cpp:72
-msgid "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+msgid "A backup is already running. Could not start another one."
 msgstr "Бэкап уже запущен. Невозможно запустить ещё один."
 
 #: TrayIcon.cpp:51
 #: TrayIcon.cpp:74
-msgid "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+msgid "Could not start backup, because no backup server was found."
 msgstr "Невозможно запустить бэкап, сервер не найден"
 
 #: TrayIcon.cpp:86
-msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+msgid "Pausing failed: No connection to backup server."
 msgstr "Приостановить не удалось. Нет соединения с сервером"
 
 #: TrayIcon.cpp:99
-msgid "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+msgid "Continuing failed: No connection to backup server."
 msgstr "Продолжить не удалось. Нет соединения с сервером"
 
 #: TrayIcon.cpp:111
-msgid "Volles Backup jetzt"
+msgid "Do full file backup"
 msgstr "Запустить полный бэкап файлов"
 
 #: TrayIcon.cpp:112
-msgid "Inkremetelles Backup jetzt"
+msgid "Do incremental file backup"
 msgstr "Запустить добавочный бэкап файлов"
 
 #: TrayIcon.cpp:113
-msgid "Volles Image-Backup jetzt"
+msgid "Do full image backup"
 msgstr "Запустить полный бэкап образа"
 
 #: TrayIcon.cpp:114
-msgid "Inkremetelles Image-Backup jetzt"
+msgid "Do incremental image backup"
 msgstr "Запустить добавочный бэкап образа"
 
 #: TrayIcon.cpp:116
-msgid "Einstellungen"
+msgid "Settings"
 msgstr "Настройки"
 
 #: TrayIcon.cpp:117
-msgid "Pfade konfigurieren"
+msgid "Add/Remove backup paths"
 msgstr "Добавить/Удалить пути бэкапа"
 
 #: TrayIcon.cpp:118
@@ -276,47 +271,95 @@ msgid "Logs"
 msgstr "Логи"
 
 #: TrayIcon.cpp:124
-msgid "Pausieren"
+msgid "Pause"
 msgstr "Пауза"
 
 #: TrayIcon.cpp:128
-msgid "Fortfahren"
+msgid "Continue"
 msgstr "Продолжить"
 
 #: Gui.h:144
-msgid "Informationen"
+msgid "Informations"
 msgstr "Информация"
 
 msgid "Name:"
 msgstr "Имя:"
 
-msgid "Backupverzögerung nach Systemstart:"
+msgid "Backup delay after system start:"
 msgstr "Задержка копирования после старта системы:"
 
-msgid "Backup Zeitfenster:"
+msgid "Backup window:"
 msgstr "Расписание бэкапа:"
 
-msgid "Vom Backup auszuschließen (mit Wildcards):"
+msgid "Exclude from backup (with wildcards):"
 msgstr "Исключить из бэкапа (с шаблоном):"
 
-msgid "Computername:"
+msgid "Computer name:"
 msgstr "Имя компьютера:"
 
 msgid "min"
 msgstr "минут"
 
-msgid "Die Verzögerung bei Systemstart ist keine Zahl"
+msgid "Backup delay after system start is not a number"
 msgstr "Задержка копирования после старта системы не является числом"
 
-msgid "Warte auf Server..."
+msgid "Waiting for server..."
 msgstr "Ожидание сервера..."
 
-msgid "Image Backups von folgenden Laufwerken:"
+msgid "Volumes to backup:"
 msgstr "Разделы для бэкапа"
 
-msgid " ist kein Laufwerk"
+msgid " is not a volume"
 msgstr " это не раздел"
 
-msgid "Ins Backup einzuschließen (mit Wildcards):"
+msgid "Include in backup (with wildcards):"
 msgstr "Включить в бэкап (с шаблоном):"
+
+msgid "File backups"
+msgstr ""
+
+msgid "Image backups"
+msgstr ""
+
+msgid "Client"
+msgstr ""
+
+msgid "Internet"
+msgstr ""
+
+msgid "UrBackup: New server"
+msgstr ""
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr ""
+
+msgid "Max backup speed for local network:"
+msgstr ""
+
+msgid "Enable backup via internet:"
+msgstr ""
+
+msgid "Internet server name/IP:"
+msgstr ""
+
+msgid "Internet server port:"
+msgstr ""
+
+msgid "Internet server password:"
+msgstr ""
+
+msgid "Do image backups over internet:"
+msgstr ""
+
+msgid "Do full file backups over internet:"
+msgstr ""
+
+msgid "Max backups speed for internet connection:"
+msgstr ""
+
+msgid "Compressed transfer:"
+msgstr ""
+
+msgid "Encrypted transfer:"
+msgstr ""
 

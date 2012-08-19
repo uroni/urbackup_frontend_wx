@@ -48,7 +48,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 	if(Connector::hasError())
 	{
-		wxMessageBox(_("Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."), wxT("UrBackup"), wxOK|wxICON_ERROR);
+		wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
 		Hide();
 		Close();
 		return;
@@ -86,7 +86,7 @@ void ConfigPath::OnClickAbort(wxCommandEvent &evt)
 
 void ConfigPath::OnClickNew(wxCommandEvent &evt)
 {
-	wxDirDialog ed(this, _("Bitte Verzeichnis das gesichert werden soll auswählen"), wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST );
+	wxDirDialog ed(this, _("Please select the directory that will be backed up."), wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST );
 	int rc=ed.ShowModal();
 	if(rc==wxID_OK)
 	{

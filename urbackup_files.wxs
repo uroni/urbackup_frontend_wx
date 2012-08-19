@@ -100,15 +100,15 @@
             </Component>
             <Directory Id="dir77A47C9F143A7502466C548C9FCBAD08" Name="en">
                 <Component Id="cmp3ADCE127861514104F3F9990F4DCEE67" Guid="{6FA6EDD9-8A38-4136-92A6-D6F3E008188A}">
-                    <File Id="filE01BABC064CA6E3C82340AF8F7CE898E" KeyPath="yes" Source="$(var.shared_data_dir)\en\trans.mo" />
+                    <File Id="filE01BABC064CA6E3C82340AF8F7CE898E" KeyPath="yes" Source="$(var.shared_data_dir)\en\urbackup.mo" />
                 </Component>
             </Directory>
             <Directory Id="dir72226116A8527C99EDF529487A911522" Name="fr">
                 <Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" Guid="{68E7C236-8C59-4216-8240-587BC451CD73}">
-                    <File Id="fil4AAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\fr\trans.mo" />
+                    <File Id="fil4AAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\fr\urbackup.mo" />
                 </Component>
                 <Component Id="cmpED2ADCE79B3B015C4CFB302C4B4D6D9F" Guid="{0E7A1C88-D841-4E33-90A0-B6D1FC0CB473}">
-                    <File Id="filC97F12BA740CEAB784D0CCCAC27B024F" KeyPath="yes" Source="$(var.shared_data_dir)\fr\trans.po" />
+                    <File Id="filC97F12BA740CEAB784D0CCCAC27B024F" KeyPath="yes" Source="$(var.shared_data_dir)\fr\urbackup.po" />
                 </Component>
             </Directory>
             <Directory Id="dir478DAC6711999A86715A581491FA55ED" Name="uninstall">

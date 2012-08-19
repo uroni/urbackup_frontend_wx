@@ -125,9 +125,11 @@ bool MyApp::OnInit()
 	//std::cout << "Lang: " << g_lang << std::endl;
 #ifndef _WIN32
 	m_locale.AddCatalogLookupPathPrefix(res_path);
+#else
+	m_locale.AddCatalogLookupPathPrefix(wxT("lang"));
 #endif
+	m_locale.AddCatalog(L"urbackup");
 	m_locale.Init(lang, 0);
-	m_locale.AddCatalog(L"trans");
 	
 	if(!m_locale.IsOk() )
 	{
@@ -218,11 +220,11 @@ void MyTimer::Notify()
 		if( atoi(n_version.c_str())>atoi(c_version.c_str()))
 		{
 #ifndef wxUSE_TASKBARICON_BALLOONS
-			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"));
+			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Update available"), _("A new version of UrBackup is available. Please click here to install it now."));
 			tbb->showBaloon(80000);
 #else
 			tray->BalloonActionUpgrade();
-			tray->ShowBalloon(_("UrBackup: Update verfügbar"), _("Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"), 30000, wxICON_INFORMATION);
+			tray->ShowBalloon(_("UrBackup: Update available"), _("A new version of UrBackup is available. Please click here to install it now."), 30000, wxICON_INFORMATION);
 			displayed_update_info=true;
 #endif
 		}
@@ -241,7 +243,7 @@ void MyTimer::Notify()
 	{
 		if(icon_type!=4)
 		{
-			last_status=_("Keine Verbindung zum Backupserver möglich");
+			last_status=_("Cannot connect to backup server");
 			if(tray!=NULL)
 				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type), last_status);
 			icon_type=4;
@@ -265,11 +267,11 @@ void MyTimer::Notify()
 	}
 	else if(status.status==wxT("INCR") )
 	{
-		status_text+=_("Inkrementelles Backup läuft. ");
+		status_text+=_("Incremental file backup running. ");
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% fertig. ");
+			status_text+=_("% done. ");
 		}
 		icon_type=1;
 		working_status=1;
@@ -277,40 +279,40 @@ void MyTimer::Notify()
 	}
 	else if(status.status==wxT("FULL") )
 	{
-		status_text+=_("Volles Backup läuft. ");
+		status_text+=_("Full file backup running. ");
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% fertig. ");
+			status_text+=_("% done. ");
 		}
 		icon_type=1;
 		working_status=2;
 	}
 	else if(status.status==wxT("INCRI") )
 	{
-		status_text+=_("Inkrementelles Image-Backup läuft. ");
+		status_text+=_("Incremental image backup running. ");
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% fertig. ");
+			status_text+=_("% done. ");
 		}
 		icon_type=1;
 		working_status=3;
 	}
 	else if(status.status==wxT("FULLI") )
 	{
-		status_text+=_("Volles Image-Backup läuft. ");
+		status_text+=_("Full image backup running. ");
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% fertig. ");
+			status_text+=_("% done. ");
 		}
 		icon_type=1;
 		working_status=4;
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
-		status_text+=_("Kein aktuelles Backup. ");
+		status_text+=_("No current backup. ");
 		icon_type=2;
 		working_status=0;
 	}
@@ -321,7 +323,7 @@ void MyTimer::Notify()
 	}
 
 	if(!status.lastbackupdate.Trim().empty() )
-		status_text+=_("Letztes Backup am ")+status.lastbackupdate;
+		status_text+=_("Last backup on ")+status.lastbackupdate;
 
 	if( icon_type<3 && incr_update_done==false)
 	{
@@ -374,11 +376,11 @@ void MyTimer::Notify()
 	if(!status.new_server.empty())
 	{
 #ifndef wxUSE_TASKBARICON_BALLOONS
-			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: Neuer Server"), _("Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"), status.new_server);
-			tbb->showBaloon(80000);
+			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: New server"), _("A new backup server has been found. Click here to use it"), status.new_server);
+			tbb->showBaloon(180000);
 #else
 			tray->BalloonActionNewServer(status.new_server);
-			tray->ShowBalloon(_("UrBackup: Neuer Server"), _("Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"), 80000, wxICON_INFORMATION);
+			tray->ShowBalloon(_("UrBackup: New server"), _("A new backup server has been found. Click here to use it"), 180000, wxICON_INFORMATION);
 #endif
 	}
 

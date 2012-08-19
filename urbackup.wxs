@@ -2,7 +2,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi' xmlns:util='http://schemas.microsoft.com/wix/UtilExtension' xmlns:firewall='http://schemas.microsoft.com/wix/FirewallExtension'>
 	<?include $(sys.CURRENTDIR)\urbackup.wxi?>
 	<Product Id='$(var.ProductID)' Name='UrBackup Client' Language='1033'
-            Version='0.40.1.0' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
+            Version='1.0.0.0' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
     <Package Description='Client for UrBackup Server'
              Comments='Client for UrBackup Server. Allows file and image backups'
              Manufacturer='Martin Raiber' InstallerVersion='300' Compressed='yes' Platform='$(var.Platform)'/>
@@ -138,16 +138,23 @@
             <Component Id="cmp37A94814CB169DB3ED2881E715547442" Guid="{37B02F8D-AF00-4CAA-9B68-4D5F26F2431F}" Win64="$(var.isx64)">
                 <File Id="filAD7AA45493CFD8B8331044CD7393799C" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_dsa.pub" />
             </Component>
-            <Directory Id="dir77A47C9F143A7502466C548C9FCBAD08" Name="en">
-                <Component Id="cmp3ADCE127861514104F3F9990F4DCEE67" Guid="{6FA6EDD9-8A38-4136-92A6-D6F3E008188A}" Win64="$(var.isx64)">
-                    <File Id="filE01BABC064CA6E3C82340AF8F7CE898E" KeyPath="yes" Source="$(var.shared_data_dir)\en\trans.mo" />
-                </Component>
-            </Directory>
-            <Directory Id="dir72226116A8527C99EDF529487A911522" Name="fr">
-                <Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" Guid="{68E7C236-8C59-4216-8240-587BC451CD73}" Win64="$(var.isx64)">
-                    <File Id="fil4AAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\fr\trans.mo" />
-                </Component>
-            </Directory>
+			<Directory Id="dir77A47C9F143A7502466C548C9FCBAD09" Name="lang">
+				<Directory Id="dir77A47C9F143A7502466C548C9FCBAD08" Name="de">
+					<Component Id="cmp3ADCE127861514104F3F9990F4DCEE67" Guid="{6FA6EDD9-8A38-4136-92A6-D6F3E008188A}" Win64="$(var.isx64)">
+						<File Id="filE01BABC064CA6E3C82340AF8F7CE898E" KeyPath="yes" Source="$(var.shared_data_dir)\lang\de\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911522" Name="fr">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" Guid="{68E7C236-8C59-4216-8240-587BC451CD73}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\lang\fr\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911523" Name="ru">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0C" Guid="{36754ab3-8eef-4baa-a835-73f737e2a972}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B9" KeyPath="yes" Source="$(var.shared_data_dir)\lang\ru\urbackup.mo" />
+					</Component>
+				</Directory>
+			</Directory>
             <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
                 <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}" Win64="$(var.isx64)">
                     <File Id="fil5186247F1A463F798D5080E6795495D3" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup\backup_client.db.template" />
@@ -179,6 +186,7 @@
             <ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0B" />
             <ComponentRef Id="cmpF989989B3E76DC136F5507BF8CDAE791" />
             <ComponentRef Id="cmp146035BB0A33B65BB459A78C1BA9938B" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0C" />
         </ComponentGroup>
     </Fragment>
 	

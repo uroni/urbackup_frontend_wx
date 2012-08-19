@@ -488,13 +488,13 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	if(update_freq_incr.ToLong(&l_update_freq_incr)==false )
 	{
-		wxMessageBox( _("Die inkrementelle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The incremental backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
 		return;
 	}
 	if(update_freq_full.ToLong(&l_update_freq_full)==false )
 	{
-		wxMessageBox( _("Die volle Backupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The full backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
 		return;
 	}
@@ -503,13 +503,13 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false && m_checkBox1->GetValue() )
 		{
-			wxMessageBox( _("Die volle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl22->SetFocus();
 			return;
 		}
 		if(update_freq_image_incr.ToLong(&l_update_freq_image_incr)==false && m_checkBox1->GetValue()  )
 		{
-			wxMessageBox( _("Die inkrementelle Imagebackupzeit ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("The incremental image backup time is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl21->SetFocus();
 			return;
 		}
@@ -517,25 +517,25 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	if(max_file_incr.ToLong(&l_max_file_incr)==false )
 	{
-		wxMessageBox( _("Die maximale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl131->SetFocus();
 		return;
 	}
 	if(min_file_incr.ToLong(&l_min_file_incr)==false )
 	{
-		wxMessageBox( _("Die minimale Anzahl an inkrementellen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl13->SetFocus();
 		return;
 	}
 	if(max_file_full.ToLong(&l_max_file_full)==false )
 	{
-		wxMessageBox( _("Die maximale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl133->SetFocus();
 		return;
 	}
 	if(min_file_full.ToLong(&l_min_file_full)==false )
 	{
-		wxMessageBox( _("Die minimale Anzahl an vollen Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl132->SetFocus();
 		return;
 	}
@@ -544,25 +544,25 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		if(min_image_incr.ToLong(&l_min_image_incr)==false )
 		{
-			wxMessageBox( _("Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl134->SetFocus();
 			return;
 		}
 		if(max_image_incr.ToLong(&l_max_image_incr)==false )
 		{
-			wxMessageBox( _("Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl135->SetFocus();
 			return;
 		}
 		if(min_image_full.ToLong(&l_min_image_full)==false )
 		{
-			wxMessageBox( _("Die minimale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl136->SetFocus();
 			return;
 		}
 		if(max_image_full.ToLong(&l_max_image_full)==false )
 		{
-			wxMessageBox( _("Die maximale Anzahl an vollen Image-Backups ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl137->SetFocus();
 			return;
 		}
@@ -570,7 +570,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	if(startup_backup_delay.ToLong(&l_startup_backup_delay)==false)
 	{
-		wxMessageBox( _("Die Verzögerung bei Systemstart ist keine Zahl"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("Backup delay after system start is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl19->SetFocus();
 		return;
 	}
@@ -587,7 +587,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			BOOL b=GetVolumePathNameA((img_paths[i]+":\\").c_str(), outb, 1000);
 			if(b==FALSE)
 			{
-				wxMessageBox( ConvertToUnicode(img_paths[i])+_(" ist kein Laufwerk"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox( ConvertToUnicode(img_paths[i])+_(" is not a volume"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl23->SetFocus();
 				return;
 			}
