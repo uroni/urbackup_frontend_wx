@@ -1,294 +1,296 @@
-# Copyright (C) 2012
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
 # This file is distributed under the same license as the UrBackup package.
-#
+# 
+# Translators:
+#   <nerix@free.fr>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: UrBackup Client Frontend(wx) 1.0\n"
+"Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2012-08-19 18:07+0100\n"
-"Last-Translator: \n"
-"Language-Team: FRENCH\n"
+"PO-Revision-Date: 2012-09-08 11:30+0000\n"
+"Last-Translator: ericbosba <nerix@free.fr>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/urbackup/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: gui/GUI.cpp:26
-msgid "Interval for incremental file backups:"
-msgstr "Temps entre les sauvegarde incrémentales de fichier:"
-
-#: gui/GUI.cpp:30
-msgid "Interval for full file backups:"
-msgstr "Temps entre les sauvegardes complètes de fichier:"
-
-#: gui/GUI.cpp:34
-msgid "Interval for incremental image backups:"
-msgstr "Temps entre les images disque incrémentales:"
-
-#: gui/GUI.cpp:38
-msgid "Interval for full image backups:"
-msgstr "Temps entre les images disque complète:"
-
-#: gui/GUI.cpp:46
-msgid "Minimal number of incremental file backups:"
-msgstr "Nombre minimal de sauvegarde incrémentale:"
-
-#: gui/GUI.cpp:50
-msgid "Maximal number of incremental file backups:"
-msgstr "Nombre maximal de sauvegarde incrémentale de fichier:"
-
-#: gui/GUI.cpp:54
-msgid "Minimal number of full file backups:"
-msgstr "Nombre minimal de sauvegarde complète de fichier:"
-
-#: gui/GUI.cpp:58
-msgid "Maximal number of full file backups:"
-msgstr "Nombre maximal de sauvegarde complète de fichier:"
-
-#: gui/GUI.cpp:66
-msgid "Minimal number of incremental image backups:"
-msgstr "Nombre minimum d'image disque incrémentale:"
-
-#: gui/GUI.cpp:70
-msgid "Maximal number of incremental image backups:"
-msgstr "Nombre maximal d'image disque incrémentale:"
-
-#: gui/GUI.cpp:74
-msgid "Minimal number of full image backups:"
-msgstr "Nombre minimum d'image disque complète:"
-
-#: gui/GUI.cpp:78
-msgid "Maximal number of full image backups:"
-msgstr "Nombre maximal d'image disque complète:"
-
-#: gui/GUI.cpp:93
-msgid "hours"
-msgstr "heures"
-
-#: gui/GUI.cpp:105
-#: gui/GUI.cpp:117
-#: gui/GUI.cpp:137
-msgid "days"
-msgstr "jours"
-
-#: gui/GUI.cpp:124
-msgid "Active"
-msgstr "Actif"
-
-#: gui/GUI.cpp:232
-#: gui/GUI.cpp:389
-msgid "Ok"
-msgstr "Ok"
-
-#: gui/GUI.cpp:237
-#: ConfigPath.cpp:13
-msgid "Abort"
-msgstr "Abandonner"
-
-#: gui/GUI.cpp:282
-msgid "Filter:"
-msgstr "Filtre:"
-
-#: gui/GUI.cpp:286
-#: TrayIcon.cpp:119
-msgid "Infos"
-msgstr "Info"
-
-#: gui/GUI.cpp:286
-msgid "Warnings"
-msgstr "Avertissement"
-
-#: gui/GUI.cpp:286
-msgid "Errors"
-msgstr "Erreurs"
-
-#: gui/GUI.cpp:303
-msgid "Exit"
-msgstr "Sortie"
-
-#: gui/GUI.cpp:356
-msgid "Version:"
-msgstr "Version:"
-
-#: gui/GUI.cpp:368
-msgid "Author:"
-msgstr "Autheur:"
-
-#: ConfigPath.cpp:6
-msgid "Remove/Add backup paths"
-msgstr "Supprimer/Ajouter un chemin de sauvegarde"
-
-#: ConfigPath.cpp:14
-msgid "Add path"
-msgstr "Ajouter un chemin"
-
-#: ConfigPath.cpp:15
-msgid "Remove path"
-msgstr "Supprimer un chemin"
-
-#: ConfigPath.cpp:26
-#: Logs.cpp:10
-msgid "There was an error. Currently nothing can be backed up."
-msgstr "Il y a eu une erreur. Rien ne peut être sauvegarder actuellement."
-
-#: ConfigPath.cpp:54
-msgid "Please select the directory that will be backed up."
-msgstr "Selectionner le repertoire a sauvegarder."
-
-#: main.cpp:125
-msgid "UrBackup: Update available"
-msgstr "UrBackup: Mise à jour disponible"
-
-#: main.cpp:125
-msgid ""
-"A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
-"Une nouvelle version de UrBackup est disponible. Cliquer pour l'installer "
-"maintenant."
-
-#: main.cpp:143
-msgid "Cannot connect to backup server"
-msgstr "Impossible de se connecter au serveur de sauvegarde"
-
-#: main.cpp:163
-msgid "Incremental file backup running. "
-msgstr "Sauvegarde incrémentielle des fichiers en cours "
-
-#: main.cpp:175
-msgid "Full file backup running. "
-msgstr "Sauvegarde complète des fichiers en cours."
-
-#: main.cpp:186
-msgid "Incremental image backup running. "
-msgstr "Image disque incrémentielle en cours. "
-
-#: main.cpp:197
-msgid "Full image backup running. "
-msgstr "Image disque complète en cours."
-
-#: main.cpp:205
-msgid "% done. "
-msgstr "% fait."
-
-#: main.cpp:208
-msgid "No current backup. "
-msgstr "Pas de sauvegarde récente."
-
-#: main.cpp:219
-msgid "Last backup on "
-msgstr "Dernière sauvegarde le "
-
-#: Settings.cpp:156
-msgid "The incremental backup interval is not a number"
-msgstr "L'interval de sauvegarde n'est pas un nombre"
-
-#: Settings.cpp:162
-msgid "The full backup interval  is not a number"
-msgstr "L'intervale de sauvegarde complète n'est pas un nombre"
-
-#: Settings.cpp:168
-msgid "The full image backup interval  is not a number"
-msgstr "L'intervale pour l'image disque complète n'est pas un nombre"
-
-#: Settings.cpp:174
-msgid "The incremental image backup time is not a number"
-msgstr "L'intervale pour l'image disque incrémentale n'est pas un nombre"
-
-#: Settings.cpp:180
-msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
-"Le nombre maximal de sauvegarde incrémentale de fichier n'est pas un nombre"
-
-#: Settings.cpp:186
-msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
-"Le nombre minimal de sauvegarde incrémentale de fichier n'est pas un nombre"
-
-#: Settings.cpp:192
-msgid "The maximal number of full file backups is not a number"
-msgstr ""
-"Le nombre maximal  de sauvegarde complète des fichiers n'est pas un nombre"
-
-#: Settings.cpp:198
-msgid "Minimal number of full file backups is not a number"
-msgstr ""
-"Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombrer"
-
-#: Settings.cpp:204
-msgid "Minimal number of incremental image backups is not a number"
-msgstr "Le nombre minimal d'image disque incrémentale n'est pas un nombre"
-
-#: Settings.cpp:210
-msgid "Maximal number of incremental image backups is not a number"
-msgstr "Le nombre maximal d'image disque incrémentale n'est pas un nombre"
-
-#: Settings.cpp:216
-msgid "Minimal number of full image backups is not a number"
-msgstr "Le nombre minimall d'image disque complète n'est pas un nombre"
-
-#: Settings.cpp:222
-msgid "Maximal number of full image backups is not a number"
-msgstr "Le nombre maximal d'image disque complète n'est pas un nombre"
-
-#: TrayIcon.cpp:49
-#: TrayIcon.cpp:72
-msgid "A backup is already running. Could not start another one."
-msgstr ""
-"Une sauvegarde est actuellement en cours. Vous ne pouvez pas en lancer une "
-"autre."
-
-#: TrayIcon.cpp:51
-#: TrayIcon.cpp:74
-msgid "Could not start backup, because no backup server was found."
-msgstr ""
-"Impossible de demarrer la sauvegarde. Aucun serveur de sauvegarde n'a été "
-"trouvé."
-
-#: TrayIcon.cpp:86
-msgid "Pausing failed: No connection to backup server."
-msgstr "Echec de la mise en pause : pas de connexion au serveur de sauvegarde."
-
-#: TrayIcon.cpp:99
-msgid "Continuing failed: No connection to backup server."
-msgstr "Echec de la reprise : Pas de connexion au serveur de sauvegarde."
-
-#: TrayIcon.cpp:111
-msgid "Do full file backup"
-msgstr "Faire une sauvegarde complète des fichiers"
-
-#: TrayIcon.cpp:112
-msgid "Do incremental file backup"
-msgstr "Faire une sauvegarde incrémentale des fichiers"
-
-#: TrayIcon.cpp:113
-msgid "Do full image backup"
-msgstr "Faire une image disque complète"
-
-#: TrayIcon.cpp:114
-msgid "Do incremental image backup"
-msgstr "Faire une image disque incrémentale"
-
-#: TrayIcon.cpp:116
-msgid "Settings"
-msgstr "Paramètres"
-
-#: TrayIcon.cpp:117
-msgid "Add/Remove backup paths"
-msgstr "Ajouter/Retirer un chemin à sauvegarder"
-
-#: TrayIcon.cpp:118
-msgid "Logs"
-msgstr "Logs"
-
-#: TrayIcon.cpp:124
-msgid "Pause"
-msgstr "Pause"
-
-#: TrayIcon.cpp:128
-msgid "Continue"
-msgstr "Continuer"
-
-#: Gui.h:144
+msgid "Encrypted transfer:"
+msgstr "Transfert chiffré :"
+
+msgid "Compressed transfer:"
+msgstr "Transfert compressé :"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Vitesse de sauvegarde maximale sur internet :"
+
+msgid "Do full file backups over internet:"
+msgstr "Effectuer des sauvegardes de type \"fichier\" complètes par internet :"
+
+msgid "Do image backups over internet:"
+msgstr "Effectuer des sauvegardes de type \"image\" par internet :"
+
+msgid "Internet server password:"
+msgstr "Mot de passe du serveur internet :"
+
+msgid "Internet server port:"
+msgstr "Port d'écoute du serveur internet :"
+
+msgid "Internet server name/IP:"
+msgstr "Nom ou IP du serveur internet :"
+
+msgid "Enable backup via internet:"
+msgstr "Activer la sauvegarde par internet :"
+
+msgid "Max backup speed for local network:"
+msgstr "Vitesse de sauvegarde maximale sur réseau local :"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Un nouveau serveur de sauvegarde a été découvert. Cliquer ici pour l'utiliser."
+
+msgid "UrBackup: New server"
+msgstr "UrBackup : Nouveau serveur."
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Image backups"
+msgstr "Sauvegardes de type \"image\""
+
+msgid "File backups"
+msgstr "Sauvegardes de type \"fichier\""
+
+msgid "Include in backup (with wildcards):"
+msgstr "Inclure à la sauvegarde (avec astérisques) :"
+
+msgid " is not a volume"
+msgstr "n'est pas un volume"
+
+msgid "Volumes to backup:"
+msgstr "Volumes à sauvegarder :"
+
+msgid "Waiting for server..."
+msgstr "En attente du serveur..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Le délai de démarrage de la sauvegarde après démarrage du système n'est pas un nombre"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Nom de l'ordinateur :"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Exclure de la sauvegarde (avec astérisques) :"
+
+msgid "Backup window:"
+msgstr "Fenêtre de sauvegarde :"
+
+msgid "Backup delay after system start:"
+msgstr "Délai de démarrage de la sauvegarde après démarrage du système :"
+
+msgid "Name:"
+msgstr "Nom :"
+
 msgid "Informations"
 msgstr "Informations"
 
+msgid "Continue"
+msgstr "Continuer"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Add/Remove backup paths"
+msgstr "Ajouter/Retirer un chemin à sauvegarder"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Do incremental image backup"
+msgstr "Faire une image disque incrémentale"
+
+msgid "Do full image backup"
+msgstr "Faire une image disque complète"
+
+msgid "Do incremental file backup"
+msgstr "Faire une sauvegarde incrémentale des fichiers"
+
+msgid "Do full file backup"
+msgstr "Faire une sauvegarde complète des fichiers"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Echec de la reprise : Pas de connexion au serveur de sauvegarde."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Echec de la mise en pause : pas de connexion au serveur de sauvegarde."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Impossible de demarrer la sauvegarde. Aucun serveur de sauvegarde n'a été trouvé."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Une sauvegarde est actuellement en cours. Vous ne pouvez pas en lancer une autre."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Le nombre maximal d'image disque complète n'est pas un nombre"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Le nombre minimall d'image disque complète n'est pas un nombre"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Le nombre maximal d'image disque incrémentale n'est pas un nombre"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Le nombre minimal d'image disque incrémentale n'est pas un nombre"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombrer"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Le nombre maximal de sauvegarde complète des fichiers n'est pas un nombre"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Le nombre minimal de sauvegarde incrémentale de fichier n'est pas un nombre"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Le nombre maximal de sauvegarde incrémentale de fichier n'est pas un nombre"
+
+msgid "The incremental image backup time is not a number"
+msgstr "L'intervale pour l'image disque incrémentale n'est pas un nombre"
+
+msgid "The full image backup interval  is not a number"
+msgstr "L'intervale pour l'image disque complète n'est pas un nombre"
+
+msgid "The full backup interval  is not a number"
+msgstr "L'intervale de sauvegarde complète n'est pas un nombre"
+
+msgid "The incremental backup interval is not a number"
+msgstr "L'interval de sauvegarde n'est pas un nombre"
+
+msgid "Last backup on "
+msgstr "Dernière sauvegarde le "
+
+msgid "No current backup. "
+msgstr "Pas de sauvegarde récente."
+
+msgid "% done. "
+msgstr "% fait."
+
+msgid "Full image backup running. "
+msgstr "Image disque complète en cours."
+
+msgid "Incremental image backup running. "
+msgstr "Image disque incrémentielle en cours. "
+
+msgid "Full file backup running. "
+msgstr "Sauvegarde complète des fichiers en cours."
+
+msgid "Incremental file backup running. "
+msgstr "Sauvegarde incrémentielle des fichiers en cours "
+
+msgid "Cannot connect to backup server"
+msgstr "Impossible de se connecter au serveur de sauvegarde"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Une nouvelle version de UrBackup est disponible. Cliquer pour l'installer maintenant."
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Mise à jour disponible"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Selectionner le repertoire a sauvegarder."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Il y a eu une erreur. Rien ne peut être sauvegarder actuellement."
+
+msgid "Remove path"
+msgstr "Supprimer un chemin"
+
+msgid "Add path"
+msgstr "Ajouter un chemin"
+
+msgid "Remove/Add backup paths"
+msgstr "Supprimer/Ajouter un chemin de sauvegarde"
+
+msgid "Author:"
+msgstr "Autheur:"
+
+msgid "Version:"
+msgstr "Version:"
+
+msgid "Exit"
+msgstr "Sortie"
+
+msgid "Errors"
+msgstr "Erreurs"
+
+msgid "Warnings"
+msgstr "Avertissement"
+
+msgid "Infos"
+msgstr "Info"
+
+msgid "Filter:"
+msgstr "Filtre:"
+
+msgid "Abort"
+msgstr "Abandonner"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "days"
+msgstr "jours"
+
+msgid "hours"
+msgstr "heures"
+
+msgid "Maximal number of full image backups:"
+msgstr "Nombre maximum d'image disque complète:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Nombre minimum d'image disque complète:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Nombre maximum d'image disque incrémentale:"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Nombre minimum d'image disque incrémentale:"
+
+msgid "Maximal number of full file backups:"
+msgstr "Nombre maximum de sauvegarde complète de type fichier:"
+
+msgid "Minimal number of full file backups:"
+msgstr "Nombre minimum de sauvegarde complète de type fichier:"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Nombre maximum de sauvegarde incrémentale de type fichier:"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Nombre minimum de sauvegarde incrémentale:"
+
+msgid "Interval for full image backups:"
+msgstr "Temps entre les images disque complète:"
+
+msgid "Interval for incremental image backups:"
+msgstr "Temps entre les images disque incrémentales:"
+
+msgid "Interval for full file backups:"
+msgstr "Temps entre les sauvegardes complètes de tpye fichier:"
+
+msgid "Interval for incremental file backups:"
+msgstr "Temps entre les sauvegardes incrémentales de type fichier:"
