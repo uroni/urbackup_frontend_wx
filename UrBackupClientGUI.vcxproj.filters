@@ -112,6 +112,9 @@
     <None Include="icon2.ico">
       <Filter>Ressourcendateien</Filter>
     </None>
+    <None Include="icon3.ico">
+      <Filter>Ressourcendateien</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="UrBackupClientGUI.rc">

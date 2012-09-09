@@ -117,7 +117,7 @@ wxTextValidator getDigitSlashValidator(void)
 
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
-	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
+	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
 
 	std::wstring t;
@@ -671,41 +671,42 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	
 
 	std::string ndata;
+
 	std::vector<std::wstring> keys=settings->getKeys();
-	for(size_t i=0;i<keys.size();++i)
-	{
-		std::string key=ConvertToUTF8(keys[i]);
-		ndata+=key+"=";
-		std::map<std::string, std::string>::iterator iter=n_vals.find(key);
-		if(iter!=n_vals.end())
-		{
-			ndata+=iter->second;
-		}
-		else
-		{
-			std::wstring val;
-			if(settings->getValue(keys[i], &val) )
-				ndata+=ConvertToUTF8(val);
-		}
-		ndata+="\n";
-	}
 
 	for(std::map<std::string, std::string>::iterator it=n_vals.begin();it!=n_vals.end();++it)
 	{
-		bool found=false;
 		const std::string &nkey=it->first;
+		std::string def_value;
+		bool found_key=false;
+
+		std::wstring key_w=ConvertToUnicode(nkey);
 		for(size_t i=0;i<keys.size();++i)
 		{
-			if(ConvertToUTF8(keys[i])==nkey)
+			if(keys[i]==key_w)
 			{
-				found=true;
+				found_key=true;
 				break;
 			}
 		}
 
-		if(!found)
+		if( found_key || !settings->getValue(it->first+"_def", &def_value) || def_value!=it->second )
 		{
 			ndata+=nkey+"="+it->second+"\n";
+		}
+	}
+
+	for(size_t i=0;i<keys.size();++i)
+	{
+		std::string key=ConvertToUTF8(keys[i]);
+		std::map<std::string, std::string>::iterator iter=n_vals.find(key);
+		if(iter==n_vals.end())
+		{
+			std::wstring val;
+			if(settings->getValue(keys[i], &val) )
+			{
+				ndata+=key+"="+ConvertToUTF8(val)+"\n";
+			}
 		}
 	}
 

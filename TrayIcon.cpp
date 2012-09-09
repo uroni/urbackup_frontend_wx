@@ -76,7 +76,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startBackup(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), wxT("Warte auf Server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), wxT("Warte auf Server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -99,7 +99,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startImage(full);
 		if(rc==1)
 		{
-			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), _("Waiting for server..."));
+			SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), _("Waiting for server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}

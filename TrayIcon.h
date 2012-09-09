@@ -35,3 +35,6 @@ private:
 	int balloon_action;
 	std::string new_ident;
 };
+
+#define ICON_WIDTH 16
+#define ICON_HEIGHT 16

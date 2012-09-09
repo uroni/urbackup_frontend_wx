@@ -42,7 +42,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 {
 	mod=false;
-	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
+	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
 	dirs=Connector::getSharedPaths();
 

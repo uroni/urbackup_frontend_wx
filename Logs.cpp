@@ -27,7 +27,7 @@ extern wxBitmapType ico_type;
 
 Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 {
-	SetIcon(wxIcon(res_path+wxT("backup-ok-big.")+ico_ext, ico_type));
+	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 	logentries=Connector::getLogEntries();
 
 	if(Connector::hasError())

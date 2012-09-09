@@ -143,7 +143,7 @@ bool MyApp::OnInit()
 	//wxInitAllImageHandlers();
 
 	tray=new TrayIcon;
-	bool b=tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type), wxT("UrBackup Client"));
+	bool b=tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), wxT("UrBackup Client"));
 	if(!b)
 	{
 		std::cout << "Setting icon failed." << std::endl;
@@ -245,7 +245,7 @@ void MyTimer::Notify()
 		{
 			last_status=_("Cannot connect to backup server");
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type), last_status);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), last_status);
 			icon_type=4;
 		}
 		working=false;
@@ -348,25 +348,25 @@ void MyTimer::Notify()
 		{
 		case 0:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), status_text);
 			if(timer!=NULL)
 				timer->Start(60000);
 			break;
 		case 1:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-progress.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), status_text);
 			if(timer!=NULL)
 				timer->Start(10000);
 			break;
 		case 2:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-bad.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), status_text);
 			if(timer!=NULL)
 				timer->Start(60000);
 			break;
 		case 3:
 			if(tray!=NULL)
-				tray->SetIcon(wxIcon(res_path+wxT("backup-progress-pause.")+ico_ext, ico_type), status_text);
+				tray->SetIcon(wxIcon(res_path+wxT("backup-progress-pause.")+ico_ext, ico_type, ICON_WIDTH, ICON_HEIGHT), status_text);
 
 			if(timer!=NULL)
 				timer->Start(60000);

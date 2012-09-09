@@ -214,6 +214,7 @@
   <ItemGroup>
     <None Include="icon1.ico" />
     <None Include="icon2.ico" />
+    <None Include="icon3.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="UrBackupClientGUI.rc" />

@@ -2,7 +2,7 @@
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
-!define MUI_ICON "backup-ok.ico"
+!define MUI_ICON "icon3.ico"
 
 SetCompressor /FINAL /SOLID lzma
 
@@ -172,7 +172,6 @@ Section "install"
 	${EndIf}
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
-	File "data\backup-ok-big.ico"
 	File "data\backup-progress.ico"	
 	File "data\new.txt"	
 	File "data\logo1.png"
