@@ -131,7 +131,7 @@ class GUISettings : public wxDialog
 	
 	public:
 		
-		GUISettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Einstellungen"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+		GUISettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
 		~GUISettings();
 	
 };
@@ -191,7 +191,7 @@ class GUIInfo : public wxDialog
 	
 	public:
 		
-		GUIInfo( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Informationen"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 420,265 ), long style = wxDEFAULT_DIALOG_STYLE );
+		GUIInfo( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Informations"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 420,265 ), long style = wxDEFAULT_DIALOG_STYLE );
 		~GUIInfo();
 	
 };
@@ -227,7 +227,7 @@ class GUIConfigPath : public wxDialog
 	
 	public:
 		
-		GUIConfigPath( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Pfade hinzufügen und entfernen"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
+		GUIConfigPath( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Add/Remove backup paths"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
 		~GUIConfigPath();
 	
 };
