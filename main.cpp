@@ -43,6 +43,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
+std::string ConvertToUTF8(const std::wstring &input);
 
 TrayIcon *tray;
 MyTimer *timer;
@@ -76,11 +77,11 @@ wxBitmapType ico_type=wxBITMAP_TYPE_XPM;
 bool MyApp::OnInit()
 {
 #ifdef _WIN32
-#ifndef _DEBUG
 	wchar_t buf[MAX_PATH];
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
-	SetCurrentDirectoryW(ExtractFilePath(buf).c_str() );
-#endif
+	//SetCurrentDirectoryW(ExtractFilePath(buf).c_str() );
+	g_res_path=ConvertToUTF8(ExtractFilePath(buf))+"\\";
+	res_path=wxString(g_res_path)+"\\";
 #else
 	if(FileExists("/usr/share/urbackup/info.txt"))
 	{
