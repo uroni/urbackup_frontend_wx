@@ -28,6 +28,8 @@ bool Connector::error=false;
 const size_t conn_retries=4;
 bool Connector::busy=false;
 
+extern std::string g_res_path;
+
 #ifdef wxUSE_WCHAR_T
 std::string ConvertToUTF8(const std::wstring &str);
 std::wstring ConvertToUnicode(const std::string &str);
@@ -44,7 +46,9 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	error=false;
 	if(pw.empty())
 	{
-		if(FileExists("pw.txt"))
+		if(FileExists(g_res_path+"pw.txt"))
+			pw=getFile(g_res_path+"pw.txt");
+		else if(FileExists("pw.txt"))
 			pw=getFile("pw.txt");
 		else if(FileExists("/usr/local/var/urbackup/pw.txt"))
 			pw=getFile("/usr/local/var/urbackup/pw.txt");

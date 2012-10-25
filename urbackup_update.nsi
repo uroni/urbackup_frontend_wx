@@ -87,13 +87,14 @@ Section "install"
 		${EndIf}
 	${EndIf}
 	
-	KillProcDLL::KillProc "UrBackupClient.exe"
-	
 	SetOutPath "$INSTDIR"
 	
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
-		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+	${Else}
+		File "data\KillProc.exe"		
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
 	${Unicode2Ansi} "UrBackupServer" $R0 	
@@ -176,6 +177,8 @@ Section "install"
 	File "data\lang\fr\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\ru"
 	File "data\lang\ru\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\es"
+	File "data\lang\es\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
@@ -311,7 +314,12 @@ Function .onInstSuccess
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
 	${EndIf}
-	Exec "$INSTDIR\UrBackupClient.exe"
+	StrCpy $0 "$INSTDIR\UrBackupClient.exe"
+	startplugin::start
+	Pop $0
+	${If} $0 == '0'
+		Exec '"$INSTDIR\UrBackupClient.exe"'
+	${EndIf}	
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32

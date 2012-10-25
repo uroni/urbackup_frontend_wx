@@ -105,9 +105,6 @@
 		<Component Id="cmp93F292ADAF785F399E42E4F60E954A12" Guid="{47D632C6-7824-4E4D-9146-FA14C8DF0EF8}" Win64="$(var.isx64)">
                 <File Id="fil6903CF037991ECFEDD00F4EC883D55AD" KeyPath="yes" Source="$(var.shared_data_dir)\backup-bad.ico" />
             </Component>
-            <Component Id="cmp626E98B55240F06A04651A5E42EABE32" Guid="{61595C86-30F9-4CB7-A7F9-6B688A121368}" Win64="$(var.isx64)">
-                <File Id="fil5CC8929F98211DB018868163DA9DBAA0" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok-big.ico" />
-            </Component>
             <Component Id="cmpA3688A751E01CECC3FC213B9110D8650" Guid="{CA7EB480-D752-46BE-8C58-658A06E77FF0}" Win64="$(var.isx64)">
                 <File Id="fil69521D7DB4FE874627D88AD1977BBD48" KeyPath="yes" Source="$(var.shared_data_dir)\backup-ok.ico" />
             </Component>
@@ -154,6 +151,11 @@
 						<File Id="fil4AAB0F81E48E2917698958995EBB68B9" KeyPath="yes" Source="$(var.shared_data_dir)\lang\ru\urbackup.mo" />
 					</Component>
 				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911524" Name="es">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A1C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1569}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68BA" KeyPath="yes" Source="$(var.shared_data_dir)\lang\es\urbackup.mo" />
+					</Component>
+				</Directory>
 			</Directory>
             <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
                 <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}" Win64="$(var.isx64)">
@@ -171,7 +173,6 @@
   <Fragment>
         <ComponentGroup Id="CommonFiles">
             <ComponentRef Id="cmp93F292ADAF785F399E42E4F60E954A12" />
-            <ComponentRef Id="cmp626E98B55240F06A04651A5E42EABE32" />
             <ComponentRef Id="cmpA3688A751E01CECC3FC213B9110D8650" />
             <ComponentRef Id="cmp743471C3E6B3C2A36D480B78348AB71A" />
             <ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F36" />
@@ -187,6 +188,7 @@
             <ComponentRef Id="cmpF989989B3E76DC136F5507BF8CDAE791" />
             <ComponentRef Id="cmp146035BB0A33B65BB459A78C1BA9938B" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A1C" />
         </ComponentGroup>
     </Fragment>
 	

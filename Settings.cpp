@@ -34,6 +34,7 @@ extern MyTimer *timer;
 extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
+extern std::string g_res_path;
 
 std::string getServerName(void)
 {
@@ -118,7 +119,7 @@ wxTextValidator getDigitSlashValidator(void)
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
-	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
+	settings=new CFileSettingsReader(g_res_path+"urbackup/data/settings.cfg");
 
 	std::wstring t;
 	if(getSettingsValue(L"update_freq_incr", &t, settings))
