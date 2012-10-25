@@ -52,7 +52,7 @@ int GetMemoryStatus(HANDLE hProc)
 }
 
 
-DWORD getpid(const char* name)
+int getpid(const char* name, DWORD *pids)
 {
 	// Win/NT or 2000 or XP 
  
@@ -68,7 +68,7 @@ DWORD getpid(const char* name)
 		DWORD iCbneeded,i; 
 		HANDLE hProc; 
 		HMODULE hMod; 
-				DWORD retPID=0;
+		int retPID=0;
 
 
 
@@ -93,7 +93,7 @@ DWORD getpid(const char* name)
 
          hInstLib = LoadLibraryA("PSAPI.DLL"); 
          if(hInstLib == NULL) 
-            return 605; 
+            return 0; 
  
          // Get procedure addresses. 
          lpfEnumProcesses = (BOOL(WINAPI *)(DWORD *,DWORD,DWORD*)) 
@@ -110,7 +110,7 @@ DWORD getpid(const char* name)
             lpfGetModuleBaseName == NULL) 
             { 
                FreeLibrary(hInstLib); 
-               return 700; 
+               return 0; 
             } 
  
         bResult=lpfEnumProcesses(aiPID,iCb,&iCbneeded); 
@@ -118,7 +118,7 @@ DWORD getpid(const char* name)
         { 
             // Unable to get process list, EnumProcesses failed 
             FreeLibrary(hInstLib); 
-            return 701; 
+            return 0; 
         } 
  
         // How many processes are there? 
@@ -145,13 +145,14 @@ DWORD getpid(const char* name)
 				continue;
             // We will match regardless of lower or upper case 
 
+			printf("PROCESS: %s\n", szName);
+
             if(strcmp(strupr(szName),szToTermUpper)==0)
 			{
-				int mem=GetMemoryStatus(hProc);
-				if(mem>maxmem)
+				if( retPID<100 )
 				{
-					retPID=aiPID[i];
-					maxmem=mem;
+					pids[retPID]=aiPID[i];
+					++retPID;
 				}
 			}
 			CloseHandle(hProc); 
