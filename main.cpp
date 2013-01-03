@@ -81,7 +81,7 @@ bool MyApp::OnInit()
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
 	//SetCurrentDirectoryW(ExtractFilePath(buf).c_str() );
 	g_res_path=ConvertToUTF8(ExtractFilePath(buf))+"\\";
-	res_path=wxString(g_res_path)+"\\";
+	res_path=wxString(g_res_path.c_str(), wxMBConvUTF8())+wxT("\\");
 #else
 	if(FileExists("/usr/share/urbackup/info.txt"))
 	{

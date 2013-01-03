@@ -145,7 +145,7 @@ void update_urbackup(void)
 {
 #ifdef _WIN32
 	wxStandardPaths sp;
-	std::string e_pstr=ExtractFilePath(sp.GetExecutablePath().ToStdString());
+	std::string e_pstr=ExtractFilePath(sp.GetExecutablePath().ToUTF8().data());
 	ExecuteProcess(e_pstr+"\\UrBackupUpdate.exe","","");
 	timer->resetDisplayedUpdateInfo();
 #endif

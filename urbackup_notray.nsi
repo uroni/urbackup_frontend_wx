@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 1.0"
+!define MUI_BRANDINGTEXT "UrBackup 1.0.1"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 1.0"
-OutFile "UrBackup Client NoTray 1.0-1.exe"
+Name "UrBackup 1.0.1"
+OutFile "UrBackup Client NoTray 1.0.1-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -35,6 +35,7 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "Spanish"
 
 
 !insertmacro MUI_RESERVEFILE_LANGDLL

@@ -20,9 +20,6 @@
 	<InstallExecuteSequence>
 		<Custom Action="WixCloseApplications" Before="InstallInitialize" />
 	</InstallExecuteSequence>
-	
-	<util:CloseApplication Id="CloseUrBackupClient" CloseMessage="yes"
-                           ElevatedCloseMessage="no" RebootPrompt="no" Target="UrBackupClient.exe" />
 
 						   
     <Directory Id='TARGETDIR' Name='SourceDir'>
@@ -36,7 +33,6 @@
 					<File Id="fileservplugin.dll"  DiskId='1' Name='fileservplugin.dll' Source="$(var.datadir)\fileservplugin.dll" />
 					<File Id="fsimageplugin.dll"  DiskId='1' Name='fsimageplugin.dll' Source="$(var.datadir)\fsimageplugin.dll" />
 					<File Id="urbackup.dll"  DiskId='1' Name='urbackup.dll' Source="$(var.datadir)\urbackup.dll" />
-					<File Id="UrBackupClient.exe"  DiskId='1' Name='UrBackupClient.exe' Source="$(var.datadir)\UrBackupClient.exe" />
 					<File Id="UrBackupClient_cmd.exe"  DiskId='1' Name='UrBackupClient_cmd.exe' Source="$(var.datadir)\UrBackupClient_cmd.exe" />
 					
 			</Component>
@@ -86,14 +82,11 @@
 	<Property Id="ARPPRODUCTICON" Value="backup_ok_ico" />
 	<Property Id="ARPHELPLINK" Value="http://www.urbackup.org/" />
 	
-	<Property Id="WixShellExecTarget" Value="[#UrBackupClient.exe]" />
-	<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
 	
     <Feature Id='urbackup_client' Title='UrBackup Client' Level='1'>
       <ComponentRef Id='urbackup_client' />
 	  <ComponentGroupRef Id='CommonFiles' />
 	  <ComponentRef Id='InstallService' />
-	  <ComponentRef Id='UrBackupClientAutostart' />
     </Feature>
 	<Feature Id="VCRedist" Title="Visual C++ 2010 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
 		<MergeRef Id="VCRedist"/>
@@ -191,17 +184,6 @@
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A1C" />
         </ComponentGroup>
     </Fragment>
-	
-	<Fragment>
-	 <DirectoryRef Id="URBACKUPDIR">
-		<Component Id="UrBackupClientAutostart" Guid="23b72208-3295-4be9-9168-3ca240fd2190" Win64="$(var.isx64)">
-		<RegistryKey Root="HKLM"
-                     Key="Software\Microsoft\Windows\CurrentVersion\Run">
-            <RegistryValue Type="string" Name="UrBackupClient" Value="[URBACKUPDIR]UrBackupClient.exe"/>
-        </RegistryKey>
-	  </Component>
-	  </DirectoryRef>
-	</Fragment>
   
 	<Fragment>
         <UI Id="WixUI_InstallDirCustom">
@@ -227,10 +209,6 @@
             <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
 
             <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
-			<Publish Dialog="ExitDialog"
-					Control="Finish" 
-					Event="DoAction" 
-					Value="LaunchApplication">NOT Installed</Publish>
 
             <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">NOT Installed</Publish>
             <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>

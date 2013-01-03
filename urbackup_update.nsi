@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 1.0"
+!define MUI_BRANDINGTEXT "UrBackup Update 1.0.1"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -21,6 +21,7 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "Spanish"
 
 !define Unicode2Ansi "!insertmacro Unicode2Ansi"
 

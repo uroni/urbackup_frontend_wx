@@ -1,7 +1,10 @@
-Autor:
+Author:
 Martin Raiber
 
 Translators:
 Martin Raiber (German)
 Eric Bosdure, aureliensegeco (French)
 Artem Alabin (Russian)
+Luis-Miguel Munoz (Spanish)
+
+See license.txt for the licences of the libraries used and of UrBackup (GPL v3).

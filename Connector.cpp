@@ -73,11 +73,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			{
 				break;
 			}
-#ifdef _WIN32
-			wxTheApp->SafeYield(NULL, false);
-#else
 			wxTheApp->Yield(false);
-#endif
 		}
 	}
 	if(!client.IsConnected())
@@ -111,11 +107,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 				conn=true;
 				break;
 			}
-			#ifdef _WIN32
-			wxTheApp->SafeYield(NULL, false);
-			#else
 			wxTheApp->Yield(false);
-			#endif
 			if(client.Error())
 				break;
 		}

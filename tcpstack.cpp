@@ -16,6 +16,10 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
+#ifdef _WIN32
+#pragma warning (disable: 4996)
+#endif
+
 #include "tcpstack.h"
 #include <memory.h>
 
@@ -39,7 +43,7 @@ size_t CTCPStack::Send(wxSocketBase* p, char* buf, size_t msglen)
 	memcpy(buffer, &len, sizeof(MAX_PACKETSIZE) );
 	memcpy(&buffer[sizeof(MAX_PACKETSIZE)], buf, msglen);
 
-	p->Write(buffer, msglen+sizeof(MAX_PACKETSIZE));
+	p->Write(buffer, (wxUint32)(msglen+sizeof(MAX_PACKETSIZE)));
 
 	delete[] buffer;
 
