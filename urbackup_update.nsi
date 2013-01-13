@@ -52,6 +52,9 @@ Section "install"
 		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '8192'
+		${If} $0 != '1641'
+		${If} $0 != '1046'
 			ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
@@ -59,6 +62,9 @@ Section "install"
 				Quit
 			${EndIf}
 			${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 			
@@ -77,6 +83,9 @@ Section "install"
 		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '8192'
+		${If} $0 != '1641'
+		${If} $0 != '1046'
 			ExecWait '"$TEMP\vcredist_2010sp1_x86.exe"  /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
@@ -84,6 +93,9 @@ Section "install"
 				Quit
 			${EndIf}
 			${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 	${EndIf}
