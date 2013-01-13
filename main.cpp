@@ -79,7 +79,7 @@ wxIcon getAppIcon(wxString fn)
 	int small_sys_y=wxSystemSettings::GetMetric(wxSYS_SMALLICON_X);
 	/*wxIconBundle bundle(res_path+fn+wxT(".")+ico_ext);
 	return bundle.GetIcon(wxSize(sys_x, sys_y), wxIconBundle::FALLBACK_NEAREST_LARGER);*/
-	return wxIcon(res_path+fn+wxT(".")+ico_ext, ico_type, small_sys_x*2, small_sys_y*2);
+	return wxIcon(res_path+fn+wxT(".")+ico_ext, ico_type, small_sys_x, small_sys_y);
 }
 
 
