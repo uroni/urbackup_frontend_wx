@@ -74,3 +74,14 @@ data/info.txt.orig
 urbackup.nsi.orig
 urbackup.wxi.orig
 version.txt.orig
+wx86_old/*
+wx64_old/*
+urbackup_notray.wixobj
+urbackup_notray - Kopie.wxs
+urbackup.wxs.notray.patch
+urbackup.wxs.orig
+urbackup.wxs.rej
+KillProc/dist/dist.zip
+KillProc/dist/KillProc_x64.exe
+KillProc/dist/KillProc_x86.exe
+KillProc/KillProc_src.zip

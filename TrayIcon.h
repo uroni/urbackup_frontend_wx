@@ -36,5 +36,5 @@ private:
 	std::string new_ident;
 };
 
-#define ICON_WIDTH 16
-#define ICON_HEIGHT 16
+#define ICON_WIDTH -1
+#define ICON_HEIGHT -1

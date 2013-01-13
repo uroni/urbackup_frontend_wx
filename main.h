@@ -20,6 +20,8 @@
 #include <wx/timer.h>
 #include <wx/intl.h>
 
+wxIcon getAppIcon(wxString fn);
+
 class MyApp : public wxApp
 {
   public:
