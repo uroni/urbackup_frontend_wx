@@ -2,7 +2,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi' xmlns:util='http://schemas.microsoft.com/wix/UtilExtension' xmlns:firewall='http://schemas.microsoft.com/wix/FirewallExtension'>
 	<?include $(sys.CURRENTDIR)\urbackup.wxi?>
 	<Product Id='$(var.ProductID)' Name='UrBackup Client' Language='1033'
-            Version='1.0.1.0' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
+            Version='1.1.0.0' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
     <Package Description='Client for UrBackup Server'
              Comments='Client for UrBackup Server. Allows file and image backups'
              Manufacturer='Martin Raiber' InstallerVersion='300' Compressed='yes' Platform='$(var.Platform)'/>
