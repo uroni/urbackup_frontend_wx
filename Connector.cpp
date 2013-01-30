@@ -174,6 +174,14 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 	return ret;
 }
 
+std::string Connector::escapeParam(const std::string &name)
+{
+	std::string tmp=greplace("%", "%25", name);
+	tmp=greplace("=", "%3D", tmp);
+	tmp=greplace("&", "%26", tmp);
+	return tmp;
+}
+
 bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 {
 	std::string args;
@@ -182,8 +190,11 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		if(i!=0)
 			args+="&";
 
-		args+="dir_"+nconvert(i)+"="+(std::string)res[i].path.ToUTF8().data();
-		args+="&dir_"+nconvert(i)+"_name="+(std::string)res[i].name.ToUTF8().data();
+		std::string path=escapeParam(res[i].path.ToUTF8().data());
+		std::string name=escapeParam(res[i].name.ToUTF8().data());
+
+		args+="dir_"+nconvert(i)+"="+path;
+		args+="&dir_"+nconvert(i)+"_name="+name;
 	}
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args);

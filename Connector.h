@@ -72,6 +72,8 @@ public:
 	static bool isBusy(void);
 
 private:
+	static std::string escapeParam(const std::string &name);
+
 	static std::string getResponse(const std::string &cmd, const std::string &args);
 	static std::string pw;
 	static bool error;
