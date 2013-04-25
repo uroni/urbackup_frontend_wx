@@ -154,6 +154,19 @@ bool MyApp::OnInit()
 		lang=wxLANGUAGE_SPANISH;
 		g_lang="es";
 		break;
+	case wxLANGUAGE_CHINESE:
+    case wxLANGUAGE_CHINESE_SIMPLIFIED:
+    case wxLANGUAGE_CHINESE_HONGKONG:
+    case wxLANGUAGE_CHINESE_MACAU:
+    case wxLANGUAGE_CHINESE_SINGAPORE:
+		lang=wxLANGUAGE_CHINESE_SIMPLIFIED;
+		g_lang="zh_CN";
+		break;
+	case wxLANGUAGE_CHINESE_TRADITIONAL:
+	case wxLANGUAGE_CHINESE_TAIWAN:
+		lang=wxLANGUAGE_CHINESE_TRADITIONAL;
+		g_lang="zh_TW";
+		break;
 	}
 
 	//std::cout << "Lang: " << g_lang << std::endl;
