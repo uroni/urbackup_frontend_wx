@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 1.0.1"
+!define MUI_BRANDINGTEXT "UrBackup Update 1.2"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -22,6 +22,8 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "SimpChinese"
+!insertmacro MUI_LANGUAGE "TradChinese"
 
 !define Unicode2Ansi "!insertmacro Unicode2Ansi"
 
@@ -162,6 +164,7 @@ Section "install"
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
 		File "data\UrBackupClient_cmd.exe"
+		File "data\sysvol_test.exe"
 	${Else}
 		File "data\args_server03.txt"
 		File "data_x64\urbackup_server03.dll"
@@ -172,6 +175,7 @@ Section "install"
 		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\UrBackupClient_cmd.exe"
+		File "data_x64\sysvol_test.exe"
 	${EndIf}
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
@@ -192,6 +196,10 @@ Section "install"
 	File "data\lang\ru\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\es"
 	File "data\lang\es\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\zh_TW"
+	File "data\lang\zh_TW\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\zh_CN"
+	File "data\lang\zh_CN\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
