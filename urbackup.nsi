@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 1.2"
+!define MUI_BRANDINGTEXT "UrBackup 1.3"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 1.2"
-OutFile "UrBackup Client 1.2-1.exe"
+Name "UrBackup 1.3"
+OutFile "UrBackup Client 1.3-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -162,6 +162,7 @@ Section "install"
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
+	File "data\build_revision.txt"
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"

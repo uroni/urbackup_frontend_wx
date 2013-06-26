@@ -64,3 +64,5 @@ msgfmt "lang\ru\urbackup.po" -o "lang\ru\urbackup.mo"
 msgfmt "lang\es\urbackup.po" -o "lang\es\urbackup.mo"
 msgfmt "lang\zh_TW\urbackup.po" -o "lang\zh_TW\urbackup.mo"
 msgfmt "lang\zh_CN\urbackup.po" -o "lang\zh_CN\urbackup.mo"
+
+git rev-parse HEAD > "data\build_revision.txt"
