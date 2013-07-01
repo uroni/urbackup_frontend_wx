@@ -8,6 +8,7 @@
 #include "GUI.h"
 #include "../main.h"
 #include "../capa_bits.h"
+#include "../../client_version.h"
 
 extern MyTimer *timer;
 extern wxString res_path;
@@ -610,7 +611,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    1.3"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("    ")+wxString(c_client_version), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
 	

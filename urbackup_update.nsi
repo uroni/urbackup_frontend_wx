@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 1.2"
+!define MUI_BRANDINGTEXT "UrBackup Update 1.3"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -50,7 +50,7 @@ Section "install"
 		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
-		File "vcredist\vcredist_2010sp1_x64.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x64.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -81,7 +81,7 @@ Section "install"
 				; Delete '$TEMP\vcredist_x86.exe'
 			; ${EndIf}
 		; ${EndIf}
-		File "vcredist\vcredist_2010sp1_x86.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x86.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -152,6 +152,12 @@ Section "install"
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
+	File "data\build_revision.txt"
+	
+	SetCompress off
+	File "data\settings_default.cfg"
+	SetCompress auto
+	
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
