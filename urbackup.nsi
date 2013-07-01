@@ -164,10 +164,7 @@ Section "install"
 	File "data\prefilebackup_new.bat"
 	File "data\build_revision.txt"
 	
-	SetCompress off
-	File "data\settings_default.cfg"
-	SetCompress auto
-	
+
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
