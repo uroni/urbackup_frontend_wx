@@ -66,3 +66,6 @@ msgfmt "lang\zh_TW\urbackup.po" -o "lang\zh_TW\urbackup.mo"
 msgfmt "lang\zh_CN\urbackup.po" -o "lang\zh_CN\urbackup.mo"
 
 git rev-parse HEAD > "data\build_revision.txt"
+cd ..
+git rev-parse HEAD >> "client\data\build_revision.txt"
+cd client
