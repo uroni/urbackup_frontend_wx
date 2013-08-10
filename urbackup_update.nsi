@@ -4,17 +4,27 @@
 !include "x64.nsh"
 !define MUI_ICON "icon3.ico"
 
-SetCompressor /FINAL /SOLID lzma
+SetCompressor /FINAL lzma
+CRCCheck off
 
-CRCCheck On
 Name "UrBackup Update"
 OutFile "UrBackupUpdate.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_WELCOME
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_FINISH
 
 !define MUI_CUSTOMFUNCTION_GUIINIT myGuiInit
+
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
 
 
 !insertmacro MUI_LANGUAGE "English"
@@ -154,6 +164,11 @@ Section "install"
 	File "data\prefilebackup_new.bat"
 	File "data\build_revision.txt"
 	
+	SetCompress off
+	File "data\server_idents_new.txt"
+	File "data\initial_settings.cfg"
+	SetCompress auto
+	
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
@@ -276,6 +291,16 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
+	IfFileExists "$INSTDIR\server_idents.txt" next_idents do_copy_idents
+do_copy_idents:
+	StrCpy $0 "$INSTDIR\server_idents_new.txt" ;Path of copy file from
+	StrCpy $1 "$INSTDIR\server_idents.txt"   ;Path of copy file to
+	StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
+	System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
+	Pop $0
+next_idents:
+	Delete "$INSTDIR\server_idents_new.txt"
+	
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
 	${Unicode2Ansi} "16" $R2
@@ -376,4 +401,9 @@ Function .onInit
 	${EndIf}
 FunctionEnd
 
+Function skipPre
+	${If} $EXEFILE == 'UrBackupUpdate.exe'
+		Abort
+	${EndIf}
+FunctionEnd
 
