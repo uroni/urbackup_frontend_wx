@@ -392,10 +392,14 @@ Function .onInit
 		strcpy $INSTDIR "$PROGRAMFILES64\UrBackup"
 		SetRegView 64
 	${EndIf}
-	
+
+	ClearErrors
 	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" 'Path'
+	IfErrors skip_modify
+	
 	strcpy $INSTDIR $0
 	
+skip_modify:
 	${If} ${RunningX64}
 		SetRegView 32
 	${EndIf}
