@@ -82,6 +82,16 @@ wxIcon getAppIcon(wxString fn)
 	return wxIcon(res_path+fn+wxT(".")+ico_ext, ico_type, small_sys_x, small_sys_y);
 }
 
+namespace
+{
+	wxString getPercentDoneText()
+	{
+		wxString pcdone=_("_percent_ done. ");
+		pcdone.Replace("_percent_", "%");
+		return pcdone;
+	}
+}
+
 
 bool MyApp::OnInit()
 {
@@ -319,7 +329,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=1;
@@ -331,7 +341,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=2;
@@ -342,7 +352,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=3;
@@ -353,14 +363,14 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=4;
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
-		status_text+=_("No current backup. ");
+		status_text+=getPercentDoneText();
 		icon_type=2;
 		working_status=0;
 	}
