@@ -370,7 +370,7 @@ void MyTimer::Notify()
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
-		status_text+=getPercentDoneText();
+		status_text+=_("No current backup. ");
 		icon_type=2;
 		working_status=0;
 	}
