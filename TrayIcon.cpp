@@ -146,7 +146,10 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	bool any_prev=false;
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_FILE_BACKUPS))
 	{
-		mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
+		if(!timer->hasCapability(DONT_DO_FULL_FILE_BACKUPS))
+		{
+			mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
+		}
 		mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), wxT("Jetzt ein inkrementelles Backup ausführen"));
 		any_prev=true;
 	}
