@@ -76,7 +76,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startBackup(full);
 		if(rc==1)
 		{
-			SetIcon(getAppIcon(wxT("backup-progress")), wxT("Warte auf Server..."));
+			SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
