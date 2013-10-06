@@ -1,6 +1,15 @@
-Autor:
+Author:
 Martin Raiber
 
 Translators:
 Martin Raiber (German)
-aureliensegeco (French)
+Eric Bosdure, aureliensegeco (French)
+Artem Alabin (Russian)
+Luis-Miguel Munoz (Spanish)
+Zhengyu Ren (Simplified Chinese and Traditional Chinese)
+janda (Slovak)
+paolobeldi (Italian)
+Artur Corumba (Portuguese - Brazil)
+drpt (Polish)
+
+See license.txt for the licences of the libraries used and of UrBackup (GPL v3).

@@ -1,0 +1,297 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# paolobeldi <inforossi@alice.it>, 2013
+# uroni <urpc@gmx.de>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-10-06 12:52+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
+"Language-Team: Italian (Italy) (http://www.transifex.com/projects/p/urbackup/language/it_IT/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Encrypted transfer:"
+msgstr "Trasferimento criptato:"
+
+msgid "Compressed transfer:"
+msgstr "Trasferimento compresso:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Velocità massimo per la connessione internet"
+
+msgid "Do full file backups over internet:"
+msgstr "Esegui backup file completo su Internet"
+
+msgid "Do image backups over internet:"
+msgstr "Esegui backup immagine completo su Internet"
+
+msgid "Internet server password:"
+msgstr "Password server Internet:"
+
+msgid "Internet server port:"
+msgstr "Porta server Internet:"
+
+msgid "Internet server name/IP:"
+msgstr "Nome/IP server Internet:"
+
+msgid "Enable backup via internet:"
+msgstr "Abilita backup via Internet"
+
+msgid "Max backup speed for local network:"
+msgstr "Velocità massima backup rete locale:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Un nuovo server di backup è stato trovato.Click qui per usarlo"
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Nuovo server"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Image backups"
+msgstr "Backup immagine"
+
+msgid "File backups"
+msgstr "Backup File"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Includere nel backup (con asterischi)"
+
+msgid " is not a volume"
+msgstr "Non è un volume"
+
+msgid "Volumes to backup:"
+msgstr "Volume per backup:"
+
+msgid "Waiting for server..."
+msgstr "Attesa del server..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Ritardo backup dopo avvio sistema non è un numero"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Nome computer"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Esclusione dal backup (con asterischi)"
+
+msgid "Backup window:"
+msgstr "Finestra di backup:"
+
+msgid "Backup delay after system start:"
+msgstr "Ritardo del backup dopo avvio sistema"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Informations"
+msgstr "Informazioni"
+
+msgid "Continue"
+msgstr "Continua"
+
+msgid "Pause"
+msgstr "Pausa"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Add/Remove backup paths"
+msgstr "Aggiungere/Rimuovere percorso backup"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Do incremental image backup"
+msgstr "Esegui backup immagine incrementale "
+
+msgid "Do full image backup"
+msgstr "Esegui backup immagine completa"
+
+msgid "Do incremental file backup"
+msgstr "Esegui backup file incrementale"
+
+msgid "Do full file backup"
+msgstr "Esegui backup file completo"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Esecuzione fallita: Manca la connessione al server di backup"
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Pausa fallita: Manca la connessione al server di backup"
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Non si avvia il backup non trovo il server di backup"
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Il backup è già in esecuzione, non si può avviare un altro backup"
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Il numero massimo di backup di immagine completi, non è un numero"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Il numero minimo di backup di immagine completi, non è un numero"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Il numero massimo di backup di immagine incrementali, non è un numero"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Il numero minimo di backup di immagine incrementali, non è un numero"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Il numero minimo di backup di file completi, non è un numero"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Il numero massimo di backup di file completi, non è un numero"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Il numero minimo di backup di file incrementale, non è un numero"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Il numero massimo di backup di file incrementale, non è un numero"
+
+msgid "The incremental image backup time is not a number"
+msgstr "Il tempo del backup di immagine incrementale, non è un numero"
+
+msgid "The full image backup interval  is not a number"
+msgstr "Intervallo del backup di immagine completo non è un numero"
+
+msgid "The full backup interval  is not a number"
+msgstr "Intervallo per backup completo non è un numero"
+
+msgid "The incremental backup interval is not a number"
+msgstr "Intervallo per backup incrementale non è un numero"
+
+msgid "Last backup on "
+msgstr "Ultimo backup nel"
+
+msgid "No current backup. "
+msgstr "Nessuno backup in corso"
+
+msgid "_percent_ done. "
+msgstr "_percent_ fatto."
+
+msgid "Full image backup running. "
+msgstr "Backup di immagine completo in corso"
+
+msgid "Incremental image backup running. "
+msgstr "Backup di immagine incrementale in corso"
+
+msgid "Full file backup running. "
+msgstr "Backup di file completo in corso"
+
+msgid "Incremental file backup running. "
+msgstr "Backup di file incrementale in corso"
+
+msgid "Cannot connect to backup server"
+msgstr "Non riesco a collegarmi al server di backup"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Una nuova versione di UrBackup è disponibile. Prego click qui per installarla"
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Aggiornamento disponibile"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Prego selezionare directory che volete salvare"
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Errore: Attualmente non può essere eseguito il backup."
+
+msgid "Remove path"
+msgstr "Rimuovi percorso"
+
+msgid "Add path"
+msgstr "Aggiungi percorso"
+
+msgid "Remove/Add backup paths"
+msgstr "Rimuovi/Aggiungi percorsi backup"
+
+msgid "Author:"
+msgstr "Autore:"
+
+msgid "Version:"
+msgstr "Versione:"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Errors"
+msgstr "Errori"
+
+msgid "Warnings"
+msgstr "Allarmi"
+
+msgid "Infos"
+msgstr "Informazioni"
+
+msgid "Filter:"
+msgstr "Filtro:"
+
+msgid "Abort"
+msgstr "Annulla"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Attivo"
+
+msgid "days"
+msgstr "giorni"
+
+msgid "hours"
+msgstr "ore"
+
+msgid "Maximal number of full image backups:"
+msgstr "Massimo numero di backup di immagine complete"
+
+msgid "Minimal number of full image backups:"
+msgstr "Minimo numero di backup di immagine complete"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Massimo numero di backup di immagine incrementali"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimo numero di backup di immagine incrementali"
+
+msgid "Maximal number of full file backups:"
+msgstr "Massimo numero di backup di file completi"
+
+msgid "Minimal number of full file backups:"
+msgstr "Minimo numero di backup di file completi"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Massimo numero di backup di file incrementali"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimo numero di backup di file incrementali"
+
+msgid "Interval for full image backups:"
+msgstr "Intervallo per backup completo"
+
+msgid "Interval for incremental image backups:"
+msgstr "Intervallo per backup immagine incrementale"
+
+msgid "Interval for full file backups:"
+msgstr "Intervallo per backup file completo"
+
+msgid "Interval for incremental file backups:"
+msgstr "Intervallo per backup file incrementale"

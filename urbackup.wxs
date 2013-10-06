@@ -156,6 +156,36 @@
 						<File Id="fil4AAB0F81E48E2917698958995EBB68BA" KeyPath="yes" Source="$(var.shared_data_dir)\lang\es\urbackup.mo" />
 					</Component>
 				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911525" Name="zh_TW">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A2C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1570}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B0" KeyPath="yes" Source="$(var.shared_data_dir)\lang\zh_TW\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911526" Name="zh_CN">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A3C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1571}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B1" KeyPath="yes" Source="$(var.shared_data_dir)\lang\zh_CN\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911527" Name="pt_BR">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A4C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1572}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B2" KeyPath="yes" Source="$(var.shared_data_dir)\lang\pt_BR\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911528" Name="it">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A5C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1573}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B3" KeyPath="yes" Source="$(var.shared_data_dir)\lang\it\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911529" Name="pl">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A6C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1574}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B4" KeyPath="yes" Source="$(var.shared_data_dir)\lang\pl\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911530" Name="sk">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0A7C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1575}" Win64="$(var.isx64)">
+						<File Id="fil4AAB0F81E48E2917698958995EBB68B5" KeyPath="yes" Source="$(var.shared_data_dir)\lang\sk\urbackup.mo" />
+					</Component>
+				</Directory>
 			</Directory>
             <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
                 <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}" Win64="$(var.isx64)">
@@ -189,6 +219,12 @@
             <ComponentRef Id="cmp146035BB0A33B65BB459A78C1BA9938B" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A0C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A1C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A2C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A3C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A4C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A5C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A6C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A7C" />
         </ComponentGroup>
     </Fragment>
 	
