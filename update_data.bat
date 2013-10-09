@@ -54,7 +54,7 @@ mkdir data\lang\zh_CN
 mkdir data\lang\pt_BR
 mkdir data\lang\it
 mkdir data\lang\pl
-mkdir data\lang\plsk
+mkdir data\lang\sk
 msgfmt "lang\de\urbackup.po" -o "data\lang\de\urbackup.mo"
 msgfmt "lang\fr\urbackup.po" -o "data\lang\fr\urbackup.mo"
 msgfmt "lang\ru\urbackup.po" -o "data\lang\ru\urbackup.mo"
