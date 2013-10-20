@@ -38,6 +38,11 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "TradChinese"
+!insertmacro MUI_LANGUAGE "PortugueseBR"
+!insertmacro MUI_LANGUAGE "Italian"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Slovak"
+!insertmacro MUI_LANGUAGE "Ukrainian"
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
@@ -214,6 +219,8 @@ Section "install"
 	File "data\lang\sk\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\pl"
 	File "data\lang\pl\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\uk"
+	File "data\lang\uk\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	

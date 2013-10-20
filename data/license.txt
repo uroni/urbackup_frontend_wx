@@ -1,4 +1,4 @@
-LICENCE OF URBACKUP
+LICENSE OF URBACKUP
 -----------------------------------------------------------------------
 
                     GNU GENERAL PUBLIC LICENSE

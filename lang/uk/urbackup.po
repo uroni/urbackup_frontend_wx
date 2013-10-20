@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# tenorio <miawork@list.ru>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-10-09 18:27+0000\n"
+"Last-Translator: tenorio <miawork@list.ru>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/urbackup/language/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Encrypted transfer:"
+msgstr "Захищена передача даних:"
+
+msgid "Compressed transfer:"
+msgstr "Зтиснена передача даних"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Максимальна швидкість копіювання через інтернет:"
+
+msgid "Do full file backups over internet:"
+msgstr "Повна файлова копія через інтернет"
+
+msgid "Do image backups over internet:"
+msgstr "Робити образи дисків через інтернет:"
+
+msgid "Internet server password:"
+msgstr "Пароль інтернет серверу:"
+
+msgid "Internet server port:"
+msgstr "Порт інтернет серверу:"
+
+msgid "Internet server name/IP:"
+msgstr "Імя/ІР інтернет серверу:"
+
+msgid "Enable backup via internet:"
+msgstr "Дозволити резервне копіювання через інтернет:"
+
+msgid "Max backup speed for local network:"
+msgstr "Максимальна швидкість копіювання через локальну мережу:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Знайдено новий сервер резервних копій. Натисніть сюди щоб задіяти його "
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Новий сервер"
+
+msgid "Internet"
+msgstr "Інтернет"
+
+msgid "Client"
+msgstr "Клієнт"
+
+msgid "Image backups"
+msgstr "Копії образів дисків"
+
+msgid "File backups"
+msgstr "Резервні копії файлів"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Додати до резервної копії(за шаблонами)"
+
+msgid " is not a volume"
+msgstr "не є розділом"
+
+msgid "Volumes to backup:"
+msgstr "Розділи для бекапу"
+
+msgid "Waiting for server..."
+msgstr "Очікування сервера..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Затримка після старту системи:"
+
+msgid "min"
+msgstr "хв."
+
+msgid "Computer name:"
+msgstr "І'мя коп'ютера"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Виключити з бекапу (за шаблонами)"
+
+msgid "Backup window:"
+msgstr "Вікно бекапу"
+
+msgid "Backup delay after system start:"
+msgstr "Затримка після старту системи:"
+
+msgid "Name:"
+msgstr "І'мя"
+
+msgid "Informations"
+msgstr "Інформація"
+
+msgid "Continue"
+msgstr "Продовжити"
+
+msgid "Pause"
+msgstr "Пауза"
+
+msgid "Logs"
+msgstr "Логи"
+
+msgid "Add/Remove backup paths"
+msgstr "Додати/Видалити щляхи для бекапу "
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Do incremental image backup"
+msgstr "Створити інкрементний образ"
+
+msgid "Do full image backup"
+msgstr "Створити повний образ"
+
+msgid "Do incremental file backup"
+msgstr "Створити інкрементній файловий бекап"
+
+msgid "Do full file backup"
+msgstr "Створити повний файловий бекап"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Продовження не можливе: Немає з'єднання з сервером резервного копіювання."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Призупинення не можливе: Немає з'єднання з сервером резервного копіювання."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Не можливо розпочати бекап. Немає з'єднання з сервером резервного копіювання."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Резервне копіювання вже виконується."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Максимальна кількість повних образів"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Мінімальна кількість повних образів"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Максимальна кількість інкрементних образів"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Мінімальна кількість інкрементних образів"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Мінімальна кількість повних файлових копій"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Максимальна кількість повних файлових копій"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Мінімальна кількість інкрементних файлових копій"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Міаксимальна кількість інкрементних файлових копій"
+
+msgid "The incremental image backup time is not a number"
+msgstr "Час створення інкрементних образів"
+
+msgid "The full image backup interval  is not a number"
+msgstr "Інтервал створеня повних образів"
+
+msgid "The full backup interval  is not a number"
+msgstr "Інтервал створення повних файлових бекапів"
+
+msgid "The incremental backup interval is not a number"
+msgstr "Інтервал створення інкрементних файлових бекапів"
+
+msgid "Last backup on "
+msgstr "Минулий бекап о"
+
+msgid "No current backup. "
+msgstr "немає актуального бекапу."
+
+msgid "_percent_ done. "
+msgstr "_відсотків_виконано."
+
+msgid "Full image backup running. "
+msgstr "Виконується створення повного образу"
+
+msgid "Incremental image backup running. "
+msgstr "Виконується створення інкрементного образу"
+
+msgid "Full file backup running. "
+msgstr "Виконуеться створення повного файлового бекапу"
+
+msgid "Incremental file backup running. "
+msgstr "Виконуеться створення інкрементного файлового бекапу"
+
+msgid "Cannot connect to backup server"
+msgstr "Немає з'єднання з сервером резервного копіювання."
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Доспупна нова версія UrBackup. Натисніть сюди щоб встановити її зараз."
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Доступне оновлення"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Виберіль директорію бекап якої буде створено."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Сталася помилка. В даний час ніщо не може бути скорійовано."
+
+msgid "Remove path"
+msgstr "Видалити шлях"
+
+msgid "Add path"
+msgstr "Додати хлях"
+
+msgid "Remove/Add backup paths"
+msgstr "Додати/вилучити шляхи для бекапів"
+
+msgid "Author:"
+msgstr "Автор"
+
+msgid "Version:"
+msgstr "Версія"
+
+msgid "Exit"
+msgstr "Вийти"
+
+msgid "Errors"
+msgstr "Помилки"
+
+msgid "Warnings"
+msgstr "Попередження"
+
+msgid "Infos"
+msgstr "Інформація"
+
+msgid "Filter:"
+msgstr "Фільтр"
+
+msgid "Abort"
+msgstr "Скасувати"
+
+msgid "Ok"
+msgstr "Так"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "days"
+msgstr "Дні"
+
+msgid "hours"
+msgstr "Години"
+
+msgid "Maximal number of full image backups:"
+msgstr "Максимальна кількість повних обзів:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Мінімальна кількість повних образів:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Максимальна кількість інкрементних образів:"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Мінімальна кількість інкрементних образів:"
+
+msgid "Maximal number of full file backups:"
+msgstr "Максимальна кількість повних фалових копій:"
+
+msgid "Minimal number of full file backups:"
+msgstr "Мінімальна калькість повних файлових копій:"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Максимальна кількість інкрементних файлових копій:"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Мінімальна кількість інкрементних файлових копій:"
+
+msgid "Interval for full image backups:"
+msgstr "Інтервал для повних образів"
+
+msgid "Interval for incremental image backups:"
+msgstr "Інтервал для інкрементних образів"
+
+msgid "Interval for full file backups:"
+msgstr "Інтервал для повних файлових копій"
+
+msgid "Interval for incremental file backups:"
+msgstr "Інтервал для інкрементних файлових копій"
