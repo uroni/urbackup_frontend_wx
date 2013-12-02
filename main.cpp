@@ -82,6 +82,16 @@ wxIcon getAppIcon(wxString fn)
 	return wxIcon(res_path+fn+wxT(".")+ico_ext, ico_type, small_sys_x, small_sys_y);
 }
 
+namespace
+{
+	wxString getPercentDoneText()
+	{
+		wxString pcdone=_("_percent_ done. ");
+		pcdone.Replace("_percent_", "%");
+		return pcdone;
+	}
+}
+
 
 bool MyApp::OnInit()
 {
@@ -166,6 +176,31 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_CHINESE_TAIWAN:
 		lang=wxLANGUAGE_CHINESE_TRADITIONAL;
 		g_lang="zh_TW";
+		break;
+	case wxLANGUAGE_PORTUGUESE_BRAZILIAN:
+		lang=wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+		g_lang="pt_BR";
+		break;
+	case wxLANGUAGE_ITALIAN:
+	case wxLANGUAGE_ITALIAN_SWISS:
+		lang=wxLANGUAGE_ITALIAN;
+		g_lang="it";
+		break;
+	case wxLANGUAGE_POLISH:
+		lang=wxLANGUAGE_POLISH;
+		g_lang="pl";
+		break;
+	case wxLANGUAGE_SLOVAK:
+		lang=wxLANGUAGE_SLOVAK;
+		g_lang="sk";
+		break;
+	case wxLANGUAGE_UKRAINIAN:
+		lang=wxLANGUAGE_UKRAINIAN;
+		g_lang="uk";
+		break;
+	case wxLANGUAGE_DANISH:
+		lang=wxLANGUAGE_DANISH;
+		g_lang="da";
 		break;
 	}
 
@@ -319,7 +354,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=1;
@@ -331,7 +366,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=2;
@@ -342,7 +377,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=3;
@@ -353,7 +388,7 @@ void MyTimer::Notify()
 		if(!status.pcdone.empty())
 		{
 			status_text+=status.pcdone;
-			status_text+=_("% done. ");
+			status_text+=getPercentDoneText();
 		}
 		icon_type=1;
 		working_status=4;

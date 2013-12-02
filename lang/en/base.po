@@ -1,19 +1,22 @@
 # UrBackup English translation
 # Copyright (C) 2011 Martin Raiber
 # This file is distributed under the same license as the UrBackup package.
-# Martin Raiber <martin@urbackup.org>, 2011.
-#
+# 
+# Translators:
+# Martin Raiber <martin@urbackup.org>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: UrBackup Client Frontend(wx) 1.0\n"
+"Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2011-01-16 19:43+0100\n"
-"Last-Translator: Martin Raiber <martin@urbackup.org>\n"
+"PO-Revision-Date: 2013-07-22 21:08+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: ENGLISH <martin@urbackup.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Encrypted transfer:"
 msgstr "Encrypted transfer:"
@@ -180,8 +183,8 @@ msgstr "Last backup on "
 msgid "No current backup. "
 msgstr "No current backup. "
 
-msgid "% done. "
-msgstr "% done. "
+msgid "_percent_ done. "
+msgstr "_percent_ done. "
 
 msgid "Full image backup running. "
 msgstr "Full image backup running. "
@@ -198,10 +201,8 @@ msgstr "Incremental file backup running. "
 msgid "Cannot connect to backup server"
 msgstr "Cannot connect to backup server"
 
-msgid ""
-"A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
-"A new version of UrBackup is available. Please click here to install it now."
+msgid "A new version of UrBackup is available. Please click here to install it now."
+msgstr "A new version of UrBackup is available. Please click here to install it now."
 
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Update available"
