@@ -1,4 +1,4 @@
-!define MUI_BRANDINGTEXT "UrBackup 1.2"
+!define MUI_BRANDINGTEXT "UrBackup 1.3"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
@@ -7,8 +7,8 @@
 SetCompressor /FINAL /SOLID lzma
 
 CRCCheck On
-Name "UrBackup 1.2"
-OutFile "UrBackup Client 1.2-1.exe"
+Name "UrBackup 1.3"
+OutFile "UrBackup Client 1.3-1.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
@@ -38,6 +38,11 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "TradChinese"
+!insertmacro MUI_LANGUAGE "PortugueseBR"
+!insertmacro MUI_LANGUAGE "Italian"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Slovak"
+!insertmacro MUI_LANGUAGE "Ukrainian"
 
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
@@ -67,7 +72,7 @@ Section "install"
 		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
-		File "vcredist\vcredist_2010sp1_x64.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x64.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -98,7 +103,7 @@ Section "install"
 				; Delete '$TEMP\vcredist_x86.exe'
 			; ${EndIf}
 		; ${EndIf}
-		File "vcredist\vcredist_2010sp1_x86.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x86.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -162,7 +167,9 @@ Section "install"
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
-	File "data\pdb_version.txt"
+	File "data\build_revision.txt"
+	
+
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
@@ -211,6 +218,18 @@ Section "install"
 	File "data\lang\zh_TW\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\zh_CN"
 	File "data\lang\zh_CN\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\pt_BR"
+	File "data\lang\pt_BR\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\it"
+	File "data\lang\it\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\sk"
+	File "data\lang\sk\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\pl"
+	File "data\lang\pl\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\uk"
+	File "data\lang\uk\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\da"
+	File "data\lang\da\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	

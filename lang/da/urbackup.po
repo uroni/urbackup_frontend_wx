@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# tnywos <tn@keyone.dk>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: tnywos <tn@keyone.dk>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/urbackup/language/da_DK/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Encrypted transfer:"
+msgstr "Krypteret overførsel:"
+
+msgid "Compressed transfer:"
+msgstr "Komprimeret overførsel:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Maksimal sikkerhedskopihastighed ved internetforbindelse:"
+
+msgid "Do full file backups over internet:"
+msgstr "Udfør fuld fil-sikkerhedskopi via internettet:"
+
+msgid "Do image backups over internet:"
+msgstr "Udfør komplet spejl-sikkerhedskopi via internettet:"
+
+msgid "Internet server password:"
+msgstr "Internetserver kodeord:"
+
+msgid "Internet server port:"
+msgstr "Internetserver port:"
+
+msgid "Internet server name/IP:"
+msgstr "Internetserver navn/IP:"
+
+msgid "Enable backup via internet:"
+msgstr "Aktiver sikkerhedskopi via internet:"
+
+msgid "Max backup speed for local network:"
+msgstr "Maksimal sikkerhedskopihastighed for lokalnetværk:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Ny sikkerhedskopiserver er fundet. Klik her for at anvende den"
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Ny server"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Klient"
+
+msgid "Image backups"
+msgstr "Spejl-sikkerhedskopiering"
+
+msgid "File backups"
+msgstr "Fil-sikkerhedskopiering"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Inkluderer i sikkerhedskopi (med jokertegn):"
+
+msgid " is not a volume"
+msgstr "det er ikke en volume"
+
+msgid "Volumes to backup:"
+msgstr "Volume der skal sikkerhedskopieres:"
+
+msgid "Waiting for server..."
+msgstr "Venter på server..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Sikkerhedskopiforsinkels efter systemstart er ikke et tal"
+
+msgid "min"
+msgstr "min."
+
+msgid "Computer name:"
+msgstr "Computernavn:"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Ekskluderer fra sikkerhedskopi (med jokertegn):"
+
+msgid "Backup window:"
+msgstr "Sikkerhedskopivindue:"
+
+msgid "Backup delay after system start:"
+msgstr "Sikkerhedskopiforsinkelse efter systemstart:"
+
+msgid "Name:"
+msgstr "Navn:"
+
+msgid "Informations"
+msgstr "Informationer"
+
+msgid "Continue"
+msgstr "Fortsæt"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Logs"
+msgstr "Logfiler"
+
+msgid "Add/Remove backup paths"
+msgstr "Tilføj/fjern sikkerhedkopistier"
+
+msgid "Settings"
+msgstr "Indstillinger"
+
+msgid "Do incremental image backup"
+msgstr "Udfør inkremental spejl-sikkerhedskopi"
+
+msgid "Do full image backup"
+msgstr "Udfør komplet spejl-sikkerhedskopi"
+
+msgid "Do incremental file backup"
+msgstr "Udfør inkremental fil-sikkerhedskopi"
+
+msgid "Do full file backup"
+msgstr "Udfør komplet fil-sikkerhedskopi"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Gentagne fejl: Ingen forbindelse til sikkerhedskopiserver."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Midlertidig fejl: Ingen forbindelse til sikkerhedskopiserver."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Kunne ikke starte sikkerhedskopiering, fordi sikkerhedskopiserver ikke blev fundet."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Sikkerhedskopiering er igang. Der kan ikke startes endnu en."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Maks. antal af komplette spejl-sikkerhedskopier er ikke et tal"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Min. antal af komplette spejl-sikkerhedskopier er ikke et tal"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Maks. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Min. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Min. antal af komplette fil-sikkerhedskopier er ikke et tal"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Maks. antal af komplette fil-sikkerhedskopier er ikke et tal"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Min. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Maks. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
+
+msgid "The incremental image backup time is not a number"
+msgstr "Tidsangivelse for inkremental spejl-sikkerhedskopi er ikke et tal"
+
+msgid "The full image backup interval  is not a number"
+msgstr "Tidsangivelse for komplet spejl-sikkerhedskopi er ikke et tal"
+
+msgid "The full backup interval  is not a number"
+msgstr "Tidsangivelse for komplet fil-sikkerhedskopi er ikke et tal"
+
+msgid "The incremental backup interval is not a number"
+msgstr "Tidsangivelse for inkremental fil-sikkerhedskopier er ikke et tal"
+
+msgid "Last backup on "
+msgstr "Sidste sikkerhedkopi foretaget"
+
+msgid "No current backup. "
+msgstr "Ingen igangværende sikkerhedkopiering"
+
+msgid "_percent_ done. "
+msgstr "_percent_ udført."
+
+msgid "Full image backup running. "
+msgstr "Komplet spejl-sikkerhedskopi er igang."
+
+msgid "Incremental image backup running. "
+msgstr "Inkremental spejl-sikkerhedskopi er igang."
+
+msgid "Full file backup running. "
+msgstr "Komplet fil-sikkerhedskopi er igang."
+
+msgid "Incremental file backup running. "
+msgstr "Inkremental fil-sikkerhedskopi er igang."
+
+msgid "Cannot connect to backup server"
+msgstr "Kan ikke forbinde til sikkerhedskopiserver"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "En ny version af UrBackup er tilgængelig. Klik venligst her for at installere den nu."
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Opdatering tilgængelig"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Angiv venligst den mappe er skal tages sikkedhedskopi af."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Der opstod en fejl. Der kan ikke tages nogen sikkerhedskopi."
+
+msgid "Remove path"
+msgstr "Fjern mappesti"
+
+msgid "Add path"
+msgstr "Tilføj mappesti"
+
+msgid "Remove/Add backup paths"
+msgstr "Tilføj/Fjern mappesti til sikkerhedkopiering"
+
+msgid "Author:"
+msgstr "Forfatter:"
+
+msgid "Version:"
+msgstr "Version:"
+
+msgid "Exit"
+msgstr "Afslut"
+
+msgid "Errors"
+msgstr "Fejl"
+
+msgid "Warnings"
+msgstr "Advarsler"
+
+msgid "Infos"
+msgstr "Informationer"
+
+msgid "Filter:"
+msgstr "Filter:"
+
+msgid "Abort"
+msgstr "Afbryd"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Aktive"
+
+msgid "days"
+msgstr "dage"
+
+msgid "hours"
+msgstr "timer"
+
+msgid "Maximal number of full image backups:"
+msgstr "Maksimal antal komplette spejl-sikkerhedskopier:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Minimum antal komplette spejl-sikkerhedskopier"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Maksimal antal inkrementale spejl-sikkerhedskopier"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimum antal inkrementale spejl-sikkerhedskopier"
+
+msgid "Maximal number of full file backups:"
+msgstr "Maksimal antal komplette fil-sikkerhedskopier"
+
+msgid "Minimal number of full file backups:"
+msgstr "Minimum antal komplette fil-sikkerhedskopier"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Maksimal antal komplette fil-sikkerhedskopier"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimum antal inkrementale fil-sikkerhedskopier"
+
+msgid "Interval for full image backups:"
+msgstr "Interval mellem komplet spejl-sikkerhedskopier:"
+
+msgid "Interval for incremental image backups:"
+msgstr "Interval mellem inkrementale spejl-sikkerhedskopier:"
+
+msgid "Interval for full file backups:"
+msgstr "Interval mellem komplette fil-sikkerhedskopier:"
+
+msgid "Interval for incremental file backups:"
+msgstr "Interval mellem inkrementale fil-sikkerhedskopier:"

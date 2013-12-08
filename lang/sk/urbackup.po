@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# janda <jan.vojtek@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-09-22 14:13+0000\n"
+"Last-Translator: janda <jan.vojtek@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/urbackup/language/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgid "Encrypted transfer:"
+msgstr "Šifrovaný prenos:"
+
+msgid "Compressed transfer:"
+msgstr "Komprimovaný prenos:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Maximálna rýchlosť zálohovania pomocou pripojenia cez internet:"
+
+msgid "Do full file backups over internet:"
+msgstr "Vytvárať úplnú zálohu súborov cez internet:"
+
+msgid "Do image backups over internet:"
+msgstr "Vytvárať úplnú zálohu obrazu diskov cez internet:"
+
+msgid "Internet server password:"
+msgstr "Heslo internetového servera:"
+
+msgid "Internet server port:"
+msgstr "Port internetového servera:"
+
+msgid "Internet server name/IP:"
+msgstr "Názov/IP internetového servera:"
+
+msgid "Enable backup via internet:"
+msgstr "Povoliť zálohovanie cez internet:"
+
+msgid "Max backup speed for local network:"
+msgstr "Maximálna rýchlosť zálohovania pre lokálne siete:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Bol nájdený nový záložný server. Kliknite pre použitie."
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Nový server"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Klient"
+
+msgid "Image backups"
+msgstr "Zálohovanie obrazov"
+
+msgid "File backups"
+msgstr "Zálohovanie súborov"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Zahrnúť do zálohy (s náhradnými znakmi *.*)"
+
+msgid " is not a volume"
+msgstr "nie je zväzok"
+
+msgid "Volumes to backup:"
+msgstr "Zväzky pre zálohovanie:"
+
+msgid "Waiting for server..."
+msgstr "Čakanie na server..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Čas oneskoreného spustenia zálohovania nie je číslo"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Názov počítača:"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Vylúčiť zo zálohy (s náhradnými znakmi *.*)"
+
+msgid "Backup window:"
+msgstr "Povolené dni/hodiny v týždni pre spustenie procesu zálohovania:"
+
+msgid "Backup delay after system start:"
+msgstr "Časové oneskorenie spustenia zálohovania po štarte systému:"
+
+msgid "Name:"
+msgstr "Meno:"
+
+msgid "Informations"
+msgstr "Informácie"
+
+msgid "Continue"
+msgstr "Pokračovať"
+
+msgid "Pause"
+msgstr "Pozastaviť"
+
+msgid "Logs"
+msgstr "Logy"
+
+msgid "Add/Remove backup paths"
+msgstr "Pridať/odstrániť priečinok pre zálohu"
+
+msgid "Settings"
+msgstr "Nastavenia"
+
+msgid "Do incremental image backup"
+msgstr "Vytvoriť čiastkovú zálohu obrazu disku"
+
+msgid "Do full image backup"
+msgstr "Vytvoriť úplnú zálohu obrazu disku"
+
+msgid "Do incremental file backup"
+msgstr "Vytvoriť čiastkovú zálohu súborov"
+
+msgid "Do full file backup"
+msgstr "Vytvoriť úplnú zálohu súborov"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Pokračovanie zlyhalo: žiadne spojenie na server záloh."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Pozastavenie zlyhalo: žiadne spojenie na server záloh."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Nemožno spustiť zálohovanie, pretože žiadny záložný server nebol nájdený."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Zálohovanie je už spustené. Nemožno spustiť ďalšie."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Maximálny počet plných záloh obrazu disku nie je číslo"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Minimálny počet plných záloh obrazu disku nie je číslo"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Maximálny počet čiastkových záloh nie je číslo"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Minimálny počet čiastkových záloh nie je číslo"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Minimálny počet plných záloh súborov nie je číslo"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Maximálny počet plných záloh súborov nie je číslo"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Minimálny počet čiastkových záloh súborov nie je číslo"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Maximálny počet čiastkových záloh súborov nie je číslo"
+
+msgid "The incremental image backup time is not a number"
+msgstr "Interval pre čiastkové zálohovanie obrazu disku nie je číslo"
+
+msgid "The full image backup interval  is not a number"
+msgstr "Interval pre vytváranie plnej zálohy obrazu disku nie je číslo"
+
+msgid "The full backup interval  is not a number"
+msgstr "Interval pre vytváranie plnej zálohy nie je číslo"
+
+msgid "The incremental backup interval is not a number"
+msgstr "Interval pre vytváranie čiastkových záloh nie je číslo"
+
+msgid "Last backup on "
+msgstr "Posledná záloha"
+
+msgid "No current backup. "
+msgstr "Žiadna aktuálna záloha."
+
+msgid "_percent_ done. "
+msgstr "_percent_ hotovo. "
+
+msgid "Full image backup running. "
+msgstr "Úplná záloha obrazu disku je spustená."
+
+msgid "Incremental image backup running. "
+msgstr "Čiastková záloha obrazu disku je spustená."
+
+msgid "Full file backup running. "
+msgstr "Úplné zálohovanie súborov je spustené."
+
+msgid "Incremental file backup running. "
+msgstr "Čiastkové zálohovanie súborov je spustené."
+
+msgid "Cannot connect to backup server"
+msgstr "Nedá sa pripojiť na záložný server"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Nová verzia programu UrBackup je k dispozícii. Prosím, kliknite tu pre jej nainštalovanie."
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: aktualizácia je k dispozícii"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Prosím, vyberte priečinok, ktorý bude zálohovaný."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Došlo k chybe. V súčasnej dobe nie je možné nič zálohovať."
+
+msgid "Remove path"
+msgstr "Odstrániť cestu"
+
+msgid "Add path"
+msgstr "Pridať cestu"
+
+msgid "Remove/Add backup paths"
+msgstr "Odstrániť/pridať obsah pre zálohu"
+
+msgid "Author:"
+msgstr "Autor:"
+
+msgid "Version:"
+msgstr "Verzia:"
+
+msgid "Exit"
+msgstr "Koniec"
+
+msgid "Errors"
+msgstr "Chyby"
+
+msgid "Warnings"
+msgstr "Upozornenia"
+
+msgid "Infos"
+msgstr "Info"
+
+msgid "Filter:"
+msgstr "Filter:"
+
+msgid "Abort"
+msgstr "Prerušiť"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Aktívne"
+
+msgid "days"
+msgstr "dní"
+
+msgid "hours"
+msgstr "hodín"
+
+msgid "Maximal number of full image backups:"
+msgstr "Maximálny počet plných záloh obrazu disku:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Minimálny počet plných záloh obrazu disku:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Maximálny počet čiastkových záloh obrazu disku:"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimálny počet čiastkových záloh obrazu disku:"
+
+msgid "Maximal number of full file backups:"
+msgstr "Maximálny počet plných záloh súborov:"
+
+msgid "Minimal number of full file backups:"
+msgstr "Minimálny počet plných záloh súborov:"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Maximálny počet čiastkových záloh súborov:"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimálny počet čiastkových záloh súborov:"
+
+msgid "Interval for full image backups:"
+msgstr "Interval pre vytváranie úplnej zálohy disku:"
+
+msgid "Interval for incremental image backups:"
+msgstr "Interval pre vytváranie čiastkovej zálohy disku:"
+
+msgid "Interval for full file backups:"
+msgstr "Interval pre vytváranie úplnej zálohy súborov:"
+
+msgid "Interval for incremental file backups:"
+msgstr "Interval pre vytváranie čiastkových záloh súborov:"

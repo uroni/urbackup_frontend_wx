@@ -76,7 +76,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		int rc=Connector::startBackup(full);
 		if(rc==1)
 		{
-			SetIcon(getAppIcon(wxT("backup-progress")), wxT("Warte auf Server..."));
+			SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
 			if(timer!=NULL)
 				timer->Start(1000);
 		}
@@ -146,16 +146,30 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	bool any_prev=false;
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_FILE_BACKUPS))
 	{
-		mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
-		mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), wxT("Jetzt ein inkrementelles Backup ausführen"));
-		any_prev=true;
+		if(!timer->hasCapability(DONT_ALLOW_STARTING_FULL_FILE_BACKUPS))
+		{
+			mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
+			any_prev=true;
+		}
+		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_FILE_BACKUPS))
+		{
+			mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), wxT("Jetzt ein inkrementelles Backup ausführen"));
+			any_prev=true;
+		}		
 	}
 #ifdef _WIN32
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_IMAGE_BACKUPS) && !timer->hasCapability(DONT_DO_IMAGE_BACKUPS) )
 	{
-		mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Do full image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
-		mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
-		any_prev=true;
+		if(!timer->hasCapability(DONT_ALLOW_STARTING_FULL_IMAGE_BACKUPS))
+		{
+			mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Do full image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+			any_prev=true;
+		}
+		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_IMAGE_BACKUPS))
+		{
+			mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+			any_prev=true;
+		}
 	}
 #endif
 	if(any_prev)

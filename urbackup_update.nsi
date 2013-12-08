@@ -1,20 +1,30 @@
-!define MUI_BRANDINGTEXT "UrBackup Update 1.2"
+!define MUI_BRANDINGTEXT "UrBackup Update 1.3"
 !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
 !include WinVer.nsh
 !include "x64.nsh"
 !define MUI_ICON "icon3.ico"
 
-SetCompressor /FINAL /SOLID lzma
+SetCompressor /FINAL lzma
+CRCCheck off
 
-CRCCheck On
 Name "UrBackup Update"
 OutFile "UrBackupUpdate.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_WELCOME
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_FINISH
 
 !define MUI_CUSTOMFUNCTION_GUIINIT myGuiInit
+
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
 
 
 !insertmacro MUI_LANGUAGE "English"
@@ -24,6 +34,11 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "TradChinese"
+!insertmacro MUI_LANGUAGE "PortugueseBR"
+!insertmacro MUI_LANGUAGE "Italian"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Slovak"
+!insertmacro MUI_LANGUAGE "Ukrainian"
 
 !define Unicode2Ansi "!insertmacro Unicode2Ansi"
 
@@ -50,7 +65,7 @@ Section "install"
 		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
-		File "vcredist\vcredist_2010sp1_x64.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x64.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -81,7 +96,7 @@ Section "install"
 				; Delete '$TEMP\vcredist_x86.exe'
 			; ${EndIf}
 		; ${EndIf}
-		File "vcredist\vcredist_2010sp1_x86.exe"
+		File "deps\win\vcredist\vcredist_2010sp1_x86.exe"
 		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
@@ -152,6 +167,13 @@ Section "install"
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
+	File "data\build_revision.txt"
+	
+	SetCompress off
+	File "data\server_idents_new.txt"
+	File "data\initial_settings.cfg"
+	SetCompress auto
+	
 	${IfNot} ${RunningX64} 
 		File "data\args_server03.txt"
 		File "data\args_xp.txt"
@@ -200,6 +222,18 @@ Section "install"
 	File "data\lang\zh_TW\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\zh_CN"
 	File "data\lang\zh_CN\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\pt_BR"
+	File "data\lang\pt_BR\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\it"
+	File "data\lang\it\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\sk"
+	File "data\lang\sk\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\pl"
+	File "data\lang\pl\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\uk"
+	File "data\lang\uk\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\da"
+	File "data\lang\da\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
@@ -273,6 +307,16 @@ do_copy_pfb:
 	Pop $0
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
+	
+	IfFileExists "$INSTDIR\server_idents.txt" next_idents do_copy_idents
+do_copy_idents:
+	StrCpy $0 "$INSTDIR\server_idents_new.txt" ;Path of copy file from
+	StrCpy $1 "$INSTDIR\server_idents.txt"   ;Path of copy file to
+	StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
+	System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
+	Pop $0
+next_idents:
+	Delete "$INSTDIR\server_idents_new.txt"
 	
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
@@ -365,13 +409,22 @@ Function .onInit
 		strcpy $INSTDIR "$PROGRAMFILES64\UrBackup"
 		SetRegView 64
 	${EndIf}
-	
+
+	ClearErrors
 	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" 'Path'
+	IfErrors skip_modify
+	
 	strcpy $INSTDIR $0
 	
+skip_modify:
 	${If} ${RunningX64}
 		SetRegView 32
 	${EndIf}
 FunctionEnd
 
+Function skipPre
+	${If} $EXEFILE == 'UrBackupUpdate.exe'
+		Abort
+	${EndIf}
+FunctionEnd
 
