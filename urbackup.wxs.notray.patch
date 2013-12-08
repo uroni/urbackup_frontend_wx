@@ -1,0 +1,28 @@
+23,25d22
+< 	
+< 	<util:CloseApplication Id="CloseUrBackupClient" CloseMessage="yes"
+<                            ElevatedCloseMessage="no" RebootPrompt="no" Target="UrBackupClient.exe" />
+39d35
+< 					<File Id="UrBackupClient.exe"  DiskId='1' Name='UrBackupClient.exe' Source="$(var.datadir)\UrBackupClient.exe" />
+89,90d84
+< 	<Property Id="WixShellExecTarget" Value="[#UrBackupClient.exe]" />
+< 	<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+96d89
+< 	  <ComponentRef Id='UrBackupClientAutostart' />
+194,204d186
+< 	
+< 	<Fragment>
+< 	 <DirectoryRef Id="URBACKUPDIR">
+< 		<Component Id="UrBackupClientAutostart" Guid="23b72208-3295-4be9-9168-3ca240fd2190" Win64="$(var.isx64)">
+< 		<RegistryKey Root="HKLM"
+<                      Key="Software\Microsoft\Windows\CurrentVersion\Run">
+<             <RegistryValue Type="string" Name="UrBackupClient" Value="[URBACKUPDIR]UrBackupClient.exe"/>
+<         </RegistryKey>
+< 	  </Component>
+< 	  </DirectoryRef>
+< 	</Fragment>
+230,233d211
+< 			<Publish Dialog="ExitDialog"
+< 					Control="Finish" 
+< 					Event="DoAction" 
+< 					Value="LaunchApplication">NOT Installed</Publish>
