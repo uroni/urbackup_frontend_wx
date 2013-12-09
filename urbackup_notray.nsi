@@ -223,6 +223,8 @@ Section "install"
 	File "data\lang\uk\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\da"
 	File "data\lang\da\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\nl"
+	File "data\lang\nl\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	

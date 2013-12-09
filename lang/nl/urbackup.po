@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# buzzertnl <frank@aced-it.nl>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-12-09 12:10+0000\n"
+"Last-Translator: buzzertnl <frank@aced-it.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/urbackup/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Encrypted transfer:"
+msgstr "Versleutelde verbinding:"
+
+msgid "Compressed transfer:"
+msgstr "Gecomprimeerde overdracht:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Maximale back-up snelheid voor internet verbinding: "
+
+msgid "Do full file backups over internet:"
+msgstr "Maak volledige bestands back-ups over internet: "
+
+msgid "Do image backups over internet:"
+msgstr "Maak volledige image back-ups over internet: "
+
+msgid "Internet server password:"
+msgstr "Internet server wachtwoord: "
+
+msgid "Internet server port:"
+msgstr "Internet server poort:"
+
+msgid "Internet server name/IP:"
+msgstr "Internet server naam/IP: "
+
+msgid "Enable backup via internet:"
+msgstr "Maak gebruik van back-ups over internet:"
+
+msgid "Max backup speed for local network:"
+msgstr "Maximale back-up snelheid voor lokaal netwerk:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Een nieuwe back-up server is gevonden. Klik hier om deze te gebruiken. "
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Nieuwe server"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Cliënt "
+
+msgid "Image backups"
+msgstr "Image back-ups"
+
+msgid "File backups"
+msgstr "Bestands back-ups "
+
+msgid "Include in backup (with wildcards):"
+msgstr "Insluiten in back-up (met wildcards): "
+
+msgid " is not a volume"
+msgstr "Is geen volume"
+
+msgid "Volumes to backup:"
+msgstr "Volumes te back-upen: "
+
+msgid "Waiting for server..."
+msgstr "Wachten op server..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "Back-up uitstel na opstarten is geen getal"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Computer naam: "
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Uitsluiten van back-up (met wildcards):"
+
+msgid "Backup window:"
+msgstr "Back-up tijd schema: "
+
+msgid "Backup delay after system start:"
+msgstr "Back-up uitstel na systeem start: "
+
+msgid "Name:"
+msgstr "Naam: "
+
+msgid "Informations"
+msgstr "Informatie "
+
+msgid "Continue"
+msgstr "Doorgaan"
+
+msgid "Pause"
+msgstr "Pauzeren "
+
+msgid "Logs"
+msgstr "Logboeken "
+
+msgid "Add/Remove backup paths"
+msgstr "Toevoegen/Verwijderen back-up paden"
+
+msgid "Settings"
+msgstr "Instellingen "
+
+msgid "Do incremental image backup"
+msgstr "Maak een incrementele image back-up"
+
+msgid "Do full image backup"
+msgstr "Maak een volledige image back-up "
+
+msgid "Do incremental file backup"
+msgstr "Maak een incrementele bestands back-up"
+
+msgid "Do full file backup"
+msgstr "Maak een volledige bestands back-up "
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Doorgaan mislukt: Geen verbinding met de back-up server. "
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Pauzeren mislukt: Geen verbinding met de back-up server."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "Kan de back-up niet starten, omdat er geen back-up server gevonden is. "
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Er is al een back-up bezig. Kan geen nieuwe starten. "
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "Maximale aantal van volledige image back-ups is geen getal"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "Minimale aantal van volledige image back-ups is geen getal"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Maximale aantal van incrementele image back-ups is geen getal"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Minimale aantal van incrementele image back-ups is geen getal"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "Minimale aantal van voledige bestands back-ups is geen getal"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "Maximale aantal van voledige bestands back-ups is geen getal"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Minimale aantal van incrementele bestands back-ups is geen getal"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Maximale aantal van incrementele bestands back-ups is geen getal"
+
+msgid "The incremental image backup time is not a number"
+msgstr "De incrementele image back-up tijd is geen getal"
+
+msgid "The full image backup interval  is not a number"
+msgstr "De voledige image back-up interval is geen getal"
+
+msgid "The full backup interval  is not a number"
+msgstr "De voledige back-up interval is geen getal"
+
+msgid "The incremental backup interval is not a number"
+msgstr "De incrementele back-up interval is geen getal"
+
+msgid "Last backup on "
+msgstr "Laatste back-up op"
+
+msgid "No current backup. "
+msgstr "Geen huidige back-up"
+
+msgid "_percent_ done. "
+msgstr "_percentage_klaar."
+
+msgid "Full image backup running. "
+msgstr "Volledige image back-up bezig. "
+
+msgid "Incremental image backup running. "
+msgstr "Incrementele image back-up bezig. "
+
+msgid "Full file backup running. "
+msgstr "Volledige bestands back-up bezig. "
+
+msgid "Incremental file backup running. "
+msgstr "Incrementele bestands back-up bezig. "
+
+msgid "Cannot connect to backup server"
+msgstr "Kan niet verbinden met de back-up server"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Een nieuwe versie van UrBackup is beschikbaar. Klik hier om deze te installeren. "
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Update beschikbaar "
+
+msgid "Please select the directory that will be backed up."
+msgstr "Selecteer een map die geback-upt moet worden. "
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Er was een fout. Momenteel kan er niks geback-upt worden. "
+
+msgid "Remove path"
+msgstr "Verwijder locatie"
+
+msgid "Add path"
+msgstr "Locatie toevoegen "
+
+msgid "Remove/Add backup paths"
+msgstr "Verwijder/Toevoegen back-up paden"
+
+msgid "Author:"
+msgstr "Auteur: "
+
+msgid "Version:"
+msgstr "Versie: "
+
+msgid "Exit"
+msgstr "Sluiten"
+
+msgid "Errors"
+msgstr "Fouten"
+
+msgid "Warnings"
+msgstr "Waarschuwingen "
+
+msgid "Infos"
+msgstr "Informatie "
+
+msgid "Filter:"
+msgstr "Filter: "
+
+msgid "Abort"
+msgstr "Annuleren "
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Bezig "
+
+msgid "days"
+msgstr "dagen"
+
+msgid "hours"
+msgstr "uren"
+
+msgid "Maximal number of full image backups:"
+msgstr "Maximale aantal van volledige image back-ups: "
+
+msgid "Minimal number of full image backups:"
+msgstr "Minimale aantal van volledige image back-ups: "
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Maximale aantal van incrementele image back-ups: "
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimale aantal van incrementele image back-ups: "
+
+msgid "Maximal number of full file backups:"
+msgstr "Maximale aantal van volledige bestands back-ups: "
+
+msgid "Minimal number of full file backups:"
+msgstr "Minimale aantal van volledige bestands back-ups: "
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Maximale aantal van incrementele bestands back-ups: "
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimale aantal van incrementele bestands back-ups: "
+
+msgid "Interval for full image backups:"
+msgstr "Interval voor volledige image back-ups: "
+
+msgid "Interval for incremental image backups:"
+msgstr "Interval voor incrementele image back-ups: "
+
+msgid "Interval for full file backups:"
+msgstr "Interval voor volledige bestands back-ups: "
+
+msgid "Interval for incremental file backups:"
+msgstr "Interval voor incrementele bestands back-ups: "

@@ -57,6 +57,7 @@ mkdir data\lang\pl
 mkdir data\lang\sk
 mkdir data\lang\uk
 mkdir data\lang\da
+mkdir data\lang\nl
 msgfmt "lang\de\urbackup.po" -o "data\lang\de\urbackup.mo"
 msgfmt "lang\fr\urbackup.po" -o "data\lang\fr\urbackup.mo"
 msgfmt "lang\ru\urbackup.po" -o "data\lang\ru\urbackup.mo"
@@ -69,6 +70,7 @@ msgfmt "lang\pl\urbackup.po" -o "data\lang\pl\urbackup.mo"
 msgfmt "lang\sk\urbackup.po" -o "data\lang\sk\urbackup.mo"
 msgfmt "lang\uk\urbackup.po" -o "data\lang\uk\urbackup.mo"
 msgfmt "lang\da\urbackup.po" -o "data\lang\da\urbackup.mo"
+msgfmt "lang\nl\urbackup.po" -o "data\lang\nl\urbackup.mo"
 
 msgfmt "lang\de\urbackup.po" -o "lang\de\urbackup.mo"
 msgfmt "lang\fr\urbackup.po" -o "lang\fr\urbackup.mo"
@@ -82,6 +84,7 @@ msgfmt "lang\sk\urbackup.po" -o "lang\sk\urbackup.mo"
 msgfmt "lang\pl\urbackup.po" -o "lang\pl\urbackup.mo"
 msgfmt "lang\uk\urbackup.po" -o "lang\uk\urbackup.mo"
 msgfmt "lang\da\urbackup.po" -o "lang\da\urbackup.mo"
+msgfmt "lang\nl\urbackup.po" -o "lang\nl\urbackup.mo"
 
 git rev-parse HEAD > "data\build_revision.txt"
 cd ..
