@@ -12,5 +12,7 @@ paolobeldi (Italian)
 Artur Corumba (Portuguese - Brazil)
 drpt (Polish)
 Ihor Maydanovich (Ukrainian)
+tnywos (Danish)
+buzzertnl (Dutch)
 
 See license.txt for the licences of the libraries used and of UrBackup (GPL v3).
