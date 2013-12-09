@@ -43,6 +43,8 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Polish"
 !insertmacro MUI_LANGUAGE "Slovak"
 !insertmacro MUI_LANGUAGE "Ukrainian"
+!insertmacro MUI_LANGUAGE "Danish"
+!insertmacro MUI_LANGUAGE "Dutch"
 
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
