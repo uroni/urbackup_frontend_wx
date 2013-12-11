@@ -270,6 +270,7 @@ Section "install"
 		${EndIf}
 	${Else}
 		${If} ${IsWin2003}
+		${OrIf} ${IsWinXP}
 			StrCpy $0 "$INSTDIR\args_server03.txt" ;Path of copy file from
 			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
 			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
