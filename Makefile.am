@@ -1,4 +1,4 @@
-ACLOCAL_eAMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4
 bin_PROGRAMS = urbackup_client_gui
 urbackup_client_gui_SOURCES = gui/GUI.cpp main.cpp ConfigPath.cpp Connector.cpp escape.cpp FileSettingsReader.cpp Info.cpp Logs.cpp Settings.cpp stringtools.cpp TaskBarBaloon.cpp tcpstack.cpp TrayIcon.cpp
 AM_CXXFLAGS = -DLINUX
