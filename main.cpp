@@ -57,6 +57,10 @@ int working_status=0;
 IMPLEMENT_APP_NO_MAIN(MyApp)
 #endif
 
+#ifndef _WIN32
+#undef wxUSE_TASKBARICON_BALLOONS
+#endif
+
 class TheFrame : public wxFrame {
 public:
     TheFrame(void) : wxFrame(NULL, -1, wxT("UrBackupGUI")) { }
@@ -271,7 +275,7 @@ void MyTimer::Notify()
 	}
 	working=true;
 
-	wxStandardPaths sp;
+	wxStandardPaths& sp=wxStandardPaths::Get();
 	static wxString cfgDir=sp.GetUserDataDir();
 	static long starttime=wxGetLocalTime();
 	static long startuptime_passed=0;
