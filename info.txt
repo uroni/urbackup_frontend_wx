@@ -1,4 +1,4 @@
-Author:
+﻿Author:
 Martin Raiber
 
 Translators:
@@ -10,7 +10,7 @@ Zhengyu Ren (Simplified Chinese and Traditional Chinese)
 janda (Slovak)
 paolobeldi (Italian)
 Artur Corumba (Portuguese - Brazil)
-drpt (Polish)
+Łukasz Milata (Polish)
 Ihor Maydanovich (Ukrainian)
 tnywos (Danish)
 

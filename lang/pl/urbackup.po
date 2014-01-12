@@ -4,14 +4,15 @@
 # 
 # Translators:
 # drpt <drupter@gmail.com>, 2013
+# drpt <drupter@gmail.com>, 2013-2014
 # uroni <urpc@gmx.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-10-06 12:53+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2014-01-12 19:38+0000\n"
+"Last-Translator: drpt <drupter@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/urbackup/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,19 +21,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Encrypted transfer:"
-msgstr "Transfer szyfrowany:"
+msgstr "Szyfrowanie transferu:"
 
 msgid "Compressed transfer:"
-msgstr "Transfer kompresowany:"
+msgstr "Kompresja transferu:"
 
 msgid "Max backups speed for internet connection:"
-msgstr "Maks. prędkość kopii dla połączeń internetowych:"
+msgstr "Maks. prędkość kopii zapasowych przez internet:"
 
 msgid "Do full file backups over internet:"
 msgstr "Wykonuj pełne kopie zapasowe plików przez internet:"
 
 msgid "Do image backups over internet:"
-msgstr "Wykonuj kopie obrazowe przez internet:"
+msgstr "Wykonuj obraz dysku przez internet:"
 
 msgid "Internet server password:"
 msgstr "Internetowe hasło serwera:"
@@ -47,7 +48,7 @@ msgid "Enable backup via internet:"
 msgstr "Włącz kopie zapasowe przez internet:"
 
 msgid "Max backup speed for local network:"
-msgstr "Maks. prędkość kopii zapasowych w sieci lokalnej:"
+msgstr "Maks. prędkość kopii zapasowej w sieci lokalnej:"
 
 msgid "A new backup server has been found. Click here to use it"
 msgstr "Znaleziono nowy serwer kopii zapasowych. Kliknij tutaj aby go używać."
@@ -62,10 +63,10 @@ msgid "Client"
 msgstr "Klient"
 
 msgid "Image backups"
-msgstr "Kopie obrazowe"
+msgstr "Obraz dysku"
 
 msgid "File backups"
-msgstr "Kopie plikowe"
+msgstr "Kopie zapasowe plików"
 
 msgid "Include in backup (with wildcards):"
 msgstr "Uwzględnij w kopii zapasowej (z wzorcami):"
@@ -74,13 +75,13 @@ msgid " is not a volume"
 msgstr "nie jest woluminem"
 
 msgid "Volumes to backup:"
-msgstr "Woluminy do wykonywania kopii zapasowej:"
+msgstr "Woluminy do wykonywania obrazu dysku:"
 
 msgid "Waiting for server..."
 msgstr "Czekam na serwer..."
 
 msgid "Backup delay after system start is not a number"
-msgstr "Opóźnienie startu kopii bezpieczeństwa po uruchomieniu systemu nie jest liczbą."
+msgstr "Opóźnienie kopii zapasowej po uruchomieniu systemu nie jest liczbą."
 
 msgid "min"
 msgstr "min"
@@ -89,13 +90,13 @@ msgid "Computer name:"
 msgstr "Nazwa komputera:"
 
 msgid "Exclude from backup (with wildcards):"
-msgstr "Wyłącz z kopii zapasowej (z wzorcami):"
+msgstr "Wyklucz z kopii zapasowej (z wzorcami):"
 
 msgid "Backup window:"
 msgstr "Okno wykonywania kopi zapasowej:"
 
 msgid "Backup delay after system start:"
-msgstr "Opóźnienie wykonywania kopii zapasowej po starcie systemu:"
+msgstr "Opóźnienie kopii zapasowej po starcie systemu:"
 
 msgid "Name:"
 msgstr "Nazwa:"
@@ -113,16 +114,16 @@ msgid "Logs"
 msgstr "Dziennik zdarzeń"
 
 msgid "Add/Remove backup paths"
-msgstr "Dodaj/Usuń katalogi"
+msgstr "Dodaj/Usuń foldery"
 
 msgid "Settings"
 msgstr "Ustawienia"
 
 msgid "Do incremental image backup"
-msgstr "Wykonaj przyrostową kopię zapasową obrazu"
+msgstr "Wykonaj przyrostowy obraz dysku"
 
 msgid "Do full image backup"
-msgstr "Wykonaj pełną kopię zapasową obrazu"
+msgstr "Wykonaj pełny obraz dysku"
 
 msgid "Do incremental file backup"
 msgstr "Wykonaj przyrostową kopię zapasową plików"
@@ -134,49 +135,49 @@ msgid "Continuing failed: No connection to backup server."
 msgstr "Kontynuacja nieudana: Brak połączenia z serwerem kopii zapasowych."
 
 msgid "Pausing failed: No connection to backup server."
-msgstr "Pauzowanie nieudane: Brak połączenia z serwerem kopii zapasowych."
+msgstr "Pauza nieudana: Brak połączenia z serwerem kopii zapasowych."
 
 msgid "Could not start backup, because no backup server was found."
-msgstr "Nie udało się rozpocząć kopii zapasowej ponieważ nie znaleziono serwera kopii zapasowych."
+msgstr "Nie udało się rozpocząć tworzenia kopii zapasowej, ponieważ nie znaleziono serwera kopii zapasowych."
 
 msgid "A backup is already running. Could not start another one."
 msgstr "Kopia zapasowa jest w trakcie wykonywania. Nie można rozpocząć kolejnej."
 
 msgid "Maximal number of full image backups is not a number"
-msgstr "Maksymalna liczba pełnych kopii obrazowych nie jest liczbą."
+msgstr "Maksymalna liczba pełnych obrazów dysku nie jest liczbą."
 
 msgid "Minimal number of full image backups is not a number"
-msgstr "Minimalna liczba kopii obrazowych nie jest liczbą."
+msgstr "Minimalna liczba pełnych obrazów dysku nie jest liczbą."
 
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Maksymalna liczba obrazowych kopii przyrostowych nie jest liczbą"
+msgstr "Maksymalna liczba przyrostowych obrazów dysku nie jest liczbą"
 
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Minimalna liczba obrazowych kopii przyrostowych nie jest liczbą."
+msgstr "Minimalna liczba przyrostowych obrazów dysku nie jest liczbą."
 
 msgid "Minimal number of full file backups is not a number"
-msgstr "Minimalna liczba plikowych pełnych kopii zapasowych nie jest liczbą."
+msgstr "Minimalna liczba pełnych kopii zapasowych plików nie jest liczbą."
 
 msgid "The maximal number of full file backups is not a number"
-msgstr "Maksymalna liczba plikowych pełnych kopii zapasowych nie jest liczbą"
+msgstr "Maksymalna liczba pełnych kopii zapasowych plików nie jest liczbą"
 
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "Minimalna liczba plikowych przyrostowych kopii zapasowych nie jest liczbą"
+msgstr "Minimalna liczba przyrostowych kopii zapasowych plików nie jest liczbą"
 
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Maksymalna liczba plikowych przyrostowych kopii zapasowych nie jest liczbą"
+msgstr "Maksymalna liczba przyrostowych kopii zapasowych plików nie jest liczbą"
 
 msgid "The incremental image backup time is not a number"
-msgstr "Czas obrazowej przyrostowej kopii zapasowej nie jest liczbą"
+msgstr "Interwał wykonywania przyrostowego obrazu dysku nie jest liczbą"
 
 msgid "The full image backup interval  is not a number"
-msgstr "Interwał pełnej obrazowej kopii zapasowej nie jest liczbą"
+msgstr "Interwał wykonywania pełnego obrazu dysku nie jest liczbą"
 
 msgid "The full backup interval  is not a number"
-msgstr "Interwal pełnej kopii zapasowej nie jest liczbą"
+msgstr "Interwał wykonywania pełnej kopii zapasowej plików nie jest liczbą"
 
 msgid "The incremental backup interval is not a number"
-msgstr "Interwał przyrostowej kopii zapasowej nie jest liczbą"
+msgstr "Interwał wykonywania przyrostowej kopii zapasowej plików nie jest liczbą"
 
 msgid "Last backup on "
 msgstr "Ostatnia kopia zapasowa "
@@ -185,50 +186,50 @@ msgid "No current backup. "
 msgstr "Brak aktualnej kopii zapasowej."
 
 msgid "_percent_ done. "
-msgstr "_percent zrobić."
+msgstr "_percent_ wykonane."
 
 msgid "Full image backup running. "
-msgstr "Trwa tworzenie pełnej obrazowej kopii zapasowej. "
+msgstr "Trwa wykonywanie obrazu dysku. "
 
 msgid "Incremental image backup running. "
-msgstr "Trwa tworzenie obrazowej przyrostowej kopii zapasowej. "
+msgstr "Trwa wykonywanie przyrostowego obrazu dysku. "
 
 msgid "Full file backup running. "
-msgstr "Trwa tworzenie pełnej plikowej kopii zapasowej. "
+msgstr "Trwa wykonywanie pełnej kopii zapasowej plików. "
 
 msgid "Incremental file backup running. "
-msgstr "Trwa tworzenie przyrostowej plikowej kopii zapasowej. "
+msgstr "Trwa wykonywanie przyrostowej kopii zapasowej plików. "
 
 msgid "Cannot connect to backup server"
-msgstr "Nie można się połączyć się z serwerem"
+msgstr "Nie można połączyć się z serwerem kopii zapasowych "
 
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr "Jest dostępna nowa wersja UrBackup. Kliknij tutaj aby ją teraz zainstalować."
+msgstr "Dostępna jest nowa wersja UrBackup. Kliknij tutaj aby ją zainstalować."
 
 msgid "UrBackup: Update available"
-msgstr "UrBackup: dostępna aktualizacja"
+msgstr "UrBackup: Dostępna aktualizacja "
 
 msgid "Please select the directory that will be backed up."
-msgstr "Wybierz katalog do utworzenia kopii zapasowej."
+msgstr "Wybierz folder do wykonania kopii zapasowej plików"
 
 msgid "There was an error. Currently nothing can be backed up."
-msgstr "Wystąpił błąd. Obecnie nie można tworzyć żadnej kopii zapasowej."
+msgstr "Wystąpił błąd. Obecnie nie można wykonać żadnej kopii zapasowej."
 
 msgid "Remove path"
-msgstr "Usuń katalog"
+msgstr "Usuń folder"
 
 msgid "Add path"
-msgstr "Dodaj katalog"
+msgstr "Dodaj folder"
 
 msgid "Remove/Add backup paths"
-msgstr "Usuń/Dodaj katalog"
+msgstr "Usuń/Dodaj foldery"
 
 msgid "Author:"
-msgstr "Autor:"
+msgstr "Autor: "
 
 msgid "Version:"
-msgstr "Wersja:"
+msgstr "Wersja: "
 
 msgid "Exit"
 msgstr "Wyjście"
@@ -261,37 +262,37 @@ msgid "hours"
 msgstr "godzin"
 
 msgid "Maximal number of full image backups:"
-msgstr "Maksymalna liczba pełnych kopii obrazowych:"
+msgstr "Maksymalna liczba pełnych obrazów dysku:"
 
 msgid "Minimal number of full image backups:"
-msgstr "Minimalna liczba pełnych kopii obrazowych:"
+msgstr "Minimalna liczba pełnych obrazów dysku:"
 
 msgid "Maximal number of incremental image backups:"
-msgstr "Maksymalna liczba przyrostowych kopii obrazowych:"
+msgstr "Maksymalna liczba przyrostowych obrazów dysku:"
 
 msgid "Minimal number of incremental image backups:"
-msgstr "Minimalna liczba przyrostowych kopii obrazowych:"
+msgstr "Minimalna liczba przyrostowych obrazów dysku:"
 
 msgid "Maximal number of full file backups:"
-msgstr "Maksymalna liczba pełnych plikowych kopii zapasowych"
+msgstr "Maksymalna liczba pełnych kopii zapasowych:"
 
 msgid "Minimal number of full file backups:"
-msgstr "Minimalna liczba pełnych plikowych kopii zapasowych:"
+msgstr "Minimalna liczba pełnych kopii zapasowych:"
 
 msgid "Maximal number of incremental file backups:"
-msgstr "Maksymalna liczba przyrostowych plikowych kopii zapasowych:"
+msgstr "Maksymalna liczba przyrostowych kopii zapasowych:"
 
 msgid "Minimal number of incremental file backups:"
-msgstr "Minimalna liczba przyrostowych plikowych kopii zapasowych:"
+msgstr "Minimalna liczba przyrostowych kopii zapasowych:"
 
 msgid "Interval for full image backups:"
-msgstr "Interwał wykonywania pełnych kopii obrazowych:"
+msgstr "Interwał wykonywania pełnego obrazu dysku:"
 
 msgid "Interval for incremental image backups:"
-msgstr "Interwał wykonywania przyrostowych kopii obrazowych:"
+msgstr "Interwał wykonywania przyrostowego obrazu dysku:"
 
 msgid "Interval for full file backups:"
-msgstr "Interwał pełnych plikowych kopii zapasowej:"
+msgstr "Interwał wykonywania pełnej kopii zapasowej:"
 
 msgid "Interval for incremental file backups:"
-msgstr "Interwał przyrostowych plikowych kopii zapasowych:"
+msgstr "Interwał wykonywania przyrostowej kopii zapasowej:"
