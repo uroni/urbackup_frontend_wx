@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# osiengine <m.heidari@osiengine.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2014-01-13 04:20+0000\n"
+"Last-Translator: osiengine <m.heidari@osiengine.com>\n"
+"Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/urbackup/language/fa_IR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Encrypted transfer:"
+msgstr "انتقال رمزنگاری شده"
+
+msgid "Compressed transfer:"
+msgstr "انتقال فشرده شده"
+
+msgid "Max backups speed for internet connection:"
+msgstr "حداکثر سرعت پشتیبان گیری برای ارتباط اینترنتی"
+
+msgid "Do full file backups over internet:"
+msgstr "پشتیبان گیری فایل بر روی اینترنت"
+
+msgid "Do image backups over internet:"
+msgstr "پشتیبان گیری تصاویر بر روی اینترنت"
+
+msgid "Internet server password:"
+msgstr "کلمه عبور سرور اینترنتی"
+
+msgid "Internet server port:"
+msgstr "پورت سرور اینترنتی"
+
+msgid "Internet server name/IP:"
+msgstr "نام/ip سرور اینترنتی"
+
+msgid "Enable backup via internet:"
+msgstr "فعال سازی پشتیبان گیری توسط اینترنت"
+
+msgid "Max backup speed for local network:"
+msgstr "حداکثر سرعت پشتیبان گیری برای شبکه داخلی"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "سرور پشتیبان گیری جدیدی یافت شد. برای استفاده از آن کلیک کنید"
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: سرور جدید"
+
+msgid "Internet"
+msgstr "اینترنت"
+
+msgid "Client"
+msgstr "کلاینت"
+
+msgid "Image backups"
+msgstr "پشتیبان گیری تصویر"
+
+msgid "File backups"
+msgstr "پشتیبان گیری فایل"
+
+msgid "Include in backup (with wildcards):"
+msgstr "موجود در پشتیبان (توسط wildcards)"
+
+msgid " is not a volume"
+msgstr "حجم ندارد"
+
+msgid "Volumes to backup:"
+msgstr "حجم های پشتیبان گیری"
+
+msgid "Waiting for server..."
+msgstr "در انتطار سرور ..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "تاخیر پشتیبان گیری بعد از شروع سیستم عدد نیست"
+
+msgid "min"
+msgstr "دقیقه"
+
+msgid "Computer name:"
+msgstr "نام کامپیوتر"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "محروم از پشتیبان گیری (توسط wildcards)"
+
+msgid "Backup window:"
+msgstr "پنچره پشتیبان گیری"
+
+msgid "Backup delay after system start:"
+msgstr "تاخیر پشتیبان گیری بعد از شروع سیستم"
+
+msgid "Name:"
+msgstr "نام"
+
+msgid "Informations"
+msgstr "اطلاعات"
+
+msgid "Continue"
+msgstr "ادامه"
+
+msgid "Pause"
+msgstr "توقف"
+
+msgid "Logs"
+msgstr "لاگ ها"
+
+msgid "Add/Remove backup paths"
+msgstr "افزودن/برداشتن مسیرهای پشتیبان گیری"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Do incremental image backup"
+msgstr "پشتیبان گیری افزایشی تصویر"
+
+msgid "Do full image backup"
+msgstr "پشتیبان گیری کامل تصویر"
+
+msgid "Do incremental file backup"
+msgstr "پشتیبان گیری افزایشی فایل"
+
+msgid "Do full file backup"
+msgstr "پشتیبان گیری کامل فایل"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "قادر به ادامه نیست : به سرور پشتیبان متصل نیست"
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "قادر به توقف نیست : به سرور پشتیبان متصل نیست"
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "قادر به شروع پشتیبان گیری نیست زیرا سرور پشتیبان یافت نشد"
+
+msgid "A backup is already running. Could not start another one."
+msgstr "یک فرآیند پشتیبان گیری در حال اجراست. نمیتوان یک فرایند جدید شروع کرد"
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "حداکثر تعداد پشتیبان گیری کامل تصویر عدد نیست"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "کمترین تعداد پشتیبان گیری کامل تصویر عدد نیست"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "بیشترین تعداد پشتیبان گیری افزایشی تصویر عدد نیست"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "کمترین تعداد پشتیبان گیری افزایشی تصویر عدد نیست"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "کمترین تعداد پشتیبان گیری کامل فایل عدد نیست"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "بیشترین تعداد پشتیبان گیری کامل فایل عدد نیست"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "کمترین تعداد پشتیبان گیری افزایشی فایل عدد نیست"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "بیشترین تعداد پشتیبان گیری افزایشی فایل عدد نیست"
+
+msgid "The incremental image backup time is not a number"
+msgstr "زمان پشتیبان گیری افزایشی تصویر عدد نیست"
+
+msgid "The full image backup interval  is not a number"
+msgstr "زمان پشتیبان گیری کامل تصویر عدد نیست"
+
+msgid "The full backup interval  is not a number"
+msgstr "بازه پشتیبان گیری کامل عدد نیست"
+
+msgid "The incremental backup interval is not a number"
+msgstr "بازه پشتیبان گیری افزایشی عدد نیست"
+
+msgid "Last backup on "
+msgstr "آخرین پشتیبان گیری در"
+
+msgid "No current backup. "
+msgstr "بدون پشتیبان گیری فعلی"
+
+msgid "_percent_ done. "
+msgstr "_percent_ done. "
+
+msgid "Full image backup running. "
+msgstr "پشتیبان گیری کامل تصویر در حال اجراست"
+
+msgid "Incremental image backup running. "
+msgstr "پشتیبان گیری افزایشی تصویر در حال اجراست"
+
+msgid "Full file backup running. "
+msgstr "پشتیبان گیری کامل فایل در حال اجراست"
+
+msgid "Incremental file backup running. "
+msgstr "پشتیبان گیری افزایشی فایل در حال اجراست"
+
+msgid "Cannot connect to backup server"
+msgstr "نمیتواند به سرور پشتیبان گیری متصل شود"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "نسخه جدید برنامه موجود است. لطفا برای نصب کلیک کنید"
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: به روزرسانی موجود است"
+
+msgid "Please select the directory that will be backed up."
+msgstr "لطفا یک پوشه برای پشتیبان گیری انتخاب کنید"
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "با خطا مواجه شد. در حال حاضر نمیتوان پشتیبان گیری انجام داد."
+
+msgid "Remove path"
+msgstr "برداشتن مسیر"
+
+msgid "Add path"
+msgstr "افزودن مسیر"
+
+msgid "Remove/Add backup paths"
+msgstr "برداشتن/افزودن مسیرهای پشتیبان گیری"
+
+msgid "Author:"
+msgstr "نویسنده :"
+
+msgid "Version:"
+msgstr "نسخه :"
+
+msgid "Exit"
+msgstr "خروج"
+
+msgid "Errors"
+msgstr "خطاها"
+
+msgid "Warnings"
+msgstr "هشدارها"
+
+msgid "Infos"
+msgstr "اطلاعات"
+
+msgid "Filter:"
+msgstr "فیلتر:"
+
+msgid "Abort"
+msgstr "لغو"
+
+msgid "Ok"
+msgstr "تایید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "days"
+msgstr "روزها"
+
+msgid "hours"
+msgstr "ساعات"
+
+msgid "Maximal number of full image backups:"
+msgstr "حداکثر تعداد پشتیبان گیری کامل تصویر"
+
+msgid "Minimal number of full image backups:"
+msgstr "حداقل تعداد پشتیبان گیری کامل تصویر"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "حداکثر تعداد پشتیبان گیری افزایشی تصویر"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "حداقل تعداد پشتیبان گیری افزایشی تصویر"
+
+msgid "Maximal number of full file backups:"
+msgstr "حداکثر تعداد پشتیبان گیری کامل فایل"
+
+msgid "Minimal number of full file backups:"
+msgstr "حداقل تعداد پشتیبان گیری کامل فایل"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "حداکثر تعداد پشتیبان گیری افزایشی فایل"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "حداقل تعداد پشتیبان گیری افزایشی فایل"
+
+msgid "Interval for full image backups:"
+msgstr "بازه برای پشتیبان گیری کامل تصویر"
+
+msgid "Interval for incremental image backups:"
+msgstr "بازه برای پشتیبان گیری افزایشی تصویر"
+
+msgid "Interval for full file backups:"
+msgstr "بازه برای پشتیبان گیری کامل فایل"
+
+msgid "Interval for incremental file backups:"
+msgstr "بازه برای پشتیبان گیری افزایشی فایل"

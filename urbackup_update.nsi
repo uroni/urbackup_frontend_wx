@@ -41,6 +41,7 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Ukrainian"
 !insertmacro MUI_LANGUAGE "Danish"
 !insertmacro MUI_LANGUAGE "Dutch"
+!insertmacro MUI_LANGUAGE "Farsi"
 
 !define Unicode2Ansi "!insertmacro Unicode2Ansi"
 
@@ -238,6 +239,8 @@ Section "install"
 	File "data\lang\da\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\nl"
 	File "data\lang\nl\urbackup.mo"
+	SetOutPath "$INSTDIR\lang\fa"
+	File "data\lang\fa\urbackup.mo"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
