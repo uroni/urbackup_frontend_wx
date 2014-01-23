@@ -1,4 +1,4 @@
-set version=1.3-1
+set version=1.3.1-1
 
 candle -ext WixUtilExtension -ext WixFirewallExtension urbackup.wxs
 light urbackup.wixobj -ext WixUtilExtension -ext WixFirewallExtension -ext WixUIExtension -out "UrBackup Client %version%(x64).msi"
