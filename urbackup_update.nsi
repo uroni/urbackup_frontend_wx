@@ -50,6 +50,8 @@ RequestExecutionLevel highest
   Pop "${outVar}"
 !macroend  
  
+ 
+ Var INSTALL_TRAYICON
 
 Section "install"
 	${If} ${RunningX64}
@@ -122,12 +124,29 @@ Section "install"
 	
 	SetOutPath "$INSTDIR"
 	
+	
+	StrCpy $INSTALL_TRAYICON "0"
+	IfFileExists $INSTDIR\UrBackupClient.exe UrBackupClientExists PastUrBackupClientExists
+	UrBackupClientExists:
+	StrCpy $INSTALL_TRAYICON "1"
+	PastUrBackupClientExists:
+	
+	${If} $EXEFILE <> 'UrBackupUpdate.exe'
+	StrCpy $INSTALL_TRAYICON "1"
+	${EndIf}
+	
+	
+	
+	${If} $INSTALL_TRAYICON == "1"
+	
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${Else}
 		File "data\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+	${EndIf}
+	
 	${EndIf}
 	
 	${Unicode2Ansi} "UrBackupServer" $R0 	
@@ -162,7 +181,10 @@ Section "install"
 	
 	CreateDirectory "$SMPROGRAMS\UrBackup"
 	CreateShortCut "$SMPROGRAMS\UrBackup\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
+	
+	${If} $INSTALL_TRAYICON == "1"
 	CreateShortCut "$SMPROGRAMS\UrBackup\UrBackup.lnk" "$INSTDIR\UrBackupClient.exe" "" "$INSTDIR\UrBackupClient.exe" 0
+	${EndIf}
 	
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "DisplayName" "UrBackup (remove only)"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "UninstallString" "$INSTDIR\Uninstall.exe"
@@ -185,7 +207,9 @@ Section "install"
 		File "data\urbackup.dll"
 		File "data\urbackup_server03.dll"
 		File "data\urbackup_xp.dll"
+		${If} $INSTALL_TRAYICON == "1"
 		File "data\UrBackupClient.exe"
+		${EndIf}
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
 		File "data\UrBackupClient_cmd.exe"
@@ -196,7 +220,9 @@ Section "install"
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
+		${If} $INSTALL_TRAYICON == "1"
 		File "data_x64\UrBackupClient.exe"
+		${EndIf}
 		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\UrBackupClient_cmd.exe"
@@ -248,7 +274,9 @@ Section "install"
 	
 	CreateDirectory "$INSTDIR\urbackup\data"	
 	
+	${If} $INSTALL_TRAYICON == "1"
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "UrBackupClient" "$INSTDIR\UrBackupClient.exe"
+	${EndIf}
 	
 	${IfNot} ${RunningX64}
 		${If} ${IsWinXP}
@@ -387,12 +415,14 @@ Function .onInstSuccess
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
 	${EndIf}
-	StrCpy $0 "$INSTDIR\UrBackupClient.exe"
-	startplugin::start
-	Pop $0
-	${If} $0 == '0'
-		Exec '"$INSTDIR\UrBackupClient.exe"'
-	${EndIf}	
+	${If} $INSTALL_TRAYICON == "1"
+		StrCpy $0 "$INSTDIR\UrBackupClient.exe"
+		startplugin::start
+		Pop $0
+		${If} $0 == '0'
+			Exec '"$INSTDIR\UrBackupClient.exe"'
+		${EndIf}
+	${EndIf}
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32
