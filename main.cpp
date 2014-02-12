@@ -279,7 +279,7 @@ void MyTimer::Notify()
 	}
 	working=true;
 
-	wxStandardPaths& sp=wxStandardPaths::Get();
+	wxStandardPathsBase& sp=wxStandardPaths::Get();
 	static wxString cfgDir=sp.GetUserDataDir();
 	static long starttime=wxGetLocalTime();
 	static long startuptime_passed=0;
