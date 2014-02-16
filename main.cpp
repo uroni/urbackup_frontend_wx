@@ -21,6 +21,8 @@
 #include "main.h"
 #include "stringtools.h"
 #include "TaskBarBaloon.h"
+#include "Settings.h"
+#include "Logs.h"
 #include <iostream>
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
@@ -238,17 +240,56 @@ bool MyApp::OnInit()
 	wxImage::AddHandler(new wxICOHandler());
 	//wxInitAllImageHandlers();
 
-	tray=new TrayIcon;
-	bool b=tray->SetIcon(getAppIcon(wxT("backup-ok")), wxT("UrBackup Client"));
-	if(!b)
+	std::string cmd;
+
+	if(argc>1)
 	{
-		std::cout << "Setting icon failed." << std::endl;
+		cmd=argv[1];
 	}
 
-	timer=new MyTimer;
+	timer=NULL;
 
-	timer->Notify();
-	timer->Start(60000);
+	if(cmd.empty())
+	{
+		tray=new TrayIcon;
+		bool b=tray->SetIcon(getAppIcon(wxT("backup-ok")), wxT("UrBackup Client"));
+		if(!b)
+		{
+			std::cout << "Setting icon failed." << std::endl;
+		}
+
+		timer=new MyTimer;
+
+		timer->Notify();
+		timer->Start(60000);
+	}
+	else if(cmd==wxT("settings"))
+	{
+		timer=new MyTimer;
+		timer->Notify();
+
+		Settings *s=new Settings(NULL);
+	}
+	else if(cmd==wxT("paths"))
+	{
+		ConfigPath *cp=new ConfigPath(NULL);
+	}
+	else if(cmd==wxT("logs"))
+	{
+		Logs *l=new Logs(NULL);
+	}
+	else if(cmd==wxT("newserver"))
+	{
+		if(argc<3)
+		{
+			return false;
+		}
+		Connector::addNewServer(argv[2].ToStdString());
+	}
+	else
+	{
+		return false;
+	}
 
     return true;
 }

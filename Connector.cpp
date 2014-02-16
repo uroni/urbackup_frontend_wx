@@ -40,22 +40,24 @@ std::wstring ConvertToUnicode(const std::string &str);
 #endif
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args)
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command)
 {
+	const std::string pw_fn = change_command ? "pw_change.txt" : "pw.txt";
+
 	busy=true;
 	error=false;
 	if(pw.empty())
 	{
-		if(FileExists(g_res_path+"pw.txt"))
-			pw=getFile(g_res_path+"pw.txt");
-		else if(FileExists("pw.txt"))
-			pw=getFile("pw.txt");
-		else if(FileExists("/usr/local/var/urbackup/pw.txt"))
-			pw=getFile("/usr/local/var/urbackup/pw.txt");
-		else if(FileExists("/var/urbackup/pw.txt"))
-			pw=getFile("/var/urbackup/pw.txt");
-		else if(FileExists("/var/lib/urbackup/pw.txt"))
-			pw=getFile("/var/lib/urbackup/pw.txt");
+		if(FileExists(g_res_path+pw_fn))
+			pw=getFile(g_res_path+pw_fn);
+		else if(FileExists(pw_fn))
+			pw=getFile(pw_fn);
+		else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
+			pw=getFile("/usr/local/var/urbackup/"+pw_fn);
+		else if(FileExists("/var/urbackup/"+pw_fn))
+			pw=getFile("/var/urbackup/"+pw_fn);
+		else if(FileExists("/var/lib/urbackup/"+pw_fn))
+			pw=getFile("/var/lib/urbackup/"+pw_fn);
 		if(pw.empty())
 		{
 			std::cout << "Could not load password file!" << std::endl;
@@ -156,7 +158,7 @@ bool Connector::hasError(void)
 std::vector<SBackupDir> Connector::getSharedPaths(void)
 {
 	std::vector<SBackupDir> ret;
-	std::string d=getResponse("1GET BACKUP DIRS","");
+	std::string d=getResponse("1GET BACKUP DIRS","", true);
 	int lc=linecount(d);
 	for(int i=0;i<lc;i+=2)
 	{
@@ -197,7 +199,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		args+="&dir_"+nconvert(i)+"_name="+name;
 	}
 
-	std::string d=getResponse("SAVE BACKUP DIRS", args);
+	std::string d=getResponse("SAVE BACKUP DIRS", args, true);
 
 	if(d!="OK")
 		return false;
@@ -207,7 +209,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 
 SStatus Connector::getStatus(void)
 {
-	std::string d=getResponse("STATUS","");
+	std::string d=getResponse("STATUS","", false);
 
 	std::vector<std::string> toks;
 	Tokenize(d, toks, "#");
@@ -249,7 +251,7 @@ SStatus Connector::getStatus(void)
 
 unsigned int Connector::getIncrUpdateIntervall(void)
 {
-	std::string d=getResponse("GET INCRINTERVALL","");
+	std::string d=getResponse("GET INCRINTERVALL","", false);
 
 	return atoi(d.c_str());
 }
@@ -262,7 +264,7 @@ int Connector::startBackup(bool full)
 	else
 		s="START BACKUP INCR";
 
-	std::string d=getResponse(s,"");
+	std::string d=getResponse(s,"", false);
 
 	if(d=="RUNNING")
 		return 2;
@@ -280,7 +282,7 @@ int Connector::startImage(bool full)
 	else
 		s="START IMAGE INCR";
 
-	std::string d=getResponse(s,"");
+	std::string d=getResponse(s,"", false);
 
 	if(d=="RUNNING")
 		return 2;
@@ -294,7 +296,7 @@ bool Connector::updateSettings(const std::string &ndata)
 {
 	std::string data=ndata;
 	escapeClientMessage(data);
-	std::string d=getResponse("UPDATE SETTINGS "+data,"");
+	std::string d=getResponse("UPDATE SETTINGS "+data,"", true);
 
 	if(d!="OK")
 		return false;
@@ -304,7 +306,7 @@ bool Connector::updateSettings(const std::string &ndata)
 
 std::vector<SLogEntry> Connector::getLogEntries(void)
 {
-	std::string d=getResponse("GET LOGPOINTS","");
+	std::string d=getResponse("GET LOGPOINTS", "", true);
 	int lc=linecount(d);
 	std::vector<SLogEntry> ret;
 	for(int i=0;i<lc;++i)
@@ -322,7 +324,7 @@ std::vector<SLogEntry> Connector::getLogEntries(void)
 
 std::vector<SLogLine>  Connector::getLogdata(int logid, int loglevel)
 {
-	std::string d=getResponse("GET LOGDATA","logid="+nconvert(logid)+"&loglevel="+nconvert(loglevel));
+	std::string d=getResponse("GET LOGDATA","logid="+nconvert(logid)+"&loglevel="+nconvert(loglevel), true);
 	std::vector<std::string> lines;
 	TokenizeMail(d, lines, "\n");
 	std::vector<SLogLine> ret;
@@ -341,7 +343,7 @@ std::vector<SLogLine>  Connector::getLogdata(int logid, int loglevel)
 bool Connector::setPause(bool b_pause)
 {
 	std::string data=b_pause?"true":"false";
-	std::string d=getResponse("PAUSE "+data,"");
+	std::string d=getResponse("PAUSE "+data,"", false);
 
 	if(d!="OK")
 		return false;
@@ -356,7 +358,7 @@ bool Connector::isBusy(void)
 
 bool Connector::addNewServer(const std::string &ident)
 {
-	std::string d=getResponse("NEW SERVER","ident="+ident);
+	std::string d=getResponse("NEW SERVER","ident="+ident, true);
 
 	if(d!="OK")
 		return false;

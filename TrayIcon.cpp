@@ -17,13 +17,14 @@
 **************************************************************************/
 
 #include "TrayIcon.h"
-#include "ConfigPath.h"
-#include "Settings.h"
-#include "Logs.h"
 #include "main.h"
 #include "Connector.h"
 #include "Info.h"
 #include "capa_bits.h"
+
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -59,6 +60,39 @@ TrayIcon::TrayIcon(void)
 #endif
 }
 
+namespace
+{
+#ifdef _WIN32
+	void runCommand(std::string cmd, std::string arg1=std::string())
+	{
+		char module_path[MAX_PATH];
+		DWORD rc = GetModuleFileNameA(NULL, module_path, MAX_PATH);
+		if(rc!=0)
+		{
+			ShellExecuteA(NULL, "runas", module_path, (cmd + (arg1.empty()?std::string():(" "+arg1))).c_str(), NULL, SW_SHOWNORMAL);
+		}
+	}
+#else
+
+	std::string sudo_app;
+
+	void find_sudo_app()
+	{
+		if(system("type gksudo")==0) sudo_app="gksudo";
+		else if(system("type kdesudo")==0) sudo_app="kdesudo";
+		else if(system("type gksu")==0) sudo_app="gksu";
+		else if(system("type kdesu")==0) sudo_app="kdesu";
+		else sudo_app="sudo";
+	}
+
+	void runCommand(std::string cmd, std::string arg1=std::string())
+	{
+		wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+	}
+#endif
+}
+
+
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
 	if(evt.GetId()==ID_TI_EXIT)
@@ -68,7 +102,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 	}
 	if(evt.GetId()==ID_TI_ADD_PATH)
 	{
-		ConfigPath *cp=new ConfigPath(NULL);
+		runCommand("paths");
 	}
 	else if(evt.GetId()==ID_TI_BACKUP_FULL || evt.GetId()==ID_TI_BACKUP_INCR)
 	{
@@ -87,11 +121,11 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 	}
 	else if(evt.GetId()==ID_TI_SETTINGS)
 	{
-		Settings *s=new Settings(NULL);
+		runCommand("settings");
 	}
 	else if(evt.GetId()==ID_TI_LOGS)
 	{
-		Logs *l=new Logs(NULL);
+		runCommand("logs");
 	}
 	else if(evt.GetId()==ID_TI_BACKUP_IMAGE_FULL || evt.GetId()==ID_TI_BACKUP_IMAGE_INCR)
 	{
@@ -228,6 +262,6 @@ void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
 	}
 	else
 	{
-		Connector::addNewServer(new_ident);
+		runCommand("newserver", new_ident);
 	}
 }
