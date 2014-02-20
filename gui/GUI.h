@@ -27,6 +27,7 @@
 #include <wx/statbmp.h>
 #include <wx/notebook.h>
 #include <wx/panel.h>
+#include <wx/gauge.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -232,4 +233,30 @@ class GUIConfigPath : public wxDialog
 	
 };
 
-#endif //__GUI__
+///////////////////////////////////////////////////////////////////////////////
+/// Class GUIStatus
+///////////////////////////////////////////////////////////////////////////////
+class GUIStatus : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText30;
+		wxStaticText* m_staticText31;
+		wxGauge* m_gauge1;
+		wxStaticText* m_staticText32;
+		wxStaticText* m_staticText33;
+		wxStaticText* m_staticText36;
+		wxStaticText* m_staticText34;
+		wxStaticText* m_staticText35;
+		wxStaticText* m_staticText37;
+		wxStaticText* m_staticText38;
+	
+	public:
+		
+		GUIStatus( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~GUIStatus();
+	
+};
+
+#endif //__GUI_H__

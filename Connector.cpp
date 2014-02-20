@@ -22,6 +22,7 @@
 #include <wx/socket.h>
 #include "escape.h"
 #include <iostream>
+#include "json/json.h"
 
 std::string Connector::pw;
 bool Connector::error=false;
@@ -364,4 +365,41 @@ bool Connector::addNewServer(const std::string &ident)
 		return false;
 	else
 		return true;
+}
+
+SStatusDetails Connector::getStatusDetails()
+{
+	std::string d=getResponse("STATUS DETAIL","", false);
+
+	SStatusDetails ret;
+	ret.ok=false;
+
+	Json::Value root;
+    Json::Reader reader;
+
+	if(!reader.parse(d, root, false))
+	{
+		return ret;
+	}
+
+	ret.last_backup_time = root["last_backup_time"].asString();
+	ret.percent_done = root["percent_done"].asInt();
+	ret.currently_running = root["currently_running"].asString();
+	
+	std::vector<SUrBackupServer> servers;
+	Json::Value json_servers = root["servers"];
+	servers.resize(json_servers.size());
+	for(unsigned int i=0;i<json_servers.size();++i)
+	{
+		servers[i].internet_connection = json_servers[i]["internet_connection"].asBool();
+		servers[i].name = json_servers[i]["name"].asString();
+	}
+	ret.servers=servers;
+	ret.time_since_last_lan_connection = root["time_since_last_lan_connection"].asInt();
+	ret.internet_connected = root["internet_connected"].asBool();
+	ret.internet_status = root["internet_status"].asString();
+
+	ret.ok=true;
+
+	return ret;
 }

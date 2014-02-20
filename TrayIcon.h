@@ -26,6 +26,7 @@ public:
 	TrayIcon(void);
 	wxMenu* CreatePopupMenu(void);
 	void OnPopupClick(wxCommandEvent &evt);
+	void OnClick(wxCommandEvent &evt);
 	void OnBalloonClick(wxCommandEvent &evt);
 	void BalloonActionUpgrade(void);
 	void BalloonActionNewServer(const std::string &ident);

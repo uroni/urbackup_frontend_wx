@@ -21,6 +21,7 @@
 #include "Connector.h"
 #include "Info.h"
 #include "capa_bits.h"
+#include "Status.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -41,6 +42,7 @@
 #define ID_TI_PAUSE 108
 #define ID_TI_CONTINUE 109
 #define ID_TI_INFO 110
+#define ID_TI_STATUS 112
 
 extern MyTimer *timer;
 extern int working_status;
@@ -57,6 +59,9 @@ TrayIcon::TrayIcon(void)
 	balloon_action=0;
 #ifdef wxUSE_TASKBARICON_BALLOONS
 	Connect(wxEVT_TASKBAR_BALLOON_CLICK, (wxObjectEventFunction)&TrayIcon::OnBalloonClick, NULL, this);
+#endif
+#ifdef _WIN32
+	Connect(wxEVT_TASKBAR_LEFT_UP, (wxObjectEventFunction)&TrayIcon::OnClick, NULL, this);
 #endif
 }
 
@@ -95,11 +100,6 @@ namespace
 
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
-	if(evt.GetId()==ID_TI_EXIT)
-	{
-		wxExit();	
-		return;
-	}
 	if(evt.GetId()==ID_TI_ADD_PATH)
 	{
 		runCommand("paths");
@@ -172,6 +172,23 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 	{
 		Info *i=new Info(NULL);
 	}
+	else if(evt.GetId()==ID_TI_STATUS)
+	{
+		Status *s = new Status(NULL);
+	}
+	else if(evt.GetId()==ID_TI_EXIT)
+	{
+		if(!b_is_pausing)
+		{
+			Connector::setPause(true);
+		}
+		wxExit();
+	}
+}
+
+void TrayIcon::OnClick(wxCommandEvent &evt)
+{
+	Status *s = new Status(NULL);
 }
 
 wxMenu* TrayIcon::CreatePopupMenu(void)
@@ -209,18 +226,27 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	if(any_prev)
 	{
 		mnu->AppendSeparator();
+		any_prev=false;
 	}
 	if(!timer->hasCapability(DONT_SHOW_SETTINGS))
 	{
 		mnu->Append(ID_TI_SETTINGS, _("Settings") );
+		any_prev=true;
 	}
 	if(!timer->hasCapability(DONT_ALLOW_CONFIG_PATHS))
 	{
 		mnu->Append(ID_TI_ADD_PATH, _("Add/Remove backup paths"));
+		any_prev=true;
 	}
 	if(!timer->hasCapability(DONT_SHOW_LOGS))
 	{
 		mnu->Append(ID_TI_LOGS, _("Logs") );
+		any_prev=true;
+	}
+	if(any_prev)
+	{
+		mnu->AppendSeparator();
+		any_prev=false;
 	}
 	mnu->Append(ID_TI_INFO, _("Infos") );
 	if(working_status>0)
@@ -237,6 +263,8 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 			mnu->Append(ID_TI_CONTINUE, _("Continue"));
 		}
 	}
+	mnu->Append(ID_TI_STATUS, _("Status"));
+	mnu->Append(ID_TI_EXIT, _("Exit"));
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);
 	return mnu;
 }

@@ -16,6 +16,9 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{59437933-cec2-425e-b03b-fa40069e48bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="jsoncpp">
+      <UniqueIdentifier>{a12c0f84-292a-4778-8b4a-128e18592502}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConfigPath.cpp">
@@ -55,6 +58,12 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="TaskBarBaloon.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Status.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,6 +111,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="capa_bits.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

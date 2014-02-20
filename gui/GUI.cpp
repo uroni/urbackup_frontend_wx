@@ -619,10 +619,10 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText23->Wrap( -1 );
 	bSizer26->Add( m_staticText23, 0, wxALL, 5 );
 	
-	m_textCtrl14 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 170,100 ), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxVSCROLL );
+	m_textCtrl14 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 370,400 ), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxVSCROLL );
 	bSizer26->Add( m_textCtrl14, 0, wxALL, 5 );
 	
-	bSizer25->Add( bSizer26, 3, wxEXPAND, 5 );
+	bSizer25->Add( bSizer26, 5, wxEXPAND, 5 );
 	
 	bSizer24->Add( bSizer25, 6, wxEXPAND, 5 );
 	
@@ -744,3 +744,83 @@ GUIConfigPath::~GUIConfigPath()
 	
 }
 
+GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
+	
+	wxBoxSizer* bSizer34;
+	bSizer34 = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer36;
+	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText30 = new wxStaticText( this, wxID_ANY, _("Running:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30->Wrap( -1 );
+	bSizer36->Add( m_staticText30, 0, wxALL, 5 );
+	
+	m_staticText31 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	bSizer36->Add( m_staticText31, 0, wxALL, 5 );
+	
+	
+	bSizer34->Add( bSizer36, 0, wxEXPAND, 5 );
+	
+	m_gauge1 = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
+	m_gauge1->SetValue( 0 ); 
+	m_gauge1->SetMinSize( wxSize( 500,-1 ) );
+	m_gauge1->SetRange(100);
+	
+	bSizer34->Add( m_gauge1, 0, wxALL, 5 );
+
+	wxBoxSizer* bSizer12;
+	bSizer12 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText37 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText37->Wrap( -1 );
+	bSizer12->Add( m_staticText37, 0, wxALL, 5 );
+
+	bSizer34->Add( bSizer12, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer35;
+	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText32 = new wxStaticText( this, wxID_ANY, _("Servers:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32->Wrap( -1 );
+	bSizer35->Add( m_staticText32, 0, wxALL, 5 );
+	
+	m_staticText33 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText33->Wrap( -1 );
+	bSizer35->Add( m_staticText33, 0, wxALL, 5 );
+	
+	
+	bSizer34->Add( bSizer35, 0, wxEXPAND, 5 );
+	
+	m_staticText36 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText36->Wrap( -1 );
+	bSizer34->Add( m_staticText36, 0, wxALL, 5 );
+	
+	wxBoxSizer* bSizer37;
+	bSizer37 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText34 = new wxStaticText( this, wxID_ANY, _("Internet connection status:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34->Wrap( -1 );
+	bSizer37->Add( m_staticText34, 0, wxALL, 5 );
+	
+	m_staticText35 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText35->Wrap( -1 );
+	bSizer37->Add( m_staticText35, 0, wxALL, 5 );
+	
+	
+	bSizer34->Add( bSizer37, 0, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( bSizer34 );
+	this->Layout();
+	bSizer34->Fit( this );
+	
+	this->Centre( wxBOTH );
+}
+
+GUIStatus::~GUIStatus()
+{
+}

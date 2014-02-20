@@ -16,38 +16,21 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
-#include <wx/wx.h>
-#include <wx/timer.h>
-#include <wx/intl.h>
+#include "Connector.h"
+#include "gui/GUI.h"
 
-wxIcon getAppIcon(wxString fn);
-
-wxString getStatusText(wxString status);
-
-wxString getPercentText(wxString pcdone);
-
-class MyApp : public wxApp
-{
-  public:
-    virtual bool OnInit();
-	virtual int OnExit();
-
-private:
-	wxLocale m_locale;
-};
-
-class MyTimer : public wxTimer
+class Status : public GUIStatus, wxTimer
 {
 public:
-	MyTimer(void);
+	Status(wxWindow* parent);
 
-	void Notify(void);
-
-	bool hasCapability(int capa_bit);
-
-	void resetDisplayedUpdateInfo(void);
+	virtual void Notify(void);
 
 private:
-	int capa;
-	bool displayed_update_info;
+
+	bool updateStatus(int errcnt);
+
+	SStatusDetails last_status_details;
+
+	int error_count;
 };

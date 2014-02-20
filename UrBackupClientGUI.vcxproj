@@ -185,9 +185,11 @@
     <ClCompile Include="escape.cpp" />
     <ClCompile Include="FileSettingsReader.cpp" />
     <ClCompile Include="Info.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Logs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Status.cpp" />
     <ClCompile Include="stringtools.cpp" />
     <ClCompile Include="TaskBarBaloon.cpp" />
     <ClCompile Include="tcpstack.cpp" />
@@ -205,6 +207,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="Status.h" />
     <ClInclude Include="stringtools.h" />
     <ClInclude Include="TaskBarBaloon.h" />
     <ClInclude Include="tcpstack.h" />

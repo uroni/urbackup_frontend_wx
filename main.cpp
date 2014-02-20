@@ -307,6 +307,45 @@ MyTimer::MyTimer(void) :
 	resetDisplayedUpdateInfo();
 }
 
+wxString getStatusText(wxString status)
+{
+	if(status==wxT("INCR") )
+	{
+		return _("Incremental file backup running. ");
+	}
+	else if(status==wxT("FULL") )
+	{
+		return _("Full file backup running. ");
+	}
+	else if(status==wxT("INCRI") )
+	{
+		return _("Incremental image backup running. ");
+	}
+	else if(status==wxT("FULLI") )
+	{
+		return _("Full image backup running. ");
+	}
+	return wxT("");
+}
+
+wxString getPercentText(wxString pcdone)
+{
+	wxString ret;
+	if(!pcdone.empty())
+	{
+		if(pcdone!=wxT("-1"))
+		{
+			ret+=pcdone;
+			ret+=getPercentDoneText();
+		}
+		else
+		{
+			ret+=_("Indexing. ");
+		}
+	}
+	return ret;
+}
+
 void MyTimer::Notify()
 {
 	static bool working=false;
@@ -404,46 +443,30 @@ void MyTimer::Notify()
 	}
 	else if(status.status==wxT("INCR") )
 	{
-		status_text+=_("Incremental file backup running. ");
-		if(!status.pcdone.empty())
-		{
-			status_text+=status.pcdone;
-			status_text+=getPercentDoneText();
-		}
+		status_text+=getStatusText(status.status);
+		status_text+=getPercentText(status.pcdone);
 		icon_type=1;
 		working_status=1;
 
 	}
 	else if(status.status==wxT("FULL") )
 	{
-		status_text+=_("Full file backup running. ");
-		if(!status.pcdone.empty())
-		{
-			status_text+=status.pcdone;
-			status_text+=getPercentDoneText();
-		}
+		status_text+=getStatusText(status.status);
+		status_text+=getPercentText(status.pcdone);
 		icon_type=1;
 		working_status=2;
 	}
 	else if(status.status==wxT("INCRI") )
 	{
-		status_text+=_("Incremental image backup running. ");
-		if(!status.pcdone.empty())
-		{
-			status_text+=status.pcdone;
-			status_text+=getPercentDoneText();
-		}
+		status_text+=getStatusText(status.status);
+		status_text+=getPercentText(status.pcdone);
 		icon_type=1;
 		working_status=3;
 	}
 	else if(status.status==wxT("FULLI") )
 	{
-		status_text+=_("Full image backup running. ");
-		if(!status.pcdone.empty())
-		{
-			status_text+=status.pcdone;
-			status_text+=getPercentDoneText();
-		}
+		status_text+=getStatusText(status.status);
+		status_text+=getPercentText(status.pcdone);
 		icon_type=1;
 		working_status=4;
 	}

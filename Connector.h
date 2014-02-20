@@ -52,6 +52,42 @@ struct SLogLine
 	wxString msg;
 };
 
+struct SUrBackupServer
+{
+	bool internet_connection;
+	wxString name;
+
+	bool operator==(const SUrBackupServer& other) const
+	{
+		return internet_connection == other.internet_connection
+			&& name == other.name;
+	}
+};
+
+struct SStatusDetails
+{
+	bool ok;
+	wxString last_backup_time;
+	int percent_done;
+	wxString currently_running;
+	std::vector<SUrBackupServer> servers;
+	unsigned int time_since_last_lan_connection;
+	bool internet_connected;
+	wxString internet_status;
+
+	bool operator==(const SStatusDetails& other) const
+	{
+		return ok == other.ok
+			&& last_backup_time == other.last_backup_time
+			&& percent_done == other.percent_done
+			&& currently_running == other.currently_running
+			&& servers == other.servers
+			&& time_since_last_lan_connection/1000/60 == other.time_since_last_lan_connection/1000/60
+			&& internet_connected == other.internet_connected
+			&& internet_status == other.internet_status;
+	}
+};
+
 class Connector
 {
 public:
@@ -66,7 +102,7 @@ public:
 	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
 	static bool setPause(bool b_pause);
 	static bool addNewServer(const std::string &ident);
-
+	static SStatusDetails getStatusDetails();
 
 	static bool hasError(void);
 	static bool isBusy(void);
