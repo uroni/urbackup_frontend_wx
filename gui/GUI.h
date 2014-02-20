@@ -241,7 +241,6 @@ class GUIStatus : public wxDialog
 	private:
 	
 	protected:
-		wxStaticText* m_staticText30;
 		wxStaticText* m_staticText31;
 		wxGauge* m_gauge1;
 		wxStaticText* m_staticText32;

@@ -13,6 +13,14 @@ namespace
 	{
 		if(str==wxT("connected_local"))
 		{
+			return _("Initializing.");
+		}
+		else if(str==wxT("wait_local"))
+		{
+			return _("Waiting for local UrBackup server.");
+		}
+		else if(str==wxT("connected_local"))
+		{
 			unsigned int min_last_seen = (last_seen/1000)/60;
 
 			wxString minutes_ago;
@@ -36,7 +44,7 @@ namespace
 			return _("Error: ")+str.substr(6);
 		}
 
-		return wxT("");
+		return str;
 	}
 }
 

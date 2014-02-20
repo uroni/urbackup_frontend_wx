@@ -753,11 +753,7 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	
 	wxBoxSizer* bSizer36;
 	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText30 = new wxStaticText( this, wxID_ANY, _("Running:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText30->Wrap( -1 );
-	bSizer36->Add( m_staticText30, 0, wxALL, 5 );
-	
+
 	m_staticText31 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText31->Wrap( -1 );
 	bSizer36->Add( m_staticText31, 0, wxALL, 5 );
@@ -766,7 +762,6 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	bSizer34->Add( bSizer36, 0, wxEXPAND, 5 );
 	
 	m_gauge1 = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
-	m_gauge1->SetValue( 0 ); 
 	m_gauge1->SetMinSize( wxSize( 500,-1 ) );
 	m_gauge1->SetRange(100);
 	
