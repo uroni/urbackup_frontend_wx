@@ -112,6 +112,7 @@ private:
 
 	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command);
 	static std::string pw;
+	static std::string pw_change;
 	static bool error;
 	static bool busy;
 };

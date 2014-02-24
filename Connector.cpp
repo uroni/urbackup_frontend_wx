@@ -25,6 +25,7 @@
 #include "json/json.h"
 
 std::string Connector::pw;
+std::string Connector::pw_change;
 bool Connector::error=false;
 const size_t conn_retries=4;
 bool Connector::busy=false;
@@ -47,21 +48,36 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 
 	busy=true;
 	error=false;
-	if(pw.empty())
+	std::string curr_pw;
+
+	if(change_command)
+		curr_pw = pw_change;
+	else
+		curr_pw = pw;
+
+	if( curr_pw.empty())
 	{
 		if(FileExists(g_res_path+pw_fn))
-			pw=getFile(g_res_path+pw_fn);
+			curr_pw=getFile(g_res_path+pw_fn);
 		else if(FileExists(pw_fn))
-			pw=getFile(pw_fn);
+			curr_pw=getFile(pw_fn);
 		else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
-			pw=getFile("/usr/local/var/urbackup/"+pw_fn);
+			curr_pw=getFile("/usr/local/var/urbackup/"+pw_fn);
 		else if(FileExists("/var/urbackup/"+pw_fn))
-			pw=getFile("/var/urbackup/"+pw_fn);
+			curr_pw=getFile("/var/urbackup/"+pw_fn);
 		else if(FileExists("/var/lib/urbackup/"+pw_fn))
-			pw=getFile("/var/lib/urbackup/"+pw_fn);
-		if(pw.empty())
+			curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
+
+		if(curr_pw.empty())
 		{
 			std::cout << "Could not load password file!" << std::endl;
+		}
+		else
+		{
+			if(change_command)
+				pw_change = curr_pw;
+			else
+				pw = curr_pw;
 		}
 	}
 	wxSocketClient client(wxSOCKET_BLOCK);
@@ -95,7 +111,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		t_args=args;
 
 	CTCPStack tcpstack;
-	tcpstack.Send(&client, cmd+"#pw="+pw+t_args);
+	tcpstack.Send(&client, cmd+"#pw="+curr_pw+t_args);
 
 	char *resp=NULL;
 	char buffer[1024];

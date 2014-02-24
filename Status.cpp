@@ -25,7 +25,7 @@ namespace
 
 			wxString minutes_ago;
 			minutes_ago << min_last_seen << _(" minutes ago.");
-			return _("Connected to local UrBackup server.")+wxT(" \n")+_("Not trying to connect to Internet server.")+wxT(" \n")+_("Local server last seen ")+minutes_ago;
+			return _("Connected to local UrBackup server.")+wxT("\n")+_("Not trying to connect to Internet server.")+wxT("\n")+_("Local server last seen ")+minutes_ago;
 		}
 		else if(str==wxT("no_server"))
 		{
@@ -56,6 +56,8 @@ Status::Status(wxWindow* parent)
 
 	if(updateStatus(0))
 	{
+		SetFocus();
+		Raise();
 		Show(true);
 
 		Start(1000);
@@ -117,7 +119,14 @@ bool Status::updateStatus(int errcnt)
 
 	m_staticText31->SetLabel(status_text);
 
-	m_staticText37->SetLabel(_("Last backup on ")+status_details.last_backup_time);
+	if(!status_details.last_backup_time.empty())
+	{
+		m_staticText37->SetLabel(_("Last backup on ")+status_details.last_backup_time);
+	}
+	else
+	{
+		m_staticText37->SetLabel(wxEmptyString);
+	}
 
 	wxString servers_text;
 
@@ -135,6 +144,11 @@ bool Status::updateStatus(int errcnt)
 			servers_text+=_("No");
 
 		servers_text+=")";
+	}
+
+	if(status_details.servers.empty())
+	{
+		m_staticText32->SetLabel(wxEmptyString);
 	}
 
 	m_staticText33->SetLabel(servers_text);
