@@ -15,4 +15,4 @@ Ihor Maydanovich (Ukrainian)
 tnywos (Danish)
 osiengine group (Farsi)
 
-See license.txt for the licences of the libraries used and of UrBackup (GPL v3).
+See license.txt for the licences of the libraries used and of UrBackup (GPL v3+).

@@ -11,7 +11,7 @@ namespace
 {
 	wxString getInternetConnectionStatus(wxString str, unsigned int last_seen)
 	{
-		if(str==wxT("connected_local"))
+		if(str==wxT("initializing"))
 		{
 			return _("Initializing.");
 		}
@@ -29,7 +29,7 @@ namespace
 		}
 		else if(str==wxT("no_server"))
 		{
-			return _("No internet server configured.");
+			return _("No Internet server configured.");
 		}
 		else if(str==wxT("connected"))
 		{
@@ -94,6 +94,7 @@ bool Status::updateStatus(int errcnt)
 	if(status_text.empty())
 	{
 		status_text=_("Idle.");
+		m_gauge1->SetValue(0);
 		m_gauge1->Disable();
 	}
 	else
