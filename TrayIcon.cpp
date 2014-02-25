@@ -199,12 +199,12 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	{
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_FULL_FILE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), wxT("Jetzt ein volles Backup ausführen"));
+			mnu->Append(ID_TI_BACKUP_FULL, _("Do full file backup"), _("Jetzt ein volles Backup ausführen"));
 			any_prev=true;
 		}
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_FILE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), wxT("Jetzt ein inkrementelles Backup ausführen"));
+			mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), _("Jetzt ein inkrementelles Backup ausführen"));
 			any_prev=true;
 		}		
 	}
@@ -213,12 +213,12 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	{
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_FULL_IMAGE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Do full image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+			mnu->Append(ID_TI_BACKUP_IMAGE_FULL, _("Do full image backup"), _("Jetzt ein inkrementelles Image-Backup ausführen"));
 			any_prev=true;
 		}
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_IMAGE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), wxT("Jetzt ein inkrementelles Image-Backup ausführen"));
+			mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), _("Jetzt ein inkrementelles Image-Backup ausführen"));
 			any_prev=true;
 		}
 	}

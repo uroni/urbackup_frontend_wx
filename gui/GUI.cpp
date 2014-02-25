@@ -779,7 +779,7 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer35;
 	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText32 = new wxStaticText( this, wxID_ANY, _("Servers:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText32->Wrap( -1 );
 	bSizer35->Add( m_staticText32, 0, wxALL, 5 );
 	

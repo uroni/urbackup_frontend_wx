@@ -150,6 +150,10 @@ bool Status::updateStatus(int errcnt)
 	{
 		m_staticText32->SetLabel(wxEmptyString);
 	}
+	else
+	{
+		m_staticText32->SetLabel(_("Servers:"));
+	}
 
 	m_staticText33->SetLabel(servers_text);
 
