@@ -119,7 +119,11 @@ wxTextValidator getDigitSlashValidator(void)
 Settings::Settings(wxWindow* parent) : GUISettings(parent)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
+#ifdef _DEBUG
+	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
+#else
 	settings=new CFileSettingsReader(g_res_path+"urbackup/data/settings.cfg");
+#endif
 
 	std::wstring t;
 	if(getSettingsValue(L"update_freq_incr", &t, settings))

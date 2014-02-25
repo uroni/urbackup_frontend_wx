@@ -57,6 +57,11 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 
 	if( curr_pw.empty())
 	{
+#ifdef _DEBUG
+		if(FileExists(pw_fn))
+			curr_pw=getFile(pw_fn);
+		else
+#endif
 		if(FileExists(g_res_path+pw_fn))
 			curr_pw=getFile(g_res_path+pw_fn);
 		else if(FileExists(pw_fn))
