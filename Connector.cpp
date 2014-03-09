@@ -266,6 +266,11 @@ SStatus Connector::getStatus(void)
 		{
 			ret.new_server=wnarrow(it_new_server->second);
 		}
+		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
+		if(it_has_server!=params.end())
+		{
+			ret.has_server= ( it_has_server->second==L"true" );
+		}
 	}
 
 	return ret;

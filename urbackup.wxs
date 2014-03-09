@@ -114,6 +114,15 @@
             <Component Id="cmpA506A755F6439AB0DED04F16F9519F36" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3003}" Win64="$(var.isx64)">
                 <File Id="fil52333B0481A4FDF2FF93D4E4B10DA690" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress.ico" />
             </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F37" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3004}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA691" KeyPath="yes" Source="$(var.shared_data_dir)\backup-no-server.ico" />
+            </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F38" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3005}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA692" KeyPath="yes" Source="$(var.shared_data_dir)\backup-indexing.ico" />
+            </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F39" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3006}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA693" KeyPath="yes" Source="$(var.shared_data_dir)\backup-no-recent.ico" />
+            </Component>
             <Component Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" Guid="{A8C77B9A-482B-4282-939A-E454AA8B94F3}" Win64="$(var.isx64)">
                 <File Id="fil8F2E72C5A068C923F426772A12CB28F5" KeyPath="yes" Source="$(var.shared_data_dir)\curr_version.txt" />
             </Component>
@@ -226,6 +235,9 @@
             <ComponentRef Id="cmpA3688A751E01CECC3FC213B9110D8650" />
             <ComponentRef Id="cmp743471C3E6B3C2A36D480B78348AB71A" />
             <ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F36" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F37" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F38" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F39" />
             <ComponentRef Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" />
             <ComponentRef Id="cmpABF00809AEDF68FD55CB21FD6A79E6F1" />
             <ComponentRef Id="cmpA3C8DD197BD7132D070BA95A0D0737A9" />

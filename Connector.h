@@ -32,12 +32,17 @@ struct SBackupDir
 
 struct SStatus
 {
+	SStatus()
+		: pause(false), capa(0), has_server(false)
+	{
+	}
 	wxString lastbackupdate;
 	wxString status;
 	wxString pcdone;
 	bool pause;
 	int capa;
 	std::string new_server;
+	bool has_server;
 };
 
 struct SLogEntry

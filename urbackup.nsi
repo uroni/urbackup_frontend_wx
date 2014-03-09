@@ -138,16 +138,6 @@ Section "install"
 	${EndIf}
 	
 	
-	${Unicode2Ansi} "UrBackupServer" $R0 	
-	SimpleSC::ExistsService "$R0"
-	Pop $0
-	${If} $0 == '0'
-		SimpleSC::StopService "$R0"
-		Pop $0
-		SimpleSC::RemoveService "$R0"
-		Pop $0
-	${EndIf}
-	
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	SimpleSC::ExistsService "$R0"
 	Pop $0
@@ -201,6 +191,9 @@ Section "install"
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
 	File "data\backup-progress.ico"	
+	File "data\backup-no-server.ico"
+	File "data\backup-indexing.ico"
+	File "data\backup-no-recent.ico"
 	File "data\new.txt"	
 	File "data\logo1.png"
 	File "data\backup-progress-pause.ico"

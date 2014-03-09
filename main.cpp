@@ -49,7 +49,6 @@ std::string ConvertToUTF8(const std::wstring &input);
 
 TrayIcon *tray;
 MyTimer *timer;
-int icon_type=0;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
 bool incr_update_done=false;
@@ -67,6 +66,22 @@ class TheFrame : public wxFrame {
 public:
     TheFrame(void) : wxFrame(NULL, -1, wxT("UrBackupGUI")) { }
 };
+
+namespace
+{
+	enum ETrayIcon
+	{
+		ETrayIcon_OK,
+		ETrayIcon_PROGRESS,
+		ETrayIcon_ERROR,
+		ETrayIcon_NO_SERVER,
+		ETrayIcon_INDEXING,
+		ETrayIcon_PAUSED,
+		ETrayIcon_NO_RECENT
+	};
+
+	ETrayIcon icon_type=ETrayIcon_OK;
+}
 
 std::string g_lang="en";
 wxString res_path;
@@ -346,6 +361,24 @@ wxString getPercentText(wxString pcdone)
 	return ret;
 }
 
+namespace
+{
+	wxString getIconName(ETrayIcon selicon)
+	{
+		switch(selicon)
+		{
+		case ETrayIcon_OK: return wxT("backup-ok");
+		case ETrayIcon_PROGRESS: return wxT("backup-progress");
+		case ETrayIcon_ERROR: return wxT("backup-bad");
+		case ETrayIcon_NO_SERVER: return wxT("backup-no-server");
+		case ETrayIcon_INDEXING: return wxT("backup-indexing");
+		case ETrayIcon_PAUSED: return wxT("backup-progress-pause");
+		case ETrayIcon_NO_RECENT: return wxT("backup-no-recent");
+		default: wxEmptyString;
+		}
+	}
+}
+
 void MyTimer::Notify()
 {
 	static bool working=false;
@@ -417,12 +450,12 @@ void MyTimer::Notify()
 
 	if(Connector::hasError() )
 	{
-		if(icon_type!=4)
+		if(icon_type!=ETrayIcon_ERROR)
 		{
 			last_status=_("Cannot connect to backup server");
+			icon_type=ETrayIcon_ERROR;
 			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(wxT("backup-bad")), last_status);
-			icon_type=4;
+				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
 		}
 		working=false;
 		return;
@@ -430,14 +463,14 @@ void MyTimer::Notify()
 
 	capa=status.capa;
 
-	int last_icon_type=icon_type;
+	ETrayIcon last_icon_type=icon_type;
 	bool refresh=false;
 	
 	if(status.status==wxT("DONE") )
 	{
 		writestring(nconvert((int)startuptime_passed+(int)passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
 		lastbackuptime=startuptime_passed+passed;
-		icon_type=0;
+		icon_type=ETrayIcon_OK;
 		working_status=0;
 		refresh=true;
 	}
@@ -445,7 +478,7 @@ void MyTimer::Notify()
 	{
 		status_text+=getStatusText(status.status);
 		status_text+=getPercentText(status.pcdone);
-		icon_type=1;
+		icon_type=ETrayIcon_PROGRESS;
 		working_status=1;
 
 	}
@@ -453,32 +486,32 @@ void MyTimer::Notify()
 	{
 		status_text+=getStatusText(status.status);
 		status_text+=getPercentText(status.pcdone);
-		icon_type=1;
+		icon_type=ETrayIcon_PROGRESS;
 		working_status=2;
 	}
 	else if(status.status==wxT("INCRI") )
 	{
 		status_text+=getStatusText(status.status);
 		status_text+=getPercentText(status.pcdone);
-		icon_type=1;
+		icon_type=ETrayIcon_PROGRESS;
 		working_status=3;
 	}
 	else if(status.status==wxT("FULLI") )
 	{
 		status_text+=getStatusText(status.status);
 		status_text+=getPercentText(status.pcdone);
-		icon_type=1;
+		icon_type=ETrayIcon_PROGRESS;
 		working_status=4;
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
 		status_text+=_("No current backup. ");
-		icon_type=2;
+		icon_type=ETrayIcon_NO_RECENT;
 		working_status=0;
 	}
 	else
 	{
-		icon_type=0;
+		icon_type=ETrayIcon_OK;
 		working_status=0;
 	}
 
@@ -496,40 +529,38 @@ void MyTimer::Notify()
 		}
 	}
 
-	if(status.pause && icon_type==1)
+	if(status.pause && icon_type==ETrayIcon_PROGRESS)
 	{
-		icon_type=3;
+		icon_type=ETrayIcon_PAUSED;
+	}
+	else if(icon_type==ETrayIcon_PROGRESS && status.pcdone==wxT("-1"))
+	{
+		icon_type=ETrayIcon_INDEXING;
+	}
+	else if( (icon_type==ETrayIcon_NO_RECENT || icon_type==ETrayIcon_OK)
+		&& !status.has_server )
+	{
+		icon_type=ETrayIcon_NO_SERVER;
 	}
 
 	if(icon_type!=last_icon_type || last_status!=status_text || refresh)
 	{
 		last_status=status_text;
-		switch(icon_type)
-		{
-		case 0:
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(wxT("backup-ok")), status_text);
-			if(timer!=NULL)
-				timer->Start(60000);
-			break;
-		case 1:
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(wxT("backup-progress")), status_text);
-			if(timer!=NULL)
-				timer->Start(10000);
-			break;
-		case 2:
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(wxT("backup-bad")), status_text);
-			if(timer!=NULL)
-				timer->Start(60000);
-			break;
-		case 3:
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(wxT("backup-progress-pause")), status_text);
 
-			if(timer!=NULL)
+		if(tray!=NULL)
+		{
+			tray->SetIcon(getAppIcon(getIconName(icon_type)), status_text);
+		}
+		if(timer!=NULL)
+		{
+			if(icon_type==ETrayIcon_PROGRESS)
+			{
+				timer->Start(10000);
+			}
+			else
+			{
 				timer->Start(60000);
+			}
 		}
 	}
 
