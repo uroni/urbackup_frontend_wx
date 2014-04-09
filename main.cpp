@@ -376,6 +376,8 @@ namespace
 		case ETrayIcon_NO_RECENT: return wxT("backup-no-recent");
 		default: wxEmptyString;
 		}
+
+		return wxEmptyString;
 	}
 }
 
