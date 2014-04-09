@@ -42,7 +42,8 @@ std::wstring ConvertToUnicode(const std::string &str);
 #endif
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command)
+
+std::string Connector::getPasswordData( bool change_command )
 {
 	const std::string pw_fn = change_command ? "pw_change.txt" : "pw.txt";
 
@@ -62,29 +63,38 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			curr_pw=getFile(pw_fn);
 		else
 #endif
-		if(FileExists(g_res_path+pw_fn))
-			curr_pw=getFile(g_res_path+pw_fn);
-		else if(FileExists(pw_fn))
-			curr_pw=getFile(pw_fn);
-		else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
-			curr_pw=getFile("/usr/local/var/urbackup/"+pw_fn);
-		else if(FileExists("/var/urbackup/"+pw_fn))
-			curr_pw=getFile("/var/urbackup/"+pw_fn);
-		else if(FileExists("/var/lib/urbackup/"+pw_fn))
-			curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
+			if(FileExists(g_res_path+pw_fn))
+				curr_pw=getFile(g_res_path+pw_fn);
+			else if(FileExists(pw_fn))
+				curr_pw=getFile(pw_fn);
+			else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
+				curr_pw=getFile("/usr/local/var/urbackup/"+pw_fn);
+			else if(FileExists("/var/urbackup/"+pw_fn))
+				curr_pw=getFile("/var/urbackup/"+pw_fn);
+			else if(FileExists("/var/lib/urbackup/"+pw_fn))
+				curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
 
-		if(curr_pw.empty())
-		{
-			std::cout << "Could not load password file!" << std::endl;
-		}
-		else
-		{
-			if(change_command)
-				pw_change = curr_pw;
+			if(curr_pw.empty())
+			{
+				std::cout << "Could not load password file!" << std::endl;
+			}
 			else
-				pw = curr_pw;
-		}
+			{
+				if(change_command)
+					pw_change = curr_pw;
+				else
+					pw = curr_pw;
+			}
 	}
+
+	return curr_pw;
+}
+
+
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command)
+{
+	std::string curr_pw = getPasswordData(change_command);
+
 	wxSocketClient client(wxSOCKET_BLOCK);
 	wxIPV4address addr;
 	addr.Hostname(wxT("127.0.0.1"));

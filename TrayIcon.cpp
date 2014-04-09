@@ -75,27 +75,34 @@ namespace
 		DWORD rc = GetModuleFileNameW(NULL, module_path, MAX_PATH);
 		if(rc!=0)
 		{
-			STARTUPINFO sStartInfo;
-			ZeroMemory( &sStartInfo, sizeof(STARTUPINFO) );
-			sStartInfo.cb = sizeof(STARTUPINFO);
-			sStartInfo.wShowWindow = SW_SHOWDEFAULT;
-			sStartInfo.dwFlags = STARTF_USESHOWWINDOW;
+			if(!Connector::getPasswordData(true).empty())
+			{
+				STARTUPINFO sStartInfo;
+				ZeroMemory( &sStartInfo, sizeof(STARTUPINFO) );
+				sStartInfo.cb = sizeof(STARTUPINFO);
+				sStartInfo.wShowWindow = SW_SHOWDEFAULT;
+				sStartInfo.dwFlags = STARTF_USESHOWWINDOW;
 
-			PROCESS_INFORMATION sProcessInfo;
-			ZeroMemory( &sProcessInfo, sizeof(PROCESS_INFORMATION) );
+				PROCESS_INFORMATION sProcessInfo;
+				ZeroMemory( &sProcessInfo, sizeof(PROCESS_INFORMATION) );
 
-			BOOL ok = CreateProcessW( module_path, const_cast<LPWSTR>(widen(cmd+(arg1.empty()?std::string():(" "+arg1))).data()),
-				NULL, NULL, true,
-				NORMAL_PRIORITY_CLASS, NULL, NULL , &sStartInfo, &sProcessInfo );
+				BOOL ok = CreateProcessW( module_path, const_cast<LPWSTR>(std::wstring(std::wstring(L"\"")+std::wstring(module_path)+"\" "+widen(cmd+(arg1.empty()?std::string():(" "+arg1)))).data()),
+					NULL, NULL, true,
+					NORMAL_PRIORITY_CLASS, NULL, NULL , &sStartInfo, &sProcessInfo );
 
-			if ( !ok ) {
-				ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
+				if ( !ok ) {
+					ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
+				}
+				else
+				{
+					CloseHandle(sProcessInfo.hProcess);
+					CloseHandle(sProcessInfo.hThread);
+				}			
 			}
 			else
 			{
-				CloseHandle(sProcessInfo.hProcess);
-				CloseHandle(sProcessInfo.hThread);
-			}			
+				ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
+			}	
 		}
 	}
 #else
