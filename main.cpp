@@ -52,7 +52,7 @@ MyTimer *timer;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
 bool incr_update_done=false;
-int working_status=0;
+bool backup_is_running=false;
 
 #ifndef DD_RELEASE
 IMPLEMENT_APP_NO_MAIN(MyApp)
@@ -340,6 +340,14 @@ wxString getStatusText(wxString status)
 	{
 		return _("Full image backup running. ");
 	}
+	else if(status==wxT("R_INCR"))
+	{
+		return _("Resumed incremental file backup running. ");
+	}
+	else if(status==wxT("R_FULL"))
+	{
+		return _("Resumed full file backup running. ");
+	}
 	return wxT("");
 }
 
@@ -473,48 +481,32 @@ void MyTimer::Notify()
 		writestring(nconvert((int)startuptime_passed+(int)passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
 		lastbackuptime=startuptime_passed+passed;
 		icon_type=ETrayIcon_OK;
-		working_status=0;
+		backup_is_running=false;
 		refresh=true;
 	}
-	else if(status.status==wxT("INCR") )
+	else if(status.status==wxT("INCR") || 
+		status.status==wxT("FULL") ||
+		status.status==wxT("INCRI") ||
+		status.status==wxT("FULLI") ||
+		status.status==wxT("R_INCR") ||
+		status.status==wxT("R_FULL"))
 	{
 		status_text+=getStatusText(status.status);
 		status_text+=getPercentText(status.pcdone);
 		icon_type=ETrayIcon_PROGRESS;
-		working_status=1;
+		backup_is_running=true;
 
-	}
-	else if(status.status==wxT("FULL") )
-	{
-		status_text+=getStatusText(status.status);
-		status_text+=getPercentText(status.pcdone);
-		icon_type=ETrayIcon_PROGRESS;
-		working_status=2;
-	}
-	else if(status.status==wxT("INCRI") )
-	{
-		status_text+=getStatusText(status.status);
-		status_text+=getPercentText(status.pcdone);
-		icon_type=ETrayIcon_PROGRESS;
-		working_status=3;
-	}
-	else if(status.status==wxT("FULLI") )
-	{
-		status_text+=getStatusText(status.status);
-		status_text+=getPercentText(status.pcdone);
-		icon_type=ETrayIcon_PROGRESS;
-		working_status=4;
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
 		status_text+=_("No current backup. ");
 		icon_type=ETrayIcon_NO_RECENT;
-		working_status=0;
+		backup_is_running=false;
 	}
 	else
 	{
 		icon_type=ETrayIcon_OK;
-		working_status=0;
+		backup_is_running=false;
 	}
 
 	if(!status.lastbackupdate.Trim().empty() )

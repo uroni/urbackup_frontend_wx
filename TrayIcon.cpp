@@ -46,7 +46,7 @@
 #define ID_TI_STATUS 112
 
 extern MyTimer *timer;
-extern int working_status;
+extern bool backup_is_running;
 bool b_is_pausing=false;
 extern MyTimer *timer;
 
@@ -277,7 +277,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		any_prev=false;
 	}
 	mnu->Append(ID_TI_INFO, _("Infos") );
-	if(working_status>0)
+	if(backup_is_running)
 	{
 		if(b_is_pausing==false)
 		{
