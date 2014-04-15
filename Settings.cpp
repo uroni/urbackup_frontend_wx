@@ -382,21 +382,21 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrlInternetSpeed->SetValue(wxT("-"));
 	}
-	if(getSettingsValue(L"internet_compress", &t, settings) && t==L"true")
-	{
-		m_checkBoxInternetCompress->SetValue(true);
-	}
-	else
+	if(getSettingsValue(L"internet_compress", &t, settings) && t==L"false")
 	{
 		m_checkBoxInternetCompress->SetValue(false);
 	}
-	if(getSettingsValue(L"internet_encrypt", &t, settings) && t==L"true")
+	else
 	{
-		m_checkBoxInternetEncrypt->SetValue(true);
+		m_checkBoxInternetCompress->SetValue(true);
+	}
+	if(getSettingsValue(L"internet_encrypt", &t, settings) && t==L"false")
+	{
+		m_checkBoxInternetEncrypt->SetValue(false);
 	}
 	else
 	{
-		m_checkBoxInternetEncrypt->SetValue(false);
+		m_checkBoxInternetEncrypt->SetValue(true);
 	}
 
 	m_textCtrlInternetSpeed->SetValidator(getDigitSlashValidator());
