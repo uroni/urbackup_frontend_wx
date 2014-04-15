@@ -255,13 +255,20 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl15->SetValue(ConvertToWX(getServerName()));
 	}
-	if(getSettingsValue(L"backup_window", &t, settings))
+	if(getSettingsValue(L"backup_window_incr_file", &t, settings))
 	{
 		m_textCtrl17->SetValue(t);
 	}
 	else
 	{
-		m_textCtrl17->SetValue(wxT("1-7/0-24"));
+		if(getSettingsValue(L"backup_window", &t, settings))
+		{
+			m_textCtrl17->SetValue(t);
+		}
+		else
+		{
+			m_textCtrl17->SetValue(wxT("1-7/0-24"));
+		}
 	}
 	if(getSettingsValue(L"exclude_files", &t, settings))
 	{
@@ -646,6 +653,10 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	n_vals["computername"]=computername.ToUTF8();
 	n_vals["backup_window"]=backup_window.ToUTF8();
+	n_vals["backup_window_incr_file"]=backup_window.ToUTF8();
+	n_vals["backup_window_full_file"]=backup_window.ToUTF8();
+	n_vals["backup_window_incr_image"]=backup_window.ToUTF8();
+	n_vals["backup_window_full_image"]=backup_window.ToUTF8();
 	n_vals["exclude_files"]=exclude_files.ToUTF8();
 	n_vals["include_files"]=include_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
