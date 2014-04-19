@@ -1,20 +1,24 @@
 # UrBackup English translation
 # Copyright (C) 2011 Martin Raiber
 # This file is distributed under the same license as the UrBackup package.
-# Martin Raiber <martin@urbackup.org>, 2011.
-#
+# 
+# Translators:
+# Martin Raiber <martin@urbackup.org>, 2011
+# uroni <urpc@gmx.de>, 2013
+# uroni <urpc@gmx.de>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: UrBackup Client Frontend(wx) 1.0\n"
+"Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-02-20 23:46+0100\n"
-"Last-Translator: Martin Raiber <martin@urbackup.org>\n"
-"Language-Team: ENGLISH <martin@urbackup.org>\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/urbackup/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Encrypted transfer:"
 msgstr "Internettransfer verschlüsseln:"
@@ -47,8 +51,7 @@ msgid "Max backup speed for local network:"
 msgstr "Geschwindigkeitslimit lokal:"
 
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
-"Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
+msgstr "Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
 
 msgid "UrBackup: New server"
 msgstr "UrBackup: Neuer Server"
@@ -182,8 +185,8 @@ msgstr "Letztes Backup am "
 msgid "No current backup. "
 msgstr "Kein aktuelles Backup. "
 
-msgid "% done. "
-msgstr "% fertig. "
+msgid "_percent_ done. "
+msgstr "_percent_ done. "
 
 msgid "Full image backup running. "
 msgstr "Volles Image-Backup läuft. "
@@ -202,9 +205,7 @@ msgstr "Keine Verbindung zum Backupserver möglich"
 
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
-"Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu "
-"installieren"
+msgstr "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
 
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Update verfügbar"
@@ -213,8 +214,7 @@ msgid "Please select the directory that will be backed up."
 msgstr "Bitte Verzeichnis das gesichert werden soll auswählen"
 
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
-"Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgstr "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
 
 msgid "Remove path"
 msgstr "Pfad entfernen"

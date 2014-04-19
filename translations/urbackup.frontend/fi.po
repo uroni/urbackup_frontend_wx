@@ -1,298 +1,295 @@
 # UrBackup English translation
 # Copyright (C) 2011 Martin Raiber
 # This file is distributed under the same license as the UrBackup package.
-#
+# 
 # Translators:
-# Zhengyu Ren <renzhengyu@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-02-20 23:54+0100\n"
-"Last-Translator: renzhengyu <renzhengyu@gmail.com>\n"
-"Language-Team: Chinese (China) (GB2312) (http://www.transifex.com/projects/p/"
-"urbackup/language/zh_CN.GB2312/)\n"
+"PO-Revision-Date: 2014-01-29 17:35+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/urbackup/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN.GB2312\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.5\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Encrypted transfer:"
-msgstr "加密传输："
+msgstr ""
 
 msgid "Compressed transfer:"
-msgstr "压缩传输："
+msgstr ""
 
 msgid "Max backups speed for internet connection:"
-msgstr "通过互联网备份时的传输速率上限："
+msgstr ""
 
 msgid "Do full file backups over internet:"
-msgstr "通过互联网进行文件完全备份："
+msgstr ""
 
 msgid "Do image backups over internet:"
-msgstr "通过互联网进行磁盘映像备份："
+msgstr ""
 
 msgid "Internet server password:"
-msgstr "互联网服务器密码："
+msgstr ""
 
 msgid "Internet server port:"
-msgstr "互联网服务器端口："
+msgstr ""
 
 msgid "Internet server name/IP:"
-msgstr "互联网服务器主机名或IP地址："
+msgstr ""
 
 msgid "Enable backup via internet:"
-msgstr "启用通过互联网备份："
+msgstr ""
 
 msgid "Max backup speed for local network:"
-msgstr "通过局域网备份时的传输速率上限："
+msgstr ""
 
 msgid "A new backup server has been found. Click here to use it"
-msgstr "发现一个新的备份服务器，点击此处使用。"
+msgstr ""
 
 msgid "UrBackup: New server"
-msgstr "UrBackup: 新服务器"
+msgstr ""
 
 msgid "Internet"
-msgstr "互联网"
+msgstr ""
 
 msgid "Client"
-msgstr "客户端"
+msgstr ""
 
 msgid "Image backups"
-msgstr "磁盘映像备份"
+msgstr ""
 
 msgid "File backups"
-msgstr "文件备份"
+msgstr ""
 
 msgid "Include in backup (with wildcards):"
-msgstr "包括在备份中（带通配符）："
+msgstr ""
 
 msgid " is not a volume"
-msgstr "不是一个卷。"
+msgstr ""
 
 msgid "Volumes to backup:"
-msgstr "待备份的卷："
+msgstr ""
 
 msgid "Waiting for server..."
-msgstr "等待服务器中……"
+msgstr ""
 
 msgid "Backup delay after system start is not a number"
-msgstr "系统启动后延迟备份设置不是数字"
+msgstr ""
 
 msgid "min"
-msgstr "分钟"
+msgstr ""
 
 msgid "Computer name:"
-msgstr "计算机名："
+msgstr ""
 
 msgid "Exclude from backup (with wildcards):"
-msgstr "从备份中排除（带通配符）："
+msgstr ""
 
 msgid "Backup window:"
-msgstr "备份窗口："
+msgstr ""
 
 msgid "Backup delay after system start:"
-msgstr "系统启动后延迟："
+msgstr ""
 
 msgid "Name:"
-msgstr "名字："
+msgstr ""
 
 msgid "Informations"
-msgstr "信息"
+msgstr ""
 
 msgid "Continue"
-msgstr "继续"
+msgstr ""
 
 msgid "Pause"
-msgstr "暂停"
+msgstr ""
 
 msgid "Logs"
-msgstr "日志"
+msgstr ""
 
 msgid "Add/Remove backup paths"
-msgstr "增加或删除备份路径"
+msgstr ""
 
 msgid "Settings"
-msgstr "设置"
+msgstr ""
 
 msgid "Do incremental image backup"
-msgstr "执行磁盘映像增量备份"
+msgstr ""
 
 msgid "Do full image backup"
-msgstr "执行磁盘映像完全备份"
+msgstr ""
 
 msgid "Do incremental file backup"
-msgstr "执行文件增量备份"
+msgstr ""
 
 msgid "Do full file backup"
-msgstr "执行文件完全备份"
+msgstr ""
 
 msgid "Continuing failed: No connection to backup server."
-msgstr "无法继续：与备份服务器失去连接。"
+msgstr ""
 
 msgid "Pausing failed: No connection to backup server."
-msgstr "无法暂停：与备份服务器失去连接。"
+msgstr ""
 
 msgid "Could not start backup, because no backup server was found."
-msgstr "无法开始备份：非发现备份服务器。"
+msgstr ""
 
 msgid "A backup is already running. Could not start another one."
-msgstr "备份任务正在执行，无法开始执行更一任务。"
+msgstr ""
 
 msgid "Maximal number of full image backups is not a number"
-msgstr "磁盘映像完全备份数上限需要一个数字值"
+msgstr ""
 
 msgid "Minimal number of full image backups is not a number"
-msgstr "磁盘映像完全备份数下限需要一个数字值"
+msgstr ""
 
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "磁盘映像增量备份数上限需要一个数字值"
+msgstr ""
 
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "磁盘映像增量备份数下限需要一个数字值"
+msgstr ""
 
 msgid "Minimal number of full file backups is not a number"
-msgstr "文件完全备份数下限需要一个数字值"
+msgstr ""
 
 msgid "The maximal number of full file backups is not a number"
-msgstr "文件完全备份数上限需要一个数字值"
+msgstr ""
 
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "文件增量备份数下限需要一个数字值"
+msgstr ""
 
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "文件增量备份数上限需要一个数字值"
+msgstr ""
 
 msgid "The incremental image backup time is not a number"
-msgstr "磁盘映像增量备份时间需要一个数字值"
+msgstr ""
 
 msgid "The full image backup interval  is not a number"
-msgstr "磁盘映像完全备份时间间隔需要一个数字值"
+msgstr ""
 
 msgid "The full backup interval  is not a number"
-msgstr "完全备份时间间隔需要一个数字值"
+msgstr ""
 
 msgid "The incremental backup interval is not a number"
-msgstr "增量备份时间间隔需要一个数字值"
+msgstr ""
 
 msgid "Last backup on "
-msgstr "最近备份于"
+msgstr ""
 
 msgid "No current backup. "
-msgstr "当前无备份。"
+msgstr ""
 
-msgid "% done. "
-msgstr "%已完成。"
+msgid "_percent_ done. "
+msgstr ""
 
 msgid "Full image backup running. "
-msgstr "磁盘映像完全备份任务正在进行。"
+msgstr ""
 
 msgid "Incremental image backup running. "
-msgstr "磁盘映像增量备份任务正在进行。"
+msgstr ""
 
 msgid "Full file backup running. "
-msgstr "文件完全备份任务正在进行。"
+msgstr ""
 
 msgid "Incremental file backup running. "
-msgstr "文件增量备份任务正在进行。"
+msgstr ""
 
 msgid "Cannot connect to backup server"
-msgstr "无法连接到备份服务器。"
+msgstr ""
 
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr "UrBackup有新版本，点击此处安装。"
+msgstr ""
 
 msgid "UrBackup: Update available"
-msgstr "UrBackup：有可用更新"
+msgstr ""
 
 msgid "Please select the directory that will be backed up."
-msgstr "请先把需要备份的文件目录。"
+msgstr ""
 
 msgid "There was an error. Currently nothing can be backed up."
-msgstr "发生错误，当前无可备份。"
+msgstr ""
 
 msgid "Remove path"
-msgstr "删除目录"
+msgstr ""
 
 msgid "Add path"
-msgstr "添加目录"
+msgstr ""
 
 msgid "Remove/Add backup paths"
-msgstr "删除或添加备份路径"
+msgstr ""
 
 msgid "Author:"
-msgstr "作者："
+msgstr ""
 
 msgid "Version:"
-msgstr "版本："
+msgstr ""
 
 msgid "Exit"
-msgstr "退出"
+msgstr ""
 
 msgid "Errors"
-msgstr "错误"
+msgstr ""
 
 msgid "Warnings"
-msgstr "警告"
+msgstr ""
 
 msgid "Infos"
-msgstr "信息"
+msgstr ""
 
 msgid "Filter:"
-msgstr "过滤器："
+msgstr ""
 
 msgid "Abort"
-msgstr "终止"
+msgstr ""
 
 msgid "Ok"
-msgstr "OK"
+msgstr ""
 
 msgid "Active"
-msgstr "活动中"
+msgstr ""
 
 msgid "days"
-msgstr "天"
+msgstr ""
 
 msgid "hours"
-msgstr "小时"
+msgstr ""
 
 msgid "Maximal number of full image backups:"
-msgstr "磁盘映像完全备份数上限"
+msgstr ""
 
 msgid "Minimal number of full image backups:"
-msgstr "磁盘映像完全备份数下限"
+msgstr ""
 
 msgid "Maximal number of incremental image backups:"
-msgstr "磁盘映像增量备份数上限"
+msgstr ""
 
 msgid "Minimal number of incremental image backups:"
-msgstr "磁盘映像增量备份数下限"
+msgstr ""
 
 msgid "Maximal number of full file backups:"
-msgstr "文件完全备份数上限"
+msgstr ""
 
 msgid "Minimal number of full file backups:"
-msgstr "文件完全备份数下限"
+msgstr ""
 
 msgid "Maximal number of incremental file backups:"
-msgstr "文件增量备份数上限"
+msgstr ""
 
 msgid "Minimal number of incremental file backups:"
-msgstr "文件增量备份数下限"
+msgstr ""
 
 msgid "Interval for full image backups:"
-msgstr "磁盘映像完全备份时间间隔"
+msgstr ""
 
 msgid "Interval for incremental image backups:"
-msgstr "磁盘映像增量备份时间间隔"
+msgstr ""
 
 msgid "Interval for full file backups:"
-msgstr "文件完全备份时间间隔"
+msgstr ""
 
 msgid "Interval for incremental file backups:"
-msgstr "文件增量备份时间间隔"
+msgstr ""

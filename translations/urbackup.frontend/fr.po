@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
-#   <nerix@free.fr>, 2012.
+# charly_md <charles@cl-info.fr>, 2014
+# ericbosba <nerix@free.fr>, 2012
+# uroni <urpc@gmx.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2012-09-08 11:30+0000\n"
-"Last-Translator: ericbosba <nerix@free.fr>\n"
+"PO-Revision-Date: 2014-02-05 20:42+0000\n"
+"Last-Translator: charly_md <charles@cl-info.fr>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/urbackup/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,10 +30,10 @@ msgid "Max backups speed for internet connection:"
 msgstr "Vitesse de sauvegarde maximale sur internet :"
 
 msgid "Do full file backups over internet:"
-msgstr "Effectuer des sauvegardes de type \"fichier\" complètes par internet :"
+msgstr "Effectuer des sauvegardes de fichiers par internet :"
 
 msgid "Do image backups over internet:"
-msgstr "Effectuer des sauvegardes de type \"image\" par internet :"
+msgstr "Effectuer des sauvegardes d'image système par internet :"
 
 msgid "Internet server password:"
 msgstr "Mot de passe du serveur internet :"
@@ -61,10 +63,10 @@ msgid "Client"
 msgstr "Client"
 
 msgid "Image backups"
-msgstr "Sauvegardes de type \"image\""
+msgstr "Sauvegardes d'image système"
 
 msgid "File backups"
-msgstr "Sauvegardes de type \"fichier\""
+msgstr "Sauvegardes de fichier"
 
 msgid "Include in backup (with wildcards):"
 msgstr "Inclure à la sauvegarde (avec astérisques) :"
@@ -91,7 +93,7 @@ msgid "Exclude from backup (with wildcards):"
 msgstr "Exclure de la sauvegarde (avec astérisques) :"
 
 msgid "Backup window:"
-msgstr "Fenêtre de sauvegarde :"
+msgstr "Créneau horaire de sauvegarde :"
 
 msgid "Backup delay after system start:"
 msgstr "Délai de démarrage de la sauvegarde après démarrage du système :"
@@ -118,10 +120,10 @@ msgid "Settings"
 msgstr "Paramètres"
 
 msgid "Do incremental image backup"
-msgstr "Faire une image disque incrémentale"
+msgstr "Faire une image système incrémentale"
 
 msgid "Do full image backup"
-msgstr "Faire une image disque complète"
+msgstr "Faire une image système complète"
 
 msgid "Do incremental file backup"
 msgstr "Faire une sauvegarde incrémentale des fichiers"
@@ -145,13 +147,13 @@ msgid "Maximal number of full image backups is not a number"
 msgstr "Le nombre maximal d'image disque complète n'est pas un nombre"
 
 msgid "Minimal number of full image backups is not a number"
-msgstr "Le nombre minimall d'image disque complète n'est pas un nombre"
+msgstr "Le nombre minimall d'image système complète n'est pas un nombre"
 
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Le nombre maximal d'image disque incrémentale n'est pas un nombre"
+msgstr "Le nombre maximal d'image système incrémentale n'est pas un nombre"
 
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Le nombre minimal d'image disque incrémentale n'est pas un nombre"
+msgstr "Le nombre minimal d'image système incrémentale n'est pas un nombre"
 
 msgid "Minimal number of full file backups is not a number"
 msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombrer"
@@ -166,10 +168,10 @@ msgid "The maximal number of incremental file backups  is not a number"
 msgstr "Le nombre maximal de sauvegarde incrémentale de fichier n'est pas un nombre"
 
 msgid "The incremental image backup time is not a number"
-msgstr "L'intervale pour l'image disque incrémentale n'est pas un nombre"
+msgstr "L'intervale pour l'image système incrémentale n'est pas un nombre"
 
 msgid "The full image backup interval  is not a number"
-msgstr "L'intervale pour l'image disque complète n'est pas un nombre"
+msgstr "L'intervale pour l'image système complète n'est pas un nombre"
 
 msgid "The full backup interval  is not a number"
 msgstr "L'intervale de sauvegarde complète n'est pas un nombre"
@@ -183,14 +185,14 @@ msgstr "Dernière sauvegarde le "
 msgid "No current backup. "
 msgstr "Pas de sauvegarde récente."
 
-msgid "% done. "
-msgstr "% fait."
+msgid "_percent_ done. "
+msgstr "_pourcent_ fait. "
 
 msgid "Full image backup running. "
-msgstr "Image disque complète en cours."
+msgstr "Image système complète en cours."
 
 msgid "Incremental image backup running. "
-msgstr "Image disque incrémentielle en cours. "
+msgstr "Image système incrémentielle en cours. "
 
 msgid "Full file backup running. "
 msgstr "Sauvegarde complète des fichiers en cours."
@@ -224,7 +226,7 @@ msgid "Remove/Add backup paths"
 msgstr "Supprimer/Ajouter un chemin de sauvegarde"
 
 msgid "Author:"
-msgstr "Autheur:"
+msgstr "Auteur:"
 
 msgid "Version:"
 msgstr "Version:"
@@ -260,16 +262,16 @@ msgid "hours"
 msgstr "heures"
 
 msgid "Maximal number of full image backups:"
-msgstr "Nombre maximum d'image disque complète:"
+msgstr "Nombre maximum d'image système complète:"
 
 msgid "Minimal number of full image backups:"
-msgstr "Nombre minimum d'image disque complète:"
+msgstr "Nombre minimum d'image système complète:"
 
 msgid "Maximal number of incremental image backups:"
-msgstr "Nombre maximum d'image disque incrémentale:"
+msgstr "Nombre maximum d'image système incrémentale:"
 
 msgid "Minimal number of incremental image backups:"
-msgstr "Nombre minimum d'image disque incrémentale:"
+msgstr "Nombre minimum d'image système incrémentale:"
 
 msgid "Maximal number of full file backups:"
 msgstr "Nombre maximum de sauvegarde complète de type fichier:"
@@ -284,13 +286,13 @@ msgid "Minimal number of incremental file backups:"
 msgstr "Nombre minimum de sauvegarde incrémentale:"
 
 msgid "Interval for full image backups:"
-msgstr "Temps entre les images disque complète:"
+msgstr "Temps entre les images système complète:"
 
 msgid "Interval for incremental image backups:"
-msgstr "Temps entre les images disque incrémentales:"
+msgstr "Temps entre les images système incrémentales:"
 
 msgid "Interval for full file backups:"
-msgstr "Temps entre les sauvegardes complètes de tpye fichier:"
+msgstr "Temps entre les sauvegardes complètes de type fichier:"
 
 msgid "Interval for incremental file backups:"
 msgstr "Temps entre les sauvegardes incrémentales de type fichier:"

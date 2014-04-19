@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# uroni <urpc@gmx.de>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/urbackup/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Encrypted transfer:"
+msgstr "Transferencia cifrada:"
+
+msgid "Compressed transfer:"
+msgstr "Transferencia comprimida:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "Velocidad máxima de backups por internet:"
+
+msgid "Do full file backups over internet:"
+msgstr "Hacer copias completas de ficheros por internet:"
+
+msgid "Do image backups over internet:"
+msgstr "Hacer copias imagen por internet:"
+
+msgid "Internet server password:"
+msgstr "Contraseña del servidor Internet:"
+
+msgid "Internet server port:"
+msgstr "Puerto del servidor Internet:"
+
+msgid "Internet server name/IP:"
+msgstr "Nombre/IP del servidor Internet:"
+
+msgid "Enable backup via internet:"
+msgstr "Permitir copias por internet:"
+
+msgid "Max backup speed for local network:"
+msgstr "Velocidad máxima para las copias por red local:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Un nuevo servidor de backup ha sido encontrado. Haga clic aquí para usarlo"
+
+msgid "UrBackup: New server"
+msgstr "UrBackup: Nuevo servidor"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Client"
+msgstr "Cliente"
+
+msgid "Image backups"
+msgstr "Copia Imagen"
+
+msgid "File backups"
+msgstr "Copia de Ficheros"
+
+msgid "Include in backup (with wildcards):"
+msgstr "Incluir en la copia (admite comodines):"
+
+msgid " is not a volume"
+msgstr " no es un volumen"
+
+msgid "Volumes to backup:"
+msgstr "Volumenes a copiar:"
+
+msgid "Waiting for server..."
+msgstr "Esperando un servidor..."
+
+msgid "Backup delay after system start is not a number"
+msgstr "El retraso indicado para iniciar tras el arranque del sistema no es un número"
+
+msgid "min"
+msgstr "min"
+
+msgid "Computer name:"
+msgstr "Nombre del equipo:"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr "Excluir de la copia (admite comodines):"
+
+msgid "Backup window:"
+msgstr "Ventana de Backup:"
+
+msgid "Backup delay after system start:"
+msgstr "Tras arrancar el ordenador, la copia se retrasará:"
+
+msgid "Name:"
+msgstr "Nombre:"
+
+msgid "Informations"
+msgstr "Informaciones"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Pause"
+msgstr "Pausa"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Add/Remove backup paths"
+msgstr "Añadir/Eliminar carpetas a copiar"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Do incremental image backup"
+msgstr "Hacer copia imagen incremental"
+
+msgid "Do full image backup"
+msgstr "Hacer copia imagen completa"
+
+msgid "Do incremental file backup"
+msgstr "Hacer copia de ficheros incremental"
+
+msgid "Do full file backup"
+msgstr "Hacer copia de ficheros completa"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "Continuación fallida: No hay conexión con el servidor de backup."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "Pausa fallida: No hay conexión con el servidor de backup."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "No pudo comenzar la copia porque no se encontró ningún servidor de backup."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "Una copia está en marcha. No puedo comenzar una nueva copia."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "Minimal number of full image backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "Minimal number of full file backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The maximal number of full file backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The incremental image backup time is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The full image backup interval  is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The full backup interval  is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "The incremental backup interval is not a number"
+msgstr "El valor indicado no es un número"
+
+msgid "Last backup on "
+msgstr "Ultima copia "
+
+msgid "No current backup. "
+msgstr "No hay copias. "
+
+msgid "_percent_ done. "
+msgstr "_percent_ realizado. "
+
+msgid "Full image backup running. "
+msgstr "Ejecutando copia imagen completa. "
+
+msgid "Incremental image backup running. "
+msgstr "Ejecutando copia imagen incremental. "
+
+msgid "Full file backup running. "
+msgstr "Ejecutando copia de ficheros completa. "
+
+msgid "Incremental file backup running. "
+msgstr "Ejecutando copia de ficheros completa incremental. "
+
+msgid "Cannot connect to backup server"
+msgstr "No puedo conectar al servidor de backup "
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "Una nueva versión de UrBackup está disponible. Pulse aquí para instalarla ahora."
+
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Actualización disponible"
+
+msgid "Please select the directory that will be backed up."
+msgstr "Seleccione la carpeta que desea respaldar."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Ocurrió un error. En este momento no se puede copiar nada."
+
+msgid "Remove path"
+msgstr "Eliminar carpeta"
+
+msgid "Add path"
+msgstr "Añadir carpeta"
+
+msgid "Remove/Add backup paths"
+msgstr "Eliminar/Añadir carpetas a copiar"
+
+msgid "Author:"
+msgstr "Autor:"
+
+msgid "Version:"
+msgstr "Version:"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "Errors"
+msgstr "Errores"
+
+msgid "Warnings"
+msgstr "Avisos"
+
+msgid "Infos"
+msgstr "Info"
+
+msgid "Filter:"
+msgstr "Filtro:"
+
+msgid "Abort"
+msgstr "Abortar"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "days"
+msgstr "dias"
+
+msgid "hours"
+msgstr "horas"
+
+msgid "Maximal number of full image backups:"
+msgstr "Número máximo de copias imagen completas:"
+
+msgid "Minimal number of full image backups:"
+msgstr "Número mínimo de copias imagen completas:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr "Número máximo de copias imagen incrementales:"
+
+msgid "Minimal number of incremental image backups:"
+msgstr "Número mínimo de copias imagen incrementales:"
+
+msgid "Maximal number of full file backups:"
+msgstr "Número máximo de copias de ficheros completas:"
+
+msgid "Minimal number of full file backups:"
+msgstr "Número mínimo de copias de ficheros completas:"
+
+msgid "Maximal number of incremental file backups:"
+msgstr "Número máximo de copias de ficheros incrementales:"
+
+msgid "Minimal number of incremental file backups:"
+msgstr "Número mínimo de copias de ficheros incrementales:"
+
+msgid "Interval for full image backups:"
+msgstr "Intervalo entre copias imagen completas:"
+
+msgid "Interval for incremental image backups:"
+msgstr "Intervalo entre copias imagen incrermentales:"
+
+msgid "Interval for full file backups:"
+msgstr "Intervalo entre copias de ficheros completa:"
+
+msgid "Interval for incremental file backups:"
+msgstr "Intervalo entre copias de ficheros incrementales:"

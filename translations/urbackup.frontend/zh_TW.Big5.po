@@ -1,23 +1,23 @@
 # UrBackup English translation
 # Copyright (C) 2011 Martin Raiber
 # This file is distributed under the same license as the UrBackup package.
-#
+# 
 # Translators:
-# Zhengyu Ren <renzhengyu@gmail.com>, 2013.
+# uroni <urpc@gmx.de>, 2013
+# renzhengyu <renzhengyu@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-02-21 00:39+0100\n"
-"Last-Translator: renzhengyu <renzhengyu@gmail.com>\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Chinese (Taiwan) (Big5)  (http://www.transifex.com/projects/p/urbackup/language/zh_TW.Big5/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW.Big5\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.5\n"
 
 msgid "Encrypted transfer:"
 msgstr "加密傳輸："
@@ -184,8 +184,8 @@ msgstr "最近備份於"
 msgid "No current backup. "
 msgstr "當前無備份"
 
-msgid "% done. "
-msgstr "%已完成。"
+msgid "_percent_ done. "
+msgstr "_percent_已完成。"
 
 msgid "Full image backup running. "
 msgstr "磁碟鏡像完整備份正在進行中。"
@@ -202,7 +202,8 @@ msgstr "檔案增量備份正在進行中。"
 msgid "Cannot connect to backup server"
 msgstr "無法連接至備份伺服器"
 
-msgid "A new version of UrBackup is available. Please click here to install it now."
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
 msgstr "UrBackup有新版本，請點擊此處安裝。"
 
 msgid "UrBackup: Update available"
@@ -294,4 +295,3 @@ msgstr "檔案完整備份之時間間隔："
 
 msgid "Interval for incremental file backups:"
 msgstr "檔案增量備份之時間間隔："
-

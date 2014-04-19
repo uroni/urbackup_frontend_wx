@@ -3,293 +3,293 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
-# Martin Raiber <martin@urbackup.org>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-07-22 21:08+0000\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: ENGLISH <martin@urbackup.org>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/urbackup/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Encrypted transfer:"
-msgstr "Encrypted transfer:"
+msgstr ""
 
 msgid "Compressed transfer:"
-msgstr "Compressed transfer:"
+msgstr ""
 
 msgid "Max backups speed for internet connection:"
-msgstr "Max backups speed for internet connection:"
+msgstr ""
 
 msgid "Do full file backups over internet:"
-msgstr "Do full file backups over internet:"
+msgstr ""
 
 msgid "Do image backups over internet:"
-msgstr "Do image backups over internet:"
+msgstr ""
 
 msgid "Internet server password:"
-msgstr "Internet server password:"
+msgstr ""
 
 msgid "Internet server port:"
-msgstr "Internet server port:"
+msgstr ""
 
 msgid "Internet server name/IP:"
-msgstr "Internet server name/IP:"
+msgstr ""
 
 msgid "Enable backup via internet:"
-msgstr "Enable backup via internet:"
+msgstr ""
 
 msgid "Max backup speed for local network:"
-msgstr "Max backup speed for local network:"
+msgstr ""
 
 msgid "A new backup server has been found. Click here to use it"
-msgstr "A new backup server has been found. Click here to use it"
+msgstr ""
 
 msgid "UrBackup: New server"
-msgstr "UrBackup: New server"
+msgstr ""
 
 msgid "Internet"
-msgstr "Internet"
+msgstr ""
 
 msgid "Client"
-msgstr "Client"
+msgstr ""
 
 msgid "Image backups"
-msgstr "Image backups"
+msgstr ""
 
 msgid "File backups"
-msgstr "File backups"
+msgstr ""
 
 msgid "Include in backup (with wildcards):"
-msgstr "Include in backup (with wildcards):"
+msgstr ""
 
 msgid " is not a volume"
-msgstr " is not a volume"
+msgstr ""
 
 msgid "Volumes to backup:"
-msgstr "Volumes to backup:"
+msgstr ""
 
 msgid "Waiting for server..."
-msgstr "Waiting for server..."
+msgstr ""
 
 msgid "Backup delay after system start is not a number"
-msgstr "Backup delay after system start is not a number"
+msgstr ""
 
 msgid "min"
-msgstr "min"
+msgstr ""
 
 msgid "Computer name:"
-msgstr "Computer name:"
+msgstr ""
 
 msgid "Exclude from backup (with wildcards):"
-msgstr "Exclude from backup (with wildcards):"
+msgstr ""
 
 msgid "Backup window:"
-msgstr "Backup window:"
+msgstr ""
 
 msgid "Backup delay after system start:"
-msgstr "Backup delay after system start:"
+msgstr ""
 
 msgid "Name:"
-msgstr "Name:"
+msgstr ""
 
 msgid "Informations"
-msgstr "Informations"
+msgstr ""
 
 msgid "Continue"
-msgstr "Continue"
+msgstr ""
 
 msgid "Pause"
-msgstr "Pause"
+msgstr ""
 
 msgid "Logs"
-msgstr "Logs"
+msgstr ""
 
 msgid "Add/Remove backup paths"
-msgstr "Add/Remove backup paths"
+msgstr ""
 
 msgid "Settings"
-msgstr "Settings"
+msgstr ""
 
 msgid "Do incremental image backup"
-msgstr "Do incremental image backup"
+msgstr ""
 
 msgid "Do full image backup"
-msgstr "Do full image backup"
+msgstr ""
 
 msgid "Do incremental file backup"
-msgstr "Do incremental file backup"
+msgstr ""
 
 msgid "Do full file backup"
-msgstr "Do full file backup"
+msgstr ""
 
 msgid "Continuing failed: No connection to backup server."
-msgstr "Continuing failed: No connection to backup server."
+msgstr ""
 
 msgid "Pausing failed: No connection to backup server."
-msgstr "Pausing failed: No connection to backup server."
+msgstr ""
 
 msgid "Could not start backup, because no backup server was found."
-msgstr "Could not start backup, because no backup server was found."
+msgstr ""
 
 msgid "A backup is already running. Could not start another one."
-msgstr "A backup is already running. Could not start another one."
+msgstr ""
 
 msgid "Maximal number of full image backups is not a number"
-msgstr "Maximal number of full image backups is not a number"
+msgstr ""
 
 msgid "Minimal number of full image backups is not a number"
-msgstr "Minimal number of full image backups is not a number"
+msgstr ""
 
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Maximal number of incremental image backups is not a number"
+msgstr ""
 
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Minimal number of incremental image backups is not a number"
+msgstr ""
 
 msgid "Minimal number of full file backups is not a number"
-msgstr "Minimal number of full file backups is not a number"
+msgstr ""
 
 msgid "The maximal number of full file backups is not a number"
-msgstr "The maximal number of full file backups is not a number"
+msgstr ""
 
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "The minimal number of incremental file backups is not a number"
+msgstr ""
 
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "The maximal number of incremental file backups  is not a number"
+msgstr ""
 
 msgid "The incremental image backup time is not a number"
-msgstr "The incremental image backup time is not a number"
+msgstr ""
 
 msgid "The full image backup interval  is not a number"
-msgstr "The full image backup interval  is not a number"
+msgstr ""
 
 msgid "The full backup interval  is not a number"
-msgstr "The full backup interval  is not a number"
+msgstr ""
 
 msgid "The incremental backup interval is not a number"
-msgstr "The incremental backup interval is not a number"
+msgstr ""
 
 msgid "Last backup on "
-msgstr "Last backup on "
+msgstr ""
 
 msgid "No current backup. "
-msgstr "No current backup. "
+msgstr ""
 
 msgid "_percent_ done. "
-msgstr "_percent_ done. "
+msgstr ""
 
 msgid "Full image backup running. "
-msgstr "Full image backup running. "
+msgstr ""
 
 msgid "Incremental image backup running. "
-msgstr "Incremental image backup running. "
+msgstr ""
 
 msgid "Full file backup running. "
-msgstr "Full file backup running. "
+msgstr ""
 
 msgid "Incremental file backup running. "
-msgstr "Incremental file backup running. "
+msgstr ""
 
 msgid "Cannot connect to backup server"
-msgstr "Cannot connect to backup server"
+msgstr ""
 
-msgid "A new version of UrBackup is available. Please click here to install it now."
-msgstr "A new version of UrBackup is available. Please click here to install it now."
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr ""
 
 msgid "UrBackup: Update available"
-msgstr "UrBackup: Update available"
+msgstr ""
 
 msgid "Please select the directory that will be backed up."
-msgstr "Please select the directory that will be backed up."
+msgstr ""
 
 msgid "There was an error. Currently nothing can be backed up."
-msgstr "There was an error. Currently nothing can be backed up."
+msgstr ""
 
 msgid "Remove path"
-msgstr "Remove path"
+msgstr ""
 
 msgid "Add path"
-msgstr "Add path"
+msgstr ""
 
 msgid "Remove/Add backup paths"
-msgstr "Remove/Add backup paths"
+msgstr ""
 
 msgid "Author:"
-msgstr "Author:"
+msgstr ""
 
 msgid "Version:"
-msgstr "Version:"
+msgstr ""
 
 msgid "Exit"
-msgstr "Exit"
+msgstr ""
 
 msgid "Errors"
-msgstr "Errors"
+msgstr ""
 
 msgid "Warnings"
-msgstr "Warnings"
+msgstr ""
 
 msgid "Infos"
-msgstr "Infos"
+msgstr ""
 
 msgid "Filter:"
-msgstr "Filter:"
+msgstr ""
 
 msgid "Abort"
-msgstr "Abort"
+msgstr ""
 
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 msgid "days"
-msgstr "days"
+msgstr ""
 
 msgid "hours"
-msgstr "hours"
+msgstr ""
 
 msgid "Maximal number of full image backups:"
-msgstr "Maximal number of full image backups:"
+msgstr ""
 
 msgid "Minimal number of full image backups:"
-msgstr "Minimal number of full image backups:"
+msgstr ""
 
 msgid "Maximal number of incremental image backups:"
-msgstr "Maximal number of incremental image backups:"
+msgstr ""
 
 msgid "Minimal number of incremental image backups:"
-msgstr "Minimal number of incremental image backups:"
+msgstr ""
 
 msgid "Maximal number of full file backups:"
-msgstr "Maximal number of full file backups:"
+msgstr ""
 
 msgid "Minimal number of full file backups:"
-msgstr "Minimal number of full file backups:"
+msgstr ""
 
 msgid "Maximal number of incremental file backups:"
-msgstr "Maximal number of incremental file backups:"
+msgstr ""
 
 msgid "Minimal number of incremental file backups:"
-msgstr "Minimal number of incremental file backups:"
+msgstr ""
 
 msgid "Interval for full image backups:"
-msgstr "Interval for full image backups:"
+msgstr ""
 
 msgid "Interval for incremental image backups:"
-msgstr "Interval for incremental image backups:"
+msgstr ""
 
 msgid "Interval for full file backups:"
-msgstr "Interval for full file backups:"
+msgstr ""
 
 msgid "Interval for incremental file backups:"
-msgstr "Interval for incremental file backups:"
+msgstr ""

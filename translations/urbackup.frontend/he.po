@@ -1,0 +1,296 @@
+# UrBackup English translation
+# Copyright (C) 2011 Martin Raiber
+# This file is distributed under the same license as the UrBackup package.
+# 
+# Translators:
+# tsahye <tsahye@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: UrBackup\n"
+"Report-Msgid-Bugs-To: martin@urbackup.org\n"
+"POT-Creation-Date: 2011-01-05 13:53+0100\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: tsahye <tsahye@gmail.com>\n"
+"Language-Team: Hebrew (http://www.transifex.com/projects/p/urbackup/language/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Encrypted transfer:"
+msgstr "תעבורה מאובטחת:"
+
+msgid "Compressed transfer:"
+msgstr "כיווץ תעבורה:"
+
+msgid "Max backups speed for internet connection:"
+msgstr "מהירות מקסימלית לגיבוי דרך האינטרנט:"
+
+msgid "Do full file backups over internet:"
+msgstr "ביצוע גיבוי קבצים דרך האינטרנט:"
+
+msgid "Do image backups over internet:"
+msgstr "ביצוע גיבוי מערכת דרך האינטרנט:"
+
+msgid "Internet server password:"
+msgstr "סיסמת שרת אינטרנט:"
+
+msgid "Internet server port:"
+msgstr "פורט שרת אינטרנט:"
+
+msgid "Internet server name/IP:"
+msgstr "שם שרת אינטרנט/כתובת IP"
+
+msgid "Enable backup via internet:"
+msgstr "אפשר גיבוי דרך האינטרנט:"
+
+msgid "Max backup speed for local network:"
+msgstr "מהירות מקסימלית לגיבוי דרך הרשת:"
+
+msgid "A new backup server has been found. Click here to use it"
+msgstr "נמצא שרת גיבוי חדש. לחץ כאן כדי להשתמש בו"
+
+msgid "UrBackup: New server"
+msgstr "שרת חדש"
+
+msgid "Internet"
+msgstr "אינטרנט"
+
+msgid "Client"
+msgstr "לקוח"
+
+msgid "Image backups"
+msgstr "גיבוי מערכת"
+
+msgid "File backups"
+msgstr "גיבוי קבצים"
+
+msgid "Include in backup (with wildcards):"
+msgstr ""
+
+msgid " is not a volume"
+msgstr "לא כונן"
+
+msgid "Volumes to backup:"
+msgstr "כוננים לגיבוי:"
+
+msgid "Waiting for server..."
+msgstr "מחכה לשרת..."
+
+msgid "Backup delay after system start is not a number"
+msgstr ""
+
+msgid "min"
+msgstr "מינימום"
+
+msgid "Computer name:"
+msgstr "שם מחשב:"
+
+msgid "Exclude from backup (with wildcards):"
+msgstr ""
+
+msgid "Backup window:"
+msgstr "חלון גיבוי:"
+
+msgid "Backup delay after system start:"
+msgstr "זמן המתנה לגיבוי אחרי שהמערכת עלתה:"
+
+msgid "Name:"
+msgstr "שם:"
+
+msgid "Informations"
+msgstr "אינפורמציה"
+
+msgid "Continue"
+msgstr "המשך"
+
+msgid "Pause"
+msgstr "השהה"
+
+msgid "Logs"
+msgstr "לוגים"
+
+msgid "Add/Remove backup paths"
+msgstr "הוסף/הסר נתיבי גיבוי"
+
+msgid "Settings"
+msgstr "הגדרות"
+
+msgid "Do incremental image backup"
+msgstr ""
+
+msgid "Do full image backup"
+msgstr "בצע גיבוי מערכת מלא"
+
+msgid "Do incremental file backup"
+msgstr ""
+
+msgid "Do full file backup"
+msgstr "בצע גיבוי קבצים מלא"
+
+msgid "Continuing failed: No connection to backup server."
+msgstr "אי אפשר להמשיך בגיבוי: אין גישה לשרת הגיבויים."
+
+msgid "Pausing failed: No connection to backup server."
+msgstr "אי אפשר לעצור גיבוי: אין גישה לשרת הגיבויים."
+
+msgid "Could not start backup, because no backup server was found."
+msgstr "אי אפשר להתחיל גיבוי, בגלל שלא נמצא שרת גיבויים."
+
+msgid "A backup is already running. Could not start another one."
+msgstr "גיבוי כבר מתבצע. אי אפשר להתחיל עוד גיבוי."
+
+msgid "Maximal number of full image backups is not a number"
+msgstr ""
+
+msgid "Minimal number of full image backups is not a number"
+msgstr ""
+
+msgid "Maximal number of incremental image backups is not a number"
+msgstr ""
+
+msgid "Minimal number of incremental image backups is not a number"
+msgstr ""
+
+msgid "Minimal number of full file backups is not a number"
+msgstr ""
+
+msgid "The maximal number of full file backups is not a number"
+msgstr ""
+
+msgid "The minimal number of incremental file backups is not a number"
+msgstr ""
+
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr ""
+
+msgid "The incremental image backup time is not a number"
+msgstr ""
+
+msgid "The full image backup interval  is not a number"
+msgstr ""
+
+msgid "The full backup interval  is not a number"
+msgstr ""
+
+msgid "The incremental backup interval is not a number"
+msgstr ""
+
+msgid "Last backup on "
+msgstr "זמן גיבוי אחרון"
+
+msgid "No current backup. "
+msgstr "אין כרגע גיבוי."
+
+msgid "_percent_ done. "
+msgstr "_percent_ הושלם."
+
+msgid "Full image backup running. "
+msgstr "גיבוי מערכת מלא מתבצע כעת."
+
+msgid "Incremental image backup running. "
+msgstr ""
+
+msgid "Full file backup running. "
+msgstr "גיבוי קבצים מלא מתבצע כעת."
+
+msgid "Incremental file backup running. "
+msgstr ""
+
+msgid "Cannot connect to backup server"
+msgstr "אין אפשרות להתחבר לשרת הגיבויים"
+
+msgid ""
+"A new version of UrBackup is available. Please click here to install it now."
+msgstr "ישנה גירסא חדשה של התוכנה, לחץ כאן כדי להתקין אותה עכשיו."
+
+msgid "UrBackup: Update available"
+msgstr "יש עידכון חדש לתוכנה"
+
+msgid "Please select the directory that will be backed up."
+msgstr "בחר את התיקייה לגיבוי."
+
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "היתה תקלה. כרגע אי אפשר לגבות כלום."
+
+msgid "Remove path"
+msgstr "הסרת נתיב"
+
+msgid "Add path"
+msgstr "הוספת נתיב"
+
+msgid "Remove/Add backup paths"
+msgstr "הוספה/הסרה של נתיב גיבוי"
+
+msgid "Author:"
+msgstr "יוצר:"
+
+msgid "Version:"
+msgstr "גירסא:"
+
+msgid "Exit"
+msgstr "יציאה"
+
+msgid "Errors"
+msgstr "תקלות"
+
+msgid "Warnings"
+msgstr "אזהרות"
+
+msgid "Infos"
+msgstr "מידע"
+
+msgid "Filter:"
+msgstr "פילטר:"
+
+msgid "Abort"
+msgstr "אודות"
+
+msgid "Ok"
+msgstr "אישור"
+
+msgid "Active"
+msgstr "פעיל"
+
+msgid "days"
+msgstr "ימים"
+
+msgid "hours"
+msgstr "שעות"
+
+msgid "Maximal number of full image backups:"
+msgstr "מקסימום של גיבויי מערכת מלאים:"
+
+msgid "Minimal number of full image backups:"
+msgstr "מינימום של גיבויי מערכת מלאים:"
+
+msgid "Maximal number of incremental image backups:"
+msgstr ""
+
+msgid "Minimal number of incremental image backups:"
+msgstr ""
+
+msgid "Maximal number of full file backups:"
+msgstr ""
+
+msgid "Minimal number of full file backups:"
+msgstr ""
+
+msgid "Maximal number of incremental file backups:"
+msgstr ""
+
+msgid "Minimal number of incremental file backups:"
+msgstr ""
+
+msgid "Interval for full image backups:"
+msgstr ""
+
+msgid "Interval for incremental image backups:"
+msgstr ""
+
+msgid "Interval for full file backups:"
+msgstr ""
+
+msgid "Interval for incremental file backups:"
+msgstr ""

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-10-09 18:27+0000\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
 "Last-Translator: tenorio <miawork@list.ru>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/urbackup/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid "Enable backup via internet:"
 msgstr "Дозволити резервне копіювання через інтернет:"
 
 msgid "Max backup speed for local network:"
-msgstr "Максимальна швидкість копіювання через локальну мережу:"
+msgstr "Максимальна швидкість копіювання через мережу:"
 
 msgid "A new backup server has been found. Click here to use it"
 msgstr "Знайдено новий сервер резервних копій. Натисніть сюди щоб задіяти його "
@@ -67,7 +67,7 @@ msgid "File backups"
 msgstr "Резервні копії файлів"
 
 msgid "Include in backup (with wildcards):"
-msgstr "Додати до резервної копії(за шаблонами)"
+msgstr "Додати до бекапу (за шаблонами)"
 
 msgid " is not a volume"
 msgstr "не є розділом"
@@ -91,7 +91,7 @@ msgid "Exclude from backup (with wildcards):"
 msgstr "Виключити з бекапу (за шаблонами)"
 
 msgid "Backup window:"
-msgstr "Вікно бекапу"
+msgstr "Інтервал бекапу"
 
 msgid "Backup delay after system start:"
 msgstr "Затримка після старту системи:"
@@ -254,10 +254,10 @@ msgid "Active"
 msgstr "Активний"
 
 msgid "days"
-msgstr "Дні"
+msgstr "Днів"
 
 msgid "hours"
-msgstr "Години"
+msgstr "Годин"
 
 msgid "Maximal number of full image backups:"
 msgstr "Максимальна кількість повних обзів:"
@@ -275,7 +275,7 @@ msgid "Maximal number of full file backups:"
 msgstr "Максимальна кількість повних фалових копій:"
 
 msgid "Minimal number of full file backups:"
-msgstr "Мінімальна калькість повних файлових копій:"
+msgstr "Мінімальна кількість повних файлових копій:"
 
 msgid "Maximal number of incremental file backups:"
 msgstr "Максимальна кількість інкрементних файлових копій:"

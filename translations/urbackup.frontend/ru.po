@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
-#   <kirpicheff@yandex.ru>, 2012.
+# kirpich <kirpicheff@yandex.ru>, 2012
+# uroni <urpc@gmx.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: martin@urbackup.org\n"
 "POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2012-09-10 13:52+0000\n"
-"Last-Translator: kirpich <kirpicheff@yandex.ru>\n"
+"PO-Revision-Date: 2013-11-20 09:13+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/urbackup/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,16 +143,16 @@ msgid "A backup is already running. Could not start another one."
 msgstr "Бэкап уже запущен. Невозможно запустить ещё один."
 
 msgid "Maximal number of full image backups is not a number"
-msgstr "Максимальное количество полных бэкапов образа не является числом"
+msgstr "Максимальное количество полных образов не является числом"
 
 msgid "Minimal number of full image backups is not a number"
-msgstr "Минимальное количество полных бэкапов образа не является числом"
+msgstr "Минимальное количество полных образов не является числом"
 
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Максимальное количество добавочных бэкапов образа не является числом"
+msgstr "Максимальное количество добавочных образов не является числом"
 
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Минимальное количество добавочных бэкапов образа не является числом"
+msgstr "Минимальное количество добавочных образов не является числом"
 
 msgid "Minimal number of full file backups is not a number"
 msgstr "Минимальное количество полных бэкапов файлов не является числом"
@@ -166,16 +167,16 @@ msgid "The maximal number of incremental file backups  is not a number"
 msgstr "Максимальное количество добавочных бэкапов файлов не является числом"
 
 msgid "The incremental image backup time is not a number"
-msgstr "Интервал добавочных бэкапов образа не является числом"
+msgstr "Интервал создания добавочных образов не является числом"
 
 msgid "The full image backup interval  is not a number"
-msgstr "Интервал полных бэкапов образа не является числом"
+msgstr "Интервал создания полных образов не является числом"
 
 msgid "The full backup interval  is not a number"
-msgstr "Интервал полных бэкапов не является числом"
+msgstr "Интервал создания полных файловых бэкапов не является числом"
 
 msgid "The incremental backup interval is not a number"
-msgstr "Интервал добавочной копии не является числом"
+msgstr "Интервал создания добавочных бэкапов не является числом"
 
 msgid "Last backup on "
 msgstr "Последний бэкап был "
@@ -183,8 +184,8 @@ msgstr "Последний бэкап был "
 msgid "No current backup. "
 msgstr "Нет бэкапа."
 
-msgid "% done. "
-msgstr "% завершено. "
+msgid "_percent_ done. "
+msgstr "_percent_ завершено. "
 
 msgid "Full image backup running. "
 msgstr "Создание образа выполняется"
@@ -260,16 +261,16 @@ msgid "hours"
 msgstr "часов"
 
 msgid "Maximal number of full image backups:"
-msgstr "Максимальное количество полных бэкапов образа"
+msgstr "Максимальное количество полных образов"
 
 msgid "Minimal number of full image backups:"
-msgstr "Минимальное количество полных бэкапов образа"
+msgstr "Минимальное количество полных  образов"
 
 msgid "Maximal number of incremental image backups:"
-msgstr "Максимальное количество добавочных бэкапов образа"
+msgstr "Максимальное количество добавочных образов"
 
 msgid "Minimal number of incremental image backups:"
-msgstr "Минимальное количество добавочных бэкапов образа"
+msgstr "Минимальное количество добавочных образов"
 
 msgid "Maximal number of full file backups:"
 msgstr "Максимальное количество полных бэкапов файлов"
