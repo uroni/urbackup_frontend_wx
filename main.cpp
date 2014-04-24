@@ -108,7 +108,7 @@ namespace
 	wxString getPercentDoneText()
 	{
 		wxString pcdone=_("_percent_ done. ");
-		pcdone.Replace(L"_percent_", L"%");
+		pcdone.Replace(wxT("_percent_"), L"%");
 		return pcdone;
 	}
 }

@@ -20,6 +20,7 @@
 #include "stringtools.h"
 #include "main.h"
 #include "capa_bits.h"
+#include "TranslationHelper.h"
 
 #include <wx/valtext.h>
 
@@ -599,7 +600,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			BOOL b=GetVolumePathNameA((img_paths[i]+":\\").c_str(), outb, 1000);
 			if(b==FALSE)
 			{
-				wxMessageBox( ConvertToUnicode(img_paths[i])+_(" is not a volume"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl23->SetFocus();
 				return;
 			}
@@ -608,7 +609,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	if(internet_server_port.ToLong(&l_internet_server_port)==false)
 	{
-		wxMessageBox( _("Der Server Port ist nicht gültig"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The server port is not valid"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrlInternetServerPort->SetFocus();
 		return;
 	}

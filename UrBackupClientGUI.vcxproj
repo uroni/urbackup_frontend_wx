@@ -193,6 +193,7 @@
     <ClCompile Include="stringtools.cpp" />
     <ClCompile Include="TaskBarBaloon.cpp" />
     <ClCompile Include="tcpstack.cpp" />
+    <ClCompile Include="TranslationHelper.cpp" />
     <ClCompile Include="TrayIcon.cpp" />
     <ClCompile Include="gui\GUI.cpp" />
   </ItemGroup>
@@ -211,6 +212,7 @@
     <ClInclude Include="stringtools.h" />
     <ClInclude Include="TaskBarBaloon.h" />
     <ClInclude Include="tcpstack.h" />
+    <ClInclude Include="TranslationHelper.h" />
     <ClInclude Include="TrayIcon.h" />
     <ClInclude Include="gui\GUI.h" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "Status.h"
 #include "main.h"
+#include "TranslationHelper.h"
 
 extern wxString res_path;
 extern wxString ico_ext;
@@ -23,9 +24,11 @@ namespace
 		{
 			unsigned int min_last_seen = (last_seen/1000)/60;
 
-			wxString minutes_ago;
-			minutes_ago << min_last_seen << _(" minutes ago.");
-			return _("Connected to local UrBackup server.")+wxT("\n")+_("Not trying to connect to Internet server.")+wxT("\n")+_("Local server last seen ")+minutes_ago;
+			wxString last_seen;
+			last_seen << min_last_seen;
+
+			return _("Connected to local UrBackup server.")+wxT("\n")+_("Not trying to connect to Internet server.")+wxT("\n")+
+					trans_1(_("Local server last seen _1_ minutes ago."), last_seen);
 		}
 		else if(str==wxT("no_server"))
 		{
@@ -41,7 +44,7 @@ namespace
 		}
 		else if(str.find(wxT("error:"))==0)
 		{
-			return _("Error: ")+str.substr(6);
+			return trans_1(_("Error: _1_"), str.substr(6));
 		}
 
 		return str;
