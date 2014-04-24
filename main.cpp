@@ -105,10 +105,10 @@ wxIcon getAppIcon(wxString fn)
 
 namespace
 {
-	wxString getPercentDoneText()
+	wxString getPercentDoneText(wxString pc)
 	{
 		wxString pcdone=_("_percent_ done. ");
-		pcdone.Replace(wxT("_percent_"), L"%");
+		pcdone.Replace(wxT("_percent_"), pc + wxT("%"));
 		return pcdone;
 	}
 }
@@ -358,8 +358,7 @@ wxString getPercentText(wxString pcdone)
 	{
 		if(pcdone!=wxT("-1"))
 		{
-			ret+=pcdone;
-			ret+=getPercentDoneText();
+			ret+=getPercentDoneText(pcdone);
 		}
 		else
 		{
