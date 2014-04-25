@@ -23,6 +23,7 @@
 #include "TaskBarBaloon.h"
 #include "Settings.h"
 #include "Logs.h"
+#include "TranslationHelper.h"
 #include <iostream>
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
@@ -107,7 +108,7 @@ namespace
 {
 	wxString getPercentDoneText(wxString pc)
 	{
-		wxString pcdone=_("_percent_ done. ");
+		wxString pcdone=_("_percent_ done.")+wxT(" ");
 		pcdone.Replace(wxT("_percent_"), pc + wxT("%"));
 		return pcdone;
 	}
@@ -326,27 +327,27 @@ wxString getStatusText(wxString status)
 {
 	if(status==wxT("INCR") )
 	{
-		return _("Incremental file backup running. ");
+		return _("Incremental file backup running.");
 	}
 	else if(status==wxT("FULL") )
 	{
-		return _("Full file backup running. ");
+		return _("Full file backup running.");
 	}
 	else if(status==wxT("INCRI") )
 	{
-		return _("Incremental image backup running. ");
+		return _("Incremental image backup running.");
 	}
 	else if(status==wxT("FULLI") )
 	{
-		return _("Full image backup running. ");
+		return _("Full image backup running.");
 	}
 	else if(status==wxT("R_INCR"))
 	{
-		return _("Resumed incremental file backup running. ");
+		return _("Resumed incremental file backup running.");
 	}
 	else if(status==wxT("R_FULL"))
 	{
-		return _("Resumed full file backup running. ");
+		return _("Resumed full file backup running.");
 	}
 	return wxT("");
 }
@@ -362,7 +363,7 @@ wxString getPercentText(wxString pcdone)
 		}
 		else
 		{
-			ret+=_("Indexing. ");
+			ret+=_("Indexing.")+wxT(" ");
 		}
 	}
 	return ret;
@@ -490,7 +491,7 @@ void MyTimer::Notify()
 		status.status==wxT("R_INCR") ||
 		status.status==wxT("R_FULL"))
 	{
-		status_text+=getStatusText(status.status);
+		status_text+=getStatusText(status.status)+wxT(" ");
 		status_text+=getPercentText(status.pcdone);
 		icon_type=ETrayIcon_PROGRESS;
 		backup_is_running=true;
@@ -498,7 +499,7 @@ void MyTimer::Notify()
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
-		status_text+=_("No current backup. ");
+		status_text+=_("No current backup.") + wxT(" ");
 		icon_type=ETrayIcon_NO_RECENT;
 		backup_is_running=false;
 	}
@@ -509,7 +510,7 @@ void MyTimer::Notify()
 	}
 
 	if(!status.lastbackupdate.Trim().empty() )
-		status_text+=_("Last backup on ")+status.lastbackupdate;
+		status_text+=trans_1(_("Last backup on _1_"), status.lastbackupdate);
 
 	if( icon_type<3 && incr_update_done==false)
 	{

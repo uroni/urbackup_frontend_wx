@@ -5,13 +5,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # Martin Raiber <martin@urbackup.org>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-24 20:42+0200\n"
-"PO-Revision-Date: 2014-04-24 18:44+0000\n"
+"POT-Creation-Date: 2014-04-25 18:49+0200\n"
+"PO-Revision-Date: 2014-04-25 16:52+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/urbackup/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -240,7 +241,7 @@ msgstr "Remove path"
 msgid "Internet connection status:"
 msgstr "Internet connection status:"
 
-#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:80
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:83
 msgid "There was an error. Currently nothing can be backed up."
 msgstr "There was an error. Currently nothing can be backed up."
 
@@ -276,36 +277,36 @@ msgstr "Resumed incremental file backup running. "
 msgid "Resumed full file backup running. "
 msgstr "Resumed full file backup running. "
 
-#: main.cpp:366
+#: main.cpp:365
 msgid "Indexing. "
 msgstr "Indexing. "
 
-#: main.cpp:442 main.cpp:446
+#: main.cpp:441 main.cpp:445
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Update available"
 
-#: main.cpp:442 main.cpp:446
+#: main.cpp:441 main.cpp:445
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "A new version of UrBackup is available. Please click here to install it now."
 
-#: main.cpp:465
+#: main.cpp:464
 msgid "Cannot connect to backup server"
 msgstr "Cannot connect to backup server"
 
-#: main.cpp:502
+#: main.cpp:501
 msgid "No current backup. "
 msgstr "No current backup. "
 
-#: main.cpp:513 Status.cpp:124
+#: main.cpp:512
 msgid "Last backup on "
 msgstr "Last backup on "
 
-#: main.cpp:564 main.cpp:568
+#: main.cpp:563 main.cpp:567
 msgid "UrBackup: New server"
 msgstr "UrBackup: New server"
 
-#: main.cpp:564 main.cpp:568
+#: main.cpp:563 main.cpp:567
 msgid "A new backup server has been found. Click here to use it"
 msgstr "A new backup server has been found. Click here to use it"
 
@@ -377,51 +378,55 @@ msgstr "Initializing."
 msgid "Waiting for local UrBackup server."
 msgstr "Waiting for local UrBackup server."
 
-#: Status.cpp:27
+#: Status.cpp:30
 msgid "Connected to local UrBackup server."
 msgstr "Connected to local UrBackup server."
 
-#: Status.cpp:27
+#: Status.cpp:30
 msgid "Not trying to connect to Internet server."
 msgstr "Not trying to connect to Internet server."
 
-#: Status.cpp:28
+#: Status.cpp:31
 msgid "Local server last seen _1_ minutes ago."
 msgstr "Local server last seen _1_ minutes ago."
 
-#: Status.cpp:32
+#: Status.cpp:35
 msgid "No Internet server configured."
 msgstr "No Internet server configured."
 
-#: Status.cpp:36
+#: Status.cpp:39
 msgid "Connected to Internet server"
 msgstr "Connected to Internet server"
 
-#: Status.cpp:40
+#: Status.cpp:43
 msgid "Could not connect to Internet server. Server unreachable."
 msgstr "Could not connect to Internet server. Server unreachable."
 
-#: Status.cpp:44
+#: Status.cpp:47
 msgid "Error: _1_"
 msgstr "Error: _1_"
 
-#: Status.cpp:98
+#: Status.cpp:101
 msgid "Idle."
 msgstr "Idle."
 
-#: Status.cpp:140
-msgid "Internet: "
-msgstr "Internet: "
+#: Status.cpp:127
+msgid "Last backup on _1_"
+msgstr "Last backup on _1_"
 
-#: Status.cpp:142
+#: Status.cpp:145
 msgid "Yes"
 msgstr "Yes"
 
-#: Status.cpp:144
+#: Status.cpp:147
 msgid "No"
 msgstr "No"
 
-#: Status.cpp:155
+#: Status.cpp:149
+msgid "Internet: _1_"
+msgstr "Internet: _1_"
+
+#: Status.cpp:158
 msgid "Servers:"
 msgstr "Servers:"
 
@@ -484,6 +489,9 @@ msgstr "Pause"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Continue"
+
+#~ msgid "Internet: "
+#~ msgstr "Internet: "
 
 #~ msgid "logo1.png"
 #~ msgstr "logo1.png"
