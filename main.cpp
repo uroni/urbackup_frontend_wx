@@ -249,9 +249,6 @@ bool MyApp::OnInit()
 		std::cout << "Selected language is wrong!" << std::endl;
 	}
 
-
-
-	this->SetTopWindow(new TheFrame);
 	wxImage::AddHandler(new wxPNGHandler());
 	wxImage::AddHandler(new wxICOHandler());
 	//wxInitAllImageHandlers();
@@ -267,6 +264,8 @@ bool MyApp::OnInit()
 
 	if(cmd.empty())
 	{
+		SetTopWindow(new TheFrame);
+
 		tray=new TrayIcon;
 		bool b=tray->SetIcon(getAppIcon(wxT("backup-ok")), wxT("UrBackup Client"));
 		if(!b)
@@ -285,14 +284,17 @@ bool MyApp::OnInit()
 		timer->Notify();
 
 		Settings *s=new Settings(NULL);
+		SetTopWindow(s);
 	}
 	else if(cmd==wxT("paths"))
 	{
 		ConfigPath *cp=new ConfigPath(NULL);
+		SetTopWindow(cp);
 	}
 	else if(cmd==wxT("logs"))
 	{
 		Logs *l=new Logs(NULL);
+		SetTopWindow(l);
 	}
 	else if(cmd==wxT("newserver"))
 	{
@@ -301,6 +303,7 @@ bool MyApp::OnInit()
 			return false;
 		}
 		Connector::addNewServer(argv[2].ToStdString());
+		wxExit();
 	}
 	else
 	{
