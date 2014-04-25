@@ -87,3 +87,5 @@ KillProc/dist/KillProc_x86.exe
 KillProc/KillProc_src.zip
 deps/
 sqlite3.exe
+messages.po
+translations/urbackup.frontend/en_new.po

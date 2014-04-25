@@ -124,7 +124,7 @@ bool Status::updateStatus(int errcnt)
 
 	if(!status_details.last_backup_time.empty())
 	{
-		m_staticText37->SetLabel(_("Last backup on ")+status_details.last_backup_time);
+		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), status_details.last_backup_time));
 	}
 	else
 	{
@@ -140,13 +140,13 @@ bool Status::updateStatus(int errcnt)
 		if(!servers_text.empty())
 			servers_text+=wxT("\n");
 
-		servers_text+=server.name+" ("+_("Internet: ");
+		wxString internet_s;
 		if(server.internet_connection)
-			servers_text+=_("Yes");
+			internet_s=_("Yes");
 		else
-			servers_text+=_("No");
+			internet_s=_("No");
 
-		servers_text+=")";
+		servers_text+=server.name+" ("+trans_1(_("Internet: _1_"), internet_s) +")";
 	}
 
 	if(status_details.servers.empty())
