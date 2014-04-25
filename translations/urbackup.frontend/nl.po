@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
 # buzzertnl <frank@aced-it.nl>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
-"Report-Msgid-Bugs-To: martin@urbackup.org\n"
-"POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2014-03-05 15:12+0000\n"
-"Last-Translator: buzzertnl <frank@aced-it.nl>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-25 19:14+0200\n"
+"PO-Revision-Date: 2014-04-25 17:17+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/urbackup/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,279 +22,512 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Encrypted transfer:"
-msgstr "Versleutelde verbinding:"
-
-msgid "Compressed transfer:"
-msgstr "Gecomprimeerde overdracht:"
-
-msgid "Max backups speed for internet connection:"
-msgstr "Maximale back-up snelheid voor internet verbinding: "
-
-msgid "Do full file backups over internet:"
-msgstr "Maak volledige bestands back-ups over internet: "
-
-msgid "Do image backups over internet:"
-msgstr "Maak volledige image back-ups over internet: "
-
-msgid "Internet server password:"
-msgstr "Internet server wachtwoord: "
-
-msgid "Internet server port:"
-msgstr "Internet server poort:"
-
-msgid "Internet server name/IP:"
-msgstr "Internet server naam/IP: "
-
-msgid "Enable backup via internet:"
-msgstr "Maak gebruik van back-ups over internet:"
-
-msgid "Max backup speed for local network:"
-msgstr "Maximale back-up snelheid voor lokaal netwerk:"
-
-msgid "A new backup server has been found. Click here to use it"
-msgstr "Een nieuwe back-up server is gevonden. Klik hier om deze te gebruiken. "
-
-msgid "UrBackup: New server"
-msgstr "UrBackup: Nieuwe server"
-
-msgid "Internet"
-msgstr "Internet"
-
-msgid "Client"
-msgstr "Cliënt "
-
-msgid "Image backups"
-msgstr "Image back-ups"
-
-msgid "File backups"
-msgstr "Bestands back-ups "
-
-msgid "Include in backup (with wildcards):"
-msgstr "Insluiten in back-up (met wildcards): "
-
-msgid " is not a volume"
-msgstr "Is geen volume"
-
-msgid "Volumes to backup:"
-msgstr "Volumes te back-upen: "
-
-msgid "Waiting for server..."
-msgstr "Wachten op server..."
-
-msgid "Backup delay after system start is not a number"
-msgstr "Back-up uitstel na opstarten is geen getal"
-
-msgid "min"
-msgstr "min"
-
-msgid "Computer name:"
-msgstr "Computer naam: "
-
-msgid "Exclude from backup (with wildcards):"
-msgstr "Uitsluiten van back-up (met wildcards):"
-
-msgid "Backup window:"
-msgstr "Back-up tijd schema: "
-
-msgid "Backup delay after system start:"
-msgstr "Back-up uitstel na systeem start: "
-
-msgid "Name:"
-msgstr "Naam: "
-
-msgid "Informations"
-msgstr "Informatie "
-
-msgid "Continue"
-msgstr "Doorgaan"
-
-msgid "Pause"
-msgstr "Pauzeren "
-
-msgid "Logs"
-msgstr "Logboeken "
-
-msgid "Add/Remove backup paths"
-msgstr "Toevoegen/Verwijderen back-up paden"
-
+#: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
 msgstr "Instellingen "
 
-msgid "Do incremental image backup"
-msgstr "Maak een incrementele image back-up"
+#: gui\GUI.h:164 TrayIcon.cpp:271
+msgid "Logs"
+msgstr "Logboeken "
 
-msgid "Do full image backup"
-msgstr "Maak een volledige image back-up "
+#: gui\GUI.h:195
+msgid "Informations"
+msgstr "Informatie "
 
-msgid "Do incremental file backup"
-msgstr "Maak een incrementele bestands back-up"
+#: gui\GUI.h:231 TrayIcon.cpp:266
+msgid "Add/Remove backup paths"
+msgstr "Toevoegen/Verwijderen back-up paden"
 
-msgid "Do full file backup"
-msgstr "Maak een volledige bestands back-up "
+#: gui\GUI.h:256 TrayIcon.cpp:294
+msgid "Status"
+msgstr ""
 
-msgid "Continuing failed: No connection to backup server."
-msgstr "Doorgaan mislukt: Geen verbinding met de back-up server. "
+#: gui\GUI.cpp:52
+msgid "Interval for incremental file backups:"
+msgstr "Interval voor incrementele bestands back-ups: "
 
-msgid "Pausing failed: No connection to backup server."
-msgstr "Pauzeren mislukt: Geen verbinding met de back-up server."
+#: gui\GUI.cpp:59
+msgid "hours"
+msgstr "uren"
 
-msgid "Could not start backup, because no backup server was found."
-msgstr "Kan de back-up niet starten, omdat er geen back-up server gevonden is. "
+#: gui\GUI.cpp:68
+msgid "Interval for full file backups:"
+msgstr "Interval voor volledige bestands back-ups: "
 
-msgid "A backup is already running. Could not start another one."
-msgstr "Er is al een back-up bezig. Kan geen nieuwe starten. "
+#: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
+msgid "days"
+msgstr "dagen"
 
-msgid "Maximal number of full image backups is not a number"
-msgstr "Maximale aantal van volledige image back-ups is geen getal"
+#: gui\GUI.cpp:87
+msgid "Interval for incremental image backups:"
+msgstr "Interval voor incrementele image back-ups: "
 
-msgid "Minimal number of full image backups is not a number"
-msgstr "Minimale aantal van volledige image back-ups is geen getal"
+#: gui\GUI.cpp:100
+msgid "Active"
+msgstr "Bezig "
 
-msgid "Maximal number of incremental image backups is not a number"
-msgstr "Maximale aantal van incrementele image back-ups is geen getal"
+#: gui\GUI.cpp:109
+msgid "Interval for full image backups:"
+msgstr "Interval voor volledige image back-ups: "
 
-msgid "Minimal number of incremental image backups is not a number"
-msgstr "Minimale aantal van incrementele image back-ups is geen getal"
+#: gui\GUI.cpp:136
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimale aantal van incrementele bestands back-ups: "
 
-msgid "Minimal number of full file backups is not a number"
-msgstr "Minimale aantal van voledige bestands back-ups is geen getal"
+#: gui\GUI.cpp:148
+msgid "Maximal number of incremental file backups:"
+msgstr "Maximale aantal van incrementele bestands back-ups: "
 
-msgid "The maximal number of full file backups is not a number"
-msgstr "Maximale aantal van voledige bestands back-ups is geen getal"
+#: gui\GUI.cpp:160
+msgid "Minimal number of full file backups:"
+msgstr "Minimale aantal van volledige bestands back-ups: "
 
-msgid "The minimal number of incremental file backups is not a number"
-msgstr "Minimale aantal van incrementele bestands back-ups is geen getal"
+#: gui\GUI.cpp:172
+msgid "Maximal number of full file backups:"
+msgstr "Maximale aantal van volledige bestands back-ups: "
 
-msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Maximale aantal van incrementele bestands back-ups is geen getal"
+#: gui\GUI.cpp:205
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimale aantal van incrementele image back-ups: "
 
-msgid "The incremental image backup time is not a number"
-msgstr "De incrementele image back-up tijd is geen getal"
+#: gui\GUI.cpp:217
+msgid "Maximal number of incremental image backups:"
+msgstr "Maximale aantal van incrementele image back-ups: "
 
-msgid "The full image backup interval  is not a number"
-msgstr "De voledige image back-up interval is geen getal"
+#: gui\GUI.cpp:229
+msgid "Minimal number of full image backups:"
+msgstr "Minimale aantal van volledige image back-ups: "
 
-msgid "The full backup interval  is not a number"
-msgstr "De voledige back-up interval is geen getal"
+#: gui\GUI.cpp:241
+msgid "Maximal number of full image backups:"
+msgstr "Maximale aantal van volledige image back-ups: "
 
-msgid "The incremental backup interval is not a number"
-msgstr "De incrementele back-up interval is geen getal"
+#: gui\GUI.cpp:264
+msgid "Computer name:"
+msgstr "Computer naam: "
 
-msgid "Last backup on "
-msgstr "Laatste back-up op"
+#: gui\GUI.cpp:276
+msgid "Exclude from backup (with wildcards):"
+msgstr "Uitsluiten van back-up (met wildcards):"
 
-msgid "No current backup. "
-msgstr "Geen huidige back-up"
+#: gui\GUI.cpp:288
+msgid "Include in backup (with wildcards):"
+msgstr "Insluiten in back-up (met wildcards): "
 
-msgid "_percent_ done. "
-msgstr "_percent_klaar."
+#: gui\GUI.cpp:300
+msgid "Backup window:"
+msgstr "Back-up tijd schema: "
 
-msgid "Full image backup running. "
-msgstr "Volledige image back-up bezig. "
+#: gui\GUI.cpp:312
+msgid "Backup delay after system start:"
+msgstr "Back-up uitstel na systeem start: "
 
-msgid "Incremental image backup running. "
-msgstr "Incrementele image back-up bezig. "
+#: gui\GUI.cpp:321
+msgid "min"
+msgstr "min"
 
-msgid "Full file backup running. "
-msgstr "Volledige bestands back-up bezig. "
+#: gui\GUI.cpp:333
+msgid "Volumes to backup:"
+msgstr "Volumes te back-upen: "
 
-msgid "Incremental file backup running. "
-msgstr "Incrementele bestands back-up bezig. "
+#: gui\GUI.cpp:356
+msgid "Max backup speed for local network:"
+msgstr "Maximale back-up snelheid voor lokaal netwerk:"
 
-msgid "Cannot connect to backup server"
-msgstr "Kan niet verbinden met de back-up server"
+#: gui\GUI.cpp:361
+msgid "MBit/s"
+msgstr ""
 
+#: gui\GUI.cpp:369
+msgid "Enable backup via internet:"
+msgstr "Maak gebruik van back-ups over internet:"
+
+#: gui\GUI.cpp:377
+msgid "Internet server name/IP:"
+msgstr "Internet server naam/IP: "
+
+#: gui\GUI.cpp:385
+msgid "Internet server port:"
+msgstr "Internet server poort:"
+
+#: gui\GUI.cpp:393
+msgid "Internet server password:"
+msgstr "Internet server wachtwoord: "
+
+#: gui\GUI.cpp:404
+msgid "Do image backups over internet:"
+msgstr "Maak volledige image back-ups over internet: "
+
+#: gui\GUI.cpp:414
+msgid "Do full file backups over internet:"
+msgstr "Maak volledige bestands back-ups over internet: "
+
+#: gui\GUI.cpp:422
+msgid "Max backups speed for internet connection:"
+msgstr "Maximale back-up snelheid voor internet verbinding: "
+
+#: gui\GUI.cpp:427
+msgid "KBit/s"
+msgstr ""
+
+#: gui\GUI.cpp:433
+msgid "Compressed transfer:"
+msgstr "Gecomprimeerde overdracht:"
+
+#: gui\GUI.cpp:441
+msgid "Encrypted transfer:"
+msgstr "Versleutelde verbinding:"
+
+#: gui\GUI.cpp:460
+msgid "File backups"
+msgstr "Bestands back-ups "
+
+#: gui\GUI.cpp:465
+msgid "Image backups"
+msgstr "Image back-ups"
+
+#: gui\GUI.cpp:468
+msgid "Client"
+msgstr "Cliënt "
+
+#: gui\GUI.cpp:469
+msgid "Internet"
+msgstr "Internet"
+
+#: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
+msgid "Ok"
+msgstr "Ok"
+
+#: gui\GUI.cpp:485 gui\GUI.cpp:701
+msgid "Abort"
+msgstr "Annuleren "
+
+#: gui\GUI.cpp:535
+msgid "Filter:"
+msgstr "Filter: "
+
+#: gui\GUI.cpp:539 TrayIcon.cpp:279
+msgid "Infos"
+msgstr "Informatie "
+
+#: gui\GUI.cpp:539
+msgid "Warnings"
+msgstr "Waarschuwingen "
+
+#: gui\GUI.cpp:539
+msgid "Errors"
+msgstr "Fouten"
+
+#: gui\GUI.cpp:556 TrayIcon.cpp:295
+msgid "Exit"
+msgstr "Sluiten"
+
+#: gui\GUI.cpp:610
+msgid "Version:"
+msgstr "Versie: "
+
+#: gui\GUI.cpp:678
+msgid "Name:"
+msgstr "Naam: "
+
+#: gui\GUI.cpp:707
+msgid "Add path"
+msgstr "Locatie toevoegen "
+
+#: gui\GUI.cpp:710
+msgid "Remove path"
+msgstr "Verwijder locatie"
+
+#: gui\GUI.cpp:800
+msgid "Internet connection status:"
+msgstr ""
+
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:83
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Er was een fout. Momenteel kan er niks geback-upt worden. "
+
+#: ConfigPath.cpp:89
+msgid "Please select the directory that will be backed up."
+msgstr "Selecteer een map die geback-upt moet worden. "
+
+#: main.cpp:111
+msgid "_percent_ done."
+msgstr ""
+
+#: main.cpp:330
+msgid "Incremental file backup running."
+msgstr ""
+
+#: main.cpp:334
+msgid "Full file backup running."
+msgstr ""
+
+#: main.cpp:338
+msgid "Incremental image backup running."
+msgstr ""
+
+#: main.cpp:342
+msgid "Full image backup running."
+msgstr ""
+
+#: main.cpp:346
+msgid "Resumed incremental file backup running."
+msgstr ""
+
+#: main.cpp:350
+msgid "Resumed full file backup running."
+msgstr ""
+
+#: main.cpp:366
+msgid "Indexing."
+msgstr ""
+
+#: main.cpp:442 main.cpp:446
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Update beschikbaar "
+
+#: main.cpp:442 main.cpp:446
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "Een nieuwe versie van UrBackup is beschikbaar. Klik hier om deze te installeren. "
 
-msgid "UrBackup: Update available"
-msgstr "UrBackup: Update beschikbaar "
+#: main.cpp:465
+msgid "Cannot connect to backup server"
+msgstr "Kan niet verbinden met de back-up server"
 
-msgid "Please select the directory that will be backed up."
-msgstr "Selecteer een map die geback-upt moet worden. "
+#: main.cpp:502
+msgid "No current backup."
+msgstr ""
 
-msgid "There was an error. Currently nothing can be backed up."
-msgstr "Er was een fout. Momenteel kan er niks geback-upt worden. "
+#: main.cpp:513 Status.cpp:127
+msgid "Last backup on _1_"
+msgstr ""
 
-msgid "Remove path"
-msgstr "Verwijder locatie"
+#: main.cpp:564 main.cpp:568
+msgid "UrBackup: New server"
+msgstr "UrBackup: Nieuwe server"
 
-msgid "Add path"
-msgstr "Locatie toevoegen "
+#: main.cpp:564 main.cpp:568
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Een nieuwe back-up server is gevonden. Klik hier om deze te gebruiken. "
 
-msgid "Remove/Add backup paths"
-msgstr "Verwijder/Toevoegen back-up paden"
+#: Settings.cpp:504
+msgid "The incremental backup interval is not a number"
+msgstr "De incrementele back-up interval is geen getal"
 
-msgid "Author:"
-msgstr "Auteur: "
+#: Settings.cpp:510
+msgid "The full backup interval  is not a number"
+msgstr "De voledige back-up interval is geen getal"
 
-msgid "Version:"
-msgstr "Versie: "
+#: Settings.cpp:519
+msgid "The full image backup interval  is not a number"
+msgstr "De voledige image back-up interval is geen getal"
 
-msgid "Exit"
-msgstr "Sluiten"
+#: Settings.cpp:525
+msgid "The incremental image backup time is not a number"
+msgstr "De incrementele image back-up tijd is geen getal"
 
-msgid "Errors"
-msgstr "Fouten"
+#: Settings.cpp:533
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Maximale aantal van incrementele bestands back-ups is geen getal"
 
-msgid "Warnings"
-msgstr "Waarschuwingen "
+#: Settings.cpp:539
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Minimale aantal van incrementele bestands back-ups is geen getal"
 
-msgid "Infos"
-msgstr "Informatie "
+#: Settings.cpp:545
+msgid "The maximal number of full file backups is not a number"
+msgstr "Maximale aantal van voledige bestands back-ups is geen getal"
 
-msgid "Filter:"
-msgstr "Filter: "
+#: Settings.cpp:551
+msgid "Minimal number of full file backups is not a number"
+msgstr "Minimale aantal van voledige bestands back-ups is geen getal"
 
-msgid "Abort"
-msgstr "Annuleren "
+#: Settings.cpp:560
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Minimale aantal van incrementele image back-ups is geen getal"
 
-msgid "Ok"
-msgstr "Ok"
+#: Settings.cpp:566
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Maximale aantal van incrementele image back-ups is geen getal"
 
-msgid "Active"
-msgstr "Bezig "
+#: Settings.cpp:572
+msgid "Minimal number of full image backups is not a number"
+msgstr "Minimale aantal van volledige image back-ups is geen getal"
 
-msgid "days"
-msgstr "dagen"
+#: Settings.cpp:578
+msgid "Maximal number of full image backups is not a number"
+msgstr "Maximale aantal van volledige image back-ups is geen getal"
 
-msgid "hours"
-msgstr "uren"
+#: Settings.cpp:586
+msgid "Backup delay after system start is not a number"
+msgstr "Back-up uitstel na opstarten is geen getal"
 
-msgid "Maximal number of full image backups:"
-msgstr "Maximale aantal van volledige image back-ups: "
+#: Settings.cpp:603
+msgid "_1_ is not a volume"
+msgstr ""
 
-msgid "Minimal number of full image backups:"
-msgstr "Minimale aantal van volledige image back-ups: "
+#: Settings.cpp:612
+msgid "The server port is not valid"
+msgstr ""
 
-msgid "Maximal number of incremental image backups:"
-msgstr "Maximale aantal van incrementele image back-ups: "
+#: Status.cpp:17
+msgid "Initializing."
+msgstr ""
 
-msgid "Minimal number of incremental image backups:"
-msgstr "Minimale aantal van incrementele image back-ups: "
+#: Status.cpp:21
+msgid "Waiting for local UrBackup server."
+msgstr ""
 
-msgid "Maximal number of full file backups:"
-msgstr "Maximale aantal van volledige bestands back-ups: "
+#: Status.cpp:30
+msgid "Connected to local UrBackup server."
+msgstr ""
 
-msgid "Minimal number of full file backups:"
-msgstr "Minimale aantal van volledige bestands back-ups: "
+#: Status.cpp:30
+msgid "Not trying to connect to Internet server."
+msgstr ""
 
-msgid "Maximal number of incremental file backups:"
-msgstr "Maximale aantal van incrementele bestands back-ups: "
+#: Status.cpp:31
+msgid "Local server last seen _1_ minutes ago."
+msgstr ""
 
-msgid "Minimal number of incremental file backups:"
-msgstr "Minimale aantal van incrementele bestands back-ups: "
+#: Status.cpp:35
+msgid "No Internet server configured."
+msgstr ""
 
-msgid "Interval for full image backups:"
-msgstr "Interval voor volledige image back-ups: "
+#: Status.cpp:39
+msgid "Connected to Internet server"
+msgstr ""
 
-msgid "Interval for incremental image backups:"
-msgstr "Interval voor incrementele image back-ups: "
+#: Status.cpp:43
+msgid "Could not connect to Internet server. Server unreachable."
+msgstr ""
 
-msgid "Interval for full file backups:"
-msgstr "Interval voor volledige bestands back-ups: "
+#: Status.cpp:47
+msgid "Error: _1_"
+msgstr ""
 
-msgid "Interval for incremental file backups:"
-msgstr "Interval voor incrementele bestands back-ups: "
+#: Status.cpp:101
+msgid "Idle."
+msgstr ""
+
+#: Status.cpp:145
+msgid "Yes"
+msgstr ""
+
+#: Status.cpp:147
+msgid "No"
+msgstr ""
+
+#: Status.cpp:149
+msgid "Internet: _1_"
+msgstr ""
+
+#: Status.cpp:158
+msgid "Servers:"
+msgstr ""
+
+#: TrayIcon.cpp:141 TrayIcon.cpp:164
+msgid "Waiting for server..."
+msgstr "Wachten op server..."
+
+#: TrayIcon.cpp:146 TrayIcon.cpp:169
+msgid "A backup is already running. Could not start another one."
+msgstr "Er is al een back-up bezig. Kan geen nieuwe starten. "
+
+#: TrayIcon.cpp:148 TrayIcon.cpp:171
+msgid "Could not start backup, because no backup server was found."
+msgstr "Kan de back-up niet starten, omdat er geen back-up server gevonden is. "
+
+#: TrayIcon.cpp:183
+msgid "Pausing failed: No connection to backup server."
+msgstr "Pauzeren mislukt: Geen verbinding met de back-up server."
+
+#: TrayIcon.cpp:196
+msgid "Continuing failed: No connection to backup server."
+msgstr "Doorgaan mislukt: Geen verbinding met de back-up server. "
+
+#: TrayIcon.cpp:230
+msgid "Do full file backup"
+msgstr "Maak een volledige bestands back-up "
+
+#: TrayIcon.cpp:230
+msgid "Do a full file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:235
+msgid "Do incremental file backup"
+msgstr "Maak een incrementele bestands back-up"
+
+#: TrayIcon.cpp:235
+msgid "Do a incremental file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:244
+msgid "Do full image backup"
+msgstr "Maak een volledige image back-up "
+
+#: TrayIcon.cpp:244
+msgid "Do a full image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:249
+msgid "Do incremental image backup"
+msgstr "Maak een incrementele image back-up"
+
+#: TrayIcon.cpp:249
+msgid "Do a incremental image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:286
+msgid "Pause"
+msgstr "Pauzeren "
+
+#: TrayIcon.cpp:291
+msgid "Continue"
+msgstr "Doorgaan"
+
+#~ msgid "_percent_ done. "
+#~ msgstr "_percent_ done. "
+
+#~ msgid "Incremental file backup running. "
+#~ msgstr "Incremental file backup running. "
+
+#~ msgid "Full file backup running. "
+#~ msgstr "Full file backup running. "
+
+#~ msgid "Incremental image backup running. "
+#~ msgstr "Incremental image backup running. "
+
+#~ msgid "Full image backup running. "
+#~ msgstr "Full image backup running. "
+
+#~ msgid "Resumed incremental file backup running. "
+#~ msgstr "Resumed incremental file backup running. "
+
+#~ msgid "Resumed full file backup running. "
+#~ msgstr "Resumed full file backup running. "
+
+#~ msgid "Indexing. "
+#~ msgstr "Indexing. "
+
+#~ msgid "No current backup. "
+#~ msgstr "No current backup. "
+
+#~ msgid "Last backup on "
+#~ msgstr "Last backup on "
+
+#~ msgid "Internet: "
+#~ msgstr "Internet: "
+
+#~ msgid "logo1.png"
+#~ msgstr "logo1.png"
+
+#~ msgid " is not a volume"
+#~ msgstr " is not a volume"
+
+#~ msgid "Remove/Add backup paths"
+#~ msgstr "Remove/Add backup paths"
+
+#~ msgid "Author:"
+#~ msgstr "Author:"

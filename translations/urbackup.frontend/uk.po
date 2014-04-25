@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
 # tenorio <miawork@list.ru>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
-"Report-Msgid-Bugs-To: martin@urbackup.org\n"
-"POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-11-20 09:13+0000\n"
-"Last-Translator: tenorio <miawork@list.ru>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-25 19:14+0200\n"
+"PO-Revision-Date: 2014-04-25 17:17+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/urbackup/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,279 +22,512 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-msgid "Encrypted transfer:"
-msgstr "Захищена передача даних:"
-
-msgid "Compressed transfer:"
-msgstr "Зтиснена передача даних"
-
-msgid "Max backups speed for internet connection:"
-msgstr "Максимальна швидкість копіювання через інтернет:"
-
-msgid "Do full file backups over internet:"
-msgstr "Повна файлова копія через інтернет"
-
-msgid "Do image backups over internet:"
-msgstr "Робити образи дисків через інтернет:"
-
-msgid "Internet server password:"
-msgstr "Пароль інтернет серверу:"
-
-msgid "Internet server port:"
-msgstr "Порт інтернет серверу:"
-
-msgid "Internet server name/IP:"
-msgstr "Імя/ІР інтернет серверу:"
-
-msgid "Enable backup via internet:"
-msgstr "Дозволити резервне копіювання через інтернет:"
-
-msgid "Max backup speed for local network:"
-msgstr "Максимальна швидкість копіювання через мережу:"
-
-msgid "A new backup server has been found. Click here to use it"
-msgstr "Знайдено новий сервер резервних копій. Натисніть сюди щоб задіяти його "
-
-msgid "UrBackup: New server"
-msgstr "UrBackup: Новий сервер"
-
-msgid "Internet"
-msgstr "Інтернет"
-
-msgid "Client"
-msgstr "Клієнт"
-
-msgid "Image backups"
-msgstr "Копії образів дисків"
-
-msgid "File backups"
-msgstr "Резервні копії файлів"
-
-msgid "Include in backup (with wildcards):"
-msgstr "Додати до бекапу (за шаблонами)"
-
-msgid " is not a volume"
-msgstr "не є розділом"
-
-msgid "Volumes to backup:"
-msgstr "Розділи для бекапу"
-
-msgid "Waiting for server..."
-msgstr "Очікування сервера..."
-
-msgid "Backup delay after system start is not a number"
-msgstr "Затримка після старту системи:"
-
-msgid "min"
-msgstr "хв."
-
-msgid "Computer name:"
-msgstr "І'мя коп'ютера"
-
-msgid "Exclude from backup (with wildcards):"
-msgstr "Виключити з бекапу (за шаблонами)"
-
-msgid "Backup window:"
-msgstr "Інтервал бекапу"
-
-msgid "Backup delay after system start:"
-msgstr "Затримка після старту системи:"
-
-msgid "Name:"
-msgstr "І'мя"
-
-msgid "Informations"
-msgstr "Інформація"
-
-msgid "Continue"
-msgstr "Продовжити"
-
-msgid "Pause"
-msgstr "Пауза"
-
-msgid "Logs"
-msgstr "Логи"
-
-msgid "Add/Remove backup paths"
-msgstr "Додати/Видалити щляхи для бекапу "
-
+#: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
 msgstr "Налаштування"
 
-msgid "Do incremental image backup"
-msgstr "Створити інкрементний образ"
+#: gui\GUI.h:164 TrayIcon.cpp:271
+msgid "Logs"
+msgstr "Логи"
 
-msgid "Do full image backup"
-msgstr "Створити повний образ"
+#: gui\GUI.h:195
+msgid "Informations"
+msgstr "Інформація"
 
-msgid "Do incremental file backup"
-msgstr "Створити інкрементній файловий бекап"
+#: gui\GUI.h:231 TrayIcon.cpp:266
+msgid "Add/Remove backup paths"
+msgstr "Додати/Видалити щляхи для бекапу "
 
-msgid "Do full file backup"
-msgstr "Створити повний файловий бекап"
+#: gui\GUI.h:256 TrayIcon.cpp:294
+msgid "Status"
+msgstr ""
 
-msgid "Continuing failed: No connection to backup server."
-msgstr "Продовження не можливе: Немає з'єднання з сервером резервного копіювання."
+#: gui\GUI.cpp:52
+msgid "Interval for incremental file backups:"
+msgstr "Інтервал для інкрементних файлових копій"
 
-msgid "Pausing failed: No connection to backup server."
-msgstr "Призупинення не можливе: Немає з'єднання з сервером резервного копіювання."
+#: gui\GUI.cpp:59
+msgid "hours"
+msgstr "Годин"
 
-msgid "Could not start backup, because no backup server was found."
-msgstr "Не можливо розпочати бекап. Немає з'єднання з сервером резервного копіювання."
+#: gui\GUI.cpp:68
+msgid "Interval for full file backups:"
+msgstr "Інтервал для повних файлових копій"
 
-msgid "A backup is already running. Could not start another one."
-msgstr "Резервне копіювання вже виконується."
+#: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
+msgid "days"
+msgstr "Днів"
 
-msgid "Maximal number of full image backups is not a number"
-msgstr "Максимальна кількість повних образів"
+#: gui\GUI.cpp:87
+msgid "Interval for incremental image backups:"
+msgstr "Інтервал для інкрементних образів"
 
-msgid "Minimal number of full image backups is not a number"
-msgstr "Мінімальна кількість повних образів"
+#: gui\GUI.cpp:100
+msgid "Active"
+msgstr "Активний"
 
-msgid "Maximal number of incremental image backups is not a number"
-msgstr "Максимальна кількість інкрементних образів"
+#: gui\GUI.cpp:109
+msgid "Interval for full image backups:"
+msgstr "Інтервал для повних образів"
 
-msgid "Minimal number of incremental image backups is not a number"
-msgstr "Мінімальна кількість інкрементних образів"
+#: gui\GUI.cpp:136
+msgid "Minimal number of incremental file backups:"
+msgstr "Мінімальна кількість інкрементних файлових копій:"
 
-msgid "Minimal number of full file backups is not a number"
-msgstr "Мінімальна кількість повних файлових копій"
+#: gui\GUI.cpp:148
+msgid "Maximal number of incremental file backups:"
+msgstr "Максимальна кількість інкрементних файлових копій:"
 
-msgid "The maximal number of full file backups is not a number"
-msgstr "Максимальна кількість повних файлових копій"
+#: gui\GUI.cpp:160
+msgid "Minimal number of full file backups:"
+msgstr "Мінімальна кількість повних файлових копій:"
 
-msgid "The minimal number of incremental file backups is not a number"
-msgstr "Мінімальна кількість інкрементних файлових копій"
+#: gui\GUI.cpp:172
+msgid "Maximal number of full file backups:"
+msgstr "Максимальна кількість повних фалових копій:"
 
-msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Міаксимальна кількість інкрементних файлових копій"
+#: gui\GUI.cpp:205
+msgid "Minimal number of incremental image backups:"
+msgstr "Мінімальна кількість інкрементних образів:"
 
-msgid "The incremental image backup time is not a number"
-msgstr "Час створення інкрементних образів"
+#: gui\GUI.cpp:217
+msgid "Maximal number of incremental image backups:"
+msgstr "Максимальна кількість інкрементних образів:"
 
-msgid "The full image backup interval  is not a number"
-msgstr "Інтервал створеня повних образів"
+#: gui\GUI.cpp:229
+msgid "Minimal number of full image backups:"
+msgstr "Мінімальна кількість повних образів:"
 
-msgid "The full backup interval  is not a number"
-msgstr "Інтервал створення повних файлових бекапів"
+#: gui\GUI.cpp:241
+msgid "Maximal number of full image backups:"
+msgstr "Максимальна кількість повних обзів:"
 
-msgid "The incremental backup interval is not a number"
-msgstr "Інтервал створення інкрементних файлових бекапів"
+#: gui\GUI.cpp:264
+msgid "Computer name:"
+msgstr "І'мя коп'ютера"
 
-msgid "Last backup on "
-msgstr "Минулий бекап о"
+#: gui\GUI.cpp:276
+msgid "Exclude from backup (with wildcards):"
+msgstr "Виключити з бекапу (за шаблонами)"
 
-msgid "No current backup. "
-msgstr "немає актуального бекапу."
+#: gui\GUI.cpp:288
+msgid "Include in backup (with wildcards):"
+msgstr "Додати до бекапу (за шаблонами)"
 
-msgid "_percent_ done. "
-msgstr "_відсотків_виконано."
+#: gui\GUI.cpp:300
+msgid "Backup window:"
+msgstr "Інтервал бекапу"
 
-msgid "Full image backup running. "
-msgstr "Виконується створення повного образу"
+#: gui\GUI.cpp:312
+msgid "Backup delay after system start:"
+msgstr "Затримка після старту системи:"
 
-msgid "Incremental image backup running. "
-msgstr "Виконується створення інкрементного образу"
+#: gui\GUI.cpp:321
+msgid "min"
+msgstr "хв."
 
-msgid "Full file backup running. "
-msgstr "Виконуеться створення повного файлового бекапу"
+#: gui\GUI.cpp:333
+msgid "Volumes to backup:"
+msgstr "Розділи для бекапу"
 
-msgid "Incremental file backup running. "
-msgstr "Виконуеться створення інкрементного файлового бекапу"
+#: gui\GUI.cpp:356
+msgid "Max backup speed for local network:"
+msgstr "Максимальна швидкість копіювання через мережу:"
 
-msgid "Cannot connect to backup server"
-msgstr "Немає з'єднання з сервером резервного копіювання."
+#: gui\GUI.cpp:361
+msgid "MBit/s"
+msgstr ""
 
+#: gui\GUI.cpp:369
+msgid "Enable backup via internet:"
+msgstr "Дозволити резервне копіювання через інтернет:"
+
+#: gui\GUI.cpp:377
+msgid "Internet server name/IP:"
+msgstr "Імя/ІР інтернет серверу:"
+
+#: gui\GUI.cpp:385
+msgid "Internet server port:"
+msgstr "Порт інтернет серверу:"
+
+#: gui\GUI.cpp:393
+msgid "Internet server password:"
+msgstr "Пароль інтернет серверу:"
+
+#: gui\GUI.cpp:404
+msgid "Do image backups over internet:"
+msgstr "Робити образи дисків через інтернет:"
+
+#: gui\GUI.cpp:414
+msgid "Do full file backups over internet:"
+msgstr "Повна файлова копія через інтернет"
+
+#: gui\GUI.cpp:422
+msgid "Max backups speed for internet connection:"
+msgstr "Максимальна швидкість копіювання через інтернет:"
+
+#: gui\GUI.cpp:427
+msgid "KBit/s"
+msgstr ""
+
+#: gui\GUI.cpp:433
+msgid "Compressed transfer:"
+msgstr "Зтиснена передача даних"
+
+#: gui\GUI.cpp:441
+msgid "Encrypted transfer:"
+msgstr "Захищена передача даних:"
+
+#: gui\GUI.cpp:460
+msgid "File backups"
+msgstr "Резервні копії файлів"
+
+#: gui\GUI.cpp:465
+msgid "Image backups"
+msgstr "Копії образів дисків"
+
+#: gui\GUI.cpp:468
+msgid "Client"
+msgstr "Клієнт"
+
+#: gui\GUI.cpp:469
+msgid "Internet"
+msgstr "Інтернет"
+
+#: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
+msgid "Ok"
+msgstr "Так"
+
+#: gui\GUI.cpp:485 gui\GUI.cpp:701
+msgid "Abort"
+msgstr "Скасувати"
+
+#: gui\GUI.cpp:535
+msgid "Filter:"
+msgstr "Фільтр"
+
+#: gui\GUI.cpp:539 TrayIcon.cpp:279
+msgid "Infos"
+msgstr "Інформація"
+
+#: gui\GUI.cpp:539
+msgid "Warnings"
+msgstr "Попередження"
+
+#: gui\GUI.cpp:539
+msgid "Errors"
+msgstr "Помилки"
+
+#: gui\GUI.cpp:556 TrayIcon.cpp:295
+msgid "Exit"
+msgstr "Вийти"
+
+#: gui\GUI.cpp:610
+msgid "Version:"
+msgstr "Версія"
+
+#: gui\GUI.cpp:678
+msgid "Name:"
+msgstr "І'мя"
+
+#: gui\GUI.cpp:707
+msgid "Add path"
+msgstr "Додати хлях"
+
+#: gui\GUI.cpp:710
+msgid "Remove path"
+msgstr "Видалити шлях"
+
+#: gui\GUI.cpp:800
+msgid "Internet connection status:"
+msgstr ""
+
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:83
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Сталася помилка. В даний час ніщо не може бути скорійовано."
+
+#: ConfigPath.cpp:89
+msgid "Please select the directory that will be backed up."
+msgstr "Виберіль директорію бекап якої буде створено."
+
+#: main.cpp:111
+msgid "_percent_ done."
+msgstr ""
+
+#: main.cpp:330
+msgid "Incremental file backup running."
+msgstr ""
+
+#: main.cpp:334
+msgid "Full file backup running."
+msgstr ""
+
+#: main.cpp:338
+msgid "Incremental image backup running."
+msgstr ""
+
+#: main.cpp:342
+msgid "Full image backup running."
+msgstr ""
+
+#: main.cpp:346
+msgid "Resumed incremental file backup running."
+msgstr ""
+
+#: main.cpp:350
+msgid "Resumed full file backup running."
+msgstr ""
+
+#: main.cpp:366
+msgid "Indexing."
+msgstr ""
+
+#: main.cpp:442 main.cpp:446
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Доступне оновлення"
+
+#: main.cpp:442 main.cpp:446
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "Доспупна нова версія UrBackup. Натисніть сюди щоб встановити її зараз."
 
-msgid "UrBackup: Update available"
-msgstr "UrBackup: Доступне оновлення"
+#: main.cpp:465
+msgid "Cannot connect to backup server"
+msgstr "Немає з'єднання з сервером резервного копіювання."
 
-msgid "Please select the directory that will be backed up."
-msgstr "Виберіль директорію бекап якої буде створено."
+#: main.cpp:502
+msgid "No current backup."
+msgstr ""
 
-msgid "There was an error. Currently nothing can be backed up."
-msgstr "Сталася помилка. В даний час ніщо не може бути скорійовано."
+#: main.cpp:513 Status.cpp:127
+msgid "Last backup on _1_"
+msgstr ""
 
-msgid "Remove path"
-msgstr "Видалити шлях"
+#: main.cpp:564 main.cpp:568
+msgid "UrBackup: New server"
+msgstr "UrBackup: Новий сервер"
 
-msgid "Add path"
-msgstr "Додати хлях"
+#: main.cpp:564 main.cpp:568
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Знайдено новий сервер резервних копій. Натисніть сюди щоб задіяти його "
 
-msgid "Remove/Add backup paths"
-msgstr "Додати/вилучити шляхи для бекапів"
+#: Settings.cpp:504
+msgid "The incremental backup interval is not a number"
+msgstr "Інтервал створення інкрементних файлових бекапів"
 
-msgid "Author:"
-msgstr "Автор"
+#: Settings.cpp:510
+msgid "The full backup interval  is not a number"
+msgstr "Інтервал створення повних файлових бекапів"
 
-msgid "Version:"
-msgstr "Версія"
+#: Settings.cpp:519
+msgid "The full image backup interval  is not a number"
+msgstr "Інтервал створеня повних образів"
 
-msgid "Exit"
-msgstr "Вийти"
+#: Settings.cpp:525
+msgid "The incremental image backup time is not a number"
+msgstr "Час створення інкрементних образів"
 
-msgid "Errors"
-msgstr "Помилки"
+#: Settings.cpp:533
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Міаксимальна кількість інкрементних файлових копій"
 
-msgid "Warnings"
-msgstr "Попередження"
+#: Settings.cpp:539
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Мінімальна кількість інкрементних файлових копій"
 
-msgid "Infos"
-msgstr "Інформація"
+#: Settings.cpp:545
+msgid "The maximal number of full file backups is not a number"
+msgstr "Максимальна кількість повних файлових копій"
 
-msgid "Filter:"
-msgstr "Фільтр"
+#: Settings.cpp:551
+msgid "Minimal number of full file backups is not a number"
+msgstr "Мінімальна кількість повних файлових копій"
 
-msgid "Abort"
-msgstr "Скасувати"
+#: Settings.cpp:560
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Мінімальна кількість інкрементних образів"
 
-msgid "Ok"
-msgstr "Так"
+#: Settings.cpp:566
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Максимальна кількість інкрементних образів"
 
-msgid "Active"
-msgstr "Активний"
+#: Settings.cpp:572
+msgid "Minimal number of full image backups is not a number"
+msgstr "Мінімальна кількість повних образів"
 
-msgid "days"
-msgstr "Днів"
+#: Settings.cpp:578
+msgid "Maximal number of full image backups is not a number"
+msgstr "Максимальна кількість повних образів"
 
-msgid "hours"
-msgstr "Годин"
+#: Settings.cpp:586
+msgid "Backup delay after system start is not a number"
+msgstr "Затримка після старту системи:"
 
-msgid "Maximal number of full image backups:"
-msgstr "Максимальна кількість повних обзів:"
+#: Settings.cpp:603
+msgid "_1_ is not a volume"
+msgstr ""
 
-msgid "Minimal number of full image backups:"
-msgstr "Мінімальна кількість повних образів:"
+#: Settings.cpp:612
+msgid "The server port is not valid"
+msgstr ""
 
-msgid "Maximal number of incremental image backups:"
-msgstr "Максимальна кількість інкрементних образів:"
+#: Status.cpp:17
+msgid "Initializing."
+msgstr ""
 
-msgid "Minimal number of incremental image backups:"
-msgstr "Мінімальна кількість інкрементних образів:"
+#: Status.cpp:21
+msgid "Waiting for local UrBackup server."
+msgstr ""
 
-msgid "Maximal number of full file backups:"
-msgstr "Максимальна кількість повних фалових копій:"
+#: Status.cpp:30
+msgid "Connected to local UrBackup server."
+msgstr ""
 
-msgid "Minimal number of full file backups:"
-msgstr "Мінімальна кількість повних файлових копій:"
+#: Status.cpp:30
+msgid "Not trying to connect to Internet server."
+msgstr ""
 
-msgid "Maximal number of incremental file backups:"
-msgstr "Максимальна кількість інкрементних файлових копій:"
+#: Status.cpp:31
+msgid "Local server last seen _1_ minutes ago."
+msgstr ""
 
-msgid "Minimal number of incremental file backups:"
-msgstr "Мінімальна кількість інкрементних файлових копій:"
+#: Status.cpp:35
+msgid "No Internet server configured."
+msgstr ""
 
-msgid "Interval for full image backups:"
-msgstr "Інтервал для повних образів"
+#: Status.cpp:39
+msgid "Connected to Internet server"
+msgstr ""
 
-msgid "Interval for incremental image backups:"
-msgstr "Інтервал для інкрементних образів"
+#: Status.cpp:43
+msgid "Could not connect to Internet server. Server unreachable."
+msgstr ""
 
-msgid "Interval for full file backups:"
-msgstr "Інтервал для повних файлових копій"
+#: Status.cpp:47
+msgid "Error: _1_"
+msgstr ""
 
-msgid "Interval for incremental file backups:"
-msgstr "Інтервал для інкрементних файлових копій"
+#: Status.cpp:101
+msgid "Idle."
+msgstr ""
+
+#: Status.cpp:145
+msgid "Yes"
+msgstr ""
+
+#: Status.cpp:147
+msgid "No"
+msgstr ""
+
+#: Status.cpp:149
+msgid "Internet: _1_"
+msgstr ""
+
+#: Status.cpp:158
+msgid "Servers:"
+msgstr ""
+
+#: TrayIcon.cpp:141 TrayIcon.cpp:164
+msgid "Waiting for server..."
+msgstr "Очікування сервера..."
+
+#: TrayIcon.cpp:146 TrayIcon.cpp:169
+msgid "A backup is already running. Could not start another one."
+msgstr "Резервне копіювання вже виконується."
+
+#: TrayIcon.cpp:148 TrayIcon.cpp:171
+msgid "Could not start backup, because no backup server was found."
+msgstr "Не можливо розпочати бекап. Немає з'єднання з сервером резервного копіювання."
+
+#: TrayIcon.cpp:183
+msgid "Pausing failed: No connection to backup server."
+msgstr "Призупинення не можливе: Немає з'єднання з сервером резервного копіювання."
+
+#: TrayIcon.cpp:196
+msgid "Continuing failed: No connection to backup server."
+msgstr "Продовження не можливе: Немає з'єднання з сервером резервного копіювання."
+
+#: TrayIcon.cpp:230
+msgid "Do full file backup"
+msgstr "Створити повний файловий бекап"
+
+#: TrayIcon.cpp:230
+msgid "Do a full file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:235
+msgid "Do incremental file backup"
+msgstr "Створити інкрементній файловий бекап"
+
+#: TrayIcon.cpp:235
+msgid "Do a incremental file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:244
+msgid "Do full image backup"
+msgstr "Створити повний образ"
+
+#: TrayIcon.cpp:244
+msgid "Do a full image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:249
+msgid "Do incremental image backup"
+msgstr "Створити інкрементний образ"
+
+#: TrayIcon.cpp:249
+msgid "Do a incremental image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:286
+msgid "Pause"
+msgstr "Пауза"
+
+#: TrayIcon.cpp:291
+msgid "Continue"
+msgstr "Продовжити"
+
+#~ msgid "_percent_ done. "
+#~ msgstr "_percent_ done. "
+
+#~ msgid "Incremental file backup running. "
+#~ msgstr "Incremental file backup running. "
+
+#~ msgid "Full file backup running. "
+#~ msgstr "Full file backup running. "
+
+#~ msgid "Incremental image backup running. "
+#~ msgstr "Incremental image backup running. "
+
+#~ msgid "Full image backup running. "
+#~ msgstr "Full image backup running. "
+
+#~ msgid "Resumed incremental file backup running. "
+#~ msgstr "Resumed incremental file backup running. "
+
+#~ msgid "Resumed full file backup running. "
+#~ msgstr "Resumed full file backup running. "
+
+#~ msgid "Indexing. "
+#~ msgstr "Indexing. "
+
+#~ msgid "No current backup. "
+#~ msgstr "No current backup. "
+
+#~ msgid "Last backup on "
+#~ msgstr "Last backup on "
+
+#~ msgid "Internet: "
+#~ msgstr "Internet: "
+
+#~ msgid "logo1.png"
+#~ msgstr "logo1.png"
+
+#~ msgid " is not a volume"
+#~ msgstr " is not a volume"
+
+#~ msgid "Remove/Add backup paths"
+#~ msgstr "Remove/Add backup paths"
+
+#~ msgid "Author:"
+#~ msgstr "Author:"

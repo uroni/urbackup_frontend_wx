@@ -3,14 +3,19 @@
 # This file is distributed under the same license as the UrBackup package.
 # 
 # Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# tnywos <tn@keyone.dk>, 2013
 # tnywos <tn@keyone.dk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
-"Report-Msgid-Bugs-To: martin@urbackup.org\n"
-"POT-Creation-Date: 2011-01-05 13:53+0100\n"
-"PO-Revision-Date: 2013-11-20 09:13+0000\n"
-"Last-Translator: tnywos <tn@keyone.dk>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-25 19:14+0200\n"
+"PO-Revision-Date: 2014-04-25 17:17+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/urbackup/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,279 +23,512 @@ msgstr ""
 "Language: da_DK\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Encrypted transfer:"
-msgstr "Krypteret overførsel:"
-
-msgid "Compressed transfer:"
-msgstr "Komprimeret overførsel:"
-
-msgid "Max backups speed for internet connection:"
-msgstr "Maksimal sikkerhedskopihastighed ved internetforbindelse:"
-
-msgid "Do full file backups over internet:"
-msgstr "Udfør fuld fil-sikkerhedskopi via internettet:"
-
-msgid "Do image backups over internet:"
-msgstr "Udfør komplet spejl-sikkerhedskopi via internettet:"
-
-msgid "Internet server password:"
-msgstr "Internetserver kodeord:"
-
-msgid "Internet server port:"
-msgstr "Internetserver port:"
-
-msgid "Internet server name/IP:"
-msgstr "Internetserver navn/IP:"
-
-msgid "Enable backup via internet:"
-msgstr "Aktiver sikkerhedskopi via internet:"
-
-msgid "Max backup speed for local network:"
-msgstr "Maksimal sikkerhedskopihastighed for lokalnetværk:"
-
-msgid "A new backup server has been found. Click here to use it"
-msgstr "Ny sikkerhedskopiserver er fundet. Klik her for at anvende den"
-
-msgid "UrBackup: New server"
-msgstr "UrBackup: Ny server"
-
-msgid "Internet"
-msgstr "Internet"
-
-msgid "Client"
-msgstr "Klient"
-
-msgid "Image backups"
-msgstr "Spejl-sikkerhedskopiering"
-
-msgid "File backups"
-msgstr "Fil-sikkerhedskopiering"
-
-msgid "Include in backup (with wildcards):"
-msgstr "Inkluderer i sikkerhedskopi (med jokertegn):"
-
-msgid " is not a volume"
-msgstr "det er ikke en volume"
-
-msgid "Volumes to backup:"
-msgstr "Volume der skal sikkerhedskopieres:"
-
-msgid "Waiting for server..."
-msgstr "Venter på server..."
-
-msgid "Backup delay after system start is not a number"
-msgstr "Sikkerhedskopiforsinkels efter systemstart er ikke et tal"
-
-msgid "min"
-msgstr "min."
-
-msgid "Computer name:"
-msgstr "Computernavn:"
-
-msgid "Exclude from backup (with wildcards):"
-msgstr "Ekskluderer fra sikkerhedskopi (med jokertegn):"
-
-msgid "Backup window:"
-msgstr "Sikkerhedskopivindue:"
-
-msgid "Backup delay after system start:"
-msgstr "Sikkerhedskopiforsinkelse efter systemstart:"
-
-msgid "Name:"
-msgstr "Navn:"
-
-msgid "Informations"
-msgstr "Informationer"
-
-msgid "Continue"
-msgstr "Fortsæt"
-
-msgid "Pause"
-msgstr "Pause"
-
-msgid "Logs"
-msgstr "Logfiler"
-
-msgid "Add/Remove backup paths"
-msgstr "Tilføj/fjern sikkerhedkopistier"
-
+#: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
 msgstr "Indstillinger"
 
-msgid "Do incremental image backup"
-msgstr "Udfør inkremental spejl-sikkerhedskopi"
+#: gui\GUI.h:164 TrayIcon.cpp:271
+msgid "Logs"
+msgstr "Logfiler"
 
-msgid "Do full image backup"
-msgstr "Udfør komplet spejl-sikkerhedskopi"
+#: gui\GUI.h:195
+msgid "Informations"
+msgstr "Informationer"
 
-msgid "Do incremental file backup"
-msgstr "Udfør inkremental fil-sikkerhedskopi"
+#: gui\GUI.h:231 TrayIcon.cpp:266
+msgid "Add/Remove backup paths"
+msgstr "Tilføj/fjern sikkerhedkopistier"
 
-msgid "Do full file backup"
-msgstr "Udfør komplet fil-sikkerhedskopi"
+#: gui\GUI.h:256 TrayIcon.cpp:294
+msgid "Status"
+msgstr ""
 
-msgid "Continuing failed: No connection to backup server."
-msgstr "Gentagne fejl: Ingen forbindelse til sikkerhedskopiserver."
+#: gui\GUI.cpp:52
+msgid "Interval for incremental file backups:"
+msgstr "Interval mellem inkrementale fil-sikkerhedskopier:"
 
-msgid "Pausing failed: No connection to backup server."
-msgstr "Midlertidig fejl: Ingen forbindelse til sikkerhedskopiserver."
+#: gui\GUI.cpp:59
+msgid "hours"
+msgstr "timer"
 
-msgid "Could not start backup, because no backup server was found."
-msgstr "Kunne ikke starte sikkerhedskopiering, fordi sikkerhedskopiserver ikke blev fundet."
+#: gui\GUI.cpp:68
+msgid "Interval for full file backups:"
+msgstr "Interval mellem komplette fil-sikkerhedskopier:"
 
-msgid "A backup is already running. Could not start another one."
-msgstr "Sikkerhedskopiering er igang. Der kan ikke startes endnu en."
+#: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
+msgid "days"
+msgstr "dage"
 
-msgid "Maximal number of full image backups is not a number"
-msgstr "Maks. antal af komplette spejl-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:87
+msgid "Interval for incremental image backups:"
+msgstr "Interval mellem inkrementale spejl-sikkerhedskopier:"
 
-msgid "Minimal number of full image backups is not a number"
-msgstr "Min. antal af komplette spejl-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:100
+msgid "Active"
+msgstr "Aktive"
 
-msgid "Maximal number of incremental image backups is not a number"
-msgstr "Maks. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:109
+msgid "Interval for full image backups:"
+msgstr "Interval mellem komplet spejl-sikkerhedskopier:"
 
-msgid "Minimal number of incremental image backups is not a number"
-msgstr "Min. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:136
+msgid "Minimal number of incremental file backups:"
+msgstr "Minimum antal inkrementale fil-sikkerhedskopier"
 
-msgid "Minimal number of full file backups is not a number"
-msgstr "Min. antal af komplette fil-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:148
+msgid "Maximal number of incremental file backups:"
+msgstr "Maksimal antal komplette fil-sikkerhedskopier"
 
-msgid "The maximal number of full file backups is not a number"
-msgstr "Maks. antal af komplette fil-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:160
+msgid "Minimal number of full file backups:"
+msgstr "Minimum antal komplette fil-sikkerhedskopier"
 
-msgid "The minimal number of incremental file backups is not a number"
-msgstr "Min. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:172
+msgid "Maximal number of full file backups:"
+msgstr "Maksimal antal komplette fil-sikkerhedskopier"
 
-msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Maks. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:205
+msgid "Minimal number of incremental image backups:"
+msgstr "Minimum antal inkrementale spejl-sikkerhedskopier"
 
-msgid "The incremental image backup time is not a number"
-msgstr "Tidsangivelse for inkremental spejl-sikkerhedskopi er ikke et tal"
+#: gui\GUI.cpp:217
+msgid "Maximal number of incremental image backups:"
+msgstr "Maksimal antal inkrementale spejl-sikkerhedskopier"
 
-msgid "The full image backup interval  is not a number"
-msgstr "Tidsangivelse for komplet spejl-sikkerhedskopi er ikke et tal"
+#: gui\GUI.cpp:229
+msgid "Minimal number of full image backups:"
+msgstr "Minimum antal komplette spejl-sikkerhedskopier"
 
-msgid "The full backup interval  is not a number"
-msgstr "Tidsangivelse for komplet fil-sikkerhedskopi er ikke et tal"
+#: gui\GUI.cpp:241
+msgid "Maximal number of full image backups:"
+msgstr "Maksimal antal komplette spejl-sikkerhedskopier:"
 
-msgid "The incremental backup interval is not a number"
-msgstr "Tidsangivelse for inkremental fil-sikkerhedskopier er ikke et tal"
+#: gui\GUI.cpp:264
+msgid "Computer name:"
+msgstr "Computernavn:"
 
-msgid "Last backup on "
-msgstr "Sidste sikkerhedkopi foretaget"
+#: gui\GUI.cpp:276
+msgid "Exclude from backup (with wildcards):"
+msgstr "Ekskluderer fra sikkerhedskopi (med jokertegn):"
 
-msgid "No current backup. "
-msgstr "Ingen igangværende sikkerhedkopiering"
+#: gui\GUI.cpp:288
+msgid "Include in backup (with wildcards):"
+msgstr "Inkluderer i sikkerhedskopi (med jokertegn):"
 
-msgid "_percent_ done. "
-msgstr "_percent_ udført."
+#: gui\GUI.cpp:300
+msgid "Backup window:"
+msgstr "Sikkerhedskopivindue:"
 
-msgid "Full image backup running. "
-msgstr "Komplet spejl-sikkerhedskopi er igang."
+#: gui\GUI.cpp:312
+msgid "Backup delay after system start:"
+msgstr "Sikkerhedskopiforsinkelse efter systemstart:"
 
-msgid "Incremental image backup running. "
-msgstr "Inkremental spejl-sikkerhedskopi er igang."
+#: gui\GUI.cpp:321
+msgid "min"
+msgstr "min."
 
-msgid "Full file backup running. "
-msgstr "Komplet fil-sikkerhedskopi er igang."
+#: gui\GUI.cpp:333
+msgid "Volumes to backup:"
+msgstr "Volume der skal sikkerhedskopieres:"
 
-msgid "Incremental file backup running. "
-msgstr "Inkremental fil-sikkerhedskopi er igang."
+#: gui\GUI.cpp:356
+msgid "Max backup speed for local network:"
+msgstr "Maksimal sikkerhedskopihastighed for lokalnetværk:"
 
-msgid "Cannot connect to backup server"
-msgstr "Kan ikke forbinde til sikkerhedskopiserver"
+#: gui\GUI.cpp:361
+msgid "MBit/s"
+msgstr ""
 
+#: gui\GUI.cpp:369
+msgid "Enable backup via internet:"
+msgstr "Aktiver sikkerhedskopi via internet:"
+
+#: gui\GUI.cpp:377
+msgid "Internet server name/IP:"
+msgstr "Internetserver navn/IP:"
+
+#: gui\GUI.cpp:385
+msgid "Internet server port:"
+msgstr "Internetserver port:"
+
+#: gui\GUI.cpp:393
+msgid "Internet server password:"
+msgstr "Internetserver kodeord:"
+
+#: gui\GUI.cpp:404
+msgid "Do image backups over internet:"
+msgstr "Udfør komplet spejl-sikkerhedskopi via internettet:"
+
+#: gui\GUI.cpp:414
+msgid "Do full file backups over internet:"
+msgstr "Udfør fuld fil-sikkerhedskopi via internettet:"
+
+#: gui\GUI.cpp:422
+msgid "Max backups speed for internet connection:"
+msgstr "Maksimal sikkerhedskopihastighed ved internetforbindelse:"
+
+#: gui\GUI.cpp:427
+msgid "KBit/s"
+msgstr ""
+
+#: gui\GUI.cpp:433
+msgid "Compressed transfer:"
+msgstr "Komprimeret overførsel:"
+
+#: gui\GUI.cpp:441
+msgid "Encrypted transfer:"
+msgstr "Krypteret overførsel:"
+
+#: gui\GUI.cpp:460
+msgid "File backups"
+msgstr "Fil-sikkerhedskopiering"
+
+#: gui\GUI.cpp:465
+msgid "Image backups"
+msgstr "Spejl-sikkerhedskopiering"
+
+#: gui\GUI.cpp:468
+msgid "Client"
+msgstr "Klient"
+
+#: gui\GUI.cpp:469
+msgid "Internet"
+msgstr "Internet"
+
+#: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
+msgid "Ok"
+msgstr "Ok"
+
+#: gui\GUI.cpp:485 gui\GUI.cpp:701
+msgid "Abort"
+msgstr "Afbryd"
+
+#: gui\GUI.cpp:535
+msgid "Filter:"
+msgstr "Filter:"
+
+#: gui\GUI.cpp:539 TrayIcon.cpp:279
+msgid "Infos"
+msgstr "Informationer"
+
+#: gui\GUI.cpp:539
+msgid "Warnings"
+msgstr "Advarsler"
+
+#: gui\GUI.cpp:539
+msgid "Errors"
+msgstr "Fejl"
+
+#: gui\GUI.cpp:556 TrayIcon.cpp:295
+msgid "Exit"
+msgstr "Afslut"
+
+#: gui\GUI.cpp:610
+msgid "Version:"
+msgstr "Version:"
+
+#: gui\GUI.cpp:678
+msgid "Name:"
+msgstr "Navn:"
+
+#: gui\GUI.cpp:707
+msgid "Add path"
+msgstr "Tilføj mappesti"
+
+#: gui\GUI.cpp:710
+msgid "Remove path"
+msgstr "Fjern mappesti"
+
+#: gui\GUI.cpp:800
+msgid "Internet connection status:"
+msgstr ""
+
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:83
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "Der opstod en fejl. Der kan ikke tages nogen sikkerhedskopi."
+
+#: ConfigPath.cpp:89
+msgid "Please select the directory that will be backed up."
+msgstr "Angiv venligst den mappe er skal tages sikkedhedskopi af."
+
+#: main.cpp:111
+msgid "_percent_ done."
+msgstr ""
+
+#: main.cpp:330
+msgid "Incremental file backup running."
+msgstr ""
+
+#: main.cpp:334
+msgid "Full file backup running."
+msgstr ""
+
+#: main.cpp:338
+msgid "Incremental image backup running."
+msgstr ""
+
+#: main.cpp:342
+msgid "Full image backup running."
+msgstr ""
+
+#: main.cpp:346
+msgid "Resumed incremental file backup running."
+msgstr ""
+
+#: main.cpp:350
+msgid "Resumed full file backup running."
+msgstr ""
+
+#: main.cpp:366
+msgid "Indexing."
+msgstr ""
+
+#: main.cpp:442 main.cpp:446
+msgid "UrBackup: Update available"
+msgstr "UrBackup: Opdatering tilgængelig"
+
+#: main.cpp:442 main.cpp:446
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "En ny version af UrBackup er tilgængelig. Klik venligst her for at installere den nu."
 
-msgid "UrBackup: Update available"
-msgstr "UrBackup: Opdatering tilgængelig"
+#: main.cpp:465
+msgid "Cannot connect to backup server"
+msgstr "Kan ikke forbinde til sikkerhedskopiserver"
 
-msgid "Please select the directory that will be backed up."
-msgstr "Angiv venligst den mappe er skal tages sikkedhedskopi af."
+#: main.cpp:502
+msgid "No current backup."
+msgstr ""
 
-msgid "There was an error. Currently nothing can be backed up."
-msgstr "Der opstod en fejl. Der kan ikke tages nogen sikkerhedskopi."
+#: main.cpp:513 Status.cpp:127
+msgid "Last backup on _1_"
+msgstr ""
 
-msgid "Remove path"
-msgstr "Fjern mappesti"
+#: main.cpp:564 main.cpp:568
+msgid "UrBackup: New server"
+msgstr "UrBackup: Ny server"
 
-msgid "Add path"
-msgstr "Tilføj mappesti"
+#: main.cpp:564 main.cpp:568
+msgid "A new backup server has been found. Click here to use it"
+msgstr "Ny sikkerhedskopiserver er fundet. Klik her for at anvende den"
 
-msgid "Remove/Add backup paths"
-msgstr "Tilføj/Fjern mappesti til sikkerhedkopiering"
+#: Settings.cpp:504
+msgid "The incremental backup interval is not a number"
+msgstr "Tidsangivelse for inkremental fil-sikkerhedskopier er ikke et tal"
 
-msgid "Author:"
-msgstr "Forfatter:"
+#: Settings.cpp:510
+msgid "The full backup interval  is not a number"
+msgstr "Tidsangivelse for komplet fil-sikkerhedskopi er ikke et tal"
 
-msgid "Version:"
-msgstr "Version:"
+#: Settings.cpp:519
+msgid "The full image backup interval  is not a number"
+msgstr "Tidsangivelse for komplet spejl-sikkerhedskopi er ikke et tal"
 
-msgid "Exit"
-msgstr "Afslut"
+#: Settings.cpp:525
+msgid "The incremental image backup time is not a number"
+msgstr "Tidsangivelse for inkremental spejl-sikkerhedskopi er ikke et tal"
 
-msgid "Errors"
-msgstr "Fejl"
+#: Settings.cpp:533
+msgid "The maximal number of incremental file backups  is not a number"
+msgstr "Maks. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
 
-msgid "Warnings"
-msgstr "Advarsler"
+#: Settings.cpp:539
+msgid "The minimal number of incremental file backups is not a number"
+msgstr "Min. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
 
-msgid "Infos"
-msgstr "Informationer"
+#: Settings.cpp:545
+msgid "The maximal number of full file backups is not a number"
+msgstr "Maks. antal af komplette fil-sikkerhedskopier er ikke et tal"
 
-msgid "Filter:"
-msgstr "Filter:"
+#: Settings.cpp:551
+msgid "Minimal number of full file backups is not a number"
+msgstr "Min. antal af komplette fil-sikkerhedskopier er ikke et tal"
 
-msgid "Abort"
-msgstr "Afbryd"
+#: Settings.cpp:560
+msgid "Minimal number of incremental image backups is not a number"
+msgstr "Min. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
 
-msgid "Ok"
-msgstr "Ok"
+#: Settings.cpp:566
+msgid "Maximal number of incremental image backups is not a number"
+msgstr "Maks. antal af inkrementale spejl-sikkerhedskopier er ikke et tal"
 
-msgid "Active"
-msgstr "Aktive"
+#: Settings.cpp:572
+msgid "Minimal number of full image backups is not a number"
+msgstr "Min. antal af komplette spejl-sikkerhedskopier er ikke et tal"
 
-msgid "days"
-msgstr "dage"
+#: Settings.cpp:578
+msgid "Maximal number of full image backups is not a number"
+msgstr "Maks. antal af komplette spejl-sikkerhedskopier er ikke et tal"
 
-msgid "hours"
-msgstr "timer"
+#: Settings.cpp:586
+msgid "Backup delay after system start is not a number"
+msgstr "Sikkerhedskopiforsinkels efter systemstart er ikke et tal"
 
-msgid "Maximal number of full image backups:"
-msgstr "Maksimal antal komplette spejl-sikkerhedskopier:"
+#: Settings.cpp:603
+msgid "_1_ is not a volume"
+msgstr ""
 
-msgid "Minimal number of full image backups:"
-msgstr "Minimum antal komplette spejl-sikkerhedskopier"
+#: Settings.cpp:612
+msgid "The server port is not valid"
+msgstr ""
 
-msgid "Maximal number of incremental image backups:"
-msgstr "Maksimal antal inkrementale spejl-sikkerhedskopier"
+#: Status.cpp:17
+msgid "Initializing."
+msgstr ""
 
-msgid "Minimal number of incremental image backups:"
-msgstr "Minimum antal inkrementale spejl-sikkerhedskopier"
+#: Status.cpp:21
+msgid "Waiting for local UrBackup server."
+msgstr ""
 
-msgid "Maximal number of full file backups:"
-msgstr "Maksimal antal komplette fil-sikkerhedskopier"
+#: Status.cpp:30
+msgid "Connected to local UrBackup server."
+msgstr ""
 
-msgid "Minimal number of full file backups:"
-msgstr "Minimum antal komplette fil-sikkerhedskopier"
+#: Status.cpp:30
+msgid "Not trying to connect to Internet server."
+msgstr ""
 
-msgid "Maximal number of incremental file backups:"
-msgstr "Maksimal antal komplette fil-sikkerhedskopier"
+#: Status.cpp:31
+msgid "Local server last seen _1_ minutes ago."
+msgstr ""
 
-msgid "Minimal number of incremental file backups:"
-msgstr "Minimum antal inkrementale fil-sikkerhedskopier"
+#: Status.cpp:35
+msgid "No Internet server configured."
+msgstr ""
 
-msgid "Interval for full image backups:"
-msgstr "Interval mellem komplet spejl-sikkerhedskopier:"
+#: Status.cpp:39
+msgid "Connected to Internet server"
+msgstr ""
 
-msgid "Interval for incremental image backups:"
-msgstr "Interval mellem inkrementale spejl-sikkerhedskopier:"
+#: Status.cpp:43
+msgid "Could not connect to Internet server. Server unreachable."
+msgstr ""
 
-msgid "Interval for full file backups:"
-msgstr "Interval mellem komplette fil-sikkerhedskopier:"
+#: Status.cpp:47
+msgid "Error: _1_"
+msgstr ""
 
-msgid "Interval for incremental file backups:"
-msgstr "Interval mellem inkrementale fil-sikkerhedskopier:"
+#: Status.cpp:101
+msgid "Idle."
+msgstr ""
+
+#: Status.cpp:145
+msgid "Yes"
+msgstr ""
+
+#: Status.cpp:147
+msgid "No"
+msgstr ""
+
+#: Status.cpp:149
+msgid "Internet: _1_"
+msgstr ""
+
+#: Status.cpp:158
+msgid "Servers:"
+msgstr ""
+
+#: TrayIcon.cpp:141 TrayIcon.cpp:164
+msgid "Waiting for server..."
+msgstr "Venter på server..."
+
+#: TrayIcon.cpp:146 TrayIcon.cpp:169
+msgid "A backup is already running. Could not start another one."
+msgstr "Sikkerhedskopiering er igang. Der kan ikke startes endnu en."
+
+#: TrayIcon.cpp:148 TrayIcon.cpp:171
+msgid "Could not start backup, because no backup server was found."
+msgstr "Kunne ikke starte sikkerhedskopiering, fordi sikkerhedskopiserver ikke blev fundet."
+
+#: TrayIcon.cpp:183
+msgid "Pausing failed: No connection to backup server."
+msgstr "Midlertidig fejl: Ingen forbindelse til sikkerhedskopiserver."
+
+#: TrayIcon.cpp:196
+msgid "Continuing failed: No connection to backup server."
+msgstr "Gentagne fejl: Ingen forbindelse til sikkerhedskopiserver."
+
+#: TrayIcon.cpp:230
+msgid "Do full file backup"
+msgstr "Udfør komplet fil-sikkerhedskopi"
+
+#: TrayIcon.cpp:230
+msgid "Do a full file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:235
+msgid "Do incremental file backup"
+msgstr "Udfør inkremental fil-sikkerhedskopi"
+
+#: TrayIcon.cpp:235
+msgid "Do a incremental file backup now"
+msgstr ""
+
+#: TrayIcon.cpp:244
+msgid "Do full image backup"
+msgstr "Udfør komplet spejl-sikkerhedskopi"
+
+#: TrayIcon.cpp:244
+msgid "Do a full image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:249
+msgid "Do incremental image backup"
+msgstr "Udfør inkremental spejl-sikkerhedskopi"
+
+#: TrayIcon.cpp:249
+msgid "Do a incremental image backup now"
+msgstr ""
+
+#: TrayIcon.cpp:286
+msgid "Pause"
+msgstr "Pause"
+
+#: TrayIcon.cpp:291
+msgid "Continue"
+msgstr "Fortsæt"
+
+#~ msgid "_percent_ done. "
+#~ msgstr "_percent_ done. "
+
+#~ msgid "Incremental file backup running. "
+#~ msgstr "Incremental file backup running. "
+
+#~ msgid "Full file backup running. "
+#~ msgstr "Full file backup running. "
+
+#~ msgid "Incremental image backup running. "
+#~ msgstr "Incremental image backup running. "
+
+#~ msgid "Full image backup running. "
+#~ msgstr "Full image backup running. "
+
+#~ msgid "Resumed incremental file backup running. "
+#~ msgstr "Resumed incremental file backup running. "
+
+#~ msgid "Resumed full file backup running. "
+#~ msgstr "Resumed full file backup running. "
+
+#~ msgid "Indexing. "
+#~ msgstr "Indexing. "
+
+#~ msgid "No current backup. "
+#~ msgstr "No current backup. "
+
+#~ msgid "Last backup on "
+#~ msgstr "Last backup on "
+
+#~ msgid "Internet: "
+#~ msgstr "Internet: "
+
+#~ msgid "logo1.png"
+#~ msgstr "logo1.png"
+
+#~ msgid " is not a volume"
+#~ msgstr " is not a volume"
+
+#~ msgid "Remove/Add backup paths"
+#~ msgstr "Remove/Add backup paths"
+
+#~ msgid "Author:"
+#~ msgstr "Author:"
