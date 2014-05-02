@@ -117,6 +117,7 @@ bool Status::updateStatus(int errcnt)
 
 		wxString s;
 		s << status_details.percent_done;
+		status_text+=wxT(" ");
 		status_text+=getPercentText(s);
 	}
 
