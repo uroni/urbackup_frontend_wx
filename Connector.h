@@ -98,7 +98,7 @@ class Connector
 public:
 	static std::vector<SBackupDir> getSharedPaths(void);
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
-	static SStatus getStatus(void);
+	static SStatus getStatus(size_t retries);
 	static unsigned int getIncrUpdateIntervall(void);
 	static int startBackup(bool full);
 	static int startImage(bool full);
@@ -116,7 +116,7 @@ public:
 
 private:
 	static std::string escapeParam(const std::string &name);
-	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command);
+	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries=4);
 	static std::string pw;
 	static std::string pw_change;
 	static bool error;

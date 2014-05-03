@@ -459,7 +459,7 @@ void MyTimer::Notify()
 	writestring(nconvert((int)passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
 
 	wxString status_text;
-	SStatus status=Connector::getStatus();
+	SStatus status=Connector::getStatus(20);
 
 	if(Connector::hasError() )
 	{

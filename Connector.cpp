@@ -27,7 +27,6 @@
 std::string Connector::pw;
 std::string Connector::pw_change;
 bool Connector::error=false;
-const size_t conn_retries=4;
 bool Connector::busy=false;
 
 extern std::string g_res_path;
@@ -91,7 +90,7 @@ std::string Connector::getPasswordData( bool change_command )
 }
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command)
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries)
 {
 	std::string curr_pw = getPasswordData(change_command);
 
@@ -101,7 +100,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	addr.Service(35623);
 	if(!client.Connect(addr,false))
 	{
-		for(size_t k=0;k<conn_retries;++k)
+		for(size_t k=0;k<retries;++k)
 		{
 			if(client.WaitOnConnect(0,500))
 			{
@@ -134,7 +133,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	while(resp==NULL)
 	{
 		bool conn=false;
-		for(size_t k=0;k<conn_retries;++k)
+		for(size_t k=0;k<retries;++k)
 		{
 			if(client.WaitForRead(0,500))
 			{
@@ -239,9 +238,9 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
-SStatus Connector::getStatus(void)
+SStatus Connector::getStatus(size_t retries)
 {
-	std::string d=getResponse("STATUS","", false);
+	std::string d=getResponse("STATUS", "", false, retries);
 
 	std::vector<std::string> toks;
 	Tokenize(d, toks, "#");
