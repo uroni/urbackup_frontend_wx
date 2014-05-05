@@ -129,7 +129,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	std::wstring t;
 	if(getSettingsValue(L"update_freq_incr", &t, settings))
 	{
-		m_textCtrl1->SetValue(wxString(convert(watoi(t)/60/60).c_str()));
+		m_textCtrl1->SetValue(wxString(convert(watoi(t)/60.f/60.f).c_str()));
 	}
 	else
 	{
@@ -402,7 +402,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 
 	m_textCtrlInternetSpeed->SetValidator(getDigitSlashValidator());
 	m_textCtrlLocalSpeed->SetValidator(getDigitSlashValidator());	
-	m_textCtrl1->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl1->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
 	m_textCtrl2->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl131->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl13->SetValidator(wxTextValidator(wxFILTER_DIGITS));
@@ -489,7 +489,8 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	bool internet_encrypt=m_checkBoxInternetEncrypt->GetValue();
 	bool internet_compress=m_checkBoxInternetCompress->GetValue();
 
-	long l_update_freq_incr,l_update_freq_full;
+	double l_update_freq_incr;
+	long l_update_freq_full;
 	long l_update_freq_image_full, l_update_freq_image_full_orig, l_update_freq_image_incr;
 	long l_max_file_incr, l_min_file_incr;
 	long l_max_file_full, l_min_file_full;
@@ -499,7 +500,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	long l_internet_server_port;
 	long l_internet_speed, l_local_speed;
 
-	if(update_freq_incr.ToLong(&l_update_freq_incr)==false )
+	if(update_freq_incr.ToCDouble(&l_update_freq_incr)==false )
 	{
 		wxMessageBox( _("The incremental backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
@@ -631,7 +632,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 
 	std::map<std::string, std::string> n_vals;
-	n_vals["update_freq_incr"]=nconvert(l_update_freq_incr*60*60);
+	n_vals["update_freq_incr"]=nconvert(static_cast<float>(l_update_freq_incr*60.f*60.f));
 	n_vals["update_freq_full"]=nconvert(l_update_freq_full*24*60*60);
 	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
 	{
