@@ -6,13 +6,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # Martin Raiber <martin@urbackup.org>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 18:49+0200\n"
-"PO-Revision-Date: 2014-04-25 16:52+0000\n"
+"POT-Creation-Date: 2014-04-25 19:14+0200\n"
+"PO-Revision-Date: 2014-04-25 17:17+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/urbackup/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -249,64 +250,64 @@ msgstr "There was an error. Currently nothing can be backed up."
 msgid "Please select the directory that will be backed up."
 msgstr "Please select the directory that will be backed up."
 
-#: main.cpp:110
-msgid "_percent_ done. "
-msgstr "_percent_ done. "
+#: main.cpp:111
+msgid "_percent_ done."
+msgstr "_percent_ done."
 
-#: main.cpp:329
-msgid "Incremental file backup running. "
-msgstr "Incremental file backup running. "
+#: main.cpp:330
+msgid "Incremental file backup running."
+msgstr "Incremental file backup running."
 
-#: main.cpp:333
-msgid "Full file backup running. "
-msgstr "Full file backup running. "
+#: main.cpp:334
+msgid "Full file backup running."
+msgstr "Full file backup running."
 
-#: main.cpp:337
-msgid "Incremental image backup running. "
-msgstr "Incremental image backup running. "
+#: main.cpp:338
+msgid "Incremental image backup running."
+msgstr "Incremental image backup running."
 
-#: main.cpp:341
-msgid "Full image backup running. "
-msgstr "Full image backup running. "
+#: main.cpp:342
+msgid "Full image backup running."
+msgstr "Full image backup running."
 
-#: main.cpp:345
-msgid "Resumed incremental file backup running. "
-msgstr "Resumed incremental file backup running. "
+#: main.cpp:346
+msgid "Resumed incremental file backup running."
+msgstr "Resumed incremental file backup running."
 
-#: main.cpp:349
-msgid "Resumed full file backup running. "
-msgstr "Resumed full file backup running. "
+#: main.cpp:350
+msgid "Resumed full file backup running."
+msgstr "Resumed full file backup running."
 
-#: main.cpp:365
-msgid "Indexing. "
-msgstr "Indexing. "
+#: main.cpp:366
+msgid "Indexing."
+msgstr "Indexing."
 
-#: main.cpp:441 main.cpp:445
+#: main.cpp:442 main.cpp:446
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Update available"
 
-#: main.cpp:441 main.cpp:445
+#: main.cpp:442 main.cpp:446
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "A new version of UrBackup is available. Please click here to install it now."
 
-#: main.cpp:464
+#: main.cpp:465
 msgid "Cannot connect to backup server"
 msgstr "Cannot connect to backup server"
 
-#: main.cpp:501
-msgid "No current backup. "
-msgstr "No current backup. "
+#: main.cpp:502
+msgid "No current backup."
+msgstr "No current backup."
 
-#: main.cpp:512
-msgid "Last backup on "
-msgstr "Last backup on "
+#: main.cpp:513 Status.cpp:127
+msgid "Last backup on _1_"
+msgstr "Last backup on _1_"
 
-#: main.cpp:563 main.cpp:567
+#: main.cpp:564 main.cpp:568
 msgid "UrBackup: New server"
 msgstr "UrBackup: New server"
 
-#: main.cpp:563 main.cpp:567
+#: main.cpp:564 main.cpp:568
 msgid "A new backup server has been found. Click here to use it"
 msgstr "A new backup server has been found. Click here to use it"
 
@@ -410,10 +411,6 @@ msgstr "Error: _1_"
 msgid "Idle."
 msgstr "Idle."
 
-#: Status.cpp:127
-msgid "Last backup on _1_"
-msgstr "Last backup on _1_"
-
 #: Status.cpp:145
 msgid "Yes"
 msgstr "Yes"
@@ -489,6 +486,36 @@ msgstr "Pause"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Continue"
+
+#~ msgid "_percent_ done. "
+#~ msgstr "_percent_ done. "
+
+#~ msgid "Incremental file backup running. "
+#~ msgstr "Incremental file backup running. "
+
+#~ msgid "Full file backup running. "
+#~ msgstr "Full file backup running. "
+
+#~ msgid "Incremental image backup running. "
+#~ msgstr "Incremental image backup running. "
+
+#~ msgid "Full image backup running. "
+#~ msgstr "Full image backup running. "
+
+#~ msgid "Resumed incremental file backup running. "
+#~ msgstr "Resumed incremental file backup running. "
+
+#~ msgid "Resumed full file backup running. "
+#~ msgstr "Resumed full file backup running. "
+
+#~ msgid "Indexing. "
+#~ msgstr "Indexing. "
+
+#~ msgid "No current backup. "
+#~ msgstr "No current backup. "
+
+#~ msgid "Last backup on "
+#~ msgstr "Last backup on "
 
 #~ msgid "Internet: "
 #~ msgstr "Internet: "
