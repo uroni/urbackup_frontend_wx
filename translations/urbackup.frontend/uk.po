@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
-# tenorio <miawork@list.ru>, 2013
+# Translators:
+# tenorio <miawork@list.ru>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 19:14+0200\n"
-"PO-Revision-Date: 2014-04-25 17:17+0000\n"
+"POT-Creation-Date: 2014-05-09 22:28+0200\n"
+"PO-Revision-Date: 2014-05-09 20:34+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/urbackup/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -38,9 +39,9 @@ msgstr "Інформація"
 msgid "Add/Remove backup paths"
 msgstr "Додати/Видалити щляхи для бекапу "
 
-#: gui\GUI.h:256 TrayIcon.cpp:294
+#: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
@@ -136,7 +137,7 @@ msgstr "Максимальна швидкість копіювання чере�
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr ""
+msgstr "MBit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
@@ -168,7 +169,7 @@ msgstr "Максимальна швидкість копіювання чере�
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr ""
+msgstr "KBit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
@@ -238,11 +239,11 @@ msgstr "Додати хлях"
 msgid "Remove path"
 msgstr "Видалити шлях"
 
-#: gui\GUI.cpp:800
+#: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr ""
+msgstr "Статус підключення до Інтернет"
 
-#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:83
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
 msgstr "Сталася помилка. В даний час ніщо не може бути скорійовано."
 
@@ -252,180 +253,205 @@ msgstr "Виберіль директорію бекап якої буде ст�
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_відсотків_ виконано."
 
-#: main.cpp:330
+#: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Виконуеться створення інкрементного файлового бекапу"
 
-#: main.cpp:334
+#: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Виконуеться створення повного файлового бекапу"
 
-#: main.cpp:338
+#: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Виконується створення інкрементного образу"
 
-#: main.cpp:342
+#: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Виконується створення повного образу"
 
-#: main.cpp:346
+#: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Продовження створення інкрементного файлового бекапу"
 
-#: main.cpp:350
+#: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Продовження створення повного файлового бекапу"
 
-#: main.cpp:366
+#: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Індексація."
 
-#: main.cpp:442 main.cpp:446
+#: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Доступне оновлення"
 
-#: main.cpp:442 main.cpp:446
+#: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "Доспупна нова версія UrBackup. Натисніть сюди щоб встановити її зараз."
 
-#: main.cpp:465
+#: main.cpp:468
 msgid "Cannot connect to backup server"
 msgstr "Немає з'єднання з сервером резервного копіювання."
 
-#: main.cpp:502
+#: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Актуальний бекап відсутній."
 
-#: main.cpp:513 Status.cpp:127
+#: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Минулий бекап о _1_"
 
-#: main.cpp:564 main.cpp:568
+#: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
 msgstr "UrBackup: Новий сервер"
 
-#: main.cpp:564 main.cpp:568
+#: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
 msgstr "Знайдено новий сервер резервних копій. Натисніть сюди щоб задіяти його "
 
-#: Settings.cpp:504
+#: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
 msgstr "Інтервал створення інкрементних файлових бекапів"
 
-#: Settings.cpp:510
+#: Settings.cpp:511
 msgid "The full backup interval  is not a number"
 msgstr "Інтервал створення повних файлових бекапів"
 
-#: Settings.cpp:519
+#: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
 msgstr "Інтервал створеня повних образів"
 
-#: Settings.cpp:525
+#: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
 msgstr "Час створення інкрементних образів"
 
-#: Settings.cpp:533
+#: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
 msgstr "Міаксимальна кількість інкрементних файлових копій"
 
-#: Settings.cpp:539
+#: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
 msgstr "Мінімальна кількість інкрементних файлових копій"
 
-#: Settings.cpp:545
+#: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
 msgstr "Максимальна кількість повних файлових копій"
 
-#: Settings.cpp:551
+#: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
 msgstr "Мінімальна кількість повних файлових копій"
 
-#: Settings.cpp:560
+#: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
 msgstr "Мінімальна кількість інкрементних образів"
 
-#: Settings.cpp:566
+#: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
 msgstr "Максимальна кількість інкрементних образів"
 
-#: Settings.cpp:572
+#: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
 msgstr "Мінімальна кількість повних образів"
 
-#: Settings.cpp:578
+#: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
 msgstr "Максимальна кількість повних образів"
 
-#: Settings.cpp:586
+#: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
 msgstr "Затримка після старту системи:"
 
-#: Settings.cpp:603
+#: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_не являється томом"
 
-#: Settings.cpp:612
+#: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Не коректний порт сервера"
 
-#: Status.cpp:17
+#: Status.cpp:18
 msgid "Initializing."
-msgstr ""
+msgstr "Ініціалізація."
 
-#: Status.cpp:21
+#: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr ""
-
-#: Status.cpp:30
-msgid "Connected to local UrBackup server."
-msgstr ""
-
-#: Status.cpp:30
-msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Очікування локального севвера UrBackup "
 
 #: Status.cpp:31
+msgid "Connected to local UrBackup server."
+msgstr "Підключення до локального сервера UrBackup."
+
+#: Status.cpp:31
+msgid "Not trying to connect to Internet server."
+msgstr "Нема спроб підключення до Інтернет серверу"
+
+#: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Локальний сервер був доступний _1_ хвилин тому."
 
-#: Status.cpp:35
+#: Status.cpp:36
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Підключення до Інтернет серверу не налаштовано"
 
-#: Status.cpp:39
+#: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "З'єднання з Інтернет сервером встановлено"
 
-#: Status.cpp:43
+#: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Неможливо з'єднатись з інтернет сервером. Сервер не відповідає."
 
-#: Status.cpp:47
+#: Status.cpp:48
 msgid "Error: _1_"
-msgstr ""
+msgstr "Помилка: _1_"
 
-#: Status.cpp:101
+#: Status.cpp:67
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: Status.cpp:75
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: Status.cpp:83
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: Status.cpp:138
 msgid "Idle."
+msgstr "Бездіяльність."
+
+#: Status.cpp:157
+msgid "ETA: Approx. _1_"
 msgstr ""
 
-#: Status.cpp:145
+#: Status.cpp:192
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
-#: Status.cpp:147
+#: Status.cpp:194
 msgid "No"
-msgstr ""
+msgstr "Ні"
 
-#: Status.cpp:149
+#: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Інтернет: _1_"
 
-#: Status.cpp:158
+#: Status.cpp:205
 msgid "Servers:"
-msgstr ""
+msgstr "Сервери:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
@@ -453,7 +479,7 @@ msgstr "Створити повний файловий бекап"
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Створити повний файловий бекап негайно"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
@@ -461,7 +487,7 @@ msgstr "Створити інкрементній файловий бекап"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr " 89%\nСтворити інкрементній файловий бекап негайно"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
@@ -469,7 +495,7 @@ msgstr "Створити повний образ"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Створити повний образ негайно"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
@@ -477,7 +503,7 @@ msgstr "Створити інкрементний образ"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Створити інкрементний образ негайно"
 
 #: TrayIcon.cpp:286
 msgid "Pause"
