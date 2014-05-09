@@ -10,6 +10,7 @@ if NOT %errorLevel% == 0 (
 if exist "%~dp0\args_nodebug.txt"  (
 	echo Disabling debug logging...
 	copy /Y "%~dp0\args_nodebug.txt" "%~dp0\args.txt"
+	del "%~dp0\args_nodebug.txt"
 ) else (
 	echo Enabling debug logging...
 	copy /Y "%~dp0\args.txt" "%~dp0\args_nodebug.txt"

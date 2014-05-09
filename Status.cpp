@@ -1,6 +1,7 @@
 #include "Status.h"
 #include "main.h"
 #include "TranslationHelper.h"
+#include "stringtools.h"
 
 extern wxString res_path;
 extern wxString ico_ext;
@@ -48,6 +49,42 @@ namespace
 		}
 
 		return str;
+	}
+
+	std::string PrettyPrintTime(wxLongLong_t ms)
+	{
+		std::string ret;
+
+		unsigned int c_s=1000;
+		unsigned int c_m=c_s*60;
+		unsigned int c_h=c_m*60;
+		unsigned int c_d=c_h*24;
+
+		if( ms>c_d)
+		{
+			wxLongLong_t t=ms/c_d;
+			if(!ret.empty()) ret+=" ";
+			ret+=nconvert(t)+wxT(" ")+wxPLURAL("day", "days", static_cast<size_t>(t));
+			ms-=t*c_d;
+		}
+
+		if( ms>c_h)
+		{
+			wxLongLong_t t=ms/c_h;
+			if(!ret.empty()) ret+=" ";
+			ret+=nconvert(t)+wxT(" ")+wxPLURAL("hour", "hours", static_cast<size_t>(t));
+			ms-=t*c_h;
+		}
+
+		if( ms>c_m)
+		{
+			wxLongLong_t t=ms/c_m;
+			if(!ret.empty()) ret+=" ";
+			ret+=nconvert(t)+wxT(" ")+wxPLURAL("minute", "minutes", static_cast<size_t>(t));
+			ms-=t*c_m;
+		}
+
+		return ret;
 	}
 }
 
@@ -113,6 +150,15 @@ bool Status::updateStatus(int errcnt)
 		else
 		{
 			m_gauge1->Pulse();
+		}
+
+		if(status_details.eta_ms>0)
+		{
+			m_staticText312->SetLabel(trans_1(_("ETA: Approx. _1_"), PrettyPrintTime(status_details.eta_ms)));
+		}
+		else
+		{
+			m_staticText312->SetLabel(wxEmptyString);
 		}
 
 		wxString s;

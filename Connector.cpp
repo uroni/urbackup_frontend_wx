@@ -419,6 +419,7 @@ SStatusDetails Connector::getStatusDetails()
 
 	ret.last_backup_time = root["last_backup_time"].asString();
 	ret.percent_done = root["percent_done"].asInt();
+	ret.eta_ms = root["eta_ms"].asInt64();
 	ret.currently_running = root["currently_running"].asString();
 	
 	std::vector<SUrBackupServer> servers;

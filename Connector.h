@@ -79,6 +79,7 @@ struct SStatusDetails
 	unsigned int time_since_last_lan_connection;
 	bool internet_connected;
 	wxString internet_status;
+	wxLongLong_t eta_ms;
 
 	bool operator==(const SStatusDetails& other) const
 	{
@@ -89,7 +90,8 @@ struct SStatusDetails
 			&& servers == other.servers
 			&& time_since_last_lan_connection/1000/60 == other.time_since_last_lan_connection/1000/60
 			&& internet_connected == other.internet_connected
-			&& internet_status == other.internet_status;
+			&& internet_status == other.internet_status
+			&& eta_ms/1000/60 == other.eta_ms/1000/60;
 	}
 };
 
