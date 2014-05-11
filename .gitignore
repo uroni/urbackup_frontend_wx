@@ -68,7 +68,6 @@ urbackup.wixobj
 urbackup.wixpdb
 Kiwi_LogViewer_2.1.0_Win32.setup.exe
 pdbs/*
-data/lang/*
 build_msi.bat.orig
 data/info.txt.orig
 urbackup.nsi.orig
