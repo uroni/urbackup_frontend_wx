@@ -136,6 +136,7 @@ bool Status::updateStatus(int errcnt)
 	if(status_text.empty())
 	{
 		status_text=_("Idle.");
+		m_staticText312->SetLabel(wxEmptyString);
 		m_gauge1->SetValue(0);
 		m_gauge1->Disable();
 	}
