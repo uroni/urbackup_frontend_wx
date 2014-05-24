@@ -292,7 +292,10 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		}
 	}
 	mnu->Append(ID_TI_STATUS, _("Status"));
-	mnu->Append(ID_TI_EXIT, _("Exit"));
+	if(!timer->hasCapability(DONT_ALLOW_EXIT_TRAY_ICON))
+	{
+		mnu->Append(ID_TI_EXIT, _("Exit"));
+	}
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);
 	return mnu;
 }
