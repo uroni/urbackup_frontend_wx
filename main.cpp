@@ -54,6 +54,7 @@ wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
 bool incr_update_done=false;
 bool backup_is_running=false;
+extern bool b_is_pausing;
 
 #ifndef DD_RELEASE
 IMPLEMENT_APP_NO_MAIN(MyApp)
@@ -539,6 +540,9 @@ void MyTimer::Notify()
 	{
 		icon_type=ETrayIcon_NO_SERVER;
 	}
+
+	b_is_pausing=status.pause;
+	
 
 	if(icon_type!=last_icon_type || last_status!=status_text || refresh)
 	{
