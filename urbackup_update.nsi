@@ -7,7 +7,7 @@
 SetCompressor /FINAL lzma
 CRCCheck off
 
-Name "UrBackup Client $client_short$"
+Name "UrBackup Client $version_short$"
 OutFile "UrBackupUpdate.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
