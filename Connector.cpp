@@ -447,7 +447,13 @@ SStatusDetails Connector::getStatusDetails()
 	catch (std::runtime_error&)
 	{
 		return ret;
-	}	
+	}
+	
+}
+
+std::string Connector::getAccessParameters( const std::string& tokens )
+{
+	return getResponse("GET ACCESS PARAMETERS","tokens="+tokens, false);
 }
 
 int Connector::getCapabilities()
