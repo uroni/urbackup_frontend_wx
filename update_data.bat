@@ -77,6 +77,7 @@ msgfmt "%LANG_DIR%\nl.po" -o "data\lang\nl\urbackup.mo"
 msgfmt "%LANG_DIR%\fa_IR.po" -o "data\lang\fa\urbackup.mo"
 
 git rev-parse HEAD > "data\build_revision.txt"
+echo. >> "data\build_revision.txt"
 cd ..
 git rev-parse HEAD >> "client\data\build_revision.txt"
 cd client
