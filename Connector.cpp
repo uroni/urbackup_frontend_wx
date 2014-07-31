@@ -23,6 +23,7 @@
 #include "escape.h"
 #include <iostream>
 #include "json/json.h"
+#include <stdexcept>
 
 std::string Connector::pw;
 std::string Connector::pw_change;
