@@ -417,25 +417,32 @@ SStatusDetails Connector::getStatusDetails()
 		return ret;
 	}
 
-	ret.last_backup_time = root["last_backup_time"].asString();
-	ret.percent_done = root["percent_done"].asInt();
-	ret.eta_ms = root["eta_ms"].asInt64();
-	ret.currently_running = root["currently_running"].asString();
-	
-	std::vector<SUrBackupServer> servers;
-	Json::Value json_servers = root["servers"];
-	servers.resize(json_servers.size());
-	for(unsigned int i=0;i<json_servers.size();++i)
+	try
 	{
-		servers[i].internet_connection = json_servers[i]["internet_connection"].asBool();
-		servers[i].name = json_servers[i]["name"].asString();
+		ret.last_backup_time = root["last_backup_time"].asString();
+		ret.percent_done = root["percent_done"].asInt();
+		ret.eta_ms = root["eta_ms"].asInt64();
+		ret.currently_running = root["currently_running"].asString();
+
+		std::vector<SUrBackupServer> servers;
+		Json::Value json_servers = root["servers"];
+		servers.resize(json_servers.size());
+		for(unsigned int i=0;i<json_servers.size();++i)
+		{
+			servers[i].internet_connection = json_servers[i]["internet_connection"].asBool();
+			servers[i].name = json_servers[i]["name"].asString();
+		}
+		ret.servers=servers;
+		ret.time_since_last_lan_connection = root["time_since_last_lan_connection"].asInt();
+		ret.internet_connected = root["internet_connected"].asBool();
+		ret.internet_status = root["internet_status"].asString();
+
+		ret.ok=true;
+
+		return ret;
 	}
-	ret.servers=servers;
-	ret.time_since_last_lan_connection = root["time_since_last_lan_connection"].asInt();
-	ret.internet_connected = root["internet_connected"].asBool();
-	ret.internet_status = root["internet_status"].asString();
-
-	ret.ok=true;
-
-	return ret;
+	catch (std::runtime_error&)
+	{
+		return ret;
+	}	
 }
