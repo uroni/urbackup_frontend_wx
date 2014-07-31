@@ -1,4 +1,4 @@
-﻿#include "TaskBarBaloon.h"
+#include "TaskBarBaloon.h"
 #include <wx/utils.h>
 #include <wx/stdpaths.h>
 #include "stringtools.h"
