@@ -321,10 +321,16 @@ next_s:
 	Delete "$INSTDIR\urbackup\backup_client_new.db"
 	
 	${If} ${IsWinXP}
+		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
+		Pop $0
 		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${ElseIf} ${IsWin2003}
+		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
+		Pop $0
 		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${Else}
+		liteFirewallW::RemoveRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+		Pop $0
 		liteFirewallW::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${EndIf}
 	Pop $0

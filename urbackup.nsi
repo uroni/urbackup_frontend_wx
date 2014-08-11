@@ -297,7 +297,7 @@ next_s:
 		Pop $0
 		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${Else}
-		liteFirewall::RemoveRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+		liteFirewallW::RemoveRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 		Pop $0
 		liteFirewallW::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	${EndIf}
