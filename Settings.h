@@ -27,7 +27,7 @@ class Settings : public GUISettings
 {
 public:
 	Settings(wxWindow* parent);
-	~Settings(void);
+	virtual ~Settings(void);
 
 	virtual void OnOkClick( wxCommandEvent& event );
 	virtual void OnAbortClick( wxCommandEvent& event );

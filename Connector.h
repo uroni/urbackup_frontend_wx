@@ -80,6 +80,7 @@ struct SStatusDetails
 	bool internet_connected;
 	wxString internet_status;
 	wxLongLong_t eta_ms;
+	int capability_bits;
 
 	bool operator==(const SStatusDetails& other) const
 	{
@@ -91,7 +92,8 @@ struct SStatusDetails
 			&& time_since_last_lan_connection/1000/60 == other.time_since_last_lan_connection/1000/60
 			&& internet_connected == other.internet_connected
 			&& internet_status == other.internet_status
-			&& eta_ms/1000/60 == other.eta_ms/1000/60;
+			&& eta_ms/1000/60 == other.eta_ms/1000/60
+			&& capability_bits == other.capability_bits;
 	}
 };
 
@@ -110,6 +112,7 @@ public:
 	static bool setPause(bool b_pause);
 	static bool addNewServer(const std::string &ident);
 	static SStatusDetails getStatusDetails();
+	static int getCapabilities();
 
 	static bool hasError(void);
 	static bool isBusy(void);

@@ -48,8 +48,8 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 #define _(s) wxGetTranslation(wxT(s))
 std::string ConvertToUTF8(const std::wstring &input);
 
-TrayIcon *tray;
-MyTimer *timer;
+TrayIcon *tray = NULL;
+MyTimer *timer = NULL;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
 bool incr_update_done=false;
@@ -114,7 +114,6 @@ namespace
 		return pcdone;
 	}
 }
-
 
 bool MyApp::OnInit()
 {
@@ -254,14 +253,14 @@ bool MyApp::OnInit()
 	wxImage::AddHandler(new wxICOHandler());
 	//wxInitAllImageHandlers();
 
+	timer=NULL;
+
 	std::string cmd;
 
 	if(argc>1)
 	{
 		cmd=argv[1];
 	}
-
-	timer=NULL;
 
 	if(cmd.empty())
 	{
@@ -281,21 +280,24 @@ bool MyApp::OnInit()
 	}
 	else if(cmd==wxT("settings"))
 	{
-		timer=new MyTimer;
-		timer->Notify();
-
 		Settings *s=new Settings(NULL);
 		SetTopWindow(s);
+		s->ShowModal();
+		s->Destroy();
 	}
 	else if(cmd==wxT("paths"))
 	{
 		ConfigPath *cp=new ConfigPath(NULL);
 		SetTopWindow(cp);
+		cp->ShowModal();
+		cp->Destroy();
 	}
 	else if(cmd==wxT("logs"))
 	{
 		Logs *l=new Logs(NULL);
 		SetTopWindow(l);
+		l->ShowModal();
+		l->Destroy();
 	}
 	else if(cmd==wxT("newserver"))
 	{
@@ -316,7 +318,6 @@ bool MyApp::OnInit()
 
 int MyApp::OnExit()
 {
-	exit(0);
 	return 0;
 }
 
@@ -565,7 +566,7 @@ void MyTimer::Notify()
 		}
 	}
 
-	if(!status.new_server.empty())
+	if(!status.new_server.empty() && tray)
 	{
 #ifndef wxUSE_TASKBARICON_BALLOONS
 			TaskBarBaloon *tbb=new TaskBarBaloon(_("UrBackup: New server"), _("A new backup server has been found. Click here to use it"), status.new_server);
@@ -580,6 +581,11 @@ void MyTimer::Notify()
 }
 
 bool MyTimer::hasCapability(int capa_bit)
+{
+	return MyTimer::hasCapability(capa_bit, capa);
+}
+
+bool MyTimer::hasCapability( int capa_bit, int capa )
 {
 	return (capa & capa_bit)>0;
 }

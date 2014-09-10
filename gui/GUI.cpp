@@ -9,6 +9,7 @@
 #include "../main.h"
 #include "../capa_bits.h"
 #include "../../client_version.h"
+#include "../Connector.h"
 
 extern MyTimer *timer;
 extern wxString res_path;
@@ -37,8 +38,10 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	wxBoxSizer* bSizer_client=new wxBoxSizer( wxVERTICAL );
 	wxBoxSizer* bSizer_internet=new wxBoxSizer( wxVERTICAL );
 
+	capa = timer?timer->getCapa():Connector::getCapabilities();
+
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if( !MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa) )
 	{
 		m_tab_imagebackups=new wxPanel(m_notebook, wxID_ANY);
 		bSizer_imagebackups=new wxBoxSizer( wxVERTICAL );
@@ -79,7 +82,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_filebackups->Add( bSizer30, 0, wxEXPAND, 5 );
 	
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer31;
 		bSizer31 = new wxBoxSizer( wxHORIZONTAL );
@@ -188,7 +191,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_filebackups->Add( bSizer38, 0, wxEXPAND, 5 );
 	
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer38s;
 		bSizer38s = new wxBoxSizer( wxVERTICAL );
@@ -325,7 +328,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_client->Add( bSizer331, 0, wxEXPAND, 5 );
 
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer441;
 		bSizer441 = new wxBoxSizer( wxHORIZONTAL );
@@ -398,7 +401,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		bSizerH = new wxBoxSizer( wxHORIZONTAL );	
 		m_staticTextInternetImage = new wxStaticText( m_tab_internet, wxID_ANY, _("Do image backups over internet:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
@@ -459,7 +462,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 
 	m_notebook->AddPage(m_tab_filebackups, _("File backups"));
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		m_tab_imagebackups->SetSizerAndFit( bSizer_imagebackups );
 		m_notebook->AddPage(m_tab_imagebackups, _("Image backups"));
@@ -495,7 +498,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	// Connect Events
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
 	}

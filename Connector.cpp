@@ -141,7 +141,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 				conn=true;
 				break;
 			}
-			wxTheApp->Yield(false);
+			wxTheApp->SafeYield(NULL, true);
 			if(client.Error())
 				break;
 		}
@@ -438,6 +438,8 @@ SStatusDetails Connector::getStatusDetails()
 		ret.internet_connected = root["internet_connected"].asBool();
 		ret.internet_status = root["internet_status"].asString();
 
+		ret.capability_bits = root["capability_bits"].asInt();
+
 		ret.ok=true;
 
 		return ret;
@@ -446,4 +448,17 @@ SStatusDetails Connector::getStatusDetails()
 	{
 		return ret;
 	}	
+}
+
+int Connector::getCapabilities()
+{
+	SStatusDetails status = getStatusDetails();
+	if(status.ok)
+	{
+		return status.capability_bits;
+	}
+	else
+	{
+		return 0;
+	}
 }

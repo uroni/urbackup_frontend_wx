@@ -44,6 +44,12 @@ public:
 	void Notify(void);
 
 	bool hasCapability(int capa_bit);
+	static bool hasCapability(int capa_bit, int capa);
+
+	int getCapa()
+	{
+		return capa;
+	}
 
 	void resetDisplayedUpdateInfo(void);
 

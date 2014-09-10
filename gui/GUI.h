@@ -129,11 +129,12 @@ class GUISettings : public wxDialog
 		virtual void OnOkClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbortClick( wxCommandEvent& event ) { event.Skip(); }
 		
+		int capa;
 	
 	public:
 		
 		GUISettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
-		~GUISettings();
+		virtual ~GUISettings();
 	
 };
 

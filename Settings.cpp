@@ -144,7 +144,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		m_textCtrl2->SetValue(wxT("30"));
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"update_freq_image_full", &t, settings))
 		{
@@ -212,7 +212,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		m_textCtrl132->SetValue(wxT("2"));
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"min_image_incr", &t,settings))
 		{
@@ -296,7 +296,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		m_textCtrl19->SetValue(wxT("0"));
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"image_letters", &t, settings))
 		{
@@ -325,7 +325,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		m_checkBoxInternetFullFile->SetValue(false);
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"internet_image_backups", &t, settings) && t==L"true")
 		{
@@ -409,7 +409,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	m_textCtrl133->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl132->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		m_textCtrl22->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 		m_textCtrl21->SetValidator(wxTextValidator(wxFILTER_DIGITS));
@@ -437,7 +437,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #ifdef _WIN32
 	wxString update_freq_image_full;
 	wxString update_freq_image_incr;
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		update_freq_image_full=m_textCtrl22->GetValue();
 		update_freq_image_incr=m_textCtrl21->GetValue();
@@ -452,7 +452,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	wxString max_image_incr;
 	wxString min_image_full;
 	wxString max_image_full;
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		min_image_incr=m_textCtrl134->GetValue();
 		max_image_incr=m_textCtrl135->GetValue();
@@ -467,7 +467,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	wxString startup_backup_delay=m_textCtrl19->GetValue();
 #ifdef _WIN32
 	wxString image_letters;
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		image_letters=m_textCtrl23->GetValue();
 	}
@@ -477,7 +477,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	wxString internet_server_port=m_textCtrlInternetServerPort->GetValue();
 #ifdef _WIN32
 	bool internet_image_backups=false;
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		internet_image_backups=m_checkBoxInternetImage->GetValue();
 	}
@@ -513,7 +513,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		return;
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false && m_checkBox1->GetValue() )
 		{
@@ -554,7 +554,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		return;
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(min_image_incr.ToLong(&l_min_image_incr)==false )
 		{
@@ -589,7 +589,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		return;
 	}
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		std::string s_image_letters=image_letters.ToUTF8();
 		std::vector<std::string> img_paths;
@@ -622,7 +622,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	l_update_freq_image_full_orig=l_update_freq_image_full;
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(m_checkBox1->GetValue()==false)
 		{
@@ -634,7 +634,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	std::map<std::string, std::string> n_vals;
 	n_vals["update_freq_incr"]=nconvert(static_cast<float>(l_update_freq_incr*60.f*60.f));
 	n_vals["update_freq_full"]=nconvert(l_update_freq_full*24*60*60);
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		n_vals["update_freq_image_full"]=nconvert(l_update_freq_image_full*24*60*60);
 		n_vals["update_freq_image_full_orig"]=nconvert(l_update_freq_image_full_orig*24*60*60);
@@ -645,7 +645,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["max_file_full"]=nconvert(l_max_file_full);
 	n_vals["min_file_full"]=nconvert(l_min_file_full);
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		n_vals["min_image_incr"]=nconvert(l_min_image_incr);
 		n_vals["max_image_incr"]=nconvert(l_max_image_incr);
@@ -663,7 +663,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["include_files"]=include_files.ToUTF8();
 	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
 #ifdef _WIN32
-	if(!timer->hasCapability(DONT_DO_IMAGE_BACKUPS))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		n_vals["image_letters"]=image_letters.ToUTF8();
 		n_vals["internet_image_backups"]=nconvert(internet_image_backups);
