@@ -131,8 +131,8 @@ Section "install"
 	StrCpy $INSTALL_TRAYICON "1"
 	PastUrBackupClientExists:
 	
-	${If} $EXEFILE <> 'UrBackupUpdate.exe'
-	StrCpy $INSTALL_TRAYICON "1"
+	${If} $EXEFILE != 'UrBackupUpdate.exe'
+		StrCpy $INSTALL_TRAYICON "1"
 	${EndIf}
 	
 	
