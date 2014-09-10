@@ -318,6 +318,7 @@ bool MyApp::OnInit()
 
 int MyApp::OnExit()
 {
+	exit(0);
 	return 0;
 }
 
