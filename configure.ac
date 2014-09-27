@@ -29,7 +29,7 @@ AC_FUNC_STRFTIME
 AC_CHECK_FUNCS([gettimeofday memset strstr])
 
 AM_OPTIONS_WXCONFIG
-reqwx=2.8.0
+reqwx=2.9.0
 AM_PATH_WXCONFIG($reqwx, wxWin=1)
 if test "$wxWin" != 1; then
 	AC_MSG_ERROR([

@@ -109,7 +109,7 @@ namespace
 {
 	wxString getPercentDoneText(wxString pc)
 	{
-		wxString pcdone=_("_percent_ done.")+wxT(" ");
+		wxString pcdone=wxString(_("_percent_ done."))+wxT(" ");
 		pcdone.Replace(wxT("_percent_"), pc + wxT("%"));
 		return pcdone;
 	}
@@ -255,7 +255,7 @@ bool MyApp::OnInit()
 
 	timer=NULL;
 
-	std::string cmd;
+	wxString cmd;
 
 	if(argc>1)
 	{
@@ -305,7 +305,7 @@ bool MyApp::OnInit()
 		{
 			return false;
 		}
-		Connector::addNewServer(argv[2].ToStdString());
+		Connector::addNewServer(wxString(argv[2]).ToStdString());
 		wxExit();
 	}
 	else
@@ -369,7 +369,7 @@ wxString getPercentText(wxString pcdone)
 		}
 		else
 		{
-			ret+=_("Indexing.")+wxT(" ");
+			ret+=wxString(_("Indexing."))+wxT(" ");
 		}
 	}
 	return ret;
@@ -505,7 +505,7 @@ void MyTimer::Notify()
 	}
 	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
 	{	
-		status_text+=_("No current backup.") + wxT(" ");
+		status_text+=wxString(_("No current backup.")) + wxT(" ");
 		icon_type=ETrayIcon_NO_RECENT;
 		backup_is_running=false;
 	}
