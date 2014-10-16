@@ -190,21 +190,39 @@ bool Connector::hasError(void)
 std::vector<SBackupDir> Connector::getSharedPaths(void)
 {
 	std::vector<SBackupDir> ret;
-	std::string d=getResponse("1GET BACKUP DIRS","", true);
-	int lc=linecount(d);
-	for(int i=0;i<lc;i+=2)
+	std::string d=getResponse("GET BACKUP DIRS","", true);
+
+	Json::Value root;
+	Json::Reader reader;
+
+	if(!reader.parse(d, root, false))
 	{
-		SBackupDir bd;
-		bd.id=atoi(getline(i, d).c_str() );
-		std::string path=getline(i+1, d);
-		bd.path=wxString::FromUTF8(path.c_str() );
-		if(path.find("|")!=std::string::npos)
-		{
-			bd.path=ConvertToUnicode(getafter("|", path));
-			bd.name=ConvertToUnicode(getuntil("|", path));
-		}
-		ret.push_back( bd );
+		return ret;
 	}
+
+	try
+	{
+		Json::Value dirs = root["dirs"];
+
+		for(Json::Value::ArrayIndex i=0;i<dirs.size();++i)
+		{
+			Json::Value dir = dirs[i];
+
+			SBackupDir rdir =
+			{
+				wxString(dir["path"].asString()),
+				wxString(dir["name"].asString()),
+				dir["id"].asInt(),
+				dir["group"].asInt()
+			};
+
+			ret.push_back(rdir);
+		}
+	}
+	catch(std::runtime_error&)
+	{
+	}
+
 	return ret;
 }
 
@@ -229,6 +247,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 
 		args+="dir_"+nconvert(i)+"="+path;
 		args+="&dir_"+nconvert(i)+"_name="+name;
+		args+="&dir_"+nconvert(i)+"_group="+nconvert(res[i].group);
 	}
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args, true);

@@ -28,6 +28,7 @@ struct SBackupDir
 	wxString path;
 	wxString name;
 	int id;
+	int group;
 };
 
 struct SStatus
