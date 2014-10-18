@@ -3,18 +3,18 @@ Martin Raiber
 
 Translators:
 Eric Bosdure, aureliensegeco, Charles Peltier (French)
-Artem Alabin (Russian)
+Artem Alabin, Valentin XliN Saikov (Russian)
 Luis-Miguel Munoz (Spanish)
 Zhengyu Ren (Simplified Chinese and Traditional Chinese)
 janda (Slovak)
-Martin Raiber (German)
-paolobeldi (Italian)
+Martin Raiber, Ettore Atalan (German)
+paolobeldi, Samuele (Italian)
 Artur Corumba (Portuguese - Brazil)
 Łukasz Milata (Polish)
 Ihor Maydanovich (Ukrainian)
-tnywos (Danish)
+Torben Nygaard (Danish)
 osiengine group (Farsi)
-buzzertnl (Dutch)
+buzzertnl, Decay (Dutch)
 Ales Hermann (Czech)
 
 See license.txt for the licences of the libraries used and of UrBackup (GPL v3+).
