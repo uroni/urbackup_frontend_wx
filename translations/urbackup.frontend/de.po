@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Ettore Atalan <atalanttore@googlemail.com>, 2014
 # Martin Raiber <martin@urbackup.org>, 2011
 # uroni <urpc@gmx.de>, 2012-2013
 # uroni <urpc@gmx.de>, 2013-2014
@@ -17,8 +18,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:35+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2014-09-06 19:50+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/urbackup/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "Einstellungen"
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr "Logs"
+msgstr "Protokolle"
 
 #: gui\GUI.h:195
 msgid "Informations"
@@ -40,7 +41,7 @@ msgstr "Informationen"
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr "Pfade konfigurieren"
+msgstr "Datensicherungspfade hinzufügen/entfernen"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
@@ -48,7 +49,7 @@ msgstr "Status"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr "Intervall für inkrementelle Backups:"
+msgstr "Intervall für inkrementelle Datensicherungen:"
 
 #: gui\GUI.cpp:59
 msgid "hours"
@@ -56,7 +57,7 @@ msgstr "Stunden"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr "Intervall für volle Backups:"
+msgstr "Intervall für vollständige Dateisicherungen:"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
@@ -64,7 +65,7 @@ msgstr "Tage"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr "Intervall für inkrementelle Image-Backups:"
+msgstr "Intervall für inkrementelle Abbildsicherungen:"
 
 #: gui\GUI.cpp:100
 msgid "Active"
@@ -72,39 +73,39 @@ msgstr "Aktiv"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr "Intervall für volle Image-Backups:"
+msgstr "Intervall für vollständige Abbildsicherungen:"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr "Minimale Anzahl an inkrementellen Backups:"
+msgstr "Minimale Anzahl an inkrementellen Dateisicherungen:"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr "Maximale Anzahl an inkrementellen Backups:"
+msgstr "Maximale Anzahl an inkrementellen Dateisicherungen:"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr "Minimale Anzahl an vollen Backups:"
+msgstr "Minimale Anzahl an vollständigen Dateisicherungen:"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr "Maximale Anzahl an vollen Backups:"
+msgstr "Maximale Anzahl an vollständigen Dateisicherungen:"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr "Minimale Anzahl an inkrementellen Image-Backups:"
+msgstr "Minimale Anzahl an inkrementellen Abbildsicherungen:"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr "Maximale Anzahl an inkrementellen Image-Backups:"
+msgstr "Maximale Anzahl an inkrementellen Abbildsicherungen:"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr "Minimale Anzahl an vollen Image-Backups:"
+msgstr "Minimale Anzahl an vollständigen Abbildsicherungen:"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr "Maximale Anzahl an vollen Image-Backups:"
+msgstr "Maximale Anzahl an vollständigen Abbildsicherungen:"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
@@ -112,19 +113,19 @@ msgstr "Computername:"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr "Vom Backup auszuschließen (mit Wildcards):"
+msgstr "Von der Datensicherung ausschließen (mit Wildcards):"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr "Ins Backup einzuschließen (mit Wildcards):"
+msgstr "In die Datensicherung miteinbeziehen (mit Wildcards):"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr "Backup Zeitfenster:"
+msgstr "Datensicherungsfenster:"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
-msgstr "Backupverzögerung nach Systemstart:"
+msgstr "Datensicherungsverzögerung nach dem Systemstart:"
 
 #: gui\GUI.cpp:321
 msgid "min"
@@ -132,11 +133,11 @@ msgstr "min"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr "Image Backups von folgenden Laufwerken:"
+msgstr "Datensicherung von folgenden Datenträgern:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
-msgstr "Geschwindigkeitslimit lokal:"
+msgstr "Maximale Datensicherungsgeschwindigkeit für das lokale Netzwerk:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
@@ -144,31 +145,31 @@ msgstr "MBit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
-msgstr "Aktiviere Internetverbindung zu Server:"
+msgstr "Datensicherung über das Internet aktivieren:"
 
 #: gui\GUI.cpp:377
 msgid "Internet server name/IP:"
-msgstr "Internetserver Name oder IP:"
+msgstr "Internetservername/-IP:"
 
 #: gui\GUI.cpp:385
 msgid "Internet server port:"
-msgstr "Internetserver Port:"
+msgstr "Internetserverport:"
 
 #: gui\GUI.cpp:393
 msgid "Internet server password:"
-msgstr "Internetserver Passwort:"
+msgstr "Internetserverpasswort:"
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr "Image-backups über Internetverbindung:"
+msgstr "Datensicherung über das Internet ausführen:"
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr "Volle Datei-backups über Internetverbindung:"
+msgstr "Vollständige Dateisicherungen über das Internet ausführen:"
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr "Geschwindigkeitslimit über Internetverbindung:"
+msgstr "Maximale Datensicherungsgeschwindigkeit für die Internetverbindung:"
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
@@ -176,19 +177,19 @@ msgstr "KBit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
-msgstr "Internettransfer komprimieren:"
+msgstr "Komprimierte Übertragung:"
 
 #: gui\GUI.cpp:441
 msgid "Encrypted transfer:"
-msgstr "Internettransfer verschlüsseln:"
+msgstr "Verschlüsselte Übertragung:"
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr "Datei Backups"
+msgstr "Dateisicherungen"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr "Image Backups"
+msgstr "Abbildsicherungen"
 
 #: gui\GUI.cpp:468
 msgid "Client"
@@ -212,19 +213,19 @@ msgstr "Filter:"
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr "Info"
+msgstr "Informationen"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
-msgstr "Warnings"
+msgstr "Warnungen"
 
 #: gui\GUI.cpp:539
 msgid "Errors"
-msgstr "Errors"
+msgstr "Fehler"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
-msgstr "Verlassen"
+msgstr "Beenden"
 
 #: gui\GUI.cpp:610
 msgid "Version:"
@@ -236,7 +237,7 @@ msgstr "Name:"
 
 #: gui\GUI.cpp:707
 msgid "Add path"
-msgstr "Neuer Pfad"
+msgstr "Pfad hinzufügen"
 
 #: gui\GUI.cpp:710
 msgid "Remove path"
@@ -248,11 +249,11 @@ msgstr "Internetverbindungsstatus:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
-msgstr "Ein Fehler ist aufgetreten. Backups werden momentan nicht durchgeführt."
+msgstr "Ein Fehler ist aufgetreten. Derzeit können keine Daten gesichert werden."
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr "Bitte Verzeichnis das gesichert werden soll auswählen"
+msgstr "Bitte wählen Sie das Verzeichnis aus, das gesichert werden soll"
 
 #: main.cpp:111
 msgid "_percent_ done."
@@ -260,52 +261,52 @@ msgstr "_percent_ fertig."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr "Inkrementelles Datei-Backup läuft."
+msgstr "Inkrementelle Dateisicherung wird ausgeführt."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr "Volles Datei-Backup läuft."
+msgstr "Vollständige Dateisicherung wird ausgeführt"
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr "Inkrementelles Image-Backup läuft."
+msgstr "Inkrementelle Abbildsicherung wird ausgeführt."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr "Volles Image-Backup läuft."
+msgstr "Vollständige Abbildsicherung wird ausgeführt."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr "Fortgesetztes inkrementelles Datei-Backup läuft."
+msgstr "Fortgesetzte inkrementelle Dateisicherung wird ausgeführt."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr "Fortgesetztes volles Datei-Backup läuft."
+msgstr "Fortgesetzte vollständige Dateisicherung wird ausgeführt."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr "Indexiere."
+msgstr "Indexierung."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
-msgstr "UrBackup: Update verfügbar"
+msgstr "UrBackup: Aktualisierung verfügbar"
 
 #: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr "Eine neue Version von UrBackup ist verfügbar. Klicken Sie hier um diese zu installieren"
+msgstr "Eine neue Version von UrBackup ist verfügbar. Bitte klicken Sie hier, um es jetzt zu installieren."
 
 #: main.cpp:468
 msgid "Cannot connect to backup server"
-msgstr "Keine Verbindung zum Backupserver möglich"
+msgstr "Zu dem Datensicherungsserver kann keine Verbindung aufgebaut werden"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr "Kein aktuelles Backup."
+msgstr "Keine aktuelle Datensicherung."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr "Letztes Backup am _1_"
+msgstr "Letzte Datensicherung am _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
@@ -313,83 +314,83 @@ msgstr "UrBackup: Neuer Server"
 
 #: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
-msgstr "Ein neuer Backup Server wurde gefunden. Hier klicken um diesen zu benutzen"
+msgstr "Ein neuer Datensicherungsserver wurde gefunden. Klicken Sie hier, um diesen zu benutzen"
 
 #: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
-msgstr "Die inkrementelle Backupzeit ist keine Zahl"
+msgstr "Das inkrementelle Datensicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:511
 msgid "The full backup interval  is not a number"
-msgstr "Die volle Backupzeit ist keine Zahl"
+msgstr "Das vollständige Datensicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
-msgstr "Die volle Imagebackupzeit ist keine Zahl"
+msgstr "Das vollständige Abbildsicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
-msgstr "Die inkrementelle Imagebackupzeit ist keine Zahl"
+msgstr "Die inkrementelle Abbildsicherungszeit ist keine Zahl"
 
 #: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Die maximale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Die maximale Anzahl an inkrementellen Dateisicherungen ist keine Zahl"
 
 #: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "Die minimale Anzahl an inkrementellen Backups ist keine Zahl"
+msgstr "Die minimale Anzahl an inkrementellen Dateisicherungen ist keine Zahl"
 
 #: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
-msgstr "Die maximale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Die maximale Anzahl an vollständigen Dateisicherungen ist keine Zahl"
 
 #: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
-msgstr "Die minimale Anzahl an vollen Backups ist keine Zahl"
+msgstr "Die minimale Anzahl an vollständigen Dateisicherungen ist keine Zahl"
 
 #: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Die minimale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Die minimale Anzahl an inkrementellen Abbildsicherungen ist keine Zahl"
 
 #: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Die maximale Anzahl an inkrementellen Image-Backups ist keine Zahl"
+msgstr "Die maximale Anzahl an inkrementellen Abbildsicherungen ist keine Zahl"
 
 #: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
-msgstr "Die minimale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Die minimale Anzahl an vollständigen Abbildsicherungen ist keine Zahl"
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr "Die maximale Anzahl an vollen Image-Backups ist keine Zahl"
+msgstr "Die maximale Anzahl an vollständigen Abbildsicherungen ist keine Zahl"
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
-msgstr "Die Verzögerung bei Systemstart ist keine Zahl"
+msgstr "Datensicherungsverzögerung nach dem Systemstart ist keine Zahl"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr "_1_ ist kein Laufwerk"
+msgstr "_1_ ist kein Datenträger"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr "Der Server-Port ist ungültig"
+msgstr "Der Serverport ist ungültig"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr "Initialisiere."
+msgstr "Initialisierung."
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr "Warte auf lokalen UrBackup Server."
+msgstr "Warte auf den lokalen UrBackup-Server."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr "Verbunden mit lokalem UrBackup Server."
+msgstr "Verbunden mit dem lokalem UrBackup-Server."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr "Versuche nicht eine Verbindung mit einem Server im Internet herzustellen."
+msgstr "Es wird versucht, keine Verbindung zu einem Internetserver herzustellen."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
@@ -397,7 +398,7 @@ msgstr "Lokaler Server wurde vor _1_ Minuten zuletzt gesehen."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr "Internetserverkonfiguration unvollständig."
+msgstr "Keine Internetserver konfiguriert."
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
@@ -435,7 +436,7 @@ msgstr "Untätig."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr "Restzeit ca. _1_"
+msgstr "Restzeit: ca. _1_"
 
 #: Status.cpp:192
 msgid "Yes"
@@ -459,51 +460,51 @@ msgstr "Warte auf Server..."
 
 #: TrayIcon.cpp:146 TrayIcon.cpp:169
 msgid "A backup is already running. Could not start another one."
-msgstr "Ein Backup läuft bereits. Konnte leider kein weiteres starten."
+msgstr "Eine Datensicherung wird bereits ausgeführt. Ein weitere konnte nicht gestartet werden."
 
 #: TrayIcon.cpp:148 TrayIcon.cpp:171
 msgid "Could not start backup, because no backup server was found."
-msgstr "Konnte kein Backup starten, da leider kein Server gefunden wurde"
+msgstr "Eine Datensicherung konnte nicht gestartet werden, weil leider kein Datensicherungsserver gefunden wurde."
 
 #: TrayIcon.cpp:183
 msgid "Pausing failed: No connection to backup server."
-msgstr "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht pausieren."
+msgstr "Pausieren fehlgeschlagen: Keine Verbindung zum Datensicherungsserver."
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr "Verbindung mit Backupserver fehlgeschlagen. Konnte nicht fortfahren."
+msgstr "Fortsetzen fehlgeschlagen: Keine Verbindung zum Datensicherungsserver."
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr "Volles Backup jetzt"
+msgstr "Vollständige Dateisicherung ausführen"
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr "Jetzt ein volles Datei-Backup ausführen"
+msgstr "Eine vollständige Dateisicherung jetzt ausführen"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr "Inkremetelles Backup jetzt"
+msgstr "Inkrementelle Dateisicherung ausführen"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr "Jetzt ein inkrementelles Datei-Backup ausführen"
+msgstr "Eine inkrementelle Dateisicherung jetzt ausführen"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr "Volles Image-Backup jetzt"
+msgstr "Vollständige Abbildsicherung ausführen"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr "Jetzt ein volles Image-Backup ausführen"
+msgstr "Eine vollständige Abbildsicherung jetzt ausführen"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr "Inkremetelles Image-Backup jetzt"
+msgstr "Inkrementelle Abbildsicherung ausführen"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr "Jetzt ein inkrementelles Image-Backup ausführen"
+msgstr "Eine inkrementelle Abbildsicherung jetzt ausführen"
 
 #: TrayIcon.cpp:286
 msgid "Pause"
@@ -511,7 +512,7 @@ msgstr "Pausieren"
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr "Fortfahren"
+msgstr "Fortsetzen"
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

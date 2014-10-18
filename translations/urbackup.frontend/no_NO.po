@@ -8,13 +8,14 @@
 # Translators:
 # Translators:
 # Translators:
+# matsr <mostue@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2014-06-01 14:41+0000\n"
+"Last-Translator: matsr <mostue@gmail.com>\n"
 "Language-Team: Norwegian (Norway) (http://www.transifex.com/projects/p/urbackup/language/no_NO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,490 +25,490 @@ msgstr ""
 
 #: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
-msgstr ""
+msgstr "Innstillinger"
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr ""
+msgstr "Logger"
 
 #: gui\GUI.h:195
 msgid "Informations"
-msgstr ""
+msgstr "Informasjoner"
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr ""
+msgstr "Legg til/Fjern backup stier"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr ""
+msgstr "Intervall for inkrementelle fil backuper:"
 
 #: gui\GUI.cpp:59
 msgid "hours"
-msgstr ""
+msgstr "timer"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr ""
+msgstr "Intervall for fulle fil backuper:"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
-msgstr ""
+msgstr "dager"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr ""
+msgstr "Intervall for inkrementelle image backuper:"
 
 #: gui\GUI.cpp:100
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr ""
+msgstr "Intervall for fulle image backuper:"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr ""
+msgstr "Minimalt antall av inkrementelle fil backuper:"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr ""
+msgstr "Maksimalt antall av inkremenelle  fil backuper:"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr ""
+msgstr "Minimalt antall av fulle fil backuper:"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr ""
+msgstr "Maksimalt antall av fulle fil backuper:"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr ""
+msgstr "Minimalt antall inkrementelle image backuper:"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr ""
+msgstr "Maksimalt antall av inkrementelle image backuper:"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr ""
+msgstr "Minimalt antall av fulle image backuper:"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr ""
+msgstr "Maksimalt antall av fulle image backuper:"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
-msgstr ""
+msgstr "Datamaskin navn:"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr ""
+msgstr "Ekskluder fra backup (med jokertegn):"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr ""
+msgstr "Inkluder i backup (med jokertegn):"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr ""
+msgstr "Backup vindu:"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
-msgstr ""
+msgstr "Backup forsinkelse etter system start:"
 
 #: gui\GUI.cpp:321
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr ""
+msgstr "Volumer å ta backup av:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
-msgstr ""
+msgstr "Maks. båndbredde for lokalt nettverk:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr ""
+msgstr "Mbit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
-msgstr ""
+msgstr "Aktiver backup via internett:"
 
 #: gui\GUI.cpp:377
 msgid "Internet server name/IP:"
-msgstr ""
+msgstr "Internett server navn/IP:"
 
 #: gui\GUI.cpp:385
 msgid "Internet server port:"
-msgstr ""
+msgstr "Internett server port:"
 
 #: gui\GUI.cpp:393
 msgid "Internet server password:"
-msgstr ""
+msgstr "Internett server passord:"
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr ""
+msgstr "Tillat image backup over internett"
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr ""
+msgstr "Tillat full fil backup over internett"
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr ""
+msgstr "Maks. båndbredde for backup over internett"
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr ""
+msgstr "Kbit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
-msgstr ""
+msgstr "Komprimert overføring:"
 
 #: gui\GUI.cpp:441
 msgid "Encrypted transfer:"
-msgstr ""
+msgstr "Kryptert overføring:"
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr ""
+msgstr "Fil backuper"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr ""
+msgstr "Image backuper"
 
 #: gui\GUI.cpp:468
 msgid "Client"
-msgstr ""
+msgstr "Klient"
 
 #: gui\GUI.cpp:469
 msgid "Internet"
-msgstr ""
+msgstr "Internett"
 
 #: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
-msgstr ""
+msgstr "Filter:"
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr ""
+msgstr "Info"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
-msgstr ""
+msgstr "Advarsler"
 
 #: gui\GUI.cpp:539
 msgid "Errors"
-msgstr ""
+msgstr "Feil"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
-msgstr ""
+msgstr "Avslutt"
 
 #: gui\GUI.cpp:610
 msgid "Version:"
-msgstr ""
+msgstr "Versjon:"
 
 #: gui\GUI.cpp:678
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 #: gui\GUI.cpp:707
 msgid "Add path"
-msgstr ""
+msgstr "Legg til sti"
 
 #: gui\GUI.cpp:710
 msgid "Remove path"
-msgstr ""
+msgstr "Fjern sti"
 
 #: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr ""
+msgstr "Status for internett tilknytning:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
+msgstr "Det oppsto en feil. Ingen backup vil bli kjørt"
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr ""
+msgstr "Velg mappe det skal tas backup av."
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ ferdig."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Inkrementell fil backup kjører."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Full fil backup kjører."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Inkrementell image backup kjører."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Full image backup kjører."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Fortsatt inkrementell fil backup kjører."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Fortsatt full fil backup kjører."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Indekserer."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
-msgstr ""
+msgstr "UrBackup: Oppdatering tilgjengelig"
 
 #: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
+msgstr "En ny versjon av UrBackup er tilgjengelig. Klikk her for å installere nå."
 
 #: main.cpp:468
 msgid "Cannot connect to backup server"
-msgstr ""
+msgstr "Kan ikke koble til backup server"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Ingen nylig backup."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Backup sist kjørt _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
-msgstr ""
+msgstr "UrBackup: Ny server"
 
 #: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
+msgstr "En ny backup server er oppdaget. Klikk her for å bruke denne"
 
 #: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
-msgstr ""
+msgstr "Inkrementell backup intervall er ikke ett tall"
 
 #: Settings.cpp:511
 msgid "The full backup interval  is not a number"
-msgstr ""
+msgstr "Full backup intervall er ikke ett tall"
 
 #: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
-msgstr ""
+msgstr "Full image backup intervall er ikke ett tall"
 
 #: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
-msgstr ""
+msgstr "Inkrementell image backup tid er ikke ett tall"
 
 #: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
+msgstr "Maksimalt antall av inkrementelle fil backuper er ikke ett tall"
 
 #: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
+msgstr "Minimalt antall av inkrementelle fil backup er ikke ett tall"
 
 #: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
-msgstr ""
+msgstr "Maksimalt antall av fulle fil backuper er ikke ett tall"
 
 #: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
-msgstr ""
+msgstr "Minimalt antall av fulle fil backuper er ikke ett tall"
 
 #: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Minimalt antall av inkrementelle image backup er ikke ett tall"
 
 #: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Maksimalt antall av inkrementelle image backup er ikke ett tall"
 
 #: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
-msgstr ""
+msgstr "Minimalt antall av fulle image backuper er ikke ett tall"
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr ""
+msgstr "Maksimalt antall av fulle image backuper er ikke ett tall"
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
-msgstr ""
+msgstr "Backup forsinkelse etter system start er ikke et tall"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ er ikke ett volum"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Server porten er ikke gyldig"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr ""
+msgstr "Initialiserer."
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "Venter på lokal UrBackup server."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Tilkoblet lokal UrBackup server."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Prøver ikke å koble til internett server."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Lokal server sist sett for _1_ minutter siden."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Ingen internett server konfigurert."
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "Tilkoblet internett server"
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Kunne ikke koble til internet server. Server ikke tilgjengelig."
 
 #: Status.cpp:48
 msgid "Error: _1_"
-msgstr ""
+msgstr "Feil: _1_"
 
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dager"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "time"
+msgstr[1] "timer"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minutt"
+msgstr[1] "minutter"
 
 #: Status.cpp:138
 msgid "Idle."
-msgstr ""
+msgstr "Uvirksom."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "Forventet ferdigstillelse: ca. _1_"
 
 #: Status.cpp:192
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: Status.cpp:194
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internett: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr ""
+msgstr "Servere:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
-msgstr ""
+msgstr "Venter på server..."
 
 #: TrayIcon.cpp:146 TrayIcon.cpp:169
 msgid "A backup is already running. Could not start another one."
-msgstr ""
+msgstr "En backup server kjører allerede. Kunne ikke starte enda en."
 
 #: TrayIcon.cpp:148 TrayIcon.cpp:171
 msgid "Could not start backup, because no backup server was found."
-msgstr ""
+msgstr "Kunne ikke starte backup, fordi ingen backup server ble funnet."
 
 #: TrayIcon.cpp:183
 msgid "Pausing failed: No connection to backup server."
-msgstr ""
+msgstr "Kunne ikke pause: Ingen tilkobling til backup server."
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr ""
+msgstr "Kunne ikke fortsette: Ingen tilkobling til backup server."
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr ""
+msgstr "Tillat full fil backup"
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Kjør full fil backup nå"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr ""
+msgstr "Tillat inkrementell fil backup"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Kjør inkrementell fil backup nå"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr ""
+msgstr "Tillat full image backup"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Kjør full image backup nå"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr ""
+msgstr "Tillat inkrementell image backup"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Kjør inkrementell image backup nå"
 
 #: TrayIcon.cpp:286
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr ""
+msgstr "Fortsett"
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

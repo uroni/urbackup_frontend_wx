@@ -8,8 +8,8 @@
 # Translators:
 # Translators:
 # Translators:
-# osiengine <m.heidari@osiengine.com>, 2014
-# osiengine <m.heidari@osiengine.com>, 2014
+# mahdi heidari <m.heidari@osiengine.com>, 2014
+# mahdi heidari <m.heidari@osiengine.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"

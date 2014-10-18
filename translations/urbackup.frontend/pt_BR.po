@@ -8,15 +8,15 @@
 # Translators:
 # Translators:
 # Translators:
-# arturcorumba <artur@corumba.net>, 2013
-# arturcorumba <artur@corumba.net>, 2013-2014
+# Artur Corumba <artur@corumba.net>, 2013
+# Artur Corumba <artur@corumba.net>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2014-09-03 19:33+0000\n"
+"Last-Translator: Artur Corumba <artur@corumba.net>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/urbackup/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,35 +254,35 @@ msgstr "Por favor escolha a pasta que será backupeada."
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ concluído."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Backup incremental sendo feito."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Backup completo sendo feito."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Backup incremental de imagem sendo feito."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Backup completo de imagem sendo feito."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Continuando backup incremental."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Continuando backup completo."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Indexando."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
@@ -299,11 +299,11 @@ msgstr "Não é possível conectar ao servidor de backup"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Sem backup atual."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Último backup em _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
@@ -412,20 +412,20 @@ msgstr "Erro: _1_"
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dia"
+msgstr[1] "dias"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "hora"
+msgstr[1] "horas"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuto"
+msgstr[1] "minutos"
 
 #: Status.cpp:138
 msgid "Idle."
@@ -433,7 +433,7 @@ msgstr "Aguardando."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "TPT: Aprox. _1_"
 
 #: Status.cpp:192
 msgid "Yes"
@@ -445,7 +445,7 @@ msgstr "Não"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internet: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"

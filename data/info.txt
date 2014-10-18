@@ -15,5 +15,6 @@ Ihor Maydanovich (Ukrainian)
 tnywos (Danish)
 osiengine group (Farsi)
 buzzertnl (Dutch)
+Ales Hermann (Czech)
 
 See license.txt for the licences of the libraries used and of UrBackup (GPL v3+).

@@ -8,8 +8,8 @@
 # Translators:
 # Translators:
 # Translators:
-# tnywos <tn@keyone.dk>, 2013
-# tnywos <tn@keyone.dk>, 2013
+# Torben Nygaard <tn@keyone.dk>, 2013
+# Torben Nygaard <tn@keyone.dk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"

@@ -9,13 +9,14 @@
 # Translators:
 # Translators:
 # buzzertnl <frank@aced-it.nl>, 2013-2014
+# Decay <justvanwesterveld@live.nl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2014-06-05 09:52+0000\n"
+"Last-Translator: Decay <justvanwesterveld@live.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/urbackup/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr "Toevoegen/Verwijderen back-up paden"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
@@ -137,7 +138,7 @@ msgstr "Maximale back-up snelheid voor lokaal netwerk:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr ""
+msgstr "MBit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
@@ -157,19 +158,19 @@ msgstr "Internet server wachtwoord: "
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr "Maak volledige image back-ups over internet: "
+msgstr "Maak image back-ups over het internet: "
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr "Maak volledige bestands back-ups over internet: "
+msgstr "Maak volledige bestands back-ups over het internet: "
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr "Maximale back-up snelheid voor internet verbinding: "
+msgstr "Maximale back-up snelheid voor internetverbinding: "
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr ""
+msgstr "KBit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
@@ -241,7 +242,7 @@ msgstr "Verwijder locatie"
 
 #: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr ""
+msgstr "Status internetverbinding:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
@@ -253,35 +254,35 @@ msgstr "Selecteer een map die geback-upt moet worden. "
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ done."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Incrementele bestands-back-up bezig."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Volledige bestands-back-up bezig."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Incrementele image-back-up bezig."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Volledige image-back-up bezig."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Hervatte incrementele bestands-back-up bezig."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Hervatte volledige bestands-back-up bezig."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Indexeren. "
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
@@ -298,11 +299,11 @@ msgstr "Kan niet verbinden met de back-up server"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Geen recente back-up."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Laatste back-up op _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
@@ -366,89 +367,89 @@ msgstr "Back-up uitstel na opstarten is geen getal"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ is geen volume"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr ""
+msgstr "De server poort is ongeldig"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr ""
+msgstr " Initialiseren"
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "Wachten op de lokale UrBackup server."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Verbonden met de lokale UrBackup server."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Probeer niet te verbinden met een internet server."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "De lokale server is _1_ minuten voor het laatst gezien."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Geen internet server ingesteld. "
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "Verbonden met een Internet server"
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Kan niet verbonden met de internet server. Server ongereikbaar. "
 
 #: Status.cpp:48
 msgid "Error: _1_"
-msgstr ""
+msgstr "Fout: _1_"
 
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dagen"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "uur"
+msgstr[1] "uren"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuut"
+msgstr[1] "minuten"
 
 #: Status.cpp:138
 msgid "Idle."
-msgstr ""
+msgstr "Ruststand."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "Nog ongeveer: _1_"
 
 #: Status.cpp:192
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: Status.cpp:194
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internet: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr ""
+msgstr "Servers:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
@@ -476,7 +477,7 @@ msgstr "Maak een volledige bestands back-up "
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Maak nu een volledige bestands-back-up"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
@@ -484,7 +485,7 @@ msgstr "Maak een incrementele bestands back-up"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Maak nu een incrementele bestands-back-up"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
@@ -492,7 +493,7 @@ msgstr "Maak een volledige image back-up "
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Maak nu een volledige image-back-up"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
@@ -500,7 +501,7 @@ msgstr "Maak een incrementele image back-up"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Maak nu een incrementele image-back-up"
 
 #: TrayIcon.cpp:286
 msgid "Pause"

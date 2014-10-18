@@ -8,20 +8,19 @@
 # Translators:
 # Translators:
 # Translators:
-# Zach Wolf <zwolf@doublepositive.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
+"PO-Revision-Date: 2012-08-19 16:03+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: English (United States) (http://www.transifex.com/projects/p/urbackup/language/en_US/)\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/urbackup/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_US\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
@@ -33,11 +32,11 @@ msgstr ""
 
 #: gui\GUI.h:195
 msgid "Informations"
-msgstr "About"
+msgstr ""
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr "Add/Remove File Backup Paths"
+msgstr ""
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
@@ -73,35 +72,35 @@ msgstr ""
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr "Minimum Number of Incremental File Backups"
+msgstr ""
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr "Maximum Number of Incremental File Backups"
+msgstr ""
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr "Minimum Number of Full File Backups"
+msgstr ""
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr "Maximum Number of Full File Backups"
+msgstr ""
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr "Minimum Number of Incremental Image Backups"
+msgstr ""
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr "Maximum Number of Incremental Image Backups"
+msgstr ""
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr "Minimum Number of Full Image Backups"
+msgstr ""
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr "Maximum Number of Full Image Backups"
+msgstr ""
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
@@ -358,7 +357,7 @@ msgstr ""
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr "Maximum Number Of Full Image Backups Is Not A Number"
+msgstr ""
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
@@ -413,18 +412,30 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: Status.cpp:138
 msgid "Idle."
@@ -468,11 +479,11 @@ msgstr ""
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr "Resume Failed: No Connection To Backup Server"
+msgstr ""
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr "Start Full File Backup"
+msgstr ""
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
@@ -480,7 +491,7 @@ msgstr ""
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr "Start Incremental File Backup"
+msgstr ""
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
@@ -488,7 +499,7 @@ msgstr ""
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr "Start Full Image Backup"
+msgstr ""
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
@@ -496,7 +507,7 @@ msgstr ""
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr "Start Incremental Image Backup"
+msgstr ""
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
@@ -508,7 +519,7 @@ msgstr ""
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr "Resume"
+msgstr ""
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
