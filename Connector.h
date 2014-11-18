@@ -28,6 +28,7 @@ struct SBackupDir
 	wxString path;
 	wxString name;
 	int id;
+	int group;
 };
 
 struct SStatus
@@ -118,6 +119,8 @@ public:
 	static bool isBusy(void);
 
 	static std::string getPasswordData(bool change_command);
+
+	static std::string getAccessParameters(const std::string& tokens);
 
 private:
 	static std::string escapeParam(const std::string &name);

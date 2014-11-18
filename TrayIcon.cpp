@@ -27,6 +27,8 @@
 #ifdef _WIN32
 #include <Windows.h>
 #endif
+#include "FileSettingsReader.h"
+#include <wx/dir.h>
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -44,6 +46,7 @@
 #define ID_TI_CONTINUE 109
 #define ID_TI_INFO 110
 #define ID_TI_STATUS 112
+#define ID_TI_ACCESS 113
 
 extern MyTimer *timer;
 extern bool backup_is_running;
@@ -53,6 +56,7 @@ extern MyTimer *timer;
 extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
+extern std::string g_res_path;
 
 TrayIcon::TrayIcon(void)
 	: wxTaskBarIcon()
@@ -108,7 +112,6 @@ namespace
 #else
 
 	std::string sudo_app;
-
 	void find_sudo_app()
 	{
 		if(system("type gksudo")==0) sudo_app="gksudo";
@@ -123,94 +126,147 @@ namespace
 		wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 	}
 #endif
+
+	void accessBackups()
+	{
+		std::string s_path = g_res_path+"/tokens/";
+		wxString wx_path = res_path + wxT("/tokens");
+#ifdef _DEBUG
+		s_path = "tokens/";
+		wx_path = wxT("tokens");
+#endif
+
+		wxArrayString token_files; 
+		wxDir::GetAllFiles(wx_path, &token_files, wxEmptyString, wxDIR_FILES);
+
+		std::string tokens;
+		for(size_t i=0;i<token_files.size();++i)
+		{
+			std::string nt = getFile(token_files[i].ToStdString());
+			if(!nt.empty())
+			{
+				if(!tokens.empty())
+				{
+					tokens+=";";
+				}
+				tokens+=nt;
+			}
+		}
+
+		if(tokens.empty())
+		{
+			wxMessageBox( _("No rights to access any files."), wxT("UrBackup"), wxICON_ERROR);
+		}
+
+		std::string params = Connector::getAccessParameters(tokens);
+
+		if(!params.empty())
+		{
+			wxLaunchDefaultBrowser(wxString(params));
+		}
+		else
+		{
+			wxMessageBox( _("Error getting server URL. Cannot access files."), wxT("UrBackup"), wxICON_ERROR);
+		}
+	}
 }
 
 
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
-	if(evt.GetId()==ID_TI_ADD_PATH)
+	switch(evt.GetId())
 	{
-		runCommand("paths");
-	}
-	else if(evt.GetId()==ID_TI_BACKUP_FULL || evt.GetId()==ID_TI_BACKUP_INCR)
-	{
-		bool full= (evt.GetId()==ID_TI_BACKUP_FULL);
-		int rc=Connector::startBackup(full);
-		if(rc==1)
+	case ID_TI_ADD_PATH:
 		{
-			SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
-			if(timer!=NULL)
-				timer->Start(1000);
-		}
-		else if(rc==2)
-			wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
-		else
-			wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-	}
-	else if(evt.GetId()==ID_TI_SETTINGS)
-	{
-		runCommand("settings");
-	}
-	else if(evt.GetId()==ID_TI_LOGS)
-	{
-		runCommand("logs");
-	}
-	else if(evt.GetId()==ID_TI_BACKUP_IMAGE_FULL || evt.GetId()==ID_TI_BACKUP_IMAGE_INCR)
-	{
-		bool full= (evt.GetId()==ID_TI_BACKUP_IMAGE_FULL);
-		int rc=Connector::startImage(full);
-		if(rc==1)
+			runCommand("paths");
+		}break;
+	case ID_TI_BACKUP_FULL:
+	case ID_TI_BACKUP_INCR:
 		{
-			SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
-			if(timer!=NULL)
-				timer->Start(1000);
-		}
-		else if(rc==2)
-			wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);
-		else
-			wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
-	}
-	else if(evt.GetId()==ID_TI_PAUSE)
-	{
-		if(Connector::setPause(true))
+			bool full= (evt.GetId()==ID_TI_BACKUP_FULL);
+			int rc=Connector::startBackup(full);
+			if(rc==1)
+			{
+				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
+				if(timer!=NULL)
+					timer->Start(1000);
+			}
+			else if(rc==2)
+				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
+			else
+				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+
+		}break;
+	case ID_TI_SETTINGS:
 		{
-			b_is_pausing=true;
-			if(timer!=NULL)
-				timer->Notify();
-		}
-		else
+			runCommand("settings");
+		}break;
+	case ID_TI_LOGS:
 		{
-			wxMessageBox( _("Pausing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
+			runCommand("logs");
 		}
-	}
-	else if(evt.GetId()==ID_TI_CONTINUE)
-	{
-		if(Connector::setPause(false))
+	case ID_TI_BACKUP_IMAGE_FULL:
+	case ID_TI_BACKUP_IMAGE_INCR:
 		{
-			b_is_pausing=false;
-			if(timer!=NULL)
-				timer->Notify();
-		}
-		else
+			bool full= (evt.GetId()==ID_TI_BACKUP_IMAGE_FULL);
+			int rc=Connector::startImage(full);
+			if(rc==1)
+			{
+				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
+				if(timer!=NULL)
+					timer->Start(1000);
+			}
+			else if(rc==2)
+				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);
+			else
+				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
+		}break;
+	case ID_TI_PAUSE:
 		{
-			wxMessageBox( _("Continuing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
-		}
-	}
-	else if(evt.GetId()==ID_TI_INFO )
-	{
-		Info *i=new Info(NULL);
-	}
-	else if(evt.GetId()==ID_TI_STATUS)
-	{
-		Status *s = new Status(NULL);
-	}
-	else if(evt.GetId()==ID_TI_EXIT)
-	{
-		if(!b_is_pausing)
+			if(Connector::setPause(true))
+			{
+				b_is_pausing=true;
+				if(timer!=NULL)
+					timer->Notify();
+			}
+			else
+			{
+				wxMessageBox( _("Pausing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
+			}
+		}break;
+	case ID_TI_CONTINUE:
 		{
-			Connector::setPause(true);
+			if(Connector::setPause(false))
+			{
+				b_is_pausing=false;
+				if(timer!=NULL)
+					timer->Notify();
+			}
+			else
+			{
+				wxMessageBox( _("Continuing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
+			}
+		}break;
+	case ID_TI_INFO:
+		{
+			Info *i=new Info(NULL);
+		}break;
+	case ID_TI_STATUS:
+		{
+			Status *s = new Status(NULL);
+		}break;
+	case ID_TI_EXIT:
+		{
+			if(!b_is_pausing)
+			{
+				Connector::setPause(true);
+			}
+			wxExit();
 		}
-		wxExit();
+	case ID_TI_ACCESS:
+		{
+			accessBackups();
+		}break;
 	}
 }
 
@@ -222,6 +278,12 @@ void TrayIcon::OnClick(wxCommandEvent &evt)
 wxMenu* TrayIcon::CreatePopupMenu(void)
 {
 	wxMenu *mnu=new wxMenu();
+
+	if(timer->hasCapability(ALLOW_TOKEN_AUTHENTICATION))
+	{
+		mnu->Append(ID_TI_ACCESS, _("Access backups"), _("Access backups"));
+		mnu->AppendSeparator();
+	}
 	bool any_prev=false;
 	if(!timer->hasCapability(DONT_ALLOW_STARTING_FILE_BACKUPS))
 	{

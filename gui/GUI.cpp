@@ -680,15 +680,34 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_staticText27 = new wxStaticText( this, wxID_ANY, _("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText27->Wrap( -1 );
-	m_staticText27->SetMinSize( wxSize( 40,-1 ) );
+	m_staticText27->SetMinSize( wxSize( -1,-1 ) );
 	
 	bSizer32->Add( m_staticText27, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_textCtrl18 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_textCtrl18->Enable( false );
 	m_textCtrl18->SetMinSize( wxSize( 200,-1 ) );
-	
+
 	bSizer32->Add( m_textCtrl18, 0, wxALL, 5 );
+
+	m_staticTextGroup = new wxStaticText( this, wxID_ANY, _("Gruppe:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextGroup->Wrap( -1 );
+	m_staticTextGroup->SetMinSize( wxSize( -1,-1 ) );
+
+	bSizer32->Add( m_staticTextGroup, 0, wxALIGN_CENTER|wxALL, 5 );
+
+	wxString choices[] =
+	{
+		_("Default"),
+		_("Continuous")
+	};
+
+	m_group = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 2, choices);
+	m_group->SetMinSize(wxSize(140, -1));
+	m_group->Enable(false);
+
+	bSizer32->Add( m_group, 0, wxALL, 5 );
+	
 	
 	bSizer30->Add( bSizer32, 0, wxEXPAND, 5 );
 	
@@ -733,6 +752,7 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_button6->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickAbort ), NULL, this );
 	m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickNew ), NULL, this );
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickDel ), NULL, this );
+	m_group->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIConfigPath::OnGroupChange ), NULL, this );
 }
 
 GUIConfigPath::~GUIConfigPath()

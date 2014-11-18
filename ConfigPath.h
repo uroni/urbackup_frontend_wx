@@ -34,6 +34,7 @@ public:
 	void OnClickDel(wxCommandEvent &evt);
 	void OnPathSelected(wxCommandEvent &evt);
 	void OnNameTextChange(wxCommandEvent &evt);
+	void OnGroupChange( wxCommandEvent& evt );
 	
 
 private:
