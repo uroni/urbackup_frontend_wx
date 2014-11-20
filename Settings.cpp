@@ -592,20 +592,28 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		std::string s_image_letters=image_letters.ToUTF8();
-		std::vector<std::string> img_paths;
-		Tokenize(s_image_letters, img_paths, ";,");
-
-		for(size_t i=0;i<img_paths.size();++i)
+		if(strlower(s_image_letters)!="all" && strlower(s_image_letters)!="all_nonusb")
 		{
-			char outb[1000];
-			BOOL b=GetVolumePathNameA((img_paths[i]+":\\").c_str(), outb, 1000);
-			if(b==FALSE)
+			std::vector<std::string> img_paths;
+			Tokenize(s_image_letters, img_paths, ";,");
+
+			for(size_t i=0;i<img_paths.size();++i)
 			{
-				wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-				m_textCtrl23->SetFocus();
-				return;
+				HANDLE hVolume = CreateFileA(("\\\\.\\"+img_paths[i]+":").c_str(), 0, FILE_SHARE_READ | FILE_SHARE_WRITE,
+					NULL, OPEN_EXISTING, 0, NULL);
+
+				if(hVolume==INVALID_HANDLE_VALUE && GetLastError()!=ERROR_ACCESS_DENIED)
+				{
+					wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+					m_textCtrl23->SetFocus();
+					return;
+				}
+				else if(hVolume!=INVALID_HANDLE_VALUE)
+				{
+					CloseHandle(hVolume);
+				}
 			}
-		}
+		}		
 	}
 #endif
 	if(internet_server_port.ToLong(&l_internet_server_port)==false)
