@@ -265,6 +265,10 @@ bool MyApp::OnInit()
 	{
 		cmd=argv[1];
 	}
+	else
+	{
+		writestring(_("&Access backups").ToUTF8().data(), "access_backups_shell_mui.txt");
+	}
 
 	if(cmd.empty())
 	{
@@ -310,6 +314,15 @@ bool MyApp::OnInit()
 			return false;
 		}
 		Connector::addNewServer(wxString(argv[2]).ToStdString());
+		wxExit();
+	}
+	else if(cmd==wxT("access"))
+	{
+		if(argc<3)
+		{
+			return false;
+		}
+		TrayIcon::accessBackups(wxString(argv[2]));
 		wxExit();
 	}
 	else

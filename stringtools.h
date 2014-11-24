@@ -100,6 +100,7 @@ std::string ReplaceChar(std::string str, char tr, char ch);
 std::wstring ReplaceChar(std::wstring str, wchar_t tr, wchar_t ch);
 std::string striptags(std::string html);
 std::string base64_encode(unsigned char const* , unsigned int len);
+std::string base64_encode_dash(const std::string& data);
 std::string base64_decode(std::string const& s);
 bool CheckForIllegalChars(const std::string &str);
 int watoi(std::wstring str);

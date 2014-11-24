@@ -127,48 +127,6 @@ namespace
 	}
 #endif
 
-	void accessBackups()
-	{
-		std::string s_path = g_res_path+"/tokens/";
-		wxString wx_path = res_path + wxT("/tokens");
-#ifdef _DEBUG
-		s_path = "tokens/";
-		wx_path = wxT("tokens");
-#endif
-
-		wxArrayString token_files; 
-		wxDir::GetAllFiles(wx_path, &token_files, wxEmptyString, wxDIR_FILES);
-
-		std::string tokens;
-		for(size_t i=0;i<token_files.size();++i)
-		{
-			std::string nt = getFile(token_files[i].ToStdString());
-			if(!nt.empty())
-			{
-				if(!tokens.empty())
-				{
-					tokens+=";";
-				}
-				tokens+=nt;
-			}
-		}
-
-		if(tokens.empty())
-		{
-			wxMessageBox( _("No rights to access any files."), wxT("UrBackup"), wxICON_ERROR);
-		}
-
-		std::string params = Connector::getAccessParameters(tokens);
-
-		if(!params.empty())
-		{
-			wxLaunchDefaultBrowser(wxString(params));
-		}
-		else
-		{
-			wxMessageBox( _("Error getting server URL. Cannot access files."), wxT("UrBackup"), wxICON_ERROR);
-		}
-	}
 }
 
 
@@ -265,7 +223,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		}
 	case ID_TI_ACCESS:
 		{
-			accessBackups();
+			accessBackups(std::wstring());
 		}break;
 	}
 }
@@ -384,5 +342,106 @@ void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
 	else
 	{
 		runCommand("newserver", new_ident);
+	}
+}
+
+void TrayIcon::accessBackups( wxString path )
+{
+	wxString orig_path = path;
+	if(!path.empty())
+	{
+		std::vector<SBackupDir> backupdirs = Connector::getSharedPaths();
+
+		bool found=false;
+
+		for(size_t i=0;i<backupdirs.size();++i)
+		{
+			if(path.find(backupdirs[i].path)==0)
+			{
+				path.erase(0, backupdirs[i].path.size());
+				if(!path.empty() && path[0]!='\\' && path[0]!='/')
+				{
+					path=wxT("/")+path;
+				}
+
+				for(size_t j=0;j<path.size();++j)
+				{
+#ifdef _WIN32
+					if(path[j]=='\\')
+#else
+					if(path[j]=='\\' 
+						&& (j==0 || (path[j-1]!='\\'))
+						&& (j+1>=path.size() || path[j+1]!='\\'))
+#endif
+					{
+						path[j]='/';
+					}
+				}
+
+				path="/"+backupdirs[i].name+path;
+
+				found=true;
+				break;
+			}
+		}
+
+		if(!found)
+		{
+			return;
+		}
+	}
+
+	std::string s_path = g_res_path+"/tokens/";
+	wxString wx_path = res_path + wxT("/tokens");
+#ifdef _DEBUG
+	s_path = "tokens/";
+	wx_path = wxT("tokens");
+#endif
+
+	wxArrayString token_files; 
+	wxDir::GetAllFiles(wx_path, &token_files, wxEmptyString, wxDIR_FILES);
+
+	std::string tokens;
+	for(size_t i=0;i<token_files.size();++i)
+	{
+		std::string nt = getFile(token_files[i].ToStdString());
+		if(!nt.empty())
+		{
+			if(!tokens.empty())
+			{
+				tokens+=";";
+			}
+			tokens+=nt;
+		}
+	}
+
+	if(tokens.empty())
+	{
+		wxMessageBox( _("No rights to access any files."), wxT("UrBackup"), wxICON_ERROR);
+	}
+
+	std::string params = Connector::getAccessParameters(tokens);
+
+	if(!path.empty())
+	{
+		params+="&path="+base64_encode_dash(path.ToUTF8().data());
+
+		if(wxDirExists(orig_path))
+		{
+			params+="&is_file=false";
+		}
+		else
+		{
+			params+="&is_file=true";
+		}
+	}
+
+	if(!params.empty())
+	{
+		wxLaunchDefaultBrowser(wxString(params));
+	}
+	else
+	{
+		wxMessageBox( _("Error getting server URL. Cannot access files."), wxT("UrBackup"), wxICON_ERROR);
 	}
 }

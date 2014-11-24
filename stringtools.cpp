@@ -1419,3 +1419,17 @@ std::string conv_filename(std::string fn)
 
         return fn;
 }
+
+std::string base64_encode_dash( const std::string& data )
+{
+	std::string ret = base64_encode(reinterpret_cast<const unsigned char*>(data.c_str()),
+		static_cast<unsigned int>(data.size()));
+
+	for(size_t i=0;i<ret.size();++i)
+	{
+		if(ret[i]=='=')
+			ret[i]='-';
+	}
+
+	return ret;
+}

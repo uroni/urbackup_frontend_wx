@@ -31,6 +31,7 @@ public:
 	void BalloonActionUpgrade(void);
 	void BalloonActionNewServer(const std::string &ident);
 
+	static void accessBackups(wxString path);
 
 private:
 	int balloon_action;
