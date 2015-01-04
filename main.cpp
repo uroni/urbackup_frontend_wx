@@ -115,6 +115,23 @@ namespace
 	}
 }
 
+void deleteShellKeys()
+{
+#ifdef _WIN32
+	bool deleted_key;
+	size_t i=0;
+	do 
+	{
+		deleted_key=false;
+		if(RegDeleteKeyW(HKEY_CLASSES_ROOT, (L"AllFilesystemObjects\\shell\\urbackup.access."+convert(i)).c_str())==ERROR_SUCCESS)
+		{
+			deleted_key=true;
+		}
+		++i;
+	} while (deleted_key);
+#endif
+}
+
 bool MyApp::OnInit()
 {
 #ifdef _WIN32
@@ -323,6 +340,11 @@ bool MyApp::OnInit()
 			return false;
 		}
 		TrayIcon::accessBackups(wxString(argv[2]));
+		wxExit();
+	}
+	else if(cmd==wxT("deleteshellkeys"))
+	{
+		deleteShellKeys();
 		wxExit();
 	}
 	else

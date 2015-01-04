@@ -387,6 +387,8 @@ Section "Uninstall"
 	
 	KillProcDLL::KillProc "UrBackupClient.exe"
 	
+	ExecWait '"$INSTDIR\UrBackupClient.exe" deleteshellkeys'
+	
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'

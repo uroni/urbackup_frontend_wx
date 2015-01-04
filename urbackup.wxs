@@ -88,6 +88,7 @@
 	
 	<Property Id="WixShellExecTarget" Value="[#UrBackupClient.exe]" />
 	<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+	<CustomAction Id="UninstallShellKeys" FileKey="UrBackupClient.exe" Execute="deferred" Return="asyncWait" ExeCommand="deleteshellkeys">REMOVE="ALL"</CustomAction>
 	
     <Feature Id='urbackup_client' Title='UrBackup Client' Level='1'>
       <ComponentRef Id='urbackup_client' />

@@ -2,7 +2,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi' xmlns:util='http://schemas.microsoft.com/wix/UtilExtension' xmlns:firewall='http://schemas.microsoft.com/wix/FirewallExtension'>
 	<?include $(sys.CURRENTDIR)\urbackup.wxi?>
 	<Product Id='$(var.ProductID)' Name='UrBackup Client' Language='1033'
-            Version='1.3.1.0' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
+            Version='$version_full_numeric$' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
     <Package Description='Client for UrBackup Server'
              Comments='Client for UrBackup Server. Allows file and image backups'
              Manufacturer='Martin Raiber' InstallerVersion='300' Compressed='yes' Platform='$(var.Platform)'/>
@@ -82,6 +82,7 @@
 	<Property Id="ARPPRODUCTICON" Value="backup_ok_ico" />
 	<Property Id="ARPHELPLINK" Value="http://www.urbackup.org/" />
 	
+	<CustomAction Id="UninstallShellKeys" FileKey="UrBackupClient.exe" Execute="deferred" Return="asyncWait" ExeCommand="deleteshellkeys">REMOVE="ALL"</CustomAction>
 	
     <Feature Id='urbackup_client' Title='UrBackup Client' Level='1'>
       <ComponentRef Id='urbackup_client' />
@@ -106,6 +107,15 @@
             </Component>
             <Component Id="cmpA506A755F6439AB0DED04F16F9519F36" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3003}" Win64="$(var.isx64)">
                 <File Id="fil52333B0481A4FDF2FF93D4E4B10DA690" KeyPath="yes" Source="$(var.shared_data_dir)\backup-progress.ico" />
+            </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F37" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3004}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA691" KeyPath="yes" Source="$(var.shared_data_dir)\backup-no-server.ico" />
+            </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F38" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3005}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA692" KeyPath="yes" Source="$(var.shared_data_dir)\backup-indexing.ico" />
+            </Component>
+			<Component Id="cmpA506A755F6439AB0DED04F16F9519F39" Guid="{239C66AB-7164-4BEF-BA3D-9037BCEA3006}" Win64="$(var.isx64)">
+                <File Id="fil52333B0481A4FDF2FF93D4E4B10DA693" KeyPath="yes" Source="$(var.shared_data_dir)\backup-no-recent.ico" />
             </Component>
             <Component Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" Guid="{A8C77B9A-482B-4282-939A-E454AA8B94F3}" Win64="$(var.isx64)">
                 <File Id="fil8F2E72C5A068C923F426772A12CB28F5" KeyPath="yes" Source="$(var.shared_data_dir)\curr_version.txt" />
@@ -189,6 +199,21 @@
 						<File Id="fil4CAB0F81E48E2917698958995EBB68B7" KeyPath="yes" Source="$(var.shared_data_dir)\lang\da\urbackup.mo" />
 					</Component>
 				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911533" Name="nl">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B0C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1578}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68B8" KeyPath="yes" Source="$(var.shared_data_dir)\lang\nl\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911534" Name="fa">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B1C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1579}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68B9" KeyPath="yes" Source="$(var.shared_data_dir)\lang\fa\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911535" Name="cs">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B2C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1580}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68BA" KeyPath="yes" Source="$(var.shared_data_dir)\lang\cs\urbackup.mo" />
+					</Component>
+				</Directory>
 			</Directory>
             <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
                 <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}" Win64="$(var.isx64)">
@@ -209,6 +234,9 @@
             <ComponentRef Id="cmpA3688A751E01CECC3FC213B9110D8650" />
             <ComponentRef Id="cmp743471C3E6B3C2A36D480B78348AB71A" />
             <ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F36" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F37" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F38" />
+			<ComponentRef Id="cmpA506A755F6439AB0DED04F16F9519F39" />
             <ComponentRef Id="cmp6F67E569C00875CB92A3B5C5C8CE8852" />
             <ComponentRef Id="cmpABF00809AEDF68FD55CB21FD6A79E6F1" />
             <ComponentRef Id="cmpA3C8DD197BD7132D070BA95A0D0737A9" />
@@ -230,6 +258,9 @@
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A7C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A8C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0A9C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B0C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B1C" />			
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B2C" />
         </ComponentGroup>
     </Fragment>
   
