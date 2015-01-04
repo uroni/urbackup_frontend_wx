@@ -82,7 +82,6 @@
 	<Property Id="ARPPRODUCTICON" Value="backup_ok_ico" />
 	<Property Id="ARPHELPLINK" Value="http://www.urbackup.org/" />
 	
-	<CustomAction Id="UninstallShellKeys" FileKey="UrBackupClient.exe" Execute="deferred" Return="asyncWait" ExeCommand="deleteshellkeys">REMOVE="ALL"</CustomAction>
 	
     <Feature Id='urbackup_client' Title='UrBackup Client' Level='1'>
       <ComponentRef Id='urbackup_client' />

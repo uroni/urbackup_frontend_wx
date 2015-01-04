@@ -4,12 +4,13 @@
 <                            ElevatedCloseMessage="no" RebootPrompt="no" Target="UrBackupClient.exe" />
 39d35
 < 					<File Id="UrBackupClient.exe"  DiskId='1' Name='UrBackupClient.exe' Source="$(var.datadir)\UrBackupClient.exe" />
-89,90d84
+89,91d84
 < 	<Property Id="WixShellExecTarget" Value="[#UrBackupClient.exe]" />
 < 	<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
-96d89
+< 	<CustomAction Id="UninstallShellKeys" FileKey="UrBackupClient.exe" Execute="deferred" Return="asyncWait" ExeCommand="deleteshellkeys">REMOVE="ALL"</CustomAction>
+97d89
 < 	  <ComponentRef Id='UrBackupClientAutostart' />
-194,204d186
+273,283d264
 < 	
 < 	<Fragment>
 < 	 <DirectoryRef Id="URBACKUPDIR">
@@ -21,7 +22,7 @@
 < 	  </Component>
 < 	  </DirectoryRef>
 < 	</Fragment>
-230,233d211
+309,312d289
 < 			<Publish Dialog="ExitDialog"
 < 					Control="Finish" 
 < 					Event="DoAction" 
