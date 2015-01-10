@@ -345,6 +345,26 @@ void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
 	}
 }
 
+void read_tokens(wxString token_path, std::string& tokens)
+{
+
+	wxArrayString token_files; 
+	wxDir::GetAllFiles(token_path, &token_files, wxEmptyString, wxDIR_FILES);
+
+	for(size_t i=0;i<token_files.size();++i)
+	{
+		std::string nt = getFile(token_files[i].ToStdString());
+		if(!nt.empty())
+		{
+			if(!tokens.empty())
+			{
+				tokens+=";";
+			}
+			tokens+=nt;
+		}
+	}
+}
+
 void TrayIcon::accessBackups( wxString path )
 {
 	wxString orig_path = path;
@@ -391,29 +411,19 @@ void TrayIcon::accessBackups( wxString path )
 		}
 	}
 
-	std::string s_path = g_res_path+"/tokens/";
 	wxString wx_path = res_path + wxT("/tokens");
 #ifdef _DEBUG
-	s_path = "tokens/";
 	wx_path = wxT("tokens");
 #endif
 
-	wxArrayString token_files; 
-	wxDir::GetAllFiles(wx_path, &token_files, wxEmptyString, wxDIR_FILES);
-
 	std::string tokens;
-	for(size_t i=0;i<token_files.size();++i)
-	{
-		std::string nt = getFile(token_files[i].ToStdString());
-		if(!nt.empty())
-		{
-			if(!tokens.empty())
-			{
-				tokens+=";";
-			}
-			tokens+=nt;
-		}
-	}
+	
+	read_tokens(wx_path, tokens);
+	
+#ifndef _WIN32
+	read_tokens(wxT("/var/urbackup/tokens"), tokens);
+	read_tokens(wxT("/usr/local/var/urbackup/tokens"), tokens);
+#endif
 
 	if(tokens.empty())
 	{
