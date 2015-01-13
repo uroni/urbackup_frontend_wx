@@ -210,6 +210,8 @@ bool Status::updateStatus(int errcnt)
 
 	m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
 
+	Layout();
+
 	GetSizer()->Fit(this);
 
 	return true;
