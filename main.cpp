@@ -301,7 +301,7 @@ bool MyApp::OnInit()
 		timer=new MyTimer;
 
 		timer->Notify();
-		timer->Start(60000);
+		timer->Start(10);
 	}
 	else if(cmd==wxT("settings"))
 	{
@@ -345,6 +345,11 @@ bool MyApp::OnInit()
 	else if(cmd==wxT("deleteshellkeys"))
 	{
 		deleteShellKeys();
+		wxExit();
+	}
+	else if(cmd==wxT("restoreok"))
+	{
+		Connector::restoreOk(wxString(argv[2])=="true");
 		wxExit();
 	}
 	else
@@ -441,10 +446,7 @@ void MyTimer::Notify()
 	{
 		return;
 	}
-	if(Connector::isBusy())
-	{
-		return;
-	}
+
 	working=true;
 
 	wxStandardPathsBase& sp=wxStandardPaths::Get();
@@ -501,7 +503,7 @@ void MyTimer::Notify()
 	writestring(nconvert((int)passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
 
 	wxString status_text;
-	SStatus status=Connector::getStatus(20);
+	SStatus status=Connector::getStatus(60000);
 
 	if(Connector::hasError() )
 	{
@@ -595,14 +597,7 @@ void MyTimer::Notify()
 		}
 		if(timer!=NULL)
 		{
-			if(icon_type==ETrayIcon_PROGRESS)
-			{
-				timer->Start(10000);
-			}
-			else
-			{
-				timer->Start(60000);
-			}
+			timer->Start(10);
 		}
 	}
 
@@ -615,6 +610,20 @@ void MyTimer::Notify()
 			tray->BalloonActionNewServer(status.new_server);
 			tray->ShowBalloon(_("UrBackup: New server"), _("A new backup server has been found. Click here to use it"), 180000, wxICON_INFORMATION);
 #endif
+	}
+
+	if(status.ask_restore_ok)
+	{
+		wxMessageDialog* dialog = new wxMessageDialog(NULL,
+			_("Are you sure you want to restore the selected files? Existing files will be overwritten. Files created since the backup will be deleted."), wxT("UrBackup"), wxOK | wxCANCEL);
+		if(dialog->ShowModal() == wxOK)
+		{
+			runCommand("restoreok", "true");
+		}
+		else
+		{
+			runCommand("restoreok", "false");
+		}
 	}
 
 	working=false;

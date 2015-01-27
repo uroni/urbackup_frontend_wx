@@ -70,64 +70,61 @@ TrayIcon::TrayIcon(void)
 #endif
 }
 
-namespace
-{
 #ifdef _WIN32
-	void runCommand(std::string cmd, std::string arg1=std::string())
+void runCommand(std::string cmd, std::string arg1)
+{
+	wchar_t module_path[MAX_PATH];
+	DWORD rc = GetModuleFileNameW(NULL, module_path, MAX_PATH);
+	if(rc!=0)
 	{
-		wchar_t module_path[MAX_PATH];
-		DWORD rc = GetModuleFileNameW(NULL, module_path, MAX_PATH);
-		if(rc!=0)
+		if(!Connector::getPasswordData(true, false).empty())
 		{
-			if(!Connector::getPasswordData(true).empty())
-			{
-				STARTUPINFO sStartInfo;
-				ZeroMemory( &sStartInfo, sizeof(STARTUPINFO) );
-				sStartInfo.cb = sizeof(STARTUPINFO);
-				sStartInfo.wShowWindow = SW_SHOWDEFAULT;
-				sStartInfo.dwFlags = STARTF_USESHOWWINDOW;
+			STARTUPINFO sStartInfo;
+			ZeroMemory( &sStartInfo, sizeof(STARTUPINFO) );
+			sStartInfo.cb = sizeof(STARTUPINFO);
+			sStartInfo.wShowWindow = SW_SHOWDEFAULT;
+			sStartInfo.dwFlags = STARTF_USESHOWWINDOW;
 
-				PROCESS_INFORMATION sProcessInfo;
-				ZeroMemory( &sProcessInfo, sizeof(PROCESS_INFORMATION) );
+			PROCESS_INFORMATION sProcessInfo;
+			ZeroMemory( &sProcessInfo, sizeof(PROCESS_INFORMATION) );
 
-				BOOL ok = CreateProcessW( module_path, const_cast<LPWSTR>(std::wstring(std::wstring(L"\"")+std::wstring(module_path)+"\" "+widen(cmd+(arg1.empty()?std::string():(" "+arg1)))).data()),
-					NULL, NULL, true,
-					NORMAL_PRIORITY_CLASS, NULL, NULL , &sStartInfo, &sProcessInfo );
+			BOOL ok = CreateProcessW( module_path, const_cast<LPWSTR>(std::wstring(std::wstring(L"\"")+std::wstring(module_path)+"\" "+widen(cmd+(arg1.empty()?std::string():(" "+arg1)))).data()),
+				NULL, NULL, true,
+				NORMAL_PRIORITY_CLASS, NULL, NULL , &sStartInfo, &sProcessInfo );
 
-				if ( !ok ) {
-					ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
-				}
-				else
-				{
-					CloseHandle(sProcessInfo.hProcess);
-					CloseHandle(sProcessInfo.hThread);
-				}			
+			if ( !ok ) {
+				ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
 			}
 			else
 			{
-				ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
-			}	
+				CloseHandle(sProcessInfo.hProcess);
+				CloseHandle(sProcessInfo.hThread);
+			}			
 		}
+		else
+		{
+			ShellExecuteW(NULL, L"runas", module_path, widen((cmd + (arg1.empty()?std::string():(" "+arg1)))).c_str(), NULL, SW_SHOWNORMAL);
+		}	
 	}
+}
 #else
 
-	std::string sudo_app;
-	void find_sudo_app()
-	{
-		if(system("type gksudo")==0) sudo_app="gksudo";
-		else if(system("type kdesudo")==0) sudo_app="kdesudo";
-		else if(system("type gksu")==0) sudo_app="gksu";
-		else if(system("type kdesu")==0) sudo_app="kdesu";
-		else sudo_app="sudo";
-	}
+std::string sudo_app;
+void find_sudo_app()
+{
+	if(system("type gksudo")==0) sudo_app="gksudo";
+	else if(system("type kdesudo")==0) sudo_app="kdesudo";
+	else if(system("type gksu")==0) sudo_app="gksu";
+	else if(system("type kdesu")==0) sudo_app="kdesu";
+	else sudo_app="sudo";
+}
 
-	void runCommand(std::string cmd, std::string arg1=std::string())
-	{
-		wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
-	}
+void runCommand(std::string cmd, std::string arg1)
+{
+	wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+}
 #endif
 
-}
 
 
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
@@ -146,8 +143,6 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			if(rc==1)
 			{
 				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
-				if(timer!=NULL)
-					timer->Start(1000);
 			}
 			else if(rc==2)
 				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
@@ -171,8 +166,6 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			if(rc==1)
 			{
 				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
-				if(timer!=NULL)
-					timer->Start(1000);
 			}
 			else if(rc==2)
 				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);

@@ -43,11 +43,15 @@ std::wstring ConvertToUnicode(const std::string &str);
 
 
 
-std::string Connector::getPasswordData( bool change_command )
+std::string Connector::getPasswordData( bool change_command, bool set_busy)
 {
 	const std::string pw_fn = change_command ? "pw_change.txt" : "pw.txt";
 
-	busy=true;
+	if(set_busy)
+	{
+		busy = true;
+	}
+	
 	error=false;
 	std::string curr_pw;
 
@@ -91,9 +95,11 @@ std::string Connector::getPasswordData( bool change_command )
 }
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries)
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t timeoutms, bool set_busy)
 {
-	std::string curr_pw = getPasswordData(change_command);
+	wxLongLong starttime = wxGetLocalTimeMillis();
+
+	std::string curr_pw = getPasswordData(change_command, set_busy);
 
 	wxSocketClient client(wxSOCKET_BLOCK);
 	wxIPV4address addr;
@@ -101,9 +107,9 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	addr.Service(35623);
 	if(!client.Connect(addr,false))
 	{
-		for(size_t k=0;k<retries;++k)
+		while(wxGetLocalTimeMillis()-starttime<timeoutms)
 		{
-			if(client.WaitOnConnect(0,500))
+			if(client.WaitOnConnect(0, 100))
 			{
 				break;
 			}
@@ -134,9 +140,9 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	while(resp==NULL)
 	{
 		bool conn=false;
-		for(size_t k=0;k<retries;++k)
+		while(wxGetLocalTimeMillis()-starttime<timeoutms)
 		{
-			if(client.WaitForRead(0,500))
+			if(client.WaitForRead(0, 100))
 			{
 				conn=true;
 				break;
@@ -258,9 +264,9 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
-SStatus Connector::getStatus(size_t retries)
+SStatus Connector::getStatus(size_t timeoutms)
 {
-	std::string d=getResponse("STATUS", "", false, retries);
+	std::string d=getResponse("STATUS", "", false, timeoutms, false);
 
 	std::vector<std::string> toks;
 	Tokenize(d, toks, "#");
@@ -299,6 +305,11 @@ SStatus Connector::getStatus(size_t retries)
 		if(it_has_server!=params.end())
 		{
 			ret.has_server= ( it_has_server->second==L"true" );
+		}
+		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
+		if(it_restore_ask!=params.end())
+		{
+			ret.ask_restore_ok = ( it_restore_ask->second==L"true");
 		}
 	}
 
@@ -486,4 +497,9 @@ int Connector::getCapabilities()
 	{
 		return 0;
 	}
+}
+
+bool Connector::restoreOk( bool ok )
+{
+	return getResponse("RESTORE OK", "ok="+nconvert(ok), true) == "ok";
 }

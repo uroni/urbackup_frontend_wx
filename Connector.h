@@ -44,6 +44,7 @@ struct SStatus
 	int capa;
 	std::string new_server;
 	bool has_server;
+	bool ask_restore_ok;
 };
 
 struct SLogEntry
@@ -103,7 +104,7 @@ class Connector
 public:
 	static std::vector<SBackupDir> getSharedPaths(void);
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
-	static SStatus getStatus(size_t retries);
+	static SStatus getStatus(size_t timeoutms);
 	static unsigned int getIncrUpdateIntervall(void);
 	static int startBackup(bool full);
 	static int startImage(bool full);
@@ -114,17 +115,18 @@ public:
 	static bool addNewServer(const std::string &ident);
 	static SStatusDetails getStatusDetails();
 	static int getCapabilities();
+	static bool restoreOk(bool ok);
 
 	static bool hasError(void);
 	static bool isBusy(void);
 
-	static std::string getPasswordData(bool change_command);
+	static std::string getPasswordData(bool change_command, bool set_busy);
 
 	static std::string getAccessParameters(const std::string& tokens);
 
 private:
 	static std::string escapeParam(const std::string &name);
-	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries=4);
+	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t timeoutms=5000, bool set_busy=true);
 	static std::string pw;
 	static std::string pw_change;
 	static bool error;

@@ -20,6 +20,8 @@
 #include <wx/taskbar.h>
 #include <wx/menu.h>
 
+void runCommand(std::string cmd, std::string arg1=std::string());
+
 class TrayIcon : public wxTaskBarIcon
 {
 public:
