@@ -28,7 +28,7 @@
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
-
+#include <wx/log.h>
 
 #include <wx/apptrait.h>
 /*#if wxUSE_STACKWALKER && defined( __WXDEBUG__ )
@@ -138,6 +138,7 @@ void deleteShellKeys()
 
 bool MyApp::OnInit()
 {
+	wxLog::SetLogLevel(0);
 #ifdef _WIN32
 	wchar_t buf[MAX_PATH];
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
