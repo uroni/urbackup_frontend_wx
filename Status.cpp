@@ -99,11 +99,14 @@ Status::Status(wxWindow* parent)
 		SetFocus();
 		Raise();
 		Show(true);
+		RequestUserAttention();
 
 		Start(1000);
 	}
 
+#ifndef __APPLE__
 	SetDoubleBuffered(true);
+#endif
 
 	error_count=reset_error_count;
 }

@@ -9,7 +9,10 @@ AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CXX
+AC_PROG_INSTALL
+AC_PROG_MKDIR_P
 
+AC_PROG_OBJCXX
 # Checks for libraries.
 
 # Checks for header files.

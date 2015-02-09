@@ -112,23 +112,37 @@ void runCommand(std::string cmd, std::string arg1)
 std::string sudo_app;
 void find_sudo_app()
 {
+#ifndef __APPLE__
 	if(system("type gksudo")==0) sudo_app="gksudo";
 	else if(system("type kdesudo")==0) sudo_app="kdesudo";
 	else if(system("type gksu")==0) sudo_app="gksu";
 	else if(system("type kdesu")==0) sudo_app="kdesu";
 	else sudo_app="sudo";
+#else
+	sudo_app="urbackup_cocoasudo";
+#endif
 }
 
 void runCommand(std::string cmd, std::string arg1)
 {
+#ifndef __APPLE__
 	wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+#else
+	wxExecute("/Applications/UrBackup\\ Client.app/Contents/MacOS/urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+#endif
 }
 #endif
 
 
+#ifdef __APPLE__
+extern "C" void bring_to_foreground();
+#endif
 
 void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 {
+#ifdef __WXMAC__
+    bring_to_foreground();
+#endif 
 	switch(evt.GetId())
 	{
 	case ID_TI_ADD_PATH:
@@ -213,7 +227,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				Connector::setPause(true);
 			}
 			wxExit();
-		}
+		}break;
 	case ID_TI_ACCESS:
 		{
 			accessBackups(std::wstring());
@@ -305,10 +319,12 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		}
 	}
 	mnu->Append(ID_TI_STATUS, _("Status"));
+#ifndef __APPLE__
 	if(!timer->hasCapability(DONT_ALLOW_EXIT_TRAY_ICON))
 	{
 		mnu->Append(ID_TI_EXIT, _("Exit"));
 	}
+#endif
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);
 	return mnu;
 }
@@ -413,9 +429,13 @@ void TrayIcon::accessBackups( wxString path )
 	
 	read_tokens(wx_path, tokens);
 	
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__APPLE__)
 	read_tokens(wxT("/var/urbackup/tokens"), tokens);
 	read_tokens(wxT("/usr/local/var/urbackup/tokens"), tokens);
+#endif
+
+#ifdef __APPLE__
+	read_tokens(wxT("/usr/var/urbackup/tokens"), tokens);
 #endif
 
 	if(tokens.empty())

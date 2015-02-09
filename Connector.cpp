@@ -67,6 +67,7 @@ std::string Connector::getPasswordData( bool change_command, bool set_busy)
 			curr_pw=getFile(pw_fn);
 		else
 #endif
+			#ifndef __APPLE__
 			if(FileExists(g_res_path+pw_fn))
 				curr_pw=getFile(g_res_path+pw_fn);
 			else if(FileExists(pw_fn))
@@ -77,6 +78,12 @@ std::string Connector::getPasswordData( bool change_command, bool set_busy)
 				curr_pw=getFile("/var/urbackup/"+pw_fn);
 			else if(FileExists("/var/lib/urbackup/"+pw_fn))
 				curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
+			else if(FileExists("/usr/var/urbackup/"+pw_fn))
+				curr_pw=getFile("/usr/var/urbackup/"+pw_fn);
+			#else
+			if(FileExists("/usr/var/urbackup/"+pw_fn))
+				curr_pw=getFile("/usr/var/urbackup/"+pw_fn);
+			#endif
 
 			if(curr_pw.empty())
 			{
@@ -113,7 +120,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			{
 				break;
 			}
-			wxTheApp->Yield(false);
+			wxTheApp->Yield(true);
 		}
 	}
 	if(!client.IsConnected())
@@ -147,7 +154,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 				conn=true;
 				break;
 			}
-			wxTheApp->SafeYield(NULL, true);
+			wxTheApp->Yield(true);
 			if(client.Error())
 				break;
 		}
@@ -274,6 +281,7 @@ SStatus Connector::getStatus(size_t timeoutms)
 	SStatus ret;
 	ret.pause=false;
 	ret.capa=0;
+	ret.ask_restore_ok=false;
 	if(toks.size()>0)
 		ret.lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
 	if(toks.size()>1)

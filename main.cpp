@@ -64,6 +64,10 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 #undef wxUSE_TASKBARICON_BALLOONS
 #endif
 
+#ifdef __APPLE__
+extern "C" void bring_to_foreground();
+#endif
+
 class TheFrame : public wxFrame {
 public:
     TheFrame(void) : wxFrame(NULL, -1, wxT("UrBackupGUI")) { }
@@ -88,7 +92,7 @@ namespace
 std::string g_lang="en";
 wxString res_path;
 std::string g_res_path;
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__APPLE__)
 wxString ico_ext=wxT("ico");
 wxBitmapType ico_type=wxBITMAP_TYPE_ICO;
 #else
@@ -287,6 +291,13 @@ bool MyApp::OnInit()
 		writestring(_("&Access backups").ToUTF8().data(), "access_backups_shell_mui.txt");
 	}
 
+	#ifdef __WXMAC__
+	if(!cmd.empty())
+	{
+    	bring_to_foreground();
+	}
+	#endif 
+
 	if(cmd.empty())
 	{
 		SetTopWindow(new TheFrame);
@@ -309,6 +320,7 @@ bool MyApp::OnInit()
 		SetTopWindow(s);
 		s->ShowModal();
 		s->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("paths"))
 	{
@@ -316,6 +328,7 @@ bool MyApp::OnInit()
 		SetTopWindow(cp);
 		cp->ShowModal();
 		cp->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("logs"))
 	{
@@ -323,6 +336,7 @@ bool MyApp::OnInit()
 		SetTopWindow(l);
 		l->ShowModal();
 		l->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("newserver"))
 	{
