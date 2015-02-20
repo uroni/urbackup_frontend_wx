@@ -52,15 +52,19 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SolutionDependencies.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SolutionDependencies.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SolutionDependencies.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SolutionDependencies.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -93,8 +97,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>D:\Developement\libs\wxWidgets\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);$(WxWidgetsLibDir)\mswu$(WxWidgetsCfgSuffix);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -104,8 +108,8 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u_net.lib;wxzlib.lib;wxregexu.lib;wxpng.lib;wxbase29u.lib;wxmswuniv29u_core.lib;wxmswuniv29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>wx64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix).lib;wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_net.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_adv.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_core.lib;wxpng$(WxWidgetsCfgSuffix).lib;wxzlib$(WxWidgetsCfgSuffix).lib;comctl32.lib;rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -115,7 +119,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);$(WxWidgetsLibDir)\mswu$(WxWidgetsCfgSuffix);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -125,8 +129,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>deps\win\wx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix).lib;wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_net.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_adv.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_core.lib;wxpng$(WxWidgetsCfgSuffix).lib;wxzlib$(WxWidgetsCfgSuffix).lib;comctl32.lib;rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -140,7 +144,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>D:\Developement\libs\wxWidgets\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);$(WxWidgetsLibDir)\mswu$(WxWidgetsCfgSuffix);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -151,8 +155,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxpngd.lib;wxbase29ud.lib;wxexpatd.lib;comctl32.lib;Rpcrt4.lib;wxbase29ud_net.lib;ws2_32.lib;wxzlibd.lib;wxmsw29ud_core.lib;wxmsw29ud_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Developement\libs\wxWidgets\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix).lib;wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_net.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_adv.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_core.lib;wxpng$(WxWidgetsCfgSuffix).lib;wxzlib$(WxWidgetsCfgSuffix).lib;comctl32.lib;rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
@@ -165,7 +169,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);$(WxWidgetsLibDir)\mswu$(WxWidgetsCfgSuffix);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -175,8 +179,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>deps\win\wx64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix).lib;wxbase$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_net.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_adv.lib;wxmsw$(WxWidgetsVer)u$(WxWidgetsCfgSuffix)_core.lib;wxpng$(WxWidgetsCfgSuffix).lib;wxzlib$(WxWidgetsCfgSuffix).lib;comctl32.lib;rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
