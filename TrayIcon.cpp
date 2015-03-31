@@ -47,6 +47,7 @@
 #define ID_TI_INFO 110
 #define ID_TI_STATUS 112
 #define ID_TI_ACCESS 113
+#define ID_TI_UNINSTALL 114
 
 extern MyTimer *timer;
 extern bool backup_is_running;
@@ -232,6 +233,18 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		{
 			accessBackups(std::wstring());
 		}break;
+	case ID_TI_UNINSTALL:
+		{
+			int answer = wxMessageBox(_("Do you really want to remove the UrBackup client from this system?"),
+							 _("Confirm uninstall"),
+            					wxYES_NO | wxCANCEL);
+
+            if (answer == wxYES)
+            {
+				wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
+			}
+			
+		}break;
 	}
 }
 
@@ -324,6 +337,9 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	{
 		mnu->Append(ID_TI_EXIT, _("Exit"));
 	}
+#else
+	mnu->AppendSeparator();
+	mnu->Append(ID_TI_UNINSTALL, _("Uninstall"));
 #endif
 	mnu->Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&TrayIcon::OnPopupClick, NULL, this);
 	return mnu;
