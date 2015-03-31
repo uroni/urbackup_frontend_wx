@@ -128,7 +128,7 @@ void runCommand(std::string cmd, std::string arg1)
 #ifndef __APPLE__
 	wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #else
-	wxExecute("/Applications/UrBackup\\ Client.app/Contents/MacOS/urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+	wxExecute(sudo_app+" \"/Applications/UrBackup Client.app/Contents/MacOS/urbackup_client_gui\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
 #endif
