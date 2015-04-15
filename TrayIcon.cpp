@@ -244,6 +244,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		{
 			accessBackups(std::wstring());
 		}break;
+#ifdef __APPLE__
 	case ID_TI_UNINSTALL:
 		{
 			int answer = wxMessageBox(_("Do you really want to remove the UrBackup client from this system?"),
@@ -252,12 +253,14 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 
             if (answer == wxYES)
             {
-			if(sudo_app.empty())
-			{
-				find_sudo_app();
+				if(sudo_app.empty())
+				{
+					find_sudo_app();
+				}
+				wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
 			}
-			wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
 	    }
+#endif
 	}
 }
 
