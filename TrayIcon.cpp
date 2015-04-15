@@ -126,10 +126,21 @@ void find_sudo_app()
 
 void runCommand(std::string cmd, std::string arg1)
 {
+		std::string sudo_prefix = "";
+
+		if(Connector::getPasswordData(true).empty())
+		{
+			if(sudo_app.empty())
+			{
+				find_sudo_app();
+			}
+			sudo_prefix = sudo_app + " ";
+		}
+
 #ifndef __APPLE__
-	wxExecute("urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+		wxExecute(sudo_prefix+"urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC
 #else
-	wxExecute(sudo_app+" \"/Applications/UrBackup Client.app/Contents/MacOS/urbackup_client_gui\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+		wxExecute(sudo_prefix+"/Applications/UrBackup\\ Client.app/Contents/MacOS/urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
 #endif
@@ -241,10 +252,12 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 
             if (answer == wxYES)
             {
-				wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
+			if(sudo_app.empty())
+			{
+				find_sudo_app();
 			}
-			
-		}break;
+			wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
+	    }
 	}
 }
 
