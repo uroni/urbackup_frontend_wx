@@ -128,7 +128,7 @@ void runCommand(std::string cmd, std::string arg1)
 {
 		std::string sudo_prefix = "";
 
-		if(Connector::getPasswordData(true).empty())
+		if(Connector::getPasswordData(true, false).empty())
 		{
 			if(sudo_app.empty())
 			{
