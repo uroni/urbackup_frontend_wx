@@ -377,6 +377,8 @@ bool MyApp::OnInit()
 		SetupWizard* sw = new SetupWizard(NULL);
 		SetTopWindow(sw);
 		sw->ShowPage(*(sw->m_pages.begin()));
+		sw->SetFocus();
+		sw->Raise();
 		sw->ShowModal();
 		sw->Destroy();
 		wxExit();
