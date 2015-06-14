@@ -599,6 +599,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache*");
 	pathsNotToBackup.push_back(L"C:\\Windows\\Temp\\*");
+	pathsNotToBackup.push_back(L":\\$Recycle.Bin\\*");
 
 	std::vector<std::wstring> backupPaths;
 
