@@ -404,7 +404,7 @@ namespace
 				}
 				else
 				{				
-					bool is_ntfs = true;
+					bool is_ntfs = false;
 					wchar_t fs_name[MAX_PATH+1];
 					if(GetVolumeInformation(new_volume.c_str(), NULL, 0, NULL, NULL, NULL,fs_name,MAX_PATH+1))
 					{
