@@ -43,6 +43,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include "SetupWizard.h"
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -369,6 +370,20 @@ bool MyApp::OnInit()
 			return false;
 		}
 		Connector::addNewServer(wxString(argv[2]).ToStdString());
+		wxExit();
+	}
+	else if(cmd==wxT("setupWizard"))
+	{
+		SetupWizard* sw = new SetupWizard(NULL);
+		SetTopWindow(sw);
+		sw->ShowPage(*(sw->m_pages.begin()));
+		sw->ShowModal();
+		sw->Destroy();
+		wxExit();
+	}
+	else if(cmd==wxT("setupDefault"))
+	{
+		SetupWizard::doDefConfig();
 		wxExit();
 	}
 	else if(cmd==wxT("access"))

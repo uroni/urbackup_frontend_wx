@@ -69,6 +69,12 @@
     <ClCompile Include="TranslationHelper.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="SetupWizard.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\GUISetupWizard.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigPath.h">
@@ -121,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="TranslationHelper.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SetupWizard.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\GUISetupWizard.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

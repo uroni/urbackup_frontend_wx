@@ -184,11 +184,13 @@
     <ClCompile Include="Connector.cpp" />
     <ClCompile Include="escape.cpp" />
     <ClCompile Include="FileSettingsReader.cpp" />
+    <ClCompile Include="gui\GUISetupWizard.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Logs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="SetupWizard.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="stringtools.cpp" />
     <ClCompile Include="TaskBarBaloon.cpp" />
@@ -203,11 +205,13 @@
     <ClInclude Include="Connector.h" />
     <ClInclude Include="escape.h" />
     <ClInclude Include="FileSettingsReader.h" />
+    <ClInclude Include="gui\GUISetupWizard.h" />
     <ClInclude Include="Info.h" />
     <ClInclude Include="Logs.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="SetupWizard.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="stringtools.h" />
     <ClInclude Include="TaskBarBaloon.h" />
