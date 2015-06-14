@@ -7,6 +7,8 @@
 #include <LM.h>
 #include <Sddl.h>
 #include <UserEnv.h>
+#include <Shlobj.h>
+
 #pragma comment(lib, "netapi32.lib")
 #pragma comment(lib, "Userenv.lib")
 
@@ -606,6 +608,28 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	{
 		pathsNotToBackup.push_back(L"C:\\Windows\\*");
 
+		TCHAR pf[MAX_PATH];
+		if(SHGetFolderPathW(
+			0,
+			CSIDL_PROGRAM_FILES, 
+			NULL, 
+			SHGFP_TYPE_CURRENT,
+			pf)==S_OK)
+		{
+			pathsNotToBackup.push_back(std::wstring(pf)+L"\\*");
+		}
+
+		memset(pf, 0, MAX_PATH);
+
+		if(SHGetFolderPathW(
+			0,
+			CSIDL_PROGRAM_FILESX86, 
+			NULL, 
+			SHGFP_TYPE_CURRENT,
+			pf)==S_OK)
+		{
+			pathsNotToBackup.push_back(std::wstring(pf)+L"\\*");
+		}
 		
 		backupPaths = volumesToPaths(get_all_volumes_list(false, cache));
 	}
