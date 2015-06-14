@@ -21,6 +21,9 @@ extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
+
+SVolumesCache* SetupWizard::cache = NULL;
+
 namespace
 {
 	std::vector<std::wstring> get_users()
@@ -222,6 +225,8 @@ namespace
 		return paths;
 	}
 
+	
+
 	std::wstring get_volume_path(PWCHAR VolumeName)
 	{		
 		PWCHAR names = NULL;		
@@ -277,9 +282,16 @@ namespace
 		return ret;
 	}
 
-	bool is_usb_disk(std::string path)
+	bool is_usb_disk(std::wstring path, SVolumesCache* cache)
 	{
-		HANDLE hVolume = CreateFileA(path.c_str(), 0, FILE_SHARE_READ | FILE_SHARE_WRITE,
+		std::map<std::wstring, bool>::iterator it = cache->is_usb_info.find(path);
+
+		if(it!=cache->is_usb_info.end())
+		{
+			return it->second;
+		}
+
+		HANDLE hVolume = CreateFileW(path.c_str(), 0, FILE_SHARE_READ | FILE_SHARE_WRITE,
 			NULL, OPEN_EXISTING, 0, NULL);
 
 		if ( hVolume != INVALID_HANDLE_VALUE )
@@ -307,6 +319,8 @@ namespace
 			{
 				bool is_usb = dev_desc->BusType == BusTypeUsb;
 
+				cache->is_usb_info[path] = is_usb;
+
 				return is_usb;
 			}
 		}
@@ -314,7 +328,7 @@ namespace
 		return false;
 	}
 
-	std::string get_all_volumes_list(bool filter_usb)
+	std::string get_all_volumes_list(bool filter_usb, SVolumesCache*& cache)
 	{
 		WCHAR vol_name[MAX_PATH] = {};
 		HANDLE hFind = FindFirstVolumeW(vol_name, ARRAYSIZE(vol_name));
@@ -322,6 +336,11 @@ namespace
 		if (hFind == INVALID_HANDLE_VALUE)
 		{
 			return "";
+		}
+
+		if(cache==NULL)
+		{
+			cache=new SVolumesCache;
 		}
 
 		std::string ret;
@@ -355,19 +374,58 @@ namespace
 
 			if(new_volume.size()==3 && new_volume[1]==':' && new_volume[2]=='\\')
 			{
-				std::string dev_fn = std::string("\\\\.\\")+std::string(1, new_volume[0])+":";
+				std::map<std::wstring, bool>::iterator it_ntfs_info = cache->is_ntfs_info.find(new_volume);
 
-				if(!filter_usb || !is_usb_disk(dev_fn))
+				std::wstring dev_fn = std::wstring(L"\\\\.\\")+std::wstring(1, new_volume[0])+L":";
+
+				if(it_ntfs_info!=cache->is_ntfs_info.end())
 				{
-					if(!ret.empty())
+					if(it_ntfs_info->second)
 					{
-						ret+=";";
+						if(!filter_usb || !is_usb_disk(dev_fn, cache))
+						{
+							if(!ret.empty())
+							{
+								ret+=";";
+							}
+							ret+=new_volume[0];
+						}
+						else if(filter_usb)
+						{
+							std::cerr << "Device "+new_volume+" is connected via USB" << std::endl;
+						}
 					}
-					ret+=new_volume[0];
+					else
+					{
+						std::cerr << "Device "+new_volume+" isn't NTFS formatted" << std::endl;
+					}
 				}
-				else if(filter_usb)
-				{
-					std::cout << "Device "+new_volume+" is connected via USB" << std::endl;
+				else
+				{				
+					bool is_ntfs = true;
+					wchar_t fs_name[MAX_PATH+1];
+					if(GetVolumeInformation(new_volume.c_str(), NULL, 0, NULL, NULL, NULL,fs_name,MAX_PATH+1))
+					{
+						is_ntfs = strlower(std::wstring(fs_name))=="ntfs";
+					}
+
+					if(is_ntfs)
+					{
+						if(!filter_usb || !is_usb_disk(dev_fn, cache))
+						{
+							if(!ret.empty())
+							{
+								ret+=";";
+							}
+							ret+=new_volume[0];
+						}
+						else if(!filter_usb)
+						{
+							std::cerr << "Device "+new_volume+" is connected via USB" << std::endl;
+						}
+					}
+
+					cache->is_ntfs_info[new_volume] = is_ntfs;
 				}
 
 			}
@@ -548,7 +606,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	{
 		pathsNotToBackup.push_back(L"C:\\Windows\\*");
 
-		backupPaths = volumesToPaths(get_all_volumes_list(false));
+		
+		backupPaths = volumesToPaths(get_all_volumes_list(false, cache));
 	}
 	else if(fileBackupChoice==EFileBackupChoice_UserFiles)
 	{
@@ -568,7 +627,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	}
 	else if(imageBackupChoice==EImageBackupChoice_AllNonUsb)
 	{
-		backup_volumes = widen(get_all_volumes_list(true));
+		backup_volumes = widen(get_all_volumes_list(true, cache));
 	}
 	else
 	{
@@ -792,7 +851,7 @@ void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupC
 		fileBackupChoice = EFileBackupChoice_Manual;
 	}
 
-	volume_choice = widen(get_all_volumes_list(false));
+	volume_choice = widen(get_all_volumes_list(false, cache));
 
 	if(lastImageBackupChoice==L"AllNonUsb")
 	{

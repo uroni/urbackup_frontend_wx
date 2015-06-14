@@ -1,4 +1,12 @@
 #include "GUI/GUISetupWizard.h"
+#include <map>
+#include <string>
+
+struct SVolumesCache
+{
+	std::map<std::wstring, bool> is_ntfs_info;
+	std::map<std::wstring, bool> is_usb_info;
+};
 
 class SetupWizard : public GUISetupWizard
 {
@@ -33,4 +41,6 @@ public:
 
 	virtual void manualVolumeConfig( wxCommandEvent& event );
 
+private:
+	static SVolumesCache* cache;
 };
