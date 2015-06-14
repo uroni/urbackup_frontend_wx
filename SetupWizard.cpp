@@ -402,6 +402,41 @@ namespace
 
 		return ret;
 	}
+
+
+	void rewrite_settings(CFileSettingsReader &setupSettings, std::map<std::wstring, std::wstring> &new_setup_settings, std::string output_fn )
+	{
+		std::wstring data;
+		std::vector<std::wstring> keys = setupSettings.getKeys();
+		for(size_t i=0;i<keys.size();++i)
+		{
+			if(!data.empty()) data+=L"\n";
+			std::wstring val;
+			std::map<std::wstring, std::wstring>::iterator it = new_setup_settings.find(keys[i]);
+			if(it==new_setup_settings.end())
+			{
+				if(setupSettings.getValue(keys[i], &val))
+				{
+					data+=keys[i] + L"=" + val;
+				}
+			}
+			else
+			{
+				data+=keys[i] + L"=" + it->second;
+				new_setup_settings.erase(it);
+			}			
+		}		
+
+		for(std::map<std::wstring, std::wstring>::iterator it=new_setup_settings.begin();
+			it!=new_setup_settings.end();++it)
+		{
+			if(!data.empty()) data+=L"\n";
+			data+=it->first+ L"=" + it->second;
+		}
+
+		writestring(ConvertToUTF8(data), output_fn);
+	}
+
 }
 
 
@@ -552,8 +587,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		bool has_image_letters = true;
 		if(!backupSettings.getValue(image_key, &curr_images))
 		{
-			image_key+=L"_def";
-			has_image_letters = backupSettings.getValue(image_key, &curr_images);
+			has_image_letters = backupSettings.getValue(image_key+L"_def", &curr_images);
+			if(has_image_letters) image_key+=L"_def";
 		}
 
 		std::wstring setup_image;
@@ -582,8 +617,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		bool has_default_dirs = true;
 		if(!backupSettings.getValue(backup_key, &curr_backups))
 		{
-			backup_key+=L"_def";
-			has_default_dirs = backupSettings.getValue(backup_key, &curr_backups);
+			has_default_dirs = backupSettings.getValue(backup_key+L"_def", &curr_backups);
+			if(has_default_dirs) backup_key+=L"_def";
 		}
 
 
@@ -611,8 +646,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		bool has_exclude_files = true;
 		if(!backupSettings.getValue(exclude_key, &curr_excludes))
 		{
-			exclude_key+=L"_def";
-			has_exclude_files = backupSettings.getValue(exclude_key, &curr_excludes);
+			has_exclude_files = backupSettings.getValue(exclude_key+L"_def", &curr_excludes);
+			if(has_exclude_files) exclude_key+=L"_def";
 		}	
 
 		std::wstring setup_exclude;
@@ -639,8 +674,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		bool has_include_files = true;
 		if(!backupSettings.getValue(include_key, &curr_includes))
 		{
-			include_key+=L"_def";
-			has_include_files = backupSettings.getValue(include_key, &curr_includes);
+			has_include_files = backupSettings.getValue(include_key+L"_def", &curr_includes);
+			if(has_include_files) include_key+=L"_def";
 		}
 
 		std::wstring setup_include;
@@ -682,20 +717,10 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 			data+=it->first+ L"=" + it->second;
 		}
 
-		int tries=3;
-		while(tries>=0)
+		if(!Connector::updateSettings(ConvertToUTF8(data)))
 		{
-			if(!Connector::updateSettings(ConvertToUTF8(data)))
-			{
-				std::cerr << "Error saving settings" << std::endl;
-			}
-			else
-			{
-				break;
-			}
-			--tries;
-		}
-		
+			std::cerr << "Error saving settings" << std::endl;
+		}		
 	}
 
 	switch(fileBackupChoice)
@@ -722,35 +747,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 
 	if(!new_setup_settings.empty())
 	{
-		std::wstring data;
-		std::vector<std::wstring> keys = setupSettings.getKeys();
-		for(size_t i=0;i<keys.size();++i)
-		{
-			if(!data.empty()) data+=L"\n";
-			std::wstring val;
-			std::map<std::wstring, std::wstring>::iterator it = new_setup_settings.find(keys[i]);
-			if(it==new_setup_settings.end())
-			{
-				if(setupSettings.getValue(keys[i], &val))
-				{
-					data+=keys[i] + L"=" + val;
-				}
-			}
-			else
-			{
-				data+=keys[i] + L"=" + it->second;
-				new_setup_settings.erase(it);
-			}			
-		}		
-
-		for(std::map<std::wstring, std::wstring>::iterator it=new_setup_settings.begin();
-			it!=new_setup_settings.end();++it)
-		{
-			if(!data.empty()) data+=L"\n";
-			data+=it->first+ L"=" + it->second;
-		}
-
-		writestring(ConvertToUTF8(data), "setup_wizard.cfg");
+		rewrite_settings(setupSettings, new_setup_settings, "setup_wizard.cfg");
 	}
 }
 
