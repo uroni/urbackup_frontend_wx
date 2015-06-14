@@ -594,12 +594,12 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 {
 	std::vector<std::wstring> pathsNotToBackup = fixupPaths(resolvePaths(getPathsNotToBackup()));
 
-	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Temp\\*");
-	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\*");
-	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*");
+	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Temp");
+	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files");
+	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache*");
-	pathsNotToBackup.push_back(L"C:\\Windows\\Temp\\*");
-	pathsNotToBackup.push_back(L":\\$Recycle.Bin\\*");
+	pathsNotToBackup.push_back(L"C:\\Windows\\Temp");
+	pathsNotToBackup.push_back(L":\\$Recycle.Bin");
 
 	std::vector<std::wstring> backupPaths;
 
@@ -607,7 +607,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 
 	if(fileBackupChoice==EFileBackupChoice_AllWithoutSystem)
 	{
-		pathsNotToBackup.push_back(L"C:\\Windows\\*");
+		pathsNotToBackup.push_back(L"C:\\Windows");
 
 		TCHAR pf[MAX_PATH];
 		if(SHGetFolderPathW(
@@ -617,7 +617,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 			SHGFP_TYPE_CURRENT,
 			pf)==S_OK)
 		{
-			pathsNotToBackup.push_back(std::wstring(pf)+L"\\*");
+			pathsNotToBackup.push_back(std::wstring(pf));
 		}
 
 		memset(pf, 0, MAX_PATH);
@@ -629,7 +629,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 			SHGFP_TYPE_CURRENT,
 			pf)==S_OK)
 		{
-			pathsNotToBackup.push_back(std::wstring(pf)+L"\\*");
+			pathsNotToBackup.push_back(std::wstring(pf));
 		}
 		
 		backupPaths = volumesToPaths(get_all_volumes_list(false, cache));
