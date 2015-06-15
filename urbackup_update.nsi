@@ -443,8 +443,9 @@ Function .onInstSuccess
 			Exec '"$INSTDIR\UrBackupClient.exe"'
 		${EndIf}
 		
+		SetOutPath "$INSTDIR"
 		${If} $EXEFILE != 'UrBackupUpdate.exe'
-			Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'
+			Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'	
 		${EndIf}
 		
 		${If} $EXEFILE == 'UrBackupUpdate.exe'
