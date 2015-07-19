@@ -1,12 +1,15 @@
-﻿Author:
+﻿Authors:
+Phil Lucido
 Martin Raiber
 
 Translators:
+Meelis Veemees (Estonian)
 Eric Bosdure, aureliensegeco, Charles Peltier (French)
 Artem Alabin, Valentin XliN Saikov (Russian)
 Luis-Miguel Munoz (Spanish)
 Zhengyu Ren (Simplified Chinese and Traditional Chinese)
 janda (Slovak)
+Mehmet Binici (Turkish)
 Martin Raiber, Ettore Atalan (German)
 paolobeldi, Samuele (Italian)
 Artur Corumba (Portuguese - Brazil)

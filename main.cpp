@@ -237,6 +237,14 @@ bool MyApp::OnInit()
 		lang=wxLANGUAGE_CZECH;
 		g_lang="cz";
 		break;
+	case wxLANGUAGE_ESTONIAN:
+		lang=wxLANGUAGE_ESTONIAN;
+		g_lang="et";
+		break;
+	case wxLANGUAGE_TURKISH:
+		lang=wxLANGUAGE_TURKISH;
+		g_lang="tr";
+		break;
 	}
 
 	//std::cout << "Lang: " << g_lang << std::endl;
