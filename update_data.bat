@@ -52,6 +52,7 @@ mkdir data\lang\es
 mkdir data\lang\zh_TW
 mkdir data\lang\zh_CN
 mkdir data\lang\pt_BR
+mkdir data\lang\pt
 mkdir data\lang\it
 mkdir data\lang\pl
 mkdir data\lang\sk
@@ -62,6 +63,8 @@ mkdir data\lang\fa
 mkdir data\lang\cs
 mkdir data\lang\tr
 mkdir data\lang\et
+mkdir data\lang\no_NO
+mkdir data\lang\sv
 tx pull -a
 set LANG_DIR=translations\urbackup.frontend\
 msgfmt "%LANG_DIR%\de.po" -o "data\lang\de\urbackup.mo"
@@ -71,6 +74,7 @@ msgfmt "%LANG_DIR%\es.po" -o "data\lang\es\urbackup.mo"
 msgfmt "%LANG_DIR%\zh_TW.Big5.po" -o "data\lang\zh_TW\urbackup.mo"
 msgfmt "%LANG_DIR%\zh_CN.GB2312.po" -o "data\lang\zh_CN\urbackup.mo"
 msgfmt "%LANG_DIR%\pt_BR.po" -o "data\lang\pt_BR\urbackup.mo"
+msgfmt "%LANG_DIR%\pt.po" -o "data\lang\pt\urbackup.mo"
 msgfmt "%LANG_DIR%\it_IT.po" -o "data\lang\it\urbackup.mo"
 msgfmt "%LANG_DIR%\pl.po" -o "data\lang\pl\urbackup.mo"
 msgfmt "%LANG_DIR%\sk.po" -o "data\lang\sk\urbackup.mo"
@@ -81,6 +85,8 @@ msgfmt "%LANG_DIR%\fa_IR.po" -o "data\lang\fa\urbackup.mo"
 msgfmt "%LANG_DIR%\cs_CZ.po" -o "data\lang\cs\urbackup.mo"
 msgfmt "%LANG_DIR%\tr.po" -o "data\lang\tr\urbackup.mo"
 msgfmt "%LANG_DIR%\et.po" -o "data\lang\et\urbackup.mo"
+msgfmt "%LANG_DIR%\no_NO.po" -o "data\lang\no_NO\urbackup.mo"
+msgfmt "%LANG_DIR%\sv.po" -o "data\lang\sv\urbackup.mo"
 
 git rev-parse HEAD > "data\build_revision.txt"
 echo. >> "data\build_revision.txt"

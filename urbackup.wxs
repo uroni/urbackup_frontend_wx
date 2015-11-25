@@ -220,6 +220,31 @@
 						<File Id="fil4CAB0F81E48E2917698958995EBB68BA" KeyPath="yes" Source="$(var.shared_data_dir)\lang\cs\urbackup.mo" />
 					</Component>
 				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911536" Name="tr">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B3C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1581}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68BB" KeyPath="yes" Source="$(var.shared_data_dir)\lang\tr\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911537" Name="et">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B4C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1582}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68BC" KeyPath="yes" Source="$(var.shared_data_dir)\lang\et\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911538" Name="no_NO">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B5C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1583}" Win64="$(var.isx64)">
+						<File Id="fil4CAB0F81E48E2917698958995EBB68BD" KeyPath="yes" Source="$(var.shared_data_dir)\lang\no_NO\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911539" Name="sb">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B6C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1584}" Win64="$(var.isx64)">
+						<File Id="fil0CAB0F81E48E2917698958995EBB68B0" KeyPath="yes" Source="$(var.shared_data_dir)\lang\sv\urbackup.mo" />
+					</Component>
+				</Directory>
+				<Directory Id="dir72226116A8527C99EDF529487A911540" Name="pt">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B7C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1585}" Win64="$(var.isx64)">
+						<File Id="fil0CAB0F81E48E2917698958995EBB68B1" KeyPath="yes" Source="$(var.shared_data_dir)\lang\pt\urbackup.mo" />
+					</Component>
+				</Directory>
 			</Directory>
             <Directory Id="dir5CC00D708A190EEA836296A3646DFAF2" Name="urbackup">
                 <Component Id="cmpF989989B3E76DC136F5507BF8CDAE791" Guid="{F07647BA-2C2A-4474-896A-8A55E95380FD}" Win64="$(var.isx64)">
@@ -267,6 +292,10 @@
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B0C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B1C" />			
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B2C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B3C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B4C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B5C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B6C" />
         </ComponentGroup>
     </Fragment>
 	
