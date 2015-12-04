@@ -296,6 +296,7 @@
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B4C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B5C" />
 			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B6C" />
+			<ComponentRef Id="cmp1BD08D74C1565C73FA7F252C3D5B0B7C" />
         </ComponentGroup>
     </Fragment>
 	
