@@ -138,12 +138,12 @@ void runCommand(std::string cmd, std::string arg1)
 		}
 
 #ifndef __APPLE__
-		wxExecute(sudo_prefix+"urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC
+		wxExecute(sudo_prefix+"urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #else
 		wxExecute(sudo_prefix+"/Applications/UrBackup\\ Client.app/Contents/MacOS/urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
-#endif
+#endif //WIN32
 
 
 #ifdef __APPLE__
