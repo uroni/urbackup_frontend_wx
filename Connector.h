@@ -34,7 +34,8 @@ struct SBackupDir
 struct SStatus
 {
 	SStatus()
-		: pause(false), capa(0), has_server(false)
+		: pause(false), capa(0), has_server(false),
+		needs_restore_restart(0), ask_restore_ok(false)
 	{
 	}
 	wxString lastbackupdate;
@@ -45,6 +46,7 @@ struct SStatus
 	std::string new_server;
 	bool has_server;
 	bool ask_restore_ok;
+	int needs_restore_restart;
 };
 
 struct SLogEntry

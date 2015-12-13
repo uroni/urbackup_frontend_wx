@@ -87,6 +87,8 @@ namespace
 	};
 
 	ETrayIcon icon_type=ETrayIcon_OK;
+
+	int needs_restore_restart = 0;
 }
 
 std::string g_lang="en";
@@ -630,16 +632,30 @@ void MyTimer::Notify()
 	if(status.ask_restore_ok)
 	{
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
-			_("Are you sure you want to restore the selected files? Existing files will be overwritten. Files created since the backup will be deleted."), wxT("UrBackup"), wxOK | wxCANCEL);
+			_("Are you sure you want to restore the selected files? Existing files will be overwritten. Files created within the selected folder since the backup will be deleted. When in doubt please cancel and run a file backup before proceeding."), wxT("UrBackup - Allow restore"), wxOK | wxCANCEL);
 		if(dialog->ShowModal() == wxOK)
 		{
-			runCommand("restoreok", "true");
+			Connector::restoreOk(true);
 		}
 		else
 		{
-			runCommand("restoreok", "false");
+			Connector::restoreOk(false);
 		}
 	}
+
+#ifdef _WIN32
+	if(status.needs_restore_restart>needs_restore_restart)
+	{
+		needs_restore_restart = status.needs_restore_restart;
+
+		wxMessageDialog* dialog = new wxMessageDialog(NULL,
+			_("Some files could not be deleted or overwritten during the restore process. In order to overwrite/delete the files the system needs to be restarted. Do you want to do this now?"), wxT("UrBackup - Restart Windows"), wxOK | wxCANCEL);
+		if(dialog->ShowModal() == wxOK)
+		{
+			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
+		}
+	}
+#endif
 
 	working=false;
 }

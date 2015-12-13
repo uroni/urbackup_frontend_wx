@@ -319,6 +319,11 @@ SStatus Connector::getStatus(size_t timeoutms)
 		{
 			ret.ask_restore_ok = ( it_restore_ask->second==L"true");
 		}
+		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
+		if(it_needs_restore_restart!=params.end())
+		{
+			ret.needs_restore_restart = watoi(it_needs_restore_restart->second);
+		}
 	}
 
 	return ret;
