@@ -648,6 +648,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	// Connect Events
 	m_button4->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIInfo::OnOKClick ), NULL, this );
+	Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GUIInfo::OnCloseInt ), NULL, this);
 }
 
 GUIInfo::~GUIInfo()
@@ -845,8 +846,16 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	bSizer34->Fit( this );
 	
 	this->Centre( wxBOTH );
+
+	Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GUIStatus::OnCloseInt ), NULL, this);
 }
 
 GUIStatus::~GUIStatus()
 {
+}
+
+void GUIStatus::OnCloseInt(wxCloseEvent& event)
+{
+	event.Skip();
+	OnClose();
 }

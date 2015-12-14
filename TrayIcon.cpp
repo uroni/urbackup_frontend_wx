@@ -282,7 +282,15 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 
 void TrayIcon::OnClick(wxCommandEvent &evt)
 {
-	Status *s = new Status(NULL);
+	if(Status::getInstance()!=NULL)
+	{
+		Status::getInstance()->SetFocus();
+		Status::getInstance()->Raise();
+	}
+	else
+	{
+		new Status(NULL);
+	}
 }
 
 wxMenu* TrayIcon::CreatePopupMenu(void)

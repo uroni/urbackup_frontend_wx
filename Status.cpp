@@ -90,7 +90,6 @@ namespace
 
 Status* Status::instance = NULL;
 
-
 Status::Status(wxWindow* parent)
 	: GUIStatus(parent)
 {
@@ -113,12 +112,6 @@ Status::Status(wxWindow* parent)
 	error_count=reset_error_count;
 
 	instance = this;
-}
-
-
-Status::~Status()
-{
-	instance=NULL;
 }
 
 
@@ -254,4 +247,9 @@ void Status::Notify(void)
 Status* Status::getInstance()
 {
 	return instance;
+}
+
+void Status::OnClose()
+{
+	instance=NULL;
 }

@@ -17,9 +17,7 @@
 **************************************************************************/
 
 #include "Connector.h"
-#include "tcpstack.h"
 #include "stringtools.h"
-#include <wx/socket.h>
 #include "escape.h"
 #include <iostream>
 #include "json/json.h"
@@ -271,64 +269,6 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
-SStatus Connector::getStatus(size_t timeoutms)
-{
-	std::string d=getResponse("STATUS", "", false, timeoutms, false);
-
-	std::vector<std::string> toks;
-	Tokenize(d, toks, "#");
-
-	SStatus ret;
-	ret.pause=false;
-	ret.capa=0;
-	ret.ask_restore_ok=false;
-	if(toks.size()>0)
-		ret.lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
-	if(toks.size()>1)
-		ret.status=wxString::FromUTF8(toks[1].c_str() );
-	if(toks.size()>2)
-		ret.pcdone=wxString::FromUTF8(toks[2].c_str() );
-	if(toks.size()>3)
-	{
-		if(toks[3]=="P")
-			ret.pause=true;
-		else if(toks[3]=="NP")
-			ret.pause=false;
-	}
-	if(toks.size()>4)
-	{
-		std::map<std::wstring,std::wstring> params;
-		ParseParamStr(toks[4], &params);
-		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
-		if(it_capa!=params.end())
-		{
-			ret.capa=watoi(it_capa->second);
-		}
-		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
-		if(it_new_server!=params.end())
-		{
-			ret.new_server=wnarrow(it_new_server->second);
-		}
-		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
-		if(it_has_server!=params.end())
-		{
-			ret.has_server= ( it_has_server->second==L"true" );
-		}
-		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
-		if(it_restore_ask!=params.end())
-		{
-			ret.ask_restore_ok = ( it_restore_ask->second==L"true");
-		}
-		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
-		if(it_needs_restore_restart!=params.end())
-		{
-			ret.needs_restore_restart = watoi(it_needs_restore_restart->second);
-		}
-	}
-
-	return ret;
-}
-
 int Connector::startBackup(bool full)
 {
 	std::string s;
@@ -508,4 +448,159 @@ int Connector::getCapabilities()
 bool Connector::restoreOk( bool ok )
 {
 	return getResponse("RESTORE OK", "ok="+nconvert(ok), true) == "ok";
+}
+
+SStatus Connector::initStatus(size_t timeoutms/*=5000*/ )
+{
+	bool change_command=false;
+	bool set_busy=false;
+	std::string cmd="STATUS";
+	std::string args="";
+	std::string curr_pw = getPasswordData(change_command, set_busy);
+
+	SStatus status;
+	status.init=false;
+	status.starttime = wxGetLocalTimeMillis();
+	status.client.reset(new wxSocketClient(wxSOCKET_BLOCK));
+	wxIPV4address addr;
+	addr.Hostname(wxT("127.0.0.1"));
+	addr.Service(35623);
+	if(!status.client->Connect(addr,false))
+	{
+		while(wxGetLocalTimeMillis()-status.starttime<timeoutms)
+		{
+			if(status.client->WaitOnConnect(0, 100))
+			{
+				break;
+			}
+			wxTheApp->Yield(true);
+		}
+	}
+	if(!status.client->IsConnected())
+	{
+		wxSocketError err=status.client->LastError();
+		error=true;
+		busy=false;
+		return status;
+	}
+
+	std::string t_args;
+
+	if(!args.empty())
+		t_args="&"+args;
+	else
+		t_args=args;
+
+	CTCPStack tcpstack;
+	tcpstack.Send(status.client.get(), cmd+"#pw="+curr_pw+t_args);
+	
+	status.timeoutms = timeoutms;
+	status.init = true;
+	return status;
+}
+
+bool SStatus::isAvailable()
+{
+	bool conn=false;
+	if(wxGetLocalTimeMillis()-starttime<timeoutms)
+	{
+		if(!client->WaitForRead(0, 10))
+		{
+			return false;
+		}
+		if(client->Error())
+		{
+			error=true;
+			return false;
+		}
+	}
+	else
+	{
+		error=true;
+		return false;
+	}
+
+	char buffer[1024];
+	client->Read(buffer, 1024);
+
+	if(client->Error())
+	{
+		error=true;
+		return false;
+	}
+
+	tcpstack.AddData(buffer, client->GetLastIOSize() );
+
+	size_t packetsize;
+	char* resp=tcpstack.getPacket(&packetsize);
+	if(packetsize==0)
+	{
+		client->Close();
+		error=true;
+		return false;
+	}
+
+	std::string ret;
+	ret.resize(packetsize);
+	memcpy(&ret[0], resp, packetsize);
+	delete resp;
+
+	client->Close();
+
+	std::vector<std::string> toks;
+	Tokenize(ret, toks, "#");
+
+	pause=false;
+	capa=0;
+	ask_restore_ok=false;
+	if(toks.size()>0)
+		lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
+	if(toks.size()>1)
+		status=wxString::FromUTF8(toks[1].c_str() );
+	if(toks.size()>2)
+		pcdone=wxString::FromUTF8(toks[2].c_str() );
+	if(toks.size()>3)
+	{
+		if(toks[3]=="P")
+			pause=true;
+		else if(toks[3]=="NP")
+			pause=false;
+	}
+	if(toks.size()>4)
+	{
+		std::map<std::wstring,std::wstring> params;
+		ParseParamStr(toks[4], &params);
+		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
+		if(it_capa!=params.end())
+		{
+			capa=watoi(it_capa->second);
+		}
+		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
+		if(it_new_server!=params.end())
+		{
+			new_server=wnarrow(it_new_server->second);
+		}
+		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
+		if(it_has_server!=params.end())
+		{
+			has_server= ( it_has_server->second==L"true" );
+		}
+		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
+		if(it_restore_ask!=params.end())
+		{
+			ask_restore_ok = ( it_restore_ask->second==L"true");
+		}
+		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
+		if(it_needs_restore_restart!=params.end())
+		{
+			needs_restore_restart = watoi(it_needs_restore_restart->second);
+		}
+	}
+
+	return true;
+}
+
+bool SStatus::hasError()
+{
+	return error;
 }

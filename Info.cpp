@@ -54,7 +54,7 @@ Info* Info::getInstance()
 	return instance;
 }
 
-Info::~Info()
+void Info::OnClose()
 {
 	instance=NULL;
 }

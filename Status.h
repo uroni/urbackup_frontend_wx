@@ -23,11 +23,13 @@ class Status : public GUIStatus, wxTimer
 {
 public:
 	Status(wxWindow* parent);
-	~Status();
 
 	static Status* getInstance();
 
 	virtual void Notify(void);
+
+protected:
+	void OnClose();
 
 private:
 

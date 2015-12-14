@@ -44,6 +44,7 @@ copy /Y "..\x64\release\sysvol_test.exe" "data_x64\sysvol_test.exe"
 copy /Y "deps\win\bin64\UrBackupCMD.exe" "data_x64\UrBackupClient_cmd.exe"
 copy /Y "deps\win\bin64\KillProc.exe" "data_x64\KillProc.exe"
 copy /Y "version.txt" "data\curr_version.txt"
+copy /Y "info.txt" "data\info.txt"
 
 mkdir data\lang\de
 mkdir data\lang\fr

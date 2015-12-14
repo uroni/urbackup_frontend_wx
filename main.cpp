@@ -314,7 +314,7 @@ bool MyApp::OnInit()
 		timer=new MyTimer;
 
 		timer->Notify();
-		timer->Start(10);
+		timer->Start(1000);
 	}
 	else if(cmd==wxT("settings"))
 	{
@@ -457,13 +457,35 @@ namespace
 
 void MyTimer::Notify()
 {
-	static bool working=false;
-	if(working==true)
+	static SStatus status;
+	if(!status.init || status.hasError())
+	{
+		status = Connector::initStatus(60000);
+	}
+
+	if(Connector::hasError() )
+	{
+		if(icon_type!=ETrayIcon_ERROR)
+		{
+			last_status=_("Cannot connect to backup server");
+			icon_type=ETrayIcon_ERROR;
+			if(tray!=NULL)
+				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
+		}
+		return;
+	}
+
+	if(!status.init)
 	{
 		return;
 	}
 
-	working=true;
+	if(!status.isAvailable())
+	{
+		return;
+	}
+
+	status.init=false;
 
 	wxStandardPathsBase& sp=wxStandardPaths::Get();
 	static wxString cfgDir=sp.GetUserDataDir();
@@ -498,20 +520,6 @@ void MyTimer::Notify()
 	}
 
 	wxString status_text;
-	SStatus status=Connector::getStatus(60000);
-
-	if(Connector::hasError() )
-	{
-		if(icon_type!=ETrayIcon_ERROR)
-		{
-			last_status=_("Cannot connect to backup server");
-			icon_type=ETrayIcon_ERROR;
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
-		}
-		working=false;
-		return;
-	}
 
 	capa=status.capa;
 
@@ -585,10 +593,6 @@ void MyTimer::Notify()
 		{
 			tray->SetIcon(getAppIcon(getIconName(icon_type)), status_text);
 		}
-		if(timer!=NULL)
-		{
-			timer->Start(10);
-		}
 	}
 
 	if(!status.new_server.empty() && tray)
@@ -629,8 +633,6 @@ void MyTimer::Notify()
 		}
 	}
 #endif
-
-	working=false;
 }
 
 bool MyTimer::hasCapability(int capa_bit)

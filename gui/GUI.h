@@ -190,6 +190,12 @@ class GUIInfo : public wxDialog
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
+		virtual void OnClose()=0;
+
+		virtual void OnCloseInt(wxCloseEvent& event) {
+			event.Skip();
+			OnClose();
+		}
 	
 	public:
 		
@@ -243,6 +249,8 @@ class GUIConfigPath : public wxDialog
 class GUIStatus : public wxDialog 
 {
 	private:
+
+		
 	
 	protected:
 		wxStaticText* m_staticText31;
@@ -255,6 +263,10 @@ class GUIStatus : public wxDialog
 		wxStaticText* m_staticText35;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText38;
+
+		virtual void OnClose()=0;
+
+		virtual void OnCloseInt(wxCloseEvent& event);
 	
 	public:
 		

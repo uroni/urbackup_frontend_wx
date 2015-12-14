@@ -22,6 +22,9 @@
 #include <wx/wx.h>
 #include <string>
 #include <vector>
+#include <wx/socket.h>
+#include <wx/sharedptr.h>
+#include "tcpstack.h"
 
 struct SBackupDir
 {
@@ -35,9 +38,14 @@ struct SStatus
 {
 	SStatus()
 		: pause(false), capa(0), has_server(false),
-		needs_restore_restart(0), ask_restore_ok(false)
+		needs_restore_restart(0), ask_restore_ok(false),
+		error(false), init(false)
 	{
 	}
+
+	bool isAvailable();
+	bool hasError();
+
 	wxString lastbackupdate;
 	wxString status;
 	wxString pcdone;
@@ -47,6 +55,13 @@ struct SStatus
 	bool has_server;
 	bool ask_restore_ok;
 	int needs_restore_restart;
+	bool init;
+
+	wxLongLong starttime;
+	size_t timeoutms;
+	wxSharedPtr<wxSocketClient> client;
+	bool error;
+	CTCPStack tcpstack;
 };
 
 struct SLogEntry
@@ -106,7 +121,6 @@ class Connector
 public:
 	static std::vector<SBackupDir> getSharedPaths(void);
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
-	static SStatus getStatus(size_t timeoutms);
 	static int startBackup(bool full);
 	static int startImage(bool full);
 	static bool updateSettings(const std::string &sdata);
@@ -117,6 +131,7 @@ public:
 	static SStatusDetails getStatusDetails();
 	static int getCapabilities();
 	static bool restoreOk(bool ok);
+	static SStatus initStatus(size_t timeoutms=5000);
 
 	static bool hasError(void);
 	static bool isBusy(void);
