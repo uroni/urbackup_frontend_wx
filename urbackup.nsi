@@ -13,6 +13,7 @@ InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "License-Install.txt"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH

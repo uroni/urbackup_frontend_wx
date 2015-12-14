@@ -15,6 +15,8 @@ RequestExecutionLevel highest
 !define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
 !insertmacro MUI_PAGE_WELCOME
 !define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
+!insertmacro MUI_PAGE_LICENSE "License-Install.txt"
+!define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !define MUI_PAGE_CUSTOMFUNCTION_PRE skipPre
