@@ -554,9 +554,9 @@ void MyTimer::Notify()
 		wxLongLong_t lastbackups;
 		if(status.lastbackupdate.ToLongLong(&lastbackups))
 		{
-			wxDateTime lastbackup(lastbackups);
+			wxDateTime lastbackup_dt((wxLongLong)(lastbackups));
 
-			status_text+=trans_1(_("Last backup on _1_"), lastbackup.Format());
+			status_text+=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
 		}	
 	}
 
