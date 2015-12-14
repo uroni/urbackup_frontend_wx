@@ -226,6 +226,10 @@ bool MyApp::OnInit()
 		lang=wxLANGUAGE_PORTUGUESE_BRAZILIAN;
 		g_lang="pt_BR";
 		break;
+	case wxLANGUAGE_PORTUGUESE:
+		lang=wxLANGUAGE_PORTUGUESE;
+		g_lang="pt";
+		break;
 	case wxLANGUAGE_ITALIAN:
 	case wxLANGUAGE_ITALIAN_SWISS:
 		lang=wxLANGUAGE_ITALIAN;
@@ -259,6 +263,24 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_CZECH:
 		lang=wxLANGUAGE_CZECH;
 		g_lang="cz";
+		break;
+	case wxLANGUAGE_ESTONIAN:
+		lang=wxLANGUAGE_ESTONIAN;
+		g_lang="et";
+		break;
+	case wxLANGUAGE_TURKISH:
+		lang=wxLANGUAGE_TURKISH;
+		g_lang="tr";
+		break;
+	case wxLANGUAGE_NORWEGIAN_BOKMAL:
+	case wxLANGUAGE_NORWEGIAN_NYNORSK:
+		lang=wxLANGUAGE_NORWEGIAN_BOKMAL;
+		g_lang="no_NO";
+		break;
+	case wxLANGUAGE_SWEDISH:
+	case wxLANGUAGE_SWEDISH_FINLAND:
+		lang=wxLANGUAGE_SWEDISH;
+		g_lang="sv";
 		break;
 	}
 

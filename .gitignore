@@ -89,3 +89,5 @@ sqlite3.exe
 messages.po
 translations/urbackup.frontend/en_new.po
 *.Po
+
+*.orig

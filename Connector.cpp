@@ -242,6 +242,7 @@ std::string Connector::escapeParam(const std::string &name)
 	std::string tmp=greplace("%", "%25", name);
 	tmp=greplace("=", "%3D", tmp);
 	tmp=greplace("&", "%26", tmp);
+	tmp=greplace("$", "%24", tmp);
 	return tmp;
 }
 

@@ -3,518 +3,507 @@
 # This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
-# Alabin Artem <kirpicheff@yandex.ru>, 2012,2015
-# Alabin Artem <kirpicheff@yandex.ru>, 2012
-# Alabin Artem <kirpicheff@yandex.ru>, 2012
-# uroni <urpc@gmx.de>, 2013
-# uroni <urpc@gmx.de>, 2013
-# Valentin XliN Saikov <saikov.vb@gmail.com>, 2014
+# Meelis Veemees <veemeesmeelis@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2015-05-28 18:50+0000\n"
-"Last-Translator: Alabin Artem <kirpicheff@yandex.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/p/urbackup/language/ru/)\n"
+"PO-Revision-Date: 2015-05-19 09:52+0000\n"
+"Last-Translator: Meelis Veemees <veemeesmeelis@gmail.com>\n"
+"Language-Team: Estonian (http://www.transifex.com/p/urbackup/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
-msgstr "Настройки"
+msgstr "Seaded"
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr "Логи"
+msgstr "Logid"
 
 #: gui\GUI.h:195
 msgid "Informations"
-msgstr "Информация"
+msgstr "Informatsioon"
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr "Добавить/Удалить пути бэкапа"
+msgstr "Lisa/Eemalda varukoopia alasid"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
-msgstr "Статус"
+msgstr "Olek"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr "Интервал добавочных файловых бэкапов"
+msgstr "Täiendava faili varundamise intervall:"
 
 #: gui\GUI.cpp:59
 msgid "hours"
-msgstr "часов"
+msgstr "tundi"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr "Интервал полных бэкапов файлов"
+msgstr "Täielik failide varundamise intervall:"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
-msgstr "дней"
+msgstr "päeva"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr "Интервал создания добавочного образа"
+msgstr "Täiendava kettapildi varundamise intervall:"
 
 #: gui\GUI.cpp:100
 msgid "Active"
-msgstr "Активнен"
+msgstr "Aktiivne"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr "Интервал создания образа"
+msgstr "Täielik kettapildi varundamise intervall:"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr "Минимальное количество добавочных бэкапов файлов"
+msgstr "Miinimum arv täiendavaid varundusi:"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr "Максимальное количество добавочных бэкапов файлов"
+msgstr "Maksimum arv täiendavaid varundusi:"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr "Минимальное количество полных бэкапов файлов"
+msgstr "Miinimum arv täielike faili varundusi:"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr "Максимальное количество полных бэкапов файлов"
+msgstr "Maksimum arv täielikke failide varundusi:"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr "Минимальное количество добавочных образов"
+msgstr "Miinimum arv täiendava kettapildi varundusi:"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr "Максимальное количество добавочных образов"
+msgstr "Maksimum arv täiendava kettapildi varundusi:"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr "Минимальное количество полных  образов"
+msgstr "Miinimum arv täielikke kettapildi varundusi:"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr "Максимальное количество полных образов"
+msgstr "Maksimum arv täielikke kettapildi varundusi:"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
-msgstr "Имя компьютера:"
+msgstr "Arvuti nimi:"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr "Исключить из бэкапа (с шаблоном):"
+msgstr "Jäta varundamisel vahele (with wildcards):"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr "Включить в бэкап (с шаблоном):"
+msgstr "Kaasa varundusse (with wildcards):"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr "Расписание бэкапа:"
+msgstr "Varunduse aken:"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
-msgstr "Задержка копирования после старта системы:"
+msgstr "Varundamise edasi lükkamine peale süsteemi starti:"
 
 #: gui\GUI.cpp:321
 msgid "min"
-msgstr "минут"
+msgstr "min"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr "Разделы для бэкапа"
+msgstr "Kettad varundamiseks:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
-msgstr "Максимальная скорость для локального бэкапа"
+msgstr "Max varunduse kiirus kohalikus võrgus:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr "МБит/c"
+msgstr "MBit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
-msgstr "Включить бэкап через интернет"
+msgstr "Luba varundamine üle interneti:"
 
 #: gui\GUI.cpp:377
 msgid "Internet server name/IP:"
-msgstr "Имя сервера интернет бэкапа"
+msgstr "Interneti serveri nimi/IP:"
 
 #: gui\GUI.cpp:385
 msgid "Internet server port:"
-msgstr "Порт интернет бэкапа"
+msgstr "Interneti serveri port:"
 
 #: gui\GUI.cpp:393
 msgid "Internet server password:"
-msgstr "Пароль интернет бэкапа"
+msgstr "Internet serveri parool:"
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr "Сделать образ через интернет"
+msgstr "Tee kettapildi varundusi üle interneti:"
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr "Сделать файловый бэкап через интернет"
+msgstr "Tee täielikke failivarundusi üle interneti:"
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr "Максимальная скорость для интернет бэкапа"
+msgstr "Maksimum varunduse kiirus üle interneti:"
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr "КБит/c"
+msgstr "KBit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
-msgstr "Включить сжатие"
+msgstr "Pakkimine ülekandel:"
 
 #: gui\GUI.cpp:441
 msgid "Encrypted transfer:"
-msgstr "Включить шифрование"
+msgstr "Krüpteeritud ülekanne:"
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr "Файловый бэкп"
+msgstr "Failide varundamine"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr "Образ "
+msgstr "Image varundamine"
 
 #: gui\GUI.cpp:468
 msgid "Client"
-msgstr "Клиент"
+msgstr "Klient"
 
 #: gui\GUI.cpp:469
 msgid "Internet"
-msgstr "Интернет"
+msgstr "Internet"
 
 #: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
 msgid "Ok"
-msgstr "Ок"
+msgstr "Ok"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
 msgid "Abort"
-msgstr "Отмена"
+msgstr "Tühista"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
-msgstr "Фильтр:"
+msgstr "Filtreeri"
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr "Информация"
+msgstr "Info"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
-msgstr "Предупреждения"
+msgstr "Hoiatused"
 
 #: gui\GUI.cpp:539
 msgid "Errors"
-msgstr "Ошибки"
+msgstr "Vead"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
-msgstr "Выход"
+msgstr "Välju"
 
 #: gui\GUI.cpp:610
 msgid "Version:"
-msgstr "Версия:"
+msgstr "Versioon:"
 
 #: gui\GUI.cpp:678
 msgid "Name:"
-msgstr "Имя:"
+msgstr "Nimi:"
 
 #: gui\GUI.cpp:707
 msgid "Add path"
-msgstr "Добавить путь"
+msgstr "Lisa kataloog"
 
 #: gui\GUI.cpp:710
 msgid "Remove path"
-msgstr "Удалить путь"
+msgstr "Eemalda kataloog"
 
 #: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr "Состояние подключения к интернету"
+msgstr "Interneti ühenduse olek:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
-msgstr "Произошла ошибка. Нечего бэкапить"
+msgstr "Ilmnes viga. Midagi ei saa varundada."
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr "Пожалуйста выберите директорию для бэкапа"
+msgstr "Palun vali kataloog mida varundada."
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr "_процентов_ выполнено."
+msgstr "_protsenti_tehtud."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr "Добавочный бэкап файлов запущен"
+msgstr "Täiendav failide varundamine käib."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr "Полное резервное копирование файлов запущено."
+msgstr "Täielik failide varundamine käib."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr "Добавочный бэкап образа запущен"
+msgstr "Täiendav kettapildi varundus käib."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr "Полный бэкап образа запущен"
+msgstr "Täielik kettapildi varundamine käib."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr "Возобновлен добавочный файловый бэкап"
+msgstr "Peatatud täiendav failide varundamine käib."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr "Возобновлен полный файловый бэкап"
+msgstr "Peatatud täielik failide varundamine käib."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr "Индексация."
+msgstr "Indekseerin."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
-msgstr "UrBackup: Доступно обновление"
+msgstr "UrBackup: Uuendus on saadval"
 
 #: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr "Доступна новая версия. Пожалуйста нажмите здесь, чтобы установить сейчас."
+msgstr "Uus versioon UrBackup-st on saadaval. Palun kliki siia et see kohe installida."
 
 #: main.cpp:468
 msgid "Cannot connect to backup server"
-msgstr "Не удается подключиться к серверу"
+msgstr "Ei saa varundusserveriga ühendust"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr "Нет текущего бэкапа"
+msgstr "Pole varundusi"
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr "Последний бэкап был_1_"
+msgstr "Viimane varundamine oli _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
-msgstr "UrBackup: Новый сервер"
+msgstr "UrBackup: Uus server"
 
 #: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
-msgstr "Найден новый сервер бэкапов. Нажмите чтобы использовать"
+msgstr "Uus varundusserver leitud. Kliki kui soovid seda kasutada"
 
 #: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
-msgstr "Интервал создания добавочных бэкапов не является числом"
+msgstr "Täiendava varunduse intervall pole number"
 
 #: Settings.cpp:511
 msgid "The full backup interval  is not a number"
-msgstr "Интервал создания полных файловых бэкапов не является числом"
+msgstr "Täieliku varunduse intervall pole number"
 
 #: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
-msgstr "Интервал создания полных образов не является числом"
+msgstr "Täieliku kettapildi varunduse intervall pole number"
 
 #: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
-msgstr "Интервал создания добавочных образов не является числом"
+msgstr "Täiendava kettapildi varunduse aeg pole number"
 
 #: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Максимальное количество добавочных бэкапов файлов не является числом"
+msgstr "Maksimum arv täiendava failide varunduseks pole number"
 
 #: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "Минимальное количество добавочных бэкапов файлов не является числом"
+msgstr "Miinimum arv täiendava failide varunduseks pole number"
 
 #: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
-msgstr "Максимальное количество полных бэкапов файлов не является числом"
+msgstr "Maksimum arv täieliku failide varunduseks pole number"
 
 #: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
-msgstr "Минимальное количество полных бэкапов файлов не является числом"
+msgstr "Miinimum arv täieliku failide varunduseks pole number"
 
 #: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Минимальное количество добавочных образов не является числом"
+msgstr "Miinimum arv täiendava kettapildi varunduseks pole number"
 
 #: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Максимальное количество добавочных образов не является числом"
+msgstr "Maksimum arv täiendava kettapildi varunduseks pole number"
 
 #: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
-msgstr "Минимальное количество полных образов не является числом"
+msgstr "Miinimum arv täieliku kettapildi varunduseks pole number"
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr "Максимальное количество полных образов не является числом"
+msgstr "Maksimum arv täieliku kettapildi varunduseks pole number"
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
-msgstr "Задержка копирования после старта системы не является числом"
+msgstr "Varunduse edasilükkamine peale süsteemi starti pole number"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr "_1_ это не раздел"
+msgstr "_1_ is not a volume"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr "Порт сервера не является допустимым"
+msgstr "Serveri port ei sobi"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr "Инициализация."
+msgstr "Initializing."
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr "Ожидание локального Urbackup сервера."
+msgstr "Ootan kohalikku UrBackup serverit."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr "Подключено к локальному Urbackup серверу"
+msgstr "Ühendatud kohaliku UrBackup serveriga."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr "Нет попыток подключения к Интернет серверу"
+msgstr "Ei proovi ühendust võtta interneti serveriga."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr "Локальный сервер был виден _1_ минут назад"
+msgstr "Kohalik server oli kättesaadav _1_minutit tagasi."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr "Интернет сервер не настроен"
+msgstr "Interneti serverit pole seadistatud."
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr "Соединение с интернет сервером"
+msgstr "Ühendatud interneti serveriga."
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr "Не удалось подключиться к Интернет серверу. Сервер недоступен."
+msgstr "Ei saanud ühendust interneti serveriga. Server unreachable."
 
 #: Status.cpp:48
 msgid "Error: _1_"
-msgstr "Ошибка: _1_"
+msgstr "Viga: _1_"
 
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] "день"
-msgstr[1] "дня"
-msgstr[2] "дней"
-msgstr[3] "дней"
+msgstr[0] ""
+msgstr[1] "päeva"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "час"
-msgstr[1] "часа"
-msgstr[2] "часов"
-msgstr[3] "часов"
+msgstr[0] ""
+msgstr[1] "tundi"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "минута"
-msgstr[1] "минуты"
-msgstr[2] "минут"
-msgstr[3] "минут"
+msgstr[0] "Minutit"
+msgstr[1] "Minutit"
 
 #: Status.cpp:138
 msgid "Idle."
-msgstr "Ожидание"
+msgstr "Ootel."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr "Осталось:примерно _1_"
+msgstr "ETA: Approx. _1_"
 
 #: Status.cpp:192
 msgid "Yes"
-msgstr "Да"
+msgstr "Jah"
 
 #: Status.cpp:194
 msgid "No"
-msgstr "Нет"
+msgstr "Ei"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr "Интернет: _1_"
+msgstr "Internet: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr "Серверы:"
+msgstr "Serverid:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
-msgstr "Ожидание сервера..."
+msgstr "Ootan serverit ..."
 
 #: TrayIcon.cpp:146 TrayIcon.cpp:169
 msgid "A backup is already running. Could not start another one."
-msgstr "Бэкап уже запущен. Невозможно запустить ещё один."
+msgstr "Varundamine juba käib. Ei saa alustada uut varundamist."
 
 #: TrayIcon.cpp:148 TrayIcon.cpp:171
 msgid "Could not start backup, because no backup server was found."
-msgstr "Невозможно запустить бэкап, сервер не найден"
+msgstr "Ei saanud varundamist alustada, kuna varundusserverit ei leitud."
 
 #: TrayIcon.cpp:183
 msgid "Pausing failed: No connection to backup server."
-msgstr "Приостановить не удалось. Нет соединения с сервером"
+msgstr "Peatamine ebõnnestus: Pole varundusserveriga ühendust."
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr "Продолжить не удалось. Нет соединения с сервером"
+msgstr "Ei saa jätkata.: Pole ühendust varundusserveriga."
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr "Сделать полный бэкап файлов"
+msgstr "Tee täielik failide varundus."
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr "Сделать полную резервную копию файла"
+msgstr "Tee täielik failide varundus kohe."
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr "Сделать добавочный бэкап файлов"
+msgstr "Tee täiendav failide varundus."
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr "Сделать добавочный файловый бэкап"
+msgstr "Tee täiendav failide varundus kohe."
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr "Сделать полный образ"
+msgstr "Tee täielik kettapildi varundus"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr "Сделать полный образ"
+msgstr "Tee täielik kettapildi varundus kohe."
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr "Сделать добавочный образ"
+msgstr "Tee täiendav kettapildi varundus."
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr "Сделать добавочный образ"
+msgstr "Tee täiendav kettapildi varundus kohe."
 
 #: TrayIcon.cpp:286
 msgid "Pause"
-msgstr "Пауза"
+msgstr "Paus"
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr "Продолжить"
+msgstr "Jätka"
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
