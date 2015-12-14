@@ -172,10 +172,12 @@ bool Status::updateStatus(int errcnt)
 	}
 
 	m_staticText31->SetLabel(status_text);
-
-	if(!status_details.last_backup_time.empty())
+	wxLongLong_t lastbackups;
+	if(!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
 	{
-		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), status_details.last_backup_time));
+		wxDateTime lastbackup(lastbackups);
+
+		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup.Format()));
 	}
 	else
 	{

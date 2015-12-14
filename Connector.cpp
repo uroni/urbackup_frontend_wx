@@ -329,13 +329,6 @@ SStatus Connector::getStatus(size_t timeoutms)
 	return ret;
 }
 
-unsigned int Connector::getIncrUpdateIntervall(void)
-{
-	std::string d=getResponse("GET INCRINTERVALL","", false);
-
-	return atoi(d.c_str());
-}
-
 int Connector::startBackup(bool full)
 {
 	std::string s;

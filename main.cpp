@@ -52,7 +52,6 @@ TrayIcon *tray = NULL;
 MyTimer *timer = NULL;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
-bool incr_update_done=false;
 bool backup_is_running=false;
 extern bool b_is_pausing;
 
@@ -468,27 +467,11 @@ void MyTimer::Notify()
 
 	wxStandardPathsBase& sp=wxStandardPaths::Get();
 	static wxString cfgDir=sp.GetUserDataDir();
-	static long starttime=wxGetLocalTime();
-	static long startuptime_passed=0;
-	static long lastbackuptime=-5*60*1000;
-	static long lastversioncheck=starttime;
+	static long lastversioncheck=wxGetLocalTime();
 
 	if(!wxDir::Exists(cfgDir) )
 	{
 		wxFileName::Mkdir(cfgDir);
-	}
-
-	if(startuptime_passed==0)
-	{
-		startuptime_passed=atoi(getFile((cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() ).c_str() );
-		startuptime_passed+=atoi(getFile((cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() ).c_str() );
-		writestring(nconvert((int)startuptime_passed), (cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() );
-		lastbackuptime=atoi(getFile((cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() ).c_str() );
-		if(lastbackuptime==0)
-			lastbackuptime=-5*60*1000;
-		std::string update_intv=getFile((cfgDir+wxT("/incr_updateintervall.cfg") ).ToUTF8().data() );
-		if(!update_intv.empty())
-			incr_update_intervall=atoi(update_intv.c_str());
 	}
 
 	long ct=wxGetLocalTime();
@@ -511,13 +494,8 @@ void MyTimer::Notify()
 			displayed_update_info=true;
 #endif
 		}
-		ct=wxGetLocalTime();
 		lastversioncheck=ct;
 	}
-
-	long passed=( ct-starttime );
-
-	writestring(nconvert((int)passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
 
 	wxString status_text;
 	SStatus status=Connector::getStatus(60000);
@@ -542,8 +520,6 @@ void MyTimer::Notify()
 	
 	if(status.status==wxT("DONE") )
 	{
-		writestring(nconvert((int)startuptime_passed+(int)passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
-		lastbackuptime=startuptime_passed+passed;
 		icon_type=ETrayIcon_OK;
 		backup_is_running=false;
 		refresh=true;
@@ -561,7 +537,7 @@ void MyTimer::Notify()
 		backup_is_running=true;
 
 	}
-	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
+	else if(status.status==wxT("NO_RECENT"))
 	{	
 		status_text+=wxString(_("No current backup.")) + wxT(" ");
 		icon_type=ETrayIcon_NO_RECENT;
@@ -574,17 +550,14 @@ void MyTimer::Notify()
 	}
 
 	if(!status.lastbackupdate.Trim().empty() )
-		status_text+=trans_1(_("Last backup on _1_"), status.lastbackupdate);
-
-	if( icon_type<3 && incr_update_done==false)
 	{
-		unsigned int n_incr_update_intervall=Connector::getIncrUpdateIntervall();
-		if(!Connector::hasError() && n_incr_update_intervall!=0)
+		wxLongLong_t lastbackups;
+		if(status.lastbackupdate.ToLongLong(&lastbackups))
 		{
-			incr_update_done=true;
-			incr_update_intervall=n_incr_update_intervall;
-			writestring(nconvert(incr_update_intervall), (cfgDir+wxT("/incr_updateintervall.cfg") ).ToUTF8().data() );
-		}
+			wxDateTime lastbackup(lastbackups);
+
+			status_text+=trans_1(_("Last backup on _1_"), lastbackup.Format());
+		}	
 	}
 
 	if(status.pause && icon_type==ETrayIcon_PROGRESS)
