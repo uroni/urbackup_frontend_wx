@@ -11,3 +11,5 @@ urbackup_xp.dll
 debug.log
 --loglevel
 warn
+--allow_restore
+default

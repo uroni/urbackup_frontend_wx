@@ -11,3 +11,5 @@ urbackup_server03.dll
 debug.log
 --loglevel
 warn
+--allow_restore
+default

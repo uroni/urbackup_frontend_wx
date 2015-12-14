@@ -11,3 +11,5 @@ urbackup.dll
 debug.log
 --loglevel
 debug
+--allow_restore
+default

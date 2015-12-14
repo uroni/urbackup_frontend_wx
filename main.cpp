@@ -647,9 +647,13 @@ void MyTimer::Notify()
 
 	if(status.ask_restore_ok)
 	{
+#ifdef __WXMAC__
+		bring_to_foreground();
+#endif 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			_("Are you sure you want to restore the selected files? Existing files will be overwritten. Files created within the selected folder since the backup will be deleted. When in doubt please cancel and run a file backup before proceeding."), wxT("UrBackup - Allow restore"), wxOK | wxCANCEL);
-		if(dialog->ShowModal() == wxOK)
+		int rc = dialog->ShowModal();
+		if(rc == wxID_OK)
 		{
 			Connector::restoreOk(true);
 		}
@@ -662,11 +666,14 @@ void MyTimer::Notify()
 #ifdef _WIN32
 	if(status.needs_restore_restart>needs_restore_restart)
 	{
+#ifdef __WXMAC__
+		bring_to_foreground();
+#endif
 		needs_restore_restart = status.needs_restore_restart;
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			_("Some files could not be deleted or overwritten during the restore process. In order to overwrite/delete the files the system needs to be restarted. Do you want to do this now?"), wxT("UrBackup - Restart Windows"), wxOK | wxCANCEL);
-		if(dialog->ShowModal() == wxOK)
+		if(dialog->ShowModal() == wxID_OK)
 		{
 			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
 		}
