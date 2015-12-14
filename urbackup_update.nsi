@@ -442,6 +442,14 @@ Function .onInstSuccess
 		${If} $0 == '0'
 			Exec '"$INSTDIR\UrBackupClient.exe"'
 		${EndIf}
+		
+		${If} $EXEFILE != 'UrBackupUpdate.exe'
+			Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'
+		${EndIf}
+		
+		${If} $EXEFILE == 'UrBackupUpdate.exe'
+			Exec '"$INSTDIR\UrBackupClient.exe" setupDefault'
+		${EndIf}
 	${EndIf}
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection

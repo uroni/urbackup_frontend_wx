@@ -395,6 +395,7 @@ Function .onInstSuccess
 		SetRegView 64
 	${EndIf}
 	Exec '"$INSTDIR\UrBackupClient.exe"'
+	Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32
