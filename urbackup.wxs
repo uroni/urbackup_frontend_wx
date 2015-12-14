@@ -143,7 +143,7 @@
                 <File Id="filBA1AFDB5114DD60BEDBD3377F3DE7D06" KeyPath="yes" Source="$(var.shared_data_dir)\updates_h.dat" />
             </Component>
             <Component Id="cmp37A94814CB169DB3ED2881E715547442" Guid="{37B02F8D-AF00-4CAA-9B68-4D5F26F2431F}" Win64="$(var.isx64)">
-                <File Id="filAD7AA45493CFD8B8331044CD7393799C" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_dsa.pub" />
+                <File Id="filAD7AA45493CFD8B8331044CD7393799C" KeyPath="yes" Source="$(var.shared_data_dir)\urbackup_ecdsa409k1.pub" />
             </Component>
 			<Directory Id="dir77A47C9F143A7502466C548C9FCBAD09" Name="lang">
 				<Directory Id="dir77A47C9F143A7502466C548C9FCBAD08" Name="de">
