@@ -226,11 +226,27 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		}break;
 	case ID_TI_INFO:
 		{
-			Info *i=new Info(NULL);
+			if(Info::getInstance()!=NULL)
+			{
+				Info::getInstance()->SetFocus();
+				Info::getInstance()->Raise();
+			}
+			else
+			{
+				new Info(NULL);
+			}
 		}break;
 	case ID_TI_STATUS:
 		{
-			Status *s = new Status(NULL);
+			if(Status::getInstance()!=NULL)
+			{
+				Status::getInstance()->SetFocus();
+				Status::getInstance()->Raise();
+			}
+			else
+			{
+				new Status(NULL);
+			}
 		}break;
 	case ID_TI_EXIT:
 		{

@@ -28,6 +28,8 @@ std::wstring ConvertToUnicode(const std::string &str);
 #define ConvertToUnicode(x)
 #endif
 
+Info* Info::instance;
+
 
 Info::Info(wxWindow* parent) : GUIInfo(parent)
 {
@@ -38,9 +40,21 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 	}
 	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);
+
+	instance=this;
 }
 
 void Info::OnOKClick( wxCommandEvent& event )
 {
 	Close();
+}
+
+Info* Info::getInstance()
+{
+	return instance;
+}
+
+Info::~Info()
+{
+	instance=NULL;
 }

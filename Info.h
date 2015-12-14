@@ -22,7 +22,12 @@ class Info : public GUIInfo
 {
 public:
 	Info(wxWindow* parent);
+	~Info();
+
+	static Info* getInstance();
 
 protected:
 	void OnOKClick( wxCommandEvent& event );
+
+	static Info* instance;
 };

@@ -23,10 +23,15 @@ class Status : public GUIStatus, wxTimer
 {
 public:
 	Status(wxWindow* parent);
+	~Status();
+
+	static Status* getInstance();
 
 	virtual void Notify(void);
 
 private:
+
+	static Status* instance;
 
 	bool updateStatus(int errcnt);
 
