@@ -175,7 +175,7 @@ bool Status::updateStatus(int errcnt)
 	wxLongLong_t lastbackups;
 	if(!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
 	{
-		wxDateTime lastbackup_dt((wxLongLong)(lastbackups));
+		wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
 
 		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
 	}
