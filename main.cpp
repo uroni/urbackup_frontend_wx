@@ -374,13 +374,20 @@ bool MyApp::OnInit()
 	}
 	else if(cmd==wxT("setupWizard"))
 	{
-		SetupWizard* sw = new SetupWizard(NULL);
-		SetTopWindow(sw);
-		sw->ShowPage(*(sw->m_pages.begin()));
-		sw->SetFocus();
-		sw->Raise();
-		sw->ShowModal();
-		sw->Destroy();
+		if(!FileExists("setup_wizard.cfg"))
+		{
+			SetupWizard* sw = new SetupWizard(NULL);
+			SetTopWindow(sw);
+			sw->ShowPage(*(sw->m_pages.begin()));
+			sw->SetFocus();
+			sw->Raise();
+			sw->ShowModal();
+			sw->Destroy();
+		}
+		else
+		{
+			SetupWizard::doDefConfig();
+		}		
 		wxExit();
 	}
 	else if(cmd==wxT("setupDefault"))
