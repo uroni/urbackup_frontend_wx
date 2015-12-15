@@ -40,7 +40,14 @@ Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 
 	for(size_t i=0;i<logentries.size();++i)
 	{
-		m_listBox1->Append(logentries[i].logtime);
+		wxLongLong_t logtime;
+		if(!logentries[i].logtime.empty() && logentries[i].logtime.ToLongLong(&logtime))
+		{
+			wxDateTime logtime_dt((wxLongLong)(logtime*1000));
+
+			m_listBox1->Append(logtime_dt.Format());
+		}
+		
 	}
 
 	Show(true);

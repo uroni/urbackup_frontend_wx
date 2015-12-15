@@ -1,4 +1,4 @@
-#include "GUI/GUISetupWizard.h"
+#include "gui/GUISetupWizard.h"
 #include <map>
 #include <string>
 

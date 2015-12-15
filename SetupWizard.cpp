@@ -21,6 +21,7 @@
 #include <iostream>
 #include "stringtools.h"
 
+#ifdef _WIN32
 #include <Windows.h>
 #include <LM.h>
 #include <Sddl.h>
@@ -29,7 +30,7 @@
 
 #pragma comment(lib, "netapi32.lib")
 #pragma comment(lib, "Userenv.lib")
-
+#endif
 
 #include "Connector.h"
 #include "ConfigPath.h"
@@ -46,6 +47,7 @@ SVolumesCache* SetupWizard::cache = NULL;
 
 namespace
 {
+#ifdef _WIN32
 	std::vector<std::wstring> get_users()
 	{
 		LPUSER_INFO_0 buf;
@@ -514,7 +516,7 @@ namespace
 
 		writestring(ConvertToUTF8(data), output_fn);
 	}
-
+#endif //_WIN32
 }
 
 
@@ -610,6 +612,7 @@ void SetupWizard::wizardNext( wxWizardEvent& event )
 
 void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupChoice imageBackupChoice, const std::wstring& volume_choice )
 {
+#ifdef _WIN32
 	std::vector<std::wstring> pathsNotToBackup = fixupPaths(resolvePaths(getPathsNotToBackup()));
 
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Temp");
@@ -679,7 +682,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	}
 
 	CFileSettingsReader setupSettings("setup_wizard.cfg");
-	CFileSettingsReader backupSettings("backupboxx/data/settings.cfg");
+	CFileSettingsReader backupSettings("urbackup/data/settings.cfg");
 	std::map<std::wstring, std::wstring> new_settings;
 	std::map<std::wstring, std::wstring> new_setup_settings;
 
@@ -852,6 +855,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	{
 		rewrite_settings(setupSettings, new_setup_settings, "setup_wizard.cfg");
 	}
+#endif
 }
 
 void SetupWizard::doDefConfig()
@@ -895,7 +899,9 @@ void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupC
 		fileBackupChoice = EFileBackupChoice_Manual;
 	}
 
+#ifdef _WIN32
 	volume_choice = widen(get_all_volumes_list(false, cache));
+#endif
 
 	if(lastImageBackupChoice==L"AllNonUsb")
 	{
