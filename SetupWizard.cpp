@@ -529,7 +529,8 @@ SetupWizard::SetupWizard( wxWindow* parent )
 	EFileBackupChoice fileBackupChoice;
 	EImageBackupChoice imageBackupChoice;
 	std::wstring volume_choice;
-	readConfig(fileBackupChoice, imageBackupChoice, volume_choice);
+	bool no_setupwizard;
+	readConfig(fileBackupChoice, imageBackupChoice, volume_choice, no_setupwizard);
 
 	if(fileBackupChoice == EFileBackupChoice_UserFiles)
 	{
@@ -553,11 +554,16 @@ SetupWizard::SetupWizard( wxWindow* parent )
 	m_textCtrl1->SetValue(volume_choice);
 
 	GetPageAreaSizer()->Add(*m_pages.begin());
+
+	if(no_setupwizard)
+	{
+		Close();
+	}
 }
 
 void SetupWizard::wizardCancel( wxWizardEvent& event )
 {
-	doDefConfig();
+	writestring("no_setupwizard=true", "setup_wizard.cfg");
 }
 
 void SetupWizard::wizardFinished( wxWizardEvent& event )
@@ -863,8 +869,12 @@ void SetupWizard::doDefConfig()
 	EFileBackupChoice fileBackupChoice;
 	EImageBackupChoice imageBackupChoice;
 	std::wstring volume_choice;
-	readConfig(fileBackupChoice, imageBackupChoice, volume_choice);
-	finishSetup(fileBackupChoice, imageBackupChoice, volume_choice);
+	bool no_setupwizard;
+	readConfig(fileBackupChoice, imageBackupChoice, volume_choice, no_setupwizard);
+	if(!no_setupwizard)
+	{
+		finishSetup(fileBackupChoice, imageBackupChoice, volume_choice);
+	}
 }
 
 void SetupWizard::manualVolumeConfig( wxCommandEvent& event )
@@ -879,9 +889,19 @@ void SetupWizard::manualVolumeConfig( wxCommandEvent& event )
 	}
 }
 
-void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupChoice& imageBackupChoice, std::wstring& volume_choice )
+void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupChoice& imageBackupChoice, std::wstring& volume_choice, bool& no_setupwizard )
 {
 	CFileSettingsReader setupSettings("setup_wizard.cfg");
+
+	std::string str_no_setupwizard;
+	setupSettings.getValue("no_setupwizard", &str_no_setupwizard);
+
+	no_setupwizard = (str_no_setupwizard=="true");
+
+	if(no_setupwizard)
+	{
+		return;
+	}
 
 	std::wstring lastImageBackupChoice;
 	std::wstring lastFileBackupChoice;
@@ -913,4 +933,15 @@ void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupC
 
 		setupSettings.getValue(L"VolumeChoice", &volume_choice);
 	}
+}
+
+bool SetupWizard::runSetupWizard()
+{
+	EFileBackupChoice fileBackupChoice;
+	EImageBackupChoice imageBackupChoice;
+	std::wstring volume_choice;
+	bool no_setupwizard;
+	readConfig(fileBackupChoice, imageBackupChoice, volume_choice, no_setupwizard);
+
+	return !no_setupwizard;
 }

@@ -374,7 +374,7 @@ bool MyApp::OnInit()
 	}
 	else if(cmd==wxT("setupWizard"))
 	{
-		if(!FileExists("setup_wizard.cfg"))
+		if(SetupWizard::runSetupWizard())
 		{
 			SetupWizard* sw = new SetupWizard(NULL);
 			SetTopWindow(sw);
@@ -383,10 +383,6 @@ bool MyApp::OnInit()
 			sw->Raise();
 			sw->ShowModal();
 			sw->Destroy();
-		}
-		else
-		{
-			SetupWizard::doDefConfig();
 		}		
 		wxExit();
 	}

@@ -35,9 +35,11 @@ public:
 
 	static void finishSetup(EFileBackupChoice fileBackupChoice, EImageBackupChoice imageBackupChoice, const std::wstring& volume_choice);
 
-	static void readConfig(EFileBackupChoice& fileBackupChoice, EImageBackupChoice& imageBackupChoice, std::wstring& volume_choice);
+	static void readConfig(EFileBackupChoice& fileBackupChoice, EImageBackupChoice& imageBackupChoice, std::wstring& volume_choice, bool& no_setupwizard);
 
 	static void doDefConfig();
+
+	static bool runSetupWizard();
 
 	virtual void manualVolumeConfig( wxCommandEvent& event );
 
