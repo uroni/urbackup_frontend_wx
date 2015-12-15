@@ -270,4 +270,5 @@ Status* Status::getInstance()
 void Status::OnClose()
 {
 	instance=NULL;
+	Destroy();
 }

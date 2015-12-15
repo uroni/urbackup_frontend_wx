@@ -57,4 +57,5 @@ Info* Info::getInstance()
 void Info::OnClose()
 {
 	instance=NULL;
+	Destroy();
 }
