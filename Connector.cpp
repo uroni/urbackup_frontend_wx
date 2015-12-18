@@ -282,6 +282,8 @@ int Connector::startBackup(bool full)
 
 	if(d=="RUNNING")
 		return 2;
+	else if(d=="NO SERVER")
+		return 3;
 	else if(d!="OK")
 		return 0;
 	else
@@ -300,6 +302,8 @@ int Connector::startImage(bool full)
 
 	if(d=="RUNNING")
 		return 2;
+	else if(d=="NO SERVER")
+		return 3;
 	else if(d!="OK")
 		return 0;
 	else

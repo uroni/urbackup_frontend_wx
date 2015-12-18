@@ -172,8 +172,10 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			}
 			else if(rc==2)
 				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
+			else if(rc==3)
+				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"),  wxOK | wxCENTRE | wxICON_ERROR);
 			else
-				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox( _("Could not start backup."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 
 		}break;
 	case ID_TI_SETTINGS:
@@ -195,6 +197,8 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			}
 			else if(rc==2)
 				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);
+			else if(rc==3)
+				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
 			else
 				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
 		}break;
