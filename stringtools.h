@@ -87,7 +87,6 @@ void EscapeCh(std::wstring &pStr, wchar_t ch);
 std::string UnescapeSQLString(std::string pStr);
 std::wstring UnescapeSQLString(std::wstring pStr);
 void ParseParamStr(const std::string &pStr, std::map<std::wstring,std::wstring> *pMap);
-int round(float f);
 std::string FormatTime(int timeins);
 bool IsHex(const std::string &str);
 unsigned long hexToULong(const std::string &data);

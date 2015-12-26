@@ -1049,11 +1049,6 @@ void ParseParamStr(const std::string &pStr, std::map<std::wstring,std::wstring> 
 	}
 }
 
-int round(float f)
-{
-  return (int)(f<0?f-0.5f:f+0.5f);
-}
-
 std::string FormatTime(int timeins)
 {
 	float t=(float)timeins;
@@ -1084,7 +1079,7 @@ std::string FormatTime(int timeins)
 
 //-------------------HTML DECODE-----------------
 
-const char array[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}; 
+const char hex_array[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}; 
 
 bool IsHex(const std::string &str)
 {
@@ -1094,7 +1089,7 @@ bool IsHex(const std::string &str)
 		bool in=false;
 		for(size_t t=0;t<16;++t)
 		{
-			if(array[t]==str[i])
+			if(hex_array[t]==str[i])
 			{
 				in=true;
 				break;
@@ -1118,7 +1113,7 @@ unsigned long hexToULong(const std::string &data)
 	{
 		for(unsigned char j = 0; j < 16; j++)
 		{
-			if( str[i] == array[j])
+			if( str[i] == hex_array[j])
 			{			
 				return_value = ((return_value * 16) + j);
 			}

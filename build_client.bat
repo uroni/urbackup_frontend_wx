@@ -1,7 +1,6 @@
-call update_deps.bat
 cd %~dp0
 
-call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 
 msbuild UrBackupClientGUI.sln /p:Configuration=Release /p:Platform="Win32"
 if %errorlevel% neq 0 exit /b %errorlevel% 
