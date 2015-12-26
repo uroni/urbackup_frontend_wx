@@ -105,7 +105,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxbase30u_net.lib;wxzlib.lib;wxregexu.lib;wxpng.lib;wxbase30u.lib;wxmswuniv30u_core.lib;wxmswuniv30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -126,7 +126,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_lib;..\deps\lib\vc_lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_lib;..\deps\libs\vc_lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -152,7 +152,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxpngd.lib;wxbase30ud.lib;wxexpatd.lib;comctl32.lib;Rpcrt4.lib;wxbase30ud_net.lib;ws2_32.lib;wxzlibd.lib;wxmsw30ud_core.lib;wxmsw30ud_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
@@ -176,7 +176,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxbase30u.lib;wxmsw30u_core.lib;wxmsw30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase30u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\lib\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
