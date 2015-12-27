@@ -80,16 +80,20 @@ Section "install"
 		ExecWait '"$TEMP\vc_redist_2015.x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
 			ExecWait '"$TEMP\vc_redist_2015.x64.exe" /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
+			${If} $0 != '1638'
 				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
 				Quit
 			${EndIf}
 			${EndIf}
+			${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 		${EndIf}
@@ -111,16 +115,20 @@ Section "install"
 		ExecWait '"$TEMP\vc_redist_2015.x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
 			ExecWait '"$TEMP\vc_redist_2015.x86.exe"  /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
+			${If} $0 != '1638'
 				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
 				Quit
 			${EndIf}
 			${EndIf}
+			${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 		${EndIf}
