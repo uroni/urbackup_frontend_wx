@@ -125,7 +125,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxbase30u.lib;wxmsw30u_core.lib;wxmsw30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase30u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_lib;..\deps\libs\vc_lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
