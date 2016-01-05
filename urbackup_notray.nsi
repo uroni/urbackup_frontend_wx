@@ -200,7 +200,6 @@ Section "install"
 	File "data\backup-no-server.ico"
 	File "data\backup-indexing.ico"
 	File "data\backup-no-recent.ico"
-	File "data\new.txt"	
 	File "data\logo1.png"
 	File "data\backup-progress-pause.ico"
 	File "data\urbackup_ecdsa409k1.pub"
@@ -253,8 +252,6 @@ Section "install"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
-	File "data\urbackup\backup_client_new.db"
-	
 	CreateDirectory "$INSTDIR\urbackup\data"
 	
 	${IfNot} ${RunningX64}
@@ -293,16 +290,6 @@ Section "install"
 			;SetRebootFlag true
 		${EndIf}
 	${EndIf}
-	
-	IfFileExists "$INSTDIR\urbackup\backup_client.db" next_s do_copy
-do_copy:
-	StrCpy $0 "$INSTDIR\urbackup\backup_client_new.db" ;Path of copy file from
-	StrCpy $1 "$INSTDIR\urbackup\backup_client.db"   ;Path of copy file to
-	StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-	System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-	Pop $0
-next_s:	
-	Delete "$INSTDIR\urbackup\backup_client_new.db"
 	
 	${If} ${IsWinXP}
 		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
