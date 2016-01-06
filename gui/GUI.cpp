@@ -485,7 +485,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer4->Add( m_button1, 0, wxALIGN_BOTTOM|wxALL, 5 );
 	
-	m_button2 = new wxButton( this, wxID_ANY, _("Abort"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button2 = new wxButton( this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_button2->SetMinSize( wxSize( -1,25 ) );
 	
 	bSizer4->Add( m_button2, 0, wxALIGN_BOTTOM|wxALL, 5 );
@@ -721,7 +721,7 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_button5 = new wxButton( this, wxID_ANY, _("Ok"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer31->Add( m_button5, 0, wxALL, 5 );
 	
-	m_button6 = new wxButton( this, wxID_ANY, _("Abort"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button6 = new wxButton( this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer31->Add( m_button6, 0, wxALL, 5 );
 	
 	

@@ -199,8 +199,8 @@ msgid "Ok"
 msgstr "Ok"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
-msgid "Abort"
-msgstr "Abort"
+msgid "Cancel"
+msgstr "Cancel"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
