@@ -39,7 +39,7 @@ struct SStatus
 	SStatus()
 		: pause(false), capa(0), has_server(false),
 		needs_restore_restart(0), ask_restore_ok(false),
-		error(false), init(false)
+		error(false), init(false), restore_file(false)
 	{
 	}
 
@@ -54,6 +54,8 @@ struct SStatus
 	std::string new_server;
 	bool has_server;
 	bool ask_restore_ok;
+	bool restore_file;
+	wxString restore_path;
 	int needs_restore_restart;
 	bool init;
 

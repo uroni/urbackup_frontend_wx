@@ -595,6 +595,16 @@ bool SStatus::isAvailable()
 		{
 			ask_restore_ok = ( it_restore_ask->second==L"true");
 		}
+		std::map<std::wstring, std::wstring>::iterator it_restore_file = params.find(L"restore_file");
+		if (it_restore_file != params.end())
+		{
+			restore_file = (it_restore_file->second == L"true");
+		}
+		std::map<std::wstring, std::wstring>::iterator it_restore_path = params.find(L"restore_path");
+		if (it_restore_path != params.end())
+		{
+			restore_path = it_restore_path->second;
+		}
 		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
 		if(it_needs_restore_restart!=params.end())
 		{

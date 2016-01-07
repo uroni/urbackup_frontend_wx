@@ -653,8 +653,20 @@ void MyTimer::Notify()
 #ifdef __WXMAC__
 		bring_to_foreground();
 #endif 
+
+		wxString ask_msg;
+
+		if (status.restore_file)
+		{
+			ask_msg = trans_1(_("Are you sure you want to restore the file at _1_? The current file content will be overwritten by the backup file content. When in doubt please cancel and run a file backup before proceeding."), status.restore_path);
+		}
+		else
+		{
+			ask_msg = trans_1(_("Are you sure you want to restore the files in _1_? Existing files in this folder will be overwritten. Files created within the selected folder since the backup will be deleted. When in doubt please cancel and run a file backup before proceeding."), status.restore_path);
+		}
+
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
-			_("Are you sure you want to restore the selected files? Existing files will be overwritten. Files created within the selected folder since the backup will be deleted. When in doubt please cancel and run a file backup before proceeding."), wxT("UrBackup - Allow restore"), wxOK | wxCANCEL);
+			ask_msg, _("UrBackup - Allow restore"), wxOK | wxCANCEL);
 		int rc = dialog->ShowModal();
 		if(rc == wxID_OK)
 		{
