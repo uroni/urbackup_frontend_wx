@@ -201,7 +201,7 @@ bool Connector::hasError(void)
 std::vector<SBackupDir> Connector::getSharedPaths(void)
 {
 	std::vector<SBackupDir> ret;
-	std::string d=getResponse("GET BACKUP DIRS","", true);
+	std::string d=getResponse("GET BACKUP DIRS","", false);
 
 	Json::Value root;
 	Json::Reader reader;

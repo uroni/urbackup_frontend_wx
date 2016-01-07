@@ -505,7 +505,7 @@ void TrayIcon::accessBackups( wxString path )
 
 	std::string params = Connector::getAccessParameters(tokens);
 
-	if(!path.empty())
+	if(!path.empty() && !params.empty())
 	{
 		params+="&path="+base64_encode_dash(path.ToUTF8().data());
 
