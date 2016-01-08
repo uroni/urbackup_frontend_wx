@@ -207,8 +207,6 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			if(Connector::setPause(true))
 			{
 				b_is_pausing=true;
-				if(timer!=NULL)
-					timer->Notify();
 			}
 			else
 			{
@@ -220,8 +218,6 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			if(Connector::setPause(false))
 			{
 				b_is_pausing=false;
-				if(timer!=NULL)
-					timer->Notify();
 			}
 			else
 			{
