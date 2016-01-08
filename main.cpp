@@ -40,6 +40,8 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 }
 #endif*/
 
+wxDECLARE_APP(MyApp);
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
