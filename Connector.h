@@ -78,6 +78,24 @@ struct SLogLine
 	wxString msg;
 };
 
+struct SRunningProcess
+{
+	wxString action;
+	int percent_done;
+	wxLongLong_t eta_ms;
+	wxString details;
+	int detail_pc;
+
+	bool operator==(const SRunningProcess& other) const
+	{
+		return action == other.action
+			&& percent_done == other.percent_done
+			&& eta_ms / 1000 / 60 == other.eta_ms / 1000 / 60
+			&& details == other.details
+			&& detail_pc == other.detail_pc;
+	}
+};
+
 struct SUrBackupServer
 {
 	bool internet_connection;
@@ -94,26 +112,24 @@ struct SStatusDetails
 {
 	bool ok;
 	wxString last_backup_time;
-	int percent_done;
-	wxString currently_running;
+	
+	std::vector<SRunningProcess> running_processes;
 	std::vector<SUrBackupServer> servers;
 	unsigned int time_since_last_lan_connection;
 	bool internet_connected;
 	wxString internet_status;
-	wxLongLong_t eta_ms;
+	
 	int capability_bits;
 
 	bool operator==(const SStatusDetails& other) const
 	{
 		return ok == other.ok
 			&& last_backup_time == other.last_backup_time
-			&& percent_done == other.percent_done
-			&& currently_running == other.currently_running
+			&& running_processes == other.running_processes
 			&& servers == other.servers
 			&& time_since_last_lan_connection/1000/60 == other.time_since_last_lan_connection/1000/60
 			&& internet_connected == other.internet_connected
 			&& internet_status == other.internet_status
-			&& eta_ms/1000/60 == other.eta_ms/1000/60
 			&& capability_bits == other.capability_bits;
 	}
 };

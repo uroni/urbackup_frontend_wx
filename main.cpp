@@ -458,6 +458,10 @@ wxString getStatusText(wxString status)
 	{
 		return _("Resumed full file backup running.");
 	}
+	else if (status == wxT("RESTORE_FILES"))
+	{
+		return _("Restoring files.");
+	}
 	return wxT("");
 }
 
@@ -569,13 +573,7 @@ void MyTimer::Notify()
 	ETrayIcon last_icon_type=icon_type;
 	bool refresh=false;
 	
-	if(status.status==wxT("DONE") )
-	{
-		icon_type=ETrayIcon_OK;
-		backup_is_running=false;
-		refresh=true;
-	}
-	else if(status.status==wxT("INCR") || 
+	if(status.status==wxT("INCR") || 
 		status.status==wxT("FULL") ||
 		status.status==wxT("INCRI") ||
 		status.status==wxT("FULLI") ||

@@ -772,32 +772,9 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
 	
-	wxBoxSizer* bSizer34;
 	bSizer34 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer36;
-	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_staticText31 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	bSizer36->Add( m_staticText31, 0, wxALL, 5 );
-	
-	bSizer34->Add( bSizer36, 0, wxEXPAND, 5 );
-
-	wxBoxSizer* bSizer362;
-	bSizer362 = new wxBoxSizer( wxHORIZONTAL );
-
-	m_staticText312 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText312->Wrap( -1 );
-	bSizer362->Add( m_staticText312, 0, wxALL, 5 );
-	
-	bSizer34->Add( bSizer362, 0, wxEXPAND, 5 );
-	
-	m_gauge1 = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
-	m_gauge1->SetMinSize( wxSize( 500,-1 ) );
-	m_gauge1->SetRange(100);
-	
-	bSizer34->Add( m_gauge1, 0, wxALL, 5 );
+	resizeForProcesses(1);
 
 	wxBoxSizer* bSizer12;
 	bSizer12 = new wxBoxSizer( wxHORIZONTAL );
@@ -848,6 +825,62 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->Centre( wxBOTH );
 
 	Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GUIStatus::OnCloseInt ), NULL, this);
+}
+
+void GUIStatus::removeCurrentProcesses(size_t new_size)
+{
+	for (size_t i = new_size; i < m_processItem.size(); ++i)
+	{
+		bSizer34->Remove(m_processItem[i].bSizer36);
+		bSizer34->Remove(m_processItem[i].bSizer362);
+		bSizer34->Detach(m_processItem[i].m_gauge1);
+		bSizer34->Detach(m_processItem[i].m_staticLine);
+		m_processItem[i].m_gauge1->Destroy();
+		m_processItem[i].m_staticText31->Destroy();
+		m_processItem[i].m_staticText312->Destroy();
+		m_processItem[i].m_staticLine->Destroy();
+	}
+	m_processItem.resize(new_size);
+}
+
+void GUIStatus::resizeForProcesses(size_t new_size)
+{
+	for (size_t i = m_processItem.size(); i < new_size; ++i)
+	{
+		SProcessItem process_item;
+		process_item.bSizer36 = new wxBoxSizer(wxHORIZONTAL);
+
+		process_item.m_staticText31 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		process_item.m_staticText31->Wrap(-1);
+		process_item.bSizer36->Add(process_item.m_staticText31, 0, wxALL, 5);
+
+		bSizer34->Insert(i * 4 + 0,process_item.bSizer36, 0, wxEXPAND, 5);
+
+		process_item.bSizer362 = new wxBoxSizer(wxHORIZONTAL);
+
+		process_item.m_staticText312 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		process_item.m_staticText312->Wrap(-1);
+		process_item.bSizer362->Add(process_item.m_staticText312, 0, wxALL, 5);
+
+		bSizer34->Insert(i * 4 + 1, process_item.bSizer362, 0, wxEXPAND, 5);
+
+		process_item.m_gauge1 = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
+		process_item.m_gauge1->SetMinSize(wxSize(500, -1));
+		process_item.m_gauge1->SetRange(100);
+		bSizer34->Insert(i * 4 + 2, process_item.m_gauge1, 0, wxALL, 5);
+
+		process_item.m_staticLine = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+
+		bSizer34->Insert(i * 4 + 3, process_item.m_staticLine, 0, wxEXPAND, 5);
+
+		m_processItem.push_back(process_item);
+	}
+}
+
+void GUIStatus::relayout()
+{
+	this->Layout();
+	bSizer34->Fit(this);
 }
 
 GUIStatus::~GUIStatus()

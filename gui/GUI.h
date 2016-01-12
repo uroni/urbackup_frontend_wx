@@ -28,6 +28,8 @@
 #include <wx/notebook.h>
 #include <wx/panel.h>
 #include <wx/gauge.h>
+#include <wx/statline.h>
+#include <vector>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -243,6 +245,16 @@ class GUIConfigPath : public wxDialog
 	
 };
 
+struct SProcessItem
+{
+	wxBoxSizer* bSizer36;
+	wxStaticText* m_staticText31;
+	wxBoxSizer* bSizer362;
+	wxStaticText* m_staticText312;
+	wxGauge* m_gauge1;
+	wxStaticLine* m_staticLine;
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIStatus
 ///////////////////////////////////////////////////////////////////////////////
@@ -253,9 +265,13 @@ class GUIStatus : public wxDialog
 		
 	
 	protected:
-		wxStaticText* m_staticText31;
-		wxStaticText* m_staticText312;
-		wxGauge* m_gauge1;
+		void removeCurrentProcesses(size_t new_size);
+
+		void resizeForProcesses(size_t new_size);
+
+		void relayout();
+
+		std::vector<SProcessItem> m_processItem;
 		wxStaticText* m_staticText32;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_staticText36;
@@ -263,6 +279,7 @@ class GUIStatus : public wxDialog
 		wxStaticText* m_staticText35;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText38;
+		wxBoxSizer* bSizer34;
 
 		virtual void OnClose()=0;
 

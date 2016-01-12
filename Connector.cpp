@@ -402,9 +402,20 @@ SStatusDetails Connector::getStatusDetails()
 	try
 	{
 		ret.last_backup_time = root["last_backup_time"].asString();
-		ret.percent_done = root["percent_done"].asInt();
-		ret.eta_ms = root["eta_ms"].asInt64();
-		ret.currently_running = root["currently_running"].asString();
+
+		std::vector<SRunningProcess> running_processes;
+		Json::Value json_running_processes = root["running_processes"];
+		running_processes.resize(json_running_processes.size());
+		for (unsigned int i = 0; i<json_running_processes.size(); ++i)
+		{
+			running_processes[i].action = json_running_processes[i]["action"].asString();
+			running_processes[i].percent_done = json_running_processes[i]["percent_done"].asInt();
+			running_processes[i].eta_ms = json_running_processes[i]["eta_ms"].asInt64();
+
+			running_processes[i].details = json_running_processes[i].get("details", std::string()).asString();
+			running_processes[i].detail_pc = json_running_processes[i].get("detail_pc", -1).asInt();
+		}
+		ret.running_processes = running_processes;
 
 		std::vector<SUrBackupServer> servers;
 		Json::Value json_servers = root["servers"];

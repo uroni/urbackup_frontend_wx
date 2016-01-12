@@ -133,6 +133,7 @@ Status::Status(wxWindow* parent)
 }
 
 
+
 bool Status::updateStatus(int errcnt)
 {
 	SStatusDetails status_details = Connector::getStatusDetails();
@@ -156,44 +157,88 @@ bool Status::updateStatus(int errcnt)
 
 	last_status_details = status_details;
 
-	wxString status_text = getStatusText(status_details.currently_running);
-
-	if(status_text.empty())
+	if (!status_details.running_processes.empty())
 	{
-		status_text=_("Idle.");
-		m_staticText312->SetLabel(wxEmptyString);
-		m_gauge1->SetValue(0);
-		m_gauge1->Disable();
+		if (status_details.running_processes.size() < m_processItem.size())
+		{
+			removeCurrentProcesses(status_details.running_processes.size());
+		}
+		else
+		{
+			resizeForProcesses(status_details.running_processes.size());
+		}
+
+		for (size_t i = 0; i < status_details.running_processes.size(); ++i)
+		{
+			SProcessItem& item = m_processItem[i];
+			SRunningProcess& proc = status_details.running_processes[i];
+
+			wxString status_text = getStatusText(proc.action);
+
+			item.m_gauge1->Enable();
+
+			if (proc.percent_done >= 0)
+			{
+				item.m_gauge1->SetValue(proc.percent_done);
+			}
+			else
+			{
+				item.m_gauge1->Pulse();
+			}
+
+			wxString eta_text = wxEmptyString;
+			if (proc.eta_ms>0)
+			{
+				eta_text = trans_1(_("ETA: Approx. _1_"), PrettyPrintTime(proc.eta_ms));
+				eta_text += "    ";
+			}
+
+
+			if (!proc.details.empty())
+			{				
+				if (proc.action == "RESTORE_FILES")
+				{
+					eta_text += trans_2(_("File: _1_"), proc.details, wxString(convert(proc.detail_pc)));
+				}
+				else if (proc.action == "INCRI" || proc.action == "FULLI")
+				{
+					eta_text += trans_1(_("Volume: _1_"), proc.details);
+				}
+
+				if (proc.detail_pc != -1)
+				{
+					if (proc.action == "RESTORE_FILES")
+					{
+						wxString s;
+						s << proc.detail_pc;
+						eta_text += getPercentText(s);
+					}
+				}
+			}
+
+			item.m_staticText312->SetLabel(eta_text);
+
+
+			wxString s;
+			s << proc.percent_done;
+			status_text += wxT(" ");
+			status_text += getPercentText(s);
+
+			item.m_staticText31->SetLabel(status_text);
+		}
 	}
 	else
 	{
-		m_gauge1->Enable();
+		removeCurrentProcesses(1);
 
-		if(status_details.percent_done>=0)
-		{
-			m_gauge1->SetValue(status_details.percent_done);
-		}
-		else
-		{
-			m_gauge1->Pulse();
-		}
+		SProcessItem& item = m_processItem[0];
 
-		if(status_details.eta_ms>0)
-		{
-			m_staticText312->SetLabel(trans_1(_("ETA: Approx. _1_"), PrettyPrintTime(status_details.eta_ms)));
-		}
-		else
-		{
-			m_staticText312->SetLabel(wxEmptyString);
-		}
-
-		wxString s;
-		s << status_details.percent_done;
-		status_text+=wxT(" ");
-		status_text+=getPercentText(s);
+		item.m_staticText312->SetLabel(wxEmptyString);
+		item.m_gauge1->SetValue(0);
+		item.m_gauge1->Disable();
+		item.m_staticText31->SetLabel(_("Idle."));
 	}
 
-	m_staticText31->SetLabel(status_text);
 	wxLongLong_t lastbackups;
 	if(!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
 	{
@@ -237,9 +282,7 @@ bool Status::updateStatus(int errcnt)
 
 	m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
 
-	Layout();
-
-	GetSizer()->Fit(this);
+	relayout();
 
 	return true;
 }
