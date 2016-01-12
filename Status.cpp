@@ -108,8 +108,8 @@ namespace
 
 Status* Status::instance = NULL;
 
-Status::Status(wxWindow* parent)
-	: GUIStatus(parent)
+Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
+	: GUIStatus(parent, follow_only_process_id)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
@@ -129,7 +129,10 @@ Status::Status(wxWindow* parent)
 
 	error_count=reset_error_count;
 
-	instance = this;
+	if (follow_only_process_id == 0)
+	{
+		instance = this;
+	}
 }
 
 
@@ -149,6 +152,22 @@ bool Status::updateStatus(int errcnt)
 		}
 		return false;
 	}
+
+	if (follow_only_process_id != 0)
+	{
+		for (size_t i = 0; i < status_details.running_processes.size();)
+		{
+			if (status_details.running_processes[i].process_id != follow_only_process_id)
+			{
+				status_details.running_processes.erase(status_details.running_processes.begin() + i);
+			}
+			else
+			{
+				++i;
+			}
+		}
+	}
+	
 
 	if(last_status_details == status_details)
 	{
@@ -236,51 +255,62 @@ bool Status::updateStatus(int errcnt)
 		item.m_staticText312->SetLabel(wxEmptyString);
 		item.m_gauge1->SetValue(0);
 		item.m_gauge1->Disable();
-		item.m_staticText31->SetLabel(_("Idle."));
-	}
 
-	wxLongLong_t lastbackups;
-	if(!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
-	{
-		wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
-
-		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
-	}
-	else
-	{
-		m_staticText37->SetLabel(wxEmptyString);
-	}
-
-	wxString servers_text;
-
-	for(size_t i=0;i<status_details.servers.size();++i)
-	{
-		const SUrBackupServer& server = status_details.servers[i];
-
-		if(!servers_text.empty())
-			servers_text+=wxT("\n");
-
-		wxString internet_s;
-		if(server.internet_connection)
-			internet_s=_("Yes");
+		if (follow_only_process_id == 0)
+		{
+			item.m_staticText31->SetLabel(_("Idle."));
+		}
 		else
-			internet_s=_("No");
-
-		servers_text+=server.name+" ("+trans_1(_("Internet: _1_"), internet_s) +")";
+		{
+			item.m_staticText31->SetLabel(_("Restore finished."));
+		}
 	}
 
-	if(status_details.servers.empty())
+	if (follow_only_process_id == 0)
 	{
-		m_staticText32->SetLabel(wxEmptyString);
-	}
-	else
-	{
-		m_staticText32->SetLabel(_("Servers:"));
-	}
+		wxLongLong_t lastbackups;
+		if (!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
+		{
+			wxDateTime lastbackup_dt((wxLongLong)(lastbackups * 1000));
 
-	m_staticText33->SetLabel(servers_text);
+			m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
+		}
+		else
+		{
+			m_staticText37->SetLabel(wxEmptyString);
+		}
 
-	m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
+		wxString servers_text;
+
+		for (size_t i = 0; i<status_details.servers.size(); ++i)
+		{
+			const SUrBackupServer& server = status_details.servers[i];
+
+			if (!servers_text.empty())
+				servers_text += wxT("\n");
+
+			wxString internet_s;
+			if (server.internet_connection)
+				internet_s = _("Yes");
+			else
+				internet_s = _("No");
+
+			servers_text += server.name + " (" + trans_1(_("Internet: _1_"), internet_s) + ")";
+		}
+
+		if (status_details.servers.empty())
+		{
+			m_staticText32->SetLabel(wxEmptyString);
+		}
+		else
+		{
+			m_staticText32->SetLabel(_("Servers:"));
+		}
+
+		m_staticText33->SetLabel(servers_text);
+
+		m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
+	}	
 
 	relayout();
 
@@ -312,6 +342,9 @@ Status* Status::getInstance()
 
 void Status::OnClose()
 {
-	instance=NULL;
+	if (follow_only_process_id == 0)
+	{
+		instance = NULL;
+	}
 	Destroy();
 }

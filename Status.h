@@ -22,7 +22,7 @@
 class Status : public GUIStatus, wxTimer
 {
 public:
-	Status(wxWindow* parent);
+	Status(wxWindow* parent, wxLongLong_t follow_only_process_id);
 
 	static Status* getInstance();
 

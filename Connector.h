@@ -85,6 +85,7 @@ struct SRunningProcess
 	wxLongLong_t eta_ms;
 	wxString details;
 	int detail_pc;
+	wxLongLong_t process_id;
 
 	bool operator==(const SRunningProcess& other) const
 	{
@@ -92,7 +93,8 @@ struct SRunningProcess
 			&& percent_done == other.percent_done
 			&& eta_ms / 1000 / 60 == other.eta_ms / 1000 / 60
 			&& details == other.details
-			&& detail_pc == other.detail_pc;
+			&& detail_pc == other.detail_pc
+			&& process_id == other.process_id;
 	}
 };
 
@@ -148,7 +150,7 @@ public:
 	static bool addNewServer(const std::string &ident);
 	static SStatusDetails getStatusDetails();
 	static int getCapabilities();
-	static bool restoreOk(bool ok);
+	static bool restoreOk(bool ok, wxLongLong_t& process_id);
 	static SStatus initStatus(size_t timeoutms=5000);
 
 	static bool hasError(void);

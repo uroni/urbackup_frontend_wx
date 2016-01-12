@@ -768,7 +768,8 @@ GUIConfigPath::~GUIConfigPath()
 	
 }
 
-GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+GUIStatus::GUIStatus( wxWindow* parent, wxLongLong_t follow_only_process_id, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+	, follow_only_process_id(follow_only_process_id)
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
 	
@@ -776,46 +777,53 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	resizeForProcesses(1);
 
-	wxBoxSizer* bSizer12;
-	bSizer12 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText37 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText37->Wrap( -1 );
-	bSizer12->Add( m_staticText37, 0, wxALL, 5 );
+	if (follow_only_process_id == 0)
+	{
+		wxBoxSizer* bSizer12;
+		bSizer12 = new wxBoxSizer(wxHORIZONTAL);
 
-	bSizer34->Add( bSizer12, 0, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer35;
-	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText32 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText32->Wrap( -1 );
-	bSizer35->Add( m_staticText32, 0, wxALL, 5 );
-	
-	m_staticText33 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText33->Wrap( -1 );
-	bSizer35->Add( m_staticText33, 0, wxALL, 5 );
-	
-	
-	bSizer34->Add( bSizer35, 0, wxEXPAND, 5 );
-	
-	m_staticText36 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText36->Wrap( -1 );
-	bSizer34->Add( m_staticText36, 0, wxALL, 5 );
-	
-	wxBoxSizer* bSizer37;
-	bSizer37 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText34 = new wxStaticText( this, wxID_ANY, _("Internet connection status:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText34->Wrap( -1 );
-	bSizer37->Add( m_staticText34, 0, wxALL, 5 );
-	
-	m_staticText35 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText35->Wrap( -1 );
-	bSizer37->Add( m_staticText35, 0, wxALL, 5 );
-	
-	
-	bSizer34->Add( bSizer37, 0, wxEXPAND, 5 );
+		m_staticText37 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText37->Wrap(-1);
+		bSizer12->Add(m_staticText37, 0, wxALL, 5);
+
+		bSizer34->Add(bSizer12, 0, wxEXPAND, 5);
+
+		wxBoxSizer* bSizer35;
+		bSizer35 = new wxBoxSizer(wxHORIZONTAL);
+
+		m_staticText32 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText32->Wrap(-1);
+		bSizer35->Add(m_staticText32, 0, wxALL, 5);
+
+		m_staticText33 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText33->Wrap(-1);
+		bSizer35->Add(m_staticText33, 0, wxALL, 5);
+
+
+		bSizer34->Add(bSizer35, 0, wxEXPAND, 5);
+
+		m_staticText36 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText36->Wrap(-1);
+		bSizer34->Add(m_staticText36, 0, wxALL, 5);
+
+		wxBoxSizer* bSizer37;
+		bSizer37 = new wxBoxSizer(wxHORIZONTAL);
+
+		m_staticText34 = new wxStaticText(this, wxID_ANY, _("Internet connection status:"), wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText34->Wrap(-1);
+		bSizer37->Add(m_staticText34, 0, wxALL, 5);
+
+		m_staticText35 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText35->Wrap(-1);
+		bSizer37->Add(m_staticText35, 0, wxALL, 5);
+
+
+		bSizer34->Add(bSizer37, 0, wxEXPAND, 5);
+	}
+	else
+	{
+		this->SetTitle(_("UrBackup - File restore"));
+	}
 	
 	
 	this->SetSizer( bSizer34 );
@@ -869,9 +877,12 @@ void GUIStatus::resizeForProcesses(size_t new_size)
 		process_item.m_gauge1->SetRange(100);
 		bSizer34->Insert(i * 4 + 2, process_item.m_gauge1, 0, wxALL, 5);
 
-		process_item.m_staticLine = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+		if (follow_only_process_id == 0)
+		{
+			process_item.m_staticLine = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
 
-		bSizer34->Insert(i * 4 + 3, process_item.m_staticLine, 0, wxEXPAND, 5);
+			bSizer34->Insert(i * 4 + 3, process_item.m_staticLine, 0, wxEXPAND, 5);
+		}
 
 		m_processItem.push_back(process_item);
 	}

@@ -230,6 +230,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			{
 				Info::getInstance()->SetFocus();
 				Info::getInstance()->Raise();
+				Info::getInstance()->RequestUserAttention();
 			}
 			else
 			{
@@ -242,10 +243,11 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			{
 				Status::getInstance()->SetFocus();
 				Status::getInstance()->Raise();
+				Status::getInstance()->RequestUserAttention();
 			}
 			else
 			{
-				new Status(NULL);
+				new Status(NULL, 0);
 			}
 		}break;
 	case ID_TI_EXIT:
@@ -286,10 +288,11 @@ void TrayIcon::OnClick(wxCommandEvent &evt)
 	{
 		Status::getInstance()->SetFocus();
 		Status::getInstance()->Raise();
+		Status::getInstance()->RequestUserAttention();
 	}
 	else
 	{
-		new Status(NULL);
+		new Status(NULL, 0);
 	}
 }
 

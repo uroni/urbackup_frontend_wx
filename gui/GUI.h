@@ -284,10 +284,12 @@ class GUIStatus : public wxDialog
 		virtual void OnClose()=0;
 
 		virtual void OnCloseInt(wxCloseEvent& event);
+
+		wxLongLong_t follow_only_process_id;
 	
 	public:
 		
-		GUIStatus( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		GUIStatus( wxWindow* parent, wxLongLong_t follow_only_process_id, wxWindowID id = wxID_ANY, const wxString& title = _("Status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
 		~GUIStatus();
 	
 };

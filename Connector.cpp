@@ -414,6 +414,8 @@ SStatusDetails Connector::getStatusDetails()
 
 			running_processes[i].details = json_running_processes[i].get("details", std::string()).asString();
 			running_processes[i].detail_pc = json_running_processes[i].get("detail_pc", -1).asInt();
+
+			running_processes[i].process_id = json_running_processes[i].get("process_id", 0).asInt64();
 		}
 		ret.running_processes = running_processes;
 
@@ -461,9 +463,24 @@ int Connector::getCapabilities()
 	}
 }
 
-bool Connector::restoreOk( bool ok )
+bool Connector::restoreOk( bool ok, wxLongLong_t& process_id)
 {
-	return getResponse("RESTORE OK", "ok="+nconvert(ok), true) == "ok";
+	std::string d = getResponse("RESTORE OK", "ok="+nconvert(ok), true);
+
+	Json::Value root;
+	Json::Reader reader;
+
+	if (!reader.parse(d, root, false))
+	{
+		return false;
+	}
+
+	if (root.get("accepted", false).asBool() == true)
+	{
+		process_id = root["process_id"].asInt64();
+	}
+
+	return root["ok"].asBool();
 }
 
 SStatus Connector::initStatus(size_t timeoutms/*=5000*/ )

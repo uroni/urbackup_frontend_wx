@@ -24,6 +24,7 @@
 #include "Settings.h"
 #include "Logs.h"
 #include "TranslationHelper.h"
+#include "Status.h"
 #include <iostream>
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
@@ -408,7 +409,8 @@ bool MyApp::OnInit()
 	}
 	else if(cmd==wxT("restoreok"))
 	{
-		Connector::restoreOk(wxString(argv[2])=="true");
+		wxLongLong_t process_id;
+		Connector::restoreOk(wxString(argv[2])=="true", process_id);
 		wxExit();
 	}
 	else
@@ -519,6 +521,7 @@ void MyTimer::Notify()
 			if(tray!=NULL)
 				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
 		}
+		status.init = false;
 		return;
 	}
 
@@ -666,18 +669,23 @@ void MyTimer::Notify()
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			ask_msg, _("UrBackup - Allow restore"), wxOK | wxCANCEL);
-		wxGetApp().SetTopWindow(dialog);
-		dialog->SetFocus();
-		dialog->Raise();
+		dialog->RequestUserAttention();
 		int rc = dialog->ShowModal();
 		dialog->Destroy();
 		if(rc == wxID_OK)
 		{
-			Connector::restoreOk(true);
+			wxLongLong_t process_id = 0;
+			Connector::restoreOk(true, process_id);
+
+			if (process_id != 0)
+			{
+				new Status(NULL, process_id);
+			}
 		}
 		else
 		{
-			Connector::restoreOk(false);
+			wxLongLong_t process_id;
+			Connector::restoreOk(false, process_id);
 		}
 	}
 
@@ -691,9 +699,7 @@ void MyTimer::Notify()
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			_("Some files could not be deleted or overwritten during the restore process. In order to overwrite/delete the files the system needs to be restarted. Do you want to do this now?"), _("UrBackup - Restart Windows"), wxOK | wxCANCEL);
-		wxGetApp().SetTopWindow(dialog);
-		dialog->SetFocus();
-		dialog->Raise();
+		dialog->RequestUserAttention();
 		if(dialog->ShowModal() == wxID_OK)
 		{
 			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
