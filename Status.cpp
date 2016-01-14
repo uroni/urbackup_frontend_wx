@@ -25,7 +25,7 @@ extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
-const int reset_error_count=60;
+const int reset_error_count=20;
 
 namespace
 {
@@ -120,6 +120,11 @@ Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
 		Show(true);
 		RequestUserAttention();
 
+		if (follow_only_process_id == 0)
+		{
+			instance = this;
+		}
+
 		Start(1000);
 	}
 
@@ -128,11 +133,6 @@ Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
 #endif
 
 	error_count=reset_error_count;
-
-	if (follow_only_process_id == 0)
-	{
-		instance = this;
-	}
 }
 
 
@@ -147,7 +147,6 @@ bool Status::updateStatus(int errcnt)
 		{
 			Stop();
 			wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
-			Hide();
 			Close();
 		}
 		return false;

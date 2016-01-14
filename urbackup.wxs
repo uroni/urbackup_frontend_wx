@@ -5,7 +5,7 @@
             Version='$version_full_numeric$' Manufacturer='Martin Raiber' UpgradeCode='87d7bb18-2091-4876-a8de-0c47f7d2e052'>
     <Package Description='Client for UrBackup Server'
              Comments='Client for UrBackup Server. Allows file and image backups'
-             Manufacturer='Martin Raiber' InstallerVersion='300' Compressed='yes' Platform='$(var.Platform)'/>
+             Manufacturer='Martin Raiber' InstallerVersion='301' Compressed='yes' Platform='$(var.Platform)'/>
 			 
 	<MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 	
