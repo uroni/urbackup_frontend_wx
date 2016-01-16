@@ -23,6 +23,10 @@
 #include "json/json.h"
 #include <stdexcept>
 
+#ifndef _WIN32
+#include "../config.h"
+#endif
+
 std::string Connector::pw;
 std::string Connector::pw_change;
 bool Connector::error=false;
@@ -65,35 +69,25 @@ std::string Connector::getPasswordData( bool change_command, bool set_busy)
 			curr_pw=getFile(pw_fn);
 		else
 #endif
-			#ifndef __APPLE__
-			if(FileExists(g_res_path+pw_fn))
-				curr_pw=getFile(g_res_path+pw_fn);
-			else if(FileExists(pw_fn))
-				curr_pw=getFile(pw_fn);
-			else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/usr/local/var/urbackup/"+pw_fn);
-			else if(FileExists("/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/var/urbackup/"+pw_fn);
-			else if(FileExists("/var/lib/urbackup/"+pw_fn))
-				curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
-			else if(FileExists("/usr/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/usr/var/urbackup/"+pw_fn);
-			#else
-			if(FileExists("/usr/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/usr/var/urbackup/"+pw_fn);
-			#endif
+		{
+#ifdef _WIN32
+			curr_pw = getFile(g_res_path + pw_fn);
+#else
+			curr_pw = getFile(VARDIR "/urbackup/" + pw_fn);
+#endif
+		}
 
-			if(curr_pw.empty())
-			{
-				std::cout << "Could not load password file!" << std::endl;
-			}
+		if(curr_pw.empty())
+		{
+			std::cout << "Could not load password file!" << std::endl;
+		}
+		else
+		{
+			if(change_command)
+				pw_change = curr_pw;
 			else
-			{
-				if(change_command)
-					pw_change = curr_pw;
-				else
-					pw = curr_pw;
-			}
+				pw = curr_pw;
+		}
 	}
 
 	return curr_pw;

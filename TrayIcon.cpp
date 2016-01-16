@@ -26,6 +26,8 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+#else
+#include "../config.h"
 #endif
 #include "FileSettingsReader.h"
 #include <wx/dir.h>
@@ -120,27 +122,27 @@ void find_sudo_app()
 	else if(system("type kdesu")==0) sudo_app="kdesu";
 	else sudo_app="sudo";
 #else
-	sudo_app="urbackup_cocoasudo";
+	sudo_app="\"" BINDIR "/UrBackup Client Administration\"";
 #endif
 }
 
 void runCommand(std::string cmd, std::string arg1)
 {
-		std::string sudo_prefix = "";
+	std::string sudo_prefix = "";
 
-		if(Connector::getPasswordData(true, false).empty())
+	if (Connector::getPasswordData(true, false).empty())
+	{
+		if (sudo_app.empty())
 		{
-			if(sudo_app.empty())
-			{
-				find_sudo_app();
-			}
-			sudo_prefix = sudo_app + " ";
+			find_sudo_app();
 		}
-
-#ifndef __APPLE__
-		wxExecute(sudo_prefix+"urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+		sudo_prefix = sudo_app + " ";
+	}
+#ifdef __APPLE__
+	std::string clientexecutable = ExtractFilePath(BINDIR)+"/urbackupclientgui";
+	wxExecute(sudo_prefix +"\""+ clientexecutable +"\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #else
-		wxExecute(sudo_prefix+"/Applications/UrBackup\\ Client.app/Contents/MacOS/urbackup_client_gui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+	wxExecute(sudo_prefix + BINDIR "urbackupclientgui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
 #endif //WIN32
@@ -275,7 +277,8 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				{
 					find_sudo_app();
 				}
-				wxExecute(sudo_app+" /usr/sbin/urbackup_uninstall");
+				std::string uninstaller = SBINDIR "/urbackup_uninstall";
+				wxExecute(sudo_app + "\"" + uninstaller + "\"", wxEXEC_ASYNC, NULL, NULL);
 			}
 	    }
 #endif
@@ -488,13 +491,8 @@ void TrayIcon::accessBackups( wxString path )
 	
 	read_tokens(wx_path, tokens);
 	
-#if !defined(_WIN32) && !defined(__APPLE__)
-	read_tokens(wxT("/var/urbackup/tokens"), tokens);
-	read_tokens(wxT("/usr/local/var/urbackup/tokens"), tokens);
-#endif
-
-#ifdef __APPLE__
-	read_tokens(wxT("/usr/var/urbackup/tokens"), tokens);
+#if !defined(_WIN32)
+	read_tokens(wxT(VARDIR "/urbackup/tokens"), tokens);
 #endif
 
 	if(tokens.empty())

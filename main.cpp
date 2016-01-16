@@ -31,6 +31,10 @@
 #include <wx/filename.h>
 #include <wx/log.h>
 
+#ifndef _WIN32
+#include "../config.h"
+#endif
+
 #include <wx/apptrait.h>
 /*#if wxUSE_STACKWALKER && defined( __WXDEBUG__ )
 // silly workaround for the link error with debug configuration:
@@ -151,16 +155,8 @@ bool MyApp::OnInit()
 	g_res_path=ConvertToUTF8(ExtractFilePath(buf))+"\\";
 	res_path=wxString(g_res_path.c_str(), wxMBConvUTF8());
 #else
-	if(FileExists("/usr/share/urbackup/info.txt"))
-	{
-		res_path=wxT("/usr/share/urbackup/");
-		g_res_path="/usr/share/urbackup/";
-	}
-	if(FileExists("/usr/local/share/urbackup/info.txt"))
-	{
-		res_path=wxT("/usr/local/share/urbackup/");
-		g_res_path="/usr/local/share/urbackup/";
-	}
+	res_path=wxT(DATADIR "/urbackup/");
+	g_res_path= DATADIR "/urbackup/";
 #endif
 	wxLanguage lang=wxLANGUAGE_ENGLISH;
 	wxLanguage sysdef=(wxLanguage)wxLocale::GetSystemLanguage();
