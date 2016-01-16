@@ -73,6 +73,8 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 
 #ifdef __APPLE__
 extern "C" void bring_to_foreground();
+extern "C" void register_login_item();
+extern "C" void remove_login_item();
 #endif
 
 class TheFrame : public wxFrame {
@@ -310,7 +312,13 @@ bool MyApp::OnInit()
 	{
 		cmd=argv[1];
 	}
-	else
+
+	if(cmd=="daemon")
+	{
+		cmd.clear();
+	}
+
+	if(cmd.empty())
 	{
 		writestring(_("&Access backups").ToUTF8().data(), "access_backups_shell_mui.txt");
 	}
@@ -409,6 +417,24 @@ bool MyApp::OnInit()
 		Connector::restoreOk(wxString(argv[2])=="true", process_id);
 		wxExit();
 	}
+#ifdef __APPLE__
+	else if (cmd == wxT("uninstall"))
+	{
+		std::string uninstaller = SBINDIR "/urbackup_uninstall";
+		wxExecute("/bin/sh \"" + uninstaller + "\"", wxEXEC_SYNC, NULL, NULL);
+		wxExit();
+	}
+	else if(cmd==wxT("register_login_item"))
+	{
+		register_login_item();
+		exit(0);
+	}
+	else if(cmd==wxT("remove_login_item"))
+	{
+		remove_login_item();
+		exit(0);
+	}
+#endif
 	else
 	{
 		return false;
@@ -723,6 +749,36 @@ void MyTimer::resetDisplayedUpdateInfo(void)
 #ifndef DD_RELEASE
 int main(int argc, char *argv[])
 {
+	#ifdef __APPLE__
+	if(argc>1 && wxString(argv[1])==wxT("daemon"))
+	{
+		std::cout << "Daemonizing..." << std::endl;
+		//Daemonize. At least that works *tears*
+		size_t pid1;
+		if( (pid1=fork())==0 )
+		{
+			setsid();
+			if(fork()==0)
+			{
+				for (int i=getdtablesize();i>=0;--i) close(i);
+				int i=open("/dev/null",O_RDWR);
+				dup(i);
+				dup(i);
+			}
+			else
+			{
+				exit(0);
+			}
+		}
+		else
+		{
+			int status;
+			waitpid(pid1, &status, 0);
+			exit(0);
+		}
+	}
+	#endif
+
 #ifdef _WIN32
 	 HANDLE gmutex = CreateMutex(NULL, TRUE, L"Local\\UrBackupClientGUI");
 	 if( gmutex!=NULL && GetLastError()==ERROR_ALREADY_EXISTS )

@@ -273,12 +273,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 
             if (answer == wxYES)
             {
-				if(sudo_app.empty())
-				{
-					find_sudo_app();
-				}
-				std::string uninstaller = SBINDIR "/urbackup_uninstall";
-				wxExecute(sudo_app + "\"" + uninstaller + "\"", wxEXEC_ASYNC, NULL, NULL);
+				runCommand("uninstall");
 			}
 	    }
 #endif
