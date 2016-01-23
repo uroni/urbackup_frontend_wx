@@ -267,10 +267,9 @@ bool Status::updateStatus(int errcnt)
 
 	if (follow_only_process_id == 0)
 	{
-		wxLongLong_t lastbackups;
-		if (!status_details.last_backup_time.empty() && status_details.last_backup_time.ToLongLong(&lastbackups))
+		if (status_details.last_backup_time>0)
 		{
-			wxDateTime lastbackup_dt((wxLongLong)(lastbackups * 1000));
+			wxDateTime lastbackup_dt((wxLongLong)(status_details.last_backup_time * 1000));
 
 			m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
 		}

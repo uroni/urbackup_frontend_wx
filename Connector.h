@@ -113,7 +113,7 @@ struct SUrBackupServer
 struct SStatusDetails
 {
 	bool ok;
-	wxString last_backup_time;
+	wxLongLong_t last_backup_time;
 	
 	std::vector<SRunningProcess> running_processes;
 	std::vector<SUrBackupServer> servers;

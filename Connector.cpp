@@ -395,7 +395,7 @@ SStatusDetails Connector::getStatusDetails()
 
 	try
 	{
-		ret.last_backup_time = root["last_backup_time"].asString();
+		ret.last_backup_time = root["last_backup_time"].asInt64();
 
 		std::vector<SRunningProcess> running_processes;
 		Json::Value json_running_processes = root["running_processes"];
