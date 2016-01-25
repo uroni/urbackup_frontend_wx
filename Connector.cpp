@@ -459,7 +459,7 @@ int Connector::getCapabilities()
 
 bool Connector::restoreOk( bool ok, wxLongLong_t& process_id)
 {
-	std::string d = getResponse("RESTORE OK", "ok="+nconvert(ok), true);
+	std::string d = getResponse("RESTORE OK", "ok="+nconvert(ok), false);
 
 	Json::Value root;
 	Json::Reader reader;

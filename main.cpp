@@ -691,7 +691,9 @@ void MyTimer::Notify()
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			ask_msg, _("UrBackup - Allow restore"), wxOK | wxCANCEL);
+#ifndef __WXMAC__
 		dialog->RequestUserAttention();
+		#endif
 		int rc = dialog->ShowModal();
 		dialog->Destroy();
 		if(rc == wxID_OK)
@@ -721,7 +723,9 @@ void MyTimer::Notify()
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			_("Some files could not be deleted or overwritten during the restore process. In order to overwrite/delete the files the system needs to be restarted. Do you want to do this now?"), _("UrBackup - Restart Windows"), wxOK | wxCANCEL);
+	#ifndef __WXMAC__
 		dialog->RequestUserAttention();
+	#endif
 		if(dialog->ShowModal() == wxID_OK)
 		{
 			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
