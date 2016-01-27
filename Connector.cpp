@@ -43,6 +43,31 @@ std::wstring ConvertToUnicode(const std::string &str);
 #define ConvertToUnicode(x)
 #endif
 
+namespace
+{
+	class ScopedSocket
+	{
+	public:
+		ScopedSocket(wxSocketClient* socket_client)
+			:socket_client(socket_client) {}
+
+		~ScopedSocket()
+		{
+			if (socket_client != NULL)
+			{
+				socket_client->Destroy();
+			}
+		}
+
+		void release()
+		{
+			socket_client = NULL;
+		}
+	private:
+		wxSocketClient* socket_client;
+	};
+}
+
 
 
 std::string Connector::getPasswordData( bool change_command, bool set_busy)
@@ -94,34 +119,56 @@ std::string Connector::getPasswordData( bool change_command, bool set_busy)
 }
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t timeoutms, bool set_busy)
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection, size_t timeoutms, bool set_busy)
 {
 	wxLongLong starttime = wxGetLocalTimeMillis();
 
 	std::string curr_pw = getPasswordData(change_command, set_busy);
 
-	wxSocketClient client(wxSOCKET_BLOCK);
-	wxIPV4address addr;
-	addr.Hostname(wxT("127.0.0.1"));
-	addr.Service(35623);
-	if(!client.Connect(addr,false))
+	wxSocketClient* client;
+	if (connection == NULL
+		|| connection->client == NULL
+		|| connection->client->Error())
 	{
-		while(wxGetLocalTimeMillis()-starttime<timeoutms)
+		if (connection != NULL
+			&& connection->client != NULL)
 		{
-			if(client.WaitOnConnect(0, 100))
+			connection->client->Destroy();
+			connection->client = NULL;
+		}
+
+		client = new wxSocketClient(wxSOCKET_BLOCK);
+
+		wxIPV4address addr;
+		addr.Hostname(wxT("127.0.0.1"));
+		addr.Service(35623);
+		if (!client->Connect(addr, false))
+		{
+			while (wxGetLocalTimeMillis() - starttime<timeoutms)
 			{
-				break;
+				if (client->WaitOnConnect(0, 100))
+				{
+					break;
+				}
+				wxTheApp->Yield(true);
 			}
-			wxTheApp->Yield(true);
+		}
+
+		if (!client->IsConnected())
+		{
+			client->Destroy();
+			error = true;
+			busy = false;
+			return "";
 		}
 	}
-	if(!client.IsConnected())
+	else
 	{
-		wxSocketError err=client.LastError();
-		error=true;
-		busy=false;
-		return "";
+		client = connection->client;
+		connection->client = NULL;
 	}
+
+	ScopedSocket client_socket(client);
 
 	std::string t_args;
 
@@ -131,7 +178,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		t_args=args;
 
 	CTCPStack tcpstack;
-	tcpstack.Send(&client, cmd+"#pw="+curr_pw+t_args);
+	tcpstack.Send(client, cmd+"#pw="+curr_pw+t_args);
 
 	char *resp=NULL;
 	char buffer[1024];
@@ -141,13 +188,13 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		bool conn=false;
 		while(wxGetLocalTimeMillis()-starttime<timeoutms)
 		{
-			if(client.WaitForRead(0, 100))
+			if(client->WaitForRead(0, 100))
 			{
 				conn=true;
 				break;
 			}
 			wxTheApp->Yield(true);
-			if(client.Error())
+			if(client->Error())
 				break;
 		}
 		if(!conn)
@@ -156,21 +203,20 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			busy=false;
 			return "";
 		}
-		client.Read(buffer, 1024);
+		client->Read(buffer, 1024);
 		
-		if(client.Error())
+		if(client->Error())
 		{
 			error=true;
 			busy=false;
 			return "";
 		}
-		tcpstack.AddData(buffer, client.GetLastIOSize() );
+		tcpstack.AddData(buffer, client->GetLastIOSize() );
 		
 
 		resp=tcpstack.getPacket(&packetsize);
 		if(packetsize==0)
 		{
-			client.Close();
 			busy=false;
 			return "";
 		}
@@ -181,9 +227,14 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	memcpy(&ret[0], resp, packetsize);
 	delete resp;
 
-	client.Close();
-
 	busy=false;
+
+	if (connection != NULL)
+	{
+		connection->client = client;
+		client_socket.release();
+	}
+
 	return ret;
 }
 
@@ -378,9 +429,9 @@ bool Connector::addNewServer(const std::string &ident)
 		return true;
 }
 
-SStatusDetails Connector::getStatusDetails()
+SStatusDetails Connector::getStatusDetails(SConnection* connection)
 {
-	std::string d=getResponse("STATUS DETAIL","", false);
+	std::string d=getResponse("STATUS DETAIL","", false, connection);
 
 	SStatusDetails ret;
 	ret.ok=false;
@@ -477,8 +528,15 @@ bool Connector::restoreOk( bool ok, wxLongLong_t& process_id)
 	return root["ok"].asBool();
 }
 
-SStatus Connector::initStatus(size_t timeoutms/*=5000*/ )
+SStatus Connector::initStatus(wxSocketClient* last_client, size_t timeoutms/*=5000*/ )
 {
+	if (last_client != NULL
+		&& last_client->Error())
+	{
+		last_client->Destroy();
+		last_client = NULL;
+	}
+
 	bool change_command=false;
 	bool set_busy=false;
 	std::string cmd="STATUS";
@@ -488,27 +546,38 @@ SStatus Connector::initStatus(size_t timeoutms/*=5000*/ )
 	SStatus status;
 	status.init=false;
 	status.starttime = wxGetLocalTimeMillis();
-	status.client.reset(new wxSocketClient(wxSOCKET_BLOCK));
-	wxIPV4address addr;
-	addr.Hostname(wxT("127.0.0.1"));
-	addr.Service(35623);
-	if(!status.client->Connect(addr,false))
+	if (last_client != NULL)
 	{
-		while(wxGetLocalTimeMillis()-status.starttime<timeoutms)
-		{
-			if(status.client->WaitOnConnect(0, 100))
-			{
-				break;
-			}
-			wxTheApp->Yield(true);
-		}
+		status.client = last_client;
 	}
-	if(!status.client->IsConnected())
+	else
 	{
-		wxSocketError err=status.client->LastError();
-		error=true;
-		busy=false;
-		return status;
+		status.client = new wxSocketClient(wxSOCKET_BLOCK);
+
+		wxIPV4address addr;
+		addr.Hostname(wxT("127.0.0.1"));
+		addr.Service(35623);
+		if (!status.client->Connect(addr, false))
+		{
+			while (wxGetLocalTimeMillis() - status.starttime<timeoutms)
+			{
+				if (status.client->WaitOnConnect(0, 100))
+				{
+					break;
+				}
+				wxTheApp->Yield(true);
+			}
+		}
+
+		if (!status.client->IsConnected())
+		{
+			wxSocketError err = status.client->LastError();
+			status.client->Destroy();
+			status.client = NULL;
+			error = true;
+			busy = false;
+			return status;
+		}
 	}
 
 	std::string t_args;
@@ -519,7 +588,7 @@ SStatus Connector::initStatus(size_t timeoutms/*=5000*/ )
 		t_args=args;
 
 	CTCPStack tcpstack;
-	tcpstack.Send(status.client.get(), cmd+"#pw="+curr_pw+t_args);
+	tcpstack.Send(status.client, cmd+"#pw="+curr_pw+t_args);
 	
 	status.timeoutms = timeoutms;
 	status.init = true;
@@ -538,12 +607,16 @@ bool SStatus::isAvailable()
 		if(client->Error())
 		{
 			error=true;
+			client->Destroy();
+			client = NULL;
 			return false;
 		}
 	}
 	else
 	{
 		error=true;
+		client->Destroy();
+		client = NULL;
 		return false;
 	}
 
@@ -553,6 +626,8 @@ bool SStatus::isAvailable()
 	if(client->Error())
 	{
 		error=true;
+		client->Destroy();
+		client = NULL;
 		return false;
 	}
 
@@ -562,7 +637,6 @@ bool SStatus::isAvailable()
 	char* resp=tcpstack.getPacket(&packetsize);
 	if(packetsize==0)
 	{
-		client->Close();
 		error=true;
 		return false;
 	}
@@ -571,8 +645,6 @@ bool SStatus::isAvailable()
 	ret.resize(packetsize);
 	memcpy(&ret[0], resp, packetsize);
 	delete resp;
-
-	client->Close();
 
 	std::vector<std::string> toks;
 	Tokenize(ret, toks, "#");

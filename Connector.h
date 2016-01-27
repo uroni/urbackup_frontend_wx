@@ -39,7 +39,8 @@ struct SStatus
 	SStatus()
 		: pause(false), capa(0), has_server(false),
 		needs_restore_restart(0), ask_restore_ok(false),
-		error(false), init(false), restore_file(false)
+		error(false), init(false), restore_file(false),
+		client(NULL)
 	{
 	}
 
@@ -61,7 +62,7 @@ struct SStatus
 
 	wxLongLong starttime;
 	size_t timeoutms;
-	wxSharedPtr<wxSocketClient> client;
+	wxSocketClient* client;
 	bool error;
 	CTCPStack tcpstack;
 };
@@ -136,6 +137,15 @@ struct SStatusDetails
 	}
 };
 
+struct SConnection
+{
+	SConnection()
+		: client(NULL) 
+	{}
+
+	wxSocketClient* client;
+};
+
 class Connector
 {
 public:
@@ -148,10 +158,10 @@ public:
 	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
 	static bool setPause(bool b_pause);
 	static bool addNewServer(const std::string &ident);
-	static SStatusDetails getStatusDetails();
+	static SStatusDetails getStatusDetails(SConnection* connection = NULL);
 	static int getCapabilities();
 	static bool restoreOk(bool ok, wxLongLong_t& process_id);
-	static SStatus initStatus(size_t timeoutms=5000);
+	static SStatus initStatus(wxSocketClient* last_client, size_t timeoutms=5000);
 
 	static bool hasError(void);
 	static bool isBusy(void);
@@ -162,7 +172,7 @@ public:
 
 private:
 	static std::string escapeParam(const std::string &name);
-	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t timeoutms=5000, bool set_busy=true);
+	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection=NULL, size_t timeoutms=5000, bool set_busy=true);
 	static std::string pw;
 	static std::string pw_change;
 	static bool error;

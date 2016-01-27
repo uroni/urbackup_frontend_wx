@@ -531,7 +531,7 @@ void MyTimer::Notify()
 	static SStatus status;
 	if(!status.init || status.hasError())
 	{
-		status = Connector::initStatus(60000);
+		status = Connector::initStatus(status.client, 60000);
 	}
 
 	if(Connector::hasError() )

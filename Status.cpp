@@ -139,7 +139,7 @@ Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
 
 bool Status::updateStatus(int errcnt)
 {
-	SStatusDetails status_details = Connector::getStatusDetails();
+	SStatusDetails status_details = Connector::getStatusDetails(&connection);
 
 	if(!status_details.ok)
 	{
@@ -343,6 +343,11 @@ void Status::OnClose()
 	if (follow_only_process_id == 0)
 	{
 		instance = NULL;
+	}
+	if (connection.client != NULL)
+	{
+		connection.client->Destroy();
+		connection.client = NULL;
 	}
 	Destroy();
 }

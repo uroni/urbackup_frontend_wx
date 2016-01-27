@@ -39,5 +39,7 @@ private:
 
 	SStatusDetails last_status_details;
 
+	SConnection connection;
+
 	int error_count;
 };
