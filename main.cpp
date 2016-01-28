@@ -320,7 +320,7 @@ bool MyApp::OnInit()
 
 	if(cmd.empty())
 	{
-		writestring(_("&Access backups").ToUTF8().data(), "access_backups_shell_mui.txt");
+		writestring(_("&Access/restore backups").ToUTF8().data(), "access_backups_shell_mui.txt");
 	}
 
 	#ifdef __WXMAC__

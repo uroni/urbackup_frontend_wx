@@ -300,7 +300,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 
 	if(timer->hasCapability(ALLOW_TOKEN_AUTHENTICATION))
 	{
-		mnu->Append(ID_TI_ACCESS, _("Access backups"), _("Access backups"));
+		mnu->Append(ID_TI_ACCESS, _("Access/restore backups"), _("Access/restore backups"));
 		mnu->AppendSeparator();
 	}
 	bool any_prev=false;
