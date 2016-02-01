@@ -875,7 +875,7 @@ void GUIStatus::resizeForProcesses(size_t new_size)
 		process_item.m_gauge1 = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
 		process_item.m_gauge1->SetMinSize(wxSize(500, -1));
 		process_item.m_gauge1->SetRange(100);
-		bSizer34->Insert(i * 4 + 2, process_item.m_gauge1, 0, wxALL, 5);
+		bSizer34->Insert(i * 4 + 2, process_item.m_gauge1, 0, wxEXPAND|wxALL, 5);
 
 		if (follow_only_process_id == 0)
 		{
