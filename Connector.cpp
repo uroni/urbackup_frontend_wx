@@ -142,8 +142,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		wxIPV4address addr;
 		addr.Hostname(wxT("127.0.0.1"));
 		addr.Service(35623);
-		if (!client->Connect(addr, false) 
-			&& !client->Error())
+		if (!client->Connect(addr, false) )
 		{
 			while (wxGetLocalTimeMillis() - starttime<timeoutms)
 			{
@@ -155,8 +154,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			}
 		}
 
-		if (client->Error()
-			|| !client->IsConnected())
+		if (!client->IsConnected())
 		{
 			client->Destroy();
 			error = true;
@@ -559,8 +557,7 @@ SStatus Connector::initStatus(wxSocketClient* last_client, size_t timeoutms/*=50
 		wxIPV4address addr;
 		addr.Hostname(wxT("127.0.0.1"));
 		addr.Service(35623);
-		if (!status.client->Connect(addr, false)
-			&& !status.client->Error())
+		if (!status.client->Connect(addr, false))
 		{
 			while (wxGetLocalTimeMillis() - status.starttime<timeoutms)
 			{
@@ -572,8 +569,7 @@ SStatus Connector::initStatus(wxSocketClient* last_client, size_t timeoutms/*=50
 			}
 		}
 
-		if (status.client->Error() 
-			|| !status.client->IsConnected())
+		if (!status.client->IsConnected())
 		{
 			wxSocketError err = status.client->LastError();
 			status.client->Destroy();
