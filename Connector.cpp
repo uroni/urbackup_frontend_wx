@@ -687,7 +687,7 @@ bool SStatus::isAvailable()
 		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
 		if(it_restore_ask!=params.end())
 		{
-			ask_restore_ok = ( it_restore_ask->second==L"true");
+			ask_restore_ok = watoi(it_restore_ask->second);
 		}
 		std::map<std::wstring, std::wstring>::iterator it_restore_file = params.find(L"restore_file");
 		if (it_restore_file != params.end())

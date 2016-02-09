@@ -98,6 +98,7 @@ namespace
 	ETrayIcon icon_type=ETrayIcon_OK;
 
 	int needs_restore_restart = 0;
+	int ask_restore_ok = 0;
 }
 
 std::string g_lang="en";
@@ -672,11 +673,12 @@ void MyTimer::Notify()
 #endif
 	}
 
-	if(status.ask_restore_ok)
+	if(status.ask_restore_ok>ask_restore_ok)
 	{
 #ifdef __WXMAC__
 		bring_to_foreground();
 #endif 
+		ask_restore_ok = status.ask_restore_ok;
 
 		wxString ask_msg;
 
