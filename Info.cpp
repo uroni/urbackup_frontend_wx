@@ -41,12 +41,34 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);
 
+	std::string n_version = getFile("version.txt");
+	std::string c_version = getFile("curr_version.txt");
+	if (n_version.empty())n_version = "0";
+	if (c_version.empty())c_version = "0";
+
+	if (atoi(n_version.c_str()) > atoi(c_version.c_str()))
+	{
+		wxButton* updateButton = new wxButton(this, wxID_ANY, _("Update available. Update now."));
+		m_versionSizer->Add(updateButton);
+
+		updateButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Info::OnUpdateClick), NULL, this);
+
+		Layout();
+	}
+
 	instance=this;
 }
 
 void Info::OnOKClick( wxCommandEvent& event )
 {
 	Close();
+}
+
+void update_urbackup();
+
+void Info::OnUpdateClick(wxCommandEvent & event)
+{
+	update_urbackup();
 }
 
 Info* Info::getInstance()

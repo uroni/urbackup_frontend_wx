@@ -607,16 +607,20 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer25->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer26;
-	bSizer26 = new wxBoxSizer( wxVERTICAL );
+	wxSizer* bSizer26 = new wxBoxSizer( wxVERTICAL );
 	
 	m_staticText21 = new wxStaticText( this, wxID_ANY, _("Version:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("    ")+wxString(c_client_version), wxDefaultPosition, wxDefaultSize, 0 );
+	m_versionSizer = new wxBoxSizer(wxHORIZONTAL);
+
+	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("    ")+wxString(c_client_version), wxDefaultPosition, wxDefaultSize, wxEXPAND);
 	m_staticText22->Wrap( -1 );
-	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
+
+	m_versionSizer->Add( m_staticText22, 0, wxALL, 5 );
+
+	bSizer26->Add(m_versionSizer);
 	
 	m_staticText23 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText23->Wrap( -1 );

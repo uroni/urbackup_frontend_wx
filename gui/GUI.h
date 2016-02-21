@@ -185,6 +185,7 @@ class GUIInfo : public wxDialog
 		wxStaticText* m_staticText22;
 		wxStaticText* m_staticText23;
 		wxTextCtrl* m_textCtrl14;
+		wxSizer* m_versionSizer;
 		
 		
 		wxButton* m_button4;

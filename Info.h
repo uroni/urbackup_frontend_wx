@@ -27,6 +27,7 @@ public:
 
 protected:
 	void OnOKClick( wxCommandEvent& event );
+	void OnUpdateClick(wxCommandEvent& event);
 
 	virtual void OnClose();
 
