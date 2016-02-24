@@ -248,6 +248,12 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 	std::vector<SBackupDir> ret;
 	std::string d=getResponse("GET BACKUP DIRS","", false);
 
+	if (d.empty())
+	{
+		error = true;
+		return ret;
+	}
+
 	Json::Value root;
 	Json::Reader reader;
 
@@ -263,6 +269,11 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 		for(Json::Value::ArrayIndex i=0;i<dirs.size();++i)
 		{
 			Json::Value dir = dirs[i];
+
+			if (!dir.get("virtual_client", Json::nullValue).isNull())
+			{
+				continue;
+			}
 
 			SBackupDir rdir =
 			{
