@@ -561,13 +561,7 @@ void MyTimer::Notify()
 	status.init=false;
 
 	wxStandardPathsBase& sp=wxStandardPaths::Get();
-	static wxString cfgDir=sp.GetUserDataDir();
 	static long lastversioncheck=wxGetLocalTime();
-
-	if(!wxDir::Exists(cfgDir) )
-	{
-		wxFileName::Mkdir(cfgDir);
-	}
 
 	long ct=wxGetLocalTime();
 
@@ -643,7 +637,7 @@ void MyTimer::Notify()
 	{
 		icon_type=ETrayIcon_INDEXING;
 	}
-	else if( (icon_type==ETrayIcon_NO_RECENT || icon_type==ETrayIcon_OK)
+	else if( icon_type==ETrayIcon_NO_RECENT
 		&& !status.has_server )
 	{
 		icon_type=ETrayIcon_NO_SERVER;
