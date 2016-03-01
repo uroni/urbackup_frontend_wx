@@ -662,6 +662,18 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		{
 			pathsNotToBackup.push_back(std::wstring(pf));
 		}
+
+		memset(pf, 0, MAX_PATH);
+
+		if (SHGetFolderPathW(
+			0,
+			CSIDL_COMMON_APPDATA,
+			NULL,
+			SHGFP_TYPE_CURRENT,
+			pf) == S_OK)
+		{
+			pathsNotToBackup.push_back(std::wstring(pf));
+		}		
 		
 		backupPaths = volumesToPaths(get_all_volumes_list(false, cache));
 	}
@@ -673,6 +685,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		includeDirs.push_back(L"C:\\Users\\:\\Pictures");
 		includeDirs.push_back(L"C:\\Users\\:\\Music");
 		includeDirs.push_back(L"C:\\Users\\:\\Videos");
+		includeDirs.push_back(L"C:\\Users\\:\\Desktop");
 	}
 
 
