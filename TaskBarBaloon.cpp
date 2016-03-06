@@ -144,8 +144,7 @@ HANDLE ExecuteProcess( const std::string & exe, const std::string &args, const s
 void update_urbackup(void)
 {
 #ifdef _WIN32
-	wxStandardPaths sp;
-	std::string e_pstr=ExtractFilePath(sp.GetExecutablePath().ToUTF8().data());
+	std::string e_pstr=ExtractFilePath(wxStandardPaths::Get().GetExecutablePath().ToUTF8().data());
 	ExecuteProcess(e_pstr+"\\UrBackupUpdate.exe","","");
 	timer->resetDisplayedUpdateInfo();
 #endif

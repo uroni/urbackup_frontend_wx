@@ -20,6 +20,7 @@ KillProc/ipch/*
 *.ncb
 *.sdf
 *.suo
+*.opensdf
 *.vcproj*
 *.vcxproj.user
 KillProc/Release/*
@@ -88,3 +89,4 @@ deps/
 sqlite3.exe
 messages.po
 translations/urbackup.frontend/en_new.po
+SolutionDependencies.props

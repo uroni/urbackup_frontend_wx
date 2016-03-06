@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <WxWidgetsDir>C:\Tools\wxWidgets-3.0.2</WxWidgetsDir>
+    <WxWidgetsIncludeDir>$(WxWidgetsDir)\include</WxWidgetsIncludeDir>
+    <WxWidgetsLibDirX86Dbg>$(WxWidgetsDir)\lib\vc_lib</WxWidgetsLibDirX86Dbg>
+    <WxWidgetsLibDirX86Rel>$(WxWidgetsDir)\lib\vc_lib</WxWidgetsLibDirX86Rel>
+    <WxWidgetsLibDirX64Dbg>$(WxWidgetsDir)\lib\vc_x64_lib</WxWidgetsLibDirX64Dbg>
+    <WxWidgetsLibDirX64Rel>$(WxWidgetsDir)\lib\vc_x64_lib</WxWidgetsLibDirX64Rel>
+    <WxWidgetsVer>30</WxWidgetsVer>
+    <WxWidgetsDbgSuffix>d</WxWidgetsDbgSuffix>
+    <WxWidgetsRelSuffix />
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(Configuration)'=='Debug'">
+      <PropertyGroup Label="UserMacros">
+        <WxWidgetsCfgSuffix>$(WxWidgetsDbgSuffix)</WxWidgetsCfgSuffix>
+        <WxWidgetsLibDir Condition="'$(Platform)'=='Win32'">$(WxWidgetsLibDirX86Dbg)</WxWidgetsLibDir>
+        <WxWidgetsLibDir Condition="'$(Platform)'=='x64'">$(WxWidgetsLibDirX64Dbg)</WxWidgetsLibDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Configuration)'=='Release'">
+      <PropertyGroup Label="UserMacros">
+        <WxWidgetsCfgSuffix>$(WxWidgetsRelSuffix)</WxWidgetsCfgSuffix>
+        <WxWidgetsLibDir Condition="'$(Platform)'=='Win32'">$(WxWidgetsLibDirX86Rel)</WxWidgetsLibDir>
+        <WxWidgetsLibDir Condition="'$(Platform)'=='x64'">$(WxWidgetsLibDirX64Rel)</WxWidgetsLibDir>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="WxWidgetsDir">
+      <Value>$(WxWidgetsDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsIncludeDir">
+      <Value>$(WxWidgetsIncludeDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsLibDirX86Dbg">
+      <Value>$(WxWidgetsLibDirX86Dbg)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsLibDirX86Rel">
+      <Value>$(WxWidgetsLibDirX86Rel)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsLibDirX64Dbg">
+      <Value>$(WxWidgetsLibDirX64Dbg)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsLibDirX64Rel">
+      <Value>$(WxWidgetsLibDirX64Rel)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsVer">
+      <Value>$(WxWidgetsVer)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsDbgSuffix">
+      <Value>$(WxWidgetsDbgSuffix)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WxWidgetsRelSuffix">
+      <Value>$(WxWidgetsRelSuffix)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
