@@ -24,6 +24,10 @@
 
 #include <wx/valtext.h>
 
+#ifndef _WIN32
+#include "../config.h"
+#endif
+
 #ifndef wxFILTER_DIGITS
 #define wxFILTER_DIGITS wxFILTER_NUMERIC
 #endif
@@ -122,8 +126,10 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 #ifdef _DEBUG
 	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
-#else
+#elif _WIN32
 	settings=new CFileSettingsReader(g_res_path+"urbackup/data/settings.cfg");
+#else
+	settings = new CFileSettingsReader(VARDIR "/urbackup/data/settings.cfg");
 #endif
 
 	std::wstring t;
