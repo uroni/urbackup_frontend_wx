@@ -187,7 +187,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 	case ID_TI_LOGS:
 		{
 			runCommand("logs");
-		}
+		}break;
 	case ID_TI_BACKUP_IMAGE_FULL:
 	case ID_TI_BACKUP_IMAGE_INCR:
 		{
