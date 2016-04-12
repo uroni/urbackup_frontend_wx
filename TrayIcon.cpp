@@ -513,7 +513,7 @@ void TrayIcon::accessBackups( wxString path )
 
 	if(!params.empty())
 	{
-		wxLaunchDefaultBrowser(wxString(params));
+		wxLaunchDefaultBrowser(wxString::FromUTF8(params.data(), params.size()));
 	}
 	else
 	{
