@@ -71,6 +71,46 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 #undef wxUSE_TASKBARICON_BALLOONS
 #endif
 
+#ifdef _WIN32
+HRESULT ModifyPrivilege(
+	IN LPCTSTR szPrivilege,
+	IN BOOL fEnable)
+{
+	HRESULT hr = S_OK;
+	TOKEN_PRIVILEGES NewState;
+	LUID             luid;
+	HANDLE hToken = NULL;
+	if (!OpenProcessToken(GetCurrentProcess(),
+		TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
+		&hToken))
+	{
+		return ERROR_FUNCTION_FAILED;
+	}
+	if (!LookupPrivilegeValue(NULL,
+		szPrivilege,
+		&luid))
+	{
+		CloseHandle(hToken);
+		return ERROR_FUNCTION_FAILED;
+	}
+	NewState.PrivilegeCount = 1;
+	NewState.Privileges[0].Luid = luid;
+	NewState.Privileges[0].Attributes =
+		(fEnable ? SE_PRIVILEGE_ENABLED : 0);
+	if (!AdjustTokenPrivileges(hToken,
+		FALSE,
+		&NewState,
+		0,
+		NULL,
+		NULL))
+	{
+		hr = ERROR_FUNCTION_FAILED;
+	}
+	CloseHandle(hToken);
+	return hr;
+}
+#endif
+
 #ifdef __APPLE__
 extern "C" void bring_to_foreground();
 extern "C" void register_login_item();
@@ -742,6 +782,7 @@ void MyTimer::Notify()
 	#endif
 		if(dialog->ShowModal() == wxID_OK)
 		{
+			ModifyPrivilege(SE_SHUTDOWN_NAME, TRUE);
 			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
 		}
 		dialog->Destroy();
