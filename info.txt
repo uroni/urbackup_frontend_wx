@@ -22,4 +22,4 @@ osiengine group (Farsi)
 buzzertnl, Decay (Dutch)
 Ales Hermann (Czech)
 
-See license.txt for the licences of the libraries used and of UrBackup (GPL v3+).
+See license.txt for the licences of the libraries used and of UrBackup (AGPL v3+).
