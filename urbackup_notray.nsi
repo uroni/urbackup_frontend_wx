@@ -59,7 +59,8 @@ RequestExecutionLevel highest
   System::Call 'kernel32::WideCharToMultiByte(i 0, i 0, w "${String}", i -1, t .s, i ${NSIS_MAX_STRLEN}, i 0, i 0) i'
   Pop "${outVar}"
 !macroend  
- 
+
+Var HAS_SERVICE 
 
 Section "install"
 	${If} ${RunningX64}
@@ -163,17 +164,20 @@ Section "install"
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
+	StrCpy $HAS_SERVICE "0"
+	
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 == '0'
-		SimpleSC::StopService "$R0"
+		SimpleSC::StopService "$R0" 1 30
 		Pop $0
+		StrCpy $HAS_SERVICE "1"
 	${EndIf}
 	
-	Sleep 500
-	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
+	
+	Sleep 500
 	
 	CreateDirectory "$SMPROGRAMS\UrBackup"
 	CreateShortCut "$SMPROGRAMS\UrBackup\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
@@ -183,6 +187,8 @@ Section "install"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "UninstallString" "$INSTDIR\Uninstall.exe"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "Path" "$INSTDIR"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "DisplayVersion" "$version_short$"
+	
+	ClearErrors
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
@@ -218,7 +224,6 @@ Section "install"
 	File "data\logo1.png"
 	File "data\backup-progress-pause.ico"
 	File "data\urbackup_ecdsa409k1.pub"
-	File "data\curr_version.txt"
 	File "data\updates_h.dat"
 	File "data\license.txt"
 	File "data\info.txt"
@@ -265,6 +270,13 @@ Section "install"
 	File "data\lang\sv\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\pt"
 	File "data\lang\pt\urbackup.mo"
+	
+	${If} ${Errors}
+		Quit
+	${EndIf}
+	
+	SetOutPath "$INSTDIR"
+	File "data\curr_version.txt"
 	
 	SetOutPath "$INSTDIR\urbackup"
 	
@@ -332,6 +344,8 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
+	
+start_service:
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
 	${Unicode2Ansi} "16" $R2
