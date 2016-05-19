@@ -176,8 +176,8 @@ void ConfigPath::OnPathSelected(wxCommandEvent &evt)
 	{
 		m_textCtrl18->Enable();
 		m_textCtrl18->SetValue(dirs[sel].name);
-		m_group->Enable();
-		m_group->Select(dirs[sel].group);
+		/*m_group->Enable();
+		m_group->Select(dirs[sel].group);*/
 	}
 }
 
@@ -193,7 +193,7 @@ void ConfigPath::OnNameTextChange(wxCommandEvent &evt)
 
 void ConfigPath::OnGroupChange( wxCommandEvent& evt )
 {
-	int sel=listbox->GetSelection();
+	/*int sel=listbox->GetSelection();
 	if(sel>=0)
 	{
 		int group = m_group->GetSelection();
@@ -202,5 +202,5 @@ void ConfigPath::OnGroupChange( wxCommandEvent& evt )
 			dirs[sel].group=group;
 			mod=true;
 		}		
-	}
+	}*/
 }

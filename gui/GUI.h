@@ -226,8 +226,8 @@ class GUIConfigPath : public wxDialog
 		wxButton* m_button7;
 		wxButton* m_button8;
 
-		wxStaticText* m_staticTextGroup;
-		wxChoice* m_group;
+		/*wxStaticText* m_staticTextGroup;
+		wxChoice* m_group;*/
 		
 		
 		// Virtual event handlers, overide them in your derived class
