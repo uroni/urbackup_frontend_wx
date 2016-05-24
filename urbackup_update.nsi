@@ -199,6 +199,7 @@ Section "install"
 		Pop $0
 		Sleep 2000
 		StrCpy $HAS_SERVICE "1"
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
 	${EndIf}
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"

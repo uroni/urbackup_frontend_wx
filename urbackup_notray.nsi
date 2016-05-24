@@ -173,6 +173,7 @@ Section "install"
 		SimpleSC::StopService "$R0" 1 30
 		Pop $0
 		StrCpy $HAS_SERVICE "1"
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
 	${EndIf}
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
