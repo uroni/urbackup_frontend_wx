@@ -26,6 +26,7 @@
 #include "TranslationHelper.h"
 #include "Status.h"
 #include <iostream>
+#include <limits>
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
@@ -509,9 +510,9 @@ int MyApp::OnExit()
 }
 
 MyTimer::MyTimer(void) : 
-	wxTimer()
+	wxTimer(), first_status(true)
 {
-	capa=0;
+	capa=INT_MAX;
 	resetDisplayedUpdateInfo();
 }
 
@@ -590,7 +591,8 @@ void MyTimer::Notify()
 	static SStatus status;
 	if(!status.init || status.hasError())
 	{
-		status = Connector::initStatus(status.client, 60000);
+		status = Connector::initStatus(status.client, first_status, 60000);
+		first_status = false;
 	}
 
 	if(Connector::hasError() )

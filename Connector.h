@@ -161,7 +161,7 @@ public:
 	static SStatusDetails getStatusDetails(SConnection* connection = NULL);
 	static int getCapabilities();
 	static bool restoreOk(bool ok, wxLongLong_t& process_id);
-	static SStatus initStatus(wxSocketClient* last_client, size_t timeoutms=5000);
+	static SStatus initStatus(wxSocketClient* last_client, bool fast, size_t timeoutms=5000);
 
 	static bool hasError(void);
 	static bool isBusy(void);

@@ -539,7 +539,7 @@ bool Connector::restoreOk( bool ok, wxLongLong_t& process_id)
 	return root["ok"].asBool();
 }
 
-SStatus Connector::initStatus(wxSocketClient* last_client, size_t timeoutms/*=5000*/ )
+SStatus Connector::initStatus(wxSocketClient* last_client, bool fast, size_t timeoutms/*=5000*/ )
 {
 	if (last_client != NULL
 		&& last_client->Error())
@@ -550,7 +550,15 @@ SStatus Connector::initStatus(wxSocketClient* last_client, size_t timeoutms/*=50
 
 	bool change_command=false;
 	bool set_busy=false;
-	std::string cmd="STATUS";
+	std::string cmd;
+	if(fast)
+	{
+		cmd = "FSTATUS";
+	}
+	else
+	{
+		cmd = "STATUS";
+	}
 	std::string args="";
 	std::string curr_pw = getPasswordData(change_command, set_busy);
 
