@@ -22,20 +22,31 @@
 #include <wx/wx.h>
 #include <string>
 #include <vector>
+#include <wx/socket.h>
+#include <wx/sharedptr.h>
+#include "tcpstack.h"
 
 struct SBackupDir
 {
 	wxString path;
 	wxString name;
 	int id;
+	int group;
 };
 
 struct SStatus
 {
 	SStatus()
-		: pause(false), capa(0), has_server(false)
+		: pause(false), capa(0), has_server(false),
+		needs_restore_restart(0), ask_restore_ok(0),
+		error(false), init(false), restore_file(false),
+		client(NULL)
 	{
 	}
+
+	bool isAvailable();
+	bool hasError();
+
 	wxString lastbackupdate;
 	wxString status;
 	wxString pcdone;
@@ -43,6 +54,17 @@ struct SStatus
 	int capa;
 	std::string new_server;
 	bool has_server;
+	int ask_restore_ok;
+	bool restore_file;
+	wxString restore_path;
+	int needs_restore_restart;
+	bool init;
+
+	wxLongLong starttime;
+	size_t timeoutms;
+	wxSocketClient* client;
+	bool error;
+	CTCPStack tcpstack;
 };
 
 struct SLogEntry
@@ -55,6 +77,26 @@ struct SLogLine
 {
 	int loglevel;
 	wxString msg;
+};
+
+struct SRunningProcess
+{
+	wxString action;
+	int percent_done;
+	wxLongLong_t eta_ms;
+	wxString details;
+	int detail_pc;
+	wxLongLong_t process_id;
+
+	bool operator==(const SRunningProcess& other) const
+	{
+		return action == other.action
+			&& percent_done == other.percent_done
+			&& eta_ms / 1000 / 60 == other.eta_ms / 1000 / 60
+			&& details == other.details
+			&& detail_pc == other.detail_pc
+			&& process_id == other.process_id;
+	}
 };
 
 struct SUrBackupServer
@@ -72,29 +114,36 @@ struct SUrBackupServer
 struct SStatusDetails
 {
 	bool ok;
-	wxString last_backup_time;
-	int percent_done;
-	wxString currently_running;
+	wxLongLong_t last_backup_time;
+	
+	std::vector<SRunningProcess> running_processes;
 	std::vector<SUrBackupServer> servers;
 	unsigned int time_since_last_lan_connection;
 	bool internet_connected;
 	wxString internet_status;
-	wxLongLong_t eta_ms;
+	
 	int capability_bits;
 
 	bool operator==(const SStatusDetails& other) const
 	{
 		return ok == other.ok
 			&& last_backup_time == other.last_backup_time
-			&& percent_done == other.percent_done
-			&& currently_running == other.currently_running
+			&& running_processes == other.running_processes
 			&& servers == other.servers
 			&& time_since_last_lan_connection/1000/60 == other.time_since_last_lan_connection/1000/60
 			&& internet_connected == other.internet_connected
 			&& internet_status == other.internet_status
-			&& eta_ms/1000/60 == other.eta_ms/1000/60
 			&& capability_bits == other.capability_bits;
 	}
+};
+
+struct SConnection
+{
+	SConnection()
+		: client(NULL) 
+	{}
+
+	wxSocketClient* client;
 };
 
 class Connector
@@ -102,8 +151,6 @@ class Connector
 public:
 	static std::vector<SBackupDir> getSharedPaths(void);
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
-	static SStatus getStatus(size_t retries);
-	static unsigned int getIncrUpdateIntervall(void);
 	static int startBackup(bool full);
 	static int startImage(bool full);
 	static bool updateSettings(const std::string &sdata);
@@ -111,17 +158,21 @@ public:
 	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
 	static bool setPause(bool b_pause);
 	static bool addNewServer(const std::string &ident);
-	static SStatusDetails getStatusDetails();
+	static SStatusDetails getStatusDetails(SConnection* connection = NULL);
 	static int getCapabilities();
+	static bool restoreOk(bool ok, wxLongLong_t& process_id);
+	static SStatus initStatus(wxSocketClient* last_client, bool fast, size_t timeoutms=5000);
 
 	static bool hasError(void);
 	static bool isBusy(void);
 
-	static std::string getPasswordData(bool change_command);
+	static std::string getPasswordData(bool change_command, bool set_busy);
+
+	static std::string getAccessParameters(const std::string& tokens);
 
 private:
 	static std::string escapeParam(const std::string &name);
-	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries=4);
+	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection=NULL, size_t timeoutms=5000, bool set_busy=true);
 	static std::string pw;
 	static std::string pw_change;
 	static bool error;

@@ -28,6 +28,8 @@
 #include <wx/notebook.h>
 #include <wx/panel.h>
 #include <wx/gauge.h>
+#include <wx/statline.h>
+#include <vector>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -183,6 +185,7 @@ class GUIInfo : public wxDialog
 		wxStaticText* m_staticText22;
 		wxStaticText* m_staticText23;
 		wxTextCtrl* m_textCtrl14;
+		wxSizer* m_versionSizer;
 		
 		
 		wxButton* m_button4;
@@ -190,6 +193,12 @@ class GUIInfo : public wxDialog
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
+		virtual void OnClose()=0;
+
+		virtual void OnCloseInt(wxCloseEvent& event) {
+			event.Skip();
+			OnClose();
+		}
 	
 	public:
 		
@@ -216,6 +225,9 @@ class GUIConfigPath : public wxDialog
 		
 		wxButton* m_button7;
 		wxButton* m_button8;
+
+		/*wxStaticText* m_staticTextGroup;
+		wxChoice* m_group;*/
 		
 		
 		// Virtual event handlers, overide them in your derived class
@@ -225,7 +237,7 @@ class GUIConfigPath : public wxDialog
 		virtual void OnClickAbort( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClickNew( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClickDel( wxCommandEvent& event ) { event.Skip(); }
-		
+		virtual void OnGroupChange( wxCommandEvent& event ) { event.Skip(); }
 	
 	public:
 		
@@ -234,17 +246,33 @@ class GUIConfigPath : public wxDialog
 	
 };
 
+struct SProcessItem
+{
+	wxBoxSizer* bSizer36;
+	wxStaticText* m_staticText31;
+	wxBoxSizer* bSizer362;
+	wxStaticText* m_staticText312;
+	wxGauge* m_gauge1;
+	wxStaticLine* m_staticLine;
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIStatus
 ///////////////////////////////////////////////////////////////////////////////
 class GUIStatus : public wxDialog 
 {
 	private:
+
+		
 	
 	protected:
-		wxStaticText* m_staticText31;
-		wxStaticText* m_staticText312;
-		wxGauge* m_gauge1;
+		void removeCurrentProcesses(size_t new_size);
+
+		void resizeForProcesses(size_t new_size);
+
+		void relayout();
+
+		std::vector<SProcessItem> m_processItem;
 		wxStaticText* m_staticText32;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_staticText36;
@@ -252,10 +280,17 @@ class GUIStatus : public wxDialog
 		wxStaticText* m_staticText35;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText38;
+		wxBoxSizer* bSizer34;
+
+		virtual void OnClose()=0;
+
+		virtual void OnCloseInt(wxCloseEvent& event);
+
+		wxLongLong_t follow_only_process_id;
 	
 	public:
 		
-		GUIStatus( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		GUIStatus( wxWindow* parent, wxLongLong_t follow_only_process_id, wxWindowID id = wxID_ANY, const wxString& title = _("Status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
 		~GUIStatus();
 	
 };

@@ -22,15 +22,24 @@
 class Status : public GUIStatus, wxTimer
 {
 public:
-	Status(wxWindow* parent);
+	Status(wxWindow* parent, wxLongLong_t follow_only_process_id);
+
+	static Status* getInstance();
 
 	virtual void Notify(void);
 
+protected:
+	void OnClose();
+
 private:
+
+	static Status* instance;
 
 	bool updateStatus(int errcnt);
 
 	SStatusDetails last_status_details;
+
+	SConnection connection;
 
 	int error_count;
 };

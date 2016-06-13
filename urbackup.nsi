@@ -13,6 +13,7 @@ InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "License-Install.txt"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
@@ -60,11 +61,27 @@ RequestExecutionLevel highest
   Pop "${outVar}"
 !macroend  
  
-
+Var HAS_SERVICE
+ 
 Section "install"
 	${If} ${RunningX64}
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
+	${EndIf}
+	
+	${If} ${IsWinXP}
+		MessageBox MB_OK "Sorry, installation on Windows XP is not supported."
+		Quit
+	${EndIf}
+	
+	${If} ${IsWin2003}
+		MessageBox MB_OK "Sorry, installation on Windows Server 2003 is not supported."
+		Quit
+	${EndIf}
+	
+	${If} ${IsWin2000}
+		MessageBox MB_OK "Sorry, installation on Windows 2000 is not supported."
+		Quit
 	${EndIf}
 	
 	SetOutPath "$TEMP"
@@ -78,20 +95,24 @@ Section "install"
 		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
-		File "deps\win\vcredist\vcredist_2010sp1_x64.exe"
-		ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /q /norestart' $0
+		File "..\deps\redist\vc_redist_2015.x64.exe"
+		ExecWait '"$TEMP\vc_redist_2015.x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
-			ExecWait '"$TEMP\vcredist_2010sp1_x64.exe" /passive /norestart' $0
+			ExecWait '"$TEMP\vc_redist_2015.x64.exe" /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
-				MessageBox MB_OK "Unable to install Visual Studio 2010SP1 runtime. UrBackup needs that runtime."
+			${If} $0 != '1638'
+				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
 				Quit
 			${EndIf}
 			${EndIf}
+			${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 		${EndIf}
@@ -109,20 +130,24 @@ Section "install"
 				; Delete '$TEMP\vcredist_x86.exe'
 			; ${EndIf}
 		; ${EndIf}
-		File "deps\win\vcredist\vcredist_2010sp1_x86.exe"
-		ExecWait '"$TEMP\vcredist_2010sp1_x86.exe" /q /norestart' $0
+		File "..\deps\redist\vc_redist_2015.x86.exe"
+		ExecWait '"$TEMP\vc_redist_2015.x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
+		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
-			ExecWait '"$TEMP\vcredist_2010sp1_x86.exe"  /passive /norestart' $0
+			ExecWait '"$TEMP\vc_redist_2015.x86.exe"  /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
-				MessageBox MB_OK "Unable to install Visual Studio 2010SP1 runtime. UrBackup needs that runtime."
+			${If} $0 != '1638'
+				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
 				Quit
 			${EndIf}
 			${EndIf}
+			${EndIf}
+		${EndIf}
 		${EndIf}
 		${EndIf}
 		${EndIf}
@@ -140,18 +165,21 @@ Section "install"
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
+	StrCpy $HAS_SERVICE "0"
 	
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 == '0'
-		SimpleSC::StopService "$R0"
+		SimpleSC::StopService "$R0" 1 30
 		Pop $0
+		StrCpy $HAS_SERVICE "1"
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
 	${EndIf}
 	
-	Sleep 500
-	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
+	
+	Sleep 500
 	
 	CreateDirectory "$SMPROGRAMS\UrBackup"
 	CreateShortCut "$SMPROGRAMS\UrBackup\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
@@ -161,6 +189,8 @@ Section "install"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "UninstallString" "$INSTDIR\Uninstall.exe"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "Path" "$INSTDIR"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\UrBackup" "DisplayVersion" "$version_short$"
+	
+	ClearErrors
 	
 	File "data\args.txt"
 	File "data\prefilebackup_new.bat"
@@ -198,16 +228,15 @@ Section "install"
 	File "data\backup-no-server.ico"
 	File "data\backup-indexing.ico"
 	File "data\backup-no-recent.ico"
-	File "data\new.txt"	
 	File "data\logo1.png"
 	File "data\backup-progress-pause.ico"
-	File "data\urbackup_dsa.pub"
-	File "data\curr_version.txt"
+	File "data\urbackup_ecdsa409k1.pub"
 	File "data\updates_h.dat"
 	File "data\license.txt"
 	File "data\info.txt"
 	File "data\args_debug.txt"
 	File "data\enable_debug_logging.bat"
+	File "data\enable_internet_only.bat"
 	SetOutPath "$INSTDIR\lang\de"
 	File "data\lang\de\urbackup.mo"
 	SetOutPath "$INSTDIR\lang\fr"
@@ -249,9 +278,14 @@ Section "install"
 	SetOutPath "$INSTDIR\lang\pt"
 	File "data\lang\pt\urbackup.mo"
 	
-	SetOutPath "$INSTDIR\urbackup"
+	${If} ${Errors}
+		Quit
+	${EndIf}
 	
-	File "data\urbackup\backup_client_new.db"
+	SetOutPath "$INSTDIR"
+	File "data\curr_version.txt"
+	
+	SetOutPath "$INSTDIR\urbackup"
 	
 	CreateDirectory "$INSTDIR\urbackup\data"	
 	
@@ -293,17 +327,7 @@ Section "install"
 			;SetRebootFlag true
 		${EndIf}
 	${EndIf}
-	
-	IfFileExists "$INSTDIR\urbackup\backup_client.db" next_s do_copy
-do_copy:
-	StrCpy $0 "$INSTDIR\urbackup\backup_client_new.db" ;Path of copy file from
-	StrCpy $1 "$INSTDIR\urbackup\backup_client.db"   ;Path of copy file to
-	StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-	System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-	Pop $0
-next_s:	
-	Delete "$INSTDIR\urbackup\backup_client_new.db"
-	
+		
 	${If} ${IsWinXP}
 		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
 		Pop $0
@@ -329,6 +353,7 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
+start_service:
 	${Unicode2Ansi} "UrBackupClientBackend" $R0
 	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
 	${Unicode2Ansi} "16" $R2
@@ -357,6 +382,8 @@ Section "Uninstall"
 	${EndIf}
 	
 	KillProcDLL::KillProc "UrBackupClient.exe"
+	
+	ExecWait '"$INSTDIR\UrBackupClient.exe" deleteshellkeys'
 	
 	${If} ${RunningX64}
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
@@ -392,7 +419,9 @@ Function .onInstSuccess
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
 	${EndIf}
+	SetOutPath "$INSTDIR"
 	Exec '"$INSTDIR\UrBackupClient.exe"'
+	Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32

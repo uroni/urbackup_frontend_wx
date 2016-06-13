@@ -1,18 +1,18 @@
 /*************************************************************************
 *    UrBackup - Client/Server backup system
-*    Copyright (C) 2011  Martin Raiber
+*    Copyright (C) 2011-2015 Martin Raiber
 *
 *    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
+*    it under the terms of the GNU Affero General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
 *
 *    This program is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*    GNU Affero General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
+*    You should have received a copy of the GNU Affero General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
@@ -1049,11 +1049,6 @@ void ParseParamStr(const std::string &pStr, std::map<std::wstring,std::wstring> 
 	}
 }
 
-int round(float f)
-{
-  return (int)(f<0?f-0.5f:f+0.5f);
-}
-
 std::string FormatTime(int timeins)
 {
 	float t=(float)timeins;
@@ -1084,7 +1079,7 @@ std::string FormatTime(int timeins)
 
 //-------------------HTML DECODE-----------------
 
-const char array[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}; 
+const char hex_array[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}; 
 
 bool IsHex(const std::string &str)
 {
@@ -1094,7 +1089,7 @@ bool IsHex(const std::string &str)
 		bool in=false;
 		for(size_t t=0;t<16;++t)
 		{
-			if(array[t]==str[i])
+			if(hex_array[t]==str[i])
 			{
 				in=true;
 				break;
@@ -1118,7 +1113,7 @@ unsigned long hexToULong(const std::string &data)
 	{
 		for(unsigned char j = 0; j < 16; j++)
 		{
-			if( str[i] == array[j])
+			if( str[i] == hex_array[j])
 			{			
 				return_value = ((return_value * 16) + j);
 			}
@@ -1418,4 +1413,18 @@ std::string conv_filename(std::string fn)
         }
 
         return fn;
+}
+
+std::string base64_encode_dash( const std::string& data )
+{
+	std::string ret = base64_encode(reinterpret_cast<const unsigned char*>(data.c_str()),
+		static_cast<unsigned int>(data.size()));
+
+	for(size_t i=0;i<ret.size();++i)
+	{
+		if(ret[i]=='=')
+			ret[i]='-';
+	}
+
+	return ret;
 }

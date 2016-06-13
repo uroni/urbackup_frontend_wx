@@ -1,18 +1,18 @@
 /*************************************************************************
 *    UrBackup - Client/Server backup system
-*    Copyright (C) 2011  Martin Raiber
+*    Copyright (C) 2011-2015 Martin Raiber
 *
 *    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
+*    it under the terms of the GNU Affero General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
 *
 *    This program is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*    GNU Affero General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
+*    You should have received a copy of the GNU Affero General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
@@ -40,7 +40,14 @@ Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 
 	for(size_t i=0;i<logentries.size();++i)
 	{
-		m_listBox1->Append(logentries[i].logtime);
+		wxLongLong_t logtime;
+		if(!logentries[i].logtime.empty() && logentries[i].logtime.ToLongLong(&logtime))
+		{
+			wxDateTime logtime_dt((wxLongLong)(logtime*1000));
+
+			m_listBox1->Append(logtime_dt.Format());
+		}
+		
 	}
 
 	Show(true);

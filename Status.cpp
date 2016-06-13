@@ -1,3 +1,21 @@
+/*************************************************************************
+*    UrBackup - Client/Server backup system
+*    Copyright (C) 2011-2015 Martin Raiber
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #include "Status.h"
 #include "main.h"
 #include "TranslationHelper.h"
@@ -7,7 +25,7 @@ extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
-const int reset_error_count=60;
+const int reset_error_count=20;
 
 namespace
 {
@@ -88,9 +106,10 @@ namespace
 	}
 }
 
+Status* Status::instance = NULL;
 
-Status::Status(wxWindow* parent)
-	: GUIStatus(parent)
+Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
+	: GUIStatus(parent, follow_only_process_id)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
@@ -99,18 +118,28 @@ Status::Status(wxWindow* parent)
 		SetFocus();
 		Raise();
 		Show(true);
+		RequestUserAttention();
+
+		if (follow_only_process_id == 0)
+		{
+			instance = this;
+		}
 
 		Start(1000);
 	}
 
+#ifndef __APPLE__
 	SetDoubleBuffered(true);
+#endif
 
 	error_count=reset_error_count;
 }
 
+
+
 bool Status::updateStatus(int errcnt)
 {
-	SStatusDetails status_details = Connector::getStatusDetails();
+	SStatusDetails status_details = Connector::getStatusDetails(&connection);
 
 	if(!status_details.ok)
 	{
@@ -118,11 +147,26 @@ bool Status::updateStatus(int errcnt)
 		{
 			Stop();
 			wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
-			Hide();
 			Close();
 		}
 		return false;
 	}
+
+	if (follow_only_process_id != 0)
+	{
+		for (size_t i = 0; i < status_details.running_processes.size();)
+		{
+			if (status_details.running_processes[i].process_id != follow_only_process_id)
+			{
+				status_details.running_processes.erase(status_details.running_processes.begin() + i);
+			}
+			else
+			{
+				++i;
+			}
+		}
+	}
+	
 
 	if(last_status_details == status_details)
 	{
@@ -131,86 +175,142 @@ bool Status::updateStatus(int errcnt)
 
 	last_status_details = status_details;
 
-	wxString status_text = getStatusText(status_details.currently_running);
-
-	if(status_text.empty())
+	if (!status_details.running_processes.empty())
 	{
-		status_text=_("Idle.");
-		m_staticText312->SetLabel(wxEmptyString);
-		m_gauge1->SetValue(0);
-		m_gauge1->Disable();
-	}
-	else
-	{
-		m_gauge1->Enable();
-
-		if(status_details.percent_done>=0)
+		if (status_details.running_processes.size() < m_processItem.size())
 		{
-			m_gauge1->SetValue(status_details.percent_done);
+			removeCurrentProcesses(status_details.running_processes.size());
 		}
 		else
 		{
-			m_gauge1->Pulse();
+			resizeForProcesses(status_details.running_processes.size());
 		}
 
-		if(status_details.eta_ms>0)
+		for (size_t i = 0; i < status_details.running_processes.size(); ++i)
 		{
-			m_staticText312->SetLabel(trans_1(_("ETA: Approx. _1_"), PrettyPrintTime(status_details.eta_ms)));
+			SProcessItem& item = m_processItem[i];
+			SRunningProcess& proc = status_details.running_processes[i];
+
+			wxString status_text = getStatusText(proc.action);
+
+			item.m_gauge1->Enable();
+
+			if (proc.percent_done >= 0)
+			{
+				item.m_gauge1->SetValue(proc.percent_done);
+			}
+			else
+			{
+				item.m_gauge1->Pulse();
+			}
+
+			wxString eta_text = wxEmptyString;
+			if (proc.eta_ms>0)
+			{
+				eta_text = trans_1(_("ETA: Approx. _1_"), PrettyPrintTime(proc.eta_ms));
+				eta_text += "    ";
+			}
+
+
+			if (!proc.details.empty())
+			{				
+				if (proc.action == "RESTORE_FILES")
+				{
+					eta_text += trans_2(_("File: _1_"), proc.details, wxString(convert(proc.detail_pc)));
+				}
+				else if (proc.action == "INCRI" || proc.action == "FULLI")
+				{
+					eta_text += trans_1(_("Volume: _1_"), proc.details);
+				}
+
+				if (proc.detail_pc != -1)
+				{
+					if (proc.action == "RESTORE_FILES")
+					{
+						wxString s;
+						s << proc.detail_pc;
+						eta_text += getPercentText(s);
+					}
+				}
+			}
+
+			item.m_staticText312->SetLabel(eta_text);
+
+
+			wxString s;
+			s << proc.percent_done;
+			status_text += wxT(" ");
+			status_text += getPercentText(s);
+
+			item.m_staticText31->SetLabel(status_text);
 		}
-		else
-		{
-			m_staticText312->SetLabel(wxEmptyString);
-		}
-
-		wxString s;
-		s << status_details.percent_done;
-		status_text+=wxT(" ");
-		status_text+=getPercentText(s);
-	}
-
-	m_staticText31->SetLabel(status_text);
-
-	if(!status_details.last_backup_time.empty())
-	{
-		m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), status_details.last_backup_time));
 	}
 	else
 	{
-		m_staticText37->SetLabel(wxEmptyString);
-	}
+		removeCurrentProcesses(1);
 
-	wxString servers_text;
+		SProcessItem& item = m_processItem[0];
 
-	for(size_t i=0;i<status_details.servers.size();++i)
-	{
-		const SUrBackupServer& server = status_details.servers[i];
+		item.m_staticText312->SetLabel(wxEmptyString);
+		item.m_gauge1->SetValue(0);
+		item.m_gauge1->Disable();
 
-		if(!servers_text.empty())
-			servers_text+=wxT("\n");
-
-		wxString internet_s;
-		if(server.internet_connection)
-			internet_s=_("Yes");
+		if (follow_only_process_id == 0)
+		{
+			item.m_staticText31->SetLabel(_("Idle."));
+		}
 		else
-			internet_s=_("No");
-
-		servers_text+=server.name+" ("+trans_1(_("Internet: _1_"), internet_s) +")";
+		{
+			item.m_staticText31->SetLabel(_("Restore finished."));
+		}
 	}
 
-	if(status_details.servers.empty())
+	if (follow_only_process_id == 0)
 	{
-		m_staticText32->SetLabel(wxEmptyString);
-	}
-	else
-	{
-		m_staticText32->SetLabel(_("Servers:"));
-	}
+		if (status_details.last_backup_time>0)
+		{
+			wxDateTime lastbackup_dt((wxLongLong)(status_details.last_backup_time * 1000));
 
-	m_staticText33->SetLabel(servers_text);
+			m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
+		}
+		else
+		{
+			m_staticText37->SetLabel(wxEmptyString);
+		}
 
-	m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
+		wxString servers_text;
 
-	GetSizer()->Fit(this);
+		for (size_t i = 0; i<status_details.servers.size(); ++i)
+		{
+			const SUrBackupServer& server = status_details.servers[i];
+
+			if (!servers_text.empty())
+				servers_text += wxT("\n");
+
+			wxString internet_s;
+			if (server.internet_connection)
+				internet_s = _("Yes");
+			else
+				internet_s = _("No");
+
+			servers_text += server.name + " (" + trans_1(_("Internet: _1_"), internet_s) + ")";
+		}
+
+		if (status_details.servers.empty())
+		{
+			m_staticText32->SetLabel(wxEmptyString);
+		}
+		else
+		{
+			m_staticText32->SetLabel(_("Servers:"));
+		}
+
+		m_staticText33->SetLabel(servers_text);
+
+		m_staticText35->SetLabel(getInternetConnectionStatus(status_details.internet_status, status_details.time_since_last_lan_connection));
+	}	
+
+	relayout();
 
 	return true;
 }
@@ -231,4 +331,23 @@ void Status::Notify(void)
 	{
 		error_count=reset_error_count;
 	}
+}
+
+Status* Status::getInstance()
+{
+	return instance;
+}
+
+void Status::OnClose()
+{
+	if (follow_only_process_id == 0)
+	{
+		instance = NULL;
+	}
+	if (connection.client != NULL)
+	{
+		connection.client->Destroy();
+		connection.client = NULL;
+	}
+	Destroy();
 }

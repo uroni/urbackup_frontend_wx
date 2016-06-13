@@ -485,7 +485,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	bSizer4->Add( m_button1, 0, wxALIGN_BOTTOM|wxALL, 5 );
 	
-	m_button2 = new wxButton( this, wxID_ANY, _("Abort"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button2 = new wxButton( this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_button2->SetMinSize( wxSize( -1,25 ) );
 	
 	bSizer4->Add( m_button2, 0, wxALIGN_BOTTOM|wxALL, 5 );
@@ -607,16 +607,20 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer25->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer26;
-	bSizer26 = new wxBoxSizer( wxVERTICAL );
+	wxSizer* bSizer26 = new wxBoxSizer( wxVERTICAL );
 	
 	m_staticText21 = new wxStaticText( this, wxID_ANY, _("Version:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
 	bSizer26->Add( m_staticText21, 0, wxALL, 5 );
 	
-	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("    ")+wxString(c_client_version), wxDefaultPosition, wxDefaultSize, 0 );
+	m_versionSizer = new wxBoxSizer(wxHORIZONTAL);
+
+	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("    ")+wxString(c_client_version), wxDefaultPosition, wxDefaultSize, wxEXPAND);
 	m_staticText22->Wrap( -1 );
-	bSizer26->Add( m_staticText22, 0, wxALL, 5 );
+
+	m_versionSizer->Add( m_staticText22, 0, wxALL, 5 );
+
+	bSizer26->Add(m_versionSizer);
 	
 	m_staticText23 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText23->Wrap( -1 );
@@ -648,6 +652,7 @@ GUIInfo::GUIInfo( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	// Connect Events
 	m_button4->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIInfo::OnOKClick ), NULL, this );
+	Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GUIInfo::OnCloseInt ), NULL, this);
 }
 
 GUIInfo::~GUIInfo()
@@ -680,15 +685,34 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_staticText27 = new wxStaticText( this, wxID_ANY, _("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText27->Wrap( -1 );
-	m_staticText27->SetMinSize( wxSize( 40,-1 ) );
+	m_staticText27->SetMinSize( wxSize( -1,-1 ) );
 	
 	bSizer32->Add( m_staticText27, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_textCtrl18 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	m_textCtrl18->Enable( false );
 	m_textCtrl18->SetMinSize( wxSize( 200,-1 ) );
-	
+
 	bSizer32->Add( m_textCtrl18, 0, wxALL, 5 );
+
+	/*m_staticTextGroup = new wxStaticText( this, wxID_ANY, _("Gruppe:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextGroup->Wrap( -1 );
+	m_staticTextGroup->SetMinSize( wxSize( -1,-1 ) );
+
+	bSizer32->Add( m_staticTextGroup, 0, wxALIGN_CENTER|wxALL, 5 );
+
+	wxString choices[] =
+	{
+		_("Default"),
+		_("Continuous")
+	};
+
+	m_group = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 2, choices);
+	m_group->SetMinSize(wxSize(140, -1));
+	m_group->Enable(false);
+
+	bSizer32->Add( m_group, 0, wxALL, 5 );*/
+	
 	
 	bSizer30->Add( bSizer32, 0, wxEXPAND, 5 );
 	
@@ -701,7 +725,7 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_button5 = new wxButton( this, wxID_ANY, _("Ok"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer31->Add( m_button5, 0, wxALL, 5 );
 	
-	m_button6 = new wxButton( this, wxID_ANY, _("Abort"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button6 = new wxButton( this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer31->Add( m_button6, 0, wxALL, 5 );
 	
 	
@@ -733,6 +757,7 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_button6->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickAbort ), NULL, this );
 	m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickNew ), NULL, this );
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickDel ), NULL, this );
+	//m_group->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIConfigPath::OnGroupChange ), NULL, this );
 }
 
 GUIConfigPath::~GUIConfigPath()
@@ -747,77 +772,62 @@ GUIConfigPath::~GUIConfigPath()
 	
 }
 
-GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+GUIStatus::GUIStatus( wxWindow* parent, wxLongLong_t follow_only_process_id, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+	, follow_only_process_id(follow_only_process_id)
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
 	
-	wxBoxSizer* bSizer34;
 	bSizer34 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer36;
-	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_staticText31 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	bSizer36->Add( m_staticText31, 0, wxALL, 5 );
-	
-	bSizer34->Add( bSizer36, 0, wxEXPAND, 5 );
+	resizeForProcesses(1);
 
-	wxBoxSizer* bSizer362;
-	bSizer362 = new wxBoxSizer( wxHORIZONTAL );
+	if (follow_only_process_id == 0)
+	{
+		wxBoxSizer* bSizer12;
+		bSizer12 = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText312 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText312->Wrap( -1 );
-	bSizer362->Add( m_staticText312, 0, wxALL, 5 );
-	
-	bSizer34->Add( bSizer362, 0, wxEXPAND, 5 );
-	
-	m_gauge1 = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
-	m_gauge1->SetMinSize( wxSize( 500,-1 ) );
-	m_gauge1->SetRange(100);
-	
-	bSizer34->Add( m_gauge1, 0, wxALL, 5 );
+		m_staticText37 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText37->Wrap(-1);
+		bSizer12->Add(m_staticText37, 0, wxALL, 5);
 
-	wxBoxSizer* bSizer12;
-	bSizer12 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText37 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText37->Wrap( -1 );
-	bSizer12->Add( m_staticText37, 0, wxALL, 5 );
+		bSizer34->Add(bSizer12, 0, wxEXPAND, 5);
 
-	bSizer34->Add( bSizer12, 0, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer35;
-	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText32 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText32->Wrap( -1 );
-	bSizer35->Add( m_staticText32, 0, wxALL, 5 );
-	
-	m_staticText33 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText33->Wrap( -1 );
-	bSizer35->Add( m_staticText33, 0, wxALL, 5 );
-	
-	
-	bSizer34->Add( bSizer35, 0, wxEXPAND, 5 );
-	
-	m_staticText36 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText36->Wrap( -1 );
-	bSizer34->Add( m_staticText36, 0, wxALL, 5 );
-	
-	wxBoxSizer* bSizer37;
-	bSizer37 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText34 = new wxStaticText( this, wxID_ANY, _("Internet connection status:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText34->Wrap( -1 );
-	bSizer37->Add( m_staticText34, 0, wxALL, 5 );
-	
-	m_staticText35 = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText35->Wrap( -1 );
-	bSizer37->Add( m_staticText35, 0, wxALL, 5 );
-	
-	
-	bSizer34->Add( bSizer37, 0, wxEXPAND, 5 );
+		wxBoxSizer* bSizer35;
+		bSizer35 = new wxBoxSizer(wxHORIZONTAL);
+
+		m_staticText32 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText32->Wrap(-1);
+		bSizer35->Add(m_staticText32, 0, wxALL, 5);
+
+		m_staticText33 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText33->Wrap(-1);
+		bSizer35->Add(m_staticText33, 0, wxALL, 5);
+
+
+		bSizer34->Add(bSizer35, 0, wxEXPAND, 5);
+
+		m_staticText36 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText36->Wrap(-1);
+		bSizer34->Add(m_staticText36, 0, wxALL, 5);
+
+		wxBoxSizer* bSizer37;
+		bSizer37 = new wxBoxSizer(wxHORIZONTAL);
+
+		m_staticText34 = new wxStaticText(this, wxID_ANY, _("Internet connection status:"), wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText34->Wrap(-1);
+		bSizer37->Add(m_staticText34, 0, wxALL, 5);
+
+		m_staticText35 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		m_staticText35->Wrap(-1);
+		bSizer37->Add(m_staticText35, 0, wxALL, 5);
+
+
+		bSizer34->Add(bSizer37, 0, wxEXPAND, 5);
+	}
+	else
+	{
+		this->SetTitle(_("UrBackup - File restore"));
+	}
 	
 	
 	this->SetSizer( bSizer34 );
@@ -825,8 +835,75 @@ GUIStatus::GUIStatus( wxWindow* parent, wxWindowID id, const wxString& title, co
 	bSizer34->Fit( this );
 	
 	this->Centre( wxBOTH );
+
+	Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GUIStatus::OnCloseInt ), NULL, this);
+}
+
+void GUIStatus::removeCurrentProcesses(size_t new_size)
+{
+	for (size_t i = new_size; i < m_processItem.size(); ++i)
+	{
+		bSizer34->Remove(m_processItem[i].bSizer36);
+		bSizer34->Remove(m_processItem[i].bSizer362);
+		bSizer34->Detach(m_processItem[i].m_gauge1);
+		bSizer34->Detach(m_processItem[i].m_staticLine);
+		m_processItem[i].m_gauge1->Destroy();
+		m_processItem[i].m_staticText31->Destroy();
+		m_processItem[i].m_staticText312->Destroy();
+		m_processItem[i].m_staticLine->Destroy();
+	}
+	m_processItem.resize(new_size);
+}
+
+void GUIStatus::resizeForProcesses(size_t new_size)
+{
+	for (size_t i = m_processItem.size(); i < new_size; ++i)
+	{
+		SProcessItem process_item;
+		process_item.bSizer36 = new wxBoxSizer(wxHORIZONTAL);
+
+		process_item.m_staticText31 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		process_item.m_staticText31->Wrap(-1);
+		process_item.bSizer36->Add(process_item.m_staticText31, 0, wxALL, 5);
+
+		bSizer34->Insert(i * 4 + 0,process_item.bSizer36, 0, wxEXPAND, 5);
+
+		process_item.bSizer362 = new wxBoxSizer(wxHORIZONTAL);
+
+		process_item.m_staticText312 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
+		process_item.m_staticText312->Wrap(-1);
+		process_item.bSizer362->Add(process_item.m_staticText312, 0, wxALL, 5);
+
+		bSizer34->Insert(i * 4 + 1, process_item.bSizer362, 0, wxEXPAND, 5);
+
+		process_item.m_gauge1 = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
+		process_item.m_gauge1->SetMinSize(wxSize(500, -1));
+		process_item.m_gauge1->SetRange(100);
+		bSizer34->Insert(i * 4 + 2, process_item.m_gauge1, 0, wxEXPAND|wxALL, 5);
+
+		if (follow_only_process_id == 0)
+		{
+			process_item.m_staticLine = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+
+			bSizer34->Insert(i * 4 + 3, process_item.m_staticLine, 0, wxEXPAND, 5);
+		}
+
+		m_processItem.push_back(process_item);
+	}
+}
+
+void GUIStatus::relayout()
+{
+	this->Layout();
+	bSizer34->Fit(this);
 }
 
 GUIStatus::~GUIStatus()
 {
+}
+
+void GUIStatus::OnCloseInt(wxCloseEvent& event)
+{
+	event.Skip();
+	OnClose();
 }

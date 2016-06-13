@@ -1,29 +1,31 @@
 /*************************************************************************
 *    UrBackup - Client/Server backup system
-*    Copyright (C) 2011  Martin Raiber
+*    Copyright (C) 2011-2015 Martin Raiber
 *
 *    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
+*    it under the terms of the GNU Affero General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
 *
 *    This program is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*    GNU Affero General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
+*    You should have received a copy of the GNU Affero General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
 #include "Connector.h"
-#include "tcpstack.h"
 #include "stringtools.h"
-#include <wx/socket.h>
 #include "escape.h"
 #include <iostream>
 #include "json/json.h"
 #include <stdexcept>
+
+#ifndef _WIN32
+#include "../config.h"
+#endif
 
 std::string Connector::pw;
 std::string Connector::pw_change;
@@ -41,13 +43,42 @@ std::wstring ConvertToUnicode(const std::string &str);
 #define ConvertToUnicode(x)
 #endif
 
+namespace
+{
+	class ScopedSocket
+	{
+	public:
+		ScopedSocket(wxSocketClient* socket_client)
+			:socket_client(socket_client) {}
+
+		~ScopedSocket()
+		{
+			if (socket_client != NULL)
+			{
+				socket_client->Destroy();
+			}
+		}
+
+		void release()
+		{
+			socket_client = NULL;
+		}
+	private:
+		wxSocketClient* socket_client;
+	};
+}
 
 
-std::string Connector::getPasswordData( bool change_command )
+
+std::string Connector::getPasswordData( bool change_command, bool set_busy)
 {
 	const std::string pw_fn = change_command ? "pw_change.txt" : "pw.txt";
 
-	busy=true;
+	if(set_busy)
+	{
+		busy = true;
+	}
+	
 	error=false;
 	std::string curr_pw;
 
@@ -63,60 +94,81 @@ std::string Connector::getPasswordData( bool change_command )
 			curr_pw=getFile(pw_fn);
 		else
 #endif
-			if(FileExists(g_res_path+pw_fn))
-				curr_pw=getFile(g_res_path+pw_fn);
-			else if(FileExists(pw_fn))
-				curr_pw=getFile(pw_fn);
-			else if(FileExists("/usr/local/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/usr/local/var/urbackup/"+pw_fn);
-			else if(FileExists("/var/urbackup/"+pw_fn))
-				curr_pw=getFile("/var/urbackup/"+pw_fn);
-			else if(FileExists("/var/lib/urbackup/"+pw_fn))
-				curr_pw=getFile("/var/lib/urbackup/"+pw_fn);
+		{
+#ifdef _WIN32
+			curr_pw = getFile(g_res_path + pw_fn);
+#else
+			curr_pw = getFile(VARDIR "/urbackup/" + pw_fn);
+#endif
+		}
 
-			if(curr_pw.empty())
-			{
-				std::cout << "Could not load password file!" << std::endl;
-			}
+		if(curr_pw.empty())
+		{
+			std::cout << "Could not load password file!" << std::endl;
+		}
+		else
+		{
+			if(change_command)
+				pw_change = curr_pw;
 			else
-			{
-				if(change_command)
-					pw_change = curr_pw;
-				else
-					pw = curr_pw;
-			}
+				pw = curr_pw;
+		}
 	}
 
 	return curr_pw;
 }
 
 
-std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, size_t retries)
+std::string Connector::getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection, size_t timeoutms, bool set_busy)
 {
-	std::string curr_pw = getPasswordData(change_command);
+	wxLongLong starttime = wxGetLocalTimeMillis();
 
-	wxSocketClient client(wxSOCKET_BLOCK);
-	wxIPV4address addr;
-	addr.Hostname(wxT("127.0.0.1"));
-	addr.Service(35623);
-	if(!client.Connect(addr,false))
+	std::string curr_pw = getPasswordData(change_command, set_busy);
+
+	wxSocketClient* client;
+	if (connection == NULL
+		|| connection->client == NULL
+		|| connection->client->Error())
 	{
-		for(size_t k=0;k<retries;++k)
+		if (connection != NULL
+			&& connection->client != NULL)
 		{
-			if(client.WaitOnConnect(0,500))
+			connection->client->Destroy();
+			connection->client = NULL;
+		}
+
+		client = new wxSocketClient(wxSOCKET_BLOCK);
+
+		wxIPV4address addr;
+		addr.Hostname(wxT("127.0.0.1"));
+		addr.Service(35623);
+		if (!client->Connect(addr, false) )
+		{
+			while (wxGetLocalTimeMillis() - starttime<timeoutms)
 			{
-				break;
+				if (client->WaitOnConnect(0, 100))
+				{
+					break;
+				}
+				wxTheApp->Yield(true);
 			}
-			wxTheApp->Yield(false);
+		}
+
+		if (!client->IsConnected())
+		{
+			client->Destroy();
+			error = true;
+			busy = false;
+			return "";
 		}
 	}
-	if(!client.IsConnected())
+	else
 	{
-		wxSocketError err=client.LastError();
-		error=true;
-		busy=false;
-		return "";
+		client = connection->client;
+		connection->client = NULL;
 	}
+
+	ScopedSocket client_socket(client);
 
 	std::string t_args;
 
@@ -126,7 +178,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		t_args=args;
 
 	CTCPStack tcpstack;
-	tcpstack.Send(&client, cmd+"#pw="+curr_pw+t_args);
+	tcpstack.Send(client, cmd+"#pw="+curr_pw+t_args);
 
 	char *resp=NULL;
 	char buffer[1024];
@@ -134,15 +186,15 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	while(resp==NULL)
 	{
 		bool conn=false;
-		for(size_t k=0;k<retries;++k)
+		while(wxGetLocalTimeMillis()-starttime<timeoutms)
 		{
-			if(client.WaitForRead(0,500))
+			if(client->WaitForRead(0, 100))
 			{
 				conn=true;
 				break;
 			}
-			wxTheApp->SafeYield(NULL, true);
-			if(client.Error())
+			wxTheApp->Yield(true);
+			if(client->Error())
 				break;
 		}
 		if(!conn)
@@ -151,21 +203,20 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 			busy=false;
 			return "";
 		}
-		client.Read(buffer, 1024);
+		client->Read(buffer, 1024);
 		
-		if(client.Error())
+		if(client->Error())
 		{
 			error=true;
 			busy=false;
 			return "";
 		}
-		tcpstack.AddData(buffer, client.GetLastIOSize() );
+		tcpstack.AddData(buffer, client->GetLastIOSize() );
 		
 
 		resp=tcpstack.getPacket(&packetsize);
 		if(packetsize==0)
 		{
-			client.Close();
 			busy=false;
 			return "";
 		}
@@ -176,9 +227,14 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	memcpy(&ret[0], resp, packetsize);
 	delete resp;
 
-	client.Close();
-
 	busy=false;
+
+	if (connection != NULL)
+	{
+		connection->client = client;
+		client_socket.release();
+	}
+
 	return ret;
 }
 
@@ -190,21 +246,50 @@ bool Connector::hasError(void)
 std::vector<SBackupDir> Connector::getSharedPaths(void)
 {
 	std::vector<SBackupDir> ret;
-	std::string d=getResponse("1GET BACKUP DIRS","", true);
-	int lc=linecount(d);
-	for(int i=0;i<lc;i+=2)
+	std::string d=getResponse("GET BACKUP DIRS","", false);
+
+	if (d.empty())
 	{
-		SBackupDir bd;
-		bd.id=atoi(getline(i, d).c_str() );
-		std::string path=getline(i+1, d);
-		bd.path=wxString::FromUTF8(path.c_str() );
-		if(path.find("|")!=std::string::npos)
-		{
-			bd.path=ConvertToUnicode(getafter("|", path));
-			bd.name=ConvertToUnicode(getuntil("|", path));
-		}
-		ret.push_back( bd );
+		error = true;
+		return ret;
 	}
+
+	Json::Value root;
+	Json::Reader reader;
+
+	if(!reader.parse(d, root, false))
+	{
+		return ret;
+	}
+
+	try
+	{
+		Json::Value dirs = root["dirs"];
+
+		for(Json::Value::ArrayIndex i=0;i<dirs.size();++i)
+		{
+			Json::Value dir = dirs[i];
+
+			if (!dir.get("virtual_client", Json::nullValue).isNull())
+			{
+				continue;
+			}
+
+			SBackupDir rdir =
+			{
+				wxString(dir["path"].asString()),
+				wxString(dir["name"].asString()),
+				dir["id"].asInt(),
+				dir["group"].asInt()
+			};
+
+			ret.push_back(rdir);
+		}
+	}
+	catch(std::runtime_error&)
+	{
+	}
+
 	return ret;
 }
 
@@ -230,6 +315,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 
 		args+="dir_"+nconvert(i)+"="+path;
 		args+="&dir_"+nconvert(i)+"_name="+name;
+		args+="&dir_"+nconvert(i)+"_group="+nconvert(res[i].group);
 	}
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args, true);
@@ -238,60 +324,6 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return false;
 	else
 		return true;
-}
-
-SStatus Connector::getStatus(size_t retries)
-{
-	std::string d=getResponse("STATUS", "", false, retries);
-
-	std::vector<std::string> toks;
-	Tokenize(d, toks, "#");
-
-	SStatus ret;
-	ret.pause=false;
-	ret.capa=0;
-	if(toks.size()>0)
-		ret.lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
-	if(toks.size()>1)
-		ret.status=wxString::FromUTF8(toks[1].c_str() );
-	if(toks.size()>2)
-		ret.pcdone=wxString::FromUTF8(toks[2].c_str() );
-	if(toks.size()>3)
-	{
-		if(toks[3]=="P")
-			ret.pause=true;
-		else if(toks[3]=="NP")
-			ret.pause=false;
-	}
-	if(toks.size()>4)
-	{
-		std::map<std::wstring,std::wstring> params;
-		ParseParamStr(toks[4], &params);
-		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
-		if(it_capa!=params.end())
-		{
-			ret.capa=watoi(it_capa->second);
-		}
-		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
-		if(it_new_server!=params.end())
-		{
-			ret.new_server=wnarrow(it_new_server->second);
-		}
-		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
-		if(it_has_server!=params.end())
-		{
-			ret.has_server= ( it_has_server->second==L"true" );
-		}
-	}
-
-	return ret;
-}
-
-unsigned int Connector::getIncrUpdateIntervall(void)
-{
-	std::string d=getResponse("GET INCRINTERVALL","", false);
-
-	return atoi(d.c_str());
 }
 
 int Connector::startBackup(bool full)
@@ -306,6 +338,8 @@ int Connector::startBackup(bool full)
 
 	if(d=="RUNNING")
 		return 2;
+	else if(d=="NO SERVER")
+		return 3;
 	else if(d!="OK")
 		return 0;
 	else
@@ -324,6 +358,8 @@ int Connector::startImage(bool full)
 
 	if(d=="RUNNING")
 		return 2;
+	else if(d=="NO SERVER")
+		return 3;
 	else if(d!="OK")
 		return 0;
 	else
@@ -404,9 +440,9 @@ bool Connector::addNewServer(const std::string &ident)
 		return true;
 }
 
-SStatusDetails Connector::getStatusDetails()
+SStatusDetails Connector::getStatusDetails(SConnection* connection)
 {
-	std::string d=getResponse("STATUS DETAIL","", false);
+	std::string d=getResponse("STATUS DETAIL","", false, connection);
 
 	SStatusDetails ret;
 	ret.ok=false;
@@ -421,10 +457,23 @@ SStatusDetails Connector::getStatusDetails()
 
 	try
 	{
-		ret.last_backup_time = root["last_backup_time"].asString();
-		ret.percent_done = root["percent_done"].asInt();
-		ret.eta_ms = root["eta_ms"].asInt64();
-		ret.currently_running = root["currently_running"].asString();
+		ret.last_backup_time = root["last_backup_time"].asInt64();
+
+		std::vector<SRunningProcess> running_processes;
+		Json::Value json_running_processes = root["running_processes"];
+		running_processes.resize(json_running_processes.size());
+		for (unsigned int i = 0; i<json_running_processes.size(); ++i)
+		{
+			running_processes[i].action = json_running_processes[i]["action"].asString();
+			running_processes[i].percent_done = json_running_processes[i]["percent_done"].asInt();
+			running_processes[i].eta_ms = json_running_processes[i]["eta_ms"].asInt64();
+
+			running_processes[i].details = json_running_processes[i].get("details", std::string()).asString();
+			running_processes[i].detail_pc = json_running_processes[i].get("detail_pc", -1).asInt();
+
+			running_processes[i].process_id = json_running_processes[i].get("process_id", 0).asInt64();
+		}
+		ret.running_processes = running_processes;
 
 		std::vector<SUrBackupServer> servers;
 		Json::Value json_servers = root["servers"];
@@ -448,7 +497,13 @@ SStatusDetails Connector::getStatusDetails()
 	catch (std::runtime_error&)
 	{
 		return ret;
-	}	
+	}
+	
+}
+
+std::string Connector::getAccessParameters( const std::string& tokens )
+{
+	return getResponse("GET ACCESS PARAMETERS","tokens="+tokens, false);
 }
 
 int Connector::getCapabilities()
@@ -462,4 +517,218 @@ int Connector::getCapabilities()
 	{
 		return 0;
 	}
+}
+
+bool Connector::restoreOk( bool ok, wxLongLong_t& process_id)
+{
+	std::string d = getResponse("RESTORE OK", "ok="+nconvert(ok), false);
+
+	Json::Value root;
+	Json::Reader reader;
+
+	if (!reader.parse(d, root, false))
+	{
+		return false;
+	}
+
+	if (root.get("accepted", false).asBool() == true)
+	{
+		process_id = root["process_id"].asInt64();
+	}
+
+	return root["ok"].asBool();
+}
+
+SStatus Connector::initStatus(wxSocketClient* last_client, bool fast, size_t timeoutms/*=5000*/ )
+{
+	if (last_client != NULL
+		&& last_client->Error())
+	{
+		last_client->Destroy();
+		last_client = NULL;
+	}
+
+	bool change_command=false;
+	bool set_busy=false;
+	std::string cmd;
+	if(fast)
+	{
+		cmd = "FSTATUS";
+	}
+	else
+	{
+		cmd = "STATUS";
+	}
+	std::string args="";
+	std::string curr_pw = getPasswordData(change_command, set_busy);
+
+	SStatus status;
+	status.init=false;
+	status.starttime = wxGetLocalTimeMillis();
+	if (last_client != NULL)
+	{
+		status.client = last_client;
+	}
+	else
+	{
+		status.client = new wxSocketClient(wxSOCKET_BLOCK);
+
+		wxIPV4address addr;
+		addr.Hostname(wxT("127.0.0.1"));
+		addr.Service(35623);
+		if (!status.client->Connect(addr, false))
+		{
+			while (wxGetLocalTimeMillis() - status.starttime<timeoutms)
+			{
+				if (status.client->WaitOnConnect(0, 100))
+				{
+					break;
+				}
+				wxTheApp->Yield(true);
+			}
+		}
+
+		if (!status.client->IsConnected())
+		{
+			wxSocketError err = status.client->LastError();
+			status.client->Destroy();
+			status.client = NULL;
+			error = true;
+			busy = false;
+			return status;
+		}
+	}
+
+	std::string t_args;
+
+	if(!args.empty())
+		t_args="&"+args;
+	else
+		t_args=args;
+
+	CTCPStack tcpstack;
+	tcpstack.Send(status.client, cmd+"#pw="+curr_pw+t_args);
+	
+	status.timeoutms = timeoutms;
+	status.init = true;
+	return status;
+}
+
+bool SStatus::isAvailable()
+{
+	bool conn=false;
+	if(wxGetLocalTimeMillis()-starttime<timeoutms)
+	{
+		if(!client->WaitForRead(0, 10))
+		{
+			return false;
+		}
+		if(client->Error())
+		{
+			error=true;
+			client->Destroy();
+			client = NULL;
+			return false;
+		}
+	}
+	else
+	{
+		error=true;
+		client->Destroy();
+		client = NULL;
+		return false;
+	}
+
+	char buffer[1024];
+	client->Read(buffer, 1024);
+
+	if(client->Error())
+	{
+		error=true;
+		client->Destroy();
+		client = NULL;
+		return false;
+	}
+
+	tcpstack.AddData(buffer, client->GetLastIOSize() );
+
+	size_t packetsize;
+	char* resp=tcpstack.getPacket(&packetsize);
+	if(packetsize==0)
+	{
+		error=true;
+		return false;
+	}
+
+	std::string ret;
+	ret.resize(packetsize);
+	memcpy(&ret[0], resp, packetsize);
+	delete resp;
+
+	std::vector<std::string> toks;
+	Tokenize(ret, toks, "#");
+
+	pause=false;
+	capa=0;
+	ask_restore_ok=false;
+	if(toks.size()>0)
+		lastbackupdate=wxString::FromUTF8(toks[0].c_str() );
+	if(toks.size()>1)
+		status=wxString::FromUTF8(toks[1].c_str() );
+	if(toks.size()>2)
+		pcdone=wxString::FromUTF8(toks[2].c_str() );
+	if(toks.size()>3)
+	{
+		if(toks[3]=="P")
+			pause=true;
+		else if(toks[3]=="NP")
+			pause=false;
+	}
+	if(toks.size()>4)
+	{
+		std::map<std::wstring,std::wstring> params;
+		ParseParamStr(toks[4], &params);
+		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
+		if(it_capa!=params.end())
+		{
+			capa=watoi(it_capa->second);
+		}
+		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
+		if(it_new_server!=params.end())
+		{
+			new_server=wnarrow(it_new_server->second);
+		}
+		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
+		if(it_has_server!=params.end())
+		{
+			has_server= ( it_has_server->second==L"true" );
+		}
+		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
+		if(it_restore_ask!=params.end())
+		{
+			ask_restore_ok = watoi(it_restore_ask->second);
+		}
+		std::map<std::wstring, std::wstring>::iterator it_restore_file = params.find(L"restore_file");
+		if (it_restore_file != params.end())
+		{
+			restore_file = (it_restore_file->second == L"true");
+		}
+		std::map<std::wstring, std::wstring>::iterator it_restore_path = params.find(L"restore_path");
+		if (it_restore_path != params.end())
+		{
+			restore_path = it_restore_path->second;
+		}
+		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
+		if(it_needs_restore_restart!=params.end())
+		{
+			needs_restore_restart = watoi(it_needs_restore_restart->second);
+		}
+	}
+
+	return true;
+}
+
+bool SStatus::hasError()
+{
+	return error;
 }

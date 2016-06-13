@@ -1,21 +1,18 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
+# Adam Karlsson <adam.karlsson@gmail.com>, 2015
+# IorX <iorx@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/urbackup/language/sv/)\n"
+"PO-Revision-Date: 2015-11-21 23:50+0000\n"
+"Last-Translator: IorX <iorx@yahoo.com>\n"
+"Language-Team: Swedish (http://www.transifex.com/uroni/urbackup/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,490 +21,490 @@ msgstr ""
 
 #: gui\GUI.h:135 TrayIcon.cpp:261
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr ""
+msgstr "Loggfiler"
 
 #: gui\GUI.h:195
 msgid "Informations"
-msgstr ""
+msgstr "Information"
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr ""
+msgstr "Lägg till/ta bort backupsökvägar"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr ""
+msgstr "Intervall för inkrementella filbackuper"
 
 #: gui\GUI.cpp:59
 msgid "hours"
-msgstr ""
+msgstr "timmar"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr ""
+msgstr "Intervall för kompletta filbackuper"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
-msgstr ""
+msgstr "dagar"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr ""
+msgstr "Intervall för inkrementella filbackuper"
 
 #: gui\GUI.cpp:100
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr ""
+msgstr "Intervall för kompletta diskavbilder"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr ""
+msgstr "Minsta antal inkrementella filbackuper"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr ""
+msgstr "Högsta antal inkrementella filbackuper"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr ""
+msgstr "Minsta antal kompletta diskavbilder"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr ""
+msgstr "Högsta antal kompletta filbackuper"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr ""
+msgstr "Minsta antal inkrementella diskavbilder"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr ""
+msgstr "Högsta antal inkrementella diskavbilder"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr ""
+msgstr "Minsta antal kompletta diskavbilder"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr ""
+msgstr "Högsta antal kompletta diskavbilder"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
-msgstr ""
+msgstr "Datornamn"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr ""
+msgstr "Exkludera från backuper (med jokertecken)"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr ""
+msgstr "Inkludera i backuper (med jokertecken)"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr ""
+msgstr "Backupfönster"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
-msgstr ""
+msgstr "Försena start av backup vid uppstart med:"
 
 #: gui\GUI.cpp:321
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr ""
+msgstr "Backup på enheter:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
-msgstr ""
+msgstr "Hastighetsbegränsning lokalt nätverk:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr ""
+msgstr "Mbit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
-msgstr ""
+msgstr "Backup över internet:"
 
 #: gui\GUI.cpp:377
 msgid "Internet server name/IP:"
-msgstr ""
+msgstr "Hostnamn/IP-adress på internet:"
 
 #: gui\GUI.cpp:385
 msgid "Internet server port:"
-msgstr ""
+msgstr "Port för internetadress:"
 
 #: gui\GUI.cpp:393
 msgid "Internet server password:"
-msgstr ""
+msgstr "Lösenord för internetanslutning:"
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr ""
+msgstr "Backup till diskavbild över internet:"
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr ""
+msgstr "Kompletta filbackuper över internet:"
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr ""
+msgstr "Hastighetsbegränsning internetkoppling:"
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr ""
+msgstr "kbit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
-msgstr ""
+msgstr "Komprimerad överföring:"
 
 #: gui\GUI.cpp:441
 msgid "Encrypted transfer:"
-msgstr ""
+msgstr "Krypterad överföring:"
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr ""
+msgstr "Filbackuper"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr ""
+msgstr "Diskavbildsbackup"
 
 #: gui\GUI.cpp:468
 msgid "Client"
-msgstr ""
+msgstr "Klient"
 
 #: gui\GUI.cpp:469
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
-msgstr ""
+msgstr "Filtrera:"
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr ""
+msgstr "Information"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
-msgstr ""
+msgstr "Varningar"
 
 #: gui\GUI.cpp:539
 msgid "Errors"
-msgstr ""
+msgstr "Fel"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
-msgstr ""
+msgstr "Avsluta"
 
 #: gui\GUI.cpp:610
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #: gui\GUI.cpp:678
 msgid "Name:"
-msgstr ""
+msgstr "Namn:"
 
 #: gui\GUI.cpp:707
 msgid "Add path"
-msgstr ""
+msgstr "Lägg till sökväg"
 
 #: gui\GUI.cpp:710
 msgid "Remove path"
-msgstr ""
+msgstr "Ta bort sökväg"
 
 #: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr ""
+msgstr "Status internetkoppling:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
+msgstr "Ett fel uppstod. Backup kan inte köras för tillfället."
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr ""
+msgstr "Välj den mapp som ska tas backup på."
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ klart."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Inkrementell filbackup körs."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Komplett filbackup körs."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Inkrementell backup av diskavbild körs."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Komplett backup av diskavbild körs."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Återuppta inkrementell filbackup."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Återuppta komplett filbackup."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Indexerar."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
-msgstr ""
+msgstr "UrBackup: Uppdatering är tillgänglig"
 
 #: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
+msgstr "En ny version av UrBackup är tillgänglig. Klicka här för att installera den nu."
 
 #: main.cpp:468
 msgid "Cannot connect to backup server"
-msgstr ""
+msgstr "Kan inte ansluta till Backupservern"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Ingen nuvarande backup."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Senaste backup den _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
-msgstr ""
+msgstr "UrBackup: Ny server"
 
 #: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
+msgstr "En ny backupserver hittat. Klicka här för att använda den"
 
 #: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
-msgstr ""
+msgstr "Inkrementella backupers intervall är inte en siffra"
 
 #: Settings.cpp:511
 msgid "The full backup interval  is not a number"
-msgstr ""
+msgstr "Kompletta backupers intervall är inte en siffra"
 
 #: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
-msgstr ""
+msgstr "Kompletta diskavbilders intervall är inte en siffra"
 
 #: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
-msgstr ""
+msgstr "Inkrementella diskavbilders tidsangivelse är inte en siffra."
 
 #: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
+msgstr "Högsta antalet inkrementella filbackuper är inte en siffra"
 
 #: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
+msgstr "Lägsta antalet inkrementella filbackuper är inte en siffra"
 
 #: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
-msgstr ""
+msgstr "Högsta antalet kompletta filbackuper är inte en siffra"
 
 #: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
-msgstr ""
+msgstr "Lägsta antalet kompletta filbackup är inte en siffra"
 
 #: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Lägsta antalet inkrementella diskavbilder är inte en siffra"
 
 #: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Högsta antalet inkrementella diskavbilder är inte en siffra"
 
 #: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
-msgstr ""
+msgstr "Lägsta antalet kompletta diskavbilder är inte en siffra"
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr ""
+msgstr "Högsta antalet kompletta diskavbilder är inte en siffra"
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
-msgstr ""
+msgstr "Försenad start av backup vid uppstart är inte en siffra"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ är inte en enhet"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Serverporten godkänns inte"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr ""
+msgstr "Initierar."
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "Väntar på lokal UrBackupserver."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Ansluten till lokal UrBackupserver."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Försöker inte ansluta till internetserver."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Senaste kontakt med lokal server var för _1_ minut sedan."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Ingen internetserver är konfigurerad."
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "Internetserver är ansluten"
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Gick inte att ansluta till internetserver. Servern är inte nåbar."
 
 #: Status.cpp:48
 msgid "Error: _1_"
-msgstr ""
+msgstr "Fel: _1_"
 
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dagar"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "timme"
+msgstr[1] "timmar"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minut"
+msgstr[1] "minuter"
 
 #: Status.cpp:138
 msgid "Idle."
-msgstr ""
+msgstr "Vilar."
 
 #: Status.cpp:157
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "Tidsuppskattning till klart ca _1_"
 
 #: Status.cpp:192
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: Status.cpp:194
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internet: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr ""
+msgstr "Servrar:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
-msgstr ""
+msgstr "Väntar på server..."
 
 #: TrayIcon.cpp:146 TrayIcon.cpp:169
 msgid "A backup is already running. Could not start another one."
-msgstr ""
+msgstr "En backup körs redan. Kunde inte starta en ytterligare."
 
 #: TrayIcon.cpp:148 TrayIcon.cpp:171
 msgid "Could not start backup, because no backup server was found."
-msgstr ""
+msgstr "Gick ej att starta backup, ingen backupserver gick att nå."
 
 #: TrayIcon.cpp:183
 msgid "Pausing failed: No connection to backup server."
-msgstr ""
+msgstr "Gick ej att göra paus, ingen anslutning till backupserver."
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr ""
+msgstr "Gick ej att återta, ingen anslutning till backupserver."
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr ""
+msgstr "Ta komplett filbackup"
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Ta en komplett filbackup nu"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr ""
+msgstr "Ta en inkrementell filbackup"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Ta en inkrementell filbackup nu"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr ""
+msgstr "Ta komplett diskavbild"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Ta komplett diskavbild nu"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr ""
+msgstr "Ta inkrementell diskavbild"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Ta inkrementell diskavbild nu"
 
 #: TrayIcon.cpp:286
 msgid "Pause"
-msgstr ""
+msgstr "Paus"
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr ""
+msgstr "Återuppta"
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

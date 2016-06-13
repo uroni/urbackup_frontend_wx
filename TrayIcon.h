@@ -20,6 +20,8 @@
 #include <wx/taskbar.h>
 #include <wx/menu.h>
 
+void runCommand(std::string cmd, std::string arg1=std::string());
+
 class TrayIcon : public wxTaskBarIcon
 {
 public:
@@ -31,6 +33,7 @@ public:
 	void BalloonActionUpgrade(void);
 	void BalloonActionNewServer(const std::string &ident);
 
+	static void accessBackups(wxString path);
 
 private:
 	int balloon_action;

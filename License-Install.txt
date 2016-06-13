@@ -1,4 +1,9 @@
-LICENSE OF URBACKUP
+﻿UrBackup is Free software licensed as AGPLv3+. This license gives you
+as user a certain set of rights, such as the right to modify and then
+share the modified software.
+Please read the whole license text to get the whole picture. Translations
+and frequently asked questions with regards to the license are available
+online at https://www.gnu.org/licenses/agpl-3.0 .
 -----------------------------------------------------------------------
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
@@ -619,7 +624,7 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS
-
+					 
 --------------------------------------------------------------------------
                 LICENCES OF USED LIBRARIES
 --------------------------------------------------------------------------

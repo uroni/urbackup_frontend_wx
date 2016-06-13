@@ -1,18 +1,18 @@
 /*************************************************************************
 *    UrBackup - Client/Server backup system
-*    Copyright (C) 2011  Martin Raiber
+*    Copyright (C) 2011-2015 Martin Raiber
 *
 *    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
+*    it under the terms of the GNU Affero General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
 *
 *    This program is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*    GNU Affero General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
+*    You should have received a copy of the GNU Affero General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
@@ -24,11 +24,17 @@
 #include "Settings.h"
 #include "Logs.h"
 #include "TranslationHelper.h"
+#include "Status.h"
 #include <iostream>
+#include <limits>
 #include <wx/stdpaths.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
+#include <wx/log.h>
 
+#ifndef _WIN32
+#include "../config.h"
+#endif
 
 #include <wx/apptrait.h>
 /*#if wxUSE_STACKWALKER && defined( __WXDEBUG__ )
@@ -40,9 +46,12 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 }
 #endif*/
 
+wxDECLARE_APP(MyApp);
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include "SetupWizard.h"
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -52,7 +61,6 @@ TrayIcon *tray = NULL;
 MyTimer *timer = NULL;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
-bool incr_update_done=false;
 bool backup_is_running=false;
 extern bool b_is_pausing;
 
@@ -62,6 +70,52 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 
 #ifndef _WIN32
 #undef wxUSE_TASKBARICON_BALLOONS
+#endif
+
+#ifdef _WIN32
+HRESULT ModifyPrivilege(
+	IN LPCTSTR szPrivilege,
+	IN BOOL fEnable)
+{
+	HRESULT hr = S_OK;
+	TOKEN_PRIVILEGES NewState;
+	LUID             luid;
+	HANDLE hToken = NULL;
+	if (!OpenProcessToken(GetCurrentProcess(),
+		TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
+		&hToken))
+	{
+		return ERROR_FUNCTION_FAILED;
+	}
+	if (!LookupPrivilegeValue(NULL,
+		szPrivilege,
+		&luid))
+	{
+		CloseHandle(hToken);
+		return ERROR_FUNCTION_FAILED;
+	}
+	NewState.PrivilegeCount = 1;
+	NewState.Privileges[0].Luid = luid;
+	NewState.Privileges[0].Attributes =
+		(fEnable ? SE_PRIVILEGE_ENABLED : 0);
+	if (!AdjustTokenPrivileges(hToken,
+		FALSE,
+		&NewState,
+		0,
+		NULL,
+		NULL))
+	{
+		hr = ERROR_FUNCTION_FAILED;
+	}
+	CloseHandle(hToken);
+	return hr;
+}
+#endif
+
+#ifdef __APPLE__
+extern "C" void bring_to_foreground();
+extern "C" void register_login_item();
+extern "C" void remove_login_item();
 #endif
 
 class TheFrame : public wxFrame {
@@ -83,12 +137,15 @@ namespace
 	};
 
 	ETrayIcon icon_type=ETrayIcon_OK;
+
+	int needs_restore_restart = 0;
+	int ask_restore_ok = 0;
 }
 
 std::string g_lang="en";
 wxString res_path;
 std::string g_res_path;
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__APPLE__)
 wxString ico_ext=wxT("ico");
 wxBitmapType ico_type=wxBITMAP_TYPE_ICO;
 #else
@@ -115,8 +172,26 @@ namespace
 	}
 }
 
+void deleteShellKeys()
+{
+#ifdef _WIN32
+	bool deleted_key;
+	size_t i=0;
+	do 
+	{
+		deleted_key=false;
+		if(RegDeleteKeyW(HKEY_CLASSES_ROOT, (L"AllFilesystemObjects\\shell\\urbackup.access."+convert(i)).c_str())==ERROR_SUCCESS)
+		{
+			deleted_key=true;
+		}
+		++i;
+	} while (deleted_key);
+#endif
+}
+
 bool MyApp::OnInit()
 {
+	wxLog::SetLogLevel(0);
 #ifdef _WIN32
 	wchar_t buf[MAX_PATH];
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
@@ -124,28 +199,38 @@ bool MyApp::OnInit()
 	g_res_path=ConvertToUTF8(ExtractFilePath(buf))+"\\";
 	res_path=wxString(g_res_path.c_str(), wxMBConvUTF8());
 #else
-	if(FileExists("/usr/share/urbackup/info.txt"))
-	{
-		res_path=wxT("/usr/share/urbackup/");
-		g_res_path="/usr/share/urbackup/";
-	}
-	if(FileExists("/usr/local/share/urbackup/info.txt"))
-	{
-		res_path=wxT("/usr/local/share/urbackup/");
-		g_res_path="/usr/local/share/urbackup/";
-	}
+	res_path=wxT(DATADIR "/urbackup/");
+	g_res_path= DATADIR "/urbackup/";
 #endif
 	wxLanguage lang=wxLANGUAGE_ENGLISH;
 	wxLanguage sysdef=(wxLanguage)wxLocale::GetSystemLanguage();
 	switch(sysdef)
 	{
+	case wxLANGUAGE_ENGLISH:
+	case wxLANGUAGE_ENGLISH_UK:
+	case wxLANGUAGE_ENGLISH_US:
+	case wxLANGUAGE_ENGLISH_AUSTRALIA:
+	case wxLANGUAGE_ENGLISH_BELIZE:
+	case wxLANGUAGE_ENGLISH_BOTSWANA:
+	case wxLANGUAGE_ENGLISH_CANADA:
+	case wxLANGUAGE_ENGLISH_CARIBBEAN:
+	case wxLANGUAGE_ENGLISH_DENMARK:
+	case wxLANGUAGE_ENGLISH_EIRE:
+	case wxLANGUAGE_ENGLISH_JAMAICA:
+	case wxLANGUAGE_ENGLISH_NEW_ZEALAND:
+	case wxLANGUAGE_ENGLISH_PHILIPPINES:
+	case wxLANGUAGE_ENGLISH_SOUTH_AFRICA:
+	case wxLANGUAGE_ENGLISH_TRINIDAD:
+	case wxLANGUAGE_ENGLISH_ZIMBABWE:
+		lang = sysdef;
+		break;
 	case wxLANGUAGE_GERMAN:
 	case wxLANGUAGE_GERMAN_AUSTRIAN:
 	case wxLANGUAGE_GERMAN_BELGIUM:
 	case wxLANGUAGE_GERMAN_LIECHTENSTEIN:
 	case wxLANGUAGE_GERMAN_LUXEMBOURG:
 	case wxLANGUAGE_GERMAN_SWISS:
-		lang=wxLANGUAGE_GERMAN;
+		lang= sysdef;
 		g_lang="de";
 		break;
 	case wxLANGUAGE_FRENCH:
@@ -154,12 +239,12 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_FRENCH_LUXEMBOURG:
 	case wxLANGUAGE_FRENCH_MONACO:
 	case wxLANGUAGE_FRENCH_SWISS:
-		lang=wxLANGUAGE_FRENCH;
+		lang= sysdef;
 		g_lang="fr";
 		break;
 	case wxLANGUAGE_RUSSIAN:
 	case wxLANGUAGE_RUSSIAN_UKRAINE:
-		lang=wxLANGUAGE_RUSSIAN;
+		lang= sysdef;
 		g_lang="ru";
 		break;
 	case wxLANGUAGE_SPANISH:
@@ -183,7 +268,7 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_SPANISH_URUGUAY:
 	case wxLANGUAGE_SPANISH_US:
 	case wxLANGUAGE_SPANISH_VENEZUELA:
-		lang=wxLANGUAGE_SPANISH;
+		lang= sysdef;
 		g_lang="es";
 		break;
 	case wxLANGUAGE_CHINESE:
@@ -191,72 +276,72 @@ bool MyApp::OnInit()
     case wxLANGUAGE_CHINESE_HONGKONG:
     case wxLANGUAGE_CHINESE_MACAU:
     case wxLANGUAGE_CHINESE_SINGAPORE:
-		lang=wxLANGUAGE_CHINESE_SIMPLIFIED;
+		lang= sysdef;
 		g_lang="zh_CN";
 		break;
 	case wxLANGUAGE_CHINESE_TRADITIONAL:
 	case wxLANGUAGE_CHINESE_TAIWAN:
-		lang=wxLANGUAGE_CHINESE_TRADITIONAL;
+		lang= sysdef;
 		g_lang="zh_TW";
 		break;
 	case wxLANGUAGE_PORTUGUESE_BRAZILIAN:
-		lang=wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+		lang= sysdef;
 		g_lang="pt_BR";
 		break;
 	case wxLANGUAGE_PORTUGUESE:
-		lang=wxLANGUAGE_PORTUGUESE;
+		lang= sysdef;
 		g_lang="pt";
 		break;
 	case wxLANGUAGE_ITALIAN:
 	case wxLANGUAGE_ITALIAN_SWISS:
-		lang=wxLANGUAGE_ITALIAN;
+		lang= sysdef;
 		g_lang="it";
 		break;
 	case wxLANGUAGE_POLISH:
-		lang=wxLANGUAGE_POLISH;
+		lang= sysdef;
 		g_lang="pl";
 		break;
 	case wxLANGUAGE_SLOVAK:
-		lang=wxLANGUAGE_SLOVAK;
+		lang= sysdef;
 		g_lang="sk";
 		break;
 	case wxLANGUAGE_UKRAINIAN:
-		lang=wxLANGUAGE_UKRAINIAN;
+		lang= sysdef;
 		g_lang="uk";
 		break;
 	case wxLANGUAGE_DANISH:
-		lang=wxLANGUAGE_DANISH;
+		lang= sysdef;
 		g_lang="da";
 		break;
 	case wxLANGUAGE_DUTCH:
 	case wxLANGUAGE_DUTCH_BELGIAN:
-		lang=wxLANGUAGE_DUTCH;
+		lang= sysdef;
 		g_lang="nl";
 		break;
 	case wxLANGUAGE_FARSI:
-		lang=wxLANGUAGE_FARSI;
+		lang= sysdef;
 		g_lang="fa";
 		break;
 	case wxLANGUAGE_CZECH:
-		lang=wxLANGUAGE_CZECH;
+		lang= sysdef;
 		g_lang="cz";
 		break;
 	case wxLANGUAGE_ESTONIAN:
-		lang=wxLANGUAGE_ESTONIAN;
+		lang= sysdef;
 		g_lang="et";
 		break;
 	case wxLANGUAGE_TURKISH:
-		lang=wxLANGUAGE_TURKISH;
+		lang= sysdef;
 		g_lang="tr";
 		break;
 	case wxLANGUAGE_NORWEGIAN_BOKMAL:
 	case wxLANGUAGE_NORWEGIAN_NYNORSK:
-		lang=wxLANGUAGE_NORWEGIAN_BOKMAL;
+		lang= sysdef;
 		g_lang="no_NO";
 		break;
 	case wxLANGUAGE_SWEDISH:
 	case wxLANGUAGE_SWEDISH_FINLAND:
-		lang=wxLANGUAGE_SWEDISH;
+		lang= sysdef;
 		g_lang="sv";
 		break;
 	}
@@ -288,6 +373,23 @@ bool MyApp::OnInit()
 		cmd=argv[1];
 	}
 
+	if(cmd=="daemon")
+	{
+		cmd.clear();
+	}
+
+	if(cmd.empty())
+	{
+		writestring(_("&Access/restore backups").ToUTF8().data(), "access_backups_shell_mui.txt");
+	}
+
+	#ifdef __WXMAC__
+	if(!cmd.empty())
+	{
+    	bring_to_foreground();
+	}
+	#endif 
+
 	if(cmd.empty())
 	{
 		SetTopWindow(new TheFrame);
@@ -301,8 +403,7 @@ bool MyApp::OnInit()
 
 		timer=new MyTimer;
 
-		timer->Notify();
-		timer->Start(60000);
+		timer->Start(1000);
 	}
 	else if(cmd==wxT("settings"))
 	{
@@ -310,6 +411,7 @@ bool MyApp::OnInit()
 		SetTopWindow(s);
 		s->ShowModal();
 		s->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("paths"))
 	{
@@ -317,6 +419,7 @@ bool MyApp::OnInit()
 		SetTopWindow(cp);
 		cp->ShowModal();
 		cp->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("logs"))
 	{
@@ -324,6 +427,7 @@ bool MyApp::OnInit()
 		SetTopWindow(l);
 		l->ShowModal();
 		l->Destroy();
+		wxExit();
 	}
 	else if(cmd==wxT("newserver"))
 	{
@@ -334,6 +438,63 @@ bool MyApp::OnInit()
 		Connector::addNewServer(wxString(argv[2]).ToStdString());
 		wxExit();
 	}
+	else if(cmd==wxT("setupWizard"))
+	{
+		if(SetupWizard::runSetupWizard())
+		{
+			SetupWizard* sw = new SetupWizard(NULL);
+			SetTopWindow(sw);
+			sw->ShowPage(*(sw->m_pages.begin()));
+			sw->SetFocus();
+			sw->Raise();
+			sw->ShowModal();
+			sw->Destroy();
+		}		
+		wxExit();
+	}
+	else if(cmd==wxT("setupDefault"))
+	{
+		SetupWizard::doDefConfig();
+		wxExit();
+	}
+	else if(cmd==wxT("access"))
+	{
+		if(argc<3)
+		{
+			return false;
+		}
+		TrayIcon::accessBackups(wxString(argv[2]));
+		wxExit();
+	}
+	else if(cmd==wxT("deleteshellkeys"))
+	{
+		deleteShellKeys();
+		wxExit();
+	}
+	else if(cmd==wxT("restoreok"))
+	{
+		wxLongLong_t process_id;
+		Connector::restoreOk(wxString(argv[2])=="true", process_id);
+		wxExit();
+	}
+#ifdef __APPLE__
+	else if (cmd == wxT("uninstall"))
+	{
+		std::string uninstaller = SBINDIR "/urbackup_uninstall";
+		wxExecute("/bin/sh \"" + uninstaller + "\"", wxEXEC_SYNC, NULL, NULL);
+		wxExit();
+	}
+	else if(cmd==wxT("register_login_item"))
+	{
+		register_login_item();
+		exit(0);
+	}
+	else if(cmd==wxT("remove_login_item"))
+	{
+		remove_login_item();
+		exit(0);
+	}
+#endif
 	else
 	{
 		return false;
@@ -349,9 +510,9 @@ int MyApp::OnExit()
 }
 
 MyTimer::MyTimer(void) : 
-	wxTimer()
+	wxTimer(), first_status(true)
 {
-	capa=0;
+	capa=INT_MAX;
 	resetDisplayedUpdateInfo();
 }
 
@@ -380,6 +541,10 @@ wxString getStatusText(wxString status)
 	else if(status==wxT("R_FULL"))
 	{
 		return _("Resumed full file backup running.");
+	}
+	else if (status == wxT("RESTORE_FILES"))
+	{
+		return _("Restoring files.");
 	}
 	return wxT("");
 }
@@ -423,41 +588,40 @@ namespace
 
 void MyTimer::Notify()
 {
-	static bool working=false;
-	if(working==true)
+	static SStatus status;
+	if(!status.init || status.hasError())
+	{
+		status = Connector::initStatus(status.client, first_status, 60000);
+		first_status = false;
+	}
+
+	if(Connector::hasError() )
+	{
+		if(icon_type!=ETrayIcon_ERROR)
+		{
+			last_status=_("Cannot connect to backup server");
+			icon_type=ETrayIcon_ERROR;
+			if(tray!=NULL)
+				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
+		}
+		status.init = false;
+		return;
+	}
+
+	if(!status.init)
 	{
 		return;
 	}
-	if(Connector::isBusy())
+
+	if(!status.isAvailable())
 	{
 		return;
 	}
-	working=true;
+
+	status.init=false;
 
 	wxStandardPathsBase& sp=wxStandardPaths::Get();
-	static wxString cfgDir=sp.GetUserDataDir();
-	static long starttime=wxGetLocalTime();
-	static long startuptime_passed=0;
-	static long lastbackuptime=-5*60*1000;
-	static long lastversioncheck=starttime;
-
-	if(!wxDir::Exists(cfgDir) )
-	{
-		wxFileName::Mkdir(cfgDir);
-	}
-
-	if(startuptime_passed==0)
-	{
-		startuptime_passed=atoi(getFile((cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() ).c_str() );
-		startuptime_passed+=atoi(getFile((cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() ).c_str() );
-		writestring(nconvert((int)startuptime_passed), (cfgDir+wxT("/passedtime.cfg") ).ToUTF8().data() );
-		lastbackuptime=atoi(getFile((cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() ).c_str() );
-		if(lastbackuptime==0)
-			lastbackuptime=-5*60*1000;
-		std::string update_intv=getFile((cfgDir+wxT("/incr_updateintervall.cfg") ).ToUTF8().data() );
-		if(!update_intv.empty())
-			incr_update_intervall=atoi(update_intv.c_str());
-	}
+	static long lastversioncheck=wxGetLocalTime();
 
 	long ct=wxGetLocalTime();
 
@@ -479,44 +643,17 @@ void MyTimer::Notify()
 			displayed_update_info=true;
 #endif
 		}
-		ct=wxGetLocalTime();
 		lastversioncheck=ct;
 	}
 
-	long passed=( ct-starttime );
-
-	writestring(nconvert((int)passed), (cfgDir+wxT("/passedtime_new.cfg") ).ToUTF8().data() );
-
 	wxString status_text;
-	SStatus status=Connector::getStatus(20);
-
-	if(Connector::hasError() )
-	{
-		if(icon_type!=ETrayIcon_ERROR)
-		{
-			last_status=_("Cannot connect to backup server");
-			icon_type=ETrayIcon_ERROR;
-			if(tray!=NULL)
-				tray->SetIcon(getAppIcon(getIconName(icon_type)), last_status);
-		}
-		working=false;
-		return;
-	}
 
 	capa=status.capa;
 
 	ETrayIcon last_icon_type=icon_type;
 	bool refresh=false;
 	
-	if(status.status==wxT("DONE") )
-	{
-		writestring(nconvert((int)startuptime_passed+(int)passed), (cfgDir+wxT("/lastbackuptime.cfg") ).ToUTF8().data() );
-		lastbackuptime=startuptime_passed+passed;
-		icon_type=ETrayIcon_OK;
-		backup_is_running=false;
-		refresh=true;
-	}
-	else if(status.status==wxT("INCR") || 
+	if(status.status==wxT("INCR") || 
 		status.status==wxT("FULL") ||
 		status.status==wxT("INCRI") ||
 		status.status==wxT("FULLI") ||
@@ -529,7 +666,7 @@ void MyTimer::Notify()
 		backup_is_running=true;
 
 	}
-	else if(startuptime_passed+passed-(long)incr_update_intervall>lastbackuptime)
+	else if(status.status==wxT("NO_RECENT"))
 	{	
 		status_text+=wxString(_("No current backup.")) + wxT(" ");
 		icon_type=ETrayIcon_NO_RECENT;
@@ -542,17 +679,14 @@ void MyTimer::Notify()
 	}
 
 	if(!status.lastbackupdate.Trim().empty() )
-		status_text+=trans_1(_("Last backup on _1_"), status.lastbackupdate);
-
-	if( icon_type<3 && incr_update_done==false)
 	{
-		unsigned int n_incr_update_intervall=Connector::getIncrUpdateIntervall();
-		if(!Connector::hasError() && n_incr_update_intervall!=0)
+		wxLongLong_t lastbackups;
+		if(status.lastbackupdate.ToLongLong(&lastbackups))
 		{
-			incr_update_done=true;
-			incr_update_intervall=n_incr_update_intervall;
-			writestring(nconvert(incr_update_intervall), (cfgDir+wxT("/incr_updateintervall.cfg") ).ToUTF8().data() );
-		}
+			wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
+
+			status_text+=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
+		}	
 	}
 
 	if(status.pause && icon_type==ETrayIcon_PROGRESS)
@@ -563,7 +697,7 @@ void MyTimer::Notify()
 	{
 		icon_type=ETrayIcon_INDEXING;
 	}
-	else if( (icon_type==ETrayIcon_NO_RECENT || icon_type==ETrayIcon_OK)
+	else if( icon_type==ETrayIcon_NO_RECENT
 		&& !status.has_server )
 	{
 		icon_type=ETrayIcon_NO_SERVER;
@@ -580,17 +714,6 @@ void MyTimer::Notify()
 		{
 			tray->SetIcon(getAppIcon(getIconName(icon_type)), status_text);
 		}
-		if(timer!=NULL)
-		{
-			if(icon_type==ETrayIcon_PROGRESS)
-			{
-				timer->Start(10000);
-			}
-			else
-			{
-				timer->Start(60000);
-			}
-		}
 	}
 
 	if(!status.new_server.empty() && tray)
@@ -604,7 +727,69 @@ void MyTimer::Notify()
 #endif
 	}
 
-	working=false;
+	if(status.ask_restore_ok>ask_restore_ok)
+	{
+#ifdef __WXMAC__
+		bring_to_foreground();
+#endif 
+		ask_restore_ok = status.ask_restore_ok;
+
+		wxString ask_msg;
+
+		if (status.restore_file)
+		{
+			ask_msg = trans_1(_("Are you sure you want to restore the file at _1_? The current file content will be overwritten by the backup file content. When in doubt please cancel and run a file backup before proceeding."), status.restore_path);
+		}
+		else
+		{
+			ask_msg = trans_1(_("Are you sure you want to restore the files in _1_? Existing files in this folder will be overwritten. Files created within the selected folder since the backup will be deleted. When in doubt please cancel and run a file backup before proceeding."), status.restore_path);
+		}
+
+		wxMessageDialog* dialog = new wxMessageDialog(NULL,
+			ask_msg, _("UrBackup - Allow restore"), wxOK | wxCANCEL);
+#ifndef __WXMAC__
+		dialog->RequestUserAttention();
+		#endif
+		int rc = dialog->ShowModal();
+		dialog->Destroy();
+		if(rc == wxID_OK)
+		{
+			wxLongLong_t process_id = 0;
+			Connector::restoreOk(true, process_id);
+
+			if (process_id != 0)
+			{
+				new Status(NULL, process_id);
+			}
+		}
+		else
+		{
+			wxLongLong_t process_id;
+			Connector::restoreOk(false, process_id);
+		}
+	}
+
+#ifdef _WIN32
+	if(status.needs_restore_restart>needs_restore_restart)
+	{
+#ifdef __WXMAC__
+		bring_to_foreground();
+#endif
+		needs_restore_restart = status.needs_restore_restart;
+
+		wxMessageDialog* dialog = new wxMessageDialog(NULL,
+			_("Some files could not be deleted or overwritten during the restore process. In order to overwrite/delete the files the system needs to be restarted. Do you want to do this now?"), _("UrBackup - Restart Windows"), wxOK | wxCANCEL);
+	#ifndef __WXMAC__
+		dialog->RequestUserAttention();
+	#endif
+		if(dialog->ShowModal() == wxID_OK)
+		{
+			ModifyPrivilege(SE_SHUTDOWN_NAME, TRUE);
+			ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_APPLICATION|SHTDN_REASON_MINOR_OTHER );
+		}
+		dialog->Destroy();
+	}
+#endif
 }
 
 bool MyTimer::hasCapability(int capa_bit)
@@ -625,6 +810,36 @@ void MyTimer::resetDisplayedUpdateInfo(void)
 #ifndef DD_RELEASE
 int main(int argc, char *argv[])
 {
+	#ifdef __APPLE__
+	if(argc>1 && wxString(argv[1])==wxT("daemon"))
+	{
+		std::cout << "Daemonizing..." << std::endl;
+		//Daemonize. At least that works *tears*
+		size_t pid1;
+		if( (pid1=fork())==0 )
+		{
+			setsid();
+			if(fork()==0)
+			{
+				for (int i=getdtablesize();i>=0;--i) close(i);
+				int i=open("/dev/null",O_RDWR);
+				dup(i);
+				dup(i);
+			}
+			else
+			{
+				exit(0);
+			}
+		}
+		else
+		{
+			int status;
+			waitpid(pid1, &status, 0);
+			exit(0);
+		}
+	}
+	#endif
+
 #ifdef _WIN32
 	 HANDLE gmutex = CreateMutex(NULL, TRUE, L"Local\\UrBackupClientGUI");
 	 if( gmutex!=NULL && GetLastError()==ERROR_ALREADY_EXISTS )

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -22,25 +22,30 @@
     <ProjectGuid>{7169B7EA-2630-4042-A0DC-19471462C1C3}</ProjectGuid>
     <RootNamespace>UrBackupClientGUI</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -88,7 +93,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>D:\Developement\libs\wxWidgets\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);..\deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -99,19 +104,22 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u_net.lib;wxzlib.lib;wxregexu.lib;wxpng.lib;wxbase29u.lib;wxmswuniv29u_core.lib;wxmswuniv29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>wx64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase30u_net.lib;wxzlib.lib;wxregexu.lib;wxpng.lib;wxbase30u.lib;wxmswuniv30u_core.lib;wxmswuniv30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);..\deps\include%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG_ENABLED;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -120,14 +128,21 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>deps\win\wx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase30u.lib;wxmsw30u_core.lib;wxmsw30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase30u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_lib;..\deps\libs\vc_lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <Manifest>
+      <OutputManifestFile>$(IntDir)$(TargetName)$(TargetExt).embed.manifest</OutputManifestFile>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <ManifestResourceCompile>
+      <ResourceOutputFileName>$(IntDir)$(TargetName)$(TargetExt).embed.manifest.res</ResourceOutputFileName>
+    </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -135,7 +150,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>D:\Developement\libs\wxWidgets\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);..\deps\include%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -146,12 +161,17 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxpngd.lib;wxbase29ud.lib;wxexpatd.lib;comctl32.lib;Rpcrt4.lib;wxbase29ud_net.lib;ws2_32.lib;wxzlibd.lib;wxmsw29ud_core.lib;wxmsw29ud_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Developement\libs\wxWidgets\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxpngd.lib;wxbase30ud.lib;wxexpatd.lib;comctl32.lib;Rpcrt4.lib;wxbase30ud_net.lib;ws2_32.lib;wxzlibd.lib;wxmsw30ud_core.lib;wxmsw30ud_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -160,8 +180,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WxWidgetsIncludeDir);..\deps\include%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG_ENABLED;_CONSOLE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -170,25 +190,34 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxbase29u.lib;wxmsw29u_core.lib;wxmsw29u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase29u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>deps\win\wx64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase30u.lib;wxmsw30u_core.lib;wxmsw30u_adv.lib;wxexpat.lib;comctl32.lib;Rpcrt4.lib;wxbase30u_net.lib;ws2_32.lib;wxpng.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WxWidgetsLibDir)\vc_x64_lib;..\deps\libs\vc_x64_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
+    <Manifest>
+      <OutputManifestFile>$(IntDir)$(TargetName)$(TargetExt).embed.manifest</OutputManifestFile>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <ManifestResourceCompile>
+      <ResourceOutputFileName>$(IntDir)$(TargetName)$(TargetExt).embed.manifest.res</ResourceOutputFileName>
+    </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConfigPath.cpp" />
     <ClCompile Include="Connector.cpp" />
     <ClCompile Include="escape.cpp" />
     <ClCompile Include="FileSettingsReader.cpp" />
+    <ClCompile Include="gui\GUISetupWizard.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Logs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="SetupWizard.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="stringtools.cpp" />
     <ClCompile Include="TaskBarBaloon.cpp" />
@@ -203,11 +232,13 @@
     <ClInclude Include="Connector.h" />
     <ClInclude Include="escape.h" />
     <ClInclude Include="FileSettingsReader.h" />
+    <ClInclude Include="gui\GUISetupWizard.h" />
     <ClInclude Include="Info.h" />
     <ClInclude Include="Logs.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="SetupWizard.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="stringtools.h" />
     <ClInclude Include="TaskBarBaloon.h" />

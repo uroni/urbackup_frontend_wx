@@ -1,18 +1,18 @@
 /*************************************************************************
 *    UrBackup - Client/Server backup system
-*    Copyright (C) 2011  Martin Raiber
+*    Copyright (C) 2011-2015 Martin Raiber
 *
 *    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
+*    it under the terms of the GNU Affero General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
 *
 *    This program is distributed in the hope that it will be useful,
 *    but WITHOUT ANY WARRANTY; without even the implied warranty of
 *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
+*    GNU Affero General Public License for more details.
 *
-*    You should have received a copy of the GNU General Public License
+*    You should have received a copy of the GNU Affero General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
@@ -94,6 +94,8 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		SBackupDir ad;
 		ad.path=ed.GetPath();
 		ad.name=getDefaultDirname(ad.path.wc_str());
+		ad.group=0;
+		ad.id=0;
 		dirs.push_back(ad);
 		mod=true;
 	}
@@ -174,6 +176,8 @@ void ConfigPath::OnPathSelected(wxCommandEvent &evt)
 	{
 		m_textCtrl18->Enable();
 		m_textCtrl18->SetValue(dirs[sel].name);
+		/*m_group->Enable();
+		m_group->Select(dirs[sel].group);*/
 	}
 }
 
@@ -185,4 +189,18 @@ void ConfigPath::OnNameTextChange(wxCommandEvent &evt)
 		dirs[sel].name=m_textCtrl18->GetValue();
 		mod=true;
 	}
+}
+
+void ConfigPath::OnGroupChange( wxCommandEvent& evt )
+{
+	/*int sel=listbox->GetSelection();
+	if(sel>=0)
+	{
+		int group = m_group->GetSelection();
+		if(group>=0)
+		{
+			dirs[sel].group=group;
+			mod=true;
+		}		
+	}*/
 }

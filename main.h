@@ -56,4 +56,5 @@ public:
 private:
 	int capa;
 	bool displayed_update_info;
+	bool first_status;
 };
