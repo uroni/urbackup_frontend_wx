@@ -907,3 +907,39 @@ void GUIStatus::OnCloseInt(wxCloseEvent& event)
 	event.Skip();
 	OnClose();
 }
+
+GUICbtStatus::GUICbtStatus(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, long style)
+	: wxDialog(parent, id, title, pos, size, style)
+{
+	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
+
+	wxBoxSizer* bSizer9;
+	bSizer9 = new wxBoxSizer(wxVERTICAL);
+
+	m_textCtrl3 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE | wxTE_READONLY | wxTE_WORDWRAP);
+	bSizer9->Add(m_textCtrl3, 15, wxALL | wxEXPAND, 5);
+
+	wxBoxSizer* bSizer10;
+	bSizer10 = new wxBoxSizer(wxHORIZONTAL);
+
+
+	bSizer10->Add(0, 0, 1, wxEXPAND, 5);
+
+	m_button5 = new wxButton(this, wxID_ANY, _("Exit"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer10->Add(m_button5, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+
+	bSizer9->Add(bSizer10, 1, wxEXPAND | wxALIGN_RIGHT, 5);
+
+	this->SetSizer(bSizer9);
+	this->Layout();
+
+	this->Centre(wxBOTH);
+
+	// Connect Events
+	m_button5->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUICbtStatus::OnExitClick), NULL, this);
+}
+
+GUICbtStatus::~GUICbtStatus()
+{
+	m_button5->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUICbtStatus::OnExitClick), NULL, this);
+}

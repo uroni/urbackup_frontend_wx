@@ -18,6 +18,7 @@
 
 #include "Info.h"
 #include "stringtools.h"
+#include "TrayIcon.h"
 
 extern std::string g_lang;
 extern std::string g_res_path;
@@ -56,6 +57,16 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 		Layout();
 	}
 
+	if (FileExists("urbctctl.exe"))
+	{
+		wxButton* cbtStatusButton = new wxButton(this, wxID_ANY, _("Show CBT status"));
+		m_versionSizer->Add(cbtStatusButton);
+
+		cbtStatusButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Info::OnShowCBTStatusClick), NULL, this);
+
+		Layout();
+	}
+
 	instance=this;
 }
 
@@ -69,6 +80,11 @@ void update_urbackup();
 void Info::OnUpdateClick(wxCommandEvent & event)
 {
 	update_urbackup();
+}
+
+void Info::OnShowCBTStatusClick(wxCommandEvent& event)
+{
+	runCommand("cbt-status");
 }
 
 Info* Info::getInstance()

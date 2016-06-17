@@ -28,6 +28,7 @@ public:
 protected:
 	void OnOKClick( wxCommandEvent& event );
 	void OnUpdateClick(wxCommandEvent& event);
+	void OnShowCBTStatusClick(wxCommandEvent& event);
 
 	virtual void OnClose();
 

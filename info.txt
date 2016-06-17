@@ -22,4 +22,4 @@ osiengine group (Farsi)
 buzzertnl, Decay (Dutch)
 Ales Hermann (Czech)
 
-See license.txt for the licences of the libraries used and of UrBackup (AGPL v3+).
+See license.txt for the licences of the libraries used and of UrBackup (AGPL v3+). The source code is available at https://github.com/uroni/urbackup_backend (backend) and https://github.com/uroni/urbackup_frontend_wx (tray icon).

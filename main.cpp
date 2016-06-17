@@ -25,6 +25,7 @@
 #include "Logs.h"
 #include "TranslationHelper.h"
 #include "Status.h"
+#include "CbtStatus.h"
 #include <iostream>
 #include <limits>
 #include <wx/stdpaths.h>
@@ -475,6 +476,14 @@ bool MyApp::OnInit()
 	{
 		wxLongLong_t process_id;
 		Connector::restoreOk(wxString(argv[2])=="true", process_id);
+		wxExit();
+	}
+	else if (cmd == wxT("cbt-status"))
+	{
+		CbtStatus *s = new CbtStatus(NULL);
+		SetTopWindow(s);
+		s->ShowModal();
+		s->Destroy();
 		wxExit();
 	}
 #ifdef __APPLE__
