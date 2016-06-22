@@ -10,7 +10,7 @@ CbtStatus::CbtStatus(wxWindow* parent)
 {
 	SetIcon(wxIcon(res_path + wxT("backup-ok.") + ico_ext, ico_type));
 
-	long pid = wxExecute("urbctctl.exe status all", wxEXEC_ASYNC, this);
+	long pid = wxExecute(wxT("\"") + res_path + wxT("urbctctl.exe\" status all"), wxEXEC_ASYNC, this);
 	if (pid != 0)
 	{
 		Redirect();
