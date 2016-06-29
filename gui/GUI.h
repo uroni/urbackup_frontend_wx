@@ -295,4 +295,26 @@ class GUIStatus : public wxDialog
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class GUICbtStatus
+///////////////////////////////////////////////////////////////////////////////
+class GUICbtStatus : public wxDialog
+{
+private:
+
+protected:
+	wxTextCtrl* m_textCtrl3;
+
+	wxButton* m_button5;
+
+	// Virtual event handlers, overide them in your derived class
+	virtual void OnExitClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+
+	GUICbtStatus(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("CBT status"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 222), long style = wxDEFAULT_DIALOG_STYLE);
+	virtual ~GUICbtStatus();
+
+};
+
 #endif //__GUI_H__

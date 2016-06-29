@@ -18,6 +18,7 @@
 
 #include "Info.h"
 #include "stringtools.h"
+#include "TrayIcon.h"
 
 extern std::string g_lang;
 extern std::string g_res_path;
@@ -41,8 +42,8 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);
 
-	std::string n_version = getFile("version.txt");
-	std::string c_version = getFile("curr_version.txt");
+	std::string n_version = getFile(g_res_path+"version.txt");
+	std::string c_version = getFile(g_res_path+"curr_version.txt");
 	if (n_version.empty())n_version = "0";
 	if (c_version.empty())c_version = "0";
 
@@ -52,6 +53,16 @@ Info::Info(wxWindow* parent) : GUIInfo(parent)
 		m_versionSizer->Add(updateButton);
 
 		updateButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Info::OnUpdateClick), NULL, this);
+
+		Layout();
+	}
+
+	if (FileExists(g_res_path+"urbctctl.exe"))
+	{
+		wxButton* cbtStatusButton = new wxButton(this, wxID_ANY, _("Show CBT status"));
+		m_versionSizer->Add(cbtStatusButton);
+
+		cbtStatusButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Info::OnShowCBTStatusClick), NULL, this);
 
 		Layout();
 	}
@@ -69,6 +80,11 @@ void update_urbackup();
 void Info::OnUpdateClick(wxCommandEvent & event)
 {
 	update_urbackup();
+}
+
+void Info::OnShowCBTStatusClick(wxCommandEvent& event)
+{
+	runCommand("cbt-status");
 }
 
 Info* Info::getInstance()

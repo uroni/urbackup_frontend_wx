@@ -207,6 +207,7 @@
     </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CbtStatus.cpp" />
     <ClCompile Include="ConfigPath.cpp" />
     <ClCompile Include="Connector.cpp" />
     <ClCompile Include="escape.cpp" />
@@ -228,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="capa_bits.h" />
+    <ClInclude Include="CbtStatus.h" />
     <ClInclude Include="ConfigPath.h" />
     <ClInclude Include="Connector.h" />
     <ClInclude Include="escape.h" />

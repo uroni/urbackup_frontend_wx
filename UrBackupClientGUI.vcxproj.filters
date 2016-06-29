@@ -75,6 +75,9 @@
     <ClCompile Include="gui\GUISetupWizard.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="CbtStatus.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigPath.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="gui\GUISetupWizard.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CbtStatus.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
