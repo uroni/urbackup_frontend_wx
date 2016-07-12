@@ -1,14 +1,11 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
 # Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2014
+# Ettore Atalan <atalanttore@googlemail.com>, 2014,2016
+# bkolbe <info@bkolbe.de>, 2016
 # Martin Raiber <martin@urbackup.org>, 2011
 # uroni <urpc@gmx.de>, 2012-2013
 # uroni <urpc@gmx.de>, 2013-2014
@@ -18,9 +15,9 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-09-06 19:50+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/urbackup/language/de/)\n"
+"PO-Revision-Date: 2016-06-15 09:26+0000\n"
+"Last-Translator: bkolbe <info@bkolbe.de>\n"
+"Language-Team: German (http://www.transifex.com/uroni/urbackup/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -434,10 +431,6 @@ msgstr[1] "Minuten"
 msgid "Idle."
 msgstr "Untätig."
 
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr "Restzeit: ca. _1_"
-
 #: Status.cpp:192
 msgid "Yes"
 msgstr "Ja"
@@ -513,6 +506,92 @@ msgstr "Pausieren"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Fortsetzen"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Aktualisierung verfügbar. Jetzt aktualisieren."
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "Backups &anzeigen/wiederherstellen"
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Dateien werden wiederhergestellt."
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "Sind Sie sicher, dass Sie die Datei _1_ wiederherstellen wollen? Die Datei wird mit den Inhalt des Backups überschrieben. Wenn Sie sich unsicher sind, brechen Sie den Vorgang ab und sichern die Datei vorher."
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "Sind Sie sicher, dass Sie die Dateien im Ordner _1_ wiederherstellen wollen? Die Dateien werden mit den Inhalt des Backups überschrieben. Wenn Sie sich unsicher sind, brechen Sie den Vorgang ab und sichern die Dateien vorher."
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - Wiederherstellung erlauben"
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Einige Dateien konnten während der Wiederherstellung nicht gelöscht oder überschrieben werden. Um die Dateien zu löschen/überschreiben muss das System neugestartet werden. Soll das System jetzt neu gestartet werden?"
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - Windows neu starten"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "Restzeit: ca. _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Datei: _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Laufwerk:_1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Wiederherstellen abgeschlossen."
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Sicherung konnte nicht gestartet werden."
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "Wollen Sie den den UrBackup-Client wirklich vom System entfernen?"
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Deinstallieren bestätigen"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Backups anzeigen/wiederherstellen"
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Deinstallieren"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Keine Rechte, um auf Dateien zuzugreifen."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Fehler beim erreichen des Servers. Auf die Datei kann nicht zugegriffen werden."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
