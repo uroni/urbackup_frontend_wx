@@ -277,8 +277,8 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 
 			SBackupDir rdir =
 			{
-				wxString(dir["path"].asString()),
-				wxString(dir["name"].asString()),
+				wxString::FromUTF8(dir["path"].asCString()),
+				wxString::FromUTF8(dir["name"].asCString()),
 				dir["id"].asInt(),
 				dir["group"].asInt()
 			};
