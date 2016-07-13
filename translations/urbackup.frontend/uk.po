@@ -1,23 +1,19 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
 # Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
 # Ihor Maydanovich <tenorioua@gmail.com>, 2013-2014
-# Ihor Maydanovich <tenorioua@gmail.com>, 2014
+# Ihor Maydanovich <tenorioua@gmail.com>, 2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-06-09 15:21+0000\n"
+"PO-Revision-Date: 2016-07-07 15:30+0000\n"
 "Last-Translator: Ihor Maydanovich <tenorioua@gmail.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/urbackup/language/uk/)\n"
+"Language-Team: Ukrainian (http://www.transifex.com/uroni/urbackup/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -434,10 +430,6 @@ msgstr[2] "хвилини"
 msgid "Idle."
 msgstr "Бездіяльність."
 
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr "ETA: Approx. _1_"
-
 #: Status.cpp:192
 msgid "Yes"
 msgstr "Так"
@@ -513,6 +505,92 @@ msgstr "Пауза"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Продовжити"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Доступне оновлення. Всановити зараз."
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "&Доступ/відновлення бекапів"
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Відновлення файлів"
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "Ви впевнені що хочете відновити файл в_1_? Поточний вміст файлу буде перезаписаний вмістом з бекапу. Якщо маєте сумніви натисніть відміна та запустіть бекап файлу перед відновленням."
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "Ви впевнені що хочете відновити файли в_1_? Поточний файли в теці буде перезаписано.  Файли створені у вказаній теці з часу останнього бекапу будуть видалені. Якщо маєте сумніви натисніть відміна та запустіть бекап файлу перед відновленням."
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - Дозволено відновлення."
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Деякі файли не можуть бути перезаписані під час підновлення. Для перезапису/видалення файлів систему необхідно перезавантажити. Ви бажаєте зробити це зараз?"
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - Перезапускає Windows"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "ETA: Approx. _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Файл: _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Розділ: _1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Відновлення завершено."
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Не можу розпочати бекап."
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "Ви дійсно хочете видалити клієнт UrBackup з цієї системи?"
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Підтверджено деінсталяцію"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Доступ/відновлення бекапів"
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Деінсталяція"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Немає прав для доступу до жодних файлів."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Помилка отримання URL серверу. Нема доступу до файлів."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

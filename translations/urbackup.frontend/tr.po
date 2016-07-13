@@ -3,14 +3,16 @@
 # This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
+# Translators:
+# Kaya Zeren <kayazeren@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2012-08-19 16:03+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: Turkish (http://www.transifex.com/p/urbackup/language/tr/)\n"
+"PO-Revision-Date: 2016-06-13 12:13+0000\n"
+"Last-Translator: Kaya Zeren <kayazeren@gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/uroni/urbackup/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,15 +25,15 @@ msgstr "Ayarlar"
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr "Loglar"
+msgstr "Günlükler"
 
 #: gui\GUI.h:195
 msgid "Informations"
-msgstr ""
+msgstr "Bilgiler"
 
 #: gui\GUI.h:231 TrayIcon.cpp:266
 msgid "Add/Remove backup paths"
-msgstr ""
+msgstr "Yedekleme yollarını ekle/kaldır"
 
 #: gui\GUI.h:257 TrayIcon.cpp:294
 msgid "Status"
@@ -39,147 +41,147 @@ msgstr "Durum"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr ""
+msgstr "Artımlı dosya yedekleme aralığı:"
 
 #: gui\GUI.cpp:59
 msgid "hours"
-msgstr "Saat"
+msgstr "saat"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr ""
+msgstr "Tam dosya yedekleme aralığı:"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
-msgstr "Gün"
+msgstr "gün"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr ""
+msgstr "Artımlı kalıp yedekleme aralığı:"
 
 #: gui\GUI.cpp:100
 msgid "Active"
-msgstr ""
+msgstr "Etkin"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr ""
+msgstr "Tam kalıp yedekleme aralığı:"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr ""
+msgstr "En az artımlı dosya yedekleme sayısı:"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr ""
+msgstr "En fazla artımlı dosya yedekleme sayısı:"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr ""
+msgstr "En az tam dosya yedekleme sayısı:"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr ""
+msgstr "En fazla tam dosya yedekleme sayısı:"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr ""
+msgstr "En az artımlı kalıp yedekleme sayısı:"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr ""
+msgstr "En fazla artımlı kalıp yedekleme sayısı:"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr ""
+msgstr "En az tam kalıp yedekleme sayısı:"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr ""
+msgstr "En fazla tam kalıp yedekleme sayısı:"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
-msgstr ""
+msgstr "Bilgisayar adı:"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr ""
+msgstr "Katılmayacak dosyalar (genel arama karakteri ile)"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr ""
+msgstr "Katılacak dosyalar (genel arama karakteri ile)"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr ""
+msgstr "Yedekleme aralığı:"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
-msgstr ""
+msgstr "Sistem başlangıcından sonraki gecikme:"
 
 #: gui\GUI.cpp:321
 msgid "min"
-msgstr "Min"
+msgstr "dakika"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr ""
+msgstr "Yedeklenecek Birimler:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
-msgstr ""
+msgstr "Yerel ağ için en yüksek yedekleme hızı:"
 
 #: gui\GUI.cpp:361
 msgid "MBit/s"
-msgstr ""
+msgstr "MBit/s"
 
 #: gui\GUI.cpp:369
 msgid "Enable backup via internet:"
-msgstr ""
+msgstr "İnternet üzerinden yedekleme yapılabilsin:"
 
 #: gui\GUI.cpp:377
 msgid "Internet server name/IP:"
-msgstr ""
+msgstr "Internet sunucusunun adı/IP:"
 
 #: gui\GUI.cpp:385
 msgid "Internet server port:"
-msgstr ""
+msgstr "İnternet sunucusunun kapı numarası:"
 
 #: gui\GUI.cpp:393
 msgid "Internet server password:"
-msgstr ""
+msgstr "İnternet sunucusunun parolası:"
 
 #: gui\GUI.cpp:404
 msgid "Do image backups over internet:"
-msgstr ""
+msgstr "İnternet üzerinden kalıp yedekleme yapılabilsin:"
 
 #: gui\GUI.cpp:414
 msgid "Do full file backups over internet:"
-msgstr ""
+msgstr "Internet üzerinden tam dosya yedeklemesi yapılabilsin:"
 
 #: gui\GUI.cpp:422
 msgid "Max backups speed for internet connection:"
-msgstr ""
+msgstr "İnternet bağlantısı için en yüksek yedekleme hızı:"
 
 #: gui\GUI.cpp:427
 msgid "KBit/s"
-msgstr ""
+msgstr "KBit/s"
 
 #: gui\GUI.cpp:433
 msgid "Compressed transfer:"
-msgstr ""
+msgstr "Aktarım sıkıştırılsın:"
 
 #: gui\GUI.cpp:441
 msgid "Encrypted transfer:"
-msgstr ""
+msgstr "Aktarım şifrelensin:"
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr "Dosya yedekleme"
+msgstr "Dosya yedekleri"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr "imaj yedekleri"
+msgstr "Kalıp yedekleri"
 
 #: gui\GUI.cpp:468
 msgid "Client"
@@ -187,7 +189,7 @@ msgstr "İstemci"
 
 #: gui\GUI.cpp:469
 msgid "Internet"
-msgstr "Internet"
+msgstr "İnternet"
 
 #: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
 msgid "Ok"
@@ -195,15 +197,15 @@ msgstr "Tamam"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
 msgid "Abort"
-msgstr "İptal"
+msgstr "Vazgeç"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
-msgstr ""
+msgstr "Süz:"
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr "Info"
+msgstr "Bilgiler"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
@@ -215,218 +217,214 @@ msgstr "Hatalar"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
-msgstr ""
+msgstr "Çık"
 
 #: gui\GUI.cpp:610
 msgid "Version:"
-msgstr ""
+msgstr "Sürüm:"
 
 #: gui\GUI.cpp:678
 msgid "Name:"
-msgstr ""
+msgstr "Ad:"
 
 #: gui\GUI.cpp:707
 msgid "Add path"
-msgstr ""
+msgstr "Yol ekle"
 
 #: gui\GUI.cpp:710
 msgid "Remove path"
-msgstr ""
+msgstr "Yolu sil"
 
 #: gui\GUI.cpp:808
 msgid "Internet connection status:"
-msgstr ""
+msgstr "İnternet bağlantısı durumu:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
+msgstr "Bir sorun çıktı. Şu anca yedeklenebilecek bir şey yok."
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr ""
+msgstr "Lütfen yedeklenecek klasörü seçin."
 
 #: main.cpp:111
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ tamamlandı."
 
 #: main.cpp:333
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Artımlı dosya yedekleme yapılıyor."
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr ""
+msgstr "Tam dosya yedekleme yapılıyor."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Artımlı kalıp yedekleme yapılıyor."
 
 #: main.cpp:345
 msgid "Full image backup running."
-msgstr ""
+msgstr "Tam kalıp yedekleme yapılıyor."
 
 #: main.cpp:349
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Artımlı dosya yedekleme sürdürülüyor."
 
 #: main.cpp:353
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Tam dosya yedekleme sürdürülüyor."
 
 #: main.cpp:369
 msgid "Indexing."
-msgstr ""
+msgstr "Dizin oluşturuluyor..."
 
 #: main.cpp:445 main.cpp:449
 msgid "UrBackup: Update available"
-msgstr ""
+msgstr "UrBackup: Güncelleme yayınlanmış"
 
 #: main.cpp:445 main.cpp:449
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
+msgstr "Yeni bir UrBackup sürümü yayınlanmış. Şimdi yüklemek için buraya tıklayın."
 
 #: main.cpp:468
 msgid "Cannot connect to backup server"
-msgstr ""
+msgstr "Yedekleme sunucusuna bağlanılamadı"
 
 #: main.cpp:505
 msgid "No current backup."
-msgstr ""
+msgstr "Geçerli bir yedekleme yok."
 
 #: main.cpp:516 Status.cpp:174
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Son yedekleme zamanı _1_"
 
 #: main.cpp:567 main.cpp:571
 msgid "UrBackup: New server"
-msgstr ""
+msgstr "UrBackup: Yeni sunucu"
 
 #: main.cpp:567 main.cpp:571
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
+msgstr "Yeni bir yedekleme sunucusu bulundu. Kullanmak için tıklayın"
 
 #: Settings.cpp:505
 msgid "The incremental backup interval is not a number"
-msgstr ""
+msgstr "Artımlı yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:511
 msgid "The full backup interval  is not a number"
-msgstr ""
+msgstr "Tam yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:520
 msgid "The full image backup interval  is not a number"
-msgstr ""
+msgstr "Tam kalıp yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:526
 msgid "The incremental image backup time is not a number"
-msgstr ""
+msgstr "Artımlı kalıp yedekleme zamanı bir rakam değil"
 
 #: Settings.cpp:534
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
+msgstr "En fazla artımlı dosya yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:540
 msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
+msgstr "En az artımlı dosya yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:546
 msgid "The maximal number of full file backups is not a number"
-msgstr ""
+msgstr "En fazla tam dosya yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:552
 msgid "Minimal number of full file backups is not a number"
-msgstr ""
+msgstr "En az tam dosya yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:561
 msgid "Minimal number of incremental image backups is not a number"
-msgstr ""
+msgstr "En az artımlı kalıp yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:567
 msgid "Maximal number of incremental image backups is not a number"
-msgstr ""
+msgstr "En fazla artımlı kalıp yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:573
 msgid "Minimal number of full image backups is not a number"
-msgstr ""
+msgstr "En az tam kalıp yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:579
 msgid "Maximal number of full image backups is not a number"
-msgstr ""
+msgstr "En fazla tam kalıp yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:587
 msgid "Backup delay after system start is not a number"
-msgstr ""
+msgstr "Sistem başlangıcından sonraki gecikme bir rakam değil"
 
 #: Settings.cpp:604
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ bir birim değil"
 
 #: Settings.cpp:613
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Sunucu kapı numarası geçersiz"
 
 #: Status.cpp:18
 msgid "Initializing."
-msgstr ""
+msgstr "Hazırlanıyor."
 
 #: Status.cpp:22
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "Yerel UrBackup sunucusu bekleniyor."
 
 #: Status.cpp:31
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Yerel UrBackup sunucusuna bağlanıldı."
 
 #: Status.cpp:31
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "İnternet sunucusuna bağlanılması denenmiyor."
 
 #: Status.cpp:32
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Yerel sunucu en son _1_ dakika önce görüldü."
 
 #: Status.cpp:36
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Herhangi bir İnternet sunucusu ayarlanmamış."
 
 #: Status.cpp:40
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "İnternet sunucusuna bağlanıldı"
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "İnternet sunucusuna bağlanılamadı. Sunucuya ulaşılamıyor."
 
 #: Status.cpp:48
 msgid "Error: _1_"
-msgstr ""
+msgstr "Hata: _1_"
 
 #: Status.cpp:67
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "gün"
+msgstr[1] "gün"
 
 #: Status.cpp:75
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "saat"
+msgstr[1] "saat"
 
 #: Status.cpp:83
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dakika"
+msgstr[1] "dakika"
 
 #: Status.cpp:138
 msgid "Idle."
-msgstr ""
-
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "Boşta."
 
 #: Status.cpp:192
 msgid "Yes"
@@ -438,71 +436,157 @@ msgstr "Hayır"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
-msgstr ""
+msgstr "İnternet: _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr ""
+msgstr "Sunucular:"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
-msgstr ""
+msgstr "Sunucu bekleniyor..."
 
 #: TrayIcon.cpp:146 TrayIcon.cpp:169
 msgid "A backup is already running. Could not start another one."
-msgstr ""
+msgstr "Çalışan bir yedekleme işlemi var. Başka bir işlem başlatılamaz."
 
 #: TrayIcon.cpp:148 TrayIcon.cpp:171
 msgid "Could not start backup, because no backup server was found."
-msgstr ""
+msgstr "Herhangi bir yedekleme sunucusu bulunamadığından yedekleme başlatılamadı."
 
 #: TrayIcon.cpp:183
 msgid "Pausing failed: No connection to backup server."
-msgstr ""
+msgstr "Duraklatılamadı: Yedekleme sunucusuyla bağlantı yok."
 
 #: TrayIcon.cpp:196
 msgid "Continuing failed: No connection to backup server."
-msgstr ""
+msgstr "Sürdürülemedi: Yedekleme sunucusuyla bağlantı yok."
 
 #: TrayIcon.cpp:230
 msgid "Do full file backup"
-msgstr ""
+msgstr "Tam dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:230
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Şimdi tam dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:235
 msgid "Do incremental file backup"
-msgstr ""
+msgstr "Artımlı dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:235
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Şimdi artımlı dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:244
 msgid "Do full image backup"
-msgstr ""
+msgstr "Tam kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:244
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Şimdi tam kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:249
 msgid "Do incremental image backup"
-msgstr ""
+msgstr "Artımlı kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:249
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Şimdi artımlı kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:286
 msgid "Pause"
-msgstr ""
+msgstr "Duraklat"
 
 #: TrayIcon.cpp:291
 msgid "Continue"
-msgstr ""
+msgstr "Sürdür"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Güncelleme yayınlanmış. Şimdi güncelle."
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "&Yedeklere Eriş/Geri Yükle"
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Yedekler geri yükleniyor."
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "_1_ konumundaki dosyayı geri yüklemek istediğinize emin misiniz? Yedek dosya içeriği geçerli dosya içeriğinin üzerine yazılacak. Emin değilseniz geri yükleme işlemini iptal ederek öncesinde bir dosya yedeklemesi yapın."
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "_1_ içindeki dosyayı geri yüklemek istediğinize emin misiniz? Klasördeki dosyaların üzerine yazılacak. Yedeklemeden sonra klasör içinde oluşturulmuş dosyalar yedek içinde bulunmadığından silinecek. Emin değilseniz geri yükleme işlemini iptal ederek öncesinde bir dosya yedeklemesi yapın."
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - Geri yükleme yapılabilsin"
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Geri yükleme işlemi sırasında bazı dosyalar silinemedi ya da üzerine yazılamadı. Dosyaların silinmesi ya da üzerine yazılması için bilgisayarın yeniden başlatılması gerekiyor. Şimdi yeniden başlatılsın mı?"
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - Windows Yeniden Başlatılsın"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "Öngörülen Bitiş: Yaklaşık _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Dosya: _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Birim: _1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Geri yükleme tamamlandı."
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Yedekleme başlatılamadı."
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "UrBackup istemcisini bilgisayarınızdan kaldırmak istediğinize emin misiniz?"
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Kaldırma onayı"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Yedeklere eriş/geri yükle"
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Herhangi bir dosyaya erişme izni yok."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Sunucunun İnternet adresi alınırken bir sorun çıktı. Dosyalara erişilemiyor."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

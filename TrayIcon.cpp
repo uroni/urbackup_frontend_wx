@@ -142,7 +142,7 @@ void runCommand(std::string cmd, std::string arg1)
 	std::string clientexecutable = ExtractFilePath(BINDIR)+"/urbackupclientgui";
 	wxExecute(sudo_prefix +"\""+ clientexecutable +"\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #else
-	wxExecute(sudo_prefix + BINDIR "urbackupclientgui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
+	wxExecute(sudo_prefix + BINDIR "/urbackupclientgui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
 #endif //WIN32

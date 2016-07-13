@@ -1,23 +1,20 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
 # Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# buzzertnl <frank@aced-it.nl>, 2013-2014
+# David Bekker <david@d4v1d.nl>, 2016
+# buzzertnl <frank@aced-it.nl>, 2013-2016
 # Decay <justvanwesterveld@live.nl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-06-05 09:52+0000\n"
-"Last-Translator: Decay <justvanwesterveld@live.nl>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/urbackup/language/nl/)\n"
+"PO-Revision-Date: 2016-06-20 20:22+0000\n"
+"Last-Translator: buzzertnl <frank@aced-it.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/uroni/urbackup/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -403,7 +400,7 @@ msgstr "Verbonden met een Internet server"
 
 #: Status.cpp:44
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr "Kan niet verbonden met de internet server. Server ongereikbaar. "
+msgstr "Kan niet verbinden met de internet server. Server onbereikbaar. "
 
 #: Status.cpp:48
 msgid "Error: _1_"
@@ -430,10 +427,6 @@ msgstr[1] "minuten"
 #: Status.cpp:138
 msgid "Idle."
 msgstr "Ruststand."
-
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr "Nog ongeveer: _1_"
 
 #: Status.cpp:192
 msgid "Yes"
@@ -510,6 +503,92 @@ msgstr "Pauzeren "
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Doorgaan"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Update beschikbaar. Nu updaten"
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "B&ackups bekijken/terugzetten"
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Bestanden herstellen"
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "Weet je zeker dat je het bestand in _1_ wil terugplaatsen? De huidige inhoud van het bestand zal worden overschreven door de inhoud van het backup bestand. Bij twijfel kan je beter eerst een bestand backup maken voor je verder gaat.  "
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "Weet je zeker dat je het bestand in _1_ wil terugplaatsen? Bestaande bestanden in deze map zullen worden overschreven. Nieuwe bestanden die gemaakt zijn in de geselecteerde mappen sinds de backup zullen worden verwijderd. Bij twijfel kan je beter eerst een bestand backup maken voor je verder gaat.  "
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - Terugplaatsen toestaan"
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Sommige bestanden konden niet worden verwijderd of overschreven tijdens het terugplaatsen van de backup. Om deze bestanden alsnog te verwijderen/overschrijven dient de computer opnieuw te worden opgestart. Wil je de computer opnieuw opstarten? "
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - Windows herstarten"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "Nog ongeveer: _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Bestand: _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Volume: _1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Terugzetten van backup voltooid."
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Backup kon niet worden gestart."
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "Weet je zeker dat je UrBackup wil verwijderen van deze computer?"
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Deïnstalleren bevestigen"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Backups bekijken/terugzetten"
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Deïnstalleren"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Geen rechten op de bestanden."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Fout bij verkrijgen van serveradres. Kan geen toegang verkrijgen tot bestanden."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
