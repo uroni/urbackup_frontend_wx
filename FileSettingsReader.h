@@ -15,9 +15,13 @@
 *    You should have received a copy of the GNU General Public License
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
-
+#pragma once
 #include <string>
 #include <map>
+#include <vector>
+
+std::string ConvertToUTF8(const std::wstring &input);
+std::wstring ConvertToUnicode(const std::string &str);
 
 class CFileSettingsReader
 {

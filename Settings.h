@@ -33,6 +33,8 @@ public:
 	virtual void OnAbortClick( wxCommandEvent& event );
 	virtual void OnDisableImageBackups( wxCommandEvent& event );
 
+	static std::string mergeNewSettings(CFileSettingsReader *settings, const std::map<std::string, std::string>& n_vals);
+
 private:
 	CFileSettingsReader *settings;
 };

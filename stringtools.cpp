@@ -476,6 +476,12 @@ std::string nconvert(unsigned int i){
 	ss << i;
 	return ss.str();
 }
+
+std::wstring convert(unsigned int i) {
+	wostringstream ss;
+	ss << i;
+	return ss.str();
+}
 #endif
 
 //--------------------------------------------------------------------
@@ -1008,44 +1014,42 @@ std::wstring UnescapeSQLString(std::wstring pStr)
 	return pStr;
 }
 
-wstring htmldecode(string str, bool html, char xc='%');
+string htmldecode(string str, bool html, char xc='%');
 
-void ParseParamStr(const std::string &pStr, std::map<std::wstring,std::wstring> *pMap)
+void ParseParamStrHttp(const std::string &pStr, std::map<std::string, std::string> *pMap)
 {
-	std::wstring key;
+	std::string key;
 	std::string value;
 
-	int pos=0;
-	for(size_t i=0;i<pStr.size();++i)
+	int pos = 0;
+	for (size_t i = 0; i<pStr.size(); ++i)
 	{
-		char ch=pStr[i];
-		if( ch=='=' && pos==0)
+		char ch = pStr[i];
+		if (ch == '=' && pos == 0)
 		{
-			pos=1;
+			pos = 1;
 		}
-		else if( (ch=='&'||ch=='$') && pos==1 )
+		else if ((ch == '&' || ch == '$') && pos == 1)
 		{
-			pos=0;
-			std::wstring wv=htmldecode(value, false);
-			EscapeSQLString(wv);
-			pMap->insert( std::pair<std::wstring, std::wstring>(key,wv) );
+			pos = 0;
+			std::string wv = htmldecode(value, false);
+			pMap->insert(std::pair<std::string, std::string>(key, wv));
 			key.clear(); value.clear();
 		}
-		else if( pos==0 )
+		else if (pos == 0)
 		{
-			key+=ch;
+			key += ch;
 		}
-		else if( pos==1 )
+		else if (pos == 1)
 		{
-			value+=ch;
+			value += ch;
 		}
 	}
 
-	if( value.size()>0 || key.size()>0 )
+	if (value.size()>0 || key.size()>0)
 	{
-		std::wstring wv=htmldecode(value, false);
-		EscapeSQLString(wv);
-		pMap->insert( std::pair<std::wstring, std::wstring>(key,wv) );
+		std::string wv = htmldecode(value, false);
+		pMap->insert(std::pair<std::string, std::string>(key, wv));
 	}
 }
 
@@ -1123,45 +1127,41 @@ unsigned long hexToULong(const std::string &data)
 }
 
 
-wstring htmldecode(string str, bool html, char xc)
+string htmldecode(string str, bool html, char xc)
 {
-	for(size_t i=0;i<str.size();i++)
+	std::string ret;
+	for (size_t i = 0; i<str.size(); i++)
 	{
-		if(str[i]==xc && i+2<str.size())
+		if (str[i] == xc && i + 2<str.size())
 		{
-			std::string data; data.push_back(str[i+1]); data.push_back(str[i+2]);
-			unsigned char ch=(unsigned char)hexToULong(data);
-			if( html==true && ch!=0  )
+			std::string data; data.push_back(str[i + 1]); data.push_back(str[i + 2]);
+			unsigned char ch = (unsigned char)hexToULong(data);
+			if (html == true && ch != 0)
 			{
-				str.erase(i,3);
-				if( ch!='-' && ch!=',' && ch!='#' )
-					str.insert(i,"&#"+nconvert((s32)ch)+";" );
+				if (ch != '-' && ch != ',' && ch != '#')
+					ret += "&#" + nconvert((s32)ch) + ";";
 				else
 				{
-					std::string c;
-					c.push_back(ch);
-					str.insert(i,c);
+					ret += ch;
 				}
 			}
-			else if( ch!=0 )
+			else if (ch != 0)
 			{
-				str[i]=ch;
-				str.erase(i+1,2);
+				ret += ch;
 			}
+			i += 2;
+		}
+		else if (str[i] == '+' && !html)
+		{
+			ret += ' ';
+		}
+		else
+		{
+			ret += str[i];
 		}
 	}
-	std::wstring ret;
-	try
-	{
-	    if( sizeof(wchar_t)==2 )
-    		utf8::utf8to16(str.begin(), str.end(), back_inserter(ret));
-    	    else if( sizeof(wchar_t)==4 )
-    		utf8::utf8to32(str.begin(), str.end(), back_inserter(ret));
-    	}
-    	catch(...){}
 	return ret;
 }
-
 bool checkhtml(const std::string &str)
 {
 	for(size_t i=0;i<str.size();++i)
@@ -1426,5 +1426,26 @@ std::string base64_encode_dash( const std::string& data )
 			ret[i]='-';
 	}
 
+	return ret;
+}
+
+std::string EscapeParamString(const std::string &pStr)
+{
+	std::string ret;
+	ret.reserve(pStr.size());
+	for (size_t i = 0; i<pStr.size(); ++i)
+	{
+		switch (pStr[i])
+		{
+		case '%': ret += "%25"; break;
+		case '&': ret += "%26"; break;
+		case '$': ret += "%24"; break;
+		case '/': ret += "%2F"; break;
+		case ' ': ret += "%20"; break;
+		case '#': ret += "%23"; break;
+		case '+': ret += "%2B"; break;
+		default: ret += pStr[i]; break;
+		}
+	}
 	return ret;
 }

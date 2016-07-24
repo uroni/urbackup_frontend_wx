@@ -62,9 +62,6 @@ std::string getServerName(void)
 #endif
 }
 
-std::string ConvertToUTF8(const std::wstring &input);
-std::wstring ConvertToUnicode(const std::string &str);
-
 #ifdef wxUSE_WCHAR_T
 #define ConvertToWX(x) ConvertToUnicode(x)
 #else
@@ -700,49 +697,8 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		n_vals["local_speed"]="-1";
 	n_vals["internet_encrypt"]=nconvert(internet_encrypt);
 	n_vals["internet_compress"]=nconvert(internet_compress);
-	
 
-	std::string ndata;
-
-	std::vector<std::wstring> keys=settings->getKeys();
-
-	for(std::map<std::string, std::string>::iterator it=n_vals.begin();it!=n_vals.end();++it)
-	{
-		const std::string &nkey=it->first;
-		std::string def_value;
-		bool found_key=false;
-
-		std::wstring key_w=ConvertToUnicode(nkey);
-		for(size_t i=0;i<keys.size();++i)
-		{
-			if(keys[i]==key_w)
-			{
-				found_key=true;
-				break;
-			}
-		}
-
-		if( found_key || !settings->getValue(it->first+"_def", &def_value) || def_value!=it->second )
-		{
-			ndata+=nkey+"="+it->second+"\n";
-		}
-	}
-
-	for(size_t i=0;i<keys.size();++i)
-	{
-		std::string key=ConvertToUTF8(keys[i]);
-		std::map<std::string, std::string>::iterator iter=n_vals.find(key);
-		if(iter==n_vals.end())
-		{
-			std::wstring val;
-			if(settings->getValue(keys[i], &val) )
-			{
-				ndata+=key+"="+ConvertToUTF8(val)+"\n";
-			}
-		}
-	}
-
-	Connector::updateSettings(ndata);
+	Connector::updateSettings(mergeNewSettings(settings, n_vals));
 
 	Close();
 }
@@ -764,4 +720,49 @@ void Settings::OnDisableImageBackups( wxCommandEvent& event )
 		m_textCtrl21->Enable(true);
 		m_textCtrl22->Enable(true);
 	}		
+}
+
+std::string Settings::mergeNewSettings(CFileSettingsReader * settings, const std::map<std::string, std::string>& n_vals)
+{
+	std::string ndata;
+
+	std::vector<std::wstring> keys = settings->getKeys();
+
+	for (std::map<std::string, std::string>::const_iterator it = n_vals.cbegin(); it != n_vals.cend(); ++it)
+	{
+		const std::string &nkey = it->first;
+		std::string def_value;
+		bool found_key = false;
+
+		std::wstring key_w = ConvertToUnicode(nkey);
+		for (size_t i = 0; i<keys.size(); ++i)
+		{
+			if (keys[i] == key_w)
+			{
+				found_key = true;
+				break;
+			}
+		}
+
+		if (found_key || !settings->getValue(it->first + "_def", &def_value) || def_value != it->second)
+		{
+			ndata += nkey + "=" + it->second + "\n";
+		}
+	}
+
+	for (size_t i = 0; i<keys.size(); ++i)
+	{
+		std::string key = ConvertToUTF8(keys[i]);
+		std::map<std::string, std::string>::const_iterator iter = n_vals.find(key);
+		if (iter == n_vals.end())
+		{
+			std::wstring val;
+			if (settings->getValue(keys[i], &val))
+			{
+				ndata += key + "=" + ConvertToUTF8(val) + "\n";
+			}
+		}
+	}
+
+	return ndata;
 }

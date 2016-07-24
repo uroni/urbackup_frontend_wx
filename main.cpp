@@ -37,6 +37,10 @@
 #include "../config.h"
 #endif
 
+#ifdef _WIN32
+#include "SelectWindowsComponents.h"
+#endif
+
 #include <wx/apptrait.h>
 /*#if wxUSE_STACKWALKER && defined( __WXDEBUG__ )
 // silly workaround for the link error with debug configuration:
@@ -502,6 +506,16 @@ bool MyApp::OnInit()
 	{
 		remove_login_item();
 		exit(0);
+	}
+#endif
+#ifdef _WIN32
+	else if (cmd == wxT("selectWindowsComponents"))
+	{
+		SelectWindowsComponents *cp = new SelectWindowsComponents(NULL);
+		SetTopWindow(cp);
+		cp->ShowModal();
+		cp->Destroy();
+		wxExit();
 	}
 #endif
 	else

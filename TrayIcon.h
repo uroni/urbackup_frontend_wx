@@ -21,6 +21,7 @@
 #include <wx/menu.h>
 
 void runCommand(std::string cmd, std::string arg1=std::string());
+void read_tokens(wxString token_path, std::string& tokens);
 
 class TrayIcon : public wxTaskBarIcon
 {

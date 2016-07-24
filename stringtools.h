@@ -86,7 +86,7 @@ void EscapeCh(std::string &pStr, char ch='\\');
 void EscapeCh(std::wstring &pStr, wchar_t ch);
 std::string UnescapeSQLString(std::string pStr);
 std::wstring UnescapeSQLString(std::wstring pStr);
-void ParseParamStr(const std::string &pStr, std::map<std::wstring,std::wstring> *pMap);
+void ParseParamStrHttp(const std::string &pStr, std::map<std::string, std::string> *pMap);
 std::string FormatTime(int timeins);
 bool IsHex(const std::string &str);
 unsigned long hexToULong(const std::string &data);
@@ -107,5 +107,6 @@ std::wstring strlower(const std::wstring &str);
 std::string trim(const std::string &str);
 void replaceNonAlphaNumeric(std::string &str, char rch);
 std::string conv_filename(std::string fn);
+std::string EscapeParamString(const std::string &pStr);
 
 #endif

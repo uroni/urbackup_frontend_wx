@@ -146,6 +146,12 @@ struct SConnection
 	wxSocketClient* client;
 };
 
+struct SPathMap
+{
+	std::string source;
+	std::string target;
+};
+
 class Connector
 {
 public:
@@ -163,6 +169,19 @@ public:
 	static bool restoreOk(bool ok, wxLongLong_t& process_id);
 	static SStatus initStatus(wxSocketClient* last_client, bool fast, size_t timeoutms=5000);
 
+	enum EAccessError
+	{
+		EAccessError_Ok,
+		EAccessError_NoServer,
+		EAccessError_NoTokens
+	};
+
+	static std::string getFileBackupsList(EAccessError& access_error);
+	static std::string getFileList(const std::string& path, int* backupid, EAccessError& access_error);
+	static std::string startRestore(const std::string& path, int backupid,
+		const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
+		bool ignore_other_fs, bool follow_symlinks);
+
 	static bool hasError(void);
 	static bool isBusy(void);
 
@@ -173,10 +192,12 @@ public:
 private:
 	static std::string escapeParam(const std::string &name);
 	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection=NULL, size_t timeoutms=5000, bool set_busy=true);
+	static bool readTokens();
 	static std::string pw;
 	static std::string pw_change;
 	static bool error;
 	static bool busy;
+	static std::string tokens;
 };
 
 #endif //CONNECTOR_H

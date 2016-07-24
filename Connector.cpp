@@ -22,6 +22,7 @@
 #include <iostream>
 #include "json/json.h"
 #include <stdexcept>
+#include "TrayIcon.h"
 
 #ifndef _WIN32
 #include "../config.h"
@@ -31,8 +32,10 @@ std::string Connector::pw;
 std::string Connector::pw_change;
 bool Connector::error=false;
 bool Connector::busy=false;
+std::string Connector::tokens;
 
 extern std::string g_res_path;
+extern wxString res_path;
 
 #ifdef wxUSE_WCHAR_T
 std::string ConvertToUTF8(const std::wstring &str);
@@ -236,6 +239,138 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	}
 
 	return ret;
+}
+
+std::string Connector::getFileBackupsList(EAccessError& access_error)
+{
+	access_error = EAccessError_Ok;
+
+	if (!readTokens())
+	{
+		access_error = EAccessError_NoTokens;
+		return std::string();
+	}
+
+	std::string list = getResponse("GET FILE BACKUPS TOKENS", "tokens=" + tokens, false);
+
+	if (!list.empty())
+	{
+		if (list[0] != '0')
+		{
+			if (list[0] == '1')
+			{
+				access_error = EAccessError_NoServer;
+			}
+
+			return std::string();
+		}
+		else
+		{
+			return list.substr(1);
+		}
+	}
+	else
+	{
+		return std::string();
+	}
+}
+
+std::string Connector::getFileList(const std::string& path, int* backupid, EAccessError& access_error)
+{
+	access_error = EAccessError_Ok;
+
+	if (!readTokens())
+	{
+		access_error = EAccessError_NoTokens;
+		return std::string();
+	}
+
+	std::string params = "tokens=" + tokens;
+
+	if (!path.empty())
+	{
+		params += "&path=" + EscapeParamString(path);
+	}
+
+	if (backupid != NULL)
+	{
+		params += "&backupid=" + convert(*backupid);
+	}
+
+	std::string list = getResponse("GET FILE LIST TOKENS",
+		params, false);
+
+	if (!list.empty())
+	{
+		if (list[0] != '0')
+		{
+			if (list[0] == '1')
+			{
+				access_error = EAccessError_NoServer;
+			}
+
+			return std::string();
+		}
+		else
+		{
+			return list.substr(1);
+		}
+	}
+	else
+	{
+		return std::string();
+	}
+}
+
+std::string Connector::startRestore(const std::string& path, int backupid,
+	const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
+	bool ignore_other_fs, bool follow_symlinks)
+{
+	access_error = EAccessError_Ok;
+
+	if (!readTokens())
+	{
+		access_error = EAccessError_NoTokens;
+		return std::string();
+	}
+
+	std::string params = "tokens=" + tokens;
+	params += "&path=" + EscapeParamString(path);
+	params += "&backupid=" + convert(backupid);
+
+	for (size_t i = 0; i < map_paths.size(); ++i)
+	{
+		params += "&map_path_source" + convert(i) + "=" + EscapeParamString(map_paths[i].source);
+		params += "&map_path_target" + convert(i) + "=" + EscapeParamString(map_paths[i].target);
+	}
+
+	params += std::string("&clean_other=") + (clean_other ? "1" : "0");
+	params += std::string("&ignore_other_fs=") + (ignore_other_fs ? "1" : "0");
+	params += std::string("&follow_symlinks=") + (follow_symlinks ? "1" : "0");
+
+	std::string res = getResponse("DOWNLOAD FILES TOKENS",
+		params, false);
+
+	if (!res.empty())
+	{
+		if (res[0] != '0')
+		{
+			if (res[0] == '1')
+			{
+				access_error = EAccessError_NoServer;
+			}
+
+			return std::string();
+		}
+		else
+		{
+			return res.substr(1);
+		}
+	}
+	else
+	{
+		return std::string();
+	}
 }
 
 bool Connector::hasError(void)
@@ -686,42 +821,42 @@ bool SStatus::isAvailable()
 	}
 	if(toks.size()>4)
 	{
-		std::map<std::wstring,std::wstring> params;
-		ParseParamStr(toks[4], &params);
-		std::map<std::wstring,std::wstring>::iterator it_capa=params.find(L"capa");
+		std::map<std::string,std::string> params;
+		ParseParamStrHttp(toks[4], &params);
+		std::map<std::string,std::string>::iterator it_capa=params.find("capa");
 		if(it_capa!=params.end())
 		{
-			capa=watoi(it_capa->second);
+			capa=atoi(it_capa->second.c_str());
 		}
-		std::map<std::wstring,std::wstring>::iterator it_new_server=params.find(L"new_ident");
+		std::map<std::string,std::string>::iterator it_new_server=params.find("new_ident");
 		if(it_new_server!=params.end())
 		{
-			new_server=wnarrow(it_new_server->second);
+			new_server=it_new_server->second;
 		}
-		std::map<std::wstring,std::wstring>::iterator it_has_server=params.find(L"has_server");
+		std::map<std::string,std::string>::iterator it_has_server=params.find("has_server");
 		if(it_has_server!=params.end())
 		{
-			has_server= ( it_has_server->second==L"true" );
+			has_server= ( it_has_server->second=="true" );
 		}
-		std::map<std::wstring,std::wstring>::iterator it_restore_ask=params.find(L"restore_ask");
+		std::map<std::string,std::string>::iterator it_restore_ask=params.find("restore_ask");
 		if(it_restore_ask!=params.end())
 		{
-			ask_restore_ok = watoi(it_restore_ask->second);
+			ask_restore_ok = atoi(it_restore_ask->second.c_str());
 		}
-		std::map<std::wstring, std::wstring>::iterator it_restore_file = params.find(L"restore_file");
+		std::map<std::string, std::string>::iterator it_restore_file = params.find("restore_file");
 		if (it_restore_file != params.end())
 		{
-			restore_file = (it_restore_file->second == L"true");
+			restore_file = (it_restore_file->second == "true");
 		}
-		std::map<std::wstring, std::wstring>::iterator it_restore_path = params.find(L"restore_path");
+		std::map<std::string, std::string>::iterator it_restore_path = params.find("restore_path");
 		if (it_restore_path != params.end())
 		{
 			restore_path = it_restore_path->second;
 		}
-		std::map<std::wstring,std::wstring>::iterator it_needs_restore_restart=params.find(L"needs_restore_restart");
+		std::map<std::string,std::string>::iterator it_needs_restore_restart=params.find("needs_restore_restart");
 		if(it_needs_restore_restart!=params.end())
 		{
-			needs_restore_restart = watoi(it_needs_restore_restart->second);
+			needs_restore_restart = atoi(it_needs_restore_restart->second.c_str());
 		}
 	}
 
@@ -731,4 +866,25 @@ bool SStatus::isAvailable()
 bool SStatus::hasError()
 {
 	return error;
+}
+
+bool Connector::readTokens()
+{
+	wxString wx_path = res_path + wxT("/tokens");
+#ifdef _DEBUG
+	wx_path = wxT("tokens");
+#endif
+
+	read_tokens(wx_path, tokens);
+
+#if !defined(_WIN32) && !defined(__APPLE__)
+	read_tokens("/var/urbackup/tokens", tokens);
+	read_tokens("/usr/local/var/urbackup/tokens", tokens);
+#endif
+
+#ifdef __APPLE__
+	read_tokens("/usr/var/urbackup/tokens", tokens);
+#endif
+
+	return !tokens.empty();
 }
