@@ -421,7 +421,13 @@ Function .onInstSuccess
 	${EndIf}
 	SetOutPath "$INSTDIR"
 	Exec '"$INSTDIR\UrBackupClient.exe"'
+	IfSilent setup_defaults setup_wizard
+setup_defaults:
 	Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'
+	Goto after_setup_wizard
+setup_wizard:
+	Exec '"$INSTDIR\UrBackupClient.exe" setupDefault'
+after_setup_wizard:
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
 		SetRegView 32
