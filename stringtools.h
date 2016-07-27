@@ -37,6 +37,9 @@ std::string getuntilinc(std::string str,std::string data);
 std::string getline(int line, const std::string &str);
 int linecount(const std::string &str);
 std::string getFile(std::string filename);
+#ifdef _WIN32
+std::string getFile(std::wstring filename);
+#endif
 std::wstring getFileUTF8(std::string filename);
 std::string ExtractFileName(std::string fulln);
 std::wstring ExtractFileName(std::wstring fulln);

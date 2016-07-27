@@ -149,7 +149,8 @@ void SelectWindowsComponents::Notify(void)
 		tree_components[rootId] = root;
 		tree_items[root] = rootId;
 
-		addComponents(rootId, root);
+		addComponents(m_treeCtrl1, iconList, rootId, root, tree_components,
+			tree_items);
 
 		m_treeCtrl1->Toggle(rootId);
 
@@ -269,7 +270,9 @@ void SelectWindowsComponents::onCancel(wxCommandEvent & event)
 	Close();
 }
 
-void SelectWindowsComponents::addComponents(wxTreeItemId treeId, SComponent * node)
+void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconList, wxTreeItemId treeId,
+	SComponent * node, std::map<wxTreeItemId, SComponent*>& tree_components,
+	std::map<SComponent*, wxTreeItemId>& tree_items)
 {
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
@@ -311,38 +314,39 @@ void SelectWindowsComponents::addComponents(wxTreeItemId treeId, SComponent * no
 			checked = 0;
 		}
 
-		wxTreeItemId childId = m_treeCtrl1->AppendItem(treeId, child->name, image);
+		wxTreeItemId childId = tree->AppendItem(treeId, child->name, image);
 
 		if (checked >= 0)
 		{
-			m_treeCtrl1->SetItemState(childId, checked);
+			tree->SetItemState(childId, checked);
 		}
 
 		tree_components[childId] = child;
 		tree_items[child] = childId;
 
-		addComponents(childId, child);
+		addComponents(tree, iconList, childId, child, tree_components, tree_items);
 	}
 }
 
-void SelectWindowsComponents::selectTreeItems(SComponent * node, bool select, bool removeSelect)
+void SelectWindowsComponents::selectTreeItems(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+	SComponent* root, SComponent * node, bool select, bool removeSelect)
 {
 	wxTreeItemId nodeId = tree_items[node];
 
-	if (m_treeCtrl1->GetItemState(nodeId) != wxTREE_ITEMSTATE_NONE)
+	if (tree->GetItemState(nodeId) != wxTREE_ITEMSTATE_NONE)
 	{
 		if (select && removeSelect)
 		{
-			m_treeCtrl1->SetItemState(nodeId, wxTREE_ITEMSTATE_NONE);
+			tree->SetItemState(nodeId, wxTREE_ITEMSTATE_NONE);
 		}
 		else
 		{
-			m_treeCtrl1->SetItemState(nodeId, select ? 1 : 0);
+			tree->SetItemState(nodeId, select ? 1 : 0);
 		}
 	}
 	else if (!select && !node->writer && node->selectable)
 	{
-		m_treeCtrl1->SetItemState(nodeId, 0);
+		tree->SetItemState(nodeId, 0);
 	}
 
 	if (select && !node->writer && node->selectable)
@@ -352,20 +356,19 @@ void SelectWindowsComponents::selectTreeItems(SComponent * node, bool select, bo
 
 	if (!node->writer)
 	{
-		SComponent* root = componentReader.getRoot();
 		for (size_t i = 0; i < root->children.size(); ++i)
 		{
 			if (root->children[i]->writerId == node->writerId)
 			{
 				if (select)
 				{
-					m_treeCtrl1->SetItemState(tree_items[root->children[i]], 1);
+					tree->SetItemState(tree_items[root->children[i]], 1);
 				}
 				else
 				{
-					if (!hasSelectedChild(root->children[i]))
+					if (!hasSelectedChild(tree, tree_items, root->children[i]))
 					{
-						m_treeCtrl1->SetItemState(tree_items[root->children[i]], 0);
+						tree->SetItemState(tree_items[root->children[i]], 0);
 					}
 				}
 
@@ -376,16 +379,17 @@ void SelectWindowsComponents::selectTreeItems(SComponent * node, bool select, bo
 
 	for(size_t i=0;i<node->dependencies.size();++i)
 	{
-		selectTreeItems(node->dependencies[i], select);
+		selectTreeItems(tree, tree_items, root, node->dependencies[i], select);
 	}
 
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
-		selectTreeItems(node->children[i], select, removeSelect);
+		selectTreeItems(tree, tree_items, root, node->children[i], select, removeSelect);
 	}
 }
 
-bool SelectWindowsComponents::hasSelectedChild(SComponent * node)
+bool SelectWindowsComponents::hasSelectedChild(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+	SComponent * node)
 {
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
@@ -393,18 +397,24 @@ bool SelectWindowsComponents::hasSelectedChild(SComponent * node)
 
 		wxTreeItemId nodeId = tree_items[child];
 
-		if (m_treeCtrl1->GetItemState(nodeId) == 1)
+		if (tree->GetItemState(nodeId) == 1)
 		{
 			return true;
 		}
 
-		if (hasSelectedChild(child))
+		if (hasSelectedChild(tree, tree_items, child))
 		{
 			return true;
 		}
 	}
 
 	return false;
+}
+
+void SelectWindowsComponents::selectTreeItems(SComponent * node, bool select, bool removeSelect)
+{
+	selectTreeItems(m_treeCtrl1, tree_items, componentReader.getRoot(),
+		node, select, removeSelect);
 }
 
 void SelectWindowsComponents::collectComponents(SComponent * node, size_t & idx, std::string& res)
@@ -450,6 +460,7 @@ void SelectWindowsComponents::collectComponents(SComponent * node, size_t & idx,
 WindowsComponentReader::WindowsComponentReader()
 	: wxThread(wxTHREAD_JOINABLE)
 {
+	root.is_root = true;
 }
 
 WindowsComponentReader::~WindowsComponentReader()
@@ -465,23 +476,15 @@ SComponent * WindowsComponentReader::getRoot()
 	return &root;
 }
 
-wxThread::ExitCode WindowsComponentReader::Entry()
+bool WindowsComponentReader::readComponents(const std::string& restoreXml, const std::vector<std::string>& componentXmls,
+	const std::vector<SComponent>& filter_except, SComponent & root, std::vector<SComponent*>& components, std::string& errmsg)
 {
 	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
 
 	if (hr != S_OK)
 	{
-		errmsg = "Error initializing COM " + GetErrorHResErrStr(hr);
-		return NULL;
-	}
-
-	hr = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
-		RPC_C_IMP_LEVEL_IDENTIFY, NULL, EOAC_NONE, NULL);
-
-	if (hr != S_OK)
-	{
-		errmsg = "Error initializing COM security " + GetErrorHResErrStr(hr);
-		return NULL;
+		errmsg = "CoInitializeEx failed " + GetErrorHResErrStr(hr);
+		return false;
 	}
 
 	SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssBackupComponents, backupcom);
@@ -491,47 +494,77 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 	if (hr != S_OK || backupcom == NULL)
 	{
 		errmsg = "Error creating backup components " + GetErrorHResErrStr(hr);
-		return NULL;
+		return false;
 	}
 
-	hr = backupcom->InitializeForBackup();
-
-	if (hr != S_OK)
+	if (!restoreXml.empty())
 	{
-		errmsg = "Error initializing components for backup " + GetErrorHResErrStr(hr);
-		return NULL;
+		hr = backupcom->InitializeForRestore(const_cast<BSTR>(ConvertToUnicode(restoreXml).c_str()));
+
+		if (hr != S_OK)
+		{
+			errmsg = "Error initializing components for restore " + GetErrorHResErrStr(hr);
+			return false;
+		}
 	}
-
-	SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssAsync, pb_result);
-	hr = backupcom->GatherWriterMetadata(&pb_result);
-
-	if (hr != S_OK)
+	else
 	{
-		errmsg="Error gathering writer metadata " + GetErrorHResErrStr(hr);
-		return NULL;
-	}
+		hr = backupcom->InitializeForBackup();
 
-	if (!wait_for(pb_result, "Gathering writer metadata failed"))
-	{
-		return NULL;
+		if (hr != S_OK)
+		{
+			errmsg = "Error initializing components for backup " + GetErrorHResErrStr(hr);
+			return false;
+		}
 	}
 
 	UINT nwriters;
-	hr = backupcom->GetWriterMetadataCount(&nwriters);
-
-	if (hr != S_OK)
+	if (restoreXml.empty())
 	{
-		errmsg = "Error getting writer metadata count";
-		return NULL;
+		SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssAsync, pb_result);
+		hr = backupcom->GatherWriterMetadata(&pb_result);
+
+		if (hr != S_OK)
+		{
+			errmsg = "Error gathering writer metadata " + GetErrorHResErrStr(hr);
+			return false;
+		}
+
+		if (!wait_for(pb_result, "Gathering writer metadata failed", errmsg))
+		{
+			return false;
+		}
+
+		
+		hr = backupcom->GetWriterMetadataCount(&nwriters);
+
+		if (hr != S_OK)
+		{
+			errmsg = "Error getting writer metadata count";
+			return false;
+		}
+	}
+	else
+	{
+		nwriters = static_cast<UINT>(componentXmls.size());
 	}
 
 	size_t maxDepth = 0;
-	
+
 	for (UINT i = 0; i < nwriters; ++i)
 	{
 		VSS_ID writerInstance;
 		SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssExamineWriterMetadata, writerMetadata);
-		HRESULT hr = backupcom->GetWriterMetadata(i, &writerInstance, &writerMetadata);
+
+		HRESULT hr;
+		if (restoreXml.empty())
+		{
+			hr = backupcom->GetWriterMetadata(i, &writerInstance, &writerMetadata);
+		}
+		else
+		{
+			hr = CreateVssExamineWriterMetadata(const_cast<BSTR>(ConvertToUnicode(componentXmls[i]).c_str()), &writerMetadata);
+		}
 
 		if (hr != S_OK)
 		{
@@ -615,7 +648,14 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 			component->name = componentNameStr;
 			component->writerId = writerId;
 			component->writer = false;
-			component->selectable = componentInfo->bSelectable == TRUE;
+			if (restoreXml.empty())
+			{
+				component->selectable = componentInfo->bSelectable == TRUE;
+			}
+			else
+			{
+				component->selectable = componentInfo->bSelectableForRestore == TRUE;
+			}
 
 			if (componentInfo->bstrCaption != NULL)
 			{
@@ -627,17 +667,39 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 				int abc = 5;
 			}
 
-			component->icon.resize(componentInfo->cbIcon);
-			memcpy(component->icon.data(), componentInfo->pbIcon, componentInfo->cbIcon);
-
-			components.push_back(component);
-
-			std::vector<std::string> toks;
-			TokenizeMail(logicalPathStr, toks, "\\");
-
-			if (toks.size() + 2 > maxDepth)
+			bool filtered = true;
+			if (filter_except.empty())
 			{
-				maxDepth = toks.size() + 2;
+				filtered = false;
+			}
+			else
+			{
+				for (size_t k = 0; k < filter_except.size(); ++k)
+				{
+					if (filter_except[k].name == component->name
+						&& filter_except[k].writerId == component->writerId
+						&& filter_except[k].logicalPath == component->logicalPath)
+					{
+						filtered = false;
+						break;
+					}
+				}
+			}
+
+			if (!filtered)
+			{
+				component->icon.resize(componentInfo->cbIcon);
+				memcpy(component->icon.data(), componentInfo->pbIcon, componentInfo->cbIcon);
+
+				components.push_back(component);
+
+				std::vector<std::string> toks;
+				TokenizeMail(logicalPathStr, toks, "\\");
+
+				if (toks.size() + 2 > maxDepth)
+				{
+					maxDepth = toks.size() + 2;
+				}
 			}
 		}
 
@@ -652,12 +714,12 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 
 			SComponent* parent = NULL;
 			if (components[i]->writer
-				&& depth==0)
+				&& depth == 0)
 			{
 				parent = &root;
 			}
 			else if (!components[i]->writer
-				&& toks.size()+1 == depth)
+				&& toks.size() + 1 == depth)
 			{
 				std::string parentPath;
 				if (!toks.empty()
@@ -689,7 +751,15 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 	{
 		VSS_ID writerInstance;
 		SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssExamineWriterMetadata, writerMetadata);
-		HRESULT hr = backupcom->GetWriterMetadata(i, &writerInstance, &writerMetadata);
+		HRESULT hr;
+		if (restoreXml.empty())
+		{
+			hr = backupcom->GetWriterMetadata(i, &writerInstance, &writerMetadata);
+		}
+		else
+		{
+			hr = CreateVssExamineWriterMetadata(const_cast<BSTR>(ConvertToUnicode(componentXmls[i]).c_str()), &writerMetadata);
+		}
 
 		if (hr != S_OK)
 		{
@@ -821,6 +891,14 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 		}
 	}
 
+	return true;
+}
+
+wxThread::ExitCode WindowsComponentReader::Entry()
+{
+	readComponents(std::string(), std::vector<std::string>(), std::vector<SComponent>(),
+		root, components, errmsg);
+
 	return ExitCode();
 }
 
@@ -869,7 +947,7 @@ std::string WindowsComponentReader::GetErrorHResErrStr(HRESULT res)
 	return "UNDEF(" + nconvert((long long int)res) + ")";
 }
 
-bool WindowsComponentReader::wait_for(IVssAsync * vsasync, const std::string & error_prefix)
+bool WindowsComponentReader::wait_for(IVssAsync * vsasync, const std::string & error_prefix, std::string& errmsg)
 {
 	if (vsasync == NULL)
 	{
@@ -921,7 +999,7 @@ bool WindowsComponentReader::wait_for(IVssAsync * vsasync, const std::string & e
 
 SComponent * WindowsComponentReader::getComponent(SComponent* node, VSS_ID writerId, std::string logical_path)
 {
-	if (node == &root)
+	if (node->is_root)
 	{
 		for (size_t i = 0; i < node->children.size(); ++i)
 		{

@@ -32,6 +32,7 @@
 #include <wx/dir.h>
 #include <wx/filename.h>
 #include <wx/log.h>
+#include <wx/socket.h>
 
 #ifndef _WIN32
 #include "../config.h"
@@ -39,6 +40,7 @@
 
 #ifdef _WIN32
 #include "SelectWindowsComponents.h"
+#include "RestoreWindowsComponents.h"
 #endif
 
 #include <wx/apptrait.h>
@@ -78,6 +80,20 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 #endif
 
 #ifdef _WIN32
+
+HRESULT initCom()
+{
+	HRESULT hr = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+		RPC_C_IMP_LEVEL_IDENTIFY, NULL, EOAC_NONE, NULL);
+
+	if (hr != S_OK)
+	{
+		wxMessageBox(wxString::Format(_("CoInitializeSecurity failed: %08x"), hr), wxT("UrBackup"), wxOK | wxICON_ERROR);
+	}
+
+	return hr;
+}
+
 HRESULT ModifyPrivilege(
 	IN LPCTSTR szPrivilege,
 	IN BOOL fEnable)
@@ -197,6 +213,7 @@ void deleteShellKeys()
 bool MyApp::OnInit()
 {
 	wxLog::SetLogLevel(0);
+	wxSocketBase::Initialize();
 #ifdef _WIN32
 	wchar_t buf[MAX_PATH];
 	GetModuleFileNameW(NULL, buf, MAX_PATH);
@@ -511,7 +528,19 @@ bool MyApp::OnInit()
 #ifdef _WIN32
 	else if (cmd == wxT("selectWindowsComponents"))
 	{
+		initCom();
+
 		SelectWindowsComponents *cp = new SelectWindowsComponents(NULL);
+		SetTopWindow(cp);
+		cp->ShowModal();
+		cp->Destroy();
+		wxExit();
+	}
+	else if (cmd == wxT("restoreWindowsComponents"))
+	{
+		initCom();
+
+		SelectRestoreComponents *cp = new SelectRestoreComponents(NULL);
 		SetTopWindow(cp);
 		cp->ShowModal();
 		cp->Destroy();

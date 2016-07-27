@@ -13,6 +13,10 @@
 
 struct SComponent
 {
+	SComponent()
+		: is_root(false) { }
+
+	bool is_root;
 	VSS_ID writerId;
 	std::string name;
 	std::string logicalPathComponent;
@@ -33,18 +37,21 @@ public:
 
 	SComponent* getRoot();
 
+	static bool readComponents(const std::string& restoreXml, const std::vector<std::string>& componentXmls, 
+		const std::vector<SComponent>& filter_except, SComponent& root, std::vector<SComponent*>& components, std::string& errmsg);
+
 protected:
 	virtual ExitCode Entry();
 
 private:
-	std::string GetErrorHResErrStr(HRESULT res);
+	static std::string GetErrorHResErrStr(HRESULT res);
 
-	bool wait_for(IVssAsync *vsasync, const std::string& error_prefix);
+	static bool wait_for(IVssAsync *vsasync, const std::string& error_prefix, std::string& errmsg);
 
 	std::string errmsg;
 	SComponent root;
 
-	SComponent* getComponent(SComponent* node, VSS_ID writerId, std::string logical_path);
+	static SComponent* getComponent(SComponent* node, VSS_ID writerId, std::string logical_path);
 
 	std::vector<SComponent*> components;
 };
@@ -55,6 +62,15 @@ public:
 	SelectWindowsComponents(wxWindow* parent);
 	~SelectWindowsComponents();
 
+	static void addComponents(wxTreeCtrl* tree, wxImageList* iconList,
+		wxTreeItemId treeId, SComponent* node, std::map<wxTreeItemId, SComponent*>& tree_components,
+		std::map<SComponent*, wxTreeItemId>& tree_items);
+
+	static void selectTreeItems(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+		SComponent* root, SComponent* node, bool select, bool removeSelect = false);
+	static bool hasSelectedChild(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+		SComponent* node);
+
 protected:
 	virtual void Notify(void);
 	virtual void evtOnTreeItemGetTooltip(wxTreeEvent& event);
@@ -63,9 +79,9 @@ protected:
 	virtual void onCancel(wxCommandEvent& event);
 
 private:
-	void addComponents(wxTreeItemId treeId, SComponent* node);
-	void selectTreeItems(SComponent* node, bool select, bool removeSelect=false);
-	bool hasSelectedChild(SComponent* node);
+
+	void selectTreeItems(SComponent* node, bool select, bool removeSelect = false);
+	
 	void collectComponents(SComponent* node, size_t& idx, std::string& res);
 
 	WindowsComponentReader componentReader;

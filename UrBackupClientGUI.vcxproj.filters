@@ -84,6 +84,12 @@
     <ClCompile Include="gui\GUIWindowsComponents.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="gui\GUIRestoreWindowsComponents.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RestoreWindowsComponents.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigPath.h">
@@ -151,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="gui\GUIWindowsComponents.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\GUIRestoreWindowsComponents.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RestoreWindowsComponents.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

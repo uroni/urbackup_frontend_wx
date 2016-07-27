@@ -26,6 +26,8 @@
 #include <wx/sharedptr.h>
 #include "tcpstack.h"
 
+typedef wxLongLong_t int64;
+
 struct SBackupDir
 {
 	wxString path;
@@ -111,12 +113,30 @@ struct SUrBackupServer
 	}
 };
 
+struct SFinishedProcess
+{
+	SFinishedProcess()
+		:id(0), success(false)
+	{
+	}
+
+	bool operator==(const SFinishedProcess& other) const
+	{
+		return id == other.id
+			&& success == other.success;
+	}
+
+	int64 id;
+	bool success;
+};
+
 struct SStatusDetails
 {
 	bool ok;
 	wxLongLong_t last_backup_time;
 	
 	std::vector<SRunningProcess> running_processes;
+	std::vector<SFinishedProcess> finished_processes;
 	std::vector<SUrBackupServer> servers;
 	unsigned int time_since_last_lan_connection;
 	bool internet_connected;
@@ -152,6 +172,32 @@ struct SPathMap
 	std::string target;
 };
 
+struct SBackupFile
+{
+	int64 access;
+	int64 creat;
+	int64 mod;
+	int backupid;
+	int64 backuptime;
+	bool isdir;
+	std::string name;
+	std::string shahash;
+	int64 size;
+};
+
+struct SStartRestore
+{
+	SStartRestore()
+		: ok(false), restore_id(0), status_id(0),
+		log_id(0), process_id(0) {}
+
+	bool ok;
+	int64 restore_id;
+	int64 status_id;
+	int64 log_id;
+	int64 process_id;
+};
+
 class Connector
 {
 public:
@@ -178,9 +224,11 @@ public:
 
 	static std::string getFileBackupsList(EAccessError& access_error);
 	static std::string getFileList(const std::string& path, int* backupid, EAccessError& access_error);
-	static std::string startRestore(const std::string& path, int backupid,
+	static SStartRestore startRestore(const std::string& path, int backupid,
 		const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
 		bool ignore_other_fs, bool follow_symlinks);
+
+	static std::vector<SBackupFile> getFileList(const std::string& path, EAccessError& access_error);
 
 	static bool hasError(void);
 	static bool isBusy(void);

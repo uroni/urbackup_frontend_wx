@@ -242,6 +242,29 @@ std::string getFile(std::string filename)
         return ret;
 }
 
+#ifdef _WIN32
+std::string getFile(std::wstring filename)
+{
+	std::fstream FileBin;
+	FileBin.open(filename.c_str(), std::ios::in | std::ios::binary);
+	if (FileBin.is_open() == false)
+	{
+		return "";
+	}
+	FileBin.seekg(0, std::ios::end);
+	unsigned long FileSize = (unsigned int)std::streamoff(FileBin.tellg());
+	FileBin.seekg(0, std::ios::beg);
+	char* buffer = new char[FileSize + 1];
+
+	FileBin.read(buffer, FileSize);
+	buffer[FileSize] = '\0';
+	std::string ret = buffer;
+	FileBin.close();
+	delete[] buffer;
+	return ret;
+}
+#endif
+
 std::wstring widen(std::string tw);
 
 std::wstring getFileUTF8(string filename)

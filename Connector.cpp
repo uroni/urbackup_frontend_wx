@@ -322,7 +322,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 	}
 }
 
-std::string Connector::startRestore(const std::string& path, int backupid,
+SStartRestore Connector::startRestore(const std::string& path, int backupid,
 	const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
 	bool ignore_other_fs, bool follow_symlinks)
 {
@@ -331,7 +331,7 @@ std::string Connector::startRestore(const std::string& path, int backupid,
 	if (!readTokens())
 	{
 		access_error = EAccessError_NoTokens;
-		return std::string();
+		return SStartRestore();
 	}
 
 	std::string params = "tokens=" + tokens;
@@ -360,17 +360,93 @@ std::string Connector::startRestore(const std::string& path, int backupid,
 				access_error = EAccessError_NoServer;
 			}
 
-			return std::string();
+			return SStartRestore();
 		}
 		else
 		{
-			return res.substr(1);
+			Json::Value root;
+			Json::Reader reader;
+			if (!reader.parse(res.substr(1), root, false))
+			{
+				return SStartRestore();
+			};
+
+			try
+			{
+				SStartRestore ret;
+				ret.ok = root["ok"].asBool();
+				ret.restore_id = root["restore_id"].asInt64();
+				ret.status_id = root["status_id"].asInt64();
+				ret.log_id = root["log_id"].asInt64();
+
+				if (root.isMember("process_id"))
+				{
+					ret.process_id = root["process_id"].asInt64();
+				}
+
+				return ret;
+			}
+			catch (std::runtime_error&)
+			{
+				return SStartRestore();
+			}
 		}
 	}
 	else
 	{
-		return std::string();
+		return SStartRestore();
 	}
+}
+
+std::vector<SBackupFile> Connector::getFileList(const std::string& path, EAccessError& access_error)
+{
+	std::vector<SBackupFile> ret;
+	std::string d = getFileList(path, NULL, access_error);
+	if (d.empty())
+	{
+		error = true;
+		return std::vector<SBackupFile>();
+	}
+
+	Json::Value root;
+	Json::Reader reader;
+	if (!reader.parse(d, root, false))
+	{
+		return ret;
+	}
+
+	try
+	{
+		for (Json::Value::ArrayIndex i = 0; i < root.size(); ++i)
+		{
+			Json::Value file = root[i];
+
+			SBackupFile newFile;
+			newFile.access = file["access"].asInt64();
+			newFile.creat = file["creat"].asInt64();
+			newFile.mod = file["mod"].asInt64();
+			newFile.isdir = file["isdir"].asBool();
+			newFile.name = file["name"].asString();
+			newFile.backupid = file["backupid"].asInt();
+			newFile.backuptime = file["backuptime"].asInt64();
+			if (!newFile.isdir)
+			{
+				newFile.shahash = file["shahash"].asString();
+				newFile.size = file["size"].asInt64();
+			}
+			else
+			{
+				newFile.size = 0;
+			}
+
+			ret.push_back(newFile);
+		}
+	}
+	catch (std::runtime_error&)
+	{
+	}
+
+	return ret;
 }
 
 bool Connector::hasError(void)
@@ -609,6 +685,14 @@ SStatusDetails Connector::getStatusDetails(SConnection* connection)
 			running_processes[i].process_id = json_running_processes[i].get("process_id", 0).asInt64();
 		}
 		ret.running_processes = running_processes;
+
+		Json::Value json_finished_processes = root["finished_processes"];
+		ret.finished_processes.resize(json_finished_processes.size());
+		for (unsigned int i = 0; i < json_finished_processes.size(); ++i)
+		{
+			ret.finished_processes[i].id = json_finished_processes[i]["process_id"].asInt64();
+			ret.finished_processes[i].success = json_finished_processes[i]["success"].asBool();
+		}
 
 		std::vector<SUrBackupServer> servers;
 		Json::Value json_servers = root["servers"];
