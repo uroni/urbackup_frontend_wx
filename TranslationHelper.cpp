@@ -31,3 +31,11 @@ wxString trans_2( wxString str, const wxString& ins1, const wxString& ins2 )
 	return str;
 }
 
+wxString trans_3(wxString str, const wxString & ins1, const wxString & ins2, const wxString & ins3)
+{
+	str.Replace(wxT("_1_"), ins1);
+	str.Replace(wxT("_2_"), ins2);
+	str.Replace(wxT("_3_"), ins3);
+	return str;
+}
+

@@ -1,85 +1,95 @@
 #pragma once
 
 #include "gui/GUIRestoreWindowsComponents.h"
+#include "SelectWindowsComponents.h"
 #include <wx/timer.h>
 #include <wx/thread.h>
-#include "Connector.h"
-#include "SelectWindowsComponents.h"
 
-wxString accessErrorToString(Connector::EAccessError access_error);
-
-class RetrieveComponentBackups : public wxThread
+struct SFileSpec
 {
-public:
-	RetrieveComponentBackups();
-	~RetrieveComponentBackups();
+	std::string path;
+	std::string spec;
+	bool recursive;
+	std::string altPath;
 
-	bool hasSuccess() { return success;  }
-	std::vector<SBackupFile>& getFileList() { return filelist; }
-	Connector::EAccessError getAccessError() {
-		return access_error;
+	bool operator==(const SFileSpec& other) const
+	{
+		return path == other.path
+			&& spec == other.spec
+			&& recursive == other.recursive;
 	}
-
-protected:
-	virtual ExitCode Entry();
-
-private:
-	Connector::EAccessError access_error;
-	bool success;
-	std::vector<SBackupFile> filelist;
 };
 
-class RetrieveComponentConfig : public wxThread
+struct SRestoreComponent
+{
+	SFileSpec currspec;
+	std::vector<SFileSpec> redirected_locations;
+	std::string writerName;
+	VSS_ID writerId;
+	UINT componentIdx;
+	std::string componentName;
+	std::string filesPrefix;
+	UINT filesIdx;
+	std::string logicalPath;
+	VSS_COMPONENT_TYPE type;
+};
+
+class RestoreWindowsComponentsThread : public wxThread
 {
 public:
-	RetrieveComponentConfig();
-	~RetrieveComponentConfig();
+	RestoreWindowsComponentsThread(int backupid,
+		std::vector<SComponent> selected_components, wxString componentConfigDir);
+	~RestoreWindowsComponentsThread();
 
-	void reset(int pbackupid) { 
-		backupid = pbackupid;
-		success = false; }
-	bool hasSuccess() { return success; }
-	Connector::EAccessError getAccessError() {
-		return access_error;
-	}
+	void log(const std::string& message);
+	void log(const wxString& message);
+	void log(const char* message) { log(std::string(message)); }
 
-	SComponent* getRoot() { return &root; }
+	std::vector<std::string> getNewLogMessages();
 
-	std::string getErrMsg() { return errmsg; }
+	wxString getMessage1();
+	wxString getMessage2();
+
+	void setMessage1(wxString msg);
+	void setMessage2(wxString msg);
+
+	int getProgressBarPc();
+	void setProgressBarPc(int pc);
 
 protected:
 	virtual ExitCode Entry();
 
 private:
+	bool restoreFiles(const SRestoreComponent& comp);
+
+	bool getFilespec(IVssWMFiledesc* wmFile, SFileSpec& filespec);
+
+	bool readAltLocations(std::vector<SFileSpec> alt_locations);
+
 	int backupid;
-	Connector::EAccessError access_error;
-	bool success;
-	SComponent root;
-	std::vector<SComponent*> components;
-	std::string errmsg;
+	std::vector<SComponent> selected_components;
+	wxString componentConfigDir;
+	wxCriticalSection log_section;
+	std::vector<std::string> log_messages;
+
+	std::vector<SRestoreComponent> restore_components;
+
+	int progress_bar_pc;
+
+	wxString message1;
+	wxString message2;
 };
 
-class SelectRestoreComponents : public GUISelectRestoreComponents, public wxTimer
+class RestoreWindowsComponents : public GUIRestoreComponents, public wxTimer
 {
 public:
-	SelectRestoreComponents(wxWindow* parent);
+	RestoreWindowsComponents(wxWindow* parent, int backupid,
+		std::vector<SComponent> selected_components, wxString componentConfigDir);
 
 protected:
 	virtual void Notify(void);
-	virtual void onListBoxSelected(wxCommandEvent& event);
-	virtual void onStartRestore(wxCommandEvent& event);
-	virtual void evtOnTreeStateImageClick(wxTreeEvent& event);
-	virtual void onCancel(wxCommandEvent& event);
+	virtual void onOkClick(wxCommandEvent& event);
 
 private:
-	RetrieveComponentBackups retrieveComponentBackups;
-	std::auto_ptr<RetrieveComponentConfig> retrieveComponentConfig;
-	wxImageList* iconList;
-	wxImageList* selectList;
-
-	bool canSelectBackup;
-	bool retrievingBackupConfig;
-
-	std::map<wxTreeItemId, SComponent*> tree_components;
-	std::map<SComponent*, wxTreeItemId> tree_items;
+	RestoreWindowsComponentsThread restoreComponentsThread;
 };

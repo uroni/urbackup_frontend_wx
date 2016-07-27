@@ -29,6 +29,8 @@ struct SComponent
 	std::vector<SComponent*> dependencies;
 };
 
+std::string GetErrorHResErrStr(HRESULT res);
+
 class WindowsComponentReader : public wxThread
 {
 public:
@@ -40,13 +42,12 @@ public:
 	static bool readComponents(const std::string& restoreXml, const std::vector<std::string>& componentXmls, 
 		const std::vector<SComponent>& filter_except, SComponent& root, std::vector<SComponent*>& components, std::string& errmsg);
 
+	static bool wait_for(IVssAsync *vsasync, const std::string& error_prefix, std::string& errmsg);
+
 protected:
 	virtual ExitCode Entry();
 
 private:
-	static std::string GetErrorHResErrStr(HRESULT res);
-
-	static bool wait_for(IVssAsync *vsasync, const std::string& error_prefix, std::string& errmsg);
 
 	std::string errmsg;
 	SComponent root;
@@ -93,3 +94,81 @@ private:
 	std::map<wxTreeItemId, SComponent*> tree_components;
 	std::map<SComponent*, wxTreeItemId> tree_items;
 };
+
+namespace
+{
+	template<typename T>
+	class ReleaseIUnknown
+	{
+	public:
+		ReleaseIUnknown(T*& unknown)
+			: unknown(unknown) {}
+
+		~ReleaseIUnknown() {
+			if (unknown != NULL) {
+				unknown->Release();
+			}
+		}
+
+	private:
+		T*& unknown;
+	};
+
+#define TOKENPASTE2(x, y) x ## y
+#define TOKENPASTE(x, y) TOKENPASTE2(x, y)
+
+#define SCOPED_DECLARE_RELEASE_IUNKNOWN(t, x) t* x = NULL; ReleaseIUnknown<t> TOKENPASTE(ReleaseIUnknown_,__LINE__) (x)
+
+	class FreeBStr
+	{
+	public:
+		FreeBStr(BSTR& bstr)
+			: bstr(bstr)
+		{}
+
+		~FreeBStr() {
+			if (bstr != NULL) {
+				SysFreeString(bstr);
+			}
+		}
+	private:
+		BSTR bstr;
+	};
+
+#define SCOPED_DECLARE_FREE_BSTR(x) BSTR x = NULL; FreeBStr TOKENPASTE(FreeBStr_, __LINE__) (x)
+
+	class FreeComponentInfo
+	{
+	public:
+		FreeComponentInfo(IVssWMComponent* wmComponent, PVSSCOMPONENTINFO& componentInfo)
+			: wmComponent(wmComponent), componentInfo(componentInfo)
+		{}
+
+		~FreeComponentInfo() {
+			if (wmComponent != NULL && componentInfo != NULL) {
+				wmComponent->FreeComponentInfo(componentInfo);
+			}
+		}
+	private:
+		IVssWMComponent* wmComponent;
+		PVSSCOMPONENTINFO componentInfo;
+	};
+
+#define SCOPED_DECLARE_FREE_COMPONENTINFO(c, i) PVSSCOMPONENTINFO i = NULL; FreeComponentInfo TOKENPASTE(FreeComponentInfo_,__LINE__) (c, i);
+
+	std::string convert(VSS_ID id)
+	{
+		WCHAR GuidStr[128] = {};
+		int rc = StringFromGUID2(id, GuidStr, 128);
+		if (rc > 0)
+		{
+			return wxString(std::wstring(GuidStr, rc - 1)).ToStdString();
+		}
+		return std::string();
+	}
+
+	std::string ConvertFromWchar(std::wstring str)
+	{
+		return ConvertToUTF8(str);
+	}
+}

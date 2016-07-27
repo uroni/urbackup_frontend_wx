@@ -87,6 +87,9 @@
     <ClCompile Include="gui\GUIRestoreWindowsComponents.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SelectRestoreWindowsComponents.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="RestoreWindowsComponents.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -161,7 +164,13 @@
     <ClInclude Include="gui\GUIRestoreWindowsComponents.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="SelectRestoreWindowsComponents.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
     <ClInclude Include="RestoreWindowsComponents.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

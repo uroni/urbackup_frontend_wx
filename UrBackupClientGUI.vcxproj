@@ -220,6 +220,7 @@
     <ClCompile Include="Logs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RestoreWindowsComponents.cpp" />
+    <ClCompile Include="SelectRestoreWindowsComponents.cpp" />
     <ClCompile Include="SelectWindowsComponents.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SetupWizard.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RestoreWindowsComponents.h" />
+    <ClInclude Include="SelectRestoreWindowsComponents.h" />
     <ClInclude Include="SelectWindowsComponents.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="SetupWizard.h" />
@@ -256,6 +258,7 @@
     <ClInclude Include="TranslationHelper.h" />
     <ClInclude Include="TrayIcon.h" />
     <ClInclude Include="gui\GUI.h" />
+    <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icon1.ico" />

@@ -40,7 +40,7 @@
 
 #ifdef _WIN32
 #include "SelectWindowsComponents.h"
-#include "RestoreWindowsComponents.h"
+#include "SelectRestoreWindowsComponents.h"
 #endif
 
 #include <wx/apptrait.h>

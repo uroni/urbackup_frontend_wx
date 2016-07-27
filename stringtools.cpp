@@ -1149,6 +1149,32 @@ unsigned long hexToULong(const std::string &data)
 	return return_value;
 }
 
+std::string byteToHex(unsigned char ch)
+{
+	std::string r;
+	r.resize(2);
+	r[0] = hex_array[ch / 16];
+	r[1] = hex_array[ch % 16];
+	return r;
+}
+
+std::string bytesToHex(const unsigned char *b, size_t bsize)
+{
+	std::string r;
+	r.reserve(bsize * 2);
+	for (size_t i = 0; i<bsize; ++i)
+	{
+		r += byteToHex(b[i]);
+	}
+	return r;
+}
+
+std::string bytesToHex(const std::string& data)
+{
+	return bytesToHex(reinterpret_cast<const unsigned char*>(data.data()), data.size());
+}
+
+
 
 string htmldecode(string str, bool html, char xc)
 {

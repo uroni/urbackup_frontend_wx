@@ -15,84 +15,6 @@ extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
-namespace
-{
-	template<typename T>
-	class ReleaseIUnknown
-	{
-	public:
-		ReleaseIUnknown(T*& unknown)
-			: unknown(unknown) {}
-
-		~ReleaseIUnknown() {
-			if (unknown != NULL) {
-				unknown->Release();
-			}
-		}
-
-	private:
-		T*& unknown;
-	};
-
-#define TOKENPASTE2(x, y) x ## y
-#define TOKENPASTE(x, y) TOKENPASTE2(x, y)
-
-#define SCOPED_DECLARE_RELEASE_IUNKNOWN(t, x) t* x = NULL; ReleaseIUnknown<t> TOKENPASTE(ReleaseIUnknown_,__LINE__) (x)
-
-	class FreeBStr
-	{
-	public:
-		FreeBStr(BSTR& bstr)
-			: bstr(bstr)
-		{}
-
-		~FreeBStr() {
-			if (bstr != NULL) {
-				SysFreeString(bstr);
-			}
-		}
-	private:
-		BSTR bstr;
-	};
-
-#define SCOPED_DECLARE_FREE_BSTR(x) BSTR x = NULL; FreeBStr TOKENPASTE(FreeBStr_, __LINE__) (x)
-
-	class FreeComponentInfo
-	{
-	public:
-		FreeComponentInfo(IVssWMComponent* wmComponent, PVSSCOMPONENTINFO& componentInfo)
-			: wmComponent(wmComponent), componentInfo(componentInfo)
-		{}
-
-		~FreeComponentInfo() {
-			if (wmComponent != NULL && componentInfo != NULL) {
-				wmComponent->FreeComponentInfo(componentInfo);
-			}
-		}
-	private:
-		IVssWMComponent* wmComponent;
-		PVSSCOMPONENTINFO componentInfo;
-	};
-
-#define SCOPED_DECLARE_FREE_COMPONENTINFO(c, i) PVSSCOMPONENTINFO i = NULL; FreeComponentInfo TOKENPASTE(FreeComponentInfo_,__LINE__) (c, i);
-
-	std::string convert(VSS_ID id)
-	{
-		WCHAR GuidStr[128] = {};
-		int rc = StringFromGUID2(id, GuidStr, 128);
-		if (rc > 0)
-		{
-			return wxString(std::wstring(GuidStr, rc - 1)).ToStdString();
-		}
-		return std::string();
-	}
-
-	std::string ConvertFromWchar(std::wstring str)
-	{
-		return ConvertToUTF8(str);
-	}
-}
-
 SelectWindowsComponents::SelectWindowsComponents(wxWindow * parent)
 	: GUIWindowsComponents(parent)
 {
@@ -902,7 +824,7 @@ wxThread::ExitCode WindowsComponentReader::Entry()
 	return ExitCode();
 }
 
-std::string WindowsComponentReader::GetErrorHResErrStr(HRESULT res)
+std::string GetErrorHResErrStr(HRESULT res)
 {
 #define CASE_VSS_ERROR(x) case x: return #x
 	switch (res)

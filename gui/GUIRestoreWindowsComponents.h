@@ -21,6 +21,9 @@
 #include <wx/sizer.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
+#include <wx/stattext.h>
+#include <wx/gauge.h>
+#include <wx/textctrl.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -49,6 +52,31 @@ class GUISelectRestoreComponents : public wxDialog
 		
 		GUISelectRestoreComponents( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Select components to restore"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 962,572 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~GUISelectRestoreComponents();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class GUIRestoreComponents
+///////////////////////////////////////////////////////////////////////////////
+class GUIRestoreComponents : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText1;
+		wxStaticText* m_staticText2;
+		wxGauge* m_gauge1;
+		wxTextCtrl* m_textCtrl1;
+		wxButton* m_button3;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void onOkClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		GUIRestoreComponents( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Restoring Windows components"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 836,570 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~GUIRestoreComponents();
 	
 };
 
