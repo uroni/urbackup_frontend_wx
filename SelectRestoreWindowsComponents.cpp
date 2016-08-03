@@ -281,7 +281,7 @@ wxThread::ExitCode RetrieveComponentConfig::Entry()
 	path_maps.push_back(path_map);
 
 	SStartRestore restore_info = Connector::startRestore("windows_components_config", backupid,
-		path_maps, access_error, false, true, false);
+		path_maps, access_error, false, true, false, 0);
 
 	if (!restore_info.ok)
 	{

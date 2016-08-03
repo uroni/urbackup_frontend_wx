@@ -32,6 +32,7 @@ struct SRestoreComponent
 	UINT filesIdx;
 	std::string logicalPath;
 	VSS_COMPONENT_TYPE type;
+	long long int restoreFlags;
 };
 
 class RestoreWindowsComponentsThread : public wxThread
@@ -65,6 +66,9 @@ private:
 	bool getFilespec(IVssWMFiledesc* wmFile, SFileSpec& filespec);
 
 	bool readAltLocations(std::vector<SFileSpec> alt_locations);
+
+	bool stopService(const std::string& service_name);
+	bool startService(const std::string& service_name);
 
 	int backupid;
 	std::vector<SComponent> selected_components;

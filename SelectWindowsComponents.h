@@ -71,6 +71,8 @@ public:
 		SComponent* root, SComponent* node, bool select, bool removeSelect = false);
 	static bool hasSelectedChild(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
 		SComponent* node);
+	static bool allChildrenSelected(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+		SComponent* node);
 
 protected:
 	virtual void Notify(void);
@@ -132,7 +134,7 @@ namespace
 			}
 		}
 	private:
-		BSTR bstr;
+		BSTR& bstr;
 	};
 
 #define SCOPED_DECLARE_FREE_BSTR(x) BSTR x = NULL; FreeBStr TOKENPASTE(FreeBStr_, __LINE__) (x)

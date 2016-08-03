@@ -46,6 +46,13 @@ std::wstring ConvertToUnicode(const std::string &str);
 #define ConvertToUnicode(x)
 #endif
 
+const int64 Connector::restore_flag_no_overwrite=1<<0;
+const int64 Connector::restore_flag_no_reboot_overwrite=1<<1;
+const int64 Connector::restore_flag_ignore_overwrite_failures=1<<2;
+const int64 Connector::restore_flag_mapping_is_alternative=1<<3;
+const int64 Connector::restore_flag_open_all_files_first=1<<4;
+const int64 Connector::restore_flag_reboot_overwrite_all=1<<5;
+
 namespace
 {
 	class ScopedSocket
@@ -324,7 +331,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 
 SStartRestore Connector::startRestore(const std::string& path, int backupid,
 	const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
-	bool ignore_other_fs, bool follow_symlinks)
+	bool ignore_other_fs, bool follow_symlinks, int64 restore_flags)
 {
 	access_error = EAccessError_Ok;
 
@@ -347,6 +354,7 @@ SStartRestore Connector::startRestore(const std::string& path, int backupid,
 	params += std::string("&clean_other=") + (clean_other ? "1" : "0");
 	params += std::string("&ignore_other_fs=") + (ignore_other_fs ? "1" : "0");
 	params += std::string("&follow_symlinks=") + (follow_symlinks ? "1" : "0");
+	params += std::string("&restore_flags=") + convert(restore_flags);
 
 	std::string res = getResponse("DOWNLOAD FILES TOKENS",
 		params, false);

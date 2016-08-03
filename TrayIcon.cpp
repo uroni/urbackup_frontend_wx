@@ -50,6 +50,8 @@
 #define ID_TI_STATUS 112
 #define ID_TI_ACCESS 113
 #define ID_TI_UNINSTALL 114
+#define ID_TI_CONFIG_COMPONENTS 115
+#define ID_TI_RESTORE_COMPONENTS 116
 
 extern MyTimer *timer;
 extern bool backup_is_running;
@@ -275,8 +277,17 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
             {
 				runCommand("uninstall");
 			}
-	    }
+	} break;
 #endif
+	case ID_TI_CONFIG_COMPONENTS:
+	{
+		runCommand("selectWindowsComponents");
+	} break;
+	case ID_TI_RESTORE_COMPONENTS:
+	{
+		runCommand("restoreWindowsComponents");
+	} break;
+
 	}
 }
 
@@ -300,7 +311,12 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 
 	if(timer->hasCapability(ALLOW_TOKEN_AUTHENTICATION))
 	{
-		mnu->Append(ID_TI_ACCESS, _("Access/restore backups"), _("Access/restore backups"));
+		wxString msg = _("Access/restore backups");
+		if (timer->hasCapability(DONT_ALLOW_FILE_RESTORE))
+		{
+			msg = _("Access backups");
+		}
+		mnu->Append(ID_TI_ACCESS, msg, msg);
 		mnu->AppendSeparator();
 	}
 	bool any_prev=false;
@@ -352,6 +368,18 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		mnu->Append(ID_TI_LOGS, _("Logs") );
 		any_prev=true;
 	}
+#ifdef _WIN32
+	if (!timer->hasCapability(DONT_ALLOW_COMPONENT_CONFIG))
+	{
+		mnu->Append(ID_TI_CONFIG_COMPONENTS, _("Configure components to backup"));
+		any_prev = true;
+	}
+	if (!timer->hasCapability(DONT_ALLOW_COMPONENT_RESTORE))
+	{
+		mnu->Append(ID_TI_CONFIG_COMPONENTS, _("Restore components"));
+		any_prev = true;
+	}
+#endif
 	if(any_prev)
 	{
 		mnu->AppendSeparator();

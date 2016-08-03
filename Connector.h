@@ -222,11 +222,19 @@ public:
 		EAccessError_NoTokens
 	};
 
+	static const int64 restore_flag_no_overwrite;
+	static const int64 restore_flag_no_reboot_overwrite;
+	static const int64 restore_flag_ignore_overwrite_failures;
+	static const int64 restore_flag_mapping_is_alternative;
+	static const int64 restore_flag_open_all_files_first;
+	static const int64 restore_flag_reboot_overwrite_all;
+
+
 	static std::string getFileBackupsList(EAccessError& access_error);
 	static std::string getFileList(const std::string& path, int* backupid, EAccessError& access_error);
 	static SStartRestore startRestore(const std::string& path, int backupid,
 		const std::vector<SPathMap>& map_paths, EAccessError& access_error, bool clean_other,
-		bool ignore_other_fs, bool follow_symlinks);
+		bool ignore_other_fs, bool follow_symlinks, int64 restore_flags);
 
 	static std::vector<SBackupFile> getFileList(const std::string& path, EAccessError& access_error);
 

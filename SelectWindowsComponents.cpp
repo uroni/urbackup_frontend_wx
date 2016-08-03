@@ -282,18 +282,14 @@ void SelectWindowsComponents::selectTreeItems(wxTreeCtrl* tree, std::map<SCompon
 		{
 			if (root->children[i]->writerId == node->writerId)
 			{
-				if (select)
+				if (!allChildrenSelected(tree, tree_items, root->children[i]))
 				{
-					tree->SetItemState(tree_items[root->children[i]], 1);
+					tree->SetItemState(tree_items[root->children[i]], 0);
 				}
 				else
 				{
-					if (!hasSelectedChild(tree, tree_items, root->children[i]))
-					{
-						tree->SetItemState(tree_items[root->children[i]], 0);
-					}
+					tree->SetItemState(tree_items[root->children[i]], 1);
 				}
-
 				break;
 			}
 		}
@@ -331,6 +327,29 @@ bool SelectWindowsComponents::hasSelectedChild(wxTreeCtrl* tree, std::map<SCompo
 	}
 
 	return false;
+}
+
+bool SelectWindowsComponents::allChildrenSelected(wxTreeCtrl * tree, std::map<SComponent*, wxTreeItemId>& tree_items, SComponent * node)
+{
+	for (size_t i = 0; i < node->children.size(); ++i)
+	{
+		SComponent* child = node->children[i];
+
+		wxTreeItemId nodeId = tree_items[child];
+
+		if (tree->GetItemState(nodeId)!=1
+			&& tree->GetItemState(nodeId)!= wxTREE_ITEMSTATE_NONE)
+		{
+			return false;
+		}
+
+		if (!allChildrenSelected(tree, tree_items, child))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void SelectWindowsComponents::selectTreeItems(SComponent * node, bool select, bool removeSelect)

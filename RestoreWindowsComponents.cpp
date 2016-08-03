@@ -13,6 +13,24 @@ namespace
 		strupper(&ret);
 		return ret;
 	}
+
+	class ScopedServiceHandle
+	{
+	public:
+		ScopedServiceHandle(SC_HANDLE& h)
+			: h(h)
+		{}
+
+		~ScopedServiceHandle() {
+			if (h != NULL) {
+				CloseServiceHandle(h);
+			}
+		}
+	private:
+		SC_HANDLE& h;
+	};
+
+#define SCOPED_DECLARE_RELEASE_SERVICE_HANDLE(x) SC_HANDLE x = NULL; ScopedServiceHandle TOKENPASTE(ScopedServiceHandle_, __LINE__) (x)
 }
 
 RestoreWindowsComponentsThread::RestoreWindowsComponentsThread(int backupid, std::vector<SComponent> selected_components, wxString componentConfigDir)
@@ -151,6 +169,9 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 
 	log("Selecting components to restore...");
 
+	std::vector<std::string> post_restart_services;
+	std::vector<std::string> stop_services;
+
 	for (UINT i = 0; i < nwriters; ++i)
 	{
 		VSS_ID writerInstance;
@@ -245,6 +266,44 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 			continue;
 		}
 
+		UINT nWriterComponents;
+		hr = backupcom->GetWriterComponentsCount(&nWriterComponents);
+
+		if (hr != S_OK)
+		{
+			log("Error getting writer components failed. VSS error code " + GetErrorHResErrStr(hr));
+			continue;
+		}
+
+		SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssWriterComponentsExt, writerComponents);
+		for (UINT j = 0; j < nWriterComponents; ++j)
+		{
+			SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssWriterComponentsExt, writerComponentsLoc);
+			hr = backupcom->GetWriterComponents(j, &writerComponentsLoc);
+			if (hr != S_OK)
+			{
+				log("Error getting writer component " + convert(j) + " for writer \"" + writerNameStr + "\" failed. VSS error code " + GetErrorHResErrStr(hr));
+				continue;
+			}
+
+			VSS_ID writerCompInstance;
+			VSS_ID writerCompId;
+			hr = writerComponentsLoc->GetWriterInfo(&writerCompInstance, &writerCompId);
+
+			if (hr != S_OK)
+			{
+				log("Error getting writer component info " + convert(j) + " for writer \"" + writerNameStr + "\" failed. VSS error code " + GetErrorHResErrStr(hr));
+				continue;
+			}
+
+			if (writerCompId == writerId)
+			{
+				writerComponents = writerComponentsLoc;
+				writerComponentsLoc = NULL;
+				break;
+			}
+		}
+
 		std::vector<SFileSpec> redirected_locations;
 		for (UINT j = 0; j < nMappings; ++j)
 		{
@@ -306,46 +365,66 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 
 			if (restoreComponent)
 			{
-				/*bool hasCurrComponent = false;
-				for (UINT k = 0; k < nCurrComponents; ++k)
+				UINT writerComponentsCount;
+				hr = writerComponents->GetComponentCount(&writerComponentsCount);
+				if (hr != S_OK)
 				{
-					SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssWMComponent, wmComponent);
-					hr = writerMetadata->GetComponent(k, &wmComponent);
+					log("Error writer component count " + convert(j) + " of writer \"" + writerNameStr + "\" failed. VSS error code " + GetErrorHResErrStr(hr));
+					continue;
+				}
+
+				bool hasCurrComponent = false;
+				for (UINT k = 0; k < writerComponentsCount; ++k)
+				{
+					SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssComponent, vssComponent);
+					hr = writerComponents->GetComponent(k, &vssComponent);
 					if (hr != S_OK)
 					{
 						log("Error getting component " + convert(k) + " of writer \"" + writerNameStr + "\" failed -2. VSS error code " + GetErrorHResErrStr(hr));
 						continue;
 					}
 
-					SCOPED_DECLARE_FREE_COMPONENTINFO(wmComponent, componentInfo);
-					hr = wmComponent->GetComponentInfo(&componentInfo);
+					SCOPED_DECLARE_FREE_BSTR(bstrComponentName);
+					hr = vssComponent->GetComponentName(&bstrComponentName);
 					if (hr != S_OK)
 					{
-						log("Error getting component info " + convert(k) + " of writer \"" + writerNameStr + "\" failed -2. VSS error code " + GetErrorHResErrStr(hr));
+						log("Error getting component name " + convert(k) + " of writer \"" + writerNameStr + "\" failed -2. VSS error code " + GetErrorHResErrStr(hr));
 						continue;
 					}
 
-					std::string currComponentNameStr = ConvertFromWchar(componentInfo->bstrComponentName);
+					std::string currComponentNameStr = ConvertFromWchar(bstrComponentName);
+
+					SCOPED_DECLARE_FREE_BSTR(bstrLogicalPath);
+					vssComponent->GetLogicalPath(&bstrLogicalPath);
 
 					std::string currLogicalPathStr;
-					if (componentInfo->bstrLogicalPath != NULL)
+					if (bstrLogicalPath != NULL)
 					{
-						currLogicalPathStr = ConvertFromWchar(componentInfo->bstrLogicalPath);
+						currLogicalPathStr = ConvertFromWchar(bstrLogicalPath);
 					}
 
 					if (currComponentNameStr == componentNameStr
 						&& currLogicalPathStr == logicalPathStr)
 					{
+						VSS_RESTORE_TARGET target;
+						hr = vssComponent->GetRestoreTarget(&target);
+
+						if (hr != S_OK)
+						{
+							log("Error getting restore target of component \"" + componentNameStr + "\" of writer \"" + writerNameStr + "\" failed -2. VSS error code " + GetErrorHResErrStr(hr));
+							continue;
+						}
+
+						if (target != VSS_RT_ORIGINAL)
+						{
+							log("Alternate restore target is used. Not implemented.");
+							return false;
+						}
+
 						hasCurrComponent = true;
 						break;
 					}
 				}
-
-				if (!hasCurrComponent)
-				{
-					log("Component \"" + componentNameStr + "\" with logical path \"" + logicalPathStr + "\" of writer \"" + writerNameStr + "\" is currently not present on the system. Cannot restore.");
-					continue;
-				}*/
 
 				hr = backupcom->SetSelectedForRestore(writerId, componentInfo->type,
 					componentInfo->bstrLogicalPath, componentInfo->bstrComponentName, true);
@@ -364,6 +443,44 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 				comp.writerName = writerNameStr;
 				comp.logicalPath = logicalPathStr;
 				comp.type = componentInfo->type;
+
+				if (method == VSS_RME_RESTORE_IF_NOT_THERE)
+				{
+					comp.restoreFlags = Connector::restore_flag_open_all_files_first | Connector::restore_flag_no_overwrite | Connector::restore_flag_mapping_is_alternative;
+				}
+				else if (method == VSS_RME_RESTORE_IF_CAN_REPLACE)
+				{
+					comp.restoreFlags = Connector::restore_flag_open_all_files_first | Connector::restore_flag_no_reboot_overwrite;
+				}
+				else if (method == VSS_RME_STOP_RESTORE_START
+					|| method == VSS_RME_RESTORE_TO_ALTERNATE_LOCATION
+					|| method == VSS_RME_RESTORE_STOP_START )
+				{
+					if (method == VSS_RME_STOP_RESTORE_START
+						&& service!=NULL)
+					{
+						stop_services.push_back(ConvertFromWchar(service));
+					}
+					else if (method == VSS_RME_RESTORE_STOP_START
+						&& service!=NULL)
+					{
+						post_restart_services.push_back(ConvertFromWchar(service));
+					}
+					comp.restoreFlags = Connector::restore_flag_no_reboot_overwrite;
+				}
+				else if (method == VSS_RME_RESTORE_AT_REBOOT)
+				{
+					comp.restoreFlags = Connector::restore_flag_reboot_overwrite_all;
+				}
+				else if (method == VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE)
+				{
+					comp.restoreFlags = 0;
+				}
+				else
+				{
+					log("Unhandled restore method "+convert(method)+" of component \"" + componentNameStr + "\" with logical path \"" + logicalPathStr + "\" of writer \"" + writerNameStr + "\".");
+					return false;
+				}
 
 				for (UINT k = 0; k < componentInfo->cFileCount; ++k)
 				{
@@ -461,6 +578,16 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 		return false;
 	}
 
+	for (size_t i = 0; i < stop_services.size(); ++i)
+	{
+		log("Stopping service \"" + stop_services[i] + "\"...");
+		if (!stopService(stop_services[i]))
+		{
+			log("Failed to stop service \"" + stop_services[i] + "\"");
+			return false;
+		}
+	}
+
 	bool has_restore_err = false;
 
 	for (size_t i = 0; i < restore_components.size(); ++i)
@@ -511,6 +638,15 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 		}
 	}
 
+	for (size_t i = 0; i < stop_services.size(); ++i)
+	{
+		log("Starting service \"" + stop_services[i] + "\"...");
+		if (!startService(stop_services[i]))
+		{
+			log("Failed to start service \"" + stop_services[i] + "\". Maybe start it manually?");
+		}
+	}
+
 	log("Finalizing restore operation (post restore)...");
 
 	SCOPED_DECLARE_RELEASE_IUNKNOWN(IVssAsync, post_wait);
@@ -526,6 +662,24 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 	{
 		log(werrmsg);
 		return false;
+	}
+
+	for (size_t i = 0; i < post_restart_services.size(); ++i)
+	{
+		log("Restarting service \"" + post_restart_services[i] + "\"...");
+
+		if (stopService(post_restart_services[i]))
+		{
+			if (!startService(post_restart_services[i]))
+			{
+				log("Failed to start service \"" + post_restart_services[i] + "\" after stopping it. Maybe start it manually?");
+			}
+		}
+		else
+		{
+			log("Failed to stop service \"" + post_restart_services[i] + "\"");
+			return false;
+		}
 	}
 
 	setMessage1(_("Restore finished"));
@@ -561,7 +715,7 @@ bool RestoreWindowsComponentsThread::restoreFiles(const SRestoreComponent& comp)
 	setMessage2(trans_2(_("Restoring component \"_1_\" of writer \"_2_\". Indexing..."), wxString(comp.componentName), wxString(comp.writerName)) );
 	
 	Connector::EAccessError access_error;
-	SStartRestore restore = Connector::startRestore(path, backupid, map_paths, access_error, false, true, false);
+	SStartRestore restore = Connector::startRestore(path, backupid, map_paths, access_error, false, true, false, comp.restoreFlags);
 
 	if (!restore.ok)
 	{
@@ -746,4 +900,165 @@ void RestoreWindowsComponents::Notify(void)
 void RestoreWindowsComponents::onOkClick(wxCommandEvent & event)
 {
 	Close();
+}
+
+bool RestoreWindowsComponentsThread::stopService(const std::string& service_name)
+{
+	ULONGLONG startTime = GetTickCount64();
+
+	SCOPED_DECLARE_RELEASE_SERVICE_HANDLE(hsc);
+	hsc = OpenSCManagerW(
+		NULL, NULL, SC_MANAGER_ALL_ACCESS);
+
+	if (NULL == hsc)
+	{
+		log("Could not open service manager");
+		return false;
+	}
+	SCOPED_DECLARE_RELEASE_SERVICE_HANDLE(service);
+	service = OpenServiceW(
+		hsc, ConvertToUnicode(service_name).c_str(), 
+		SERVICE_STOP |	SERVICE_QUERY_STATUS);
+
+	if (service == NULL)
+	{
+		log("Could not open handle to service.");
+		return false;
+	}
+
+	SERVICE_STATUS_PROCESS ssp;
+	DWORD bytesNeeded;
+	if (!QueryServiceStatusEx(service,
+		SC_STATUS_PROCESS_INFO,	(LPBYTE)&ssp,
+		sizeof(SERVICE_STATUS_PROCESS),	&bytesNeeded))
+	{
+		log("QueryServiceStatusEx failed");
+		return false;
+	}
+
+	if (ssp.dwCurrentState == SERVICE_STOPPED)
+	{
+		return true;
+	}
+
+	while (ssp.dwCurrentState == SERVICE_STOP_PENDING)
+	{
+		DWORD dwWaitTime = ssp.dwWaitHint / 10;
+
+		if (dwWaitTime < 1000)
+			dwWaitTime = 1000;
+		else if (dwWaitTime > 10000)
+			dwWaitTime = 10000;
+
+		Sleep(dwWaitTime);
+
+		if (!QueryServiceStatusEx(
+			service,
+			SC_STATUS_PROCESS_INFO,	(LPBYTE)&ssp,
+			sizeof(SERVICE_STATUS_PROCESS),	&bytesNeeded))
+		{
+			log("QueryServiceStatusEx failed");
+			return false;
+		}
+
+		if (ssp.dwCurrentState == SERVICE_STOPPED)
+		{
+			return true;
+		}
+
+		if (GetTickCount64() - startTime > 30000)
+		{
+			log("Timeout while waiting for service to stop. Stopping service failed.");
+			return false;
+		}
+	}
+
+	if (!ControlService(
+		service, SERVICE_CONTROL_STOP,	(LPSERVICE_STATUS)&ssp))
+	{
+		log("ControlService failed");
+		return false;
+	}
+
+	while (ssp.dwCurrentState != SERVICE_STOPPED)
+	{
+		DWORD dwWaitTime = ssp.dwWaitHint / 10;
+
+		if (dwWaitTime < 1000)
+			dwWaitTime = 1000;
+		else if (dwWaitTime > 10000)
+			dwWaitTime = 10000;
+
+		Sleep(dwWaitTime);
+
+		if (!QueryServiceStatusEx(
+			service, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssp,
+			sizeof(SERVICE_STATUS_PROCESS),
+			&bytesNeeded))
+		{
+			log("QueryServiceStatusEx failed");
+			return false;
+		}
+
+		if (ssp.dwCurrentState == SERVICE_STOPPED)
+		{
+			return true;
+		}
+
+		if (GetTickCount64() - startTime > 30000)
+		{
+			log("Timeout while waiting for service to stop. Stopping service failed.");
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool RestoreWindowsComponentsThread::startService(const std::string & service_name)
+{
+	ULONGLONG startTime = GetTickCount64();
+
+	SCOPED_DECLARE_RELEASE_SERVICE_HANDLE(hsc);
+	hsc = OpenSCManagerW(NULL, NULL, SC_MANAGER_ALL_ACCESS);
+
+	if (NULL == hsc)
+	{
+		log("Could not open service manager");
+		return false;
+	}
+	SCOPED_DECLARE_RELEASE_SERVICE_HANDLE(service);
+	service = OpenServiceW(	hsc, ConvertToUnicode(service_name).c_str(),
+		SERVICE_START | SERVICE_QUERY_STATUS);
+
+	if (service == NULL)
+	{
+		log("Could not open handle to service.");
+		return false;
+	}
+
+	SERVICE_STATUS_PROCESS ssp;
+	DWORD bytesNeeded;
+	if (!QueryServiceStatusEx(service,
+		SC_STATUS_PROCESS_INFO, (LPBYTE)&ssp,
+		sizeof(SERVICE_STATUS_PROCESS), &bytesNeeded))
+	{
+		log("QueryServiceStatusEx failed");
+		return false;
+	}
+
+	if (ssp.dwCurrentState == SERVICE_RUNNING
+		|| ssp.dwCurrentState == SERVICE_START_PENDING)
+	{
+		return true;
+	}
+
+	if (!StartServiceW(
+		service, 0, NULL))
+	{
+		log("StartService failed");
+		return false;
+	}
+
+	return true;
 }
