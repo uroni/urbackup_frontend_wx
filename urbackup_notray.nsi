@@ -196,19 +196,13 @@ Section "install"
 	File "data\build_revision.txt"
 	
 	${IfNot} ${RunningX64} 
-		File "data\args_server03.txt"
-		File "data\args_xp.txt"
 		File "data\fileservplugin.dll"
 		File "data\fsimageplugin.dll"
 		File "data\urbackup.dll"
-		File "data\urbackup_server03.dll"
-		File "data\urbackup_xp.dll"
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
 		File "data\sysvol_test.exe"
 	${Else}
-		File "data\args_server03.txt"
-		File "data_x64\urbackup_server03.dll"
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
@@ -282,57 +276,10 @@ Section "install"
 	SetOutPath "$INSTDIR\urbackup"
 	
 	CreateDirectory "$INSTDIR\urbackup\data"
-	
-	${IfNot} ${RunningX64}
-		${If} ${IsWinXP}
-			StrCpy $0 "$INSTDIR\args_xp.txt" ;Path of copy file from
-			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
-			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-			System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-			Pop $0
-			;SetRebootFlag true
-		${EndIf}
-		${If} ${IsWin2000}
-			StrCpy $0 "$INSTDIR\args_xp.txt" ;Path of copy file from
-			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
-			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-			System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-			Pop $0
-			;SetRebootFlag true
-		${EndIf}
-		${If} ${IsWin2003}
-			StrCpy $0 "$INSTDIR\args_server03.txt" ;Path of copy file from
-			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
-			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-			System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-			Pop $0
-			;SetRebootFlag true
-		${EndIf}
-	${Else}
-		${If} ${IsWin2003}
-		${OrIf} ${IsWinXP}
-			StrCpy $0 "$INSTDIR\args_server03.txt" ;Path of copy file from
-			StrCpy $1 "$INSTDIR\args.txt"   ;Path of copy file to
-			StrCpy $2 0 ; only 0 or 1, set 0 to overwrite file if it already exists
-			System::Call 'kernel32::CopyFile(t r0, t r1, b r2) l'
-			Pop $0
-			;SetRebootFlag true
-		${EndIf}
-	${EndIf}
-	
-	${If} ${IsWinXP}
-		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
-		Pop $0
-		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
-	${ElseIf} ${IsWin2003}
-		nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe"
-		Pop $0
-		nsisFirewallW::AddAuthorizedApplication "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
-	${Else}
-		liteFirewallW::RemoveRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
-		Pop $0
-		liteFirewallW::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
-	${EndIf}
+		
+	liteFirewallW::RemoveRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
+	Pop $0
+	liteFirewallW::AddRule "$INSTDIR\UrBackupClientBackend.exe" "UrBackupClientBackend"
 	Pop $0
 	
 	IfFileExists "$INSTDIR\prefilebackup.bat" next_s_pfb do_copy_pfb
