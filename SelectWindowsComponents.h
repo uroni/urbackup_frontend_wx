@@ -21,7 +21,7 @@ struct SComponent
 	std::string name;
 	std::string logicalPathComponent;
 	std::string logicalPath;
-	std::string tooltip;
+	std::string displayName;
 	bool selectable;
 	bool writer;
 	std::vector<char> icon;

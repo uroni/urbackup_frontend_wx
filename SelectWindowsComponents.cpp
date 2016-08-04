@@ -79,79 +79,80 @@ void SelectWindowsComponents::Notify(void)
 
 		m_treeCtrl1->SetImageList(iconList);
 
-		std::string componentsStr;
-		if (settings->getValue("vss_select_components", &componentsStr)
-			|| settings->getValue("vss_select_components_def", &componentsStr))
+		std::string componentsStr = "default=1";
+		if (!settings->getValue("vss_select_components", &componentsStr))
 		{
-			std::map<std::string, std::string> comps;
-			ParseParamStrHttp(componentsStr, &comps);
+			settings->getValue("vss_select_components_def", &componentsStr);
+		}
+		
+		std::map<std::string, std::string> comps;
+		ParseParamStrHttp(componentsStr, &comps);
 
-			bool has_comps = true;
-			if (!comps["all"].empty()
-				&& comps["all"] != "0")
+		bool has_comps = true;
+		if (!comps["all"].empty()
+			&& comps["all"] != "0")
+		{
+			has_comps = false;
+
+			for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
+				it != tree_components.end(); ++it)
 			{
-				has_comps = false;
-
-				for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
-					it != tree_components.end(); ++it)
+				if (m_treeCtrl1->GetItemState(it->first) == 0)
 				{
-					if (m_treeCtrl1->GetItemState(it->first) == 0)
-					{
-						selectTreeItems(it->second, true);
-					}
+					selectTreeItems(it->second, true);
 				}
 			}
-			else if (!comps["default"].empty()
-				&& comps["default"] != "0")
-			{
-				comps["writer_0"] = "{a65faa63-5ea8-4ebc-9dbd-a0c4db26912a}"; //MS SQL Server 2014
-				comps["writer_1"] = "{76fe1ac4-15f7-4bcd-987e-8e1acb462fb7}"; //MS Exchange 2010
-			}
+		}
+		else if (!comps["default"].empty()
+			&& comps["default"] != "0")
+		{
+			comps["writer_0"] = "{a65faa63-5ea8-4ebc-9dbd-a0c4db26912a}"; //MS SQL Server 2014
+			comps["writer_1"] = "{76fe1ac4-15f7-4bcd-987e-8e1acb462fb7}"; //MS Exchange 2010
+		}
 
-			if(has_comps)
+		if(has_comps)
+		{
+			for (std::map<std::string, std::string>::iterator it = comps.begin();
+				it != comps.end(); ++it)
 			{
-				for (std::map<std::string, std::string>::iterator it = comps.begin();
-					it != comps.end(); ++it)
+				if (next(it->first, 0, "writer_"))
 				{
-					if (next(it->first, 0, "writer_"))
+					std::string idx = getafter("writer_", it->first);
+
+					std::string componentName = comps["name_" + idx];
+					std::string logicalPath = comps["path_" + idx];
+					VSS_ID writerId;
+					HRESULT hr = IIDFromString(ConvertToUnicode(comps["writer_" + idx]).c_str(), &writerId);
+
+					if (hr == S_OK)
 					{
-						std::string idx = getafter("writer_", it->first);
-
-						std::string componentName = comps["name_" + idx];
-						std::string logicalPath = comps["path_" + idx];
-						VSS_ID writerId;
-						HRESULT hr = IIDFromString(ConvertToUnicode(comps["writer_" + idx]).c_str(), &writerId);
-
-						if (hr == S_OK)
+						for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
+							it != tree_components.end(); ++it)
 						{
-							for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
-								it != tree_components.end(); ++it)
+							if (!it->second->is_root
+								&& it->second->writerId == writerId
+								&& (it->second->name == componentName || (componentName.empty() && it->second->writer) )
+								&& it->second->logicalPath == logicalPath
+								&& m_treeCtrl1->GetItemState(it->first)==0)
 							{
-								if (!it->second->is_root
-									&& it->second->writerId == writerId
-									&& (it->second->name == componentName || (componentName.empty() && it->second->writer) )
-									&& it->second->logicalPath == logicalPath
-									&& m_treeCtrl1->GetItemState(it->first)==0)
+								selectTreeItems(it->second, true);
+
+								if (!it->second->children.empty())
 								{
-									selectTreeItems(it->second, true);
-
-									if (!it->second->children.empty())
-									{
-										wxTreeItemId nodeId = tree_items[it->second];
-										m_treeCtrl1->ExpandAllChildren(nodeId);
-									}
-
-									SComponent* node = it->second->parent;
-									while (node != NULL)
-									{
-										wxTreeItemId nodeId = tree_items[node];
-										m_treeCtrl1->Expand(nodeId);
-										node = node->parent;
-									}
-									break;
+									wxTreeItemId nodeId = tree_items[it->second];
+									m_treeCtrl1->ExpandAllChildren(nodeId);
 								}
-							}							
-						}
+
+								SComponent* node = it->second->parent;
+								while (node != NULL)
+								{
+									wxTreeItemId nodeId = tree_items[node];
+									m_treeCtrl1->Expand(nodeId);
+									node = node->parent;
+								}
+								break;
+							}
+						}							
 					}
 				}
 			}
@@ -168,7 +169,7 @@ void SelectWindowsComponents::evtOnTreeItemGetTooltip(wxTreeEvent & event)
 		return;
 	}
 
-	std::string tooltip =component->tooltip;
+	std::string tooltip =component->name;
 	if (!tooltip.empty())
 	{
 		event.SetToolTip(tooltip);
@@ -260,7 +261,13 @@ void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconL
 			checked = 0;
 		}
 
-		wxTreeItemId childId = tree->AppendItem(treeId, child->name, image);
+		std::string name = child->displayName;
+		if (name.empty())
+		{
+			name = child->name;
+		}
+
+		wxTreeItemId childId = tree->AppendItem(treeId, name, image);
 
 		if (checked >= 0)
 		{
@@ -434,8 +441,7 @@ void SelectWindowsComponents::collectComponents(SComponent * node, size_t & idx,
 		}
 	}
 
-	if(node== componentReader.getRoot()
-		|| state == 1 )
+	if( state != wxTREE_ITEMSTATE_NONE )
 	{
 		for (size_t i = 0; i < node->children.size(); ++i)
 		{
@@ -647,7 +653,7 @@ bool WindowsComponentReader::readComponents(const std::string& restoreXml, const
 
 			if (componentInfo->bstrCaption != NULL)
 			{
-				component->tooltip = ConvertFromWchar(componentInfo->bstrCaption);
+				component->displayName = ConvertFromWchar(componentInfo->bstrCaption);
 			}
 
 			if (componentInfo->cbIcon > 0)
@@ -709,13 +715,7 @@ bool WindowsComponentReader::readComponents(const std::string& restoreXml, const
 			else if (!components[i]->writer
 				&& toks.size() + 1 == depth)
 			{
-				std::string parentPath;
-				if (!toks.empty()
-					&& components[i]->logicalPath.size()>toks[toks.size() - 1].size())
-				{
-					parentPath = components[i]->logicalPath.substr(0, components[i]->logicalPath.size() - toks[toks.size() - 1].size() - 1);
-				}
-				parent = getComponent(&root, components[i]->writerId, parentPath);
+				parent = getComponent(&root, components[i]->writerId, components[i]->logicalPath);
 			}
 
 			if (parent != NULL)
@@ -728,6 +728,14 @@ bool WindowsComponentReader::readComponents(const std::string& restoreXml, const
 						off = parent->logicalPath.size() + 1;
 					}
 					components[i]->logicalPathComponent = components[i]->logicalPath.substr(off);
+				}
+				if (components[i]->logicalPathComponent.empty())
+				{
+					components[i]->logicalPathComponent = components[i]->name;
+				}
+				else
+				{
+					components[i]->logicalPathComponent += "\\" + components[i]->name;
 				}
 				components[i]->parent = parent;
 				parent->children.push_back(components[i]);
@@ -1041,7 +1049,7 @@ SComponent * WindowsComponentReader::getComponent(SComponent* node, VSS_ID write
 			{
 				if (remainingPath.empty())
 				{
-					return node;
+					return node->children[i];
 				}
 				else
 				{
