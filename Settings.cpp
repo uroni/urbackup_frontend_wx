@@ -728,7 +728,7 @@ std::string Settings::mergeNewSettings(CFileSettingsReader * settings, const std
 
 	std::vector<std::wstring> keys = settings->getKeys();
 
-	for (std::map<std::string, std::string>::const_iterator it = n_vals.cbegin(); it != n_vals.cend(); ++it)
+	for (std::map<std::string, std::string>::const_iterator it = n_vals.begin(); it != n_vals.end(); ++it)
 	{
 		const std::string &nkey = it->first;
 		std::string def_value;
