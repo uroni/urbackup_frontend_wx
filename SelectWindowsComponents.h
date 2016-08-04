@@ -14,7 +14,7 @@
 struct SComponent
 {
 	SComponent()
-		: is_root(false) { }
+		: is_root(false), parent(NULL){ }
 
 	bool is_root;
 	VSS_ID writerId;
@@ -27,6 +27,7 @@ struct SComponent
 	std::vector<char> icon;
 	std::vector<SComponent*> children;
 	std::vector<SComponent*> dependencies;
+	SComponent* parent;
 };
 
 std::string GetErrorHResErrStr(HRESULT res);
@@ -72,7 +73,7 @@ public:
 	static bool hasSelectedChild(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
 		SComponent* node);
 	static bool allChildrenSelected(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
-		SComponent* node);
+		SComponent* node, bool& has_selectable_child);
 
 protected:
 	virtual void Notify(void);

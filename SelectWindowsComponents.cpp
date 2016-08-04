@@ -85,9 +85,12 @@ void SelectWindowsComponents::Notify(void)
 			std::map<std::string, std::string> comps;
 			ParseParamStrHttp(componentsStr, &comps);
 
+			bool has_comps = true;
 			if (!comps["all"].empty()
 				&& comps["all"] != "0")
 			{
+				has_comps = false;
+
 				for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
 					it != tree_components.end(); ++it)
 				{
@@ -97,7 +100,14 @@ void SelectWindowsComponents::Notify(void)
 					}
 				}
 			}
-			else
+			else if (!comps["default"].empty()
+				&& comps["default"] != "0")
+			{
+				comps["writer_0"] = "{a65faa63-5ea8-4ebc-9dbd-a0c4db26912a}"; //MS SQL Server 2014
+				comps["writer_1"] = "{76fe1ac4-15f7-4bcd-987e-8e1acb462fb7}"; //MS Exchange 2010
+			}
+
+			if(has_comps)
 			{
 				for (std::map<std::string, std::string>::iterator it = comps.begin();
 					it != comps.end(); ++it)
@@ -116,22 +126,27 @@ void SelectWindowsComponents::Notify(void)
 							for (std::map<wxTreeItemId, SComponent*>::iterator it = tree_components.begin();
 								it != tree_components.end(); ++it)
 							{
-								if (it->second->writerId == writerId
+								if (!it->second->is_root
+									&& it->second->writerId == writerId
 									&& (it->second->name == componentName || (componentName.empty() && it->second->writer) )
 									&& it->second->logicalPath == logicalPath
 									&& m_treeCtrl1->GetItemState(it->first)==0)
 								{
-									if (!componentName.empty())
-									{
-										selectTreeItems(it->second, true);
-									}
-									else
+									selectTreeItems(it->second, true);
+
+									if (!it->second->children.empty())
 									{
 										wxTreeItemId nodeId = tree_items[it->second];
-										m_treeCtrl1->SetItemState(nodeId, 1);
-										m_treeCtrl1->Toggle(nodeId);
+										m_treeCtrl1->ExpandAllChildren(nodeId);
 									}
 
+									SComponent* node = it->second->parent;
+									while (node != NULL)
+									{
+										wxTreeItemId nodeId = tree_items[node];
+										m_treeCtrl1->Expand(nodeId);
+										node = node->parent;
+									}
 									break;
 								}
 							}							
@@ -178,8 +193,16 @@ void SelectWindowsComponents::onOkClick(wxCommandEvent & event)
 	std::map<std::string, std::string> n_vals;
 
 	std::string res;
-	size_t idx = 0;
-	collectComponents(componentReader.getRoot(), idx, res);
+	if (m_treeCtrl1->GetItemState(tree_items[componentReader.getRoot()]) == 1)
+	{
+		res = "all=1";
+	}
+	else
+	{
+		size_t idx = 0;
+		collectComponents(componentReader.getRoot(), idx, res);
+	}
+
 	n_vals["vss_select_components"] = res;
 
 	Connector::updateSettings(Settings::mergeNewSettings(settings, n_vals));
@@ -255,25 +278,24 @@ void SelectWindowsComponents::selectTreeItems(wxTreeCtrl* tree, std::map<SCompon
 {
 	wxTreeItemId nodeId = tree_items[node];
 
+	int new_itemstate=-5;
 	if (tree->GetItemState(nodeId) != wxTREE_ITEMSTATE_NONE)
 	{
 		if (select && removeSelect)
 		{
 			tree->SetItemState(nodeId, wxTREE_ITEMSTATE_NONE);
+			new_itemstate = wxTREE_ITEMSTATE_NONE;
 		}
 		else
 		{
-			tree->SetItemState(nodeId, select ? 1 : 0);
+			new_itemstate = select ? 1 : 0;
+			tree->SetItemState(nodeId, new_itemstate);			
 		}
 	}
 	else if (!select && !node->writer && node->selectable)
 	{
 		tree->SetItemState(nodeId, 0);
-	}
-
-	if (select && !node->writer && node->selectable)
-	{
-		removeSelect = true;
+		new_itemstate = 0;
 	}
 
 	if (!node->writer)
@@ -282,16 +304,27 @@ void SelectWindowsComponents::selectTreeItems(wxTreeCtrl* tree, std::map<SCompon
 		{
 			if (root->children[i]->writerId == node->writerId)
 			{
-				if (!allChildrenSelected(tree, tree_items, root->children[i]))
+				bool has_selectable_child = false;
+				if (!allChildrenSelected(tree, tree_items, root->children[i], has_selectable_child))
 				{
 					tree->SetItemState(tree_items[root->children[i]], 0);
 				}
-				else
+
+				if (!has_selectable_child)
 				{
-					tree->SetItemState(tree_items[root->children[i]], 1);
+					tree->SetItemState(tree_items[root->children[i]], select ? 1 : 0);
 				}
 				break;
 			}
+		}
+	}
+
+	if (node != root)
+	{
+		bool has_selectable_child = false;
+		if (!allChildrenSelected(tree, tree_items, root, has_selectable_child))
+		{
+			tree->SetItemState(tree_items[root], 0);
 		}
 	}
 
@@ -302,7 +335,13 @@ void SelectWindowsComponents::selectTreeItems(wxTreeCtrl* tree, std::map<SCompon
 
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
-		selectTreeItems(tree, tree_items, root, node->children[i], select, removeSelect);
+		bool curr_remove_select = select && !node->writer && node->selectable;
+		selectTreeItems(tree, tree_items, root, node->children[i], select, curr_remove_select);
+	}
+
+	if (new_itemstate != -5)
+	{
+		tree->SetItemState(nodeId, new_itemstate);
 	}
 }
 
@@ -329,7 +368,8 @@ bool SelectWindowsComponents::hasSelectedChild(wxTreeCtrl* tree, std::map<SCompo
 	return false;
 }
 
-bool SelectWindowsComponents::allChildrenSelected(wxTreeCtrl * tree, std::map<SComponent*, wxTreeItemId>& tree_items, SComponent * node)
+bool SelectWindowsComponents::allChildrenSelected(wxTreeCtrl * tree, std::map<SComponent*, wxTreeItemId>& tree_items,
+	SComponent * node, bool& has_selectable_child)
 {
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
@@ -337,13 +377,18 @@ bool SelectWindowsComponents::allChildrenSelected(wxTreeCtrl * tree, std::map<SC
 
 		wxTreeItemId nodeId = tree_items[child];
 
+		if (tree->GetItemState(nodeId) != wxTREE_ITEMSTATE_NONE)
+		{
+			has_selectable_child = true;
+		}
+
 		if (tree->GetItemState(nodeId)!=1
 			&& tree->GetItemState(nodeId)!= wxTREE_ITEMSTATE_NONE)
 		{
 			return false;
 		}
 
-		if (!allChildrenSelected(tree, tree_items, child))
+		if (!allChildrenSelected(tree, tree_items, child, has_selectable_child))
 		{
 			return false;
 		}
@@ -551,6 +596,7 @@ bool WindowsComponentReader::readComponents(const std::string& restoreXml, const
 			component->name = writerNameStr;
 			component->selectable = true;
 			component->writer = true;
+			component->parent = &root;
 
 			components.push_back(component);
 
@@ -682,6 +728,7 @@ bool WindowsComponentReader::readComponents(const std::string& restoreXml, const
 					}
 					components[i]->logicalPathComponent = components[i]->logicalPath.substr(off);
 				}
+				components[i]->parent = parent;
 				parent->children.push_back(components[i]);
 			}
 		}

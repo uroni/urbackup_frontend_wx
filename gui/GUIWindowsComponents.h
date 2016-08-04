@@ -17,10 +17,8 @@
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/string.h>
-#include <wx/stattext.h>
-#include <wx/textctrl.h>
-#include <wx/sizer.h>
 #include <wx/button.h>
+#include <wx/sizer.h>
 #include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -35,8 +33,6 @@ class GUIWindowsComponents : public wxDialog
 	
 	protected:
 		wxTreeCtrl* m_treeCtrl1;
-		wxStaticText* m_staticText1;
-		wxTextCtrl* m_textCtrl1;
 		wxButton* m_button1;
 		wxButton* m_button2;
 		

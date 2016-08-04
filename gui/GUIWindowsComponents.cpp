@@ -19,19 +19,6 @@ GUIWindowsComponents::GUIWindowsComponents( wxWindow* parent, wxWindowID id, con
 	m_treeCtrl1 = new wxTreeCtrl( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE );
 	bSizer1->Add( m_treeCtrl1, 10, wxALL|wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer3;
-	bSizer3 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText1 = new wxStaticText( this, wxID_ANY, _("Numer of file backups after which to run a virtual full file backup:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText1->Wrap( -1 );
-	bSizer3->Add( m_staticText1, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	m_textCtrl1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer3->Add( m_textCtrl1, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	bSizer1->Add( bSizer3, 1, wxEXPAND, 5 );
-	
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxHORIZONTAL );
 	
