@@ -14,6 +14,7 @@
 extern wxString res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
+extern std::string g_res_path;
 
 SelectWindowsComponents::SelectWindowsComponents(wxWindow * parent)
 	: GUIWindowsComponents(parent)
