@@ -376,7 +376,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 	}
 	if (!timer->hasCapability(DONT_ALLOW_COMPONENT_RESTORE))
 	{
-		mnu->Append(ID_TI_CONFIG_COMPONENTS, _("Restore components"));
+		mnu->Append(ID_TI_RESTORE_COMPONENTS, _("Restore components"));
 		any_prev = true;
 	}
 #endif

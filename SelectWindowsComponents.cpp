@@ -1036,7 +1036,7 @@ SComponent * WindowsComponentReader::getComponent(SComponent* node, VSS_ID write
 		std::string prevRemainingPath = remainingPath;
 		remainingPath = getafter("\\", remainingPath);
 
-		if (nextPath.empty())
+		if (remainingPath.empty())
 		{
 			nextPath += prevRemainingPath;
 			remainingPath.clear();
