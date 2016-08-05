@@ -27,11 +27,11 @@ SelectWindowsComponents::SelectWindowsComponents(wxWindow * parent)
 	icons[0] = wxIcon(unchecked_xpm);
 	icons[1] = wxIcon(checked_xpm);
 
-	int width = icons[0].GetWidth(),
-		height = icons[0].GetHeight();
+	icon_width = icons[0].GetWidth();
+	icon_height = icons[0].GetHeight();
 
-	selectList = new wxImageList(width, height, true);
-	iconList = new wxImageList(width, height, true);
+	selectList = new wxImageList(icon_width, icon_height, true);
+	iconList = new wxImageList(icon_width, icon_height, true);
 
 	for (size_t i = 0; i < WXSIZEOF(icons); i++)
 		selectList->Add(icons[i]);
@@ -73,7 +73,7 @@ void SelectWindowsComponents::Notify(void)
 		tree_items[root] = rootId;
 
 		addComponents(m_treeCtrl1, iconList, rootId, root, tree_components,
-			tree_items);
+			tree_items, icon_width, icon_height);
 
 		m_treeCtrl1->Toggle(rootId);
 
@@ -219,7 +219,7 @@ void SelectWindowsComponents::onCancel(wxCommandEvent & event)
 
 void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconList, wxTreeItemId treeId,
 	SComponent * node, std::map<wxTreeItemId, SComponent*>& tree_components,
-	std::map<SComponent*, wxTreeItemId>& tree_items)
+	std::map<SComponent*, wxTreeItemId>& tree_items, int icon_width, int icon_height)
 {
 	for (size_t i = 0; i < node->children.size(); ++i)
 	{
@@ -241,9 +241,17 @@ void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconL
 					out.write(child->icon.data(), child->icon.size());
 					out.close();
 
-					wxIcon icon(tempFile.GetFullPath(), wxBITMAP_TYPE_ICO);
+					wxIcon icon(tempFile.GetFullPath(), wxBITMAP_TYPE_ICO, icon_width, icon_height);
 					image = iconList->GetImageCount();
-					iconList->Add(icon);
+					if (icon.GetWidth() == icon_width
+						&& icon.GetHeight()==icon_height)
+					{
+						iconList->Add(icon);
+					}
+					else
+					{
+						iconList->Add(wxBitmap(wxBitmap(icon).ConvertToImage().Rescale(icon_width, icon_height)));
+					}
 				}
 
 				DeleteFile(tempFile.GetFullPath().wc_str());
@@ -277,7 +285,8 @@ void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconL
 		tree_components[childId] = child;
 		tree_items[child] = childId;
 
-		addComponents(tree, iconList, childId, child, tree_components, tree_items);
+		addComponents(tree, iconList, childId, child, tree_components, tree_items,
+			icon_width, icon_height);
 	}
 }
 

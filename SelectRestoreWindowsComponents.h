@@ -92,4 +92,7 @@ private:
 
 	wxString componentConfigDir;
 	int backupid;
+
+	int icon_width;
+	int icon_height;
 };

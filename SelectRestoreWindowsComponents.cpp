@@ -50,11 +50,11 @@ SelectRestoreComponents::SelectRestoreComponents(wxWindow * parent)
 	icons[0] = wxIcon(unchecked_xpm);
 	icons[1] = wxIcon(checked_xpm);
 
-	int width = icons[0].GetWidth(),
-		height = icons[0].GetHeight();
+	int icon_width = icons[0].GetWidth();
+	int icon_height = icons[0].GetHeight();
 
-	selectList = new wxImageList(width, height, true);
-	iconList = new wxImageList(width, height, true);
+	selectList = new wxImageList(icon_width, icon_height, true);
+	iconList = new wxImageList(icon_width, icon_height, true);
 
 	for (size_t i = 0; i < WXSIZEOF(icons); i++)
 		selectList->Add(icons[i]);
@@ -130,7 +130,7 @@ void SelectRestoreComponents::Notify(void)
 		tree_items[root] = rootId;
 
 		SelectWindowsComponents::addComponents(m_treeCtrl1, iconList, rootId, root, tree_components,
-			tree_items);
+			tree_items, icon_width, icon_height);
 
 		m_treeCtrl1->SetImageList(iconList);
 

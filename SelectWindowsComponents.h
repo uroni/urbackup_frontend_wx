@@ -66,7 +66,7 @@ public:
 
 	static void addComponents(wxTreeCtrl* tree, wxImageList* iconList,
 		wxTreeItemId treeId, SComponent* node, std::map<wxTreeItemId, SComponent*>& tree_components,
-		std::map<SComponent*, wxTreeItemId>& tree_items);
+		std::map<SComponent*, wxTreeItemId>& tree_items, int icon_width, int icon_height);
 
 	static void selectTreeItems(wxTreeCtrl* tree, std::map<SComponent*, wxTreeItemId>& tree_items,
 		SComponent* root, SComponent* node, bool select, bool removeSelect = false);
@@ -96,6 +96,9 @@ private:
 
 	std::map<wxTreeItemId, SComponent*> tree_components;
 	std::map<SComponent*, wxTreeItemId> tree_items;
+
+	int icon_width;
+	int icon_height;
 };
 
 namespace
