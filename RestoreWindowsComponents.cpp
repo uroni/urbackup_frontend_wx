@@ -3,6 +3,7 @@
 #include "Connector.h"
 #include "SelectRestoreWindowsComponents.h"
 #include "TranslationHelper.h"
+#include "md5.h"
 
 namespace
 {
@@ -690,8 +691,18 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 
 bool RestoreWindowsComponentsThread::restoreFiles(const SRestoreComponent& comp)
 {
+	std::string logicalPathHash;
+	if (!comp.logicalPath.empty())
+	{
+		MD5 md((unsigned char*)comp.logicalPath.c_str());
+		char *p = md.hex_digest();
+		std::string md5 = p;
+		delete[]p;
+		logicalPathHash = "_" + md5;
+	}
+
 	std::string path = ".symlink_"+conv_filename(comp.writerName) + "_" +
-		convert(comp.writerId) + "_" + sortHex(comp.componentIdx) + "_"+conv_filename(comp.componentName) + "_" + comp.filesPrefix + sortHex(comp.filesIdx);
+		convert(comp.writerId) + logicalPathHash + "_" + conv_filename(comp.componentName) + "_" + comp.filesPrefix + sortHex(comp.filesIdx);
 
 	std::vector<SPathMap> map_paths;
 
