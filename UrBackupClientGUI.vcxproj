@@ -219,6 +219,7 @@
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Logs.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="md5.cpp" />
     <ClCompile Include="RestoreWindowsComponents.cpp" />
     <ClCompile Include="SelectRestoreWindowsComponents.cpp" />
     <ClCompile Include="SelectWindowsComponents.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Info.h" />
     <ClInclude Include="Logs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="md5.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RestoreWindowsComponents.h" />
     <ClInclude Include="SelectRestoreWindowsComponents.h" />
