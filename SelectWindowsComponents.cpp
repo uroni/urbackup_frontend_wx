@@ -242,15 +242,18 @@ void SelectWindowsComponents::addComponents(wxTreeCtrl* tree, wxImageList* iconL
 					out.close();
 
 					wxIcon icon(tempFile.GetFullPath(), wxBITMAP_TYPE_ICO, icon_width, icon_height);
-					image = iconList->GetImageCount();
-					if (icon.GetWidth() == icon_width
-						&& icon.GetHeight()==icon_height)
+					if (icon.IsOk())
 					{
-						iconList->Add(icon);
-					}
-					else
-					{
-						iconList->Add(wxBitmap(wxBitmap(icon).ConvertToImage().Rescale(icon_width, icon_height)));
+						image = iconList->GetImageCount();
+						if (icon.GetWidth() == icon_width
+							&& icon.GetHeight() == icon_height)
+						{
+							iconList->Add(icon);
+						}
+						else
+						{
+							iconList->Add(wxBitmap(wxBitmap(icon).ConvertToImage().Rescale(icon_width, icon_height)));
+						}
 					}
 				}
 
