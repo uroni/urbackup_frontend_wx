@@ -4,6 +4,7 @@ Martin Raiber
 
 Translators:
 Meelis Veemees (Estonian)
+Jussi Bergström (Finnish)
 Eric Bosdure, aureliensegeco, Charles Peltier (French)
 Artem Alabin, Valentin XliN Saikov (Russian)
 Luis-Miguel Munoz (Spanish)
