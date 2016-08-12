@@ -3,15 +3,17 @@
 # This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
+# Translators:
 # Adam Karlsson <adam.karlsson@gmail.com>, 2015
 # IorX <iorx@yahoo.com>, 2015
+# Jonas Aaslund <gnindit@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2015-11-21 23:50+0000\n"
-"Last-Translator: IorX <iorx@yahoo.com>\n"
+"PO-Revision-Date: 2016-08-01 18:13+0000\n"
+"Last-Translator: Jonas Aaslund <gnindit@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/uroni/urbackup/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +43,7 @@ msgstr "Status"
 
 #: gui\GUI.cpp:52
 msgid "Interval for incremental file backups:"
-msgstr "Intervall för inkrementella filbackuper"
+msgstr "Intervall för inkrementella filbackuper:"
 
 #: gui\GUI.cpp:59
 msgid "hours"
@@ -49,7 +51,7 @@ msgstr "timmar"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
-msgstr "Intervall för kompletta filbackuper"
+msgstr "Intervall för kompletta filbackuper:"
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
@@ -57,7 +59,7 @@ msgstr "dagar"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
-msgstr "Intervall för inkrementella filbackuper"
+msgstr "Intervall för inkrementella filbackuper:"
 
 #: gui\GUI.cpp:100
 msgid "Active"
@@ -65,55 +67,55 @@ msgstr "Aktiv"
 
 #: gui\GUI.cpp:109
 msgid "Interval for full image backups:"
-msgstr "Intervall för kompletta diskavbilder"
+msgstr "Intervall för kompletta diskavbilder:"
 
 #: gui\GUI.cpp:136
 msgid "Minimal number of incremental file backups:"
-msgstr "Minsta antal inkrementella filbackuper"
+msgstr "Minsta antal inkrementella filbackuper:"
 
 #: gui\GUI.cpp:148
 msgid "Maximal number of incremental file backups:"
-msgstr "Högsta antal inkrementella filbackuper"
+msgstr "Högsta antal inkrementella filbackuper:"
 
 #: gui\GUI.cpp:160
 msgid "Minimal number of full file backups:"
-msgstr "Minsta antal kompletta diskavbilder"
+msgstr "Minsta antal kompletta filbackuper:"
 
 #: gui\GUI.cpp:172
 msgid "Maximal number of full file backups:"
-msgstr "Högsta antal kompletta filbackuper"
+msgstr "Högsta antal kompletta filbackuper:"
 
 #: gui\GUI.cpp:205
 msgid "Minimal number of incremental image backups:"
-msgstr "Minsta antal inkrementella diskavbilder"
+msgstr "Minsta antal inkrementella diskavbilder:"
 
 #: gui\GUI.cpp:217
 msgid "Maximal number of incremental image backups:"
-msgstr "Högsta antal inkrementella diskavbilder"
+msgstr "Högsta antal inkrementella diskavbilder:"
 
 #: gui\GUI.cpp:229
 msgid "Minimal number of full image backups:"
-msgstr "Minsta antal kompletta diskavbilder"
+msgstr "Minsta antal kompletta diskavbilder:"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr "Högsta antal kompletta diskavbilder"
+msgstr "Högsta antal kompletta diskavbilder:"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
-msgstr "Datornamn"
+msgstr "Datornamn:"
 
 #: gui\GUI.cpp:276
 msgid "Exclude from backup (with wildcards):"
-msgstr "Exkludera från backuper (med jokertecken)"
+msgstr "Exkludera från backuper (med jokertecken):"
 
 #: gui\GUI.cpp:288
 msgid "Include in backup (with wildcards):"
-msgstr "Inkludera i backuper (med jokertecken)"
+msgstr "Inkludera i backuper (med jokertecken):"
 
 #: gui\GUI.cpp:300
 msgid "Backup window:"
-msgstr "Backupfönster"
+msgstr "Backupintervall:"
 
 #: gui\GUI.cpp:312
 msgid "Backup delay after system start:"
@@ -125,7 +127,7 @@ msgstr "min"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
-msgstr "Backup på enheter:"
+msgstr "Enhet att säkerhetskopiera:"
 
 #: gui\GUI.cpp:356
 msgid "Max backup speed for local network:"
@@ -426,10 +428,6 @@ msgstr[1] "minuter"
 msgid "Idle."
 msgstr "Vilar."
 
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr "Tidsuppskattning till klart ca _1_"
-
 #: Status.cpp:192
 msgid "Yes"
 msgstr "Ja"
@@ -505,6 +503,92 @@ msgstr "Paus"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Återuppta"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Uppdatering tillgänglig. Uppdatera nu."
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "&Åtkomst/återställ säkerhetskopior."
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Återställer filer"
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "Bekräfta återställning av filer i _1_. Nuvarande filer kommer att skrivas över. Om du är osäker tryck cancel och kör först en filbackup."
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "Bekräfta återställning av filer i _1_. Nuvarande filer i mappen kommer att skrivas över. Filer som har lagts till i mappen efter senaste säkerthetskopian kommer att raderas. Om du är osäker tryck cancel och kör först en filbackup."
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - Tillåt återställning"
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Vissa filer kunde inte raderas eller skrivas över under återställningsprocessen. För att kunna återställa dessa filer måste systemet startas om. Vill du göra det nu?"
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - Starta om Windows"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "Tidsuppskattning till klart ca _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Fil: _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Enhet: _1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Återställning klar."
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Kunde inte starta backup."
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "Bekräfta borttagning av UrBackupklient."
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Bekräfta avinstallation"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Åtkomst/återställ säkerhetskopior."
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Ingra rättigheter att komma åt filer."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Fel vid hämtning av server adress. Ingen åtkomst till filer."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
