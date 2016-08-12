@@ -34,6 +34,7 @@ struct SBackupDir
 	wxString name;
 	int id;
 	int group;
+	wxString flags;
 };
 
 struct SStatus
