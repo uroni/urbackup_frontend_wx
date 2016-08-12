@@ -66,6 +66,7 @@ mkdir data\lang\tr
 mkdir data\lang\et
 mkdir data\lang\no_NO
 mkdir data\lang\sv
+mkdir data\lang\fi
 tx pull -a
 set LANG_DIR=translations\urbackup.frontend\
 msgfmt "%LANG_DIR%\de.po" -o "data\lang\de\urbackup.mo"
@@ -88,6 +89,7 @@ msgfmt "%LANG_DIR%\tr.po" -o "data\lang\tr\urbackup.mo"
 msgfmt "%LANG_DIR%\et.po" -o "data\lang\et\urbackup.mo"
 msgfmt "%LANG_DIR%\no_NO.po" -o "data\lang\no_NO\urbackup.mo"
 msgfmt "%LANG_DIR%\sv.po" -o "data\lang\sv\urbackup.mo"
+msgfmt "%LANG_DIR%\fi.po" -o "data\lang\fi\urbackup.mo"
 
 git rev-parse HEAD > "data\build_revision.txt"
 echo. >> "data\build_revision.txt"
