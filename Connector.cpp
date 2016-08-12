@@ -280,7 +280,8 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 				wxString::FromUTF8(dir["path"].asCString()),
 				wxString::FromUTF8(dir["name"].asCString()),
 				dir["id"].asInt(),
-				dir["group"].asInt()
+				dir["group"].asInt(),
+				wxString::FromUTF8(dir["flags"].asCString())
 			};
 
 			ret.push_back(rdir);
@@ -312,6 +313,12 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 
 		std::string path=escapeParam(res[i].path.ToUTF8().data());
 		std::string name=escapeParam(res[i].name.ToUTF8().data());
+
+		if (name.find("/") == std::string::npos
+			&& !res[i].flags.empty())
+		{
+			name += "/" + res[i].flags;
+		}
 
 		args+="dir_"+nconvert(i)+"="+path;
 		args+="&dir_"+nconvert(i)+"_name="+name;
