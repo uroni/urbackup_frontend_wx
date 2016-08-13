@@ -36,11 +36,16 @@
 
 #ifndef _WIN32
 #include "../config.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <sys/file.h>
 #endif
 
 #ifdef _WIN32
 #include "SelectWindowsComponents.h"
 #include "SelectRestoreWindowsComponents.h"
+#include <Shlobj.h>
 #endif
 
 #include <wx/apptrait.h>
@@ -207,6 +212,69 @@ void deleteShellKeys()
 		}
 		++i;
 	} while (deleted_key);
+#endif
+}
+
+void startOnlyOnce()
+{
+#ifndef _WIN32
+	const char *homedir = NULL;
+
+	if ((homedir = getenv("HOME")) == NULL)
+	{
+		struct passwd *pw = getpwuid(getuid());
+		if (pw != NULL)
+		{
+			homedir = pw->pw_dir;
+		}
+	}
+
+	if (homedir == NULL)
+	{
+		return;
+	}
+
+	int fd = open((std::string(homedir) + "/.urbackupclientgui_startonce")).c_str(), O_CREAT | O_RDWR);
+
+	if (fd == -1)
+	{
+		return;
+	}
+
+	int rc = flock(fd, LOCK_EX | LOCK_NB);
+
+	if (rc != 0)
+	{
+		std::cout << "Application is already started" << std::endl;
+		close(fd);
+		exit(30);
+	}
+#else
+	PWSTR fpathb;
+	HRESULT hr = SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, NULL, &fpathb);
+	if (hr != S_OK)
+	{
+		return;
+	}
+
+	std::wstring fpath = fpathb;
+
+	CoTaskMemFree(fpathb);
+
+	HANDLE hFile = CreateFileW((fpath + "\\.urbackupclientgui_startonce").c_str(),
+		GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_HIDDEN, NULL);
+	if (hFile == INVALID_HANDLE_VALUE)
+	{
+		return;
+	}
+
+
+	if (!LockFile(hFile, 0, 0, 100, 0))
+	{
+		std::cout << "Application is already started" << std::endl;
+		CloseHandle(hFile);
+		exit(30);
+	}
 #endif
 }
 
@@ -418,6 +486,7 @@ bool MyApp::OnInit()
 
 	if(cmd.empty())
 	{
+		startOnlyOnce();
 		SetTopWindow(new TheFrame);
 
 		tray=new TrayIcon;
@@ -895,14 +964,6 @@ int main(int argc, char *argv[])
 		}
 	}
 	#endif
-
-#ifdef _WIN32
-	 HANDLE gmutex = CreateMutex(NULL, TRUE, L"Local\\UrBackupClientGUI");
-	 if( gmutex!=NULL && GetLastError()==ERROR_ALREADY_EXISTS )
-	 {
-		 return 68;
-	 }
-#endif
 
 	wxEntry(argc, argv);
 }
