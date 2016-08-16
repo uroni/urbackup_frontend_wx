@@ -234,7 +234,7 @@ void startOnlyOnce()
 		return;
 	}
 
-	int fd = open((std::string(homedir) + "/.urbackupclientgui_startonce")).c_str(), O_CREAT | O_RDWR);
+	int fd = open((std::string(homedir) + "/.urbackupclientgui_startonce").c_str(), O_CREAT | O_RDWR);
 
 	if (fd == -1)
 	{
