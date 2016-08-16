@@ -41,7 +41,6 @@
 #include <sys/file.h>
 #endif
 
-#include <Shlobj.h>
 #include <wx/apptrait.h>
 /*#if wxUSE_STACKWALKER && defined( __WXDEBUG__ )
 // silly workaround for the link error with debug configuration:
@@ -55,6 +54,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 wxDECLARE_APP(MyApp);
 
 #ifdef _WIN32
+#include <Shlobj.h>
 #include <windows.h>
 #endif
 #include "SetupWizard.h"
