@@ -62,6 +62,7 @@ RequestExecutionLevel highest
 !macroend  
  
 Var HAS_SERVICE
+Var SITE_LOCAL_RUNTIME
  
 Section "install"
 	${If} ${RunningX64}
@@ -165,6 +166,7 @@ Section "install"
 		Pop $0
 		${If} $0 != '1'
 		${If} $0 != '3'
+			StrCpy $SITE_LOCAL_RUNTIME "1"
 			File "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\*"
 			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
 		${EndIf}
