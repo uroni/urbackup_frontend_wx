@@ -160,15 +160,6 @@ Section "install"
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
-		Pop $0
-		${If} $0 != '1'
-		${If} $0 != '3'
-			StrCpy $SITE_LOCAL_RUNTIME "1"
-			File "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\*"
-			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
-			nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
-		${EndIf}
-		${EndIf}
 	${Else}
 		File "data\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
@@ -212,6 +203,7 @@ Section "install"
 		File "data\UrBackupClientBackend.exe"
 		File "data\cryptoplugin.dll"
 		File "data\sysvol_test.exe"
+		File "data\UrBackupClient_cmd.exe"
 	${Else}
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
@@ -219,6 +211,14 @@ Section "install"
 		File "data_x64\UrBackupClientBackend.exe"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\sysvol_test.exe"
+		File "data_x64\UrBackupClient_cmd.exe"
+		
+		ExecWait '"$INSTDIR\UrBackupClient_cmd.exe" --version' $0
+		${If} $0 != '1'
+			StrCpy $SITE_LOCAL_RUNTIME "1"
+			File "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\*"
+			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
+		${EndIf}
 	${EndIf}
 	File "data\backup-bad.ico"
 	File "data\backup-ok.ico"
