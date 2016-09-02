@@ -169,6 +169,7 @@ Section "install"
 			StrCpy $SITE_LOCAL_RUNTIME "1"
 			File "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\*"
 			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
+			nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 		${EndIf}
 		${EndIf}
 	${Else}

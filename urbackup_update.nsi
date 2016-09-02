@@ -59,6 +59,7 @@ RequestExecutionLevel highest
  
  Var INSTALL_TRAYICON
  Var HAS_SERVICE
+ Var SITE_LOCAL_RUNTIME
 
 Section "install"
 	${If} ${RunningX64}
@@ -104,8 +105,8 @@ Section "install"
 			${If} $0 != '0'
 			${If} $0 != '3010'
 			${If} $0 != '1638'
-				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
-				Quit
+				DetailPrint "Unable to install Visual Studio 2015 runtime. Falling back to site local runtime installation."
+				StrCpy $SITE_LOCAL_RUNTIME "1"
 			${EndIf}
 			${EndIf}
 			${EndIf}
@@ -172,6 +173,15 @@ Section "install"
 	${If} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+		Pop $0
+		${If} $0 != '1'
+		${If} $0 != '3'
+			StrCpy $SITE_LOCAL_RUNTIME "1"
+			File "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\*"
+			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
+			nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+		${EndIf}
+		${EndIf}
 	${Else}
 		File "data\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
