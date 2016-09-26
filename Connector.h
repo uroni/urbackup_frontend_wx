@@ -119,7 +119,7 @@ struct SStatusDetails
 	
 	std::vector<SRunningProcess> running_processes;
 	std::vector<SUrBackupServer> servers;
-	int64 time_since_last_lan_connection;
+	wxLongLong_t time_since_last_lan_connection;
 	bool internet_connected;
 	wxString internet_status;
 	
