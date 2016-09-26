@@ -40,6 +40,7 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <sys/file.h>
+#include <errno.h>
 #endif
 
 #ifdef _WIN32
@@ -243,7 +244,7 @@ void startOnlyOnce()
 
 	int rc = flock(fd, LOCK_EX | LOCK_NB);
 
-	if (rc != 0)
+	if (rc != 0 && errno==EWOULDBLOCK)
 	{
 		std::cout << "Application is already started" << std::endl;
 		close(fd);
