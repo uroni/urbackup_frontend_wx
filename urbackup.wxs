@@ -300,6 +300,10 @@
                      Key="Software\Microsoft\Windows\CurrentVersion\Run">
             <RegistryValue Type="string" Name="UrBackupClient" Value="[URBACKUPDIR]UrBackupClient.exe"/>
         </RegistryKey>
+		<RegistryKey Root="HKLM"
+                     Key="SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsBackup">
+            <RegistryValue Type="integer" Name="DisableMonitoring" Value="1"/>
+        </RegistryKey>
 	  </Component>
 	  </DirectoryRef>
 	</Fragment>

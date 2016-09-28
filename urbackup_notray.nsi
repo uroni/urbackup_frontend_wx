@@ -369,6 +369,7 @@ Function .onInstSuccess
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
 	${EndIf}
+	WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsBackup" "DisableMonitoring" 0x1
 	Exec '"$INSTDIR\UrBackupClient.exe"'
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection

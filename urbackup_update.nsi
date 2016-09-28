@@ -433,6 +433,7 @@ Function .onInstSuccess
 		!insertmacro DisableX64FSRedirection
 		SetRegView 64
 	${EndIf}
+	WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsBackup" "DisableMonitoring" 0x1
 	${If} $INSTALL_TRAYICON == "1"
 		StrCpy $0 "$INSTDIR\UrBackupClient.exe"
 		startplugin::start
