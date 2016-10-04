@@ -305,7 +305,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 	}
 
 	std::string list = getResponse("GET FILE LIST TOKENS",
-		params, false);
+		params, false, NULL, 120000);
 
 	if (!list.empty())
 	{
@@ -357,7 +357,7 @@ SStartRestore Connector::startRestore(const std::string& path, int backupid,
 	params += std::string("&restore_flags=") + convert(restore_flags);
 
 	std::string res = getResponse("DOWNLOAD FILES TOKENS",
-		params, false);
+		params, false, NULL, 120000);
 
 	if (!res.empty())
 	{
