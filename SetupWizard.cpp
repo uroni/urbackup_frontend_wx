@@ -682,11 +682,11 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	{
 		backupPaths.push_back(L"C:\\Users");
 
-		includeDirs.push_back(L"C:\\Users\\:\\Documents");
-		includeDirs.push_back(L"C:\\Users\\:\\Pictures");
-		includeDirs.push_back(L"C:\\Users\\:\\Music");
-		includeDirs.push_back(L"C:\\Users\\:\\Videos");
-		includeDirs.push_back(L"C:\\Users\\:\\Desktop");
+		includeDirs.push_back(L"C:\\Users\\:\\Documents\\*");
+		includeDirs.push_back(L"C:\\Users\\:\\Pictures\\*");
+		includeDirs.push_back(L"C:\\Users\\:\\Music\\*");
+		includeDirs.push_back(L"C:\\Users\\:\\Videos\\*");
+		includeDirs.push_back(L"C:\\Users\\:\\Desktop\\*");
 	}
 
 
