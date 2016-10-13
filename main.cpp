@@ -473,10 +473,12 @@ bool MyApp::OnInit()
 		cmd.clear();
 	}
 
+#ifdef _WIN32
 	if(cmd.empty())
 	{
 		writestring(_("&Access/restore backups").ToUTF8().data(), "access_backups_shell_mui.txt");
 	}
+#endif
 
 	#ifdef __WXMAC__
 	if(!cmd.empty())
