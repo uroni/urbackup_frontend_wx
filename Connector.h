@@ -172,7 +172,6 @@ public:
 	static std::string getAccessParameters(const std::string& tokens);
 
 private:
-	static std::string escapeParam(const std::string &name);
 	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection=NULL, size_t timeoutms=5000, bool set_busy=true);
 	static std::string pw;
 	static std::string pw_change;

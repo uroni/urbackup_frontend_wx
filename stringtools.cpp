@@ -1428,3 +1428,24 @@ std::string base64_encode_dash( const std::string& data )
 
 	return ret;
 }
+
+std::string EscapeParamString(const std::string &pStr)
+{
+	std::string ret;
+	ret.reserve(pStr.size());
+	for (size_t i = 0; i<pStr.size(); ++i)
+	{
+		switch (pStr[i])
+		{
+		case '%': ret += "%25"; break;
+		case '&': ret += "%26"; break;
+		case '$': ret += "%24"; break;
+		case '/': ret += "%2F"; break;
+		case ' ': ret += "%20"; break;
+		case '#': ret += "%23"; break;
+		case '+': ret += "%2B"; break;
+		default: ret += pStr[i]; break;
+		}
+	}
+	return ret;
+}

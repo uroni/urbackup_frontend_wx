@@ -107,5 +107,6 @@ std::wstring strlower(const std::wstring &str);
 std::string trim(const std::string &str);
 void replaceNonAlphaNumeric(std::string &str, char rch);
 std::string conv_filename(std::string fn);
+std::string EscapeParamString(const std::string &pStr);
 
 #endif
