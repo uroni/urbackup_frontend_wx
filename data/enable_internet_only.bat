@@ -7,8 +7,8 @@ if NOT %errorLevel% == 0 (
 	exit /b 1
 )
 
-echo --internet_only_mode> %~dp0\extra_args_0.txt
-echo true>> %~dp0\extra_args_0.txt
+echo --internet_only_mode> "%~dp0\extra_args_0.txt"
+echo true>> "%~dp0\extra_args_0.txt"
 
 echo Restarting the UrBackupBackend service...
 net stop UrBackupClientBackend
