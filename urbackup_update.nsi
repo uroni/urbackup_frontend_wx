@@ -419,7 +419,7 @@ start_service:
 	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
 	${Unicode2Ansi} "16" $R2
 	${Unicode2Ansi} "2" $R3
-	${Unicode2Ansi} "$INSTDIR\UrBackupClientBackend.exe" $R4
+	${Unicode2Ansi} '"$INSTDIR\UrBackupClientBackend.exe"' $R4
 	SimpleSC::ExistsService "$R0"
 	Pop $0
 	${If} $0 != '0'
