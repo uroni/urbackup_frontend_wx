@@ -12,6 +12,8 @@ OutFile "UrBackup Client NoTray $version_short$.exe"
 InstallDir "$PROGRAMFILES\UrBackup"
 RequestExecutionLevel highest
 
+!include "servicelib.nsh"
+
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
@@ -60,7 +62,6 @@ RequestExecutionLevel highest
   Pop "${outVar}"
 !macroend  
 
-Var HAS_SERVICE
 Var SITE_LOCAL_RUNTIME
 
 Section "install"
@@ -165,17 +166,13 @@ Section "install"
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
-	StrCpy $HAS_SERVICE "0"
-	
-	${Unicode2Ansi} "UrBackupClientBackend" $R0
-	SimpleSC::ExistsService "$R0"
-	Pop $0
-	${If} $0 == '0'
-		SimpleSC::StopService "$R0" 1 30
-		Pop $0
-		StrCpy $HAS_SERVICE "1"
-		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
-	${EndIf}
+	!insertmacro SERVICE running "UrBackupClientBackend" "action=service_stop;"
+	Goto skip_service_stop
+service_stop:
+	!insertmacro SERVICE stop "UrBackupClientBackend" ""
+	!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
+	nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
+skip_service_stop:
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	
@@ -303,20 +300,10 @@ next_s_pfb:
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
 	
-start_service:
-	${Unicode2Ansi} "UrBackupClientBackend" $R0
-	${Unicode2Ansi} "UrBackup Client Service for Backups" $R1
-	${Unicode2Ansi} "16" $R2
-	${Unicode2Ansi} "2" $R3
-	${Unicode2Ansi} '"$INSTDIR\UrBackupClientBackend.exe"' $R4
-	SimpleSC::ExistsService "$R0"
-	Pop $0
-	${If} $0 != '0'
-		SimpleSC::InstallService "$R0" "$R1" "$R2" "$R3" "$R4" "" "" ""
-		Pop $0
-	${EndIf}	
-	SimpleSC::StartService "$R0" ""
-	Pop $0
+	!insertmacro SERVICE installed "UrBackupClientBackend" "action=skip_service_install;"
+	!insertmacro SERVICE create "UrBackupClientBackend" 'path="$INSTDIR\UrBackupClientBackend.exe";autostart=1;interact=0;display=UrBackup Client Service for Backups;description=UrBackup Client Service for Backups;'
+skip_service_install:
+	!insertmacro SERVICE start "UrBackupClientBackend" ""
 	
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
@@ -339,11 +326,10 @@ Section "Uninstall"
 		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 
-	${Unicode2Ansi} "UrBackupClientBackend" $R0
-	SimpleSC::StopService "$R0"
-	Pop $0
-	SimpleSC::RemoveService "$R0"
-	Pop $0
+	!insertmacro SERVICE stop "UrBackupClientBackend" ""
+	!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
+	!insertmacro SERVICE delete "UrBackupClientBackend" ""
+	nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
 	
 	Sleep 500
 
