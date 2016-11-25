@@ -54,14 +54,7 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Norwegian"
 !insertmacro MUI_LANGUAGE "Portuguese"
 
-!insertmacro MUI_RESERVEFILE_LANGDLL
-
-!define Unicode2Ansi "!insertmacro Unicode2Ansi"
-
-!macro Unicode2Ansi String outVar
-  System::Call 'kernel32::WideCharToMultiByte(i 0, i 0, w "${String}", i -1, t .s, i ${NSIS_MAX_STRLEN}, i 0, i 0) i'
-  Pop "${outVar}"
-!macroend  
+!insertmacro MUI_RESERVEFILE_LANGDLL 
  
 Var SITE_LOCAL_RUNTIME
 
@@ -169,13 +162,13 @@ Section "install"
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${EndIf}
 	
-	!insertmacro SERVICE running "UrBackupClientBackend" "action=service_stop;"
-	Goto skip_service_stop
-service_stop:
-	!insertmacro SERVICE stop "UrBackupClientBackend" ""
-	!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
-	nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
-skip_service_stop:
+	!insertmacro SERVICE running "UrBackupClientBackend" ""
+	Pop $0
+	${If} $0 == "true"
+		!insertmacro SERVICE stop "UrBackupClientBackend" ""
+		!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
+	${EndIf}
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	
@@ -307,9 +300,11 @@ do_copy_pfb:
 next_s_pfb:	
 	Delete "$INSTDIR\prefilebackup_new.bat"
 	
-	!insertmacro SERVICE installed "UrBackupClientBackend" "action=skip_service_install;"
-	!insertmacro SERVICE create "UrBackupClientBackend" 'path="$INSTDIR\UrBackupClientBackend.exe";autostart=1;interact=0;display=UrBackup Client Service for Backups;description=UrBackup Client Service for Backups;'
-skip_service_install:
+	!insertmacro SERVICE installed "UrBackupClientBackend" ""
+	Pop $0
+	${If} $0 != "true"
+		!insertmacro SERVICE create "UrBackupClientBackend" 'path="$INSTDIR\UrBackupClientBackend.exe";autostart=1;interact=0;display=UrBackup Client Service for Backups;description=UrBackup Client Service for Backups;'
+	${EndIf}	
 	!insertmacro SERVICE start "UrBackupClientBackend" ""
 	
 	${If} ${RunningX64}

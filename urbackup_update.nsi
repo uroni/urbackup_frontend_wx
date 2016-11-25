@@ -50,13 +50,6 @@ RequestExecutionLevel highest
 !insertmacro MUI_LANGUAGE "Estonian"
 !insertmacro MUI_LANGUAGE "Norwegian"
 !insertmacro MUI_LANGUAGE "Portuguese"
-
-!define Unicode2Ansi "!insertmacro Unicode2Ansi"
-
-!macro Unicode2Ansi String outVar
-  System::Call 'kernel32::WideCharToMultiByte(i 0, i 0, w "${String}", i -1, t .s, i ${NSIS_MAX_STRLEN}, i 0, i 0) i'
-  Pop "${outVar}"
-!macroend  
  
  
  Var INSTALL_TRAYICON
@@ -163,6 +156,11 @@ Section "install"
 	UrBackupClientExists:
 	StrCpy $INSTALL_TRAYICON "1"
 	PastUrBackupClientExists:
+	IfFileExists $INSTDIR\UrBackupClientBackend.exe UrBackupClientBackendExists PastUrBackupClientBackendExists
+	PastUrBackupClientBackendExists:
+	StrCpy $INSTALL_TRAYICON "1"
+	UrBackupClientBackendExists:
+	
 	
 	${If} $EXEFILE != 'UrBackupUpdate.exe'
 		StrCpy $INSTALL_TRAYICON "1"
@@ -184,32 +182,22 @@ Section "install"
 	
 	StrCpy $HAS_SERVICE "0"
 	
-	${Unicode2Ansi} "UrBackupClient Backend" $R0
-	SimpleSC::ExistsService "$R0"
+	!insertmacro SERVICE running "UrBackupClient Backend" ""
 	Pop $0
-	${If} $0 == '0'
-		SimpleSC::StopService "$R0" 1 30
-		Pop $0
-		Sleep 2000
-		StrCpy $HAS_SERVICE "1"
+	${If} $0 == "true"
+		!insertmacro SERVICE stop "UrBackupClient Backend" ""
+		!insertmacro SERVICE waitfor "UrBackupClient Backend" "status=stopped"
+		!insertmacro SERVICE delete "UrBackupClient Backend" ""
 	${EndIf}
 	
-	!insertmacro SERVICE installed "UrBackupClient Backend" "action=uninstall_old_service;"
-	Goto skip_service_uninstall
-uninstall_old_service:
-	!insertmacro SERVICE stop "UrBackupClient Backend" ""
-	!insertmacro SERVICE waitfor "UrBackupClient Backend" "status=stopped"
-	!insertmacro SERVICE delete "UrBackupClient Backend" ""
-skip_service_uninstall:
-	
-	!insertmacro SERVICE running "UrBackupClientBackend" "action=service_stop;"
-	Goto skip_service_stop
-service_stop:
-	StrCpy $HAS_SERVICE "1"
-	!insertmacro SERVICE stop "UrBackupClientBackend" ""
-	!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
-	nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
-skip_service_stop:
+	!insertmacro SERVICE running "UrBackupClientBackend" ""
+	Pop $0
+	${If} $0 == "true"
+		StrCpy $HAS_SERVICE "1"
+		!insertmacro SERVICE stop "UrBackupClientBackend" ""
+		!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClientBackend.exe'
+	${EndIf}
 	
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	
@@ -378,9 +366,11 @@ next_idents:
 	Delete "$INSTDIR\server_idents_new.txt"
 	
 start_service:
-	!insertmacro SERVICE installed "UrBackupClientBackend" "action=skip_service_install;"
-	!insertmacro SERVICE create "UrBackupClientBackend" 'path="$INSTDIR\UrBackupClientBackend.exe";autostart=1;interact=0;display=UrBackup Client Service for Backups;description=UrBackup Client Service for Backups;'
-skip_service_install:
+	!insertmacro SERVICE installed "UrBackupClientBackend" ""
+	Pop $0
+	${If} $0 != "true"
+		!insertmacro SERVICE create "UrBackupClientBackend" 'path="$INSTDIR\UrBackupClientBackend.exe";autostart=1;interact=0;display=UrBackup Client Service for Backups;description=UrBackup Client Service for Backups;'
+	${EndIf}	
 	!insertmacro SERVICE start "UrBackupClientBackend" ""
 	
 	${If} ${RunningX64}
