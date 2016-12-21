@@ -31,6 +31,9 @@
 #endif
 #include "FileSettingsReader.h"
 #include <wx/dir.h>
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
+#include <wx/textfile.h>
 
 #undef _
 #define _(s) wxGetTranslation(wxT(s))
@@ -541,7 +544,31 @@ void TrayIcon::accessBackups( wxString path )
 
 	if(!params.empty())
 	{
-		wxLaunchDefaultBrowser(wxString::FromUTF8(params.data(), params.size()));
+		if (params.size() > 2000)
+		{
+			wxFileName tmpfn(wxStandardPaths::Get().GetTempDir(), wxT("urbackupclient_fileaccess.htm"));
+			wxTextFile file(tmpfn.GetFullPath());
+			file.AddLine("<html><head>");
+			file.AddLine("<meta http-equiv=\"refresh\" content=\"0;URL='" + params + "'\">");
+			file.AddLine("<script type=\"text/javascript\">");
+			file.AddLine("window.location.href='" + params + "';");
+			file.AddLine("</script></head><body>");
+			file.AddLine("You will be redirected to your UrBackup instance. <a href=\"" + params + "\">Click here</a> if not.");
+			file.AddLine("</body></html>");
+			file.Write();
+			file.Close();
+
+			std::string fileurl = tmpfn.GetFullPath();
+#ifdef _WIN32
+			fileurl = greplace("\\", "/", fileurl);
+#endif
+			fileurl = EscapeParamString(fileurl);
+			wxLaunchDefaultBrowser("file:///" + fileurl);
+		}
+		else
+		{
+			wxLaunchDefaultBrowser(wxString::FromUTF8(params.data(), params.size()));
+		}
 	}
 	else
 	{
