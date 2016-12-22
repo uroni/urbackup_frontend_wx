@@ -10,19 +10,12 @@
 < 	<CustomAction Id="UninstallShellKeys" FileKey="UrBackupClient.exe" Execute="deferred" Return="asyncWait" ExeCommand="deleteshellkeys">REMOVE="ALL"</CustomAction>
 97d89
 < 	  <ComponentRef Id='UrBackupClientAutostart' />
-273,283d264
-< 	
-< 	<Fragment>
-< 	 <DirectoryRef Id="URBACKUPDIR">
-< 		<Component Id="UrBackupClientAutostart" Guid="23b72208-3295-4be9-9168-3ca240fd2190" Win64="$(var.isx64)">
-< 		<RegistryKey Root="HKLM"
+300,303d291
 <                      Key="Software\Microsoft\Windows\CurrentVersion\Run">
 <             <RegistryValue Type="string" Name="UrBackupClient" Value="[URBACKUPDIR]UrBackupClient.exe"/>
 <         </RegistryKey>
-< 	  </Component>
-< 	  </DirectoryRef>
-< 	</Fragment>
-309,312d289
+< 		<RegistryKey Root="HKLM"
+335,338d322
 < 			<Publish Dialog="ExitDialog"
 < 					Control="Finish" 
 < 					Event="DoAction" 
