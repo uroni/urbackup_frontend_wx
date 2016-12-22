@@ -558,7 +558,7 @@ void TrayIcon::accessBackups( wxString path )
 			file.Write();
 			file.Close();
 
-			std::string fileurl = tmpfn.GetFullPath();
+			std::string fileurl = tmpfn.GetFullPath().ToStdString();
 #ifdef _WIN32
 			fileurl = greplace("\\", "/", fileurl);
 #endif
