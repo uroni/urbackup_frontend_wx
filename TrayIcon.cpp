@@ -444,6 +444,15 @@ void TrayIcon::OnBalloonClick(wxCommandEvent &evt)
 
 void read_tokens(wxString token_path, std::string& tokens)
 {
+#ifdef _WIN32
+	static bool adj_priv = false;
+	static bool has_backup_priv = false;
+	if (!adj_priv)
+	{
+		adj_priv = true;
+		has_backup_priv = ModifyPrivilege(SE_BACKUP_NAME, TRUE) == S_OK;
+	}
+#endif
 
 	wxArrayString token_files; 
 	wxDir::GetAllFiles(token_path, &token_files, wxEmptyString, wxDIR_FILES);
@@ -459,6 +468,38 @@ void read_tokens(wxString token_path, std::string& tokens)
 			}
 			tokens+=nt;
 		}
+#ifdef _WIN32
+		else if (has_backup_priv)
+		{
+			HANDLE hFile = CreateFileW(token_files[i].ToStdWstring().c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_BACKUP_SEMANTICS, NULL);
+
+			std::string nt;
+			if (hFile != INVALID_HANDLE_VALUE)
+			{
+				char buf[512];
+				DWORD read;
+				while (ReadFile(hFile, buf, 512, &read, NULL) != FALSE)
+				{
+					nt.insert(nt.end(), buf, buf + read);
+					if (read == 0)
+					{
+						break;
+					}
+				}
+
+				CloseHandle(hFile);
+			}
+
+			if (!nt.empty())
+			{
+				if (!tokens.empty())
+				{
+					tokens += ";";
+				}
+				tokens += nt;
+			}
+		}
+#endif
 	}
 }
 

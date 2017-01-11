@@ -22,6 +22,12 @@
 
 void runCommand(std::string cmd, std::string arg1=std::string());
 void read_tokens(wxString token_path, std::string& tokens);
+#ifdef _WIN32
+#include <Windows.h>
+HRESULT ModifyPrivilege(
+	IN LPCTSTR szPrivilege,
+	IN BOOL fEnable);
+#endif
 
 class TrayIcon : public wxTaskBarIcon
 {

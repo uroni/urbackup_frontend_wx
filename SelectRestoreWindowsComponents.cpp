@@ -399,4 +399,6 @@ wxString accessErrorToString(Connector::EAccessError access_error)
 	case Connector::EAccessError_NoTokens:
 		return _("No file backup access tokens found. Did you run a file backup yet?");
 	}
+	assert(false);
+	return wxT("UNDEF");
 }
