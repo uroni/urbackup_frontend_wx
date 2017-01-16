@@ -456,7 +456,7 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 				}
 				else if (method == VSS_RME_RESTORE_IF_CAN_REPLACE)
 				{
-					comp.restoreFlags = Connector::restore_flag_open_all_files_first | Connector::restore_flag_no_reboot_overwrite;
+					comp.restoreFlags = Connector::restore_flag_open_all_files_first | Connector::restore_flag_no_reboot_overwrite | Connector::restore_flag_ignore_overwrite_failures;
 				}
 				else if (method == VSS_RME_STOP_RESTORE_START
 					|| method == VSS_RME_RESTORE_TO_ALTERNATE_LOCATION
@@ -769,6 +769,7 @@ bool RestoreWindowsComponentsThread::restoreFiles(const SRestoreComponent& comp)
 					if (!status.finished_processes[i].success)
 					{
 						setMessage2("");
+						log("Restoring file set failed. See restore log for details.");
 						return false;
 					}
 				}
