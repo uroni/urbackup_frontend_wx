@@ -427,13 +427,17 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 					}
 				}
 
-				hr = backupcom->SetSelectedForRestore(writerId, componentInfo->type,
-					componentInfo->bstrLogicalPath, componentInfo->bstrComponentName, true);
 
-				if (hr != S_OK)
+				if (hasCurrComponent)
 				{
-					log("Error selecting component \"" + componentNameStr + "\" with logical path \"" + logicalPathStr + "\" of writer \"" + writerNameStr + "\" for restore");
-					return false;
+					hr = backupcom->SetSelectedForRestore(writerId, componentInfo->type,
+						componentInfo->bstrLogicalPath, componentInfo->bstrComponentName, true);
+
+					if (hr != S_OK)
+					{
+						log("Error selecting component \"" + componentNameStr + "\" with logical path \"" + logicalPathStr + "\" of writer \"" + writerNameStr + "\" for restore. VSS error code " + GetErrorHResErrStr(hr));
+						return false;
+					}
 				}
 
 				SRestoreComponent comp;
@@ -444,6 +448,7 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 				comp.writerName = writerNameStr;
 				comp.logicalPath = logicalPathStr;
 				comp.type = componentInfo->type;
+				comp.hasComponent = hasCurrComponent;
 
 				if (method == VSS_RME_RESTORE_IF_NOT_THERE)
 				{
@@ -624,18 +629,23 @@ wxThread::ExitCode RestoreWindowsComponentsThread::Entry()
 					"\" of writer \"" + comp.writerName + "\" finished.");
 			}
 
-			hr = backupcom->SetFileRestoreStatus(comp.writerId,
-				comp.type, comp.logicalPath.empty() ? NULL : ConvertToUnicode(comp.logicalPath).c_str(),
-				ConvertToUnicode(comp.componentName).c_str(),
-				has_restore_err ? VSS_RS_FAILED : VSS_RS_ALL);
-			has_restore_err = false;
-
-			if (hr != S_OK)
+			if (comp.hasComponent)
 			{
-				log("Error setting restore status of component \"" + comp.componentName +
-					"\" of writer \"" + comp.writerName + "\". VSS error code " + GetErrorHResErrStr(hr));
-				return false;
+				hr = backupcom->SetFileRestoreStatus(comp.writerId,
+					comp.type, comp.logicalPath.empty() ? NULL : ConvertToUnicode(comp.logicalPath).c_str(),
+					ConvertToUnicode(comp.componentName).c_str(),
+					has_restore_err ? VSS_RS_FAILED : VSS_RS_ALL);
+
+
+				if (hr != S_OK)
+				{
+					log("Error setting restore status of component \"" + comp.componentName +
+						"\" of writer \"" + comp.writerName + "\". VSS error code " + GetErrorHResErrStr(hr));
+					return false;
+				}
 			}
+
+			has_restore_err = false;
 		}
 	}
 
@@ -832,7 +842,11 @@ bool RestoreWindowsComponentsThread::getFilespec(IVssWMFiledesc * wmFile, SFileS
 
 	hr = wmFile->GetRecursive(&filespec.recursive);
 
-	if (hr != S_OK)
+	if (hr == S_FALSE)
+	{
+		filespec.recursive = false;
+	}
+	else if (hr != S_OK)
 	{
 		log("Getting recursive flag of file spec failed. VSS error code " + GetErrorHResErrStr(hr));
 		return false;

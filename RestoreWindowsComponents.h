@@ -33,6 +33,7 @@ struct SRestoreComponent
 	std::string logicalPath;
 	VSS_COMPONENT_TYPE type;
 	long long int restoreFlags;
+	bool hasComponent;
 };
 
 class RestoreWindowsComponentsThread : public wxThread

@@ -916,6 +916,8 @@ std::string GetErrorHResErrStr(HRESULT res)
 #define CASE_VSS_ERROR(x) case x: return #x
 	switch (res)
 	{
+	case S_OK:
+		return "S_OK";
 	case E_INVALIDARG:
 		return "E_INVALIDARG";
 	case E_OUTOFMEMORY:
@@ -951,6 +953,9 @@ std::string GetErrorHResErrStr(HRESULT res)
 		CASE_VSS_ERROR(VSS_E_REBOOT_REQUIRED);
 		CASE_VSS_ERROR(VSS_E_TRANSACTION_FREEZE_TIMEOUT);
 		CASE_VSS_ERROR(VSS_E_TRANSACTION_THAW_TIMEOUT);
+		CASE_VSS_ERROR(S_FALSE);
+		CASE_VSS_ERROR(VSS_E_INVALID_XML_DOCUMENT);
+		CASE_VSS_ERROR(VSS_E_UNEXPECTED);
 	};
 #undef CASE_VSS_ERROR
 	return "UNDEF(" + nconvert((long long int)res) + ")";
