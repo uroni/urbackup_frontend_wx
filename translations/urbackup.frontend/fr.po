@@ -3,8 +3,10 @@
 # This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
 # Translators:
-# Charles Peltier <charles@cl-info.fr>, 2014-2015
+# Translators:
+# Charles Peltier <charles@cl-info.fr>, 2014-2016
 # Charles Peltier <charles@cl-info.fr>, 2014
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # ericbosba <nerix@free.fr>, 2012
 # ericbosba <nerix@free.fr>, 2012
 # uroni <urpc@gmx.de>, 2013
@@ -14,7 +16,7 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2015-10-07 20:00+0000\n"
+"PO-Revision-Date: 2016-07-13 16:22+0000\n"
 "Last-Translator: Charles Peltier <charles@cl-info.fr>\n"
 "Language-Team: French (http://www.transifex.com/uroni/urbackup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +103,7 @@ msgstr "Nombre minimum d'image système complète :"
 
 #: gui\GUI.cpp:241
 msgid "Maximal number of full image backups:"
-msgstr "Nombre maximum d'image système complète :"
+msgstr "Nombre maximal d'image système complète :"
 
 #: gui\GUI.cpp:264
 msgid "Computer name:"
@@ -261,7 +263,7 @@ msgstr "Sauvegarde incrémentielle de fichiers en cours"
 
 #: main.cpp:337
 msgid "Full file backup running."
-msgstr "Sauvegarde complète de fichier en cours."
+msgstr "Sauvegarde complète de fichiers en cours."
 
 #: main.cpp:341
 msgid "Incremental image backup running."
@@ -424,15 +426,11 @@ msgstr[1] "heures"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
-msgstr[1] "minuted"
+msgstr[1] "minutes"
 
 #: Status.cpp:138
 msgid "Idle."
 msgstr "En attente"
-
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr "fin estimée : approximativement _1_"
 
 #: Status.cpp:192
 msgid "Yes"
@@ -448,7 +446,7 @@ msgstr "Internet : _1_"
 
 #: Status.cpp:205
 msgid "Servers:"
-msgstr "Serveurs :"
+msgstr "Serveur :"
 
 #: TrayIcon.cpp:141 TrayIcon.cpp:164
 msgid "Waiting for server..."
@@ -509,6 +507,92 @@ msgstr "Pause"
 #: TrayIcon.cpp:291
 msgid "Continue"
 msgstr "Continuer"
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr "Mise à jour disponible. Mettre à jour maintenant."
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr "&Visualiser / restaurer les sauvegardes"
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr "Restauration des fichiers."
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr "Êtes-vous sûr de vouloir restaurer le fichier à _1_ ? Le contenu du fichier en cours sera remplacé par le contenu du fichier de sauvegarde. En cas de doute veuillez annuler et exécuter une sauvegarde de fichiers avant de poursuivre ."
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr "Êtes-vous sûr de vouloir restaurer les fichiers dans _1_ ? Les fichiers existants dans ce dossier seront écrasés. Les fichiers créés dans le dossier sélectionné depuis la sauvegarde seront supprimés. En cas de doute veuillez annuler et exécuter une sauvegarde de fichiers avant de poursuivre."
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr "UrBackup - autoriser la restauration"
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr "Certains fichiers ne peuvent pas être supprimés ou écrasés lors du processus de restauration . Afin de remplacer / supprimer les fichiers du système doit être redémarré. Voulez-vous faire maintenant ?"
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr "UrBackup - redémarrage de Windows"
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr "fin estimée : approximativement _1_"
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr "Fichier : _1_"
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr "Partition : _1_"
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr "Restauration terminée"
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr "Impossible de démarrer la sauvegarde"
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr "Voulez-vous vraiment désinstaller UrBackup Client de votre système ?"
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr "Confirmer la désinstallation"
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr "Visualiser / restaurer les sauvegardes"
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr "Déinstaller"
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr "Pas de droits pour accéder aux fichiers."
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
+msgstr "Erreur dans l'adresse du serveur. Impossible d'accéder aux fichiers."
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "

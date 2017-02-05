@@ -1,11 +1,7 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
-# Translators:
-# Translators:
-# Translators:
-# Translators:
 # Translators:
 # Translators:
 msgid ""
@@ -13,9 +9,9 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2012-08-19 16:03+0000\n"
+"PO-Revision-Date: 2016-12-05 22:23+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/urbackup/language/sl_SI/)\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/uroni/urbackup/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +24,7 @@ msgstr ""
 
 #: gui\GUI.h:164 TrayIcon.cpp:271
 msgid "Logs"
-msgstr ""
+msgstr "tLogi"
 
 #: gui\GUI.h:195
 msgid "Informations"
@@ -48,7 +44,7 @@ msgstr ""
 
 #: gui\GUI.cpp:59
 msgid "hours"
-msgstr ""
+msgstr "ur"
 
 #: gui\GUI.cpp:68
 msgid "Interval for full file backups:"
@@ -56,7 +52,7 @@ msgstr ""
 
 #: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
 msgid "days"
-msgstr ""
+msgstr "dni"
 
 #: gui\GUI.cpp:87
 msgid "Interval for incremental image backups:"
@@ -124,7 +120,7 @@ msgstr ""
 
 #: gui\GUI.cpp:321
 msgid "min"
-msgstr ""
+msgstr "tmin"
 
 #: gui\GUI.cpp:333
 msgid "Volumes to backup:"
@@ -180,27 +176,27 @@ msgstr ""
 
 #: gui\GUI.cpp:460
 msgid "File backups"
-msgstr ""
+msgstr "tFile backupi"
 
 #: gui\GUI.cpp:465
 msgid "Image backups"
-msgstr ""
+msgstr "tImage backupi"
 
 #: gui\GUI.cpp:468
 msgid "Client"
-msgstr ""
+msgstr "tOdjemalec"
 
 #: gui\GUI.cpp:469
 msgid "Internet"
-msgstr ""
+msgstr "tInternet"
 
 #: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
 msgid "Ok"
-msgstr ""
+msgstr "ok"
 
 #: gui\GUI.cpp:485 gui\GUI.cpp:701
 msgid "Abort"
-msgstr ""
+msgstr "tPrkini"
 
 #: gui\GUI.cpp:535
 msgid "Filter:"
@@ -208,15 +204,15 @@ msgstr ""
 
 #: gui\GUI.cpp:539 TrayIcon.cpp:279
 msgid "Infos"
-msgstr ""
+msgstr "tInformacije"
 
 #: gui\GUI.cpp:539
 msgid "Warnings"
-msgstr ""
+msgstr "tOpozorila"
 
 #: gui\GUI.cpp:539
 msgid "Errors"
-msgstr ""
+msgstr "tNapake"
 
 #: gui\GUI.cpp:556 TrayIcon.cpp:295
 msgid "Exit"
@@ -435,17 +431,13 @@ msgstr[3] ""
 msgid "Idle."
 msgstr ""
 
-#: Status.cpp:157
-msgid "ETA: Approx. _1_"
-msgstr ""
-
 #: Status.cpp:192
 msgid "Yes"
-msgstr ""
+msgstr "da"
 
 #: Status.cpp:194
 msgid "No"
-msgstr ""
+msgstr "ne"
 
 #: Status.cpp:196
 msgid "Internet: _1_"
@@ -513,6 +505,92 @@ msgstr ""
 
 #: TrayIcon.cpp:291
 msgid "Continue"
+msgstr ""
+
+#: Info.cpp:51
+msgid "Update available. Update now."
+msgstr ""
+
+#: main.cpp:342
+msgid "&Access/restore backups"
+msgstr ""
+
+#: main.cpp:506
+msgid "Restoring files."
+msgstr ""
+
+#: main.cpp:699
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr ""
+
+#: main.cpp:703
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr ""
+
+#: main.cpp:707
+msgid "UrBackup - Allow restore"
+msgstr ""
+
+#: main.cpp:739
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr ""
+
+#: main.cpp:739
+msgid "UrBackup - Restart Windows"
+msgstr ""
+
+#: Status.cpp:210
+msgid "ETA: Approx. _1_"
+msgstr ""
+
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr ""
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr ""
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr ""
+
+#: TrayIcon.cpp:180
+msgid "Could not start backup."
+msgstr ""
+
+#: TrayIcon.cpp:270
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr ""
+
+#: TrayIcon.cpp:271
+msgid "Confirm uninstall"
+msgstr ""
+
+#: TrayIcon.cpp:303
+msgid "Access/restore backups"
+msgstr ""
+
+#: TrayIcon.cpp:383
+msgid "Uninstall"
+msgstr ""
+
+#: TrayIcon.cpp:495
+msgid "No rights to access any files."
+msgstr ""
+
+#: TrayIcon.cpp:520
+msgid "Error getting server URL. Cannot access files."
 msgstr ""
 
 #~ msgid "_percent_ done. "
