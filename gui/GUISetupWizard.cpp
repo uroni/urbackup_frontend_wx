@@ -81,7 +81,7 @@ GUISetupWizard::GUISetupWizard( wxWindow* parent, wxWindowID id, const wxString&
 	m_staticText3->Wrap( -1 );
 	bSizer4->Add( m_staticText3, 0, wxALL, 5 );
 	
-	m_textCtrl1 = new wxTextCtrl( setupBackupPaths, wxID_ANY, _("C;D"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_textCtrl1 = new wxTextCtrl( setupBackupPaths, wxID_ANY, wxT("C;D"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_textCtrl1->Enable( false );
 	
 	bSizer4->Add( m_textCtrl1, 0, wxALL, 5 );
