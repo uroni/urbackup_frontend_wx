@@ -1,10 +1,7 @@
 # UrBackup English translation
-# Copyright (C) 2011 Martin Raiber
-# This file is distributed under the same license as the UrBackup package.
+# Copyright (C) 2011-2015 Martin Raiber
+# This work is licensed under a Creative Commons Attribution 4.0 International License (See http://creativecommons.org/licenses/by/4.0/).
 # 
-# Translators:
-# Translators:
-# Translators:
 # Translators:
 # Translators:
 # Translators:
@@ -14,237 +11,302 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-09 22:28+0200\n"
-"PO-Revision-Date: 2014-05-09 20:34+0000\n"
+"POT-Creation-Date: 2017-02-05 16:19+0100\n"
+"PO-Revision-Date: 2017-02-06 08:34+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
-"Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/urbackup/language/fa_IR/)\n"
+"Language-Team: Persian (Iran) (http://www.transifex.com/uroni/urbackup/language/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa_IR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: gui\GUI.h:135 TrayIcon.cpp:261
+#: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: gui\GUI.h:164 TrayIcon.cpp:271
+#: gui\GUI.h:167 TrayIcon.cpp:371
 msgid "Logs"
 msgstr "لاگ ها"
 
-#: gui\GUI.h:195
-msgid "Informations"
-msgstr "اطلاعات"
-
-#: gui\GUI.h:231 TrayIcon.cpp:266
-msgid "Add/Remove backup paths"
-msgstr "افزودن/برداشتن مسیرهای پشتیبان گیری"
-
-#: gui\GUI.h:257 TrayIcon.cpp:294
-msgid "Status"
-msgstr ""
-
-#: gui\GUI.cpp:52
-msgid "Interval for incremental file backups:"
-msgstr "بازه برای پشتیبان گیری افزایشی فایل"
-
-#: gui\GUI.cpp:59
-msgid "hours"
-msgstr "ساعات"
-
-#: gui\GUI.cpp:68
-msgid "Interval for full file backups:"
-msgstr "بازه برای پشتیبان گیری کامل فایل"
-
-#: gui\GUI.cpp:75 gui\GUI.cpp:94 gui\GUI.cpp:116
-msgid "days"
-msgstr "روزها"
-
-#: gui\GUI.cpp:87
-msgid "Interval for incremental image backups:"
-msgstr "بازه برای پشتیبان گیری افزایشی تصویر"
-
-#: gui\GUI.cpp:100
-msgid "Active"
-msgstr "فعال"
-
-#: gui\GUI.cpp:109
-msgid "Interval for full image backups:"
-msgstr "بازه برای پشتیبان گیری کامل تصویر"
-
-#: gui\GUI.cpp:136
-msgid "Minimal number of incremental file backups:"
-msgstr "حداقل تعداد پشتیبان گیری افزایشی فایل"
-
-#: gui\GUI.cpp:148
-msgid "Maximal number of incremental file backups:"
-msgstr "حداکثر تعداد پشتیبان گیری افزایشی فایل"
-
-#: gui\GUI.cpp:160
-msgid "Minimal number of full file backups:"
-msgstr "حداقل تعداد پشتیبان گیری کامل فایل"
-
-#: gui\GUI.cpp:172
-msgid "Maximal number of full file backups:"
-msgstr "حداکثر تعداد پشتیبان گیری کامل فایل"
-
-#: gui\GUI.cpp:205
-msgid "Minimal number of incremental image backups:"
-msgstr "حداقل تعداد پشتیبان گیری افزایشی تصویر"
-
-#: gui\GUI.cpp:217
-msgid "Maximal number of incremental image backups:"
-msgstr "حداکثر تعداد پشتیبان گیری افزایشی تصویر"
-
-#: gui\GUI.cpp:229
-msgid "Minimal number of full image backups:"
-msgstr "حداقل تعداد پشتیبان گیری کامل تصویر"
-
-#: gui\GUI.cpp:241
-msgid "Maximal number of full image backups:"
-msgstr "حداکثر تعداد پشتیبان گیری کامل تصویر"
-
-#: gui\GUI.cpp:264
-msgid "Computer name:"
-msgstr "نام کامپیوتر"
-
-#: gui\GUI.cpp:276
-msgid "Exclude from backup (with wildcards):"
-msgstr "محروم از پشتیبان گیری (توسط wildcards)"
-
-#: gui\GUI.cpp:288
-msgid "Include in backup (with wildcards):"
-msgstr "موجود در پشتیبان (توسط wildcards)"
-
-#: gui\GUI.cpp:300
-msgid "Backup window:"
-msgstr "پنچره پشتیبان گیری"
-
-#: gui\GUI.cpp:312
-msgid "Backup delay after system start:"
-msgstr "تاخیر پشتیبان گیری بعد از شروع سیستم"
-
-#: gui\GUI.cpp:321
-msgid "min"
-msgstr "دقیقه"
-
-#: gui\GUI.cpp:333
-msgid "Volumes to backup:"
-msgstr "حجم های پشتیبان گیری"
-
-#: gui\GUI.cpp:356
-msgid "Max backup speed for local network:"
-msgstr "حداکثر سرعت پشتیبان گیری برای شبکه داخلی"
-
-#: gui\GUI.cpp:361
-msgid "MBit/s"
-msgstr ""
-
-#: gui\GUI.cpp:369
-msgid "Enable backup via internet:"
-msgstr "فعال سازی پشتیبان گیری توسط اینترنت"
-
-#: gui\GUI.cpp:377
-msgid "Internet server name/IP:"
-msgstr "نام/ip سرور اینترنتی"
-
-#: gui\GUI.cpp:385
-msgid "Internet server port:"
-msgstr "پورت سرور اینترنتی"
-
-#: gui\GUI.cpp:393
-msgid "Internet server password:"
-msgstr "کلمه عبور سرور اینترنتی"
-
-#: gui\GUI.cpp:404
-msgid "Do image backups over internet:"
-msgstr "پشتیبان گیری تصاویر بر روی اینترنت"
-
-#: gui\GUI.cpp:414
-msgid "Do full file backups over internet:"
-msgstr "پشتیبان گیری فایل بر روی اینترنت"
-
-#: gui\GUI.cpp:422
-msgid "Max backups speed for internet connection:"
-msgstr "حداکثر سرعت پشتیبان گیری برای ارتباط اینترنتی"
-
-#: gui\GUI.cpp:427
-msgid "KBit/s"
-msgstr ""
-
-#: gui\GUI.cpp:433
-msgid "Compressed transfer:"
-msgstr "انتقال فشرده شده"
-
-#: gui\GUI.cpp:441
-msgid "Encrypted transfer:"
-msgstr "انتقال رمزنگاری شده"
-
-#: gui\GUI.cpp:460
-msgid "File backups"
-msgstr "پشتیبان گیری فایل"
-
-#: gui\GUI.cpp:465
-msgid "Image backups"
-msgstr "پشتیبان گیری تصویر"
-
-#: gui\GUI.cpp:468
-msgid "Client"
-msgstr "کلاینت"
-
-#: gui\GUI.cpp:469
-msgid "Internet"
-msgstr "اینترنت"
-
-#: gui\GUI.cpp:480 gui\GUI.cpp:638 gui\GUI.cpp:698
-msgid "Ok"
-msgstr "تایید"
-
-#: gui\GUI.cpp:485 gui\GUI.cpp:701
-msgid "Abort"
-msgstr "لغو"
-
-#: gui\GUI.cpp:535
-msgid "Filter:"
-msgstr "فیلتر:"
-
-#: gui\GUI.cpp:539 TrayIcon.cpp:279
+#: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
 msgid "Infos"
 msgstr "اطلاعات"
 
-#: gui\GUI.cpp:539
+#: gui\GUI.h:244 TrayIcon.cpp:366
+msgid "Add/Remove backup paths"
+msgstr "افزودن/برداشتن مسیرهای پشتیبان گیری"
+
+#: gui\GUI.h:293 TrayIcon.cpp:406
+msgid "Status"
+msgstr "وضعیت"
+
+#: gui\GUIRestoreWindowsComponents.h:53
+msgid "Select components to restore"
+msgstr ""
+
+#: gui\GUIRestoreWindowsComponents.h:78
+msgid "Restoring Windows components"
+msgstr ""
+
+#: gui\GUISetupWizard.h:61
+msgid "Select files and volumes to backup"
+msgstr ""
+
+#: gui\GUIWindowsComponents.h:48
+msgid "Select Windows components to backup"
+msgstr ""
+
+#: gui\GUI.cpp:55
+msgid "Interval for incremental file backups:"
+msgstr "بازه برای پشتیبان گیری افزایشی فایل"
+
+#: gui\GUI.cpp:62
+msgid "hours"
+msgstr "ساعات"
+
+#: gui\GUI.cpp:71
+msgid "Interval for full file backups:"
+msgstr "بازه برای پشتیبان گیری کامل فایل"
+
+#: gui\GUI.cpp:78 gui\GUI.cpp:97 gui\GUI.cpp:119
+msgid "days"
+msgstr "روزها"
+
+#: gui\GUI.cpp:90
+msgid "Interval for incremental image backups:"
+msgstr "بازه برای پشتیبان گیری افزایشی تصویر"
+
+#: gui\GUI.cpp:103
+msgid "Active"
+msgstr "فعال"
+
+#: gui\GUI.cpp:112
+msgid "Interval for full image backups:"
+msgstr "بازه برای پشتیبان گیری کامل تصویر"
+
+#: gui\GUI.cpp:139
+msgid "Minimal number of incremental file backups:"
+msgstr "حداقل تعداد پشتیبان گیری افزایشی فایل"
+
+#: gui\GUI.cpp:151
+msgid "Maximal number of incremental file backups:"
+msgstr "حداکثر تعداد پشتیبان گیری افزایشی فایل"
+
+#: gui\GUI.cpp:163
+msgid "Minimal number of full file backups:"
+msgstr "حداقل تعداد پشتیبان گیری کامل فایل"
+
+#: gui\GUI.cpp:175
+msgid "Maximal number of full file backups:"
+msgstr "حداکثر تعداد پشتیبان گیری کامل فایل"
+
+#: gui\GUI.cpp:208
+msgid "Minimal number of incremental image backups:"
+msgstr "حداقل تعداد پشتیبان گیری افزایشی تصویر"
+
+#: gui\GUI.cpp:220
+msgid "Maximal number of incremental image backups:"
+msgstr "حداکثر تعداد پشتیبان گیری افزایشی تصویر"
+
+#: gui\GUI.cpp:232
+msgid "Minimal number of full image backups:"
+msgstr "حداقل تعداد پشتیبان گیری کامل تصویر"
+
+#: gui\GUI.cpp:244
+msgid "Maximal number of full image backups:"
+msgstr "حداکثر تعداد پشتیبان گیری کامل تصویر"
+
+#: gui\GUI.cpp:267
+msgid "Computer name:"
+msgstr "نام کامپیوتر"
+
+#: gui\GUI.cpp:279
+msgid "Exclude from backup (with wildcards):"
+msgstr "محروم از پشتیبان گیری (توسط wildcards)"
+
+#: gui\GUI.cpp:291
+msgid "Include in backup (with wildcards):"
+msgstr "موجود در پشتیبان (توسط wildcards)"
+
+#: gui\GUI.cpp:303
+msgid "Backup window:"
+msgstr "پنچره پشتیبان گیری"
+
+#: gui\GUI.cpp:315
+msgid "Backup delay after system start:"
+msgstr "تاخیر پشتیبان گیری بعد از شروع سیستم"
+
+#: gui\GUI.cpp:324
+msgid "min"
+msgstr "دقیقه"
+
+#: gui\GUI.cpp:336
+msgid "Volumes to backup:"
+msgstr "حجم های پشتیبان گیری"
+
+#: gui\GUI.cpp:359
+msgid "Max backup speed for local network:"
+msgstr "حداکثر سرعت پشتیبان گیری برای شبکه داخلی"
+
+#: gui\GUI.cpp:364
+msgid "MBit/s"
+msgstr ""
+
+#: gui\GUI.cpp:372
+msgid "Enable backup via internet:"
+msgstr "فعال سازی پشتیبان گیری توسط اینترنت"
+
+#: gui\GUI.cpp:380
+msgid "Internet server name/IP:"
+msgstr "نام/ip سرور اینترنتی"
+
+#: gui\GUI.cpp:388
+msgid "Internet server port:"
+msgstr "پورت سرور اینترنتی"
+
+#: gui\GUI.cpp:396
+msgid "Internet server password:"
+msgstr "کلمه عبور سرور اینترنتی"
+
+#: gui\GUI.cpp:407
+msgid "Do image backups over internet:"
+msgstr "پشتیبان گیری تصاویر بر روی اینترنت"
+
+#: gui\GUI.cpp:417
+msgid "Do full file backups over internet:"
+msgstr "پشتیبان گیری فایل بر روی اینترنت"
+
+#: gui\GUI.cpp:425
+msgid "Max backups speed for internet connection:"
+msgstr "حداکثر سرعت پشتیبان گیری برای ارتباط اینترنتی"
+
+#: gui\GUI.cpp:430
+msgid "KBit/s"
+msgstr ""
+
+#: gui\GUI.cpp:436
+msgid "Compressed transfer:"
+msgstr "انتقال فشرده شده"
+
+#: gui\GUI.cpp:444
+msgid "Encrypted transfer:"
+msgstr "انتقال رمزنگاری شده"
+
+#: gui\GUI.cpp:463
+msgid "File backups"
+msgstr "پشتیبان گیری فایل"
+
+#: gui\GUI.cpp:468
+msgid "Image backups"
+msgstr "پشتیبان گیری تصویر"
+
+#: gui\GUI.cpp:471
+msgid "Client"
+msgstr "کلاینت"
+
+#: gui\GUI.cpp:472
+msgid "Internet"
+msgstr "اینترنت"
+
+#: gui\GUI.cpp:483 gui\GUI.cpp:645 gui\GUI.cpp:725
+#: gui\GUIWindowsComponents.cpp:28
+msgid "Ok"
+msgstr "تایید"
+
+#: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
+#: gui\GUIWindowsComponents.cpp:31
+msgid "Cancel"
+msgstr ""
+
+#: gui\GUI.cpp:538
+msgid "Filter:"
+msgstr "فیلتر:"
+
+#: gui\GUI.cpp:542
 msgid "Warnings"
 msgstr "هشدارها"
 
-#: gui\GUI.cpp:539
+#: gui\GUI.cpp:542
 msgid "Errors"
 msgstr "خطاها"
 
-#: gui\GUI.cpp:556 TrayIcon.cpp:295
+#: gui\GUI.cpp:559 gui\GUI.cpp:928 TrayIcon.cpp:410
 msgid "Exit"
 msgstr "خروج"
 
-#: gui\GUI.cpp:610
+#: gui\GUI.cpp:612
 msgid "Version:"
 msgstr "نسخه :"
 
-#: gui\GUI.cpp:678
+#: gui\GUI.cpp:686
 msgid "Name:"
 msgstr "نام"
 
-#: gui\GUI.cpp:707
+#: gui\GUI.cpp:734
 msgid "Add path"
 msgstr "افزودن مسیر"
 
-#: gui\GUI.cpp:710
+#: gui\GUI.cpp:737
 msgid "Remove path"
 msgstr "برداشتن مسیر"
 
-#: gui\GUI.cpp:808
+#: gui\GUI.cpp:816
 msgid "Internet connection status:"
 msgstr ""
 
-#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:120
+#: gui\GUI.cpp:829
+msgid "UrBackup - File restore"
+msgstr ""
+
+#: gui\GUIRestoreWindowsComponents.cpp:37
+msgid "Start restore"
+msgstr ""
+
+#: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
+msgid "Starting restore operation..."
+msgstr ""
+
+#: gui\GUIRestoreWindowsComponents.cpp:97
+msgid "OK"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:26
+msgid "Please select the file set you want to backup:"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:32
+msgid ""
+"Backup all files except temporary, cache, system and program files "
+"(recommended)"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:37
+msgid ""
+"Backup only documents, music, pictures, movies and the desktop of all users"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:42
+msgid "Manually select the files to backup"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:56
+msgid "Please select the volumes to backup:"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:62
+msgid "Backup the system volume (recommended)"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:67
+msgid "Backup all internal disk volumes"
+msgstr ""
+
+#: gui\GUISetupWizard.cpp:72
+msgid "Manually list the volume letters to backup:"
+msgstr ""
+
+#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
 msgstr "با خطا مواجه شد. در حال حاضر نمیتوان پشتیبان گیری انجام داد."
 
@@ -252,261 +314,428 @@ msgstr "با خطا مواجه شد. در حال حاضر نمیتوان پشت�
 msgid "Please select the directory that will be backed up."
 msgstr "لطفا یک پوشه برای پشتیبان گیری انتخاب کنید"
 
-#: main.cpp:111
+#: Info.cpp:52
+msgid "Update available. Update now."
+msgstr ""
+
+#: Info.cpp:62
+msgid "Show CBT status"
+msgstr ""
+
+#: main.cpp:97
+#, c-format
+msgid "CoInitializeSecurity failed: %08x"
+msgstr ""
+
+#: main.cpp:196
 msgid "_percent_ done."
 msgstr ""
 
-#: main.cpp:333
+#: main.cpp:479
+msgid "&Access/restore backups"
+msgstr ""
+
+#: main.cpp:651
 msgid "Incremental file backup running."
 msgstr ""
 
-#: main.cpp:337
+#: main.cpp:655
 msgid "Full file backup running."
 msgstr ""
 
-#: main.cpp:341
+#: main.cpp:659
 msgid "Incremental image backup running."
 msgstr ""
 
-#: main.cpp:345
+#: main.cpp:663
 msgid "Full image backup running."
 msgstr ""
 
-#: main.cpp:349
+#: main.cpp:667
 msgid "Resumed incremental file backup running."
 msgstr ""
 
-#: main.cpp:353
+#: main.cpp:671
 msgid "Resumed full file backup running."
 msgstr ""
 
-#: main.cpp:369
+#: main.cpp:675
+msgid "Restoring files."
+msgstr ""
+
+#: main.cpp:691
 msgid "Indexing."
 msgstr ""
 
-#: main.cpp:445 main.cpp:449
+#: main.cpp:730
+msgid "Cannot connect to backup server"
+msgstr "نمیتواند به سرور پشتیبان گیری متصل شود"
+
+#: main.cpp:766 main.cpp:770
 msgid "UrBackup: Update available"
 msgstr "UrBackup: به روزرسانی موجود است"
 
-#: main.cpp:445 main.cpp:449
+#: main.cpp:766 main.cpp:770
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr "نسخه جدید برنامه موجود است. لطفا برای نصب کلیک کنید"
 
-#: main.cpp:468
-msgid "Cannot connect to backup server"
-msgstr "نمیتواند به سرور پشتیبان گیری متصل شود"
-
-#: main.cpp:505
+#: main.cpp:799
 msgid "No current backup."
 msgstr ""
 
-#: main.cpp:516 Status.cpp:174
+#: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
 msgstr ""
 
-#: main.cpp:567 main.cpp:571
+#: main.cpp:850 main.cpp:854
 msgid "UrBackup: New server"
 msgstr "UrBackup: سرور جدید"
 
-#: main.cpp:567 main.cpp:571
+#: main.cpp:850 main.cpp:854
 msgid "A new backup server has been found. Click here to use it"
 msgstr "سرور پشتیبان گیری جدیدی یافت شد. برای استفاده از آن کلیک کنید"
 
-#: Settings.cpp:505
+#: main.cpp:869
+msgid ""
+"Are you sure you want to restore the file at _1_? The current file content "
+"will be overwritten by the backup file content. When in doubt please cancel "
+"and run a file backup before proceeding."
+msgstr ""
+
+#: main.cpp:873
+msgid ""
+"Are you sure you want to restore the files in _1_? Existing files in this "
+"folder will be overwritten. Files created within the selected folder since "
+"the backup will be deleted. When in doubt please cancel and run a file "
+"backup before proceeding."
+msgstr ""
+
+#: main.cpp:877
+msgid "UrBackup - Allow restore"
+msgstr ""
+
+#: main.cpp:909
+msgid ""
+"Some files could not be deleted or overwritten during the restore process. "
+"In order to overwrite/delete the files the system needs to be restarted. Do "
+"you want to do this now?"
+msgstr ""
+
+#: main.cpp:909
+msgid "UrBackup - Restart Windows"
+msgstr ""
+
+#: RestoreWindowsComponents.cpp:107
+msgid "Preparing restore"
+msgstr ""
+
+#: RestoreWindowsComponents.cpp:569
+msgid "Restore operation in progress"
+msgstr ""
+
+#: RestoreWindowsComponents.cpp:696
+msgid "Restore finished"
+msgstr ""
+
+#: RestoreWindowsComponents.cpp:736
+msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
+msgstr ""
+
+#: RestoreWindowsComponents.cpp:796
+#, c-format
+msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
+#: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
+msgid "Loading..."
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:77
+msgid "Error retrieving Windows component backups: "
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:115
+msgid "Error retrieving Windows component configuration: "
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
+msgid "Windows components"
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:189
+msgid "No backup was selected"
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:210
+msgid "No components selected"
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:396
+msgid "Unknown access error"
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:398
+msgid "Currently not connected to a backup server. No backup server found."
+msgstr ""
+
+#: SelectRestoreWindowsComponents.cpp:400
+msgid "No file backup access tokens found. Did you run a file backup yet?"
+msgstr ""
+
+#: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
 msgstr "بازه پشتیبان گیری افزایشی عدد نیست"
 
-#: Settings.cpp:511
+#: Settings.cpp:514
 msgid "The full backup interval  is not a number"
 msgstr "بازه پشتیبان گیری کامل عدد نیست"
 
-#: Settings.cpp:520
+#: Settings.cpp:523
 msgid "The full image backup interval  is not a number"
 msgstr "زمان پشتیبان گیری کامل تصویر عدد نیست"
 
-#: Settings.cpp:526
+#: Settings.cpp:529
 msgid "The incremental image backup time is not a number"
 msgstr "زمان پشتیبان گیری افزایشی تصویر عدد نیست"
 
-#: Settings.cpp:534
+#: Settings.cpp:537
 msgid "The maximal number of incremental file backups  is not a number"
 msgstr "بیشترین تعداد پشتیبان گیری افزایشی فایل عدد نیست"
 
-#: Settings.cpp:540
+#: Settings.cpp:543
 msgid "The minimal number of incremental file backups is not a number"
 msgstr "کمترین تعداد پشتیبان گیری افزایشی فایل عدد نیست"
 
-#: Settings.cpp:546
+#: Settings.cpp:549
 msgid "The maximal number of full file backups is not a number"
 msgstr "بیشترین تعداد پشتیبان گیری کامل فایل عدد نیست"
 
-#: Settings.cpp:552
+#: Settings.cpp:555
 msgid "Minimal number of full file backups is not a number"
 msgstr "کمترین تعداد پشتیبان گیری کامل فایل عدد نیست"
 
-#: Settings.cpp:561
+#: Settings.cpp:564
 msgid "Minimal number of incremental image backups is not a number"
 msgstr "کمترین تعداد پشتیبان گیری افزایشی تصویر عدد نیست"
 
-#: Settings.cpp:567
+#: Settings.cpp:570
 msgid "Maximal number of incremental image backups is not a number"
 msgstr "بیشترین تعداد پشتیبان گیری افزایشی تصویر عدد نیست"
 
-#: Settings.cpp:573
+#: Settings.cpp:576
 msgid "Minimal number of full image backups is not a number"
 msgstr "کمترین تعداد پشتیبان گیری کامل تصویر عدد نیست"
 
-#: Settings.cpp:579
+#: Settings.cpp:582
 msgid "Maximal number of full image backups is not a number"
 msgstr "حداکثر تعداد پشتیبان گیری کامل تصویر عدد نیست"
 
-#: Settings.cpp:587
+#: Settings.cpp:590
 msgid "Backup delay after system start is not a number"
 msgstr "تاخیر پشتیبان گیری بعد از شروع سیستم عدد نیست"
 
-#: Settings.cpp:604
+#: Settings.cpp:610
 msgid "_1_ is not a volume"
 msgstr ""
 
-#: Settings.cpp:613
+#: Settings.cpp:624
 msgid "The server port is not valid"
 msgstr ""
 
-#: Status.cpp:18
+#: Status.cpp:36
 msgid "Initializing."
 msgstr ""
 
-#: Status.cpp:22
+#: Status.cpp:40
 msgid "Waiting for local UrBackup server."
 msgstr ""
 
-#: Status.cpp:31
+#: Status.cpp:49
 msgid "Connected to local UrBackup server."
 msgstr ""
 
-#: Status.cpp:31
+#: Status.cpp:49
 msgid "Not trying to connect to Internet server."
 msgstr ""
 
-#: Status.cpp:32
+#: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
 msgstr ""
 
-#: Status.cpp:36
+#: Status.cpp:54
 msgid "No Internet server configured."
 msgstr ""
 
-#: Status.cpp:40
+#: Status.cpp:58
 msgid "Connected to Internet server"
 msgstr ""
 
-#: Status.cpp:44
+#: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
 msgstr ""
 
-#: Status.cpp:48
+#: Status.cpp:66
 msgid "Error: _1_"
 msgstr ""
 
-#: Status.cpp:67
+#: Status.cpp:85
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 
-#: Status.cpp:75
+#: Status.cpp:93
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 
-#: Status.cpp:83
+#: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 
-#: Status.cpp:138
-msgid "Idle."
-msgstr ""
-
-#: Status.cpp:157
+#: Status.cpp:210
 msgid "ETA: Approx. _1_"
 msgstr ""
 
-#: Status.cpp:192
+#: Status.cpp:219
+msgid "File: _1_"
+msgstr ""
+
+#: Status.cpp:223
+msgid "Volume: _1_"
+msgstr ""
+
+#: Status.cpp:260
+msgid "Idle."
+msgstr ""
+
+#: Status.cpp:264
+msgid "Restore finished."
+msgstr ""
+
+#: Status.cpp:292
 msgid "Yes"
-msgstr ""
+msgstr "بله"
 
-#: Status.cpp:194
+#: Status.cpp:294
 msgid "No"
-msgstr ""
+msgstr "خیر"
 
-#: Status.cpp:196
+#: Status.cpp:296
 msgid "Internet: _1_"
 msgstr ""
 
-#: Status.cpp:205
+#: Status.cpp:305
 msgid "Servers:"
 msgstr ""
 
-#: TrayIcon.cpp:141 TrayIcon.cpp:164
+#: TrayIcon.cpp:178 TrayIcon.cpp:203
 msgid "Waiting for server..."
 msgstr "در انتطار سرور ..."
 
-#: TrayIcon.cpp:146 TrayIcon.cpp:169
+#: TrayIcon.cpp:181 TrayIcon.cpp:206
 msgid "A backup is already running. Could not start another one."
 msgstr "یک فرآیند پشتیبان گیری در حال اجراست. نمیتوان یک فرایند جدید شروع کرد"
 
-#: TrayIcon.cpp:148 TrayIcon.cpp:171
+#: TrayIcon.cpp:183 TrayIcon.cpp:208 TrayIcon.cpp:210
 msgid "Could not start backup, because no backup server was found."
 msgstr "قادر به شروع پشتیبان گیری نیست زیرا سرور پشتیبان یافت نشد"
 
-#: TrayIcon.cpp:183
+#: TrayIcon.cpp:185
+msgid "Could not start backup."
+msgstr ""
+
+#: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
 msgstr "قادر به توقف نیست : به سرور پشتیبان متصل نیست"
 
-#: TrayIcon.cpp:196
+#: TrayIcon.cpp:231
 msgid "Continuing failed: No connection to backup server."
 msgstr "قادر به ادامه نیست : به سرور پشتیبان متصل نیست"
 
-#: TrayIcon.cpp:230
+#: TrayIcon.cpp:275
+msgid "Do you really want to remove the UrBackup client from this system?"
+msgstr ""
+
+#: TrayIcon.cpp:276
+msgid "Confirm uninstall"
+msgstr ""
+
+#: TrayIcon.cpp:317
+msgid "Access/restore backups"
+msgstr ""
+
+#: TrayIcon.cpp:320
+msgid "Access backups"
+msgstr ""
+
+#: TrayIcon.cpp:330
 msgid "Do full file backup"
 msgstr "پشتیبان گیری کامل فایل"
 
-#: TrayIcon.cpp:230
+#: TrayIcon.cpp:330
 msgid "Do a full file backup now"
 msgstr ""
 
-#: TrayIcon.cpp:235
+#: TrayIcon.cpp:335
 msgid "Do incremental file backup"
 msgstr "پشتیبان گیری افزایشی فایل"
 
-#: TrayIcon.cpp:235
+#: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
 msgstr ""
 
-#: TrayIcon.cpp:244
+#: TrayIcon.cpp:344
 msgid "Do full image backup"
 msgstr "پشتیبان گیری کامل تصویر"
 
-#: TrayIcon.cpp:244
+#: TrayIcon.cpp:344
 msgid "Do a full image backup now"
 msgstr ""
 
-#: TrayIcon.cpp:249
+#: TrayIcon.cpp:349
 msgid "Do incremental image backup"
 msgstr "پشتیبان گیری افزایشی تصویر"
 
-#: TrayIcon.cpp:249
+#: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
 msgstr ""
 
-#: TrayIcon.cpp:286
+#: TrayIcon.cpp:377
+msgid "Configure components to backup"
+msgstr ""
+
+#: TrayIcon.cpp:382
+msgid "Restore components"
+msgstr ""
+
+#: TrayIcon.cpp:398
 msgid "Pause"
 msgstr "توقف"
 
-#: TrayIcon.cpp:291
+#: TrayIcon.cpp:403
 msgid "Continue"
 msgstr "ادامه"
+
+#: TrayIcon.cpp:414
+msgid "Uninstall"
+msgstr ""
+
+#: TrayIcon.cpp:567
+msgid "No rights to access any files."
+msgstr ""
+
+#: TrayIcon.cpp:616
+msgid "Error getting server URL. Cannot access files."
+msgstr ""
+
+#~ msgid "Informations"
+#~ msgstr "Informations"
+
+#~ msgid "Abort"
+#~ msgstr "Abort"
 
 #~ msgid "_percent_ done. "
 #~ msgstr "_percent_ done. "
