@@ -305,7 +305,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 	}
 
 	std::string list = getResponse("GET FILE LIST TOKENS",
-		params, false, NULL, 120000);
+		params, false, NULL, 10*60*1000);
 
 	if (!list.empty())
 	{
