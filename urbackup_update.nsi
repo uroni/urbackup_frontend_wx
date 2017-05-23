@@ -430,6 +430,7 @@ Function .onInstSuccess
 			Exec '"$INSTDIR\UrBackupClient.exe"'
 		${EndIf}
 		
+		IfSilent setup_defaults
 		SetOutPath "$INSTDIR"
 		${If} $EXEFILE != 'UrBackupUpdate.exe'
 			Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'	
@@ -438,6 +439,10 @@ Function .onInstSuccess
 		${If} $EXEFILE == 'UrBackupUpdate.exe'
 			Exec '"$INSTDIR\UrBackupClient.exe" setupDefault'
 		${EndIf}
+		Goto after_setup_wizard
+setup_defaults:
+		Exec '"$INSTDIR\UrBackupClient.exe" setupDefault'
+after_setup_wizard:
 	${EndIf}
 	${If} ${RunningX64}
 		!insertmacro EnableX64FSRedirection
