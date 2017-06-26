@@ -225,7 +225,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		
 
 		resp=tcpstack.getPacket(&packetsize);
-		if(packetsize==0)
+		if(resp==NULL || packetsize==0)
 		{
 			busy=false;
 			return "";
@@ -233,9 +233,8 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 	}
 
 	std::string ret;
-	ret.resize(packetsize);
-	memcpy(&ret[0], resp, packetsize);
-	delete resp;
+	ret.assign(resp, packetsize);
+	delete[] resp;
 
 	busy=false;
 
