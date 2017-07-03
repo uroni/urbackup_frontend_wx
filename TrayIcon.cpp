@@ -259,7 +259,8 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 		}break;
 	case ID_TI_EXIT:
 		{
-			if(!b_is_pausing)
+			if( !b_is_pausing
+				 && !timer->hasCapability(DONT_ALLOW_PAUSE) )
 			{
 				Connector::setPause(true);
 			}
