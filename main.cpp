@@ -875,9 +875,9 @@ void MyTimer::Notify()
 
 		wxMessageDialog* dialog = new wxMessageDialog(NULL,
 			ask_msg, _("UrBackup - Allow restore"), wxOK | wxCANCEL);
-#ifndef __WXMAC__
+#ifdef _WIN32
 		dialog->RequestUserAttention();
-		#endif
+#endif
 		int rc = dialog->ShowModal();
 		dialog->Destroy();
 		if(rc == wxID_OK)
