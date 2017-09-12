@@ -192,7 +192,7 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 
 	char *resp=NULL;
 	char buffer[1024];
-	size_t packetsize;
+	size_t packetsize = 0;
 	while(resp==NULL)
 	{
 		bool conn=false;
@@ -225,7 +225,8 @@ std::string Connector::getResponse(const std::string &cmd, const std::string &ar
 		
 
 		resp=tcpstack.getPacket(&packetsize);
-		if(resp==NULL || packetsize==0)
+		if((resp==NULL || packetsize==0)
+			&& (wxGetLocalTimeMillis() - starttime>=timeoutms) )
 		{
 			busy=false;
 			return "";
