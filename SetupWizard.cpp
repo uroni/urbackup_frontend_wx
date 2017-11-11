@@ -632,6 +632,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	pathsNotToBackup.push_back(L":\\$Recycle.Bin");
 	pathsNotToBackup.push_back(L":\\System Volume Information");
 	pathsNotToBackup.push_back(L"C:\\Windows.old");
+	pathsNotToBackup.push_back(L"C:\\$Windows.~BT");
 	pathsNotToBackup.push_back(L"C:\\ProgramData\\Microsoft\\Windows Defender\\Scans\\mpcache-*");
 
 	std::vector<std::wstring> backupPaths;
