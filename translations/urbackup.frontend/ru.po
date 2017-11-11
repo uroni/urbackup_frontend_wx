@@ -5,9 +5,10 @@
 # Translators:
 # Translators:
 # Translators:
-# Alabin Artem <kirpicheff@yandex.ru>, 2012,2015
+# Alabin Artem <kirpicheff@yandex.ru>, 2012,2015,2017
 # Alabin Artem <kirpicheff@yandex.ru>, 2012
 # Alabin Artem <kirpicheff@yandex.ru>, 2012
+# Konstantin <IncubusRK@gmail.com>, 2017
 # uroni <urpc@gmx.de>, 2013
 # uroni <urpc@gmx.de>, 2013
 # Valentin XliN Saikov <saikov.vb@gmail.com>, 2014
@@ -16,8 +17,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-10-18 07:35+0000\n"
+"Last-Translator: Alabin Artem <kirpicheff@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/uroni/urbackup/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,23 +48,23 @@ msgstr "Статус"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Выберите компоненты для восстановления"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Восстанавливаются компоненты Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Выберите файлы и разделы для резервного копирования"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Выберите компоненты Windows для резервного копирования"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
-msgstr "Интервал добавочных файловых бэкапов"
+msgstr "Интервал инкрементальных файловых бэкапов"
 
 #: gui\GUI.cpp:62
 msgid "hours"
@@ -79,7 +80,7 @@ msgstr "дней"
 
 #: gui\GUI.cpp:90
 msgid "Interval for incremental image backups:"
-msgstr "Интервал создания добавочного образа"
+msgstr "Интервал создания инкрементального образа"
 
 #: gui\GUI.cpp:103
 msgid "Active"
@@ -91,11 +92,11 @@ msgstr "Интервал создания образа"
 
 #: gui\GUI.cpp:139
 msgid "Minimal number of incremental file backups:"
-msgstr "Минимальное количество добавочных бэкапов файлов"
+msgstr "Минимальное количество инкрементальных бэкапов файлов"
 
 #: gui\GUI.cpp:151
 msgid "Maximal number of incremental file backups:"
-msgstr "Максимальное количество добавочных бэкапов файлов"
+msgstr "Максимальное количество инкрементальных бэкапов файлов"
 
 #: gui\GUI.cpp:163
 msgid "Minimal number of full file backups:"
@@ -107,11 +108,11 @@ msgstr "Максимальное количество полных бэкапо�
 
 #: gui\GUI.cpp:208
 msgid "Minimal number of incremental image backups:"
-msgstr "Минимальное количество добавочных образов"
+msgstr "Минимальное количество инкрементальных образов"
 
 #: gui\GUI.cpp:220
 msgid "Maximal number of incremental image backups:"
-msgstr "Максимальное количество добавочных образов"
+msgstr "Максимальное количество инкрементальных образов"
 
 #: gui\GUI.cpp:232
 msgid "Minimal number of full image backups:"
@@ -147,7 +148,7 @@ msgstr "минут"
 
 #: gui\GUI.cpp:336
 msgid "Volumes to backup:"
-msgstr "Разделы для бэкапа"
+msgstr "Тома для бэкапа"
 
 #: gui\GUI.cpp:359
 msgid "Max backup speed for local network:"
@@ -221,7 +222,7 @@ msgstr "Ок"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -261,54 +262,54 @@ msgstr "Состояние подключения к интернету"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - восстановление файлов"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Начать восстановление"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Запускается операция восстановления..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Пожалуйста выберите файлы, для которых вы хотите создать резервную копию:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Копировать все файлы за исключением временных, кеша, системных и программных файлов (рекомендуется)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Копировать только документы, музыку, изображения и файлы с рабочего стола всех пользователей."
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Выбрать файлы для резервного копирования вручную"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Пожалуйста выберите тома для резервного копирования:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Создавать резервную копию системного тома (рекомендуется)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Создавать резервную копию всех разделов внутренних дисков"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Указать вручную буквы разделов для резервного копирования:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -320,28 +321,28 @@ msgstr "Пожалуйста выберите директорию для бэк
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Доступно обновление. Обновить сейчас."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Показать статус CBT"
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "CoInitializeSecurity вызвал ошибку: %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr "_процентов_ выполнено."
+msgstr "_percent_ выполнено."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "Проверить/восстановить резервную копию"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
-msgstr "Добавочный бэкап файлов запущен"
+msgstr "Инкрементальный бэкап файлов запущен"
 
 #: main.cpp:655
 msgid "Full file backup running."
@@ -349,7 +350,7 @@ msgstr "Полное резервное копирование файлов за
 
 #: main.cpp:659
 msgid "Incremental image backup running."
-msgstr "Добавочный бэкап образа запущен"
+msgstr "Инкрементальный бэкап образа запущен"
 
 #: main.cpp:663
 msgid "Full image backup running."
@@ -357,7 +358,7 @@ msgstr "Полный бэкап образа запущен"
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr "Возобновлен добавочный файловый бэкап"
+msgstr "Возобновлен инкрементальный файловый бэкап"
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
@@ -365,7 +366,7 @@ msgstr "Возобновлен полный файловый бэкап"
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Восстанавливаются файлы."
 
 #: main.cpp:691
 msgid "Indexing."
@@ -405,7 +406,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Вы уверены, что хотите восстановить файл _1_? Текущее содержимое файла будет перезаписано содержимым резервной копии. Если не уверены отмените операцию и сделайте дополнительную резервную копию данного файла."
 
 #: main.cpp:873
 msgid ""
@@ -413,84 +414,84 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "Вы уверены, что хотите восстановить файлы в _1_? Текущее содержимое файлов в указанной папке будет перезаписано содержимым резервной копии. Если не уверены отмените операцию и сделайте дополнительную резервную копию файлов."
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - Разрешить восстановление"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "Некоторые файлы не могут быть удалены или перезаписаны во время процесса восстановления. Что бы завершить процесс необходимо перезагрузить систему. Вы хотите сделать это сейчас?"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - Перезагрузка Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Подготовка к восстановлению"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Идет процесс восстановления"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Восстановление завершено"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Восстанавливается компонент  \"_1_\" из \"_2_\". Индексирование..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Восстанавливается компонент  \"_1_\" из \"_2_\".   _3_% завершено."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Загрузка..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Ошибка получения резервной копии компонентов Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Ошибка получения конфигурации компонентов Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Компоненты Windows"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Резервная копия не выбрана"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Компонент не выбран"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Неизвестная ошибка доступа"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Не удалось подключиться к серверу резервного копирования. Сервер резервного копирования не найден."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Не удалось найти токен доступа к резервной копии файла. Вы уже запускали резервное копирование файла?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
-msgstr "Интервал создания добавочных бэкапов не является числом"
+msgstr "Интервал создания инкрементальных бэкапов не является числом"
 
 #: Settings.cpp:514
 msgid "The full backup interval  is not a number"
@@ -502,15 +503,15 @@ msgstr "Интервал создания полных образов не яв�
 
 #: Settings.cpp:529
 msgid "The incremental image backup time is not a number"
-msgstr "Интервал создания добавочных образов не является числом"
+msgstr "Интервал создания инкрементальных образов не является числом"
 
 #: Settings.cpp:537
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr "Максимальное количество добавочных бэкапов файлов не является числом"
+msgstr "Максимальное количество инкрементальных бэкапов файлов не является числом"
 
 #: Settings.cpp:543
 msgid "The minimal number of incremental file backups is not a number"
-msgstr "Минимальное количество добавочных бэкапов файлов не является числом"
+msgstr "Минимальное количество инкрементальных бэкапов файлов не является числом"
 
 #: Settings.cpp:549
 msgid "The maximal number of full file backups is not a number"
@@ -522,11 +523,11 @@ msgstr "Минимальное количество полных бэкапов 
 
 #: Settings.cpp:564
 msgid "Minimal number of incremental image backups is not a number"
-msgstr "Минимальное количество добавочных образов не является числом"
+msgstr "Минимальное количество инкрементальных образов не является числом"
 
 #: Settings.cpp:570
 msgid "Maximal number of incremental image backups is not a number"
-msgstr "Максимальное количество добавочных образов не является числом"
+msgstr "Максимальное количество инкрементальных образов не является числом"
 
 #: Settings.cpp:576
 msgid "Minimal number of full image backups is not a number"
@@ -614,11 +615,11 @@ msgstr "Осталось:примерно _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "Файл: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "Раздел: _1_"
 
 #: Status.cpp:260
 msgid "Idle."
@@ -626,7 +627,7 @@ msgstr "Ожидание"
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "Восстановление завершено."
 
 #: Status.cpp:292
 msgid "Yes"
@@ -658,7 +659,7 @@ msgstr "Невозможно запустить бэкап, сервер не н
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "Не удается начать резервное копирование."
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
@@ -670,19 +671,19 @@ msgstr "Продолжить не удалось. Нет соединения с
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "Вы действительно хотите удалить UrBackup клиент?"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "Подтвердить удаление"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "Проверить/восстановить резервную копию"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Доступ к резервным копиям"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -694,11 +695,11 @@ msgstr "Сделать полную резервную копию файла"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
-msgstr "Сделать добавочный бэкап файлов"
+msgstr "Сделать инкрементальный бэкап файлов"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr "Сделать добавочный файловый бэкап"
+msgstr "Сделать инкрементальный файловый бэкап"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
@@ -710,19 +711,19 @@ msgstr "Сделать полный образ"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
-msgstr "Сделать добавочный образ"
+msgstr "Сделать инкрементальный образ"
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr "Сделать добавочный образ"
+msgstr "Сделать инкрементальный образ"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Настройка компонентов для резервного копирования"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Восстановление компонентов"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
@@ -734,15 +735,15 @@ msgstr "Продолжить"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "Удалить"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "Нет прав на доступ к файлам."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "Ошибка получения URL сервера. Невозможно получить доступ к файлам."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

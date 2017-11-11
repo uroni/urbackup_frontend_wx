@@ -5,22 +5,25 @@
 # Translators:
 # Translators:
 # Translators:
+# Czeslaw Mruk <czmruk@gmail.com>, 2017
 # Łukasz Milata <drupter@gmail.com>, 2013
-# Łukasz Milata <drupter@gmail.com>, 2013-2014,2016
+# Łukasz Milata <drupter@gmail.com>, 2013-2014,2016-2017
+# Mirek Kluz <miroslaw.kluz@gmail.com>, 2017
 # uroni <urpc@gmx.de>, 2013
+# Wojciech Staszewski, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-09-23 18:54+0000\n"
+"Last-Translator: Mirek Kluz <miroslaw.kluz@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/uroni/urbackup/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
@@ -44,19 +47,19 @@ msgstr "Status"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Wybierz komponenty do odtwarzania"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Przywracanie składników Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Wybierz pliki i wolumeny do kopii"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Wybierz składniki Windows do kopii"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -156,7 +159,7 @@ msgstr "MBit/s"
 
 #: gui\GUI.cpp:372
 msgid "Enable backup via internet:"
-msgstr "Włącz kopie zapasowe przez internet:"
+msgstr "Włącz kopie zapasowe przez Internet:"
 
 #: gui\GUI.cpp:380
 msgid "Internet server name/IP:"
@@ -172,15 +175,15 @@ msgstr "Internetowe hasło serwera:"
 
 #: gui\GUI.cpp:407
 msgid "Do image backups over internet:"
-msgstr "Wykonuj obraz dysku przez internet:"
+msgstr "Wykonuj obraz dysku przez Internet:"
 
 #: gui\GUI.cpp:417
 msgid "Do full file backups over internet:"
-msgstr "Wykonuj pełne kopie zapasowe plików przez internet:"
+msgstr "Wykonuj pełne kopie zapasowe plików przez Internet:"
 
 #: gui\GUI.cpp:425
 msgid "Max backups speed for internet connection:"
-msgstr "Maks. prędkość kopii zapasowych przez internet:"
+msgstr "Maks. prędkość kopii zapasowych przez Internet:"
 
 #: gui\GUI.cpp:430
 msgid "KBit/s"
@@ -218,7 +221,7 @@ msgstr "Ok"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -254,58 +257,58 @@ msgstr "Usuń folder"
 
 #: gui\GUI.cpp:816
 msgid "Internet connection status:"
-msgstr "Status połączenia przez internet:"
+msgstr "Status połączenia:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - przywracanie plików"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Rozpocznij przywracanie"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Zaczynam przywracanie..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Wybierz plik, który chcesz wykonać:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Tworzenie kopii zapasowych wszystkich plików, z wyjątkiem plików tymczasowych, pamięci podręcznej, systemów i programów (zalecane)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Kopiuj tylko dokumenty, muzykę, zdjęcia, filmy i pulpity wszystkich użytkowników"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Ręcznie zaznacz pliki do tworzenia kopii zapasowych"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Wybierz woluminy do tworzenia kopii zapasowych:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Wykonaj kopię zapasową woluminu systemowego (zalecane)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Tworzenie kopii zapasowych wszystkich wewnętrznych woluminów dysku"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Ręcznie wymień litery volumenów na kopię zapasową:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -321,12 +324,12 @@ msgstr "Dostępna aktualizacja. Aktualizuj teraz."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Pokaż stan CBT"
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "Zabezpieczenia nie powiodły się:%08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
@@ -429,61 +432,61 @@ msgstr "UrBackup - Uruchom ponownie system Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Przygotowanie przywracania"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Trwa operacja przywracania"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Przywracanie zakończone"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Przywracanie składnika \"_1_\": \"_2_\". Indeksowanie..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Przywracanie składnika \"_1_\": \"_2_\". Wykonano _3_% f "
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Wczytywanie..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Błąd podczas odzyskiwania kopii zapasowej składników Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Błąd podczas pobierania konfiguracji składników systemu Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Składniki Windows"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Nie wybrano kopii zapasowej"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Nie wybrano składnika."
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Nieznany błąd dostępu."
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Aktualnie nie ma połączenia z serwerem. Nie znaleziono serwera."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Nie znaleziono tokenów dostępu. Czy była wykonana kopia zapasowa plików?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
@@ -559,7 +562,7 @@ msgstr "Połączony z lokalnym serwerem UrBackup."
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr "Nie próbuje łączyć się z serwerem przez internet."
+msgstr "Nie próbuje łączyć się z serwerem przez Internet."
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
@@ -571,11 +574,11 @@ msgstr "Nie skonfigurowany serwer internetowy."
 
 #: Status.cpp:58
 msgid "Connected to Internet server"
-msgstr "Połączony z serwerem przez internet."
+msgstr "Połączony z serwerem przez Internet."
 
 #: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr "Nie można połączyć się z serwerem przez internet. Serwer nieosiągalny."
+msgstr "Nie można połączyć się z serwerem przez Internet. Serwer nieosiągalny."
 
 #: Status.cpp:66
 msgid "Error: _1_"
@@ -587,6 +590,7 @@ msgid_plural "days"
 msgstr[0] "dzień"
 msgstr[1] "dni"
 msgstr[2] "dni"
+msgstr[3] "dni"
 
 #: Status.cpp:93
 msgid "hour"
@@ -594,6 +598,7 @@ msgid_plural "hours"
 msgstr[0] "godzina"
 msgstr[1] "godzin"
 msgstr[2] "godzin"
+msgstr[3] "godzin"
 
 #: Status.cpp:101
 msgid "minute"
@@ -601,6 +606,7 @@ msgid_plural "minutes"
 msgstr[0] "minuta"
 msgstr[1] "minut"
 msgstr[2] "minut"
+msgstr[3] "minut"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
@@ -676,7 +682,7 @@ msgstr "Przeglądaj/przywróc kopie zapasowe"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Dostęp do kopii zapasowych"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -712,11 +718,11 @@ msgstr "Wykonaj przyrostowy obraz dysku"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Wybierz składniki do kopii zapasowej"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Przywracanie składników"
 
 #: TrayIcon.cpp:398
 msgid "Pause"

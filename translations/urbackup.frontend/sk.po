@@ -5,14 +5,14 @@
 # Translators:
 # Translators:
 # Translators:
-# janda, 2013-2015
+# janda, 2013-2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-09-23 18:54+0000\n"
+"Last-Translator: janda\n"
 "Language-Team: Slovak (http://www.transifex.com/uroni/urbackup/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,7 +216,7 @@ msgstr "Ok"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -268,7 +268,7 @@ msgstr ""
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
@@ -315,7 +315,7 @@ msgstr "Prosím, vyberte priečinok, ktorý bude zálohovaný."
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Aktualizácia k dispozícii. Aktualizovať teraz."
 
 #: Info.cpp:62
 msgid "Show CBT status"
@@ -606,7 +606,7 @@ msgstr "ETA: približne. _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "Súbor: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"

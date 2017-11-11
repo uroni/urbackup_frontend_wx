@@ -7,9 +7,11 @@
 # Translators:
 # Daniele Renda <daniele.renda@gmail.com>, 2016
 # Francesco Pellegrino <fra.pel@gmail.com>, 2016
+# Luca Calcaterra <calcaterra.luca@gmail.com>, 2017
 # paolo <inforossi@alice.it>, 2013
 # paolo <inforossi@alice.it>, 2013
 # Samuele <samuele.facco@gmail.com>, 2014
+# Silvano C <s.news@carpene.com>, 2017
 # uroni <urpc@gmx.de>, 2013
 # uroni <urpc@gmx.de>, 2013
 msgid ""
@@ -17,8 +19,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-10-17 10:40+0000\n"
+"Last-Translator: Luca Calcaterra <calcaterra.luca@gmail.com>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.com/uroni/urbackup/language/it_IT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,19 +50,19 @@ msgstr "Stato"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Seleziona gli elementi per il ripristino"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Ripristino elementi Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Seleziona i files e i volumi da salvare"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Seleziona gli elementi Windows da salvare"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -222,7 +224,7 @@ msgstr "Ok"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -262,54 +264,54 @@ msgstr "Stato della connessione:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - Ripristino File"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Avvia ripristino"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Avvio operazione di ripristino..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Seleziona i files che vuoi nel backup:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Backup di tutti i files eccetto temporanei, cache, file programmi e di sistema (raccomandato)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Backup dei soli documenti, musica, foto, video, desktop, di tutti gli utenti"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Selezione manuale dei files di cui fare il backup"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Seleziona i volumi di cui fare il backup:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Backup del volume di sistema (raccomandato)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Backup di tutte le unità interne"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Lista lettere di unità di cui fare il backup:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -321,24 +323,24 @@ msgstr "Prego selezionare directory che volete salvare"
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Aggiornamento disponibile. Aggiorna ora."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Mostra stato CBT "
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "CoInitializeSecurity fallita: %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr "_fine_ alla fine."
+msgstr "_percento_ completato."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "&Accedi/ripristina backups"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
@@ -366,7 +368,7 @@ msgstr "Ripresa del backup completo in corso"
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Ripristino files."
 
 #: main.cpp:691
 msgid "Indexing."
@@ -406,7 +408,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Sei sicuro di voler ripristinare il file a _1_? Il contenuto corrente sarà sovrascritto dal quello del backup. Se sei in dubbio, clicca su annulla e fai un backup prima di procedere."
 
 #: main.cpp:873
 msgid ""
@@ -414,11 +416,11 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "Sei sicuro di voler ripristinare il file a _1_? Il contenuto in questa cartella sarà sovrascritto dal quello del backup. Se sei in dubbio, clicca su annulla e fai un backup prima di procedere."
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "Urbackup - consenti il ripristino"
 
 #: main.cpp:909
 msgid ""
@@ -555,7 +557,7 @@ msgstr "Inizializzazione."
 
 #: Status.cpp:40
 msgid "Waiting for local UrBackup server."
-msgstr "Aspettando per un server UrBackup locale."
+msgstr "In attesa di un server UrBackup locale."
 
 #: Status.cpp:49
 msgid "Connected to local UrBackup server."
@@ -677,7 +679,7 @@ msgstr ""
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Accedi ai backups"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -685,7 +687,7 @@ msgstr "Esegui backup file completo"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr "Esegui un backup completo adesso"
+msgstr "Esegui un backup completo ora"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
@@ -693,7 +695,7 @@ msgstr "Esegui backup file incrementale"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr "Esegui un backup incrementale adesso"
+msgstr "Esegui un backup incrementale ora"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
@@ -701,7 +703,7 @@ msgstr "Esegui backup immagine completa"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr "Esegui un backup completo dell'immagine"
+msgstr "Esegui un backup completo dell'immagine ora"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
@@ -709,15 +711,15 @@ msgstr "Esegui backup immagine incrementale "
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr "Esegui un backup incrementale dell'immagine"
+msgstr "Esegui un backup incrementale dell'immagine ora"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Configura i componenti per il backup"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Ripristina componenti"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
@@ -729,15 +731,15 @@ msgstr "Continua"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "Disinstalla"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "Nessun permesso di accesso ai files."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "Errore nella server URL. Impossibile accedere ai files."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

@@ -5,7 +5,8 @@
 # Translators:
 # Translators:
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2014,2016
+# Allgaeu Cycle <Allgaeu.Cycle@gmail.com>, 2017
+# Ettore Atalan <atalanttore@googlemail.com>, 2014,2016-2017
 # bkolbe <info@bkolbe.de>, 2016
 # Martin Raiber <martin@urbackup.org>, 2011
 # uroni <urpc@gmx.de>, 2012-2013
@@ -16,8 +17,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-09-23 18:34+0000\n"
+"Last-Translator: Allgaeu Cycle <Allgaeu.Cycle@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/uroni/urbackup/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,23 +48,23 @@ msgstr "Status"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Wiederherzustellende Komponenten auswählen"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Windows-Komponenten werden wiederhergestellt"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Zu sichernde Dateien und Datenträger auswählen"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Zu sichernde Windows-Komponenten auswählen"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
-msgstr "Intervall für inkrementelle Datensicherungen:"
+msgstr "Intervall für inkrementelle Dateisicherungen:"
 
 #: gui\GUI.cpp:62
 msgid "hours"
@@ -147,7 +148,7 @@ msgstr "min"
 
 #: gui\GUI.cpp:336
 msgid "Volumes to backup:"
-msgstr "Datensicherung von folgenden Datenträgern:"
+msgstr "Zu sichernde Datenträger:"
 
 #: gui\GUI.cpp:359
 msgid "Max backup speed for local network:"
@@ -221,7 +222,7 @@ msgstr "OK"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -261,54 +262,54 @@ msgstr "Internetverbindungsstatus:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - Datei wiederherstellen"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Wiederherstellen starten"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Wiederherstellungsvorgang wird gestartet ..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Bitte wählen Sie die Datei aus, die Sie sichern möchten:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Sicherung aller Dateien außer temporärer Dateien, Cache, System und Programmdateien (empfohlen)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Sicherung von Dokumenten, Musik, Bilder, Videos und der Desktop von allen Benutzern."
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Zu sichernde Dateien manuell auswählen"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Bitte wählen Sie die zu sichernden Datenträger aus:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Systemdatenträger sichern (empfohlen)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Alle internen Festplattendatenträger sichern"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Manuelles Auflisten der zu sichernden Datenträgerbuchstaben:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -324,7 +325,7 @@ msgstr "Aktualisierung verfügbar. Jetzt aktualisieren."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "CBT-Status anzeigen"
 
 #: main.cpp:97
 #, c-format
@@ -432,15 +433,15 @@ msgstr "UrBackup - Windows neu starten"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Wiederherstellen wird vorbereitet"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Wiederherstellungsvorgang in Bearbeitung"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Wiederherstellen abgeschlossen"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
@@ -454,35 +455,35 @@ msgstr ""
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Laden..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Fehler beim Abrufen der Windows-Komponentensicherungen: "
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Fehler beim Abrufen der Windows-Komponentenkonfiguration: "
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Windows-Komponenten"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Keine Sicherung ausgewählt"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Keine Komponenten ausgewählt"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Unbekannter Zugriffsfehler"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Momentan nicht mit einem Sicherungsserver verbunden. Kein Sicherungsserver gefunden."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
@@ -612,7 +613,7 @@ msgstr "Datei: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr "Laufwerk:_1_"
+msgstr "Datenträger:_1_"
 
 #: Status.cpp:260
 msgid "Idle."
@@ -676,7 +677,7 @@ msgstr "Backups anzeigen/wiederherstellen"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Sicherungen anzeigen"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -712,11 +713,11 @@ msgstr "Eine inkrementelle Abbildsicherung jetzt ausführen"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Zu sichernde Komponenten konfigurieren"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Komponenten wiederherstellen"
 
 #: TrayIcon.cpp:398
 msgid "Pause"

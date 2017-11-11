@@ -5,6 +5,9 @@
 # Translators:
 # Translators:
 # Translators:
+# po erix <eirxpo@gmail.com>, 2017
+# Hoilc <fyxyzhc@qq.com>, 2017
+# po erix <eirxpo@gmail.com>, 2017
 # uroni <urpc@gmx.de>, 2013
 # Zhengyu Ren <renzhengyu@gmail.com>, 2013
 msgid ""
@@ -12,8 +15,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2017-09-19 15:03+0000\n"
+"Last-Translator: po erix <eirxpo@gmail.com>\n"
 "Language-Team: Chinese (China) (GB2312) (http://www.transifex.com/uroni/urbackup/language/zh_CN.GB2312/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,19 +46,19 @@ msgstr "状态"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "恢复选择的组件"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "恢复windows组件"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "备份选择的文件和卷"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "备份选择的windows组件"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -151,7 +154,7 @@ msgstr "通过局域网备份时的传输速率上限："
 
 #: gui\GUI.cpp:364
 msgid "MBit/s"
-msgstr ""
+msgstr "MBit/s"
 
 #: gui\GUI.cpp:372
 msgid "Enable backup via internet:"
@@ -183,7 +186,7 @@ msgstr "通过互联网备份时的传输速率上限："
 
 #: gui\GUI.cpp:430
 msgid "KBit/s"
-msgstr ""
+msgstr "KBit/s"
 
 #: gui\GUI.cpp:436
 msgid "Compressed transfer:"
@@ -217,7 +220,7 @@ msgstr "OK"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -253,58 +256,58 @@ msgstr "删除目录"
 
 #: gui\GUI.cpp:816
 msgid "Internet connection status:"
-msgstr ""
+msgstr "互联网连接状态"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup-文件恢复"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "开始恢复"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "开始恢复选项"
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "好"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "请选择你希望备份的文件"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "备份除了临时文件系统文件以及程序文件外的所有文件(推荐)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "只备份文档，音乐，图片，视频以及所有用户在桌面上的文件"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "自定义所需备份文件"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "请选择需备份的卷"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "备份系统卷(推荐)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "备份所有本地卷"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "自定义所需备份的盘符"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -316,56 +319,56 @@ msgstr "请先把需要备份的文件目录。"
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "可升级，现在升级"
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "显示 CBT 状态"
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "CoInitializeSecurity 失败：%08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ 已完成"
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "&A访问/恢复备份"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "文件增量备份中"
 
 #: main.cpp:655
 msgid "Full file backup running."
-msgstr ""
+msgstr "全文件备份中"
 
 #: main.cpp:659
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "增量镜像备份中"
 
 #: main.cpp:663
 msgid "Full image backup running."
-msgstr ""
+msgstr "全镜像备份中"
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "恢复增量文件备份"
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "恢复全文件备份"
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "恢复文件中"
 
 #: main.cpp:691
 msgid "Indexing."
-msgstr ""
+msgstr "索引中"
 
 #: main.cpp:730
 msgid "Cannot connect to backup server"
@@ -382,11 +385,11 @@ msgstr "UrBackup有新版本，点击此处安装。"
 
 #: main.cpp:799
 msgid "No current backup."
-msgstr ""
+msgstr "当前无备份。"
 
 #: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "最近备份于 _1_"
 
 #: main.cpp:850 main.cpp:854
 msgid "UrBackup: New server"
@@ -401,7 +404,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "你去人希望从 _1_ 开始恢复文件么？ 备份文件将会覆盖现有文件. 如果你不确认，请在恢复之前备份现有文件。"
 
 #: main.cpp:873
 msgid ""
@@ -409,80 +412,80 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "你去人希望从 _1_ 开始恢复文件架么? 备份文件夹将会覆盖现有文件夹.如果你不确认，请在恢复之前备份现有文件"
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "Urbackup-允许恢复"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "在恢复过程中，有些文件无法被覆盖或删除。如果你想恢复，需要重启。你是否希望重启？"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup-重启 "
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "准备恢复中"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "恢复正在进行中"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "恢复完成"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "恢复组件 \"_1_\" 写入 \"_2_\". 正在索引..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr " 恢复组件 \"_1_\" 中 \"_2_\". _3_% 完成."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "加载中"
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "在恢复windows组件过程中出现错误"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "在恢复windows组件过程中出现配置错误"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "windows组件"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "未选择需要恢复的备份"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "未选择组件"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "未知的访问错误"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "无法访问备份服务器，未发现备份服务器"
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "没有发现文件备份令牌，你之前有做过文件备份么？"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
@@ -538,47 +541,47 @@ msgstr "系统启动后延迟备份设置不是数字"
 
 #: Settings.cpp:610
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ 不是一个卷"
 
 #: Settings.cpp:624
 msgid "The server port is not valid"
-msgstr ""
+msgstr "服务器端口不可达"
 
 #: Status.cpp:36
 msgid "Initializing."
-msgstr ""
+msgstr "初始化中"
 
 #: Status.cpp:40
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "等待UrBackup服务器"
 
 #: Status.cpp:49
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "已连接到UrBackup服务器"
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "不再尝试连接到互联网备份服务器"
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "本地服务器最后在线于  _1_ 分钟前"
 
 #: Status.cpp:54
 msgid "No Internet server configured."
-msgstr ""
+msgstr "未配置互联网服务器"
 
 #: Status.cpp:58
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "已连接到互联网备份服务器"
 
 #: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "无法连接到互联网备份服务器，服务器不可达"
 
 #: Status.cpp:66
 msgid "Error: _1_"
-msgstr ""
+msgstr "错误：_1_"
 
 #: Status.cpp:85
 msgid "day"
@@ -593,27 +596,27 @@ msgstr[0] "小时"
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
+msgstr[0] "分钟"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "剩余时间：大约 _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "文件：_1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "卷：_1_"
 
 #: Status.cpp:260
 msgid "Idle."
-msgstr ""
+msgstr "空闲"
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "恢复完成"
 
 #: Status.cpp:292
 msgid "Yes"
@@ -625,11 +628,11 @@ msgstr "否"
 
 #: Status.cpp:296
 msgid "Internet: _1_"
-msgstr ""
+msgstr "互联网：_1_"
 
 #: Status.cpp:305
 msgid "Servers:"
-msgstr ""
+msgstr "服务器："
 
 #: TrayIcon.cpp:178 TrayIcon.cpp:203
 msgid "Waiting for server..."
@@ -645,7 +648,7 @@ msgstr "无法开始备份：非发现备份服务器。"
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "无法开始备份"
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
@@ -657,19 +660,19 @@ msgstr "无法继续：与备份服务器失去连接。"
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "你确实想要移除这台客户端么？"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "反安装确认"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "访问/恢复备份"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "访问备份"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -677,7 +680,7 @@ msgstr "执行文件完全备份"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "立即执行全文件备份"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
@@ -685,7 +688,7 @@ msgstr "执行文件增量备份"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "立即执行增量文件备份"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
@@ -693,7 +696,7 @@ msgstr "执行磁盘映像完全备份"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "立即执行磁盘映像完全备份"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
@@ -701,15 +704,15 @@ msgstr "执行磁盘映像增量备份"
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "立即执行磁盘映像增量备份"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "配置需备份组件"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "恢复组件"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
@@ -721,15 +724,15 @@ msgstr "继续"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "反安装"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "无访问任何文件的权限"
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "在访问服务器URL时发生错误，无法访问文件"
 
 #~ msgid "Informations"
 #~ msgstr "Informations"
