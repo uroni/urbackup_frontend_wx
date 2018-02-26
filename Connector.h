@@ -206,7 +206,7 @@ public:
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
 	static int startBackup(bool full);
 	static int startImage(bool full);
-	static bool updateSettings(const std::string &sdata);
+	static bool updateSettings(const std::string &sdata, size_t timeoutms = 5000);
 	static std::vector<SLogEntry> getLogEntries(void);
 	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
 	static bool setPause(bool b_pause);

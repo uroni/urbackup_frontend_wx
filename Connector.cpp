@@ -583,11 +583,11 @@ int Connector::startImage(bool full)
 		return 1;
 }
 
-bool Connector::updateSettings(const std::string &ndata)
+bool Connector::updateSettings(const std::string &ndata, size_t timeoutms)
 {
 	std::string data=ndata;
 	escapeClientMessage(data);
-	std::string d=getResponse("UPDATE SETTINGS "+data,"", true);
+	std::string d=getResponse("UPDATE SETTINGS "+data,"", true, NULL, timeoutms);
 
 	if(d!="OK")
 		return false;

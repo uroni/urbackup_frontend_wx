@@ -848,7 +848,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 			data+=it->first+ L"=" + it->second;
 		}
 
-		if(!Connector::updateSettings(ConvertToUTF8(data)))
+		if(!Connector::updateSettings(ConvertToUTF8(data), 3*60*1000))
 		{
 			std::cerr << "Error saving settings" << std::endl;
 		}		
