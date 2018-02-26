@@ -430,8 +430,8 @@ Function .onInstSuccess
 			Exec '"$INSTDIR\UrBackupClient.exe"'
 		${EndIf}
 		
-		IfSilent setup_defaults
 		SetOutPath "$INSTDIR"
+		IfSilent setup_defaults
 		${If} $EXEFILE != 'UrBackupUpdate.exe'
 			Exec '"$INSTDIR\UrBackupClient.exe" setupWizard'	
 		${EndIf}
