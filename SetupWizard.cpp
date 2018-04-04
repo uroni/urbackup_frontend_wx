@@ -642,6 +642,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	if(fileBackupChoice==EFileBackupChoice_AllWithoutSystem)
 	{
 		pathsNotToBackup.push_back(L"C:\\Windows");
+		pathsNotToBackup.push_back(L"C:\\$GetCurrent");
 
 		TCHAR pf[MAX_PATH];
 		if(SHGetFolderPathW(
