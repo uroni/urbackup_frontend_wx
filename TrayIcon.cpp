@@ -378,7 +378,8 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		mnu->Append(ID_TI_CONFIG_COMPONENTS, _("Configure components to backup"));
 		any_prev = true;
 	}
-	if (!timer->hasCapability(DONT_ALLOW_COMPONENT_RESTORE))
+	if (!timer->hasCapability(DONT_ALLOW_COMPONENT_RESTORE)
+		&& !timer->hasCapability(STATUS_NO_COMPONENTS))
 	{
 		mnu->Append(ID_TI_RESTORE_COMPONENTS, _("Restore components"));
 		any_prev = true;
