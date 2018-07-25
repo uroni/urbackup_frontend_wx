@@ -941,7 +941,7 @@ bool SStatus::isAvailable()
 		std::map<std::string, std::string>::iterator it_restore_path = params.find("restore_path");
 		if (it_restore_path != params.end())
 		{
-			restore_path = it_restore_path->second;
+			restore_path = wxString::FromUTF8(it_restore_path->second.c_str());
 		}
 		std::map<std::string,std::string>::iterator it_needs_restore_restart=params.find("needs_restore_restart");
 		if(it_needs_restore_restart!=params.end())
