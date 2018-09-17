@@ -64,7 +64,8 @@ int getpid(const char* name, DWORD *pids)
 		int iLen,iLenP,indx; 
 		char szName[MAX_PATH],szToTermUpper[MAX_PATH];
 		BOOL bResult; 
-		DWORD aiPID[1000],iCb=1000,iNumProc;
+		DWORD iCb = 500, iNumProc;
+		DWORD* aiPID=NULL;
 		DWORD iCbneeded,i; 
 		HANDLE hProc; 
 		HMODULE hMod; 
@@ -113,13 +114,20 @@ int getpid(const char* name, DWORD *pids)
                return 0; 
             } 
  
-        bResult=lpfEnumProcesses(aiPID,iCb,&iCbneeded); 
-        if(!bResult) 
-        { 
-            // Unable to get process list, EnumProcesses failed 
-            FreeLibrary(hInstLib); 
-            return 0; 
-        } 
+		 do
+		 {
+			 iCb *= 2;
+			 delete[] aiPID;
+			 aiPID = new DWORD[iCb];
+			 bResult = lpfEnumProcesses(aiPID, iCb*sizeof(DWORD), &iCbneeded);
+			 if (!bResult)
+			 {
+				 // Unable to get process list, EnumProcesses failed 
+				 FreeLibrary(hInstLib);
+				 return 0;
+			 }
+		 } while (iCb * sizeof(DWORD) == iCbneeded);
+
  
         // How many processes are there? 
 		int maxmem=0;
@@ -157,6 +165,8 @@ int getpid(const char* name, DWORD *pids)
 			}
 			CloseHandle(hProc); 
 		}
+
+		delete[] aiPID;
 
 		return retPID;
 }
