@@ -77,6 +77,9 @@ Section "install"
 		Quit
 	${EndIf}
 	
+	SetOutPath "$INSTDIR"
+	File "data\version_info.txt"
+	
 	SetOutPath "$TEMP"
 	${If} ${RunningX64}
 		; Push $R0
