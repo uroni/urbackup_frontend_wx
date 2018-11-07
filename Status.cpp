@@ -118,7 +118,9 @@ Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
 		SetFocus();
 		Raise();
 		Show(true);
+#if !defined(__WXMAC__) && !defined(__linux__)
 		RequestUserAttention();
+#endif
 
 		if (follow_only_process_id == 0)
 		{

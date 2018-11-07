@@ -237,7 +237,9 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			{
 				Info::getInstance()->SetFocus();
 				Info::getInstance()->Raise();
+#if !defined(__WXMAC__) && !defined(__linux__)
 				Info::getInstance()->RequestUserAttention();
+#endif
 			}
 			else
 			{
@@ -250,7 +252,9 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			{
 				Status::getInstance()->SetFocus();
 				Status::getInstance()->Raise();
+#if !defined(__WXMAC__) && !defined(__linux__)
 				Status::getInstance()->RequestUserAttention();
+#endif
 			}
 			else
 			{
@@ -301,7 +305,9 @@ void TrayIcon::OnClick(wxCommandEvent &evt)
 	{
 		Status::getInstance()->SetFocus();
 		Status::getInstance()->Raise();
+#if !defined(__WXMAC__) && !defined(__linux__)
 		Status::getInstance()->RequestUserAttention();
+#endif
 	}
 	else
 	{
