@@ -707,6 +707,14 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		backup_volumes = volume_choice;
 	}
 
+	wxMilliClock_t starttime = wxGetLocalTimeMillis();
+	while(!FileExists("urbackup/data/settings.cfg")
+		&& FileExists("initial_settings.cfg") 
+		&& wxGetLocalTimeMillis()-starttime<2*60*1000)
+	{
+		wxMilliSleep(100);
+	}
+
 	CFileSettingsReader setupSettings("setup_wizard.cfg");
 	CFileSettingsReader backupSettings("urbackup/data/settings.cfg");
 	std::map<std::wstring, std::wstring> new_settings;
