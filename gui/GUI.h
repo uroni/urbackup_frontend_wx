@@ -103,6 +103,8 @@ class GUISettings : public wxDialog
 		wxTextCtrl* m_textCtrlInternetServer;
 		wxStaticText* m_staticInternetServerPort;
 		wxTextCtrl* m_textCtrlInternetServerPort;
+		wxStaticText* m_staticInternetServerProxy;
+		wxTextCtrl* m_textCtrlInternetServerProxy;
 		wxStaticText* m_staticInternetServerAuthkey;
 		wxTextCtrl* m_textCtrlInternetServerAuthkey;
 		wxStaticText* m_staticTextInternetFullFile;

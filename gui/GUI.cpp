@@ -392,6 +392,14 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizerH->Add( m_textCtrlInternetServerPort, 0, wxALL, 5 );	
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
+	bSizerH = new wxBoxSizer(wxHORIZONTAL);
+	m_staticInternetServerProxy = new wxStaticText(m_tab_internet, wxID_ANY, _("Internet server HTTP(s) proxy:"), wxDefaultPosition, wxSize(300, -1), 0);
+	m_staticInternetServerProxy->Wrap(-1);
+	bSizerH->Add(m_staticInternetServerProxy, 0, wxALIGN_CENTER | wxALL, 5);
+	m_textCtrlInternetServerProxy = new wxTextCtrl(m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0);
+	bSizerH->Add(m_textCtrlInternetServerProxy, 0, wxALL, 5);
+	bSizer_internet->Add(bSizerH, 0, wxEXPAND, 5);
+
 	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
 	m_staticInternetServerAuthkey = new wxStaticText( m_tab_internet, wxID_ANY, _("Internet server password:"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
 	m_staticInternetServerAuthkey->Wrap( -1 );

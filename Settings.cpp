@@ -356,6 +356,14 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrlInternetServerPort->SetValue(wxT("55415"));
 	}
+	if (getSettingsValue(L"internet_server_proxy", &t, settings))
+	{
+		m_textCtrlInternetServerProxy->SetValue(t);
+	}
+	else
+	{
+		m_textCtrlInternetServerProxy->SetValue(wxT(""));
+	}
 	if(getSettingsValue(L"internet_authkey", &t, settings))
 	{
 		m_textCtrlInternetServerAuthkey->SetValue(t);
@@ -478,6 +486,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	bool internet_mode_enabled=m_checkBoxInternetEnabled->GetValue();
 	wxString internet_server=m_textCtrlInternetServer->GetValue();
 	wxString internet_server_port=m_textCtrlInternetServerPort->GetValue();
+	wxString internet_server_proxy = m_textCtrlInternetServerProxy->GetValue();
 #ifdef _WIN32
 	bool internet_image_backups=false;
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -684,6 +693,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["internet_full_file_backups"]=nconvert(internet_full_file_backups);
 	n_vals["internet_server"]=internet_server.ToUTF8();
 	n_vals["internet_server_port"]=nconvert(l_internet_server_port);
+	n_vals["internet_server_proxy"] = internet_server_proxy.ToUTF8();
 	n_vals["internet_authkey"]=internet_authkey.ToUTF8();
 
 	if(internet_speed!=wxT("-") && !internet_speed.empty())
