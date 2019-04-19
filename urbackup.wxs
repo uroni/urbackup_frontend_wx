@@ -32,6 +32,7 @@
 			<Component Id='urbackup_client' Guid="$(var.ComponentID)" Win64="$(var.isx64)">
 					<File Id='args' Name='args.txt' DiskId='1' Source='data\args.txt' />
 					<File Id='prefilebackup_new.bat'  DiskId='1' Name='prefilebackup_new.bat' Source='data\prefilebackup_new.bat' />
+					<File Id='scrub_disk.bat'  DiskId='1' Name='scrub_disk.bat' Source='data\scrub_disk.bat' />
 					<File Id="cryptoplugin.dll"  DiskId='1' Name='cryptoplugin.dll' Source="$(var.datadir)\cryptoplugin.dll" />
 					<File Id="fileservplugin.dll"  DiskId='1' Name='fileservplugin.dll' Source="$(var.datadir)\fileservplugin.dll" />
 					<File Id="fsimageplugin.dll"  DiskId='1' Name='fsimageplugin.dll' Source="$(var.datadir)\fsimageplugin.dll" />
