@@ -199,6 +199,7 @@ Section "install"
 		File "data\cryptoplugin.dll"
 		File "data\UrBackupClient_cmd.exe"
 		File "data\sysvol_test.exe"
+		File "data\libzstd.dll"
 	${Else}
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
@@ -208,6 +209,7 @@ Section "install"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\UrBackupClient_cmd.exe"
 		File "data_x64\sysvol_test.exe"
+		File "data_x64\libzstd.dll"
 		
 		ExecWait '"$INSTDIR\UrBackupClient_cmd.exe" --version' $0
 		${If} $0 != '1'

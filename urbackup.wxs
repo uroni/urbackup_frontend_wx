@@ -37,6 +37,7 @@
 					<File Id="fileservplugin.dll"  DiskId='1' Name='fileservplugin.dll' Source="$(var.datadir)\fileservplugin.dll" />
 					<File Id="fsimageplugin.dll"  DiskId='1' Name='fsimageplugin.dll' Source="$(var.datadir)\fsimageplugin.dll" />
 					<File Id="urbackup.dll"  DiskId='1' Name='urbackup.dll' Source="$(var.datadir)\urbackup.dll" />
+					<File Id="libzstd.dll"  DiskId='1' Name='libzstd.dll' Source="$(var.datadir)\libzstd.dll" />
 					<File Id="UrBackupClient.exe"  DiskId='1' Name='UrBackupClient.exe' Source="$(var.datadir)\UrBackupClient.exe" />
 					<File Id="UrBackupClient_cmd.exe"  DiskId='1' Name='UrBackupClient_cmd.exe' Source="$(var.datadir)\UrBackupClient_cmd.exe" />
 					
