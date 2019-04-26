@@ -246,7 +246,7 @@
 					</Component>
 				</Directory>
 				<Directory Id="dir72226116A8527C99EDF529487A911541" Name="ja">
-					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B8C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1585}" Win64="$(var.isx64)">
+					<Component Id="cmp1BD08D74C1565C73FA7F252C3D5B0B8C" Guid="{94b1ecbd-728c-4198-a078-bdd1530d1586}" Win64="$(var.isx64)">
 						<File Id="fil0CAB0F81E48E2917698958995EBB68B2" KeyPath="yes" Source="$(var.shared_data_dir)\lang\ja\urbackup.mo" />
 					</Component>
 				</Directory>
