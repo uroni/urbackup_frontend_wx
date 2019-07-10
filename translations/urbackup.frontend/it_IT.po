@@ -8,6 +8,7 @@
 # Daniele Renda <daniele.renda@gmail.com>, 2016
 # Francesco Pellegrino <fra.pel@gmail.com>, 2016
 # Luca Calcaterra <calcaterra.luca@gmail.com>, 2017
+# Mirco Boschi <tipolosko@gmail.com>, 2018
 # paolo <inforossi@alice.it>, 2013
 # paolo <inforossi@alice.it>, 2013
 # Samuele <samuele.facco@gmail.com>, 2014
@@ -19,8 +20,8 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-10-17 10:40+0000\n"
-"Last-Translator: Luca Calcaterra <calcaterra.luca@gmail.com>\n"
+"PO-Revision-Date: 2018-07-01 07:10+0000\n"
+"Last-Translator: Mirco Boschi <tipolosko@gmail.com>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.com/uroni/urbackup/language/it_IT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +51,7 @@ msgstr "Stato"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr "Seleziona gli elementi per il ripristino"
+msgstr "Seleziona gli elementi da ripristinare"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
@@ -62,7 +63,7 @@ msgstr "Seleziona i files e i volumi da salvare"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr "Seleziona gli elementi Windows da salvare"
+msgstr "Seleziona i componenti di Windows da salvare"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -327,7 +328,7 @@ msgstr "Aggiornamento disponibile. Aggiorna ora."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr "Mostra stato CBT "
+msgstr "Mostra stato CBT"
 
 #: main.cpp:97
 #, c-format
@@ -336,7 +337,7 @@ msgstr "CoInitializeSecurity fallita: %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr "_percento_ completato."
+msgstr "_percent_ completato."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
@@ -360,11 +361,11 @@ msgstr "Backup completo dell'immagine in corso."
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr "Ripresa del backup incrementale in corso"
+msgstr "Ripresa del backup incrementale in corso."
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr "Ripresa del backup completo in corso"
+msgstr "Ripresa del backup completo in corso."
 
 #: main.cpp:675
 msgid "Restoring files."
@@ -389,7 +390,7 @@ msgstr "Una nuova versione di UrBackup è disponibile. Prego click qui per insta
 
 #: main.cpp:799
 msgid "No current backup."
-msgstr "Nessun backup in corso"
+msgstr "Nessun backup in corso."
 
 #: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
@@ -427,69 +428,69 @@ msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "Alcuni files non possono essere cancellati o sovrascritti durante l'operazione di ripristino. Per poter procedere con la sovrascrittura/cancellazione, il sistema deve essere riavviato. Vuoi riavviare adesso?"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - Riavvia Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Preparazione Ripristino"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Operazione di ripristino in corso"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Ripristino completato"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Ripristino componente \"_1_\" del writer \"_2_\". Indicizzazione.."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Ripristino componente \"_1_\" del sistema \"_2_\". _3_% completato."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento in corso..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Errore durante l'ottenimento della lista dei componenti backup di Windows: "
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Errore durante l'ottenimento delle configurazioni dei componenti backup di Windows: "
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Componenti Windows"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Nessun backup selezionato"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Nessun componente selezionato"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Errore di accesso sconosciuto"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Non connesso ad un server di backup. Nessun server di backup trovato."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Nessun token di backup trovato. Hai eseguito almeno un backup?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
@@ -565,7 +566,7 @@ msgstr "Connesso al server UrBackup locale."
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr "Non connesso al server remoto"
+msgstr "Connessione al server internet non configurata."
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
@@ -611,11 +612,11 @@ msgstr "FINE: Appross. _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "File: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "Volume: _1_"
 
 #: Status.cpp:260
 msgid "Idle."
@@ -623,7 +624,7 @@ msgstr "Inattivo."
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "Ripristino completato."
 
 #: Status.cpp:292
 msgid "Yes"
@@ -655,7 +656,7 @@ msgstr "Non si avvia il backup non trovo il server di backup"
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "Impossibile avviare il backup."
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
@@ -667,15 +668,15 @@ msgstr "Esecuzione fallita: Manca la connessione al server di backup"
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "Sicuro di voler rimuovere il client UrBackup da questo sistema?"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "Conferma rimozione"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "Accedi / Ripristina backups"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
@@ -687,7 +688,7 @@ msgstr "Esegui backup file completo"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr "Esegui un backup completo ora"
+msgstr "Esegui un backup completo adesso"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
@@ -695,7 +696,7 @@ msgstr "Esegui backup file incrementale"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr "Esegui un backup incrementale ora"
+msgstr "Esegui un backup incrementale adesso"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
@@ -703,7 +704,7 @@ msgstr "Esegui backup immagine completa"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr "Esegui un backup completo dell'immagine ora"
+msgstr "Esegui un backup completo dell'immagine adesso"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
@@ -739,7 +740,7 @@ msgstr "Nessun permesso di accesso ai files."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr "Errore nella server URL. Impossibile accedere ai files."
+msgstr "Errore durante l'ottenimento dell'URL del server. Impossibile accedere ai files."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

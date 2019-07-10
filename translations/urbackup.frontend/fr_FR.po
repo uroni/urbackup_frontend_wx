@@ -5,13 +5,17 @@
 # Translators:
 # Translators:
 # Translators:
+# Charles Peltier <charles@cl-info.fr>, 2014,2018
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
+# ericbosba <nerix@free.fr>, 2012
+# uroni <urpc@gmx.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2018-06-19 11:34+0000\n"
+"Last-Translator: Charles Peltier <charles@cl-info.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/uroni/urbackup/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,385 +25,385 @@ msgstr ""
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: gui\GUI.h:167 TrayIcon.cpp:371
 msgid "Logs"
-msgstr ""
+msgstr "Journaux"
 
 #: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
 msgid "Infos"
-msgstr ""
+msgstr "Informations"
 
 #: gui\GUI.h:244 TrayIcon.cpp:366
 msgid "Add/Remove backup paths"
-msgstr ""
+msgstr "Ajouter/Retirer un chemin à sauvegarder"
 
 #: gui\GUI.h:293 TrayIcon.cpp:406
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Sélectionner un composant à restaurer"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Restaurer un composant Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Sélectionner des fichiers et volumes à sauvegarder"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Sélectionner un composant Windows à sauvegarder"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
-msgstr ""
+msgstr "Intervalle entre les sauvegardes incrémentielles :"
 
 #: gui\GUI.cpp:62
 msgid "hours"
-msgstr ""
+msgstr "heures"
 
 #: gui\GUI.cpp:71
 msgid "Interval for full file backups:"
-msgstr ""
+msgstr "Intervalle entre les sauvegardes complètes de fichiers :"
 
 #: gui\GUI.cpp:78 gui\GUI.cpp:97 gui\GUI.cpp:119
 msgid "days"
-msgstr ""
+msgstr "jours"
 
 #: gui\GUI.cpp:90
 msgid "Interval for incremental image backups:"
-msgstr ""
+msgstr "Intervalle entre les images systèmes incrémentielles :"
 
 #: gui\GUI.cpp:103
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #: gui\GUI.cpp:112
 msgid "Interval for full image backups:"
-msgstr ""
+msgstr "Temps entre les images système complète :"
 
 #: gui\GUI.cpp:139
 msgid "Minimal number of incremental file backups:"
-msgstr ""
+msgstr "Nombre mini de sauvegardes incrémentielles :"
 
 #: gui\GUI.cpp:151
 msgid "Maximal number of incremental file backups:"
-msgstr ""
+msgstr "Nombre maxi de sauvegardes incrémentielles :"
 
 #: gui\GUI.cpp:163
 msgid "Minimal number of full file backups:"
-msgstr ""
+msgstr "Nombre mini de sauvegarde complète de fichiers :"
 
 #: gui\GUI.cpp:175
 msgid "Maximal number of full file backups:"
-msgstr ""
+msgstr "Nombre maxi de sauvegarde complète de fichiers :"
 
 #: gui\GUI.cpp:208
 msgid "Minimal number of incremental image backups:"
-msgstr ""
+msgstr "Nombre mini d'images système incrémentielles :"
 
 #: gui\GUI.cpp:220
 msgid "Maximal number of incremental image backups:"
-msgstr ""
+msgstr "Nombre maxi d'images système incrémentielles :"
 
 #: gui\GUI.cpp:232
 msgid "Minimal number of full image backups:"
-msgstr ""
+msgstr "Nombre minimum d'image système complète :"
 
 #: gui\GUI.cpp:244
 msgid "Maximal number of full image backups:"
-msgstr ""
+msgstr "Nombre maximal d'image système complète :"
 
 #: gui\GUI.cpp:267
 msgid "Computer name:"
-msgstr ""
+msgstr "Nom de l'ordinateur"
 
 #: gui\GUI.cpp:279
 msgid "Exclude from backup (with wildcards):"
-msgstr ""
+msgstr "Exclure de la sauvegarde (avec astérisques) :"
 
 #: gui\GUI.cpp:291
 msgid "Include in backup (with wildcards):"
-msgstr ""
+msgstr "Inclure à la sauvegarde (avec astérisques) :"
 
 #: gui\GUI.cpp:303
 msgid "Backup window:"
-msgstr ""
+msgstr "Créneau horaire de sauvegarde :"
 
 #: gui\GUI.cpp:315
 msgid "Backup delay after system start:"
-msgstr ""
+msgstr "Délai lancement sauvegarde après démarrage système :"
 
 #: gui\GUI.cpp:324
 msgid "min"
-msgstr ""
+msgstr "minute"
 
 #: gui\GUI.cpp:336
 msgid "Volumes to backup:"
-msgstr ""
+msgstr "Lecteurs à sauvegarder :"
 
 #: gui\GUI.cpp:359
 msgid "Max backup speed for local network:"
-msgstr ""
+msgstr "Débit maximal autorisé sur réseau local :"
 
 #: gui\GUI.cpp:364
 msgid "MBit/s"
-msgstr ""
+msgstr "Mbit/s"
 
 #: gui\GUI.cpp:372
 msgid "Enable backup via internet:"
-msgstr ""
+msgstr "Activer la sauvegarde par internet :"
 
 #: gui\GUI.cpp:380
 msgid "Internet server name/IP:"
-msgstr ""
+msgstr "Nom ou IP du serveur internet :"
 
 #: gui\GUI.cpp:388
 msgid "Internet server port:"
-msgstr ""
+msgstr "Port d'écoute du serveur internet :"
 
 #: gui\GUI.cpp:396
 msgid "Internet server password:"
-msgstr ""
+msgstr "Mot de passe du client sur le serveur internet :"
 
 #: gui\GUI.cpp:407
 msgid "Do image backups over internet:"
-msgstr ""
+msgstr "Sauvegarder le système via internet :"
 
 #: gui\GUI.cpp:417
 msgid "Do full file backups over internet:"
-msgstr ""
+msgstr "Sauvegarder les fichiers via internet :"
 
 #: gui\GUI.cpp:425
 msgid "Max backups speed for internet connection:"
-msgstr ""
+msgstr "Débit maximum de la sauvegarde via internet :"
 
 #: gui\GUI.cpp:430
 msgid "KBit/s"
-msgstr ""
+msgstr "Kbit/s"
 
 #: gui\GUI.cpp:436
 msgid "Compressed transfer:"
-msgstr ""
+msgstr "Compresser le transfert :"
 
 #: gui\GUI.cpp:444
 msgid "Encrypted transfer:"
-msgstr ""
+msgstr "Chiffrer le transfert :"
 
 #: gui\GUI.cpp:463
 msgid "File backups"
-msgstr ""
+msgstr "Sauvegardes de fichiers"
 
 #: gui\GUI.cpp:468
 msgid "Image backups"
-msgstr ""
+msgstr "Sauvegardes d'image système"
 
 #: gui\GUI.cpp:471
 msgid "Client"
-msgstr ""
+msgstr "Client"
 
 #: gui\GUI.cpp:472
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: gui\GUI.cpp:483 gui\GUI.cpp:645 gui\GUI.cpp:725
 #: gui\GUIWindowsComponents.cpp:28
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
-msgstr ""
+msgstr "Filtre:"
 
 #: gui\GUI.cpp:542
 msgid "Warnings"
-msgstr ""
+msgstr "Avertissement"
 
 #: gui\GUI.cpp:542
 msgid "Errors"
-msgstr ""
+msgstr "Erreurs"
 
 #: gui\GUI.cpp:559 gui\GUI.cpp:928 TrayIcon.cpp:410
 msgid "Exit"
-msgstr ""
+msgstr "Quitter"
 
 #: gui\GUI.cpp:612
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #: gui\GUI.cpp:686
 msgid "Name:"
-msgstr ""
+msgstr "Nom :"
 
 #: gui\GUI.cpp:734
 msgid "Add path"
-msgstr ""
+msgstr "Ajouter un chemin"
 
 #: gui\GUI.cpp:737
 msgid "Remove path"
-msgstr ""
+msgstr "Supprimer un chemin"
 
 #: gui\GUI.cpp:816
 msgid "Internet connection status:"
-msgstr ""
+msgstr "État de la connexion internet"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - Restauration de fichier"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Démarrer la restauration"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Lancement de la restauration..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Merci de sélectionner le lot de fichiers à sauvegarder"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Sauvegarder tous les fichiers sauf : fichiers temporaires, cache, systèmes et \"program files\" (recommandé)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Sauvegarder uniquement les fichiers des utilisateurs : documents, musique, vidéos et bureau"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Sélectionner manuellement les fichiers"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Sélectionner une partition à sauvegarder"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Sauvegarder la partition système (recommandé)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Sauvegarder tous les volumes internes"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Lister manuellement les volumes à sauvegarder"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
+msgstr "Il y a eu une erreur. Rien ne peut être sauvegardé actuellement."
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr ""
+msgstr "Selectionner le repertoire a sauvegarder."
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Mise à jour disponible. Mettre à jour maintenant."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Afficher le statut CBT"
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "Erreur d'initialisation de la fonction sécurité des process : %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ réalisé"
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "&Visualiser / restaurer les sauvegardes"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Sauvegarde incrémentielle de fichiers en cours"
 
 #: main.cpp:655
 msgid "Full file backup running."
-msgstr ""
+msgstr "Sauvegarde complète de fichiers en cours."
 
 #: main.cpp:659
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Sauvegarde système incrémentielle en cours."
 
 #: main.cpp:663
 msgid "Full image backup running."
-msgstr ""
+msgstr "Sauvegarde système complète en cours"
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Reprise d'une sauvegarde incrémentielle de fichiers en cours."
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Reprise d'une sauvegarde complète de fichiers en cours."
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Restauration des fichiers."
 
 #: main.cpp:691
 msgid "Indexing."
-msgstr ""
+msgstr "Indexation"
 
 #: main.cpp:730
 msgid "Cannot connect to backup server"
-msgstr ""
+msgstr "Impossible de se connecter au serveur de sauvegarde"
 
 #: main.cpp:766 main.cpp:770
 msgid "UrBackup: Update available"
-msgstr ""
+msgstr "UrBackup: Mise à jour disponible"
 
 #: main.cpp:766 main.cpp:770
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
+msgstr "Une nouvelle version de UrBackup est disponible. Cliquer pour l'installer maintenant."
 
 #: main.cpp:799
 msgid "No current backup."
-msgstr ""
+msgstr "Pas de sauvegarde"
 
 #: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Dernière sauvegarde :  _1_"
 
 #: main.cpp:850 main.cpp:854
 msgid "UrBackup: New server"
-msgstr ""
+msgstr "UrBackup : Nouveau serveur."
 
 #: main.cpp:850 main.cpp:854
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
+msgstr "Un nouveau serveur de sauvegarde a été découvert. Cliquer ici pour l'utiliser."
 
 #: main.cpp:869
 msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir restaurer le fichier à _1_ ? Le contenu du fichier en cours sera remplacé par le contenu du fichier de sauvegarde. En cas de doute veuillez annuler et exécuter une sauvegarde de fichiers avant de poursuivre ."
 
 #: main.cpp:873
 msgid ""
@@ -407,330 +411,330 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir restaurer les fichiers dans _1_ ? Les fichiers existants dans ce dossier seront écrasés. Les fichiers créés dans le dossier sélectionné depuis la sauvegarde seront supprimés. En cas de doute veuillez annuler et exécuter une sauvegarde de fichiers avant de poursuivre."
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - autoriser la restauration"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "Certains fichiers ne peuvent pas être supprimés ou écrasés lors du processus de restauration . Afin de remplacer / supprimer les fichiers du système doit être redémarré. Voulez-vous faire maintenant ?"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - redémarrage de Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Préparation de la restauration"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Restauration en cours"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Restauration finie"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Restaure le composant \"_1_\" sur \"_2_\". Indexation..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Restauration du composant \"_1_\" sur \"_2_\". _3_% fini."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Chargement"
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Erreur de récupération du composant Windows sauvegardé"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Erreur de récupération de la configuration du composant Windows"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Composants Windows"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Aucune sauvegarde sélectionnée"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Aucun composant sélectionné"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Erreur d'accès inconnue"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Actuellement non connecté à un serveur de sauvegarde. Aucun serveur trouvé"
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Pas de jeton d'accès au fichier sauvegardé trouvé. Voulez-vous lancer une sauvegarde du fichier maintenant ?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
-msgstr ""
+msgstr "l'intervalle de sauvegarde doit être un nombre"
 
 #: Settings.cpp:514
 msgid "The full backup interval  is not a number"
-msgstr ""
+msgstr "L'intervale de sauvegarde complète n'est pas un nombre"
 
 #: Settings.cpp:523
 msgid "The full image backup interval  is not a number"
-msgstr ""
+msgstr "L'intervale pour l'image système complète n'est pas un nombre"
 
 #: Settings.cpp:529
 msgid "The incremental image backup time is not a number"
-msgstr ""
+msgstr "L’intervalle pour l'image système incrémentielle doit être un nombre"
 
 #: Settings.cpp:537
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
+msgstr "Le nombre maximal de sauvegarde incrémentielle de fichier doit être un nombre"
 
 #: Settings.cpp:543
 msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
+msgstr "Le nombre minimal de sauvegarde incrémentielle de fichier doit être un nombre"
 
 #: Settings.cpp:549
 msgid "The maximal number of full file backups is not a number"
-msgstr ""
+msgstr "Le nombre maximal de sauvegarde complète des fichiers n'est pas un nombre"
 
 #: Settings.cpp:555
 msgid "Minimal number of full file backups is not a number"
-msgstr ""
+msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombre"
 
 #: Settings.cpp:564
 msgid "Minimal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Le nombre minimal d'image système incrémentielle doit être un nombre"
 
 #: Settings.cpp:570
 msgid "Maximal number of incremental image backups is not a number"
-msgstr ""
+msgstr "Le nombre maximal d'image système incrémentielle doit être un nombre"
 
 #: Settings.cpp:576
 msgid "Minimal number of full image backups is not a number"
-msgstr ""
+msgstr "Le nombre minimal d'image système complète doit être un nombre"
 
 #: Settings.cpp:582
 msgid "Maximal number of full image backups is not a number"
-msgstr ""
+msgstr "Le nombre maximal d'images système complètes doit être un nombre"
 
 #: Settings.cpp:590
 msgid "Backup delay after system start is not a number"
-msgstr ""
+msgstr "Délai de lancement sauvegarde après démarrage du système doit être un nombre"
 
 #: Settings.cpp:610
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ n'est pas un volume"
 
 #: Settings.cpp:624
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Le port du serveur n'est pas valide"
 
 #: Status.cpp:36
 msgid "Initializing."
-msgstr ""
+msgstr "Initialisation"
 
 #: Status.cpp:40
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "En attente du serveur UrBackup local"
 
 #: Status.cpp:49
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Connecté au serveur UrBackup local"
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Ne pas essayer de se connecter à un serveur via internet"
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Serveur local vu depuis moins de _1_ minutes"
 
 #: Status.cpp:54
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Pas de serveur internet configuré"
 
 #: Status.cpp:58
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "Connecté au serveur internet"
 
 #: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Ne peux pas se connecter au serveur car il est introuvable."
 
 #: Status.cpp:66
 msgid "Error: _1_"
-msgstr ""
+msgstr "Erreur: _1_"
 
 #: Status.cpp:85
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "jours"
+msgstr[1] "jours"
 
 #: Status.cpp:93
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "heure"
+msgstr[1] "heures"
 
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minute"
+msgstr[1] "minutes"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "fin estimée : approximativement _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "Fichier : _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "Partition : _1_"
 
 #: Status.cpp:260
 msgid "Idle."
-msgstr ""
+msgstr "En attente"
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "Restauration terminée"
 
 #: Status.cpp:292
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: Status.cpp:294
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: Status.cpp:296
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internet : _1_"
 
 #: Status.cpp:305
 msgid "Servers:"
-msgstr ""
+msgstr "Serveur :"
 
 #: TrayIcon.cpp:178 TrayIcon.cpp:203
 msgid "Waiting for server..."
-msgstr ""
+msgstr "En attente du serveur..."
 
 #: TrayIcon.cpp:181 TrayIcon.cpp:206
 msgid "A backup is already running. Could not start another one."
-msgstr ""
+msgstr "Une sauvegarde est actuellement en cours. Vous ne pouvez pas en lancer une autre."
 
 #: TrayIcon.cpp:183 TrayIcon.cpp:208 TrayIcon.cpp:210
 msgid "Could not start backup, because no backup server was found."
-msgstr ""
+msgstr "Impossible de demarrer la sauvegarde. Aucun serveur de sauvegarde n'a été trouvé."
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "Impossible de démarrer la sauvegarde"
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
-msgstr ""
+msgstr "Echec de la mise en pause : pas de connexion au serveur de sauvegarde."
 
 #: TrayIcon.cpp:231
 msgid "Continuing failed: No connection to backup server."
-msgstr ""
+msgstr "Echec de la reprise : Pas de connexion au serveur de sauvegarde."
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "Voulez-vous vraiment désinstaller UrBackup Client de votre système ?"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "Confirmer la désinstallation"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "Visualiser / restaurer les sauvegardes"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Accéder aux sauvegardes"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
-msgstr ""
+msgstr "Faire une sauvegarde complète des fichiers"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Lancer une sauvegarde complète de fichiers"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
-msgstr ""
+msgstr "Faire une sauvegarde incrémentielle des fichiers"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Lancer une sauvegarde incrémentielle de fichiers"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
-msgstr ""
+msgstr "Faire une image système complète"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Lancer une sauvegarde système complète"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
-msgstr ""
+msgstr "Faire une image système incrémentielle"
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Lancer une sauvegarde système incrémentielle"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Configurer les composants à sauvegarder"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Restaurer des composants"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: TrayIcon.cpp:403
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "Déinstaller"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "Pas de droits pour accéder aux fichiers."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "Erreur dans l'adresse du serveur. Impossible d'accéder aux fichiers."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

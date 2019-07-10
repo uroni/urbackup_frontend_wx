@@ -7,14 +7,14 @@
 # Translators:
 # Adam Karlsson <adam.karlsson@gmail.com>, 2015
 # IorX <iorx@yahoo.com>, 2015
-# Jonas Aaslund <gnindit@gmail.com>, 2016
+# Jonas A, 2016
 # Mikael l, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-10-17 20:20+0000\n"
+"PO-Revision-Date: 2017-11-30 21:00+0000\n"
 "Last-Translator: Mikael l\n"
 "Language-Team: Swedish (http://www.transifex.com/uroni/urbackup/language/sv/)\n"
 "MIME-Version: 1.0\n"

@@ -5,7 +5,7 @@
 # Translators:
 # Translators:
 # Translators:
-# Charles Peltier <charles@cl-info.fr>, 2014-2017
+# Charles Peltier <charles@cl-info.fr>, 2014-2018
 # Charles Peltier <charles@cl-info.fr>, 2014
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # ericbosba <nerix@free.fr>, 2012
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-09-23 18:34+0000\n"
+"PO-Revision-Date: 2018-06-19 11:23+0000\n"
 "Last-Translator: Charles Peltier <charles@cl-info.fr>\n"
 "Language-Team: French (http://www.transifex.com/uroni/urbackup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -519,7 +519,7 @@ msgstr "Le nombre maximal de sauvegarde complète des fichiers n'est pas un nomb
 
 #: Settings.cpp:555
 msgid "Minimal number of full file backups is not a number"
-msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombrer"
+msgstr "Le nombre minimal de sauvegarde complète des fichiers n'est pas un nombre"
 
 #: Settings.cpp:564
 msgid "Minimal number of incremental image backups is not a number"

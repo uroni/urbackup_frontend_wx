@@ -7,14 +7,14 @@
 # Translators:
 # Cristian B <cb@kk-partner.dk>, 2016
 # Torben Nygaard <tn@keyone.dk>, 2013
-# Torben Nygaard <tn@keyone.dk>, 2013
+# Torben Nygaard <tn@keyone.dk>, 2013,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-09-19 21:47+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2018-02-11 10:30+0000\n"
+"Last-Translator: Torben Nygaard <tn@keyone.dk>\n"
 "Language-Team: Danish (Denmark) (http://www.transifex.com/uroni/urbackup/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,23 +40,23 @@ msgstr "Tilføj/fjern sikkerhedkopistier"
 
 #: gui\GUI.h:293 TrayIcon.cpp:406
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Vælg de elementer der skal genskabes"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Genskaber Windows elementer"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Vælg filer og volume der skal sikkerhedskopieres"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Vælg Windows elementer der skal sikkerhedeskopieres"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -152,7 +152,7 @@ msgstr "Maksimal sikkerhedskopihastighed for lokalnetværk:"
 
 #: gui\GUI.cpp:364
 msgid "MBit/s"
-msgstr ""
+msgstr "MBits/s"
 
 #: gui\GUI.cpp:372
 msgid "Enable backup via internet:"
@@ -184,7 +184,7 @@ msgstr "Maksimal sikkerhedskopihastighed ved internetforbindelse:"
 
 #: gui\GUI.cpp:430
 msgid "KBit/s"
-msgstr ""
+msgstr "KBits/s"
 
 #: gui\GUI.cpp:436
 msgid "Compressed transfer:"
@@ -218,7 +218,7 @@ msgstr "Ok"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Annuller"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -258,54 +258,54 @@ msgstr "Internetforbindelse status:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - Fil gendannelse"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Start gendannelse"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Starter gendannelsesoperation..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Vælg venligst filsættet der skal tages backup af:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Sikkerhedskopier alle filer, undtaget midlertidige-, cache-, system- og programfiler (anbefales) "
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Sikkerhedskopier kun dokumenter, musik, billeder, video, og skrivebordet for alle brugere"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Vælg filer der skal sikkerhedskopieres manuelt"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Vælg venligst drev der skal sikkerhedskopiers:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Sikkerhedskopier systemdrev (anbefales)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Sikkerhedskopier alle interne drev"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Vis manuelt de drev der skal sikkerhedskopieres:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -317,11 +317,11 @@ msgstr "Angiv venligst den mappe er skal tages sikkedhedskopi af."
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Opdatering tilgængelig. Opdater nu."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Vis CBT status"
 
 #: main.cpp:97
 #, c-format
@@ -330,43 +330,43 @@ msgstr ""
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ udført."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "&Adgang til/Gendan sikkerhedskopi "
 
 #: main.cpp:651
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "Inkremental filsikkerhedskopi kører."
 
 #: main.cpp:655
 msgid "Full file backup running."
-msgstr ""
+msgstr "Fuld fil-sikkerhedskopi kører."
 
 #: main.cpp:659
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "Inkremental spejl-sikkerhedskopi kører."
 
 #: main.cpp:663
 msgid "Full image backup running."
-msgstr ""
+msgstr "Fuld spejl-sikkerhedskopi kører."
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Genoptaget inkremental filsikkerhedskopiering kører."
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Genoptaget fuld fil-sikkerhedskopiering kører."
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Gendanner filer."
 
 #: main.cpp:691
 msgid "Indexing."
-msgstr ""
+msgstr "Indekserer."
 
 #: main.cpp:730
 msgid "Cannot connect to backup server"
@@ -383,11 +383,11 @@ msgstr "En ny version af UrBackup er tilgængelig. Klik venligst her for at inst
 
 #: main.cpp:799
 msgid "No current backup."
-msgstr ""
+msgstr "Ingen nuværende sikkerhedskopi."
 
 #: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "Sidste sikkerhedskopi _1_"
 
 #: main.cpp:850 main.cpp:854
 msgid "UrBackup: New server"
@@ -402,7 +402,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Er du sikker på at filen _1_ skal gendannes? Den nuværende fil vil blive overskrevet med indholdet af filen fra sikkerhedskopien. Er du i tvivl så vælg annuller og foretag en sikkerhedskopi af filen før du fortsætter."
 
 #: main.cpp:873
 msgid ""
@@ -410,80 +410,80 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "Er du sikker på at filerne i _1_ skal gendannes? Den nuværende filer vil blive overskrevet. Alle filer i de valgte mapper der er ændret siden sikkerhedskopien vil blive slettet. Er du i tvivl så vælg annuller og foretag en filsikkerhedskopi før du fortsætter."
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - Tillad gendannelse"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "Nogle filer kunne ikke slettes eller overskrives under gendannelsesprocessen. For at disse filer kan overskrives/slettes skal computeren genstartes. Skal der genstartes nu?"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - Genstart Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Forbereder gendannelse"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Gendannelse er igang"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Gendannelse er afsluttet"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Gendanner element \"_1_\" af \"_2_\". Indekserer..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Gendanner element \"_1_\" af \"_2_\". _3_% færdig."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Henter..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Fejl under modtagelse af Windows elementer til sikkerhedskopiering:"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Fejl under modtagelse af Windows elementers konfiguration"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Windows elementer"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Ingen sikkerhedskopi er valgt"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Ingen elementer er valgt"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Ukendt adgangsfejl"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "Er ikke forbundet til sikkerhedskopiserver. Ingen sikkerhedskopiserver er fundet."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Ingen filsikkerhedskopi adgangsnøgle er fundet. Har du foretaget en filsikkerhedskopi?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
@@ -539,47 +539,47 @@ msgstr "Sikkerhedskopiforsinkels efter systemstart er ikke et tal"
 
 #: Settings.cpp:610
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ er ikke et diskdrev."
 
 #: Settings.cpp:624
 msgid "The server port is not valid"
-msgstr ""
+msgstr "Server port er ikke tillad."
 
 #: Status.cpp:36
 msgid "Initializing."
-msgstr ""
+msgstr "Initialiserer"
 
 #: Status.cpp:40
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "Venter på lokal UrBackup server."
 
 #: Status.cpp:49
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "Forbundet til lokal UrBackup server."
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "Forsøger ikke at forbinde til internetserver."
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "Lokal server er sidst set for _1_ minutter siden."
 
 #: Status.cpp:54
 msgid "No Internet server configured."
-msgstr ""
+msgstr "Ingen internetserver er konfigureret."
 
 #: Status.cpp:58
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "Forbundet til internetserver"
 
 #: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "Kunne ikke forbinde til internetserver. Server er ikke tilgængelig."
 
 #: Status.cpp:66
 msgid "Error: _1_"
-msgstr ""
+msgstr "Fejl: _1_"
 
 #: Status.cpp:85
 msgid "day"
@@ -596,44 +596,44 @@ msgstr[1] "timer"
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minutter"
+msgstr[1] "minutter"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "ETA: Ca. _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "fil: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "Drev: _1_"
 
 #: Status.cpp:260
 msgid "Idle."
-msgstr ""
+msgstr "Inaktiv"
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "Gendannelse er afsluttet."
 
 #: Status.cpp:292
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: Status.cpp:294
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: Status.cpp:296
 msgid "Internet: _1_"
-msgstr ""
+msgstr "Internet: _1_"
 
 #: Status.cpp:305
 msgid "Servers:"
-msgstr ""
+msgstr "Serverer:"
 
 #: TrayIcon.cpp:178 TrayIcon.cpp:203
 msgid "Waiting for server..."
@@ -649,7 +649,7 @@ msgstr "Kunne ikke starte sikkerhedskopiering, fordi sikkerhedskopiserver ikke b
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "Sikkerhedskopiering kunne ikke startes."
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
@@ -661,27 +661,27 @@ msgstr "Gentagne fejl: Ingen forbindelse til sikkerhedskopiserver."
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "Vil du afinstallerer UrBackup-klient fra dette system?"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "Bekræft afinstallation"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "Adgang til/Gendan sikkerhedskopier"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Adgang til sikerhedskopier"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
-msgstr "Udfør komplet fil-sikkerhedskopi"
+msgstr "Udfør fuld fil-sikkerhedskopi"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "Udfør fuld fil-sikkerhedskopi nu"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
@@ -689,15 +689,15 @@ msgstr "Udfør inkremental fil-sikkerhedskopi"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "Foretag en inkremental filsikkerhedskopi nu"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
-msgstr "Udfør komplet spejl-sikkerhedskopi"
+msgstr "Udfør fuld spejl-sikkerhedskopi"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "Foretag en fuld spejl-sikkerhedskopi nu"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
@@ -705,15 +705,15 @@ msgstr "Udfør inkremental spejl-sikkerhedskopi"
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "Foretag en inkremental spejl-sikkerhedskopi nu"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Konfigurer elementer til sikkerhedskopi"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Gendan elementer"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
@@ -725,15 +725,15 @@ msgstr "Fortsæt"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "Afinstaller"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "Ingen adgangsrettigheder til nogen filer."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "Fejl når server URL skal hentes. Kan ikke få adgang til filer."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

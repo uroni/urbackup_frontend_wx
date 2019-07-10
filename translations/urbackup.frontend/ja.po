@@ -5,13 +5,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Ikeguchi Naoki <siketyan@sikeserver.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-02-06 08:34+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2019-06-01 13:00+0000\n"
+"Last-Translator: Ikeguchi Naoki <siketyan@sikeserver.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/uroni/urbackup/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,385 +22,385 @@ msgstr ""
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: gui\GUI.h:167 TrayIcon.cpp:371
 msgid "Logs"
-msgstr ""
+msgstr "ログ"
 
 #: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
 msgid "Infos"
-msgstr ""
+msgstr "情報"
 
 #: gui\GUI.h:244 TrayIcon.cpp:366
 msgid "Add/Remove backup paths"
-msgstr ""
+msgstr "バックアップパスの追加と削除"
 
 #: gui\GUI.h:293 TrayIcon.cpp:406
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "復元するコンポーネントを選択"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Windowsコンポーネントを復元中"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "バックアップするファイルとボリュームを選択"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "バックアップするWindowsコンポーネントを選択"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
-msgstr ""
+msgstr "増分ファイルバックアップの間隔:"
 
 #: gui\GUI.cpp:62
 msgid "hours"
-msgstr ""
+msgstr "時間"
 
 #: gui\GUI.cpp:71
 msgid "Interval for full file backups:"
-msgstr ""
+msgstr "完全ファイルバックアップの間隔:"
 
 #: gui\GUI.cpp:78 gui\GUI.cpp:97 gui\GUI.cpp:119
 msgid "days"
-msgstr ""
+msgstr "日"
 
 #: gui\GUI.cpp:90
 msgid "Interval for incremental image backups:"
-msgstr ""
+msgstr "増分イメージバックアップの間隔:"
 
 #: gui\GUI.cpp:103
 msgid "Active"
-msgstr ""
+msgstr "アクティブ"
 
 #: gui\GUI.cpp:112
 msgid "Interval for full image backups:"
-msgstr ""
+msgstr "完全イメージバックアップの間隔:"
 
 #: gui\GUI.cpp:139
 msgid "Minimal number of incremental file backups:"
-msgstr ""
+msgstr "増分ファイルバックアップの最小値:"
 
 #: gui\GUI.cpp:151
 msgid "Maximal number of incremental file backups:"
-msgstr ""
+msgstr "増分ファイルバックアップの最大値:"
 
 #: gui\GUI.cpp:163
 msgid "Minimal number of full file backups:"
-msgstr ""
+msgstr "完全ファイルバックアップの最小値:"
 
 #: gui\GUI.cpp:175
 msgid "Maximal number of full file backups:"
-msgstr ""
+msgstr "完全ファイルバックアップの最大値:"
 
 #: gui\GUI.cpp:208
 msgid "Minimal number of incremental image backups:"
-msgstr ""
+msgstr "増分イメージバックアップの最小値:"
 
 #: gui\GUI.cpp:220
 msgid "Maximal number of incremental image backups:"
-msgstr ""
+msgstr "増分イメージバックアップの最大値:"
 
 #: gui\GUI.cpp:232
 msgid "Minimal number of full image backups:"
-msgstr ""
+msgstr "完全イメージバックアップの最小値:"
 
 #: gui\GUI.cpp:244
 msgid "Maximal number of full image backups:"
-msgstr ""
+msgstr "完全イメージバックアップの最大値:"
 
 #: gui\GUI.cpp:267
 msgid "Computer name:"
-msgstr ""
+msgstr "コンピュータ名:"
 
 #: gui\GUI.cpp:279
 msgid "Exclude from backup (with wildcards):"
-msgstr ""
+msgstr "バックアップから除外 （ワイルドカード可）:"
 
 #: gui\GUI.cpp:291
 msgid "Include in backup (with wildcards):"
-msgstr ""
+msgstr "バックアップに含める （ワイルドカード可）:"
 
 #: gui\GUI.cpp:303
 msgid "Backup window:"
-msgstr ""
+msgstr "バックアップウィンドウ:"
 
 #: gui\GUI.cpp:315
 msgid "Backup delay after system start:"
-msgstr ""
+msgstr "システムの起動からバックアップまでの遅延:"
 
 #: gui\GUI.cpp:324
 msgid "min"
-msgstr ""
+msgstr "最小"
 
 #: gui\GUI.cpp:336
 msgid "Volumes to backup:"
-msgstr ""
+msgstr "バックアップするボリューム:"
 
 #: gui\GUI.cpp:359
 msgid "Max backup speed for local network:"
-msgstr ""
+msgstr "ローカルネットワークでの最大バックアップ速度:"
 
 #: gui\GUI.cpp:364
 msgid "MBit/s"
-msgstr ""
+msgstr "メガビット/秒"
 
 #: gui\GUI.cpp:372
 msgid "Enable backup via internet:"
-msgstr ""
+msgstr "インターネットを介したバックアップを有効化:"
 
 #: gui\GUI.cpp:380
 msgid "Internet server name/IP:"
-msgstr ""
+msgstr "サーバ名またはIPアドレス:"
 
 #: gui\GUI.cpp:388
 msgid "Internet server port:"
-msgstr ""
+msgstr "ポート番号:"
 
 #: gui\GUI.cpp:396
 msgid "Internet server password:"
-msgstr ""
+msgstr "パスワード:"
 
 #: gui\GUI.cpp:407
 msgid "Do image backups over internet:"
-msgstr ""
+msgstr "インターネットを介してイメージバックアップを行う:"
 
 #: gui\GUI.cpp:417
 msgid "Do full file backups over internet:"
-msgstr ""
+msgstr "インターネットを介して完全ファイルバックアップを行う:"
 
 #: gui\GUI.cpp:425
 msgid "Max backups speed for internet connection:"
-msgstr ""
+msgstr "インターネット接続での最大バックアップ速度:"
 
 #: gui\GUI.cpp:430
 msgid "KBit/s"
-msgstr ""
+msgstr "キロビット/秒"
 
 #: gui\GUI.cpp:436
 msgid "Compressed transfer:"
-msgstr ""
+msgstr "圧縮して転送:"
 
 #: gui\GUI.cpp:444
 msgid "Encrypted transfer:"
-msgstr ""
+msgstr "暗号化して転送:"
 
 #: gui\GUI.cpp:463
 msgid "File backups"
-msgstr ""
+msgstr "ファイルバックアップ"
 
 #: gui\GUI.cpp:468
 msgid "Image backups"
-msgstr ""
+msgstr "イメージバックアップ"
 
 #: gui\GUI.cpp:471
 msgid "Client"
-msgstr ""
+msgstr "クライアント"
 
 #: gui\GUI.cpp:472
 msgid "Internet"
-msgstr ""
+msgstr "インターネット"
 
 #: gui\GUI.cpp:483 gui\GUI.cpp:645 gui\GUI.cpp:725
 #: gui\GUIWindowsComponents.cpp:28
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
-msgstr ""
+msgstr "絞り込み:"
 
 #: gui\GUI.cpp:542
 msgid "Warnings"
-msgstr ""
+msgstr "警告"
 
 #: gui\GUI.cpp:542
 msgid "Errors"
-msgstr ""
+msgstr "エラー"
 
 #: gui\GUI.cpp:559 gui\GUI.cpp:928 TrayIcon.cpp:410
 msgid "Exit"
-msgstr ""
+msgstr "終了"
 
 #: gui\GUI.cpp:612
 msgid "Version:"
-msgstr ""
+msgstr "バージョン:"
 
 #: gui\GUI.cpp:686
 msgid "Name:"
-msgstr ""
+msgstr "名前:"
 
 #: gui\GUI.cpp:734
 msgid "Add path"
-msgstr ""
+msgstr "パスの追加"
 
 #: gui\GUI.cpp:737
 msgid "Remove path"
-msgstr ""
+msgstr "パスの削除"
 
 #: gui\GUI.cpp:816
 msgid "Internet connection status:"
-msgstr ""
+msgstr "インターネット接続状態:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - ファイルの復元"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "復元開始"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "復元を開始しています…"
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "バックアップしたいファイルを選択してください:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "一時，キャッシュ，システム，プログラムのファイルを除いた全ファイルをバックアップする （推奨）"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "全ユーザのドキュメント，音楽，画像，動画，デスクトップのみをバックアップする"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "バックアップするファイルを手動で選択する"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "バックアップするボリュームを選択してください:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "システムボリュームをバックアップする （推奨）"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "全ての内部ディスクボリュームをバックアップする"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "バックアップするボリュームの文字を手動設定:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
-msgstr ""
+msgstr "エラーが発生しました．現在，何もバックアップされていません．"
 
 #: ConfigPath.cpp:89
 msgid "Please select the directory that will be backed up."
-msgstr ""
+msgstr "バックアップされるディレクトリを選択してください．"
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "アップデートがあります．アップデートしてください．"
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "CBTの状態を表示"
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "CoInitializeSecurity 失敗: %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr ""
+msgstr "_percent_ 完了．"
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "バックアップのアクセスと復元 (&A)"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
-msgstr ""
+msgstr "増分ファイルバックアップを実行中．"
 
 #: main.cpp:655
 msgid "Full file backup running."
-msgstr ""
+msgstr "完全ファイルバックアップを実行中．"
 
 #: main.cpp:659
 msgid "Incremental image backup running."
-msgstr ""
+msgstr "増分イメージバックアップを実行中．"
 
 #: main.cpp:663
 msgid "Full image backup running."
-msgstr ""
+msgstr "完全イメージバックアップを実行中．"
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "再開された増分ファイルバックアップを実行中．"
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "再開された完全ファイルバックアップを実行中．"
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "ファイルを復元中．"
 
 #: main.cpp:691
 msgid "Indexing."
-msgstr ""
+msgstr "インデックス中．"
 
 #: main.cpp:730
 msgid "Cannot connect to backup server"
-msgstr ""
+msgstr "バックアップサーバに接続できません"
 
 #: main.cpp:766 main.cpp:770
 msgid "UrBackup: Update available"
-msgstr ""
+msgstr "UrBackup: アップデートが有効"
 
 #: main.cpp:766 main.cpp:770
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
-msgstr ""
+msgstr "UrBackupの新しいバージョンが有効です．ここをクリックしてインストールしてください．"
 
 #: main.cpp:799
 msgid "No current backup."
-msgstr ""
+msgstr "バックアップはありません．"
 
 #: main.cpp:816 Status.cpp:274
 msgid "Last backup on _1_"
-msgstr ""
+msgstr "最終バックアップ: _1_"
 
 #: main.cpp:850 main.cpp:854
 msgid "UrBackup: New server"
-msgstr ""
+msgstr "UrBackup: 新しいサーバ"
 
 #: main.cpp:850 main.cpp:854
 msgid "A new backup server has been found. Click here to use it"
-msgstr ""
+msgstr "新しいバックアップサーバを見つけました．ここをクリックして使用"
 
 #: main.cpp:869
 msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "_1_ のファイルを復元してもよろしいですか？ 現在のファイルの内容は上書きされます． 疑わしい場合は，キャンセルしてファイルバックアップを行ってから再試行してください．"
 
 #: main.cpp:873
 msgid ""
@@ -407,327 +408,327 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "_1_ 内のファイルを復元してもよろしいですか？ フォルダ内に存在するファイルは上書きされます． フォルダ内のバックアップ以降に作成されたファイルは削除されます． 疑わしい場合は，キャンセルしてファイルバックアップを行ってから再試行してください．"
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - 復元を許可"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "復元中にいくつかのファイルを削除または上書きできませんでした． 削除または上書きを行うために，システムを再起動する必要があります． 今すぐ行いますか？"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - Windowsを再起動"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "復元の準備中"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "復元中"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "復元完了"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "\"_2_\" のコンポーネント \"_1_\" を復元中． インデックスしています…"
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "\"_2_\" のコンポーネント \"_1_\" を復元中． _3_% 完了しました．"
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "読み込み中…"
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Windowsコンポーネントバックアップの取得エラー:"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Windowsコンポーネント設定の取得エラー:"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Windowsコンポーネント"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "バックアップが選択されていません"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "コンポーネントが選択されていません"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "不明なアクセスエラー"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "現在，バックアップサーバに接続されていません． バックアップサーバが見つかりませんでした．"
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "ファイルバックアップのアクセストークンが見つかりませんでした． ファイルバックアップを実行しましたか？"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
-msgstr ""
+msgstr "増分バックアップの間隔が数値ではありません"
 
 #: Settings.cpp:514
 msgid "The full backup interval  is not a number"
-msgstr ""
+msgstr "完全バックアップの間隔が数値ではありません"
 
 #: Settings.cpp:523
 msgid "The full image backup interval  is not a number"
-msgstr ""
+msgstr "完全イメージバックアップの間隔が数値ではありません"
 
 #: Settings.cpp:529
 msgid "The incremental image backup time is not a number"
-msgstr ""
+msgstr "増分イメージバックアップの間隔が数値ではありません"
 
 #: Settings.cpp:537
 msgid "The maximal number of incremental file backups  is not a number"
-msgstr ""
+msgstr "増分ファイルバックアップの最大値が数値ではありません"
 
 #: Settings.cpp:543
 msgid "The minimal number of incremental file backups is not a number"
-msgstr ""
+msgstr "増分ファイルバックアップの最小値が数値ではありません"
 
 #: Settings.cpp:549
 msgid "The maximal number of full file backups is not a number"
-msgstr ""
+msgstr "完全ファイルバックアップの最大値が数値ではありません"
 
 #: Settings.cpp:555
 msgid "Minimal number of full file backups is not a number"
-msgstr ""
+msgstr "完全ファイルバックアップの最小値が数値ではありません"
 
 #: Settings.cpp:564
 msgid "Minimal number of incremental image backups is not a number"
-msgstr ""
+msgstr "増分イメージバックアップの最小値が数値ではありません"
 
 #: Settings.cpp:570
 msgid "Maximal number of incremental image backups is not a number"
-msgstr ""
+msgstr "増分イメージバックアップの最大値が数値ではありません"
 
 #: Settings.cpp:576
 msgid "Minimal number of full image backups is not a number"
-msgstr ""
+msgstr "完全イメージバックアップの最小値が数値ではありません"
 
 #: Settings.cpp:582
 msgid "Maximal number of full image backups is not a number"
-msgstr ""
+msgstr "完全イメージバックアップの最大値が数値ではありません"
 
 #: Settings.cpp:590
 msgid "Backup delay after system start is not a number"
-msgstr ""
+msgstr "システムの起動からバックアップまでの遅延が数値ではありません"
 
 #: Settings.cpp:610
 msgid "_1_ is not a volume"
-msgstr ""
+msgstr "_1_ はボリュームではありません"
 
 #: Settings.cpp:624
 msgid "The server port is not valid"
-msgstr ""
+msgstr "サーバのポート番号が不正です"
 
 #: Status.cpp:36
 msgid "Initializing."
-msgstr ""
+msgstr "初期化中．"
 
 #: Status.cpp:40
 msgid "Waiting for local UrBackup server."
-msgstr ""
+msgstr "ローカル UrBackup サーバを待機中．"
 
 #: Status.cpp:49
 msgid "Connected to local UrBackup server."
-msgstr ""
+msgstr "ローカル UrBackup サーバに接続しました．"
 
 #: Status.cpp:49
 msgid "Not trying to connect to Internet server."
-msgstr ""
+msgstr "インターネットサーバへの接続を施行していません．"
 
 #: Status.cpp:50
 msgid "Local server last seen _1_ minutes ago."
-msgstr ""
+msgstr "ローカルサーバは _1_ 分前にアクティブでした．"
 
 #: Status.cpp:54
 msgid "No Internet server configured."
-msgstr ""
+msgstr "インターネットサーバが設定されていません．"
 
 #: Status.cpp:58
 msgid "Connected to Internet server"
-msgstr ""
+msgstr "インターネットサーバに接続しました"
 
 #: Status.cpp:62
 msgid "Could not connect to Internet server. Server unreachable."
-msgstr ""
+msgstr "インターネットサーバに接続できませんでした． サーバに到達できません．"
 
 #: Status.cpp:66
 msgid "Error: _1_"
-msgstr ""
+msgstr "エラー: _1_"
 
 #: Status.cpp:85
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "日"
 
 #: Status.cpp:93
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
+msgstr[0] "時間"
 
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
+msgstr[0] "分"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
-msgstr ""
+msgstr "残り: 約 _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "ファイル: _1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "ボリューム: _1_"
 
 #: Status.cpp:260
 msgid "Idle."
-msgstr ""
+msgstr "準備完了．"
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "復元が完了しました．"
 
 #: Status.cpp:292
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 #: Status.cpp:294
 msgid "No"
-msgstr ""
+msgstr "いいえ"
 
 #: Status.cpp:296
 msgid "Internet: _1_"
-msgstr ""
+msgstr "インターネット: _1_"
 
 #: Status.cpp:305
 msgid "Servers:"
-msgstr ""
+msgstr "サーバ:"
 
 #: TrayIcon.cpp:178 TrayIcon.cpp:203
 msgid "Waiting for server..."
-msgstr ""
+msgstr "サーバを待機中…"
 
 #: TrayIcon.cpp:181 TrayIcon.cpp:206
 msgid "A backup is already running. Could not start another one."
-msgstr ""
+msgstr "バックアップが既に実行されています． もう一つを開始することはできません．"
 
 #: TrayIcon.cpp:183 TrayIcon.cpp:208 TrayIcon.cpp:210
 msgid "Could not start backup, because no backup server was found."
-msgstr ""
+msgstr "バックアップサーバが見つからなかったため，バックアップを開始できませんでした．"
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "バックアップを開始できませんでした．"
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
-msgstr ""
+msgstr "一時停止に失敗: バックアップサーバに接続していません．"
 
 #: TrayIcon.cpp:231
 msgid "Continuing failed: No connection to backup server."
-msgstr ""
+msgstr "継続に失敗: バックアップサーバに接続していません．"
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "本当にこのシステムから UrBackup クライアントを削除してもよろしいですか？"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "アンインストールの確認"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "バックアップのアクセスと復元"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "バックアップへアクセス"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
-msgstr ""
+msgstr "完全ファイルバックアップの実行"
 
 #: TrayIcon.cpp:330
 msgid "Do a full file backup now"
-msgstr ""
+msgstr "今すぐ完全ファイルバックアップを実行"
 
 #: TrayIcon.cpp:335
 msgid "Do incremental file backup"
-msgstr ""
+msgstr "増分ファイルバックアップを実行"
 
 #: TrayIcon.cpp:335
 msgid "Do a incremental file backup now"
-msgstr ""
+msgstr "今すぐ増分ファイルバックアップを実行"
 
 #: TrayIcon.cpp:344
 msgid "Do full image backup"
-msgstr ""
+msgstr "完全イメージバックアップを実行"
 
 #: TrayIcon.cpp:344
 msgid "Do a full image backup now"
-msgstr ""
+msgstr "今すぐ完全イメージバックアップを実行"
 
 #: TrayIcon.cpp:349
 msgid "Do incremental image backup"
-msgstr ""
+msgstr "増分イメージバックアップを実行"
 
 #: TrayIcon.cpp:349
 msgid "Do a incremental image backup now"
-msgstr ""
+msgstr "今すぐ増分イメージバックアップを実行"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "バックアップするコンポーネントを設定"
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "コンポーネントを復元"
 
 #: TrayIcon.cpp:398
 msgid "Pause"
-msgstr ""
+msgstr "一時停止"
 
 #: TrayIcon.cpp:403
 msgid "Continue"
-msgstr ""
+msgstr "継続"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "アンインストール"
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "ファイルへのアクセス権がありません．"
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "サーバURLの取得エラー． ファイルにアクセスできません．"
 
 #~ msgid "Informations"
 #~ msgstr "Informations"

@@ -439,6 +439,10 @@ bool MyApp::OnInit()
 		lang = sysdef;
 		g_lang = "fi";
 		break;
+	case wxLANGUAGE_JAPANESE:
+		lang = sysdef;
+		g_lang = "ja";
+		break;
 	}
 
 	//std::cout << "Lang: " << g_lang << std::endl;

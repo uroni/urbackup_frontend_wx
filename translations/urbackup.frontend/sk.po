@@ -6,19 +6,20 @@
 # Translators:
 # Translators:
 # janda, 2013-2015,2017
+# Michal Zila <holden42@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-09-23 18:54+0000\n"
-"Last-Translator: janda\n"
+"PO-Revision-Date: 2019-03-20 13:27+0000\n"
+"Last-Translator: Michal Zila <holden42@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/uroni/urbackup/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
@@ -42,19 +43,19 @@ msgstr "Stav"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Vyberte súčasti pre obnovenie"
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Obnovovanie súčastí systému Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Vyberte súbory a zväzky pre zálohovanie"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Vyberte súčasti systému Windows pre zálohovanie"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -256,15 +257,15 @@ msgstr "Stav pripojenia k Internetu:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - obnovenie súborov"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Spustiť obnovenie"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Spúšťanie procesu obnovenia..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
@@ -272,38 +273,38 @@ msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Vyberte súbory, ktoré chcete zálohovať:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Zálohovať všetky súbory s výnimkou dočasných súborov, medzi-pamäti, systémových súborov a programov (odporúčané)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Zálohovať len dokumenty, hudbu, obrázky, filmy a plochu všetkých používateľov"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Ručne vybrať súbory pre zálohovanie"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Vyberte zväzky pre zálohovanie:"
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Zálohovať systémový zväzok (odporúčané)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Zálohovať všetky interné zväzky"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Ručne vypísať písmená zväzkov pre zálohovanie:"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -319,7 +320,7 @@ msgstr "Aktualizácia k dispozícii. Aktualizovať teraz."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Zobraziť stav CBT"
 
 #: main.cpp:97
 #, c-format
@@ -332,7 +333,7 @@ msgstr "_percent_ hotovo."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "&Zobraziť/obnoviť zálohy"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
@@ -352,15 +353,15 @@ msgstr "Úplná záloha obrazu disku je spustená."
 
 #: main.cpp:667
 msgid "Resumed incremental file backup running."
-msgstr ""
+msgstr "Pokračovanie prírastkovej súborovej zálohy."
 
 #: main.cpp:671
 msgid "Resumed full file backup running."
-msgstr ""
+msgstr "Pokračovanie úplnej súborovej zálohy."
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Obnovovanie súborov."
 
 #: main.cpp:691
 msgid "Indexing."
@@ -400,7 +401,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Naozaj chcete obnoviť súbor do _1_? Obsah novšieho súboru sa prepíše tým zo zálohy. Ak si nie ste istí, tak operáciu zrušte a spustite zálohu v súčasnom stave a až potom pokračujte v obnovovaní."
 
 #: main.cpp:873
 msgid ""
@@ -412,7 +413,7 @@ msgstr ""
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - umožniť obnovovanie"
 
 #: main.cpp:909
 msgid ""
@@ -423,19 +424,19 @@ msgstr ""
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - reštartovať Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Príprava obnovenia"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Prebieha obnovovanie"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Obnovovanie dokončené"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
@@ -473,7 +474,7 @@ msgstr ""
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Neznáma chyba prístupu"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
@@ -585,6 +586,7 @@ msgid_plural "days"
 msgstr[0] "deň"
 msgstr[1] "dni"
 msgstr[2] "dní"
+msgstr[3] "dní"
 
 #: Status.cpp:93
 msgid "hour"
@@ -592,6 +594,7 @@ msgid_plural "hours"
 msgstr[0] "hodina"
 msgstr[1] "hodín"
 msgstr[2] "hodín"
+msgstr[3] "hodín"
 
 #: Status.cpp:101
 msgid "minute"
@@ -599,6 +602,7 @@ msgid_plural "minutes"
 msgstr[0] "minúta"
 msgstr[1] "minút"
 msgstr[2] "minút"
+msgstr[3] "minút"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"

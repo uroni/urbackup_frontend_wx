@@ -5,14 +5,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Constantin Jianu <jianuconstantinioan@yahoo.com>, 2018
 # Olivian Daniel Tofan <daniel@toffee.ro>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-09-22 10:23+0000\n"
-"Last-Translator: uroni <urpc@gmx.de>\n"
+"PO-Revision-Date: 2018-03-22 21:15+0000\n"
+"Last-Translator: Constantin Jianu <jianuconstantinioan@yahoo.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/uroni/urbackup/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,19 +43,19 @@ msgstr "Stare"
 
 #: gui\GUIRestoreWindowsComponents.h:53
 msgid "Select components to restore"
-msgstr ""
+msgstr "Selectează componentele ce vor fi restaurate "
 
 #: gui\GUIRestoreWindowsComponents.h:78
 msgid "Restoring Windows components"
-msgstr ""
+msgstr "Restaurează Componente Windows"
 
 #: gui\GUISetupWizard.h:61
 msgid "Select files and volumes to backup"
-msgstr ""
+msgstr "Selectează fișiere și volume pentru care se va crea copie de rezerva"
 
 #: gui\GUIWindowsComponents.h:48
 msgid "Select Windows components to backup"
-msgstr ""
+msgstr "Selectează componente Windows pentru care se va crea copie de rezerva"
 
 #: gui\GUI.cpp:55
 msgid "Interval for incremental file backups:"
@@ -216,7 +217,7 @@ msgstr "Ok"
 #: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 #: gui\GUI.cpp:538
 msgid "Filter:"
@@ -256,54 +257,54 @@ msgstr "Stare conexiune Internet:"
 
 #: gui\GUI.cpp:829
 msgid "UrBackup - File restore"
-msgstr ""
+msgstr "UrBackup - Fisier restaurat"
 
 #: gui\GUIRestoreWindowsComponents.cpp:37
 msgid "Start restore"
-msgstr ""
+msgstr "Start restaurare"
 
 #: gui\GUIRestoreWindowsComponents.cpp:76 RestoreWindowsComponents.cpp:108
 msgid "Starting restore operation..."
-msgstr ""
+msgstr "Se începe operația de restaurare ..."
 
 #: gui\GUIRestoreWindowsComponents.cpp:97
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: gui\GUISetupWizard.cpp:26
 msgid "Please select the file set you want to backup:"
-msgstr ""
+msgstr "Te rog sa selectezi fisierul pentru care se va face copie de rezerva:"
 
 #: gui\GUISetupWizard.cpp:32
 msgid ""
 "Backup all files except temporary, cache, system and program files "
 "(recommended)"
-msgstr ""
+msgstr "Fa copie de rezerva tuturor fisierelor cu exceptia celor cache, de sistem si Program Files (recomandat)"
 
 #: gui\GUISetupWizard.cpp:37
 msgid ""
 "Backup only documents, music, pictures, movies and the desktop of all users"
-msgstr ""
+msgstr "Fa copie de rezerva numai la documente, muzica, fotografii, filme si fișierelor de pe desktop pentru toți useri"
 
 #: gui\GUISetupWizard.cpp:42
 msgid "Manually select the files to backup"
-msgstr ""
+msgstr "Selecteaza manual fisierele pentru  copie de rezerva"
 
 #: gui\GUISetupWizard.cpp:56
 msgid "Please select the volumes to backup:"
-msgstr ""
+msgstr "Te rog selecteaza volumele pentru care se vor face copie de rezerva "
 
 #: gui\GUISetupWizard.cpp:62
 msgid "Backup the system volume (recommended)"
-msgstr ""
+msgstr "Copie de rezerva pentru volumul cu sistem (recomandat)"
 
 #: gui\GUISetupWizard.cpp:67
 msgid "Backup all internal disk volumes"
-msgstr ""
+msgstr "Copie de rezerva pentru toate volumele"
 
 #: gui\GUISetupWizard.cpp:72
 msgid "Manually list the volume letters to backup:"
-msgstr ""
+msgstr "Listeaza manual literele volumelor pentru copie de rezerva"
 
 #: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
 msgid "There was an error. Currently nothing can be backed up."
@@ -315,16 +316,16 @@ msgstr "Selectați dosarul pentru care se va realiza copia de rezervă. "
 
 #: Info.cpp:52
 msgid "Update available. Update now."
-msgstr ""
+msgstr "Actualizari disponibile. Actualizati acum."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr ""
+msgstr "Arata statusul CBT."
 
 #: main.cpp:97
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
-msgstr ""
+msgstr "CoInitializeSecurity nu a reușit: 1%08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
@@ -332,7 +333,7 @@ msgstr "_percent_ terminat."
 
 #: main.cpp:479
 msgid "&Access/restore backups"
-msgstr ""
+msgstr "Accesați / restaurați copii de rezervă"
 
 #: main.cpp:651
 msgid "Incremental file backup running."
@@ -360,7 +361,7 @@ msgstr "Execuția copierii de rezervă întreagă fișier a fost reluată."
 
 #: main.cpp:675
 msgid "Restoring files."
-msgstr ""
+msgstr "Restaurarea fișierelor"
 
 #: main.cpp:691
 msgid "Indexing."
@@ -400,7 +401,7 @@ msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
-msgstr ""
+msgstr "Sigur doriți să restaurați fișierul la _1_? Conținutul actual al fișierelor va fi suprascris de conținutul fișierului de rezervă. Când aveți dubii, vă rugăm să anulați și să executați o copie de siguranță a fișierelor înainte de a continua."
 
 #: main.cpp:873
 msgid ""
@@ -408,80 +409,80 @@ msgid ""
 "folder will be overwritten. Files created within the selected folder since "
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
-msgstr ""
+msgstr "Sigur doriți să restaurați fișierele în _1_? Fișierele existente din acest dosar vor fi suprascrise. Fișierele create în folderul selectat de la copia de rezervă vor fi șterse. Când aveți dubii, vă rugăm să anulați și să executați o copie de siguranță a fișierelor înainte de a continua."
 
 #: main.cpp:877
 msgid "UrBackup - Allow restore"
-msgstr ""
+msgstr "UrBackup - Permiteți restaurarea"
 
 #: main.cpp:909
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
-msgstr ""
+msgstr "Unele fișiere nu au putut fi șterse sau suprascrise în timpul procesului de restaurare. Pentru a suprascrie / șterge fișierele, sistemul trebuie să fie repornit. Vrei să faci asta acum?"
 
 #: main.cpp:909
 msgid "UrBackup - Restart Windows"
-msgstr ""
+msgstr "UrBackup - Reporniți Windows"
 
 #: RestoreWindowsComponents.cpp:107
 msgid "Preparing restore"
-msgstr ""
+msgstr "Pregătirea restaurării"
 
 #: RestoreWindowsComponents.cpp:569
 msgid "Restore operation in progress"
-msgstr ""
+msgstr "Operațiunea de restaurare în curs"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr ""
+msgstr "Restaurare terminata."
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
-msgstr ""
+msgstr "Restaurarea componentei \"_1_\" a editorului \"_2_\". Indexarea ..."
 
 #: RestoreWindowsComponents.cpp:796
 #, c-format
 msgid "Restoring component \"_1_\" of writer \"_2_\". _3_% finished."
-msgstr ""
+msgstr "Restaurarea componentei \"_1_\" a editorului \"_2_\". _3_% terminat."
 
 #: SelectRestoreWindowsComponents.cpp:47 SelectRestoreWindowsComponents.cpp:63
 #: SelectRestoreWindowsComponents.cpp:175 SelectWindowsComponents.cpp:40
 msgid "Loading..."
-msgstr ""
+msgstr "Se încarcă..."
 
 #: SelectRestoreWindowsComponents.cpp:77
 msgid "Error retrieving Windows component backups: "
-msgstr ""
+msgstr "Eroare la preluarea copiilor de rezervă ale componentelor Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:115
 msgid "Error retrieving Windows component configuration: "
-msgstr ""
+msgstr "Eroare la preluarea configurației componentelor Windows:"
 
 #: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
 msgid "Windows components"
-msgstr ""
+msgstr "Componente Windows"
 
 #: SelectRestoreWindowsComponents.cpp:189
 msgid "No backup was selected"
-msgstr ""
+msgstr "Nu a fost selectată nicio copie de siguranță"
 
 #: SelectRestoreWindowsComponents.cpp:210
 msgid "No components selected"
-msgstr ""
+msgstr "Nu au fost selectate componente"
 
 #: SelectRestoreWindowsComponents.cpp:396
 msgid "Unknown access error"
-msgstr ""
+msgstr "Eroare de acces necunoscută"
 
 #: SelectRestoreWindowsComponents.cpp:398
 msgid "Currently not connected to a backup server. No backup server found."
-msgstr ""
+msgstr "În prezent, nu este conectat la un server de backup. Nu sa găsit niciun server de backup."
 
 #: SelectRestoreWindowsComponents.cpp:400
 msgid "No file backup access tokens found. Did you run a file backup yet?"
-msgstr ""
+msgstr "Nu s-au găsit jetoane de acces la fișiere de rezervă. Ați executat încă o copie de rezervă?"
 
 #: Settings.cpp:508
 msgid "The incremental backup interval is not a number"
@@ -606,11 +607,11 @@ msgstr "ETA: Aprox. _1_"
 
 #: Status.cpp:219
 msgid "File: _1_"
-msgstr ""
+msgstr "Fișier:_1_"
 
 #: Status.cpp:223
 msgid "Volume: _1_"
-msgstr ""
+msgstr "Volum:_1_"
 
 #: Status.cpp:260
 msgid "Idle."
@@ -618,7 +619,7 @@ msgstr "Inactiv."
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr ""
+msgstr "Restaurare terminata. "
 
 #: Status.cpp:292
 msgid "Yes"
@@ -650,7 +651,7 @@ msgstr "Nu se poate porni copierea de rezervă, pentru că niciun server de copi
 
 #: TrayIcon.cpp:185
 msgid "Could not start backup."
-msgstr ""
+msgstr "Nu am putut începe backupul."
 
 #: TrayIcon.cpp:220
 msgid "Pausing failed: No connection to backup server."
@@ -662,19 +663,19 @@ msgstr "Continuare eșuată: Nu există conexiune catre serverul de copii de rez
 
 #: TrayIcon.cpp:275
 msgid "Do you really want to remove the UrBackup client from this system?"
-msgstr ""
+msgstr "Chiar vrei să elimini clientul UrBackup din acest sistem?"
 
 #: TrayIcon.cpp:276
 msgid "Confirm uninstall"
-msgstr ""
+msgstr "Confirmă dezinstalarea?"
 
 #: TrayIcon.cpp:317
 msgid "Access/restore backups"
-msgstr ""
+msgstr "Accesați / restaurați copii de rezervă"
 
 #: TrayIcon.cpp:320
 msgid "Access backups"
-msgstr ""
+msgstr "Accesați copii de rezervă"
 
 #: TrayIcon.cpp:330
 msgid "Do full file backup"
@@ -710,11 +711,11 @@ msgstr "Fă acum o copie de rezervă incrementală imagine"
 
 #: TrayIcon.cpp:377
 msgid "Configure components to backup"
-msgstr ""
+msgstr "Configurarea componentelor pentru a face backup."
 
 #: TrayIcon.cpp:382
 msgid "Restore components"
-msgstr ""
+msgstr "Restaurează componente."
 
 #: TrayIcon.cpp:398
 msgid "Pause"
@@ -726,15 +727,15 @@ msgstr "Continuare"
 
 #: TrayIcon.cpp:414
 msgid "Uninstall"
-msgstr ""
+msgstr "Dezinstalare."
 
 #: TrayIcon.cpp:567
 msgid "No rights to access any files."
-msgstr ""
+msgstr "Nu există drepturi de acces la fișiere."
 
 #: TrayIcon.cpp:616
 msgid "Error getting server URL. Cannot access files."
-msgstr ""
+msgstr "Nu pot accesa URL-ului serverului.\nNu se pot accesa fișierele."
 
 #~ msgid "Informations"
 #~ msgstr "Informations"
