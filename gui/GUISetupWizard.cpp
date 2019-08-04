@@ -25,22 +25,22 @@ GUISetupWizard::GUISetupWizard( wxWindow* parent, wxWindowID id, const wxString&
 	
 	m_staticText1 = new wxStaticText( setupBackupPaths, wxID_ANY, _("Please select the file set you want to backup:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
-	m_staticText1->SetFont( wxFont( 13, 70, 90, 90, false, wxEmptyString ) );
+	m_staticText1->SetFont( wxFont( 13, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer2->Add( m_staticText1, 0, wxALL, 5 );
 	
 	m_radioBtn1 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Backup all files except temporary, cache, system and program files (recommended)"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
-	m_radioBtn1->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn1->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer2->Add( m_radioBtn1, 0, wxALL, 5 );
 	
 	m_radioBtn2 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Backup only documents, music, pictures, movies and the desktop of all users"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_radioBtn2->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn2->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer2->Add( m_radioBtn2, 0, wxALL, 5 );
 	
 	m_radioBtn3 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Manually select the files to backup"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_radioBtn3->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn3->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer2->Add( m_radioBtn3, 0, wxALL, 5 );
 	
@@ -55,22 +55,22 @@ GUISetupWizard::GUISetupWizard( wxWindow* parent, wxWindowID id, const wxString&
 	
 	m_staticText2 = new wxStaticText( setupBackupPaths, wxID_ANY, _("Please select the volumes to backup:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
-	m_staticText2->SetFont( wxFont( 13, 70, 90, 90, false, wxEmptyString ) );
+	m_staticText2->SetFont( wxFont( 13, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer3->Add( m_staticText2, 0, wxALL, 5 );
 	
 	m_radioBtn4 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Backup the system volume (recommended)"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
-	m_radioBtn4->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn4->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer3->Add( m_radioBtn4, 0, wxALL, 5 );
 	
 	m_radioBtn5 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Backup all internal disk volumes"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_radioBtn5->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn5->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer3->Add( m_radioBtn5, 0, wxALL, 5 );
 	
 	m_radioBtn6 = new wxRadioButton( setupBackupPaths, wxID_ANY, _("Manually list the volume letters to backup:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_radioBtn6->SetFont( wxFont( 10, 70, 90, 90, false, wxEmptyString ) );
+	m_radioBtn6->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 	
 	bSizer3->Add( m_radioBtn6, 0, wxALL, 5 );
 	
