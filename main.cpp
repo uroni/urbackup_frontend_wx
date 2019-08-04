@@ -26,6 +26,7 @@
 #include "TranslationHelper.h"
 #include "Status.h"
 #include "CbtStatus.h"
+#include "Info.h"
 #include <iostream>
 #include <limits>
 #include <wx/stdpaths.h>
@@ -627,6 +628,22 @@ bool MyApp::OnInit()
 		wxExit();
 	}
 #endif
+	else if (cmd == wxT("info"))
+	{
+		Info *s = new Info(NULL);
+		SetTopWindow(s);
+		s->ShowModal();
+		s->Destroy();
+		wxExit();
+	}
+	else if (cmd == wxT("status"))
+	{
+		Status *s = new Status(NULL, 0);
+		SetTopWindow(s);
+		s->ShowModal();
+		s->Destroy();
+		wxExit();
+	}
 	else
 	{
 		return false;
