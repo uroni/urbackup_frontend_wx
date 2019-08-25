@@ -158,10 +158,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 			}
 			else
 			{
-				if(settings->getValue(L"update_freq_image_full_orig", &t))
-				{
-					m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
-				}
+				m_textCtrl22->SetValue(wxString(convert(-1*watoi(t)/24/60/60).c_str()));
 				m_textCtrl21->Enable(false);
 				m_textCtrl22->Enable(false);
 				m_checkBox1->SetValue(false);
@@ -174,7 +171,10 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		}
 		if(getSettingsValue(L"update_freq_image_incr", &t, settings))
 		{
-			m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+			if(watoi(t)>0)
+				m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+			else
+				m_textCtrl21->SetValue(wxString(-1*convert(watoi(t) / 24 / 60 / 60).c_str()));
 		}
 		else
 		{
@@ -646,7 +646,10 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		if(m_checkBox1->GetValue()==false)
 		{
-			l_update_freq_image_full=-1;
+			if(l_update_freq_image_full>0)
+				l_update_freq_image_full*=-1;
+			if (l_update_freq_image_incr > 0)
+				l_update_freq_image_incr *= -1;
 		}
 	}
 #endif
