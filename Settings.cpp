@@ -174,7 +174,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 			if(watoi(t)>0)
 				m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
 			else
-				m_textCtrl21->SetValue(wxString(-1*convert(watoi(t) / 24 / 60 / 60).c_str()));
+				m_textCtrl21->SetValue(wxString(convert(-1*watoi(t) / 24 / 60 / 60).c_str()));
 		}
 		else
 		{
