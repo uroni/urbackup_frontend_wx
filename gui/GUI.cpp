@@ -130,6 +130,24 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_staticText2->Wrap( -1 );
 	bSizer29->Add( m_staticText2, 0, wxALIGN_CENTER|wxALL, 5 );
 	
+	wxSize image_button_size = wxDLG_UNIT(this, wxSize(15, 13));
+	wxSize size_sub = wxDLG_UNIT(this, wxSize(5, 5));
+
+	wxBitmap fa_home;
+	fa_home.LoadFile("fa-home.png", wxBITMAP_TYPE_PNG);
+	fa_home_img_scaled = fa_home.ConvertToImage().Scale(image_button_size.GetWidth()- size_sub.GetWidth(), image_button_size.GetHeight()- size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	wxBitmap fa_client;
+	fa_client.LoadFile("fa-road.png", wxBITMAP_TYPE_PNG);
+	fa_client_img_scaled = fa_client.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	wxBitmap fa_lock;
+	fa_lock.LoadFile("fa-lock.png", wxBITMAP_TYPE_PNG);
+	fa_lock_img_scaled = fa_lock.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	m_bitmapButton1 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer29->Add(m_bitmapButton1, 0, wxALIGN_CENTER | wxALL, 5);
+	
 	bSizer_filebackups->Add( bSizer29, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer30;
@@ -146,6 +164,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_staticText4->Wrap( -1 );
 	bSizer30->Add( m_staticText4, 0, wxALIGN_CENTER|wxALL, 5 );
 	
+	m_bitmapButton2 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer30->Add(m_bitmapButton2, 0, wxALIGN_CENTER | wxALL, 5);
+
 	bSizer_filebackups->Add( bSizer30, 0, wxEXPAND, 5 );
 	
 #ifdef _WIN32
@@ -170,6 +191,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		m_checkBox1 = new wxCheckBox( m_tab_imagebackups, wxID_ANY, _("Active"), wxDefaultPosition, wxDefaultSize, 0 );
 		m_checkBox1->SetValue(true); 
 		bSizer31->Add( m_checkBox1, 0, wxALIGN_CENTER|wxALL, 5 );
+
+		m_bitmapButton21 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer31->Add(m_bitmapButton21, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer31, 0, wxEXPAND, 5 );
 	
@@ -186,6 +210,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		m_staticText42 = new wxStaticText( m_tab_imagebackups, wxID_ANY, _("days"), wxDefaultPosition, wxDefaultSize, 0 );
 		m_staticText42->Wrap( -1 );
 		bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
+
+		m_bitmapButton22 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer32->Add(m_bitmapButton22, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer32, 0, wxEXPAND, 5 );
 	}
@@ -209,6 +236,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl13 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer341->Add( m_textCtrl13, 0, wxALL, 5 );
+
+	m_bitmapButton13 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer341->Add(m_bitmapButton13, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer341, 0, wxEXPAND, 5 );
 	
@@ -221,6 +251,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl131 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer35->Add( m_textCtrl131, 0, wxALL, 5 );
+
+	m_bitmapButton131 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer35->Add(m_bitmapButton131, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer35, 0, wxEXPAND, 5 );
 	
@@ -233,6 +266,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl132 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer36->Add( m_textCtrl132, 0, wxALL, 5 );
+
+	m_bitmapButton132 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer36->Add(m_bitmapButton132, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer36, 0, wxEXPAND, 5 );
 	
@@ -245,6 +281,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl133 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer37->Add( m_textCtrl133, 0, wxALL, 5 );
+
+	m_bitmapButton133 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer37->Add(m_bitmapButton133, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer37, 0, wxEXPAND, 5 );
 	
@@ -278,6 +317,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		m_textCtrl134 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer39->Add( m_textCtrl134, 0, wxALL, 5 );
+
+		m_bitmapButton134 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer39->Add(m_bitmapButton134, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer39, 0, wxEXPAND, 5 );
 	
@@ -290,6 +332,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		m_textCtrl135 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer40->Add( m_textCtrl135, 0, wxALL, 5 );
+
+		m_bitmapButton135 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer40->Add(m_bitmapButton135, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer40, 0, wxEXPAND, 5 );
 	
@@ -302,6 +347,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		m_textCtrl136 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer41->Add( m_textCtrl136, 0, wxALL, 5 );
+
+		m_bitmapButton136 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer41->Add(m_bitmapButton136, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer41, 0, wxEXPAND, 5 );
 	
@@ -314,6 +362,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		m_textCtrl137 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizer42->Add( m_textCtrl137, 0, wxALL, 5 );
+
+		m_bitmapButton137 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer42->Add(m_bitmapButton137, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer42, 0, wxEXPAND, 5 );
 	
@@ -348,7 +399,11 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer44->Add( m_staticText26, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_textCtrl16 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, string_input_size, 0 );
+
 	bSizer44->Add( m_textCtrl16, 0, wxALL, 5 );
+
+	m_bitmapButton16 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer44->Add(m_bitmapButton16, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer44, 0, wxEXPAND, 5 );
 
@@ -361,6 +416,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl161 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, string_input_size, 0 );
 	bSizer441->Add( m_textCtrl161, 0, wxALL, 5 );
+
+	m_bitmapButton161 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer441->Add(m_bitmapButton161, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_filebackups->Add( bSizer441, 0, wxEXPAND, 5 );
 	
@@ -373,6 +431,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_textCtrl17 = new wxTextCtrl( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, string_input_size, 0 );
 	bSizer45->Add( m_textCtrl17, 0, wxALL, 5 );
+
+	m_bitmapButton17 = new wxBitmapButton(m_tab_client, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer45->Add(m_bitmapButton17, 0, wxALIGN_CENTER | wxALL, 5);
 	
 	bSizer_client->Add( bSizer45, 0, wxEXPAND, 5 );
 	
@@ -390,6 +451,10 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	m_staticText291 = new wxStaticText( m_tab_client, wxID_ANY, _("min"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText291->Wrap( -1 );
+
+	m_bitmapButton19 = new wxBitmapButton(m_tab_client, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer331->Add(m_bitmapButton19, 0, wxALIGN_CENTER | wxALL, 5);
+
 	bSizer331->Add( m_staticText291, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	bSizer_client->Add( bSizer331, 0, wxEXPAND, 5 );
@@ -406,6 +471,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		m_textCtrl23 = new wxTextCtrl( m_tab_imagebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, string_input_size, 0 );
 		bSizer441->Add( m_textCtrl23, 0, wxALL, 5 );
+
+		m_bitmapButton23 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizer441->Add(m_bitmapButton23, 0, wxALIGN_CENTER | wxALL, 5);
 	
 		bSizer_imagebackups->Add( bSizer441, 0, wxEXPAND, 5 );
 
@@ -431,6 +499,10 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_staticTextLocalSpeedUnit = new wxStaticText( m_tab_client, wxID_ANY, _("MBit/s"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	m_staticTextLocalSpeedUnit->Wrap( -1 );
 	bSizerH->Add( m_staticTextLocalSpeedUnit, 0, wxALIGN_CENTER|wxALL, 5 );	
+
+	m_bitmapButtonLocalSpeed = new wxBitmapButton(m_tab_client, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerH->Add(m_bitmapButtonLocalSpeed, 0, wxALIGN_CENTER | wxALL, 5);
+
 	bSizer_client->Add( bSizerH, 0, wxEXPAND, 5 );
 
 
@@ -484,6 +556,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		bSizerH->Add( m_staticTextInternetImage, 0, wxALIGN_CENTER|wxALL, 5 );	
 		m_checkBoxInternetImage = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 		bSizerH->Add( m_checkBoxInternetImage, 0, wxALL, 5 );	
+		m_bitmapButtonInternetImage = new wxBitmapButton(m_tab_internet, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+		bSizerH->Add(m_bitmapButtonInternetImage, 0, wxALIGN_CENTER | wxALL, 5);
 		bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 	}
 #endif
@@ -494,6 +568,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizerH->Add( m_staticTextInternetFullFile, 0, wxALIGN_CENTER|wxALL, 5 );	
 	m_checkBoxInternetFullFile = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizerH->Add( m_checkBoxInternetFullFile, 0, wxALL, 5 );	
+	m_bitmapButtonInternetFullFile = new wxBitmapButton(m_tab_internet, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerH->Add(m_bitmapButtonInternetFullFile, 0, wxALIGN_CENTER | wxALL, 5);
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
@@ -505,6 +581,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_staticTextInternetSpeedUnit = new wxStaticText( m_tab_internet, wxID_ANY, _("KBit/s"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	m_staticTextInternetSpeedUnit->Wrap( -1 );
 	bSizerH->Add( m_staticTextInternetSpeedUnit, 0, wxALIGN_CENTER|wxALL, 5 );	
+	m_bitmapButtonInternetSpeed = new wxBitmapButton(m_tab_internet, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerH->Add(m_bitmapButtonInternetSpeed, 0, wxALIGN_CENTER | wxALL, 5);
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
@@ -513,6 +591,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizerH->Add( m_staticTextInternetCompress, 0, wxALIGN_CENTER|wxALL, 5 );	
 	m_checkBoxInternetCompress = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizerH->Add( m_checkBoxInternetCompress, 0, wxALL, 5 );	
+	m_bitmapButtonInternetCompress = new wxBitmapButton(m_tab_internet, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerH->Add(m_bitmapButtonInternetCompress, 0, wxALIGN_CENTER | wxALL, 5);
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
@@ -521,6 +601,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizerH->Add( m_staticTextInternetEncrypt, 0, wxALIGN_CENTER|wxALL, 5 );	
 	m_checkBoxInternetEncrypt = new wxCheckBox( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizerH->Add( m_checkBoxInternetEncrypt, 0, wxALL, 5 );	
+	m_bitmapButtonInternetEncrypt = new wxBitmapButton(m_tab_internet, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerH->Add(m_bitmapButtonInternetEncrypt, 0, wxALIGN_CENTER | wxALL, 5);
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 
@@ -580,6 +662,54 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 #endif
 	m_button1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnOkClick ), NULL, this );
 	m_button2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnAbortClick ), NULL, this );
+
+	m_bitmapButton1->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton2->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton21->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton22->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton13->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton131->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton132->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton133->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton134->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton135->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton136->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton137->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton16->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton161->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton17->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton19->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButton23->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonLocalSpeed->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonInternetFullFile->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonInternetImage->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonInternetSpeed->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonInternetCompress->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	m_bitmapButtonInternetEncrypt->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+
+	m_textCtrl1->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl2->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl21->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl22->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl13->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl131->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl132->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl133->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl134->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl135->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl136->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl137->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl16->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl161->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl17->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl19->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrl23->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrlLocalSpeed->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_checkBoxInternetFullFile->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_checkBoxInternetImage->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_textCtrlInternetSpeed->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_checkBoxInternetCompress->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	m_checkBoxInternetEncrypt->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 }
 
 GUISettings::~GUISettings()

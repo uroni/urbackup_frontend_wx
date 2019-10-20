@@ -70,15 +70,47 @@ std::string getServerName(void)
 
 bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *settings)
 {
-	if(!settings->getValue(key, ret) )
+	std::wstring use_str;
+	settings->getValue(key + L"_use", &use_str);
+	int use = watoi(use_str);
+
+	if (use == c_use_value_client)
 	{
-		if(!settings->getValue(key+L"_def", ret) )
+		if (settings->getValue(key + L"_client", ret))
 		{
-			return false;
+			return true;
+		}
+	}
+	else if(use == c_use_value)
+	{
+		if (settings->getValue(key + L"_home", ret))
+		{
+			return true;
+		}
+	}
+	else if (use == c_use_group)
+	{
+		if (settings->getValue(key + L"_group", ret))
+		{
+			return true;
+		}
+	}
+	else
+	{
+		if (!settings->getValue(key, ret))
+		{
+			if (settings->getValue(key + L"_def", ret))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return true;
 		}
 	}
 
-	return true;
+	return false;
 }
 
 wxTextValidator getPathValidator(void)
@@ -118,7 +150,8 @@ wxTextValidator getDigitSlashValidator(void)
 	return val;
 }
 
-Settings::Settings(wxWindow* parent) : GUISettings(parent)
+Settings::Settings(wxWindow* parent) : GUISettings(parent),
+	init_complete(false)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 #ifdef _DEBUG
@@ -138,6 +171,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl1->SetValue(wxT("12"));
 	}
+	setSettingsSwitch(L"update_freq_incr", m_bitmapButton1, m_textCtrl1);
 	if(getSettingsValue(L"update_freq_full", &t, settings))
 	{
 		m_textCtrl2->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
@@ -146,6 +180,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl2->SetValue(wxT("30"));
 	}
+	setSettingsSwitch(L"update_freq_full", m_bitmapButton2, m_textCtrl2);
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
@@ -169,6 +204,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 			m_textCtrl22->SetValue(wxT("60"));
 			m_checkBox1->SetValue(true);
 		}
+		setSettingsSwitch(L"update_freq_image_full", m_bitmapButton22, m_textCtrl22);
 		if(getSettingsValue(L"update_freq_image_incr", &t, settings))
 		{
 			if(watoi(t)>0)
@@ -180,6 +216,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl21->SetValue(wxT("7"));
 		}
+		setSettingsSwitch(L"update_freq_image_incr", m_bitmapButton21, m_textCtrl21);
 	}
 #endif
 	if(getSettingsValue(L"max_file_incr", &t, settings))
@@ -190,6 +227,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl131->SetValue(wxT("100"));
 	}
+	setSettingsSwitch(L"max_file_incr", m_bitmapButton131, m_textCtrl131);
 	if(getSettingsValue(L"min_file_incr", &t, settings))
 	{
 		m_textCtrl13->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -198,6 +236,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl13->SetValue(wxT("40"));
 	}
+	setSettingsSwitch(L"min_file_incr", m_bitmapButton13, m_textCtrl13);
 	if(getSettingsValue(L"max_file_full", &t, settings))
 	{
 		m_textCtrl133->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -206,6 +245,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl133->SetValue(wxT("10"));
 	}
+	setSettingsSwitch(L"max_file_full", m_bitmapButton133, m_textCtrl133);
 	if(getSettingsValue(L"min_file_full", &t,settings))
 	{
 		m_textCtrl132->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -214,6 +254,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl132->SetValue(wxT("2"));
 	}
+	setSettingsSwitch(L"min_file_full", m_bitmapButton132, m_textCtrl132);
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
@@ -225,6 +266,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl134->SetValue(wxT("4"));
 		}
+		setSettingsSwitch(L"min_image_incr", m_bitmapButton134, m_textCtrl134);
 		if(getSettingsValue(L"max_image_incr", &t, settings))
 		{
 			m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -233,6 +275,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl135->SetValue(wxT("30"));
 		}
+		setSettingsSwitch(L"max_image_incr", m_bitmapButton135, m_textCtrl135);
 		if(getSettingsValue(L"min_image_full", &t, settings))
 		{
 			m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -241,6 +284,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl136->SetValue(wxT("2"));
 		}
+		setSettingsSwitch(L"min_image_full", m_bitmapButton136, m_textCtrl136);
 		if(getSettingsValue(L"max_image_full", &t, settings))
 		{
 			m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
@@ -249,6 +293,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl137->SetValue(wxT("5"));
 		}
+		setSettingsSwitch(L"max_image_full", m_bitmapButton137, m_textCtrl137);
 	}
 #endif
 	if(settings->getValue(L"computername", &t) )
@@ -274,6 +319,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 			m_textCtrl17->SetValue(wxT("1-7/0-24"));
 		}
 	}
+	setSettingsSwitch(L"backup_window_incr_file", m_bitmapButton17, m_textCtrl17);
 	if(getSettingsValue(L"exclude_files", &t, settings))
 	{
 		m_textCtrl16->SetValue(t);
@@ -282,6 +328,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl16->SetValue(wxT(""));
 	}
+	setSettingsSwitch(L"exclude_files", m_bitmapButton16, m_textCtrl16);
 	if(getSettingsValue(L"include_files", &t, settings))
 	{
 		m_textCtrl161->SetValue(t);
@@ -290,6 +337,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl161->SetValue(wxT(""));
 	}
+	setSettingsSwitch(L"include_files", m_bitmapButton161, m_textCtrl161);
 	if(getSettingsValue(L"startup_backup_delay", &t, settings))
 	{
 		m_textCtrl19->SetValue(convert(watoi(t)/60));
@@ -298,6 +346,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrl19->SetValue(wxT("0"));
 	}
+	setSettingsSwitch(L"startup_backup_delay", m_bitmapButton19, m_textCtrl19);
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
@@ -309,6 +358,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_textCtrl23->SetValue(wxT("C"));
 		}
+		setSettingsSwitch(L"image_letters", m_bitmapButton23, m_textCtrl23);
 	}
 #endif
 	if(getSettingsValue(L"internet_mode_enabled", &t, settings) && t==L"true")
@@ -327,6 +377,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_checkBoxInternetFullFile->SetValue(false);
 	}
+	setSettingsSwitch(L"internet_full_file_backups", m_bitmapButtonInternetFullFile, m_checkBoxInternetFullFile);
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
@@ -338,6 +389,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 		{
 			m_checkBoxInternetImage->SetValue(false);
 		}
+		setSettingsSwitch(L"internet_image_backups", m_bitmapButtonInternetImage, m_checkBoxInternetImage);
 	}
 #endif
 	if(getSettingsValue(L"internet_server", &t, settings))
@@ -383,6 +435,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrlLocalSpeed->SetValue(wxT("-"));
 	}
+	setSettingsSwitch(L"local_speed", m_bitmapButtonLocalSpeed, m_textCtrlLocalSpeed);
 	if(getSettingsValue(L"internet_speed", &t, settings))
 	{
 		if(watoi(t)>0) 
@@ -394,6 +447,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_textCtrlInternetSpeed->SetValue(wxT("-"));
 	}
+	setSettingsSwitch(L"internet_speed", m_bitmapButtonInternetSpeed, m_textCtrlInternetSpeed);
 	if(getSettingsValue(L"internet_compress", &t, settings) && t==L"false")
 	{
 		m_checkBoxInternetCompress->SetValue(false);
@@ -402,6 +456,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_checkBoxInternetCompress->SetValue(true);
 	}
+	setSettingsSwitch(L"internet_compress", m_bitmapButtonInternetCompress, m_checkBoxInternetCompress);
 	if(getSettingsValue(L"internet_encrypt", &t, settings) && t==L"false")
 	{
 		m_checkBoxInternetEncrypt->SetValue(false);
@@ -410,6 +465,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	{
 		m_checkBoxInternetEncrypt->SetValue(true);
 	}
+	setSettingsSwitch(L"internet_encrypt", m_bitmapButtonInternetEncrypt, m_checkBoxInternetEncrypt);
 
 	m_textCtrlInternetSpeed->SetValidator(getDigitSlashValidator());
 	m_textCtrlLocalSpeed->SetValidator(getDigitSlashValidator());	
@@ -434,6 +490,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent)
 	m_textCtrlInternetServerPort->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
+	init_complete = true;
 }
 
 Settings::~Settings(void)
@@ -735,6 +792,79 @@ void Settings::OnDisableImageBackups( wxCommandEvent& event )
 	}		
 }
 
+void Settings::OnBitmapBtnClick(wxCommandEvent & event)
+{
+	std::wstring& key = button_ids[event.GetId()];
+	SSetting& setting = settings_info[key];
+
+	int use = setting.use;
+
+	if (use == c_use_group)
+		use = c_use_value;
+	else if (use == c_use_value)
+		use = c_use_value_client;
+	else
+		use = c_use_group;
+
+	std::wstring val;
+	if (use == c_use_value_client)
+	{
+		setting.btn->SetBitmapLabel(fa_client_img_scaled);
+		val = setting.value_client;
+	}
+	else if (use == c_use_group)
+	{
+		setting.btn->SetBitmapLabel(fa_lock_img_scaled);
+		val = setting.value_group;
+	}
+	else
+	{
+		setting.btn->SetBitmapLabel(fa_home_img_scaled);
+		val = setting.value_home;
+	}
+
+
+	setting.use = use;
+
+	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
+	if (checkBox != NULL)
+	{
+		checkBox->SetValue(val == L"1" || val == L"true");
+	}
+
+	wxTextCtrl* textCtrl = dynamic_cast<wxTextCtrl*>(setting.ctrl);
+	if (textCtrl != NULL)
+	{
+		textCtrl->ChangeValue(transformValToUI(key, val));
+	}
+}
+
+void Settings::OnCtlChange(wxCommandEvent & event)
+{
+	if (!init_complete)
+		return;
+
+	std::wstring key = ctrl_ids[event.GetId()];
+	
+	SSetting& setting = settings_info[key];
+
+	setting.use = c_use_value_client;
+
+	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
+	if (checkBox != NULL)
+	{
+		setting.value_client = convert(checkBox->GetValue());
+	}
+
+	wxTextCtrl* textCtrl = dynamic_cast<wxTextCtrl*>(setting.ctrl);
+	if (textCtrl != NULL)
+	{
+		setting.value_client = transformValFromUI(key, textCtrl->GetValue().ToStdWstring());
+	}	
+
+	setting.btn->SetBitmapLabel(fa_client_img_scaled);
+}
+
 std::string Settings::mergeNewSettings(CFileSettingsReader * settings, const std::map<std::string, std::string>& n_vals)
 {
 	std::string ndata;
@@ -778,4 +908,74 @@ std::string Settings::mergeNewSettings(CFileSettingsReader * settings, const std
 	}
 
 	return ndata;
+}
+
+std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)
+{
+	if (key == "update_freq_incr")
+	{
+		return convert(watoi(val) / 60.f / 60.f);
+	}
+	else if (key == "update_fre_full")
+	{
+		return convert(watoi(val) / 24 / 60 / 60);
+	}
+
+	return val;
+}
+
+std::wstring Settings::transformValFromUI(const std::wstring & key, const std::wstring & val)
+{
+	if (key == "update_freq_incr")
+	{
+		return convert(watoi(val) * 60.f * 60.f);
+	}
+	else if (key == "update_fre_full")
+	{
+		return convert(watoi(val)* 24 * 60 * 60);
+	}
+
+	return val;
+}
+
+void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, wxWindow* ctrl)
+{
+	std::wstring use_str;
+	settings->getValue(key + L"_use", &use_str);
+
+	int use = watoi(use_str);;
+
+	if (use == c_use_value_client)
+	{
+		btn->SetBitmapLabel(fa_client_img_scaled);
+	}
+	else if (use == c_use_group)
+	{
+		btn->SetBitmapLabel(fa_lock_img_scaled);
+	}
+	else
+	{
+		btn->SetBitmapLabel(fa_home_img_scaled);
+	}
+
+	ctrl_ids[ctrl->GetId()] = key;
+	button_ids[btn->GetId()] = key;
+	SSetting& setting = settings_info[key];
+	setting.btn = btn;
+	setting.ctrl = ctrl;
+	setting.use = use;
+	if (!settings->getValue(key + L"_client", &setting.value_client))
+	{
+		settings->getValue(key, &setting.value_client);
+	}
+	if (!settings->getValue(key + L"_home", &setting.value_home))
+	{
+		if(!settings->getValue(key+L"_def", &setting.value_client))
+			settings->getValue(key, &setting.value_client);
+	}
+	if (!settings->getValue(key + L"_group", &setting.value_group))
+	{
+		if (!settings->getValue(key + L"_def", &setting.value_client))
+			settings->getValue(key, &setting.value_client);
+	}
 }

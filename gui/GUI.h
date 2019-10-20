@@ -29,6 +29,7 @@
 #include <wx/panel.h>
 #include <wx/gauge.h>
 #include <wx/statline.h>
+#include <wx/bmpbuttn.h>
 #include <vector>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -50,51 +51,70 @@ class GUISettings : public wxDialog
 		wxStaticText* m_staticText1;
 		wxTextCtrl* m_textCtrl1;
 		wxStaticText* m_staticText2;
+		//wxButton* m_bitmapButton1;
+		wxBitmapButton* m_bitmapButton1;
 		wxStaticText* m_staticText3;
 		wxTextCtrl* m_textCtrl2;
+		wxBitmapButton* m_bitmapButton2;
 		wxStaticText* m_staticText4;
 		wxStaticText* m_staticText6;
 		wxTextCtrl* m_textCtrl21;
+		wxBitmapButton* m_bitmapButton21;
 		wxStaticText* m_staticText41;
 		
 		wxCheckBox* m_checkBox1;
 		wxStaticText* m_staticText7;
 		wxTextCtrl* m_textCtrl22;
+		wxBitmapButton* m_bitmapButton22;
 		wxStaticText* m_staticText42;
 		wxStaticText* m_staticText30;
 		wxStaticText* m_staticText9;
 		wxTextCtrl* m_textCtrl13;
+		wxBitmapButton* m_bitmapButton13;
 		wxStaticText* m_staticText10;
 		wxTextCtrl* m_textCtrl131;
+		wxBitmapButton* m_bitmapButton131;
 		wxStaticText* m_staticText11;
 		wxTextCtrl* m_textCtrl132;
+		wxBitmapButton* m_bitmapButton132;
 		wxStaticText* m_staticText12;
 		wxTextCtrl* m_textCtrl133;
+		wxBitmapButton* m_bitmapButton133;
 		wxStaticText* m_staticText29;
 		wxStaticText* m_staticText14;
 		wxTextCtrl* m_textCtrl134;
+		wxBitmapButton* m_bitmapButton134;
 		wxStaticText* m_staticText15;
 		wxTextCtrl* m_textCtrl135;
+		wxBitmapButton* m_bitmapButton135;
 		wxStaticText* m_staticText16;
 		wxTextCtrl* m_textCtrl136;
+		wxBitmapButton* m_bitmapButton136;
 		wxStaticText* m_staticText17;
 		wxTextCtrl* m_textCtrl137;
+		wxBitmapButton* m_bitmapButton137;
 		wxStaticText* m_staticText28;
 		wxStaticText* m_staticText25;
 		wxTextCtrl* m_textCtrl15;
 		wxStaticText* m_staticText26;
 		wxTextCtrl* m_textCtrl16;
+		wxBitmapButton* m_bitmapButton16;
 		wxStaticText* m_staticText261;
 		wxTextCtrl* m_textCtrl161;
+		wxBitmapButton* m_bitmapButton161;
 		wxStaticText* m_staticText27;
 		wxTextCtrl* m_textCtrl17;
+		wxBitmapButton* m_bitmapButton17;
 		wxStaticText* m_staticText281;
 		wxTextCtrl* m_textCtrl19;
+		wxBitmapButton* m_bitmapButton19;
 		wxStaticText* m_staticText291;
 		wxTextCtrl* m_textCtrl23;
+		wxBitmapButton* m_bitmapButton23;
 		wxStaticText* m_staticText301;
 		wxStaticText* m_staticTextLocalSpeed;
 		wxTextCtrl* m_textCtrlLocalSpeed;
+		wxBitmapButton* m_bitmapButtonLocalSpeed;
 		wxStaticText* m_staticTextLocalSpeedUnit;
 
 		wxStaticText* m_staticTextInternetEnabled;
@@ -109,15 +129,20 @@ class GUISettings : public wxDialog
 		wxTextCtrl* m_textCtrlInternetServerAuthkey;
 		wxStaticText* m_staticTextInternetFullFile;
 		wxCheckBox* m_checkBoxInternetFullFile;
+		wxBitmapButton* m_bitmapButtonInternetFullFile;
 		wxStaticText* m_staticTextInternetImage;
 		wxCheckBox* m_checkBoxInternetImage;
+		wxBitmapButton* m_bitmapButtonInternetImage;
 		wxStaticText* m_staticTextInternetSpeed;
 		wxTextCtrl* m_textCtrlInternetSpeed;
+		wxBitmapButton* m_bitmapButtonInternetSpeed;
 		wxStaticText* m_staticTextInternetSpeedUnit;
 		wxStaticText* m_staticTextInternetCompress;
 		wxCheckBox* m_checkBoxInternetCompress;
+		wxBitmapButton* m_bitmapButtonInternetCompress;
 		wxStaticText* m_staticTextInternetEncrypt;
 		wxCheckBox* m_checkBoxInternetEncrypt;
+		wxBitmapButton* m_bitmapButtonInternetEncrypt;
 		
 		wxButton* m_button1;
 		wxButton* m_button2;
@@ -127,11 +152,18 @@ class GUISettings : public wxDialog
 		wxPanel *m_tab_imagebackups;
 		wxPanel *m_tab_client;
 		wxPanel *m_tab_internet;
+
+		wxImage fa_lock_img_scaled;
+		wxImage fa_home_img_scaled;
+		wxImage fa_client_img_scaled;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnDisableImageBackups( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOkClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbortClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBitmapBtnClick(wxCommandEvent& event) { event.Skip(); }
+		virtual void OnCtlChange(wxCommandEvent& event) { event.Skip(); }
+
 		
 		int capa;
 	
