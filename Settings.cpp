@@ -569,13 +569,15 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	long l_internet_server_port;
 	long l_internet_speed, l_local_speed;
 
-	if(update_freq_incr.ToCDouble(&l_update_freq_incr)==false )
+	if(!update_freq_incr.ToCDouble(&l_update_freq_incr)
+		&& settings_info[L"update_freq_incr"].use==c_use_value_client )
 	{
 		wxMessageBox( _("The incremental backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
 		return;
 	}
-	if(update_freq_full.ToLong(&l_update_freq_full)==false )
+	if(!update_freq_full.ToLong(&l_update_freq_full)
+		&& settings_info[L"update_freq_full"].use==c_use_value_client)
 	{
 		wxMessageBox( _("The full backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
@@ -584,13 +586,16 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
-		if(update_freq_image_full.ToLong(&l_update_freq_image_full)==false && m_checkBox1->GetValue() )
+		if(!update_freq_image_full.ToLong(&l_update_freq_image_full) 
+			&& m_checkBox1->GetValue()
+			&& settings_info[L"update_freq_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl22->SetFocus();
 			return;
 		}
-		if(update_freq_image_incr.ToLong(&l_update_freq_image_incr)==false && m_checkBox1->GetValue()  )
+		if(!update_freq_image_incr.ToLong(&l_update_freq_image_incr) && m_checkBox1->GetValue()
+			&& settings_info[L"update_freq_image_incr"].use == c_use_value_client)
 		{
 			wxMessageBox( _("The incremental image backup time is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl21->SetFocus();
@@ -598,25 +603,29 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		}
 	}
 #endif
-	if(max_file_incr.ToLong(&l_max_file_incr)==false )
+	if(!max_file_incr.ToLong(&l_max_file_incr)
+		&& settings_info[L"max_file_incr"].use == c_use_value_client)
 	{
 		wxMessageBox( _("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl131->SetFocus();
 		return;
 	}
-	if(min_file_incr.ToLong(&l_min_file_incr)==false )
+	if(!min_file_incr.ToLong(&l_min_file_incr)
+		&& settings_info[L"min_file_incr"].use == c_use_value_client)
 	{
 		wxMessageBox( _("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl13->SetFocus();
 		return;
 	}
-	if(max_file_full.ToLong(&l_max_file_full)==false )
+	if(!max_file_full.ToLong(&l_max_file_full)
+		&& settings_info[L"max_file_full"].use == c_use_value_client)
 	{
 		wxMessageBox( _("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl133->SetFocus();
 		return;
 	}
-	if(min_file_full.ToLong(&l_min_file_full)==false )
+	if(!min_file_full.ToLong(&l_min_file_full)
+		&& settings_info[L"min_file_full"].use == c_use_value_client)
 	{
 		wxMessageBox( _("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl132->SetFocus();
@@ -625,25 +634,29 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
-		if(min_image_incr.ToLong(&l_min_image_incr)==false )
+		if(!min_image_incr.ToLong(&l_min_image_incr)
+			&& settings_info[L"min_image_incr"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl134->SetFocus();
 			return;
 		}
-		if(max_image_incr.ToLong(&l_max_image_incr)==false )
+		if(!max_image_incr.ToLong(&l_max_image_incr)
+			&& settings_info[L"max_image_incr"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl135->SetFocus();
 			return;
 		}
-		if(min_image_full.ToLong(&l_min_image_full)==false )
+		if(!min_image_full.ToLong(&l_min_image_full)
+			&& settings_info[L"min_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl136->SetFocus();
 			return;
 		}
-		if(max_image_full.ToLong(&l_max_image_full)==false )
+		if(!max_image_full.ToLong(&l_max_image_full)
+			&& settings_info[L"max_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl137->SetFocus();
@@ -651,7 +664,8 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		}
 	}
 #endif
-	if(startup_backup_delay.ToLong(&l_startup_backup_delay)==false)
+	if(!startup_backup_delay.ToLong(&l_startup_backup_delay)
+		&& settings_info[L"start_backup_delay"].use == c_use_value_client)
 	{
 		wxMessageBox( _("Backup delay after system start is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl19->SetFocus();
@@ -661,7 +675,8 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		std::string s_image_letters=image_letters.ToUTF8();
-		if(strlower(s_image_letters)!="all" && strlower(s_image_letters)!="all_nonusb")
+		if(strlower(s_image_letters)!="all" && strlower(s_image_letters)!="all_nonusb"
+			&& settings_info[L"image_letters"].use == c_use_value_client)
 		{
 			std::vector<std::string> img_paths;
 			Tokenize(s_image_letters, img_paths, ";,");
@@ -685,7 +700,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		}		
 	}
 #endif
-	if(internet_server_port.ToLong(&l_internet_server_port)==false)
+	if(!internet_server_port.ToLong(&l_internet_server_port))
 	{
 		wxMessageBox( _("The server port is not valid"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrlInternetServerPort->SetFocus();
@@ -916,7 +931,7 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	{
 		return convert(watoi(val) / 60.f / 60.f);
 	}
-	else if (key == "update_fre_full")
+	else if (key == "update_freq_full")
 	{
 		return convert(watoi(val) / 24 / 60 / 60);
 	}
@@ -930,7 +945,7 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 	{
 		return convert(watoi(val) * 60.f * 60.f);
 	}
-	else if (key == "update_fre_full")
+	else if (key == "update_freq_full")
 	{
 		return convert(watoi(val)* 24 * 60 * 60);
 	}
