@@ -115,6 +115,8 @@ std::string trim(const std::string &str);
 void replaceNonAlphaNumeric(std::string &str, char rch);
 std::string conv_filename(std::string fn);
 std::string EscapeParamString(const std::string &pStr);
+std::string EscapePathParamString(const std::string &pStr);
+std::string UnescapeParamString(const std::string & str);
 
 namespace
 {

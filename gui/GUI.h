@@ -156,6 +156,7 @@ class GUISettings : public wxDialog
 		wxImage fa_lock_img_scaled;
 		wxImage fa_home_img_scaled;
 		wxImage fa_client_img_scaled;
+		wxImage fa_copy_img_scaled;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnDisableImageBackups( wxCommandEvent& event ) { event.Skip(); }
@@ -260,6 +261,13 @@ class GUIConfigPath : public wxDialog
 		wxButton* m_button7;
 		wxButton* m_button8;
 
+		wxBitmapButton* m_bitmapButton1;
+
+		wxImage fa_lock_img_scaled;
+		wxImage fa_home_img_scaled;
+		wxImage fa_client_img_scaled;
+		wxImage fa_copy_img_scaled;
+
 		/*wxStaticText* m_staticTextGroup;
 		wxChoice* m_group;*/
 		
@@ -272,6 +280,7 @@ class GUIConfigPath : public wxDialog
 		virtual void OnClickNew( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClickDel( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGroupChange( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClickSourceSwitch(wxCommandEvent& event) { event.Skip(); }
 	
 	public:
 		

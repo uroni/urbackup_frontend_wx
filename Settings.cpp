@@ -71,26 +71,26 @@ std::string getServerName(void)
 bool getSettingsValue(std::wstring key, std::wstring *ret, CFileSettingsReader *settings)
 {
 	std::wstring use_str;
-	settings->getValue(key + L"_use", &use_str);
+	settings->getValue(key + L".use", &use_str);
 	int use = watoi(use_str);
 
 	if (use == c_use_value_client)
 	{
-		if (settings->getValue(key + L"_client", ret))
+		if (settings->getValue(key + L".client", ret))
 		{
 			return true;
 		}
 	}
 	else if(use == c_use_value)
 	{
-		if (settings->getValue(key + L"_home", ret))
+		if (settings->getValue(key + L".home", ret))
 		{
 			return true;
 		}
 	}
 	else if (use == c_use_group)
 	{
-		if (settings->getValue(key + L"_group", ret))
+		if (settings->getValue(key + L".group", ret))
 		{
 			return true;
 		}
@@ -712,10 +712,10 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	local_speed.ToLong(&l_local_speed);
 	l_local_speed*=(1024*1024)/8;
 
-	l_update_freq_image_full_orig=l_update_freq_image_full;
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
+		l_update_freq_image_full_orig = l_update_freq_image_full;
 		if(m_checkBox1->GetValue()==false)
 		{
 			if(l_update_freq_image_full>0)
@@ -726,7 +726,35 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	}
 #endif
 
-	std::map<std::string, std::string> n_vals;
+	std::string s_data;
+
+	s_data += std::string("internet_mode_enabled=")+nconvert(internet_mode_enabled)+"\n";
+	s_data += std::string("internet_server=")+ internet_server.ToUTF8() + "\n";
+	s_data += std::string("internet_server_port=") + nconvert(l_internet_server_port) + "\n";
+	s_data += std::string("internet_server_proxy=") + internet_server_proxy.ToUTF8() + "\n";
+	s_data += std::string("internet_authkey=") + internet_authkey.ToUTF8() + "\n";
+	s_data += std::string("computername=") + computername.ToUTF8() + "\n";
+
+	for (std::map<std::wstring, SSetting>::iterator it = settings_info.begin(); it != settings_info.end(); ++it)
+	{
+		std::wstring old_val;
+		std::wstring old_use;
+		if (it->second.use != c_use_group
+			&& it->second.use!=c_use_value
+			&& (!settings->getValue(it->first+L".client", &old_val)
+				|| old_val!=it->second.value_client
+				|| !settings->getValue(it->first + L".use", &old_use)
+				|| old_use!=convert(it->second.use) ) )
+		{
+			std::string key = wxString(it->first).ToUTF8();
+			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8()+"\n";
+			s_data += key + ".use=" + nconvert(it->second.use) + "\n";
+		}
+	}
+
+	Connector::updateSettings(s_data);
+
+	/*std::map<std::string, std::string> n_vals;
 	n_vals["update_freq_incr"]=nconvert(static_cast<float>(l_update_freq_incr*60.f*60.f));
 	n_vals["update_freq_full"]=nconvert(l_update_freq_full*24*60*60);
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -783,7 +811,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	n_vals["internet_encrypt"]=nconvert(internet_encrypt);
 	n_vals["internet_compress"]=nconvert(internet_compress);
 
-	Connector::updateSettings(mergeNewSettings(settings, n_vals));
+	Connector::updateSettings(mergeNewSettings(settings, n_vals));*/
 
 	Close();
 }
@@ -935,6 +963,29 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	{
 		return convert(watoi(val) / 24 / 60 / 60);
 	}
+	else if (key == "internet_speed")
+	{
+		return convert(watoi(val) / (1024 / 8));
+	}
+	else if (key == "local_speed")
+	{
+		return convert(watoi(val) / ((1024*1024) / 8));
+	}
+	else if (key == "update_freq_image_full"
+		|| key=="update_freq_image_incr")
+	{
+		int ret = watoi(val) * 24 * 60 * 60;
+		if (!m_checkBox1->GetValue()
+			&& ret>0)
+		{
+			ret *= -1;
+		}
+		return convert(ret);
+	}
+	else if (key == "startup_backup_delay")
+	{
+		return convert(watoi(val) / 60);
+	}
 
 	return val;
 }
@@ -949,6 +1000,25 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 	{
 		return convert(watoi(val)* 24 * 60 * 60);
 	}
+	else if (key == "internet_speed")
+	{
+		return convert(watoi(val) * (1024 / 8) );
+	}
+	else if (key == "local_speed")
+	{
+		return convert(watoi(val) * ((1024*1024) / 8));
+	}
+	else if (key == "update_freq_image_full"
+		|| key=="update_freq_image_incr")
+	{
+		int ret = watoi(val) / 24 / 60 / 60;
+		m_checkBox1->SetValue(ret > 0);
+		return convert(ret);
+	}
+	else if (key == "startup_backup_delay")
+	{
+		return convert(watoi(val) * 60);
+	}
 
 	return val;
 }
@@ -956,7 +1026,7 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, wxWindow* ctrl)
 {
 	std::wstring use_str;
-	settings->getValue(key + L"_use", &use_str);
+	settings->getValue(key + L".use", &use_str);
 
 	int use = watoi(use_str);;
 
@@ -979,16 +1049,16 @@ void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, 
 	setting.btn = btn;
 	setting.ctrl = ctrl;
 	setting.use = use;
-	if (!settings->getValue(key + L"_client", &setting.value_client))
+	if (!settings->getValue(key + L".client", &setting.value_client))
 	{
 		settings->getValue(key, &setting.value_client);
 	}
-	if (!settings->getValue(key + L"_home", &setting.value_home))
+	if (!settings->getValue(key + L".home", &setting.value_home))
 	{
-		if(!settings->getValue(key+L"_def", &setting.value_client))
+		if(!settings->getValue(key+L".def", &setting.value_client))
 			settings->getValue(key, &setting.value_client);
 	}
-	if (!settings->getValue(key + L"_group", &setting.value_group))
+	if (!settings->getValue(key + L".group", &setting.value_group))
 	{
 		if (!settings->getValue(key + L"_def", &setting.value_client))
 			settings->getValue(key, &setting.value_client);

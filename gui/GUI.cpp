@@ -665,48 +665,65 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 
 	m_bitmapButton1->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton2->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton21->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton22->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+#ifdef _WIN32
+	if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		m_bitmapButton21->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton22->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton23->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton134->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton135->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton136->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButton137->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+		m_bitmapButtonInternetImage->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	}
+#endif
 	m_bitmapButton13->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton131->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton132->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton133->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton134->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton135->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton136->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton137->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	
 	m_bitmapButton16->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton161->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton17->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton19->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButton23->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	
 	m_bitmapButtonLocalSpeed->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButtonInternetFullFile->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
-	m_bitmapButtonInternetImage->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+	
 	m_bitmapButtonInternetSpeed->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButtonInternetCompress->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButtonInternetEncrypt->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 
+#ifdef _WIN32
+	if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		m_textCtrl21->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl22->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl23->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl134->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl135->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl136->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_textCtrl137->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+		m_checkBoxInternetImage->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	}
+#endif
 	m_textCtrl1->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl2->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl21->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl22->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	
 	m_textCtrl13->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl131->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl132->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl133->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl134->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl135->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl136->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl137->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	
 	m_textCtrl16->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl161->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl17->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_textCtrl19->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_textCtrl23->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	
 	m_textCtrlLocalSpeed->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_checkBoxInternetFullFile->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
-	m_checkBoxInternetImage->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+	
 	m_textCtrlInternetSpeed->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_checkBoxInternetCompress->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_checkBoxInternetEncrypt->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
@@ -898,7 +915,31 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_textCtrl18->Enable( false );
 	m_textCtrl18->SetMinSize(wxDLG_UNIT(this, wxSize( 100,-1 )) );
 
+	wxSize image_button_size = wxDLG_UNIT(this, wxSize(15, 13));
+	wxSize size_sub = wxDLG_UNIT(this, wxSize(5, 5));
+
+	wxBitmap fa_home;
+	fa_home.LoadFile("fa-home.png", wxBITMAP_TYPE_PNG);
+	fa_home_img_scaled = fa_home.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	wxBitmap fa_client;
+	fa_client.LoadFile("fa-road.png", wxBITMAP_TYPE_PNG);
+	fa_client_img_scaled = fa_client.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	wxBitmap fa_lock;
+	fa_lock.LoadFile("fa-lock.png", wxBITMAP_TYPE_PNG);
+	fa_lock_img_scaled = fa_lock.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
+	wxBitmap fa_copy;
+	fa_copy.LoadFile("fa-copy.png", wxBITMAP_TYPE_PNG);
+	fa_copy_img_scaled = fa_copy.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
+
 	bSizer32->Add( m_textCtrl18, 0, wxALL, 5 );
+
+	bSizer32->Add(0, 0, 1, wxEXPAND, 5);
+
+	m_bitmapButton1 = new wxBitmapButton(this, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer32->Add(m_bitmapButton1, 0, wxALIGN_CENTER | wxALL, 5);
 
 	/*m_staticTextGroup = new wxStaticText( this, wxID_ANY, _("Gruppe:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticTextGroup->Wrap( -1 );
@@ -962,6 +1003,7 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	m_button6->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickAbort ), NULL, this );
 	m_button7->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickNew ), NULL, this );
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIConfigPath::OnClickDel ), NULL, this );
+	m_bitmapButton1->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUIConfigPath::OnClickSourceSwitch), NULL, this);
 	//m_group->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIConfigPath::OnGroupChange ), NULL, this );
 }
 

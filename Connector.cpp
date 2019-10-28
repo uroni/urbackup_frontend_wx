@@ -500,7 +500,8 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 				wxString::FromUTF8(dir["name"].asCString()),
 				dir["id"].asInt(),
 				dir["group"].asInt(),
-				wxString::FromUTF8(dir["flags"].asCString())
+				wxString::FromUTF8(dir["flags"].asCString()),
+				dir["server_default"].asInt()
 			};
 
 			ret.push_back(rdir);

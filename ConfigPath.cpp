@@ -18,6 +18,8 @@
 
 #include "ConfigPath.h"
 #include "stringtools.h"
+#include "FileSettingsReader.h"
+#include "Settings.h"
 
 #define CP_ID_OK 100
 
@@ -44,25 +46,117 @@ ConfigPath::ConfigPath(wxWindow* parent)
 	mod=false;
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
-	dirs=Connector::getSharedPaths();
+#ifdef _DEBUG
+	CFileSettingsReader settings("urbackup/data/settings.cfg");
+#elif _WIN32
+	CFileSettingsReader settings(g_res_path + "urbackup/data/settings.cfg");
+#else
+	CFileSettingsReader settings(VARDIR "/urbackup/data/settings.cfg");
+#endif
 
-	if(Connector::hasError())
+	default_dirs_use = 0;
+	std::string default_dirs_use_str;
+	if (settings.getValue("default_dirs.use", &default_dirs_use_str))
+		default_dirs_use = atoi(default_dirs_use_str.c_str());
+
+	default_dirs_use_orig = default_dirs_use;
+
+	std::vector<std::string> default_dirs_toks;
+
+	size_t num_group_dirs = 0;
+	if (default_dirs_use & c_use_group)
 	{
-		wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
-		Hide();
-		Close();
-		return;
-	}
-
-
-	for(size_t i=0;i<dirs.size();++i)
-	{
-		listbox->Append(dirs[i].path);
-		if(dirs[i].name.IsEmpty())
+		std::string val;
+		if (settings.getValue("default_dirs.group", &val))
 		{
-			dirs[i].name=getDefaultDirname(dirs[i].path.wc_str());
+			TokenizeMail(val, default_dirs_toks, ";");
+			num_group_dirs = default_dirs_toks.size();
 		}
 	}
+	if (default_dirs_use & c_use_value)
+	{
+		std::string val;
+		std::vector<std::string> toks;
+		if (settings.getValue("default_dirs.home", &val))
+		{
+			TokenizeMail(val, toks, ";");
+			default_dirs_toks.insert(default_dirs_toks.end(), toks.begin(), toks.end());
+		}
+	}
+
+	std::vector<SBackupDir> c_dirs = Connector::getSharedPaths();
+
+	std::map<wxString, size_t > path_n;
+
+	for (size_t i = 0; i<default_dirs_toks.size(); ++i)
+	{
+		SBackupDir dir;
+		dir.path = UnescapeParamString(trim(default_dirs_toks[i]));
+		dir.group = 0;
+		++path_n[dir.path];
+		if (dir.path.find("|") != std::string::npos)
+		{
+			std::vector<std::string> toks;
+			TokenizeMail(std::string(dir.path.ToUTF8()), toks, "|");
+			dir.path = toks[0];
+			dir.name = toks[1];
+			if (toks.size()>2)
+			{
+				dir.group = (std::max)(0, atoi(toks[2].c_str()));
+			}
+		}
+
+		size_t match_n = 0;
+		for (size_t j = 0; j < c_dirs.size(); ++j)
+		{
+			if (c_dirs[j].path == dir.path)
+			{
+				++match_n;
+				if (match_n == path_n[dir.path])
+				{
+					std::string flags = getafter("/", std::string(dir.name.ToUTF8()));
+					dir.name = c_dirs[j].name;
+
+					if (!flags.empty())
+						dir.name += "/" + flags;
+				}
+			}
+		}
+
+		if (dir.name.IsEmpty())
+		{
+			dir.name = getDefaultDirname(dir.path.wc_str());
+		}
+
+		if (i < num_group_dirs)
+			dirs_group.push_back(dir);
+		else
+			dirs_home.push_back(dir);
+	}
+
+	for (size_t i = 0; i < c_dirs.size(); ++i)
+	{
+		SBackupDir& dir = c_dirs[i];
+
+		if (dir.server_default != 0)
+			continue;
+
+		if (dir.name.IsEmpty())
+		{
+			dir.name = getDefaultDirname(dir.path.wc_str());
+		}
+
+		if (!dir.flags.empty())
+		{
+			dir.name += "/" + dir.flags;
+		}
+
+		dirs_client.push_back(dir);
+	}
+
+
+	renderListBoxContent();
+	switchBitmapLabel();
 
 	m_textCtrl18->SetValidator(getPathValidator());
 
@@ -74,7 +168,12 @@ void ConfigPath::OnClickOk(wxCommandEvent &evt)
 {
 	if(mod)
 	{
-		Connector::saveSharedPaths(dirs);
+		if (default_dirs_use != default_dirs_use_orig)
+		{
+			std::string s_data = "default_dirs.use=" + nconvert(default_dirs_use) + "\n";
+			Connector::updateSettings(s_data);
+		}
+		Connector::saveSharedPaths(dirs_client);
 	}
 	Close();
 }
@@ -96,7 +195,11 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		ad.name=getDefaultDirname(ad.path.wc_str());
 		ad.group=0;
 		ad.id=0;
-		dirs.push_back(ad);
+		dirs_client.push_back(ad);
+
+		default_dirs_use |= c_use_value_client;
+		switchBitmapLabel();
+
 		mod=true;
 	}
 }
@@ -106,8 +209,44 @@ void ConfigPath::OnClickDel(wxCommandEvent &evt)
 	int sel=listbox->GetSelection();
 	if(sel>=0)
 	{
-		listbox->Delete(sel);
-		dirs.erase(dirs.begin()+sel);
+		size_t offs_home = (default_dirs_use & c_use_group) ? dirs_group.size() : 0;
+		bool switch_client = false;
+		if (default_dirs_use & c_use_group
+			&& sel < dirs_group.size())
+		{
+			switch_client = true;
+		}
+		else if (default_dirs_use & c_use_value
+			&& sel < offs_home + dirs_home.size())
+		{
+			switch_client = true;
+		}
+
+		offs_home+= (default_dirs_use & c_use_value) ? dirs_home.size() : 0;
+
+		if (switch_client)
+		{
+			if (default_dirs_use & c_use_group)
+				dirs_client.insert(dirs_client.begin(), dirs_group.begin(), dirs_group.end());
+			if (default_dirs_use & c_use_value)
+				dirs_client.insert(dirs_client.begin(), dirs_home.begin(), dirs_home.end());
+
+			default_dirs_use = c_use_value_client;
+
+			dirs_client.erase(dirs_client.begin() + sel);
+		}
+		else
+		{
+			dirs_client.erase(dirs_client.begin() + sel - offs_home);
+			if (dirs_client.empty())
+			{
+				default_dirs_use &= ~c_use_value_client;
+			}
+		}
+
+		renderListBoxContent();
+		switchBitmapLabel();
+
 		mod=true;
 	}
 }
@@ -137,14 +276,96 @@ std::wstring removeChars(std::wstring in)
 
 bool ConfigPath::findPathName(const std::wstring &pn)
 {
-	for(size_t i=0;i<dirs.size();++i)
+	for(size_t i=0;i<dirs_client.size();++i)
 	{
-		if(dirs[i].name==pn )
+		if(dirs_client[i].name==pn )
+		{
+			return true;
+		}
+	}
+	for (size_t i = 0; i<dirs_group.size(); ++i)
+	{
+		if (dirs_group[i].name == pn)
+		{
+			return true;
+		}
+	}
+	for (size_t i = 0; i<dirs_home.size(); ++i)
+	{
+		if (dirs_home[i].name == pn)
 		{
 			return true;
 		}
 	}
 	return false;
+}
+
+void ConfigPath::switchBitmapLabel()
+{
+	if (default_dirs_use == c_use_group)
+	{
+		m_bitmapButton1->SetBitmapLabel(fa_lock_img_scaled);
+	}
+	else if (default_dirs_use == c_use_value)
+	{
+		m_bitmapButton1->SetBitmapLabel(fa_home_img_scaled);
+	}
+	else if (default_dirs_use == c_use_value_client)
+	{
+		m_bitmapButton1->SetBitmapLabel(fa_client_img_scaled);
+	}
+	else
+	{
+		m_bitmapButton1->SetBitmapLabel(fa_copy_img_scaled);
+	}
+}
+
+void ConfigPath::renderListBoxContent()
+{
+	listbox->Clear();
+	if (default_dirs_use & c_use_group)
+	{
+		for (size_t i = 0; i < dirs_group.size(); ++i)
+		{
+			listbox->Append(dirs_group[i].path);
+		}
+	}
+
+	if (default_dirs_use & c_use_value)
+	{
+		for (size_t i = 0; i < dirs_home.size(); ++i)
+		{
+			listbox->Append(dirs_home[i].path);
+		}
+	}
+
+	if (default_dirs_use & c_use_value_client)
+	{
+		for (size_t i = 0; i < dirs_client.size(); ++i)
+		{
+			listbox->Append(dirs_client[i].path);
+		}
+	}
+}
+
+SBackupDir & ConfigPath::getSel(int sel)
+{
+	size_t offs_home = (default_dirs_use & c_use_group) ? dirs_group.size() : 0;
+	bool switch_client = false;
+	if (default_dirs_use & c_use_group
+		&& sel < dirs_group.size())
+	{
+		return dirs_group[sel];
+	}
+	else if (default_dirs_use & c_use_value
+		&& sel < offs_home + dirs_home.size())
+	{
+		return dirs_home[sel - offs_home];
+	}
+
+	offs_home += (default_dirs_use & c_use_value) ? dirs_home.size() : 0;
+
+	return dirs_client[sel - offs_home];
 }
 
 std::wstring ConfigPath::getDefaultDirname(const std::wstring &path)
@@ -175,7 +396,7 @@ void ConfigPath::OnPathSelected(wxCommandEvent &evt)
 	if(sel>=0)
 	{
 		m_textCtrl18->Enable();
-		m_textCtrl18->SetValue(dirs[sel].name);
+		m_textCtrl18->SetValue(getSel(sel).name);
 		/*m_group->Enable();
 		m_group->Select(dirs[sel].group);*/
 	}
@@ -186,7 +407,7 @@ void ConfigPath::OnNameTextChange(wxCommandEvent &evt)
 	int sel=listbox->GetSelection();
 	if(sel>=0)
 	{
-		dirs[sel].name=m_textCtrl18->GetValue();
+		getSel(sel).name=m_textCtrl18->GetValue();
 		mod=true;
 	}
 }
@@ -203,4 +424,27 @@ void ConfigPath::OnGroupChange( wxCommandEvent& evt )
 			mod=true;
 		}		
 	}*/
+}
+
+void ConfigPath::OnClickSourceSwitch(wxCommandEvent & event)
+{
+	if (default_dirs_use == c_use_group)
+	{
+		default_dirs_use = c_use_value;
+	}
+	else if (default_dirs_use == c_use_value)
+	{
+		default_dirs_use = c_use_value_client;
+	}
+	else if (default_dirs_use == c_use_value_client)
+	{
+		default_dirs_use = c_use_group | c_use_value | c_use_value_client;
+	}
+	else
+	{
+		default_dirs_use = c_use_group;
+	}
+
+	renderListBoxContent();
+	switchBitmapLabel();
 }

@@ -35,13 +35,23 @@ public:
 	void OnPathSelected(wxCommandEvent &evt);
 	void OnNameTextChange(wxCommandEvent &evt);
 	void OnGroupChange( wxCommandEvent& evt );
+	void OnClickSourceSwitch(wxCommandEvent& event);
 	
 
 private:
-	std::vector<SBackupDir> dirs;
+	std::vector<SBackupDir> dirs_group;
+	std::vector<SBackupDir> dirs_home;
+	std::vector<SBackupDir> dirs_client;
+
+	void switchBitmapLabel();
+	void renderListBoxContent();
+
+	SBackupDir& getSel(int sel);
 
 	std::wstring getDefaultDirname(const std::wstring &path);
 	bool findPathName(const std::wstring &pn);
 
+	int default_dirs_use;
+	int default_dirs_use_orig;
 	bool mod;
 };
