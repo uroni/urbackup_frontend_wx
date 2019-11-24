@@ -746,7 +746,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 				|| !settings->getValue(it->first + L".use", &old_use)
 				|| old_use!=convert(it->second.use) ) )
 		{
-			std::string key = wxString(it->first).ToUTF8();
+			std::string key(wxString(it->first).ToUTF8());
 			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8()+"\n";
 			s_data += key + ".use=" + nconvert(it->second.use) + "\n";
 		}
