@@ -31,6 +31,7 @@ std::wstring ConvertToUnicode(const std::string &input);
 #endif
 
 extern wxString res_path;
+extern std::string g_res_path;
 extern wxString ico_ext;
 extern wxBitmapType ico_type;
 
