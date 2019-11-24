@@ -22,11 +22,11 @@
 #include <sstream> 
 #include <map>
 #include "utf8/utf8.h"
+#include "stringtools.h"
 
 #ifndef _WIN32
 #include <memory.h>
 #include <stdlib.h>
-#include "stringtools.h"
 #endif
 
 
@@ -1037,8 +1037,6 @@ std::wstring UnescapeSQLString(std::wstring pStr)
 	}
 	return pStr;
 }
-
-string htmldecode(string str, bool html, char xc='%');
 
 void ParseParamStrHttp(const std::string &pStr, std::map<std::string, std::string> *pMap)
 {
