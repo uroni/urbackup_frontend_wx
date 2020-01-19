@@ -162,6 +162,36 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 	settings = new CFileSettingsReader(VARDIR "/urbackup/data/settings.cfg");
 #endif
 
+	std::wstring client_settings_tray_access_pw;
+	if (getSettingsValue(L"client_settings_tray_access_pw", &client_settings_tray_access_pw, settings)
+		&& !client_settings_tray_access_pw.empty())
+	{
+		do
+		{
+			wxPasswordEntryDialog* pwEntry = new wxPasswordEntryDialog(this, _("Please enter the tray access text"));
+			if (pwEntry->ShowModal() != wxID_OK)
+			{
+				Close();
+				return;
+			}
+
+			if (pwEntry->GetValue() == client_settings_tray_access_pw)
+			{
+				break;
+			}
+			else
+			{
+				wxDialog* pwWrong = new wxDialog(this, -1, _("Tray access text wrong. Please retry or cancel."));
+				if (pwWrong->ShowModal() != wxID_OK)
+				{
+					Close();
+					return;
+				}
+
+			}
+		} while (true);
+	}
+
 	std::wstring t;
 	if(getSettingsValue(L"update_freq_incr", &t, settings))
 	{
