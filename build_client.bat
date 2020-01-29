@@ -1,6 +1,6 @@
 cd %~dp0
 
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat"
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 
 msbuild UrBackupClientGUI.sln /p:Configuration=Release /p:Platform="Win32"
 if %errorlevel% neq 0 exit /b %errorlevel% 
