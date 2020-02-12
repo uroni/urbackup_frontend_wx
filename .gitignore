@@ -92,3 +92,4 @@ translations/urbackup.frontend/en_new.po
 
 *.orig
 UrBackupClientGUI.VC.opendb
+/.vs/*
