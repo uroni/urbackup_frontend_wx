@@ -93,19 +93,19 @@ Section "install"
 		; ExecWait '"$TEMP\vcredist_x64.exe" /q'  
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
-		File "..\deps\redist\vc_redist_2015.x64.exe"
-		ExecWait '"$TEMP\vc_redist_2015.x64.exe" /q /norestart' $0
+		File "..\deps\redist\vc_redist_2019.x64.exe"
++		ExecWait '"$TEMP\vc_redist_2019.x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
 		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
-			ExecWait '"$TEMP\vc_redist_2015.x64.exe" /passive /norestart' $0
+			ExecWait '"$TEMP\vc_redist_2019.x64.exe" /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
 			${If} $0 != '1638'
-				DetailPrint "Unable to install Visual Studio 2015 runtime. Falling back to site local runtime installation."
+				DetailPrint "Unable to install Visual Studio 2019 runtime. Falling back to site local runtime installation."
 				StrCpy $SITE_LOCAL_RUNTIME "1"
 			${EndIf}
 			${EndIf}
@@ -128,19 +128,19 @@ Section "install"
 				; Delete '$TEMP\vcredist_x86.exe'
 			; ${EndIf}
 		; ${EndIf}
-		File "..\deps\redist\vc_redist_2015.x86.exe"
-		ExecWait '"$TEMP\vc_redist_2015.x86.exe" /q /norestart' $0
+		File "..\deps\redist\vc_redist_2019.x86.exe"
++		ExecWait '"$TEMP\vc_redist_2019.x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
 		${If} $0 != '1638'
 		${If} $0 != '8192'
 		${If} $0 != '1641'
 		${If} $0 != '1046'
-			ExecWait '"$TEMP\vc_redist_2015.x86.exe"  /passive /norestart' $0
+			ExecWait '"$TEMP\vc_redist_2019.x86.exe"  /passive /norestart' $0
 			${If} $0 != '0'
 			${If} $0 != '3010'
 			${If} $0 != '1638'
-				MessageBox MB_OK "Unable to install Visual Studio 2015 runtime. UrBackup needs that runtime."
+				MessageBox MB_OK "Unable to install Visual Studio 2019 runtime. UrBackup needs that runtime."
 				Quit
 			${EndIf}
 			${EndIf}
