@@ -94,7 +94,7 @@ Section "install"
 		; Delete '$TEMP\vcredist_x64.exe'
 ; VSRedistInstalled64:
 		File "..\deps\redist\vc_redist_2019.x64.exe"
-+		ExecWait '"$TEMP\vc_redist_2019.x64.exe" /q /norestart' $0
+		ExecWait '"$TEMP\vc_redist_2019.x64.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
 		${If} $0 != '1638'
@@ -129,7 +129,7 @@ Section "install"
 			; ${EndIf}
 		; ${EndIf}
 		File "..\deps\redist\vc_redist_2019.x86.exe"
-+		ExecWait '"$TEMP\vc_redist_2019.x86.exe" /q /norestart' $0
+		ExecWait '"$TEMP\vc_redist_2019.x86.exe" /q /norestart' $0
 		${If} $0 != '0'
 		${If} $0 != '3010'
 		${If} $0 != '1638'
