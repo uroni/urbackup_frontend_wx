@@ -667,7 +667,7 @@ std::string replaceonce(std::string tor, std::string tin, std::string data)
 	between the tokens) - strings, which are declared by two \" are not
 	tokenized = treated as a single token
 */
-void	Tokenize(std::string& str, std::vector<std::string> &tokens, std::string seps)
+void	Tokenize(const std::string& str, std::vector<std::string> &tokens, std::string seps)
 {
 	// one-space line for storing blank lines in the file
 	std::string blankLine = " ";
@@ -723,7 +723,7 @@ void	Tokenize(std::string& str, std::vector<std::string> &tokens, std::string se
 		if(tokens[i]=="") tokens.erase(tokens.begin()+(i--));
 }
 
-void	Tokenize(std::wstring& str, std::vector<std::wstring> &tokens, std::wstring seps)
+void	Tokenize(const std::wstring& str, std::vector<std::wstring> &tokens, std::wstring seps)
 {
 	// one-space line for storing blank lines in the file
 	std::wstring blankLine = L" ";
@@ -779,7 +779,7 @@ void	Tokenize(std::wstring& str, std::vector<std::wstring> &tokens, std::wstring
 		if(tokens[i].empty()) tokens.erase(tokens.begin()+(i--));
 }
 
-void TokenizeMail(std::string& str, std::vector<std::string> &tokens, std::string seps)
+void TokenizeMail(const std::string& str, std::vector<std::string> &tokens, std::string seps)
 {
 	// one-space line for storing blank lines in the file
 	std::string blankLine = "";
