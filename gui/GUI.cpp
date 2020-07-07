@@ -134,15 +134,27 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	wxSize size_sub = wxDLG_UNIT(this, wxSize(5, 5));
 
 	wxBitmap fa_home;
+#ifdef _WIN32
 	fa_home.LoadFile("fa-home.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_home.LoadFile(res_path+wxT("fa-home.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_home_img_scaled = fa_home.ConvertToImage().Scale(image_button_size.GetWidth()- size_sub.GetWidth(), image_button_size.GetHeight()- size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	wxBitmap fa_client;
+#ifdef _WIN32
 	fa_client.LoadFile("fa-road.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_client.LoadFile(res_path+wxT("fa-road.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_client_img_scaled = fa_client.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	wxBitmap fa_lock;
+#ifdef _WIN32
 	fa_lock.LoadFile("fa-lock.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_lock.LoadFile(res_path+wxT("fa-lock.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_lock_img_scaled = fa_lock.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	m_bitmapButton1 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
@@ -919,19 +931,35 @@ GUIConfigPath::GUIConfigPath( wxWindow* parent, wxWindowID id, const wxString& t
 	wxSize size_sub = wxDLG_UNIT(this, wxSize(5, 5));
 
 	wxBitmap fa_home;
+#ifdef _WIN32
 	fa_home.LoadFile("fa-home.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_home.LoadFile(res_path+wxT("fa-home.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_home_img_scaled = fa_home.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	wxBitmap fa_client;
+#ifdef _WIN32
 	fa_client.LoadFile("fa-road.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_client.LoadFile(res_path+wxT("fa-road.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_client_img_scaled = fa_client.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	wxBitmap fa_lock;
+#ifdef _WIN32
 	fa_lock.LoadFile("fa-lock.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_lock.LoadFile(res_path+wxT("fa-lock.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_lock_img_scaled = fa_lock.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	wxBitmap fa_copy;
+#ifdef _WIN32
 	fa_copy.LoadFile("fa-copy.png", wxBITMAP_TYPE_PNG);
+#else
+	fa_copy.LoadFile(res_path+wxT("fa-copy.png"), wxBITMAP_TYPE_PNG);
+#endif
 	fa_copy_img_scaled = fa_copy.ConvertToImage().Scale(image_button_size.GetWidth() - size_sub.GetWidth(), image_button_size.GetHeight() - size_sub.GetHeight(), wxIMAGE_QUALITY_BILINEAR);
 
 	bSizer32->Add( m_textCtrl18, 0, wxALL, 5 );
