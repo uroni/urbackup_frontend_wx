@@ -144,7 +144,7 @@ void runCommand(std::string cmd, std::string arg1)
 		sudo_prefix = sudo_app + " ";
 	}
 #ifdef __APPLE__
-	std::string clientexecutable = ExtractFilePath(BINDIR)+"/urbackupclientgui";
+	wxString clientexecutable = wxStandardPaths::Get().GetExecutablePath();
 	wxExecute(sudo_prefix +"\""+ clientexecutable +"\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #else
 	wxExecute(sudo_prefix + BINDIR "/urbackupclientgui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
