@@ -11,6 +11,8 @@
 #include <vector>
 #include <map>
 
+typedef wxLongLong_t int64;
+
 struct SComponent
 {
 	SComponent()
@@ -99,6 +101,9 @@ private:
 
 	int icon_width;
 	int icon_height;
+
+	int use_orig;
+	int64 use_lm_orig;
 };
 
 namespace

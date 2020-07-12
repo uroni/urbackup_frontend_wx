@@ -53,5 +53,6 @@ private:
 
 	int default_dirs_use;
 	int default_dirs_use_orig;
+	int64 default_dirs_use_lm_orig;
 	bool mod;
 };
