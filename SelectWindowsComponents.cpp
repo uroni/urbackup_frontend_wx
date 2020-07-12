@@ -47,6 +47,16 @@ SelectWindowsComponents::SelectWindowsComponents(wxWindow * parent)
 	settings = new CFileSettingsReader(VARDIR "/urbackup/data/settings.cfg");
 #endif
 
+	use_orig = 0;
+	std::string use_orig_str;
+	if (settings->getValue("vss_select_components.use", &use_orig_str))
+		use_orig = atoi(use_orig_str.c_str());
+
+	use_lm_orig = 0;
+	std::string use_lm_orig_str;
+	if (settings->getValue("vss_select_components.use_lm", &use_lm_orig_str))
+		wxString(use_lm_orig_str).ToLongLong(&use_lm_orig);
+
 	componentReader.Run();
 }
 
@@ -80,10 +90,7 @@ void SelectWindowsComponents::Notify(void)
 		m_treeCtrl1->SetImageList(iconList);
 
 		std::string componentsStr = "default=1";
-		if (!settings->getValue("vss_select_components", &componentsStr))
-		{
-			settings->getValue("vss_select_components_def", &componentsStr);
-		}
+		settings->getValue("vss_select_components.client", &componentsStr);
 		
 		std::map<std::string, std::string> comps;
 		ParseParamStrHttp(componentsStr, &comps);
@@ -192,8 +199,6 @@ void SelectWindowsComponents::evtOnTreeStateImageClick(wxTreeEvent & event)
 
 void SelectWindowsComponents::onOkClick(wxCommandEvent & event)
 {
-	std::map<std::string, std::string> n_vals;
-
 	std::string res;
 	if (m_treeCtrl1->GetItemState(tree_items[componentReader.getRoot()]) == 1)
 	{
@@ -205,9 +210,24 @@ void SelectWindowsComponents::onOkClick(wxCommandEvent & event)
 		collectComponents(componentReader.getRoot(), idx, res);
 	}
 
-	n_vals["vss_select_components"] = res;
+	int use = use_orig;
 
-	Connector::updateSettings(Settings::mergeNewSettings(settings, n_vals));
+	use |= c_use_value_client;
+
+	std::string s_data = "vss_select_components=" + res+"\n";
+
+	if (use != use_orig)
+	{
+		s_data += "vss_select_components.use=" + nconvert(use) + "\n";
+		int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
+
+		if (use_lm_orig > ctime)
+			ctime = use_lm_orig + 1;
+
+		s_data += "default_dirs.use_lm=" + nconvert(ctime) + "\n";
+	}
+
+	Connector::updateSettings(s_data);
 
 	Close();
 }
