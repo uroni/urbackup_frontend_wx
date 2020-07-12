@@ -44,8 +44,6 @@ public:
 	virtual void OnBitmapBtnClick(wxCommandEvent& event);
 	virtual void OnCtlChange(wxCommandEvent& event);
 
-	static std::string mergeNewSettings(CFileSettingsReader *settings, const std::map<std::string, std::string>& n_vals);
-
 private:
 
 	std::wstring transformValToUI(const std::wstring& key, const std::wstring& val);

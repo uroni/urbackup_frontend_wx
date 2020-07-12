@@ -765,20 +765,40 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	s_data += std::string("internet_authkey=") + internet_authkey.ToUTF8() + "\n";
 	s_data += std::string("computername=") + computername.ToUTF8() + "\n";
 
+	int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
+
 	for (std::map<std::wstring, SSetting>::iterator it = settings_info.begin(); it != settings_info.end(); ++it)
 	{
 		std::wstring old_val;
 		std::wstring old_use;
 		if (it->second.use != c_use_group
 			&& it->second.use!=c_use_value
-			&& (!settings->getValue(it->first+L".client", &old_val)
-				|| old_val!=it->second.value_client
-				|| !settings->getValue(it->first + L".use", &old_use)
-				|| old_use!=convert(it->second.use) ) )
+			&& ((!settings->getValue(it->first+L".client", &old_val) &&
+				old_val!=it->second.value_client) ||
+				( !settings->getValue(it->first + L".use", &old_use) &&
+				old_use!=convert(it->second.use) ) )  )
 		{
 			std::string key(wxString(it->first).ToUTF8());
-			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8()+"\n";
+			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8() + "\n";
 			s_data += key + ".use=" + nconvert(it->second.use) + "\n";
+			int64 use_lm = 0;
+			std::wstring old_use_lm_str;
+			if (!settings->getValue(it->first + L".use_lm", &old_use_lm_str)
+				|| old_use_lm_str.empty())
+				use_lm = ctime;
+			else
+				wxString(old_use_lm_str).ToLongLong(&use_lm);
+
+
+			if (convert(it->second.use) != old_use)
+			{
+				if (use_lm > ctime)
+					++use_lm;
+				else
+					use_lm = ctime;
+			}
+
+			s_data += key + ".use_lm=" + nconvert(use_lm) + "\n";
 		}
 	}
 
@@ -936,51 +956,6 @@ void Settings::OnCtlChange(wxCommandEvent & event)
 	}	
 
 	setting.btn->SetBitmapLabel(fa_client_img_scaled);
-}
-
-std::string Settings::mergeNewSettings(CFileSettingsReader * settings, const std::map<std::string, std::string>& n_vals)
-{
-	std::string ndata;
-
-	std::vector<std::wstring> keys = settings->getKeys();
-
-	for (std::map<std::string, std::string>::const_iterator it = n_vals.begin(); it != n_vals.end(); ++it)
-	{
-		const std::string &nkey = it->first;
-		std::string def_value;
-		bool found_key = false;
-
-		std::wstring key_w = ConvertToUnicode(nkey);
-		for (size_t i = 0; i<keys.size(); ++i)
-		{
-			if (keys[i] == key_w)
-			{
-				found_key = true;
-				break;
-			}
-		}
-
-		if (found_key || !settings->getValue(it->first + "_def", &def_value) || def_value != it->second)
-		{
-			ndata += nkey + "=" + it->second + "\n";
-		}
-	}
-
-	for (size_t i = 0; i<keys.size(); ++i)
-	{
-		std::string key = ConvertToUTF8(keys[i]);
-		std::map<std::string, std::string>::const_iterator iter = n_vals.find(key);
-		if (iter == n_vals.end())
-		{
-			std::wstring val;
-			if (settings->getValue(keys[i], &val))
-			{
-				ndata += key + "=" + ConvertToUTF8(val) + "\n";
-			}
-		}
-	}
-
-	return ndata;
 }
 
 std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)

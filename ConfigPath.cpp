@@ -62,6 +62,11 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 	default_dirs_use_orig = default_dirs_use;
 
+	default_dirs_use_lm_orig = 0;
+	std::string default_dirs_use_lm_str;
+	if (settings.getValue("default_dirs.use_lm", &default_dirs_use_lm_str))
+		wxString(default_dirs_use_lm_str).ToLongLong(&default_dirs_use_lm_orig);
+
 	std::vector<std::string> default_dirs_toks;
 
 	size_t num_group_dirs = 0;
@@ -173,6 +178,13 @@ void ConfigPath::OnClickOk(wxCommandEvent &evt)
 		if (default_dirs_use != default_dirs_use_orig)
 		{
 			std::string s_data = "default_dirs.use=" + nconvert(default_dirs_use) + "\n";
+			int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
+
+			if (default_dirs_use_lm_orig > ctime)
+				ctime = default_dirs_use_lm_orig + 1;
+
+			s_data += "default_dirs.use_lm=" + nconvert(ctime) + "\n";
+
 			Connector::updateSettings(s_data);
 		}
 		Connector::saveSharedPaths(dirs_client);
