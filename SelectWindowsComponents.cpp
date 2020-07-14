@@ -89,7 +89,7 @@ void SelectWindowsComponents::Notify(void)
 
 		m_treeCtrl1->SetImageList(iconList);
 
-		std::string componentsStr = "default=1";
+		std::string componentsStr = "default=0";
 		settings->getValue("vss_select_components.client", &componentsStr);
 		
 		std::map<std::string, std::string> comps;
