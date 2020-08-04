@@ -126,13 +126,19 @@ void find_sudo_app()
 	else if(system("type gksu")==0) sudo_app="gksu";
 	else if(system("type kdesu")==0) sudo_app="kdesu";
 	else sudo_app="sudo";
-#else
-	sudo_app="\"" BINDIR "/UrBackup Client Administration\"";
 #endif
 }
 
 void runCommand(std::string cmd, std::string arg1)
 {
+#ifdef __APPLE__
+
+	wxString clientexecutable = wxStandardPaths::Get().GetExecutablePath();
+	wxString sudoedcommand = "/usr/bin/osascript -e 'do shell script (quoted form of \""+ clientexecutable +"\" & \" "+cmd+"\""+(arg1.empty()?std::string():(" & \" "+arg1+"\""))+") with prompt \"UrBackup Client wants to make changes\" with administrator privileges'";
+	wxExecute(sudoedcommand, wxEXEC_ASYNC, NULL, NULL);
+
+#else
+
 	std::string sudo_prefix = "";
 
 	if (Connector::getPasswordData(true, false).empty())
@@ -143,10 +149,7 @@ void runCommand(std::string cmd, std::string arg1)
 		}
 		sudo_prefix = sudo_app + " ";
 	}
-#ifdef __APPLE__
-	wxString clientexecutable = wxStandardPaths::Get().GetExecutablePath();
-	wxExecute(sudo_prefix +"\""+ clientexecutable +"\" "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
-#else
+
 	wxExecute(sudo_prefix + BINDIR "/urbackupclientgui "+cmd+(arg1.empty()?std::string():(" "+arg1)), wxEXEC_ASYNC, NULL, NULL);
 #endif
 }
