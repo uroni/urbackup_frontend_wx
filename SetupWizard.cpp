@@ -627,6 +627,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Media Cache");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache*");
+	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Microsoft\\Terminal Server Client\\Cache");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\:\\cache2");
 	pathsNotToBackup.push_back(L"C:\\Users\\:\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\:\\cache");
 	pathsNotToBackup.push_back(L"C:\\Windows\\Temp");
