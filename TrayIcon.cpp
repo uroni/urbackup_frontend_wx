@@ -396,7 +396,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		mnu->AppendSeparator();
 		any_prev=false;
 	}
-	mnu->Append(ID_TI_INFO, _("Infos") );
+	mnu->Append(ID_TI_INFO, _("About...") );
 	if(backup_is_running)
 	{
 		if(b_is_pausing==false)
