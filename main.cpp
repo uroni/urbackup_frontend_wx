@@ -959,6 +959,7 @@ void MyTimer::resetDisplayedUpdateInfo(void)
 #ifndef DD_RELEASE
 int main(int argc, char *argv[])
 {
+	wxDISABLE_DEBUG_SUPPORT();
 	#ifdef __APPLE__
 	if(argc>1 && wxString(argv[1])==wxT("daemon"))
 	{
