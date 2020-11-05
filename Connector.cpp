@@ -519,7 +519,10 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 	std::string args;
 	for(size_t i=0;i<res.size();++i)
 	{
-		if(i!=0)
+		if (res[i].server_default)
+			continue;
+
+		if(!args.empty())
 			args+="&";
 
 		std::string path = EscapeParamString(res[i].path.ToUTF8().data());
