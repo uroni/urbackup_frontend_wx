@@ -237,7 +237,7 @@ class GUIInfo : public wxDialog
 	
 	public:
 		
-		GUIInfo( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Infos"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 420,265 ), long style = wxDEFAULT_DIALOG_STYLE );
+		GUIInfo( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 420,265 ), long style = wxDEFAULT_DIALOG_STYLE );
 		~GUIInfo();
 	
 };
