@@ -28,9 +28,13 @@ msgstr "Settings"
 msgid "Logs"
 msgstr "Logs"
 
-#: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
+#: TrayIcon.cpp:391
 msgid "Infos"
 msgstr "Infos"
+
+#: gui\GUI.h:205 gui\GUI.cpp:542
+msgid "About..."
+msgstr "About..."
 
 #: gui\GUI.h:244 TrayIcon.cpp:366
 msgid "Add/Remove backup paths"
