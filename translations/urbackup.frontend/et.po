@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2017-09-22 08:30+0000\n"
+"PO-Revision-Date: 2020-12-04 20:19+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: Estonian (http://www.transifex.com/uroni/urbackup/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -28,9 +28,13 @@ msgstr "Seaded"
 msgid "Logs"
 msgstr "Logid"
 
-#: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
+#: TrayIcon.cpp:391
 msgid "Infos"
 msgstr "Info"
+
+#: gui\GUI.h:205 gui\GUI.cpp:542
+msgid "About..."
+msgstr ""
 
 #: gui\GUI.h:244 TrayIcon.cpp:366
 msgid "Add/Remove backup paths"
