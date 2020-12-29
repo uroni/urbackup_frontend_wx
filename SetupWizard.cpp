@@ -953,6 +953,8 @@ void SetupWizard::readConfig( EFileBackupChoice& fileBackupChoice, EImageBackupC
 	volume_choice = widen(get_all_volumes_list(false, cache));
 #endif
 
+	imageBackupChoice = EImageBackupChoice_System;
+
 	if(lastImageBackupChoice==L"AllNonUsb")
 	{
 		imageBackupChoice = EImageBackupChoice_AllNonUsb;
