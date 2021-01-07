@@ -290,6 +290,12 @@ bool MyApp::OnInit()
 	//SetCurrentDirectoryW(ExtractFilePath(buf).c_str() );
 	g_res_path=ConvertToUTF8(ExtractFilePath(buf))+"\\";
 	res_path=wxString(g_res_path.c_str(), wxMBConvUTF8());
+#elif defined(__APPLE__)
+	wxFileName base(wxStandardPaths::Get().GetExecutablePath());
+	base.AppendDir(wxT("share"));
+	base.AppendDir(wxT("urbackup"));
+	res_path=base.GetPathWithSep();
+	g_res_path=res_path;
 #else
 	res_path=wxT(DATADIR "/urbackup/");
 	g_res_path= DATADIR "/urbackup/";
