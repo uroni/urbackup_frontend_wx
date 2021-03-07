@@ -121,8 +121,6 @@ class GUISettings : public wxDialog
 		wxCheckBox* m_checkBoxInternetEnabled;
 		wxStaticText* m_staticInternetServer;
 		wxTextCtrl* m_textCtrlInternetServer;
-		wxStaticText* m_staticInternetServerPort;
-		wxTextCtrl* m_textCtrlInternetServerPort;
 		wxStaticText* m_staticInternetServerProxy;
 		wxTextCtrl* m_textCtrlInternetServerProxy;
 		wxStaticText* m_staticInternetServerAuthkey;

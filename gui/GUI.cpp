@@ -516,19 +516,11 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
-	m_staticInternetServer = new wxStaticText( m_tab_internet, wxID_ANY, _("Internet server name/IP:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticInternetServer = new wxStaticText( m_tab_internet, wxID_ANY, _("Server URL client connects to:"), wxDefaultPosition, left_column_size, 0 );
 	m_staticInternetServer->Wrap( -1 );
 	bSizerH->Add( m_staticInternetServer, 0, wxALIGN_CENTER|wxALL, 5 );	
 	m_textCtrlInternetServer = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, string_input_size, 0 );
 	bSizerH->Add( m_textCtrlInternetServer, 0, wxALL, 5 );	
-	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
-
-	bSizerH = new wxBoxSizer( wxHORIZONTAL );	
-	m_staticInternetServerPort = new wxStaticText( m_tab_internet, wxID_ANY, _("Internet server port:"), wxDefaultPosition, left_column_size, 0 );
-	m_staticInternetServerPort->Wrap( -1 );
-	bSizerH->Add( m_staticInternetServerPort, 0, wxALIGN_CENTER|wxALL, 5 );	
-	m_textCtrlInternetServerPort = new wxTextCtrl( m_tab_internet, wxID_ANY, wxEmptyString, wxDefaultPosition, number_input_size, 0 );
-	bSizerH->Add( m_textCtrlInternetServerPort, 0, wxALL, 5 );	
 	bSizer_internet->Add( bSizerH, 0, wxEXPAND, 5 );
 
 	bSizerH = new wxBoxSizer(wxHORIZONTAL);

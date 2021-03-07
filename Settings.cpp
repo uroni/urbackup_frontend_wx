@@ -422,22 +422,27 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		setSettingsSwitch(L"internet_image_backups", m_bitmapButtonInternetImage, m_checkBoxInternetImage);
 	}
 #endif
-	if(getSettingsValue(L"internet_server", &t, settings))
+	std::wstring internet_server_url;
+	getSettingsValue(L"internet_server", &internet_server_url, settings);
+	std::wstring internet_server_port;
+	getSettingsValue(L"internet_server_port", &internet_server_port, settings);
+
+	if (internet_server_url.find(L"urbackup://") != 0
+		&& internet_server_url.find(L"wss://") != 0
+		&& internet_server_url.find(L"ws://") != 0)
 	{
-		m_textCtrlInternetServer->SetValue(t);
+		if (watoi(internet_server_port) == 55415)
+		{
+			internet_server_url = "urbackup://" + internet_server_url;
+		}
+		else
+		{
+			internet_server_url = "urbackup://" + internet_server_url + ":" + internet_server_port;
+		}
 	}
-	else
-	{
-		m_textCtrlInternetServer->SetValue(wxT(""));
-	}
-	if(getSettingsValue(L"internet_server_port", &t, settings))
-	{
-		m_textCtrlInternetServerPort->SetValue(t);
-	}
-	else
-	{
-		m_textCtrlInternetServerPort->SetValue(wxT("55415"));
-	}
+
+	m_textCtrlInternetServer->SetValue(internet_server_url);
+
 	if (getSettingsValue(L"internet_server_proxy", &t, settings))
 	{
 		m_textCtrlInternetServerProxy->SetValue(t);
@@ -517,7 +522,6 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 	}
 #endif
 	m_textCtrl19->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-	m_textCtrlInternetServerPort->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
 	init_complete = true;
@@ -572,7 +576,31 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	bool internet_mode_enabled=m_checkBoxInternetEnabled->GetValue();
 	wxString internet_server=m_textCtrlInternetServer->GetValue();
-	wxString internet_server_port=m_textCtrlInternetServerPort->GetValue();
+	wxString internet_server_port = L"55415";
+
+	if (!internet_server.empty() &&
+		internet_server.find("urbackup://") != 0 &&
+		internet_server.find("wss://") != 0 &&
+		internet_server.find("ws://") != 0)
+	{
+		internet_server = "urbackup://" + internet_server;
+	}
+
+	if (internet_server.find("urbackup://") == 0)
+	{
+		wxString hostname = internet_server.substr(11);
+		if (hostname.find(":") != std::string::npos)
+		{
+			internet_server_port = getafter(L":", hostname.ToStdWstring());
+			internet_server = getuntil(L":", hostname.ToStdWstring());
+		}
+		else
+		{
+			internet_server_port = L"55415";
+			internet_server = hostname;
+		}
+	}
+
 	wxString internet_server_proxy = m_textCtrlInternetServerProxy->GetValue();
 #ifdef _WIN32
 	bool internet_image_backups=false;
@@ -733,7 +761,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!internet_server_port.ToLong(&l_internet_server_port))
 	{
 		wxMessageBox( _("The server port is not valid"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-		m_textCtrlInternetServerPort->SetFocus();
+		m_textCtrlInternetServer->SetFocus();
 		return;
 	}
 
