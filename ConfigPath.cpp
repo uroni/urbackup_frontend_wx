@@ -135,6 +135,8 @@ ConfigPath::ConfigPath(wxWindow* parent)
 			dir.name = getDefaultDirname(dir.path.wc_str());
 		}
 
+		dir.server_default = 1;
+
 		if (i < num_group_dirs)
 			dirs_group.push_back(dir);
 		else
@@ -209,6 +211,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		ad.name=getDefaultDirname(ad.path.wc_str());
 		ad.group=0;
 		ad.id=0;
+		ad.server_default = 0;
 		dirs_client.push_back(ad);
 
 		default_dirs_use |= c_use_value_client;
