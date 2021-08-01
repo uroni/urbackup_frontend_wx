@@ -69,21 +69,33 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 	std::vector<std::string> default_dirs_toks;
 
-	size_t num_group_dirs = 0;
+	size_t num_group_off = 0;
 	if (default_dirs_use & c_use_group)
 	{
 		std::string val;
 		if (settings.getValue("default_dirs.group", &val))
 		{
 			TokenizeMail(val, default_dirs_toks, ";");
-			num_group_dirs = default_dirs_toks.size();
+			num_group_off = default_dirs_toks.size();
 		}
 	}
+	size_t num_home_off = num_group_off;
 	if (default_dirs_use & c_use_value)
 	{
 		std::string val;
 		std::vector<std::string> toks;
 		if (settings.getValue("default_dirs.home", &val))
+		{
+			TokenizeMail(val, toks, ";");
+			default_dirs_toks.insert(default_dirs_toks.end(), toks.begin(), toks.end());
+			num_home_off = default_dirs_toks.size();
+		}
+	}
+	if (default_dirs_use & c_use_value_client)
+	{
+		std::string val;
+		std::vector<std::string> toks;
+		if (settings.getValue("default_dirs.client", &val))
 		{
 			TokenizeMail(val, toks, ";");
 			default_dirs_toks.insert(default_dirs_toks.end(), toks.begin(), toks.end());
@@ -137,32 +149,20 @@ ConfigPath::ConfigPath(wxWindow* parent)
 
 		dir.server_default = 1;
 
-		if (i < num_group_dirs)
+		if (i < num_group_off)
+		{
 			dirs_group.push_back(dir);
-		else
+		}
+		else if (i < num_home_off)
+		{
 			dirs_home.push_back(dir);
-	}
-
-	for (size_t i = 0; i < c_dirs.size(); ++i)
-	{
-		SBackupDir& dir = c_dirs[i];
-
-		if (dir.server_default != 0)
-			continue;
-
-		if (dir.name.IsEmpty())
-		{
-			dir.name = getDefaultDirname(dir.path.wc_str());
 		}
-
-		if (!dir.flags.empty())
+		else
 		{
-			dir.name += "/" + dir.flags;
+			dir.server_default = 0;
+			dirs_client.push_back(dir);
 		}
-
-		dirs_client.push_back(dir);
 	}
-
 
 	renderListBoxContent();
 	switchBitmapLabel();
