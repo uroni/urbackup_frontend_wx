@@ -20,6 +20,7 @@
 #include <vector>
 #include <iostream>
 #include "stringtools.h"
+#include "Settings.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -722,6 +723,8 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	std::map<std::wstring, std::wstring> new_settings;
 	std::map<std::wstring, std::wstring> new_setup_settings;
 
+	int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
+
 	if(!backup_volumes.empty())
 	{
 		std::wstring curr_images;
@@ -730,14 +733,28 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		if(!backupSettings.getValue(image_key, &curr_images))
 		{
 			has_image_letters = backupSettings.getValue(image_key+L"_def", &curr_images);
-			if(has_image_letters) image_key+=L"_def";
+		}
+
+		int use = c_use_value_client;
+		std::wstring use_str;
+		if (backupSettings.getValue(image_key + L".use", &use_str) &&
+			!use_str.empty() )
+		{
+			use = watoi(use_str);
 		}
 
 		std::wstring setup_image;
 		if( (setupSettings.getValue(L"image_letters", &setup_image) &&
 			setup_image==curr_images ) || !has_image_letters )
 		{
-			new_settings[image_key] = backup_volumes;
+			new_settings[image_key + L".client"] = backup_volumes;
+			if (use == c_use_value_client)
+			{
+				new_settings[image_key] = backup_volumes;
+				new_settings[image_key + L".use"] = convert(c_use_value_client);
+				new_settings[image_key + L".use_lm"] = convert(ctime);
+			}
+
 			new_setup_settings[L"image_letters"] = backup_volumes;
 		}
 	}
@@ -760,15 +777,27 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		if(!backupSettings.getValue(backup_key, &curr_backups))
 		{
 			has_default_dirs = backupSettings.getValue(backup_key+L"_def", &curr_backups);
-			if(has_default_dirs) backup_key+=L"_def";
 		}
 
+		int use = c_use_value_client;
+		std::wstring use_str;
+		if (backupSettings.getValue(backup_key + L".use", &use_str) &&
+			!use_str.empty())
+		{
+			use = watoi(use_str);
+		}
 
 		std::wstring setup_backup;
 		if( (setupSettings.getValue(L"default_dirs", &setup_backup) &&
-			setup_backup==curr_backups) || !has_default_dirs)
+			setup_backup==curr_backups) || !has_default_dirs )
 		{
-			new_settings[backup_key] = new_backupdirs;
+			new_settings[backup_key + L".client"] = new_backupdirs;
+			if (use == c_use_value_client)
+			{
+				new_settings[backup_key + L".use"] = convert(use);
+				new_settings[backup_key + L".use_lm"] = convert(ctime);
+				new_settings[backup_key] = new_backupdirs;
+			}
 			new_setup_settings[L"default_dirs"] = new_backupdirs;
 		}
 	}	
@@ -789,14 +818,27 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 		if(!backupSettings.getValue(exclude_key, &curr_excludes))
 		{
 			has_exclude_files = backupSettings.getValue(exclude_key+L"_def", &curr_excludes);
-			if(has_exclude_files) exclude_key+=L"_def";
 		}	
+
+		int use = c_use_value_client;
+		std::wstring use_str;
+		if (backupSettings.getValue(exclude_key + L".use", &use_str) &&
+			!use_str.empty())
+		{
+			use = watoi(use_str);
+		}
 
 		std::wstring setup_exclude;
 		if( (setupSettings.getValue(L"exclude_files", &setup_exclude) &&
 			setup_exclude==curr_excludes) || !has_exclude_files )
 		{
-			new_settings[exclude_key] = new_exclude_files;
+			new_settings[exclude_key+L".client"] = new_exclude_files;
+			if (use == c_use_value_client)
+			{
+				new_settings[exclude_key + L".use"] = convert(use);
+				new_settings[exclude_key + L".use_lm"] = convert(ctime);
+				new_settings[exclude_key] = new_exclude_files;
+			}
 			new_setup_settings[L"exclude_files"] = new_exclude_files;
 		}
 	}
@@ -820,11 +862,25 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 			if(has_include_files) include_key+=L"_def";
 		}
 
+		int use = c_use_value_client;
+		std::wstring use_str;
+		if (backupSettings.getValue(include_key + L".use", &use_str) &&
+			!use_str.empty())
+		{
+			use = watoi(use_str);
+		}
+
 		std::wstring setup_include;
 		if( (setupSettings.getValue(L"include_files", &setup_include) &&
 			setup_include==curr_includes ) || !has_include_files)
 		{
-			new_settings[include_key] = new_include_files;
+			new_settings[include_key + L".client"] = new_include_files;
+			if (use == c_use_value_client)
+			{
+				new_settings[include_key + L".use"] = convert(use);
+				new_settings[include_key + L".use_lm"] = convert(ctime);
+				new_settings[include_key] = new_include_files;
+			}
 			new_setup_settings[L"include_files"] = new_include_files;
 		}
 	}
