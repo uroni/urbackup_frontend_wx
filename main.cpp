@@ -871,6 +871,8 @@ void MyTimer::Notify()
 		}
 	}
 
+	/* Users might accidentally click on it. Disable for now.
+	
 	if(!status.new_server.empty() && tray)
 	{
 #ifndef wxUSE_TASKBARICON_BALLOONS
@@ -880,7 +882,7 @@ void MyTimer::Notify()
 			tray->BalloonActionNewServer(status.new_server);
 			tray->ShowBalloon(_("UrBackup: New server"), _("A new backup server has been found. Click here to use it"), 180000, wxICON_INFORMATION);
 #endif
-	}
+	}*/
 
 	if(status.ask_restore_ok>ask_restore_ok)
 	{

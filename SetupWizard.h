@@ -46,3 +46,4 @@ public:
 private:
 	static SVolumesCache* cache;
 };
+
