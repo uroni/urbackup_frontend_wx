@@ -142,7 +142,6 @@ HRESULT ModifyPrivilege(
 
 #ifdef __APPLE__
 extern "C" void bring_to_foreground();
-extern "C" void register_login_item();
 extern "C" void remove_login_item();
 extern "C" void check_full_disk_access();
 #endif
@@ -605,11 +604,6 @@ bool MyApp::OnInit()
 		std::string uninstaller = SBINDIR "/urbackup_uninstall";
 		wxExecute("/bin/sh \"" + uninstaller + "\"", wxEXEC_SYNC, NULL, NULL);
 		wxExit();
-	}
-	else if(cmd==wxT("register_login_item"))
-	{
-		register_login_item();
-		exit(0);
 	}
 	else if(cmd==wxT("remove_login_item"))
 	{
