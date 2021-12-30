@@ -144,6 +144,7 @@ HRESULT ModifyPrivilege(
 extern "C" void bring_to_foreground();
 extern "C" void register_login_item();
 extern "C" void remove_login_item();
+extern "C" void check_full_disk_access();
 #endif
 
 class TheFrame : public wxFrame {
@@ -513,6 +514,10 @@ bool MyApp::OnInit()
 		timer=new MyTimer;
 
 		timer->Start(1000);
+        
+        #ifdef __APPLE__
+        check_full_disk_access();
+        #endif
 	}
 	else if(cmd==wxT("settings"))
 	{
