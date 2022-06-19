@@ -357,7 +357,6 @@ bool MyApp::OnInit()
 	case wxLANGUAGE_SPANISH_GUATEMALA:
 	case wxLANGUAGE_SPANISH_HONDURAS:
 	case wxLANGUAGE_SPANISH_MEXICAN:
-	case wxLANGUAGE_SPANISH_MODERN:
 	case wxLANGUAGE_SPANISH_NICARAGUA:
 	case wxLANGUAGE_SPANISH_PANAMA:
 	case wxLANGUAGE_SPANISH_PARAGUAY:
@@ -378,7 +377,6 @@ bool MyApp::OnInit()
 		g_lang="zh_CN";
 		break;
 	case wxLANGUAGE_CHINESE_TRADITIONAL:
-	case wxLANGUAGE_CHINESE_TAIWAN:
 		lang= sysdef;
 		g_lang="zh_TW";
 		break;
