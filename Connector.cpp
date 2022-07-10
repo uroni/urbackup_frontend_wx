@@ -517,6 +517,7 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 {
 	std::string args;
+	size_t idx = 0;
 	for(size_t i=0;i<res.size();++i)
 	{
 		if (res[i].server_default)
@@ -534,9 +535,10 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 			name += "/" + res[i].flags;
 		}
 
-		args+="dir_"+nconvert(i)+"="+path;
-		args+="&dir_"+nconvert(i)+"_name="+name;
-		args+="&dir_"+nconvert(i)+"_group="+nconvert(res[i].group);
+		args+="dir_"+nconvert(idx)+"="+path;
+		args+="&dir_"+nconvert(idx)+"_name="+name;
+		args+="&dir_"+nconvert(idx)+"_group="+nconvert(res[i].group);
+		idx += 1;
 	}
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args, true);
