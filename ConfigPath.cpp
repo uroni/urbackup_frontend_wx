@@ -186,7 +186,11 @@ void ConfigPath::OnClickOk(wxCommandEvent &evt)
 
 			Connector::updateSettings(s_data);
 		}
-		Connector::saveSharedPaths(dirs_client);
+		if (!Connector::saveSharedPaths(dirs_client))
+		{
+			wxMessageBox(_("Saving the changed paths to backup failed"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			return;
+		}
 	}
 	Close();
 }
