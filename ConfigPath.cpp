@@ -70,7 +70,6 @@ ConfigPath::ConfigPath(wxWindow* parent)
 	std::vector<std::string> default_dirs_toks;
 
 	size_t num_group_off = 0;
-	if (default_dirs_use & c_use_group)
 	{
 		std::string val;
 		if (settings.getValue("default_dirs.group", &val))
@@ -80,7 +79,6 @@ ConfigPath::ConfigPath(wxWindow* parent)
 		}
 	}
 	size_t num_home_off = num_group_off;
-	if (default_dirs_use & c_use_value)
 	{
 		std::string val;
 		std::vector<std::string> toks;
@@ -91,7 +89,6 @@ ConfigPath::ConfigPath(wxWindow* parent)
 			num_home_off = default_dirs_toks.size();
 		}
 	}
-	if (default_dirs_use & c_use_value_client)
 	{
 		std::string val;
 		std::vector<std::string> toks;
@@ -205,7 +202,6 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 	int rc=ed.ShowModal();
 	if(rc==wxID_OK)
 	{
-		listbox->Append(ed.GetPath() );
 		SBackupDir ad;
 		ad.path=ed.GetPath();
 		ad.name=getDefaultDirname(ad.path.wc_str());
@@ -216,6 +212,7 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 
 		default_dirs_use |= c_use_value_client;
 		switchBitmapLabel();
+		renderListBoxContent();
 
 		mod=true;
 	}
