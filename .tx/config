@@ -1,8 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[urbackup.frontend]
+[o:uroni:p:urbackup:r:frontend]
 file_filter = translations/urbackup.frontend/<lang>.po
+source_file = translations/urbackup.frontend/en.po
 source_lang = en
-type = PO
+type        = PO
 

@@ -17,14 +17,14 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2018-06-19 11:23+0000\n"
-"Last-Translator: Charles Peltier <charles@cl-info.fr>\n"
+"PO-Revision-Date: 2012-08-19 16:03+0000\n"
+"Last-Translator: uroni <urpc@gmx.de>, 2013\n"
 "Language-Team: French (http://www.transifex.com/uroni/urbackup/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
@@ -590,18 +590,21 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "jours"
 msgstr[1] "jours"
+msgstr[2] "jours"
 
 #: Status.cpp:93
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "heure"
 msgstr[1] "heures"
+msgstr[2] "heures"
 
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
+msgstr[2] "minutes"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"

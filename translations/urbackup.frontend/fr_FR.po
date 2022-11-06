@@ -5,7 +5,7 @@
 # Translators:
 # Translators:
 # Translators:
-# Charles Peltier <charles@cl-info.fr>, 2014,2018
+# Charles Peltier <charles@cl-info.fr>, 2014,2018-2019,2021
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # ericbosba <nerix@free.fr>, 2012
 # uroni <urpc@gmx.de>, 2013
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 16:19+0100\n"
-"PO-Revision-Date: 2018-06-19 11:34+0000\n"
-"Last-Translator: Charles Peltier <charles@cl-info.fr>\n"
+"PO-Revision-Date: 2012-08-19 16:03+0000\n"
+"Last-Translator: Charles Peltier <charles@cl-info.fr>, 2014,2018-2019,2021\n"
 "Language-Team: French (France) (http://www.transifex.com/uroni/urbackup/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: gui\GUI.h:138 TrayIcon.cpp:361
 msgid "Settings"
@@ -125,11 +125,11 @@ msgstr "Nom de l'ordinateur"
 
 #: gui\GUI.cpp:279
 msgid "Exclude from backup (with wildcards):"
-msgstr "Exclure de la sauvegarde (avec astérisques) :"
+msgstr "Exclure de la sauvegarde (avec jocker) :"
 
 #: gui\GUI.cpp:291
 msgid "Include in backup (with wildcards):"
-msgstr "Inclure à la sauvegarde (avec astérisques) :"
+msgstr "Inclure à la sauvegarde (avec jocker) :"
 
 #: gui\GUI.cpp:303
 msgid "Backup window:"
@@ -322,7 +322,7 @@ msgstr "Mise à jour disponible. Mettre à jour maintenant."
 
 #: Info.cpp:62
 msgid "Show CBT status"
-msgstr "Afficher le statut CBT"
+msgstr "Afficher le statut du suivi de bloc"
 
 #: main.cpp:97
 #, c-format
@@ -331,7 +331,7 @@ msgstr "Erreur d'initialisation de la fonction sécurité des process : %08x"
 
 #: main.cpp:196
 msgid "_percent_ done."
-msgstr "_percent_ réalisé"
+msgstr "_percent_ réalisés"
 
 #: main.cpp:479
 msgid "&Access/restore backups"
@@ -438,7 +438,7 @@ msgstr "Restauration en cours"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr "Restauration finie"
+msgstr "Restauration terminée"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
@@ -500,7 +500,7 @@ msgstr "L'intervale pour l'image système complète n'est pas un nombre"
 
 #: Settings.cpp:529
 msgid "The incremental image backup time is not a number"
-msgstr "L’intervalle pour l'image système incrémentielle doit être un nombre"
+msgstr "L’intervalle de temps pour l'image système incrémentielle doit être un nombre"
 
 #: Settings.cpp:537
 msgid "The maximal number of incremental file backups  is not a number"
@@ -587,18 +587,21 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "jours"
 msgstr[1] "jours"
+msgstr[2] "jours"
 
 #: Status.cpp:93
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "heure"
 msgstr[1] "heures"
+msgstr[2] "heures"
 
 #: Status.cpp:101
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
+msgstr[2] "minutes"
 
 #: Status.cpp:210
 msgid "ETA: Approx. _1_"
