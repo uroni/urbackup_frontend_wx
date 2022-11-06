@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UrBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-05 16:19+0100\n"
+"POT-Creation-Date: 2022-11-06 13:29+0100\n"
 "PO-Revision-Date: 2016-04-28 14:40+0000\n"
 "Last-Translator: uroni <urpc@gmx.de>\n"
 "Language-Team: English (http://www.transifex.com/uroni/urbackup/language/"
@@ -20,23 +20,23 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: gui\GUI.h:138 TrayIcon.cpp:361
+#: gui\GUI.h:171 TrayIcon.cpp:371
 msgid "Settings"
 msgstr "Settings"
 
-#: gui\GUI.h:167 TrayIcon.cpp:371
+#: gui\GUI.h:200 TrayIcon.cpp:381
 msgid "Logs"
 msgstr "Logs"
 
-#: gui\GUI.h:205 gui\GUI.cpp:542 TrayIcon.cpp:391
-msgid "Infos"
-msgstr "Infos"
+#: gui\GUI.h:238 TrayIcon.cpp:402
+msgid "About..."
+msgstr "About..."
 
-#: gui\GUI.h:244 TrayIcon.cpp:366
+#: gui\GUI.h:285 TrayIcon.cpp:376
 msgid "Add/Remove backup paths"
 msgstr "Add/Remove backup paths"
 
-#: gui\GUI.h:293 TrayIcon.cpp:406
+#: gui\GUI.h:334 TrayIcon.cpp:417
 msgid "Status"
 msgstr "Status"
 
@@ -56,205 +56,209 @@ msgstr "Select files and volumes to backup"
 msgid "Select Windows components to backup"
 msgstr "Select Windows components to backup"
 
-#: gui\GUI.cpp:55
+#: gui\GUI.cpp:122
 msgid "Interval for incremental file backups:"
 msgstr "Interval for incremental file backups:"
 
-#: gui\GUI.cpp:62
+#: gui\GUI.cpp:129
 msgid "hours"
 msgstr "hours"
 
-#: gui\GUI.cpp:71
+#: gui\GUI.cpp:156
 msgid "Interval for full file backups:"
 msgstr "Interval for full file backups:"
 
-#: gui\GUI.cpp:78 gui\GUI.cpp:97 gui\GUI.cpp:119
+#: gui\GUI.cpp:163 gui\GUI.cpp:185 gui\GUI.cpp:210
 msgid "days"
 msgstr "days"
 
-#: gui\GUI.cpp:90
+#: gui\GUI.cpp:178
 msgid "Interval for incremental image backups:"
 msgstr "Interval for incremental image backups:"
 
-#: gui\GUI.cpp:103
+#: gui\GUI.cpp:191
 msgid "Active"
 msgstr "Active"
 
-#: gui\GUI.cpp:112
+#: gui\GUI.cpp:203
 msgid "Interval for full image backups:"
 msgstr "Interval for full image backups:"
 
-#: gui\GUI.cpp:139
+#: gui\GUI.cpp:233
 msgid "Minimal number of incremental file backups:"
 msgstr "Minimal number of incremental file backups:"
 
-#: gui\GUI.cpp:151
+#: gui\GUI.cpp:248
 msgid "Maximal number of incremental file backups:"
 msgstr "Maximal number of incremental file backups:"
 
-#: gui\GUI.cpp:163
+#: gui\GUI.cpp:263
 msgid "Minimal number of full file backups:"
 msgstr "Minimal number of full file backups:"
 
-#: gui\GUI.cpp:175
+#: gui\GUI.cpp:278
 msgid "Maximal number of full file backups:"
 msgstr "Maximal number of full file backups:"
 
-#: gui\GUI.cpp:208
+#: gui\GUI.cpp:314
 msgid "Minimal number of incremental image backups:"
 msgstr "Minimal number of incremental image backups:"
 
-#: gui\GUI.cpp:220
+#: gui\GUI.cpp:329
 msgid "Maximal number of incremental image backups:"
 msgstr "Maximal number of incremental image backups:"
 
-#: gui\GUI.cpp:232
+#: gui\GUI.cpp:344
 msgid "Minimal number of full image backups:"
 msgstr "Minimal number of full image backups:"
 
-#: gui\GUI.cpp:244
+#: gui\GUI.cpp:359
 msgid "Maximal number of full image backups:"
 msgstr "Maximal number of full image backups:"
 
-#: gui\GUI.cpp:267
+#: gui\GUI.cpp:385
 msgid "Computer name:"
 msgstr "Computer name:"
 
-#: gui\GUI.cpp:279
+#: gui\GUI.cpp:397
 msgid "Exclude from backup (with wildcards):"
 msgstr "Exclude from backup (with wildcards):"
 
-#: gui\GUI.cpp:291
+#: gui\GUI.cpp:413
 msgid "Include in backup (with wildcards):"
 msgstr "Include in backup (with wildcards):"
 
-#: gui\GUI.cpp:303
+#: gui\GUI.cpp:428
 msgid "Backup window:"
 msgstr "Backup window:"
 
-#: gui\GUI.cpp:315
+#: gui\GUI.cpp:443
 msgid "Backup delay after system start:"
 msgstr "Backup delay after system start:"
 
-#: gui\GUI.cpp:324
+#: gui\GUI.cpp:452
 msgid "min"
 msgstr "min"
 
-#: gui\GUI.cpp:336
+#: gui\GUI.cpp:468
 msgid "Volumes to backup:"
 msgstr "Volumes to backup:"
 
-#: gui\GUI.cpp:359
+#: gui\GUI.cpp:494
 msgid "Max backup speed for local network:"
 msgstr "Max backup speed for local network:"
 
-#: gui\GUI.cpp:364
+#: gui\GUI.cpp:499
 msgid "MBit/s"
 msgstr "MBit/s"
 
-#: gui\GUI.cpp:372
+#: gui\GUI.cpp:511
 msgid "Enable backup via internet:"
 msgstr "Enable backup via internet:"
 
-#: gui\GUI.cpp:380
-msgid "Internet server name/IP:"
-msgstr "Internet server name/IP:"
+#: gui\GUI.cpp:519
+msgid "Server URL client connects to:"
+msgstr ""
 
-#: gui\GUI.cpp:388
-msgid "Internet server port:"
-msgstr "Internet server port:"
+#: gui\GUI.cpp:527
+msgid "Internet server HTTP(s) proxy:"
+msgstr ""
 
-#: gui\GUI.cpp:396
+#: gui\GUI.cpp:535
 msgid "Internet server password:"
 msgstr "Internet server password:"
 
-#: gui\GUI.cpp:407
+#: gui\GUI.cpp:546
 msgid "Do image backups over internet:"
 msgstr "Do image backups over internet:"
 
-#: gui\GUI.cpp:417
+#: gui\GUI.cpp:558
 msgid "Do full file backups over internet:"
 msgstr "Do full file backups over internet:"
 
-#: gui\GUI.cpp:425
+#: gui\GUI.cpp:568
 msgid "Max backups speed for internet connection:"
 msgstr "Max backups speed for internet connection:"
 
-#: gui\GUI.cpp:430
+#: gui\GUI.cpp:573
 msgid "KBit/s"
 msgstr "KBit/s"
 
-#: gui\GUI.cpp:436
+#: gui\GUI.cpp:581
 msgid "Compressed transfer:"
 msgstr "Compressed transfer:"
 
-#: gui\GUI.cpp:444
+#: gui\GUI.cpp:591
 msgid "Encrypted transfer:"
 msgstr "Encrypted transfer:"
 
-#: gui\GUI.cpp:463
+#: gui\GUI.cpp:612
 msgid "File backups"
 msgstr "File backups"
 
-#: gui\GUI.cpp:468
+#: gui\GUI.cpp:617
 msgid "Image backups"
 msgstr "Image backups"
 
-#: gui\GUI.cpp:471
+#: gui\GUI.cpp:620
 msgid "Client"
 msgstr "Client"
 
-#: gui\GUI.cpp:472
+#: gui\GUI.cpp:621
 msgid "Internet"
 msgstr "Internet"
 
-#: gui\GUI.cpp:483 gui\GUI.cpp:645 gui\GUI.cpp:725
+#: gui\GUI.cpp:632 gui\GUI.cpp:859 gui\GUI.cpp:963
 #: gui\GUIWindowsComponents.cpp:28
 msgid "Ok"
 msgstr "Ok"
 
-#: gui\GUI.cpp:488 gui\GUI.cpp:728 gui\GUIRestoreWindowsComponents.cpp:40
+#: gui\GUI.cpp:637 gui\GUI.cpp:966 gui\GUIRestoreWindowsComponents.cpp:40
 #: gui\GUIWindowsComponents.cpp:31
 msgid "Cancel"
 msgstr "Cancel"
 
-#: gui\GUI.cpp:538
+#: gui\GUI.cpp:752
 msgid "Filter:"
 msgstr "Filter:"
 
-#: gui\GUI.cpp:542
+#: gui\GUI.cpp:756
+msgid "Infos"
+msgstr "Infos"
+
+#: gui\GUI.cpp:756
 msgid "Warnings"
 msgstr "Warnings"
 
-#: gui\GUI.cpp:542
+#: gui\GUI.cpp:756
 msgid "Errors"
 msgstr "Errors"
 
-#: gui\GUI.cpp:559 gui\GUI.cpp:928 TrayIcon.cpp:410
+#: gui\GUI.cpp:773 gui\GUI.cpp:1167 TrayIcon.cpp:421
 msgid "Exit"
 msgstr "Exit"
 
-#: gui\GUI.cpp:612
+#: gui\GUI.cpp:826
 msgid "Version:"
 msgstr "Version:"
 
-#: gui\GUI.cpp:686
+#: gui\GUI.cpp:900
 msgid "Name:"
 msgstr "Name:"
 
-#: gui\GUI.cpp:734
+#: gui\GUI.cpp:972
 msgid "Add path"
 msgstr "Add path"
 
-#: gui\GUI.cpp:737
+#: gui\GUI.cpp:975
 msgid "Remove path"
 msgstr "Remove path"
 
-#: gui\GUI.cpp:816
+#: gui\GUI.cpp:1055
 msgid "Internet connection status:"
 msgstr "Internet connection status:"
 
-#: gui\GUI.cpp:829
+#: gui\GUI.cpp:1068
 msgid "UrBackup - File restore"
 msgstr "UrBackup - File restore"
 
@@ -308,11 +312,15 @@ msgstr "Backup all internal disk volumes"
 msgid "Manually list the volume letters to backup:"
 msgstr "Manually list the volume letters to backup:"
 
-#: ConfigPath.cpp:51 Logs.cpp:35 Status.cpp:149
-msgid "There was an error. Currently nothing can be backed up."
-msgstr "There was an error. Currently nothing can be backed up."
+#: gui\GUISetupWizard.cpp:80
+msgid "     "
+msgstr ""
 
-#: ConfigPath.cpp:89
+#: ConfigPath.cpp:191
+msgid "Saving the changed paths to backup failed"
+msgstr ""
+
+#: ConfigPath.cpp:205
 msgid "Please select the directory that will be backed up."
 msgstr "Please select the directory that will be backed up."
 
@@ -324,82 +332,78 @@ msgstr "Update available. Update now."
 msgid "Show CBT status"
 msgstr "Show CBT status"
 
-#: main.cpp:97
+#: Logs.cpp:35 Status.cpp:151
+msgid "There was an error. Currently nothing can be backed up."
+msgstr "There was an error. Currently nothing can be backed up."
+
+#: main.cpp:98
 #, c-format
 msgid "CoInitializeSecurity failed: %08x"
 msgstr "CoInitializeSecurity failed: %08x"
 
-#: main.cpp:196
+#: main.cpp:197
 msgid "_percent_ done."
 msgstr "_percent_ done."
 
-#: main.cpp:479
+#: main.cpp:488
 msgid "&Access/restore backups"
 msgstr "&Access/restore backups"
 
-#: main.cpp:651
+#: main.cpp:675
 msgid "Incremental file backup running."
 msgstr "Incremental file backup running."
 
-#: main.cpp:655
+#: main.cpp:679
 msgid "Full file backup running."
 msgstr "Full file backup running."
 
-#: main.cpp:659
+#: main.cpp:683
 msgid "Incremental image backup running."
 msgstr "Incremental image backup running."
 
-#: main.cpp:663
+#: main.cpp:687
 msgid "Full image backup running."
 msgstr "Full image backup running."
 
-#: main.cpp:667
+#: main.cpp:691
 msgid "Resumed incremental file backup running."
 msgstr "Resumed incremental file backup running."
 
-#: main.cpp:671
+#: main.cpp:695
 msgid "Resumed full file backup running."
 msgstr "Resumed full file backup running."
 
-#: main.cpp:675
+#: main.cpp:699
 msgid "Restoring files."
 msgstr "Restoring files."
 
-#: main.cpp:691
+#: main.cpp:715
 msgid "Indexing."
 msgstr "Indexing."
 
-#: main.cpp:730
+#: main.cpp:754
 msgid "Cannot connect to backup server"
 msgstr "Cannot connect to backup server"
 
-#: main.cpp:766 main.cpp:770
+#: main.cpp:790 main.cpp:794
 msgid "UrBackup: Update available"
 msgstr "UrBackup: Update available"
 
-#: main.cpp:766 main.cpp:770
+#: main.cpp:790 main.cpp:794
 msgid ""
 "A new version of UrBackup is available. Please click here to install it now."
 msgstr ""
 "A new version of UrBackup is available. Please click here to install it now."
 
-#: main.cpp:799
+#: main.cpp:823
 msgid "No current backup."
 msgstr "No current backup."
 
-#: main.cpp:816 Status.cpp:274
+#: main.cpp:840 Status.cpp:276
 msgid "Last backup on _1_"
 msgstr "Last backup on _1_"
 
-#: main.cpp:850 main.cpp:854
-msgid "UrBackup: New server"
-msgstr "UrBackup: New server"
-
-#: main.cpp:850 main.cpp:854
-msgid "A new backup server has been found. Click here to use it"
-msgstr "A new backup server has been found. Click here to use it"
-
-#: main.cpp:869
+#: main.cpp:895
 msgid ""
 "Are you sure you want to restore the file at _1_? The current file content "
 "will be overwritten by the backup file content. When in doubt please cancel "
@@ -409,7 +413,7 @@ msgstr ""
 "will be overwritten by the backup file content. When in doubt please cancel "
 "and run a file backup before proceeding."
 
-#: main.cpp:873
+#: main.cpp:899
 msgid ""
 "Are you sure you want to restore the files in _1_? Existing files in this "
 "folder will be overwritten. Files created within the selected folder since "
@@ -421,11 +425,11 @@ msgstr ""
 "the backup will be deleted. When in doubt please cancel and run a file "
 "backup before proceeding."
 
-#: main.cpp:877
+#: main.cpp:903
 msgid "UrBackup - Allow restore"
 msgstr "UrBackup - Allow restore"
 
-#: main.cpp:909
+#: main.cpp:935
 msgid ""
 "Some files could not be deleted or overwritten during the restore process. "
 "In order to overwrite/delete the files the system needs to be restarted. Do "
@@ -435,7 +439,7 @@ msgstr ""
 "In order to overwrite/delete the files the system needs to be restarted. Do "
 "you want to do this now?"
 
-#: main.cpp:909
+#: main.cpp:935
 msgid "UrBackup - Restart Windows"
 msgstr "UrBackup - Restart Windows"
 
@@ -473,7 +477,7 @@ msgstr "Error retrieving Windows component backups: "
 msgid "Error retrieving Windows component configuration: "
 msgstr "Error retrieving Windows component configuration: "
 
-#: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:66
+#: SelectRestoreWindowsComponents.cpp:123 SelectWindowsComponents.cpp:76
 msgid "Windows components"
 msgstr "Windows components"
 
@@ -497,63 +501,71 @@ msgstr "Currently not connected to a backup server. No backup server found."
 msgid "No file backup access tokens found. Did you run a file backup yet?"
 msgstr "No file backup access tokens found. Did you run a file backup yet?"
 
-#: Settings.cpp:508
+#: Settings.cpp:171
+msgid "Please enter the tray access text"
+msgstr "Please enter the tray access text"
+
+#: Settings.cpp:184
+msgid "Tray access text wrong. Please retry or cancel."
+msgstr "Tray access text wrong. Please retry or cancel."
+
+#: Settings.cpp:633
 msgid "The incremental backup interval is not a number"
 msgstr "The incremental backup interval is not a number"
 
-#: Settings.cpp:514
+#: Settings.cpp:640
 msgid "The full backup interval  is not a number"
 msgstr "The full backup interval  is not a number"
 
-#: Settings.cpp:523
+#: Settings.cpp:651
 msgid "The full image backup interval  is not a number"
 msgstr "The full image backup interval  is not a number"
 
-#: Settings.cpp:529
+#: Settings.cpp:658
 msgid "The incremental image backup time is not a number"
 msgstr "The incremental image backup time is not a number"
 
-#: Settings.cpp:537
+#: Settings.cpp:667
 msgid "The maximal number of incremental file backups  is not a number"
 msgstr "The maximal number of incremental file backups  is not a number"
 
-#: Settings.cpp:543
+#: Settings.cpp:674
 msgid "The minimal number of incremental file backups is not a number"
 msgstr "The minimal number of incremental file backups is not a number"
 
-#: Settings.cpp:549
+#: Settings.cpp:681
 msgid "The maximal number of full file backups is not a number"
 msgstr "The maximal number of full file backups is not a number"
 
-#: Settings.cpp:555
+#: Settings.cpp:688
 msgid "Minimal number of full file backups is not a number"
 msgstr "Minimal number of full file backups is not a number"
 
-#: Settings.cpp:564
+#: Settings.cpp:698
 msgid "Minimal number of incremental image backups is not a number"
 msgstr "Minimal number of incremental image backups is not a number"
 
-#: Settings.cpp:570
+#: Settings.cpp:705
 msgid "Maximal number of incremental image backups is not a number"
 msgstr "Maximal number of incremental image backups is not a number"
 
-#: Settings.cpp:576
+#: Settings.cpp:712
 msgid "Minimal number of full image backups is not a number"
 msgstr "Minimal number of full image backups is not a number"
 
-#: Settings.cpp:582
+#: Settings.cpp:719
 msgid "Maximal number of full image backups is not a number"
 msgstr "Maximal number of full image backups is not a number"
 
-#: Settings.cpp:590
+#: Settings.cpp:728
 msgid "Backup delay after system start is not a number"
 msgstr "Backup delay after system start is not a number"
 
-#: Settings.cpp:610
+#: Settings.cpp:749
 msgid "_1_ is not a volume"
 msgstr "_1_ is not a volume"
 
-#: Settings.cpp:624
+#: Settings.cpp:763
 msgid "The server port is not valid"
 msgstr "The server port is not valid"
 
@@ -611,141 +623,153 @@ msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: Status.cpp:210
+#: Status.cpp:212
 msgid "ETA: Approx. _1_"
 msgstr "ETA: Approx. _1_"
 
-#: Status.cpp:219
+#: Status.cpp:221
 msgid "File: _1_"
 msgstr "File: _1_"
 
-#: Status.cpp:223
+#: Status.cpp:225
 msgid "Volume: _1_"
 msgstr "Volume: _1_"
 
-#: Status.cpp:260
+#: Status.cpp:262
 msgid "Idle."
 msgstr "Idle."
 
-#: Status.cpp:264
+#: Status.cpp:266
 msgid "Restore finished."
 msgstr "Restore finished."
 
-#: Status.cpp:292
+#: Status.cpp:294
 msgid "Yes"
 msgstr "Yes"
 
-#: Status.cpp:294
+#: Status.cpp:296
 msgid "No"
 msgstr "No"
 
-#: Status.cpp:296
+#: Status.cpp:298
 msgid "Internet: _1_"
 msgstr "Internet: _1_"
 
-#: Status.cpp:305
+#: Status.cpp:307
 msgid "Servers:"
 msgstr "Servers:"
 
-#: TrayIcon.cpp:178 TrayIcon.cpp:203
+#: TrayIcon.cpp:181 TrayIcon.cpp:206
 msgid "Waiting for server..."
 msgstr "Waiting for server..."
 
-#: TrayIcon.cpp:181 TrayIcon.cpp:206
+#: TrayIcon.cpp:184 TrayIcon.cpp:209
 msgid "A backup is already running. Could not start another one."
 msgstr "A backup is already running. Could not start another one."
 
-#: TrayIcon.cpp:183 TrayIcon.cpp:208 TrayIcon.cpp:210
+#: TrayIcon.cpp:186 TrayIcon.cpp:211 TrayIcon.cpp:213
 msgid "Could not start backup, because no backup server was found."
 msgstr "Could not start backup, because no backup server was found."
 
-#: TrayIcon.cpp:185
+#: TrayIcon.cpp:188
 msgid "Could not start backup."
 msgstr "Could not start backup."
 
-#: TrayIcon.cpp:220
+#: TrayIcon.cpp:223
 msgid "Pausing failed: No connection to backup server."
 msgstr "Pausing failed: No connection to backup server."
 
-#: TrayIcon.cpp:231
+#: TrayIcon.cpp:234
 msgid "Continuing failed: No connection to backup server."
 msgstr "Continuing failed: No connection to backup server."
 
-#: TrayIcon.cpp:275
+#: TrayIcon.cpp:283
 msgid "Do you really want to remove the UrBackup client from this system?"
 msgstr "Do you really want to remove the UrBackup client from this system?"
 
-#: TrayIcon.cpp:276
+#: TrayIcon.cpp:284
 msgid "Confirm uninstall"
 msgstr "Confirm uninstall"
 
-#: TrayIcon.cpp:317
+#: TrayIcon.cpp:327
 msgid "Access/restore backups"
 msgstr "Access/restore backups"
 
-#: TrayIcon.cpp:320
+#: TrayIcon.cpp:330
 msgid "Access backups"
 msgstr "Access backups"
 
-#: TrayIcon.cpp:330
+#: TrayIcon.cpp:340
 msgid "Do full file backup"
 msgstr "Do full file backup"
 
-#: TrayIcon.cpp:330
+#: TrayIcon.cpp:340
 msgid "Do a full file backup now"
 msgstr "Do a full file backup now"
 
-#: TrayIcon.cpp:335
+#: TrayIcon.cpp:345
 msgid "Do incremental file backup"
 msgstr "Do incremental file backup"
 
-#: TrayIcon.cpp:335
+#: TrayIcon.cpp:345
 msgid "Do a incremental file backup now"
 msgstr "Do a incremental file backup now"
 
-#: TrayIcon.cpp:344
+#: TrayIcon.cpp:354
 msgid "Do full image backup"
 msgstr "Do full image backup"
 
-#: TrayIcon.cpp:344
+#: TrayIcon.cpp:354
 msgid "Do a full image backup now"
 msgstr "Do a full image backup now"
 
-#: TrayIcon.cpp:349
+#: TrayIcon.cpp:359
 msgid "Do incremental image backup"
 msgstr "Do incremental image backup"
 
-#: TrayIcon.cpp:349
+#: TrayIcon.cpp:359
 msgid "Do a incremental image backup now"
 msgstr "Do a incremental image backup now"
 
-#: TrayIcon.cpp:377
+#: TrayIcon.cpp:387
 msgid "Configure components to backup"
 msgstr "Configure components to backup"
 
-#: TrayIcon.cpp:382
+#: TrayIcon.cpp:393
 msgid "Restore components"
 msgstr "Restore components"
 
-#: TrayIcon.cpp:398
+#: TrayIcon.cpp:409
 msgid "Pause"
 msgstr "Pause"
 
-#: TrayIcon.cpp:403
+#: TrayIcon.cpp:414
 msgid "Continue"
 msgstr "Continue"
 
-#: TrayIcon.cpp:414
+#: TrayIcon.cpp:425
 msgid "Uninstall"
 msgstr "Uninstall"
 
-#: TrayIcon.cpp:567
+#: TrayIcon.cpp:578
 msgid "No rights to access any files."
 msgstr "No rights to access any files."
 
-#: TrayIcon.cpp:616
+#: TrayIcon.cpp:627
 msgid "Error getting server URL. Cannot access files."
 msgstr "Error getting server URL. Cannot access files."
+
+#~ msgid "Internet server name/IP:"
+#~ msgstr "Internet server name/IP:"
+
+#~ msgid "Internet server port:"
+#~ msgstr "Internet server port:"
+
+#~ msgid "UrBackup: New server"
+#~ msgstr "UrBackup: New server"
+
+#~ msgid "A new backup server has been found. Click here to use it"
+#~ msgstr "A new backup server has been found. Click here to use it"
 
 #~ msgid "Informations"
 #~ msgstr "Informations"
