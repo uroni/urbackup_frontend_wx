@@ -16,13 +16,13 @@ signtool sign /fd sha256 /t http://time.certum.pl /i Certum data\*.exe data\*.dl
 
 :skip_signing1
 
-"C:\Program Files (x86)\NSIS\Unicode\makensis.exe" "%~dp0/urbackup.nsi"
+"C:\Program Files (x86)\NSIS\makensis.exe" "%~dp0/urbackup.nsi"
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-"C:\Program Files (x86)\NSIS\Unicode\makensis.exe" "%~dp0/urbackup_notray.nsi"
+"C:\Program Files (x86)\NSIS\makensis.exe" "%~dp0/urbackup_notray.nsi"
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-"C:\Program Files (x86)\NSIS\Unicode\makensis.exe" "%~dp0/urbackup_update.nsi"
+"C:\Program Files (x86)\NSIS\makensis.exe" "%~dp0/urbackup_update.nsi"
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 call build_msi.bat
