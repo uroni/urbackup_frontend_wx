@@ -214,7 +214,11 @@ void ConfigPath::OnClickNew(wxCommandEvent &evt)
 		ad.server_default = 0;
 		dirs_client.push_back(ad);
 
-		default_dirs_use |= c_use_value_client;
+		if (dirs_group.empty() && dirs_home.empty())
+			default_dirs_use = c_use_value_client;
+		else
+			default_dirs_use |= c_use_value_client;
+
 		switchBitmapLabel();
 		renderListBoxContent();
 
