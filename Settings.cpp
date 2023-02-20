@@ -799,12 +799,12 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		std::wstring old_val;
 		std::wstring old_use;
-		if (it->second.use != c_use_group
-			&& it->second.use!=c_use_value
-			&& ((!settings->getValue(it->first+L".client", &old_val) &&
-				old_val!=it->second.value_client) ||
-				( !settings->getValue(it->first + L".use", &old_use) &&
-				old_use!=convert(it->second.use) ) )  )
+		if ((it->second.use != c_use_group &&
+			 it->second.use!=c_use_value &&
+			  (!settings->getValue(it->first+L".client", &old_val) ||
+				old_val!=it->second.value_client) ) ||
+				( !settings->getValue(it->first + L".use", &old_use) ||
+				old_use!=convert(it->second.use) ) )  
 		{
 			std::string key(wxString(it->first).ToUTF8());
 			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8() + "\n";
