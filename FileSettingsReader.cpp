@@ -20,6 +20,17 @@
 #include "stringtools.h"
 #include "FileSettingsReader.h"
 
+namespace
+{
+	std::string removeTrailingCR(const std::string& str)
+	{
+		if (!str.empty() && str[str.size() - 1] == '\r')
+			return str.substr(0, str.size() - 1);
+		else
+			return str;
+	}
+}
+
 std::wstring ConvertToUnicode(const std::string &input)
 {
     std::wstring ret;
@@ -53,26 +64,66 @@ CFileSettingsReader::CFileSettingsReader(std::string pFile)
 {
 	std::string pData=getFile(pFile);
 
-	int num_lines=linecount(pData);
-	for(int i=0;i<num_lines;++i)
+	int state = 0;
+	std::string key;
+	std::string value;
+
+	for (size_t i = 0; i < pData.size(); ++i)
 	{
-		std::string line=getline(i,pData);
-
-		if(line.size()<2 || line[0]=='#' )
-			continue;
-
-		std::string key=getuntil("=",line);
-		std::string value;
-
-		if(key=="")
-			value=line;
-		else
+		char ch = pData[i];
+		switch (state)
 		{
-			line.erase(0,key.size()+1);
-			value=line;
-		}		
-		
-		mSettingsMap.insert(std::pair<std::wstring,std::wstring>(ConvertToUnicode(key), ConvertToUnicode(value)) );
+		case 0:
+			if (ch == '#')
+			{
+				state = 1;
+			}
+			else if (ch != '\n')
+			{
+				key += ch;
+				state = 2;
+			}
+			break;
+		case 1:
+			if (ch == '\n')
+			{
+				state = 0;
+			}
+			break;
+		case 2:
+			if (ch == '\n')
+			{
+				mSettingsMap[L""] = ConvertToUnicode(removeTrailingCR(key));
+				key.clear();
+			}
+			else if (ch == '=')
+			{
+				state = 3;
+			}
+			else
+			{
+				key += ch;
+			}
+			break;
+		case 3:
+			if (ch == '\n')
+			{
+				mSettingsMap[ConvertToUnicode(key)] = ConvertToUnicode(removeTrailingCR(value));
+				key.clear();
+				value.clear();
+				state = 0;
+			}
+			else
+			{
+				value += ch;
+			}
+			break;
+		}
+	}
+
+	if (state == 3)
+	{
+		mSettingsMap[ConvertToUnicode(key)] = ConvertToUnicode(removeTrailingCR(value));
 	}
 }
 
