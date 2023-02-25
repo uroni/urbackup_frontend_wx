@@ -469,4 +469,5 @@ void ConfigPath::OnClickSourceSwitch(wxCommandEvent & event)
 
 	renderListBoxContent();
 	switchBitmapLabel();
+	mod = true;
 }
