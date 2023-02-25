@@ -226,8 +226,6 @@ void SelectWindowsComponents::onOkClick(wxCommandEvent& event)
 		s_data += "vss_select_components.use_lm=" + nconvert(ctime) + "\n";
 	}
 
-	s_data += "set_client_settings=1\n";
-
 	Connector::updateSettings(s_data);
 
 	Close();
