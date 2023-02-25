@@ -1059,9 +1059,15 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, wxWindow* ctrl)
 {
 	std::wstring use_str;
-	settings->getValue(key + L".use", &use_str);
-
-	int use = watoi(use_str);;
+	int use;
+	if (!settings->getValue(key + L".use", &use_str))
+	{
+		use = c_use_group;
+	}
+	else
+	{
+		use = watoi(use_str);;
+	}
 
 	if (use == c_use_value_client)
 	{
