@@ -183,6 +183,7 @@ void ConfigPath::OnClickOk(wxCommandEvent &evt)
 				ctime = default_dirs_use_lm_orig + 1;
 
 			s_data += "default_dirs.use_lm=" + nconvert(ctime) + "\n";
+			s_data += "set_client_settings=1\n";
 
 			Connector::updateSettings(s_data);
 		}
