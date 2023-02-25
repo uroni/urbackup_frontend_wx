@@ -431,11 +431,11 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		&& internet_server_url.find(L"wss://") != 0
 		&& internet_server_url.find(L"ws://") != 0)
 	{
-		if (watoi(internet_server_port) == 55415)
+		if (watoi(internet_server_port) == 55415 && !internet_server_url.empty())
 		{
 			internet_server_url = "urbackup://" + internet_server_url;
 		}
-		else
+		else if(!internet_server_url.empty() && !internet_server_port.empty())
 		{
 			internet_server_url = "urbackup://" + internet_server_url + ":" + internet_server_port;
 		}
