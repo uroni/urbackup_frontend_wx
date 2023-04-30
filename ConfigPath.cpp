@@ -114,8 +114,8 @@ ConfigPath::ConfigPath(wxWindow* parent)
 			std::vector<std::string> toks;
 			std::string s_dir(dir.path.ToUTF8());
 			TokenizeMail(s_dir, toks, "|");
-			dir.path = wxString::FromUTF8(toks[0]);
-			dir.name = wxString::FromUTF8(toks[1]);
+			dir.path = wxString::FromUTF8(toks[0].c_str());
+			dir.name = wxString::FromUTF8(toks[1].c_str());
 			if (toks.size()>2)
 			{
 				dir.group = (std::max)(0, atoi(toks[2].c_str()));
