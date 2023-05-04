@@ -170,7 +170,6 @@ namespace
 	int ask_restore_ok = 0;
 }
 
-std::string g_lang="en";
 wxString res_path;
 std::string g_res_path;
 #if defined(_WIN32) || defined(__APPLE__)
@@ -300,164 +299,14 @@ bool MyApp::OnInit()
 	res_path=wxT(DATADIR "/urbackup/");
 	g_res_path= DATADIR "/urbackup/";
 #endif
-	wxLanguage lang=wxLANGUAGE_ENGLISH;
-	wxLanguage sysdef=(wxLanguage)wxLocale::GetSystemLanguage();
-	switch(sysdef)
-	{
-	case wxLANGUAGE_ENGLISH:
-	case wxLANGUAGE_ENGLISH_UK:
-	case wxLANGUAGE_ENGLISH_US:
-	case wxLANGUAGE_ENGLISH_AUSTRALIA:
-	case wxLANGUAGE_ENGLISH_BELIZE:
-	case wxLANGUAGE_ENGLISH_BOTSWANA:
-	case wxLANGUAGE_ENGLISH_CANADA:
-	case wxLANGUAGE_ENGLISH_CARIBBEAN:
-	case wxLANGUAGE_ENGLISH_DENMARK:
-	case wxLANGUAGE_ENGLISH_EIRE:
-	case wxLANGUAGE_ENGLISH_JAMAICA:
-	case wxLANGUAGE_ENGLISH_NEW_ZEALAND:
-	case wxLANGUAGE_ENGLISH_PHILIPPINES:
-	case wxLANGUAGE_ENGLISH_SOUTH_AFRICA:
-	case wxLANGUAGE_ENGLISH_TRINIDAD:
-	case wxLANGUAGE_ENGLISH_ZIMBABWE:
-		lang = sysdef;
-		break;
-	case wxLANGUAGE_GERMAN:
-	case wxLANGUAGE_GERMAN_AUSTRIAN:
-	case wxLANGUAGE_GERMAN_BELGIUM:
-	case wxLANGUAGE_GERMAN_LIECHTENSTEIN:
-	case wxLANGUAGE_GERMAN_LUXEMBOURG:
-	case wxLANGUAGE_GERMAN_SWISS:
-		lang= sysdef;
-		g_lang="de";
-		break;
-	case wxLANGUAGE_FRENCH:
-	case wxLANGUAGE_FRENCH_BELGIAN:
-	case wxLANGUAGE_FRENCH_CANADIAN:
-	case wxLANGUAGE_FRENCH_LUXEMBOURG:
-	case wxLANGUAGE_FRENCH_MONACO:
-	case wxLANGUAGE_FRENCH_SWISS:
-		lang= sysdef;
-		g_lang="fr";
-		break;
-	case wxLANGUAGE_RUSSIAN:
-	case wxLANGUAGE_RUSSIAN_UKRAINE:
-		lang= sysdef;
-		g_lang="ru";
-		break;
-	case wxLANGUAGE_SPANISH:
-	case wxLANGUAGE_SPANISH_ARGENTINA:
-	case wxLANGUAGE_SPANISH_BOLIVIA:
-	case wxLANGUAGE_SPANISH_CHILE:
-	case wxLANGUAGE_SPANISH_COLOMBIA:
-	case wxLANGUAGE_SPANISH_COSTA_RICA:
-	case wxLANGUAGE_SPANISH_DOMINICAN_REPUBLIC:
-	case wxLANGUAGE_SPANISH_ECUADOR:
-	case wxLANGUAGE_SPANISH_EL_SALVADOR:
-	case wxLANGUAGE_SPANISH_GUATEMALA:
-	case wxLANGUAGE_SPANISH_HONDURAS:
-	case wxLANGUAGE_SPANISH_MEXICAN:
-	case wxLANGUAGE_SPANISH_NICARAGUA:
-	case wxLANGUAGE_SPANISH_PANAMA:
-	case wxLANGUAGE_SPANISH_PARAGUAY:
-	case wxLANGUAGE_SPANISH_PERU:
-	case wxLANGUAGE_SPANISH_PUERTO_RICO:
-	case wxLANGUAGE_SPANISH_URUGUAY:
-	case wxLANGUAGE_SPANISH_US:
-	case wxLANGUAGE_SPANISH_VENEZUELA:
-		lang= sysdef;
-		g_lang="es";
-		break;
-	case wxLANGUAGE_CHINESE:
-    case wxLANGUAGE_CHINESE_SIMPLIFIED:
-    case wxLANGUAGE_CHINESE_HONGKONG:
-    case wxLANGUAGE_CHINESE_MACAU:
-    case wxLANGUAGE_CHINESE_SINGAPORE:
-		lang= sysdef;
-		g_lang="zh_CN";
-		break;
-	case wxLANGUAGE_CHINESE_TRADITIONAL:
-		lang= sysdef;
-		g_lang="zh_TW";
-		break;
-	case wxLANGUAGE_PORTUGUESE_BRAZILIAN:
-		lang= sysdef;
-		g_lang="pt_BR";
-		break;
-	case wxLANGUAGE_PORTUGUESE:
-		lang= sysdef;
-		g_lang="pt";
-		break;
-	case wxLANGUAGE_ITALIAN:
-	case wxLANGUAGE_ITALIAN_SWISS:
-		lang= sysdef;
-		g_lang="it";
-		break;
-	case wxLANGUAGE_POLISH:
-		lang= sysdef;
-		g_lang="pl";
-		break;
-	case wxLANGUAGE_SLOVAK:
-		lang= sysdef;
-		g_lang="sk";
-		break;
-	case wxLANGUAGE_UKRAINIAN:
-		lang= sysdef;
-		g_lang="uk";
-		break;
-	case wxLANGUAGE_DANISH:
-		lang= sysdef;
-		g_lang="da";
-		break;
-	case wxLANGUAGE_DUTCH:
-	case wxLANGUAGE_DUTCH_BELGIAN:
-		lang= sysdef;
-		g_lang="nl";
-		break;
-	case wxLANGUAGE_FARSI:
-		lang= sysdef;
-		g_lang="fa";
-		break;
-	case wxLANGUAGE_CZECH:
-		lang= sysdef;
-		g_lang="cz";
-		break;
-	case wxLANGUAGE_ESTONIAN:
-		lang= sysdef;
-		g_lang="et";
-		break;
-	case wxLANGUAGE_TURKISH:
-		lang= sysdef;
-		g_lang="tr";
-		break;
-	case wxLANGUAGE_NORWEGIAN_BOKMAL:
-	case wxLANGUAGE_NORWEGIAN_NYNORSK:
-		lang= sysdef;
-		g_lang="no_NO";
-		break;
-	case wxLANGUAGE_SWEDISH:
-	case wxLANGUAGE_SWEDISH_FINLAND:
-		lang= sysdef;
-		g_lang="sv";
-		break;
-	case wxLANGUAGE_FINNISH:
-		lang = sysdef;
-		g_lang = "fi";
-		break;
-	case wxLANGUAGE_JAPANESE:
-		lang = sysdef;
-		g_lang = "ja";
-		break;
-	}
 
-	//std::cout << "Lang: " << g_lang << std::endl;
 #ifndef _WIN32
 	m_locale.AddCatalogLookupPathPrefix(res_path);
 #else
 	m_locale.AddCatalogLookupPathPrefix(res_path+wxT("lang"));
 #endif
+	m_locale.Init();
 	m_locale.AddCatalog(L"urbackup");
-	m_locale.Init(lang, 0);
 	
 	if(!m_locale.IsOk() )
 	{

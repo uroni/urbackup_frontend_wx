@@ -20,7 +20,6 @@
 #include "stringtools.h"
 #include "TrayIcon.h"
 
-extern std::string g_lang;
 extern std::string g_res_path;
 
 #ifdef wxUSE_WCHAR_T
@@ -34,11 +33,7 @@ Info* Info::instance;
 
 Info::Info(wxWindow* parent) : GUIInfo(parent)
 {
-	std::string inf=getFile(g_res_path+"info_"+g_lang+".txt");
-	if(inf.empty())
-	{
-		inf=getFile(g_res_path+"info.txt");
-	}
+	std::string inf= getFile(g_res_path + "info.txt");
 	m_textCtrl14->SetValue(ConvertToUnicode(inf));
 	Show(true);
 
