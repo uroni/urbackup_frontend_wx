@@ -1031,7 +1031,7 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 	}
 	else if (key == "update_freq_full")
 	{
-		return convert(watoi(val)* 24 * 60 * 60);
+		return convert(watoi(val) * 24 * 60 * 60);
 	}
 	else if (key == "internet_speed")
 	{
@@ -1044,7 +1044,7 @@ std::wstring Settings::transformValFromUI(const std::wstring & key, const std::w
 	else if (key == "update_freq_image_full"
 		|| key=="update_freq_image_incr")
 	{
-		int ret = watoi(val) / 24 / 60 / 60;
+		int ret = watoi(val) * 24 * 60 * 60;
 		m_checkBox1->SetValue(ret > 0);
 		return convert(ret);
 	}
