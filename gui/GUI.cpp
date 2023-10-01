@@ -773,7 +773,7 @@ GUILogfiles::GUILogfiles( wxWindow* parent, wxWindowID id, const wxString& title
 	m_button5 = new wxButton( this, wxID_ANY, _("Exit"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer10->Add( m_button5, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	bSizer9->Add( bSizer10, 1, wxEXPAND|wxALIGN_RIGHT, 5 );
+	bSizer9->Add( bSizer10, 1, wxEXPAND, 5 );
 	
 	bSizer8->Add( bSizer9, 1, wxEXPAND, 5 );
 	
@@ -1167,7 +1167,7 @@ GUICbtStatus::GUICbtStatus(wxWindow * parent, wxWindowID id, const wxString & ti
 	m_button5 = new wxButton(this, wxID_ANY, _("Exit"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizer10->Add(m_button5, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
 
-	bSizer9->Add(bSizer10, 1, wxEXPAND | wxALIGN_RIGHT, 5);
+	bSizer9->Add(bSizer10, 1, wxEXPAND, 5);
 
 	this->SetSizer(bSizer9);
 	this->Layout();
