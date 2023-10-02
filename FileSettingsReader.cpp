@@ -134,7 +134,7 @@ bool CFileSettingsReader::getValue(std::string key, std::string *value)
 
 	if(b==true)
 	{
-		std::string nvalue=wnarrow(s_value);
+		std::string nvalue= ConvertToUTF8(s_value);
 		*value=nvalue;		
 		return true;
 	}
