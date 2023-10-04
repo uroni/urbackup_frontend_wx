@@ -232,7 +232,7 @@ Section "install"
 		ExecWait '"$INSTDIR\UrBackupClient_cmd.exe" --version' $0
 		${If} $0 != '1'
 			StrCpy $SITE_LOCAL_RUNTIME "1"
-			File "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.32.31326_copy\x64\Microsoft.VC143.CRT\*"
+			File "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.36.32532_copy\x64\Microsoft.VC143.CRT\*"
 			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
 		${EndIf}
 	${EndIf}
