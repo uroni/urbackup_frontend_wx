@@ -106,7 +106,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 	for (size_t i = 0; i<default_dirs_toks.size(); ++i)
 	{
 		SBackupDir dir;
-		dir.path = wxString::FromUTF8(UnescapeParamString(trim(default_dirs_toks[i])));
+		dir.path = wxString::FromUTF8(UnescapeParamString(trim(default_dirs_toks[i])).c_str());
 		dir.group = 0;
 		++path_n[dir.path];
 		if (dir.path.find("|") != std::string::npos)
