@@ -75,7 +75,31 @@ Section "install"
 	File "data\version_info.txt"
 	
 	SetOutPath "$TEMP"
-	${If} ${RunningX64}
+	${If} ${IsNativeARM64}
+		File "..\deps\redist\vc_redist_2022.arm64.exe"
+		ExecWait '"$TEMP\vc_redist_2022.arm64.exe" /q /norestart' $0
+		${If} $0 != '0'
+		${If} $0 != '3010'
+		${If} $0 != '1638'
+		${If} $0 != '8192'
+		${If} $0 != '1641'
+		${If} $0 != '1046'
+			ExecWait '"$TEMP\vc_redist_2022.arm64.exe"  /passive /norestart' $0
+			${If} $0 != '0'
+			${If} $0 != '3010'
+			${If} $0 != '1638'
+				MessageBox MB_OK "Unable to install Visual Studio 2022 runtime. UrBackup needs that runtime."
+				Quit
+			${EndIf}
+			${EndIf}
+			${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
+		${EndIf}
+	${ElseIf} ${RunningX64}
 		File "..\deps\redist\vc_redist_2022.x64.exe"
 		ExecWait '"$TEMP\vc_redist_2022.x64.exe" /q /norestart' $0
 		${If} $0 != '0'
@@ -148,7 +172,10 @@ Section "install"
 	
 	${If} $INSTALL_TRAYICON == "1"
 	
-	${If} ${RunningX64}
+	${If} ${IsNativeARM64}
+		File "data_arm64\KillProc.exe"		
+		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
+	${ElseIf} ${RunningX64}
 		File "data_x64\KillProc.exe"		
 		nsExec::Exec '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 	${Else}
@@ -204,19 +231,18 @@ Section "install"
 	File "data\initial_settings.cfg"
 	SetCompress auto
 	
-	${IfNot} ${RunningX64} 
-		File "data\fileservplugin.dll"
-		File "data\fsimageplugin.dll"
-		File "data\urbackup.dll"
+	${If} ${IsNativeARM64}
+		File "data_arm64\fileservplugin.dll"
+		File "data_arm64\fsimageplugin.dll"
+		File "data_arm64\urbackup.dll"
 		${If} $INSTALL_TRAYICON == "1"
-		File "data\UrBackupClient.exe"
+		File "data_arm64\UrBackupClient.exe"
 		${EndIf}
-		File "data\UrBackupClientBackend.exe"
-		File "data\cryptoplugin.dll"
-		File "data\UrBackupClient_cmd.exe"
-		File "data\sysvol_test.exe"
-		File "data\libzstd.dll"
-	${Else}
+		File "data_arm64\UrBackupClientBackend.exe"
+		File "data_arm64\cryptoplugin.dll"
+		File "data_arm64\UrBackupClient_cmd.exe"
+		File "data_arm64\sysvol_test.exe"
+	${ElseIf} ${RunningX64} 
 		File "data_x64\fileservplugin.dll"
 		File "data_x64\fsimageplugin.dll"
 		File "data_x64\urbackup.dll"
@@ -227,14 +253,24 @@ Section "install"
 		File "data_x64\cryptoplugin.dll"
 		File "data_x64\UrBackupClient_cmd.exe"
 		File "data_x64\sysvol_test.exe"
-		File "data_x64\libzstd.dll"
 		
 		ExecWait '"$INSTDIR\UrBackupClient_cmd.exe" --version' $0
 		${If} $0 != '1'
 			StrCpy $SITE_LOCAL_RUNTIME "1"
-			File "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.36.32532_copy\x64\Microsoft.VC143.CRT\*"
+			File "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.40.33807_copy\x64\Microsoft.VC143.CRT\*"
 			File "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64\*"
 		${EndIf}
+	${Else}
+		File "data\fileservplugin.dll"
+		File "data\fsimageplugin.dll"
+		File "data\urbackup.dll"
+		${If} $INSTALL_TRAYICON == "1"
+		File "data\UrBackupClient.exe"
+		${EndIf}
+		File "data\UrBackupClientBackend.exe"
+		File "data\cryptoplugin.dll"
+		File "data\UrBackupClient_cmd.exe"
+		File "data\sysvol_test.exe"
 	${EndIf}
 	
 	${If} ${Errors}
@@ -371,14 +407,9 @@ Section "Uninstall"
 		SetRegView 64
 	${EndIf}
 	
-	KillProcDLL::KillProc "UrBackupClient.exe"
-	
 	ExecWait '"$INSTDIR\UrBackupClient.exe" deleteshellkeys'
 	
-	${If} ${RunningX64}
-		File "data_x64\KillProc.exe"		
-		ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
-	${EndIf}
+	ExecWait '"$INSTDIR\KillProc.exe" UrBackupClient.exe'
 
 	!insertmacro SERVICE stop "UrBackupClientBackend" ""
 	!insertmacro SERVICE waitfor "UrBackupClientBackend" "status=stopped"

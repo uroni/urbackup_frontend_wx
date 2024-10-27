@@ -1,11 +1,14 @@
 cd %~dp0
 
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
+call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
 
 msbuild UrBackupClientGUI.sln /p:Configuration=Release /p:Platform="Win32" /p:vcpkgTriplet="x86-windows-static-md"
 if %errorlevel% neq 0 exit /b %errorlevel% 
 
 msbuild UrBackupClientGUI.sln /p:Configuration=Release /p:Platform="x64" /p:vcpkgTriplet="x64-windows-static-md"
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+msbuild UrBackupClientGUI.sln /p:Configuration=Release /p:Platform="ARM64" /p:vcpkgTriplet="arm64-windows-static-md"
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 call update_data.bat

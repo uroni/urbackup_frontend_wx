@@ -93,3 +93,6 @@ translations/urbackup.frontend/en_new.po
 *.orig
 UrBackupClientGUI.VC.opendb
 /.vs/*
+/ARM64
+/data_arm64
+/vcpkg_installed
