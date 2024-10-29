@@ -104,11 +104,13 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 
 	capa = timer?timer->getCapa():Connector::getCapabilities();
 
+#ifdef _WIN32
 	if( !MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa) )
 	{
 		m_tab_imagebackups=new wxPanel(m_notebook, wxID_ANY);
 		bSizer_imagebackups=new wxBoxSizer( wxVERTICAL );
 	}
+#endif
 	
 	wxSize left_column_size = wxDLG_UNIT(this, wxSize(171, -1));
 	wxSize string_input_size = wxDLG_UNIT(this, wxSize(85, -1));
@@ -167,6 +169,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 
 	bSizer_filebackups->Add( bSizer30, 0, wxEXPAND, 5 );
 	
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer31;
@@ -213,90 +216,88 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		bSizer_imagebackups->Add( bSizer32, 0, wxEXPAND, 5 );
 	}
+#endif
 	
-	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
-	{
-		wxBoxSizer* bSizer33;
-		bSizer33 = new wxBoxSizer(wxHORIZONTAL);
-
-		m_staticText30 = new wxStaticText(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		m_staticText30->Wrap(-1);
-		bSizer33->Add(m_staticText30, 0, wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer33, 0, wxEXPAND, 5);
-
-		wxBoxSizer* bSizer341;
-		bSizer341 = new wxBoxSizer(wxHORIZONTAL);
-
-		m_staticText9 = new wxStaticText(m_tab_filebackups, wxID_ANY, _("Minimal number of incremental file backups:"), wxDefaultPosition, left_column_size, 0);
-		m_staticText9->Wrap(-1);
-		bSizer341->Add(m_staticText9, 0, wxALIGN_CENTER | wxALL, 5);
-
-		m_textCtrl13 = new wxTextCtrl(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		bSizer341->Add(m_textCtrl13, 0, wxALL, 5);
-
-		m_bitmapButton13 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
-		bSizer341->Add(m_bitmapButton13, 0, wxALIGN_CENTER | wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer341, 0, wxEXPAND, 5);
-
-		wxBoxSizer* bSizer35;
-		bSizer35 = new wxBoxSizer(wxHORIZONTAL);
-
-		m_staticText10 = new wxStaticText(m_tab_filebackups, wxID_ANY, _("Maximal number of incremental file backups:"), wxDefaultPosition, left_column_size, 0);
-		m_staticText10->Wrap(-1);
-		bSizer35->Add(m_staticText10, 0, wxALIGN_CENTER | wxALL, 5);
-
-		m_textCtrl131 = new wxTextCtrl(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		bSizer35->Add(m_textCtrl131, 0, wxALL, 5);
-
-		m_bitmapButton131 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
-		bSizer35->Add(m_bitmapButton131, 0, wxALIGN_CENTER | wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer35, 0, wxEXPAND, 5);
-
-		wxBoxSizer* bSizer36;
-		bSizer36 = new wxBoxSizer(wxHORIZONTAL);
-
-		m_staticText11 = new wxStaticText(m_tab_filebackups, wxID_ANY, _("Minimal number of full file backups:"), wxDefaultPosition, left_column_size, 0);
-		m_staticText11->Wrap(-1);
-		bSizer36->Add(m_staticText11, 0, wxALIGN_CENTER | wxALL, 5);
-
-		m_textCtrl132 = new wxTextCtrl(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		bSizer36->Add(m_textCtrl132, 0, wxALL, 5);
-
-		m_bitmapButton132 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
-		bSizer36->Add(m_bitmapButton132, 0, wxALIGN_CENTER | wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer36, 0, wxEXPAND, 5);
-
-		wxBoxSizer* bSizer37;
-		bSizer37 = new wxBoxSizer(wxHORIZONTAL);
-
-		m_staticText12 = new wxStaticText(m_tab_filebackups, wxID_ANY, _("Maximal number of full file backups:"), wxDefaultPosition, left_column_size, 0);
-		m_staticText12->Wrap(-1);
-		bSizer37->Add(m_staticText12, 0, wxALIGN_CENTER | wxALL, 5);
-
-		m_textCtrl133 = new wxTextCtrl(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		bSizer37->Add(m_textCtrl133, 0, wxALL, 5);
-
-		m_bitmapButton133 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
-		bSizer37->Add(m_bitmapButton133, 0, wxALIGN_CENTER | wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer37, 0, wxEXPAND, 5);
-
-		wxBoxSizer* bSizer38;
-		bSizer38 = new wxBoxSizer(wxVERTICAL);
-
-		m_staticText29 = new wxStaticText(m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0);
-		m_staticText29->Wrap(-1);
-		bSizer38->Add(m_staticText29, 0, wxALL, 5);
-
-		bSizer_filebackups->Add(bSizer38, 0, wxEXPAND, 5);
-	}
+	wxBoxSizer* bSizer33;
+	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
 	
-	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa) &&
-		!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
+	m_staticText30 = new wxStaticText( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30->Wrap( -1 );
+	bSizer33->Add( m_staticText30, 0, wxALL, 5 );
+	
+	bSizer_filebackups->Add( bSizer33, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer341;
+	bSizer341 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText9 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Minimal number of incremental file backups:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticText9->Wrap( -1 );
+	bSizer341->Add( m_staticText9, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_textCtrl13 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer341->Add( m_textCtrl13, 0, wxALL, 5 );
+
+	m_bitmapButton13 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer341->Add(m_bitmapButton13, 0, wxALIGN_CENTER | wxALL, 5);
+	
+	bSizer_filebackups->Add( bSizer341, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer35;
+	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText10 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Maximal number of incremental file backups:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticText10->Wrap( -1 );
+	bSizer35->Add( m_staticText10, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_textCtrl131 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer35->Add( m_textCtrl131, 0, wxALL, 5 );
+
+	m_bitmapButton131 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer35->Add(m_bitmapButton131, 0, wxALIGN_CENTER | wxALL, 5);
+	
+	bSizer_filebackups->Add( bSizer35, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer36;
+	bSizer36 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText11 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Minimal number of full file backups:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticText11->Wrap( -1 );
+	bSizer36->Add( m_staticText11, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_textCtrl132 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer36->Add( m_textCtrl132, 0, wxALL, 5 );
+
+	m_bitmapButton132 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer36->Add(m_bitmapButton132, 0, wxALIGN_CENTER | wxALL, 5);
+	
+	bSizer_filebackups->Add( bSizer36, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer37;
+	bSizer37 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText12 = new wxStaticText( m_tab_filebackups, wxID_ANY, _("Maximal number of full file backups:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticText12->Wrap( -1 );
+	bSizer37->Add( m_staticText12, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_textCtrl133 = new wxTextCtrl( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer37->Add( m_textCtrl133, 0, wxALL, 5 );
+
+	m_bitmapButton133 = new wxBitmapButton(m_tab_filebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizer37->Add(m_bitmapButton133, 0, wxALIGN_CENTER | wxALL, 5);
+	
+	bSizer_filebackups->Add( bSizer37, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer38;
+	bSizer38 = new wxBoxSizer( wxVERTICAL );
+	
+	m_staticText29 = new wxStaticText( m_tab_filebackups, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	bSizer38->Add( m_staticText29, 0, wxALL, 5 );
+	
+	bSizer_filebackups->Add( bSizer38, 0, wxEXPAND, 5 );
+	
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer38s;
 		bSizer38s = new wxBoxSizer( wxVERTICAL );
@@ -376,6 +377,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	
 		bSizer_imagebackups->Add( bSizer43, 0, wxEXPAND, 5 );
 	}
+#endif
 	
 	wxBoxSizer* bSizer28;
 	bSizer28 = new wxBoxSizer( wxHORIZONTAL );

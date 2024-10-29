@@ -211,6 +211,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		m_textCtrl2->SetValue(wxT("30"));
 	}
 	setSettingsSwitch(L"update_freq_full", m_bitmapButton2, m_textCtrl2);
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"update_freq_image_full", &t, settings))
@@ -247,84 +248,84 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		}
 		setSettingsSwitch(L"update_freq_image_incr", m_bitmapButton21, m_textCtrl21);
 	}
-	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
+#endif
+	if(getSettingsValue(L"max_file_incr", &t, settings))
 	{
-		if (getSettingsValue(L"max_file_incr", &t, settings))
-		{
-			m_textCtrl131->SetValue(wxString(convert(watoi(t)).c_str()));
-		}
-		else
-		{
-			m_textCtrl131->SetValue(wxT("100"));
-		}
-		setSettingsSwitch(L"max_file_incr", m_bitmapButton131, m_textCtrl131);
-		if (getSettingsValue(L"min_file_incr", &t, settings))
-		{
-			m_textCtrl13->SetValue(wxString(convert(watoi(t)).c_str()));
-		}
-		else
-		{
-			m_textCtrl13->SetValue(wxT("40"));
-		}
-		setSettingsSwitch(L"min_file_incr", m_bitmapButton13, m_textCtrl13);
-		if (getSettingsValue(L"max_file_full", &t, settings))
-		{
-			m_textCtrl133->SetValue(wxString(convert(watoi(t)).c_str()));
-		}
-		else
-		{
-			m_textCtrl133->SetValue(wxT("10"));
-		}
-		setSettingsSwitch(L"max_file_full", m_bitmapButton133, m_textCtrl133);
-		if (getSettingsValue(L"min_file_full", &t, settings))
-		{
-			m_textCtrl132->SetValue(wxString(convert(watoi(t)).c_str()));
-		}
-		else
-		{
-			m_textCtrl132->SetValue(wxT("2"));
-		}
-		setSettingsSwitch(L"min_file_full", m_bitmapButton132, m_textCtrl132);
-		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
-		{
-			if (getSettingsValue(L"min_image_incr", &t, settings))
-			{
-				m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
-			}
-			else
-			{
-				m_textCtrl134->SetValue(wxT("4"));
-			}
-			setSettingsSwitch(L"min_image_incr", m_bitmapButton134, m_textCtrl134);
-			if (getSettingsValue(L"max_image_incr", &t, settings))
-			{
-				m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
-			}
-			else
-			{
-				m_textCtrl135->SetValue(wxT("30"));
-			}
-			setSettingsSwitch(L"max_image_incr", m_bitmapButton135, m_textCtrl135);
-			if (getSettingsValue(L"min_image_full", &t, settings))
-			{
-				m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
-			}
-			else
-			{
-				m_textCtrl136->SetValue(wxT("2"));
-			}
-			setSettingsSwitch(L"min_image_full", m_bitmapButton136, m_textCtrl136);
-			if (getSettingsValue(L"max_image_full", &t, settings))
-			{
-				m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
-			}
-			else
-			{
-				m_textCtrl137->SetValue(wxT("5"));
-			}
-			setSettingsSwitch(L"max_image_full", m_bitmapButton137, m_textCtrl137);
-		}
+		m_textCtrl131->SetValue(wxString(convert(watoi(t)).c_str()));
 	}
+	else
+	{
+		m_textCtrl131->SetValue(wxT("100"));
+	}
+	setSettingsSwitch(L"max_file_incr", m_bitmapButton131, m_textCtrl131);
+	if(getSettingsValue(L"min_file_incr", &t, settings))
+	{
+		m_textCtrl13->SetValue(wxString(convert(watoi(t)).c_str()));
+	}
+	else
+	{
+		m_textCtrl13->SetValue(wxT("40"));
+	}
+	setSettingsSwitch(L"min_file_incr", m_bitmapButton13, m_textCtrl13);
+	if(getSettingsValue(L"max_file_full", &t, settings))
+	{
+		m_textCtrl133->SetValue(wxString(convert(watoi(t)).c_str()));
+	}
+	else
+	{
+		m_textCtrl133->SetValue(wxT("10"));
+	}
+	setSettingsSwitch(L"max_file_full", m_bitmapButton133, m_textCtrl133);
+	if(getSettingsValue(L"min_file_full", &t,settings))
+	{
+		m_textCtrl132->SetValue(wxString(convert(watoi(t)).c_str()));
+	}
+	else
+	{
+		m_textCtrl132->SetValue(wxT("2"));
+	}
+	setSettingsSwitch(L"min_file_full", m_bitmapButton132, m_textCtrl132);
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		if(getSettingsValue(L"min_image_incr", &t,settings))
+		{
+			m_textCtrl134->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl134->SetValue(wxT("4"));
+		}
+		setSettingsSwitch(L"min_image_incr", m_bitmapButton134, m_textCtrl134);
+		if(getSettingsValue(L"max_image_incr", &t, settings))
+		{
+			m_textCtrl135->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl135->SetValue(wxT("30"));
+		}
+		setSettingsSwitch(L"max_image_incr", m_bitmapButton135, m_textCtrl135);
+		if(getSettingsValue(L"min_image_full", &t, settings))
+		{
+			m_textCtrl136->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl136->SetValue(wxT("2"));
+		}
+		setSettingsSwitch(L"min_image_full", m_bitmapButton136, m_textCtrl136);
+		if(getSettingsValue(L"max_image_full", &t, settings))
+		{
+			m_textCtrl137->SetValue(wxString(convert(watoi(t)).c_str()));
+		}
+		else
+		{
+			m_textCtrl137->SetValue(wxT("5"));
+		}
+		setSettingsSwitch(L"max_image_full", m_bitmapButton137, m_textCtrl137);
+	}
+#endif
 	if(settings->getValue(L"computername", &t) )
 	{
 		m_textCtrl15->SetValue(t);
@@ -376,6 +377,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		m_textCtrl19->SetValue(wxT("0"));
 	}
 	setSettingsSwitch(L"startup_backup_delay", m_bitmapButton19, m_textCtrl19);
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"image_letters", &t, settings))
@@ -388,6 +390,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		}
 		setSettingsSwitch(L"image_letters", m_bitmapButton23, m_textCtrl23);
 	}
+#endif
 	if(getSettingsValue(L"internet_mode_enabled", &t, settings) && t==L"true")
 	{
 		m_checkBoxInternetEnabled->SetValue(true);
@@ -405,6 +408,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		m_checkBoxInternetFullFile->SetValue(false);
 	}
 	setSettingsSwitch(L"internet_full_file_backups", m_bitmapButtonInternetFullFile, m_checkBoxInternetFullFile);
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"internet_image_backups", &t, settings) && t==L"true")
@@ -417,6 +421,7 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		}
 		setSettingsSwitch(L"internet_image_backups", m_bitmapButtonInternetImage, m_checkBoxInternetImage);
 	}
+#endif
 	std::wstring internet_server_url;
 	getSettingsValue(L"internet_server", &internet_server_url, settings);
 	std::wstring internet_server_port;
@@ -501,25 +506,21 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 	m_textCtrlLocalSpeed->SetValidator(getDigitSlashValidator());	
 	m_textCtrl1->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
 	m_textCtrl2->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
-	{
-		m_textCtrl131->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-		m_textCtrl13->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-		m_textCtrl133->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-		m_textCtrl132->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
-		{
-			m_textCtrl134->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-			m_textCtrl135->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-			m_textCtrl136->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-			m_textCtrl137->SetValidator(wxTextValidator(wxFILTER_DIGITS));
-		}
-	}
-	if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	m_textCtrl131->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl13->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl133->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+	m_textCtrl132->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		m_textCtrl22->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 		m_textCtrl21->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl134->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl135->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl136->SetValidator(wxTextValidator(wxFILTER_DIGITS));
+		m_textCtrl137->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	}
+#endif
 	m_textCtrl19->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl15->SetValidator(getPathValidator());
 	Show(true);
@@ -535,6 +536,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 {
 	wxString update_freq_incr=m_textCtrl1->GetValue();
 	wxString update_freq_full=m_textCtrl2->GetValue();
+#ifdef _WIN32
 	wxString update_freq_image_full;
 	wxString update_freq_image_incr;
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -542,40 +544,37 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		update_freq_image_full=m_textCtrl22->GetValue();
 		update_freq_image_incr=m_textCtrl21->GetValue();
 	}
+#endif
+	wxString max_file_incr=m_textCtrl131->GetValue();
+	wxString min_file_incr=m_textCtrl13->GetValue();
+	wxString max_file_full=m_textCtrl133->GetValue();
+	wxString min_file_full=m_textCtrl132->GetValue();
+#ifdef _WIN32
 	wxString min_image_incr;
 	wxString max_image_incr;
 	wxString min_image_full;
 	wxString max_image_full;
-	wxString max_file_incr;
-	wxString min_file_incr;
-	wxString max_file_full;
-	wxString min_file_full;
-	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
-		max_file_incr = m_textCtrl131->GetValue();
-		min_file_incr = m_textCtrl13->GetValue();
-		max_file_full = m_textCtrl133->GetValue();
-		min_file_full = m_textCtrl132->GetValue();
-		
-		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
-		{
-			min_image_incr = m_textCtrl134->GetValue();
-			max_image_incr = m_textCtrl135->GetValue();
-			min_image_full = m_textCtrl136->GetValue();
-			max_image_full = m_textCtrl137->GetValue();
-		}
+		min_image_incr=m_textCtrl134->GetValue();
+		max_image_incr=m_textCtrl135->GetValue();
+		min_image_full=m_textCtrl136->GetValue();
+		max_image_full=m_textCtrl137->GetValue();
 	}
+#endif
 	wxString computername=m_textCtrl15->GetValue();
 	wxString backup_window=m_textCtrl17->GetValue();
 	wxString exclude_files=m_textCtrl16->GetValue();
 	wxString include_files=m_textCtrl161->GetValue();
 	wxString startup_backup_delay=m_textCtrl19->GetValue();
+#ifdef _WIN32
 	wxString image_letters;
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		image_letters=m_textCtrl23->GetValue();
 	}
-	const bool internet_mode_enabled=m_checkBoxInternetEnabled->GetValue();
+#endif
+	bool internet_mode_enabled=m_checkBoxInternetEnabled->GetValue();
 	wxString internet_server=m_textCtrlInternetServer->GetValue();
 	wxString internet_server_port = L"55415";
 
@@ -603,17 +602,19 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	}
 
 	wxString internet_server_proxy = m_textCtrlInternetServerProxy->GetValue();
+#ifdef _WIN32
 	bool internet_image_backups=false;
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		internet_image_backups=m_checkBoxInternetImage->GetValue();
 	}
-	const bool internet_full_file_backups=m_checkBoxInternetFullFile->GetValue();
+#endif
+	bool internet_full_file_backups=m_checkBoxInternetFullFile->GetValue();
 	wxString internet_authkey=m_textCtrlInternetServerAuthkey->GetValue();
 	wxString internet_speed=m_textCtrlInternetSpeed->GetValue();
 	wxString local_speed=m_textCtrlLocalSpeed->GetValue();
-	const bool internet_encrypt=m_checkBoxInternetEncrypt->GetValue();
-	const bool internet_compress=m_checkBoxInternetCompress->GetValue();
+	bool internet_encrypt=m_checkBoxInternetEncrypt->GetValue();
+	bool internet_compress=m_checkBoxInternetCompress->GetValue();
 
 	double l_update_freq_incr;
 	long l_update_freq_full;
@@ -640,6 +641,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		m_textCtrl2->SetFocus();
 		return;
 	}
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(!update_freq_image_full.ToLong(&l_update_freq_image_full) 
@@ -658,68 +660,68 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			return;
 		}
 	}
-	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_MAX_BACKUPS, capa))
+#endif
+	if(!max_file_incr.ToLong(&l_max_file_incr)
+		&& settings_info[L"max_file_incr"].use == c_use_value_client)
 	{
-		if (!max_file_incr.ToLong(&l_max_file_incr)
-			&& settings_info[L"max_file_incr"].use == c_use_value_client)
+		wxMessageBox( _("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		m_textCtrl131->SetFocus();
+		return;
+	}
+	if(!min_file_incr.ToLong(&l_min_file_incr)
+		&& settings_info[L"min_file_incr"].use == c_use_value_client)
+	{
+		wxMessageBox( _("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		m_textCtrl13->SetFocus();
+		return;
+	}
+	if(!max_file_full.ToLong(&l_max_file_full)
+		&& settings_info[L"max_file_full"].use == c_use_value_client)
+	{
+		wxMessageBox( _("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		m_textCtrl133->SetFocus();
+		return;
+	}
+	if(!min_file_full.ToLong(&l_min_file_full)
+		&& settings_info[L"min_file_full"].use == c_use_value_client)
+	{
+		wxMessageBox( _("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		m_textCtrl132->SetFocus();
+		return;
+	}
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		if(!min_image_incr.ToLong(&l_min_image_incr)
+			&& settings_info[L"min_image_incr"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-			m_textCtrl131->SetFocus();
+			wxMessageBox( _("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl134->SetFocus();
 			return;
 		}
-		if (!min_file_incr.ToLong(&l_min_file_incr)
-			&& settings_info[L"min_file_incr"].use == c_use_value_client)
+		if(!max_image_incr.ToLong(&l_max_image_incr)
+			&& settings_info[L"max_image_incr"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-			m_textCtrl13->SetFocus();
+			wxMessageBox( _("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl135->SetFocus();
 			return;
 		}
-		if (!max_file_full.ToLong(&l_max_file_full)
-			&& settings_info[L"max_file_full"].use == c_use_value_client)
+		if(!min_image_full.ToLong(&l_min_image_full)
+			&& settings_info[L"min_image_full"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-			m_textCtrl133->SetFocus();
+			wxMessageBox( _("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl136->SetFocus();
 			return;
 		}
-		if (!min_file_full.ToLong(&l_min_file_full)
-			&& settings_info[L"min_file_full"].use == c_use_value_client)
+		if(!max_image_full.ToLong(&l_max_image_full)
+			&& settings_info[L"max_image_full"].use == c_use_value_client)
 		{
-			wxMessageBox(_("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-			m_textCtrl132->SetFocus();
+			wxMessageBox( _("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			m_textCtrl137->SetFocus();
 			return;
-		}
-		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
-		{
-			if (!min_image_incr.ToLong(&l_min_image_incr)
-				&& settings_info[L"min_image_incr"].use == c_use_value_client)
-			{
-				wxMessageBox(_("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-				m_textCtrl134->SetFocus();
-				return;
-			}
-			if (!max_image_incr.ToLong(&l_max_image_incr)
-				&& settings_info[L"max_image_incr"].use == c_use_value_client)
-			{
-				wxMessageBox(_("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-				m_textCtrl135->SetFocus();
-				return;
-			}
-			if (!min_image_full.ToLong(&l_min_image_full)
-				&& settings_info[L"min_image_full"].use == c_use_value_client)
-			{
-				wxMessageBox(_("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-				m_textCtrl136->SetFocus();
-				return;
-			}
-			if (!max_image_full.ToLong(&l_max_image_full)
-				&& settings_info[L"max_image_full"].use == c_use_value_client)
-			{
-				wxMessageBox(_("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
-				m_textCtrl137->SetFocus();
-				return;
-			}
 		}
 	}
+#endif
 	if(!startup_backup_delay.ToLong(&l_startup_backup_delay)
 		&& settings_info[L"start_backup_delay"].use == c_use_value_client)
 	{
@@ -728,7 +730,6 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		return;
 	}
 #ifdef _WIN32
-	// Check if image letters are pointing to actual volumes
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		std::string s_image_letters=image_letters.ToUTF8();
@@ -769,10 +770,11 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	local_speed.ToLong(&l_local_speed);
 	l_local_speed*=(1024*1024)/8;
 
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		l_update_freq_image_full_orig = l_update_freq_image_full;
-		if(!m_checkBox1->GetValue())
+		if(m_checkBox1->GetValue()==false)
 		{
 			if(l_update_freq_image_full>0)
 				l_update_freq_image_full*=-1;
@@ -780,6 +782,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 				l_update_freq_image_incr *= -1;
 		}
 	}
+#endif
 
 	std::string s_data;
 
@@ -828,6 +831,65 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	}
 
 	Connector::updateSettings(s_data);
+
+	/*std::map<std::string, std::string> n_vals;
+	n_vals["update_freq_incr"]=nconvert(static_cast<float>(l_update_freq_incr*60.f*60.f));
+	n_vals["update_freq_full"]=nconvert(l_update_freq_full*24*60*60);
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		n_vals["update_freq_image_full"]=nconvert(l_update_freq_image_full*24*60*60);
+		n_vals["update_freq_image_full_orig"]=nconvert(l_update_freq_image_full_orig*24*60*60);
+		n_vals["update_freq_image_incr"]=nconvert(l_update_freq_image_incr*24*60*60);
+	}
+	n_vals["max_file_incr"]=nconvert(l_max_file_incr);
+	n_vals["min_file_incr"]=nconvert(l_min_file_incr);
+	n_vals["max_file_full"]=nconvert(l_max_file_full);
+	n_vals["min_file_full"]=nconvert(l_min_file_full);
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		n_vals["min_image_incr"]=nconvert(l_min_image_incr);
+		n_vals["max_image_incr"]=nconvert(l_max_image_incr);
+		n_vals["min_image_full"]=nconvert(l_min_image_full);
+		n_vals["max_image_full"]=nconvert(l_max_image_full);
+	}
+#endif
+	n_vals["computername"]=computername.ToUTF8();
+	n_vals["backup_window"]=backup_window.ToUTF8();
+	n_vals["backup_window_incr_file"]=backup_window.ToUTF8();
+	n_vals["backup_window_full_file"]=backup_window.ToUTF8();
+	n_vals["backup_window_incr_image"]=backup_window.ToUTF8();
+	n_vals["backup_window_full_image"]=backup_window.ToUTF8();
+	n_vals["exclude_files"]=exclude_files.ToUTF8();
+	n_vals["include_files"]=include_files.ToUTF8();
+	n_vals["startup_backup_delay"]=nconvert(l_startup_backup_delay*60);
+#ifdef _WIN32
+	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		n_vals["image_letters"]=image_letters.ToUTF8();
+		n_vals["internet_image_backups"]=nconvert(internet_image_backups);
+	}
+#endif
+	n_vals["internet_mode_enabled"]=nconvert(internet_mode_enabled);
+	n_vals["internet_full_file_backups"]=nconvert(internet_full_file_backups);
+	n_vals["internet_server"]=internet_server.ToUTF8();
+	n_vals["internet_server_port"]=nconvert(l_internet_server_port);
+	n_vals["internet_server_proxy"] = internet_server_proxy.ToUTF8();
+	n_vals["internet_authkey"]=internet_authkey.ToUTF8();
+
+	if(internet_speed!=wxT("-") && !internet_speed.empty())
+		n_vals["internet_speed"]=nconvert(l_internet_speed);
+	else
+		n_vals["internet_speed"]="-1";
+
+	if(local_speed!=wxT("-") && !local_speed.empty())
+		n_vals["local_speed"]=nconvert(l_local_speed);
+	else
+		n_vals["local_speed"]="-1";
+	n_vals["internet_encrypt"]=nconvert(internet_encrypt);
+	n_vals["internet_compress"]=nconvert(internet_compress);
+
+	Connector::updateSettings(mergeNewSettings(settings, n_vals));*/
 
 	Close();
 }
