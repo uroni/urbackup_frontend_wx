@@ -63,6 +63,7 @@ class GUISettings : public wxDialog
 		wxStaticText* m_staticText41;
 		
 		wxCheckBox* m_checkBox1;
+		wxCheckBox* m_checkBox1_2;
 		wxStaticText* m_staticText7;
 		wxTextCtrl* m_textCtrl22;
 		wxBitmapButton* m_bitmapButton22;

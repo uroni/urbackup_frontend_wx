@@ -211,6 +211,10 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 		m_staticText42->Wrap( -1 );
 		bSizer32->Add( m_staticText42, 0, wxALIGN_CENTER|wxALL, 5 );
 
+		m_checkBox1_2 = new wxCheckBox(m_tab_imagebackups, wxID_ANY, _("Active"), wxDefaultPosition, wxDefaultSize, 0);
+		m_checkBox1_2->SetValue(true);
+		bSizer32->Add(m_checkBox1_2, 0, wxALIGN_CENTER | wxALL, 5);
+
 		m_bitmapButton22 = new wxBitmapButton(m_tab_imagebackups, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
 		bSizer32->Add(m_bitmapButton22, 0, wxALIGN_CENTER | wxALL, 5);
 	

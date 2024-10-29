@@ -219,32 +219,39 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 			if(watoi(t)>0)
 			{
 				m_textCtrl22->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
-				m_checkBox1->SetValue(true);
+				m_checkBox1_2->SetValue(true);
 			}
 			else
 			{
 				m_textCtrl22->SetValue(wxString(convert(-1*watoi(t)/24/60/60).c_str()));
-				m_textCtrl21->Enable(false);
 				m_textCtrl22->Enable(false);
-				m_checkBox1->SetValue(false);
+				m_checkBox1_2->SetValue(false);
 			}
 		}
 		else
 		{
 			m_textCtrl22->SetValue(wxT("60"));
-			m_checkBox1->SetValue(true);
+			m_checkBox1_2->SetValue(true);
 		}
 		setSettingsSwitch(L"update_freq_image_full", m_bitmapButton22, m_textCtrl22);
 		if(getSettingsValue(L"update_freq_image_incr", &t, settings))
 		{
-			if(watoi(t)>0)
-				m_textCtrl21->SetValue(wxString(convert(watoi(t)/24/60/60).c_str()));
+			if (watoi(t) > 0)
+			{
+				m_textCtrl21->SetValue(wxString(convert(watoi(t) / 24 / 60 / 60).c_str()));
+				m_checkBox1->SetValue(true);
+			}
 			else
-				m_textCtrl21->SetValue(wxString(convert(-1*watoi(t) / 24 / 60 / 60).c_str()));
+			{
+				m_textCtrl21->SetValue(wxString(convert(-1 * watoi(t) / 24 / 60 / 60).c_str()));
+				m_textCtrl21->Enable(false);
+				m_checkBox1->SetValue(false);
+			}
 		}
 		else
 		{
 			m_textCtrl21->SetValue(wxT("7"));
+			m_checkBox1->SetValue(true);
 		}
 		setSettingsSwitch(L"update_freq_image_incr", m_bitmapButton21, m_textCtrl21);
 	}
@@ -618,7 +625,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	double l_update_freq_incr;
 	long l_update_freq_full;
-	long l_update_freq_image_full, l_update_freq_image_full_orig, l_update_freq_image_incr;
+	long l_update_freq_image_full, l_update_freq_image_incr;
 	long l_max_file_incr, l_min_file_incr;
 	long l_max_file_full, l_min_file_full;
 	long l_min_image_incr, l_max_image_incr;
@@ -645,7 +652,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(!update_freq_image_full.ToLong(&l_update_freq_image_full) 
-			&& m_checkBox1->GetValue()
+			&& m_checkBox1_2->GetValue()
 			&& settings_info[L"update_freq_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -773,13 +780,15 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
-		l_update_freq_image_full_orig = l_update_freq_image_full;
-		if(m_checkBox1->GetValue()==false)
+		if(!m_checkBox1->GetValue())
 		{
-			if(l_update_freq_image_full>0)
-				l_update_freq_image_full*=-1;
 			if (l_update_freq_image_incr > 0)
 				l_update_freq_image_incr *= -1;
+		}
+		if (!m_checkBox1_2->GetValue())
+		{
+			if (l_update_freq_image_full > 0)
+				l_update_freq_image_full *= -1;
 		}
 	}
 #endif
@@ -899,18 +908,28 @@ void Settings::OnAbortClick( wxCommandEvent& event )
 	Close();
 }
 
-void Settings::OnDisableImageBackups( wxCommandEvent& event )
+void Settings::OnDisableIncrImageBackups( wxCommandEvent& event )
 {
-	if(m_checkBox1->GetValue()==false)
+	if(!m_checkBox1->GetValue())
 	{
 		m_textCtrl21->Enable(false);
-		m_textCtrl22->Enable(false);
 	}
 	else
 	{
 		m_textCtrl21->Enable(true);
-		m_textCtrl22->Enable(true);
 	}		
+}
+
+void Settings::OnDisableFullImageBackups(wxCommandEvent& event)
+{
+	if (!m_checkBox1_2->GetValue())
+	{
+		m_textCtrl22->Enable(false);
+	}
+	else
+	{
+		m_textCtrl22->Enable(true);
+	}
 }
 
 void Settings::OnBitmapBtnClick(wxCommandEvent & event)
@@ -1004,14 +1023,25 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	{
 		return convert(watoi(val) / ((1024*1024) / 8));
 	}
-	else if (key == "update_freq_image_full"
-		|| key=="update_freq_image_incr")
+	else if (key == "update_freq_image_incr")
 	{
 		int ret = watoi(val) * 24 * 60 * 60;
-		if (!m_checkBox1->GetValue()
-			&& ret>0)
+		m_checkBox1->SetValue(true);
+		if (ret<0)
 		{
 			ret *= -1;
+			m_checkBox1->SetValue(false);
+		}
+		return convert(ret);
+	}
+	else if (key == "update_freq_image_full")
+	{
+		int ret = watoi(val) * 24 * 60 * 60;
+		m_checkBox1_2->SetValue(true);
+		if (ret < 0)
+		{
+			ret *= -1;
+			m_checkBox1_2->SetValue(false);
 		}
 		return convert(ret);
 	}

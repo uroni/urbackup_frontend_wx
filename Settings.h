@@ -40,7 +40,8 @@ public:
 
 	virtual void OnOkClick( wxCommandEvent& event );
 	virtual void OnAbortClick( wxCommandEvent& event );
-	virtual void OnDisableImageBackups( wxCommandEvent& event );
+	virtual void OnDisableIncrImageBackups( wxCommandEvent& event );
+	virtual void OnDisableFullImageBackups(wxCommandEvent& event);
 	virtual void OnBitmapBtnClick(wxCommandEvent& event);
 	virtual void OnCtlChange(wxCommandEvent& event);
 
