@@ -15,7 +15,7 @@ call update_data.bat
 
 if NOT "%SIGN%" == "true" GOTO skip_signing1
 
-signtool sign /fd sha256 /t http://time.certum.pl /i Certum data\*.exe data\*.dll data_x64\*.exe data_x64\*.dll
+signtool sign /fd sha256 /tr http://ts.ssl.com /td sha256 /i "SSL.com" data\*.exe data\*.dll data_x64\*.exe data_x64\*.dll data_arm64\*.exe data_arm64\*.dll
 
 :skip_signing1
 
@@ -32,6 +32,6 @@ call build_msi.bat
 
 if NOT "%SIGN%" == "true" GOTO skip_signing2
 
-signtool sign /fd sha256 /t http://time.certum.pl /i Certum "UrBackup Client $version_short$.exe" "UrBackup Client NoTray $version_short$.exe" "UrBackup Client $version_short$(x64).msi" "UrBackup Client (No tray) $version_short$(x64).msi"
+signtool sign /fd sha256 /tr http://ts.ssl.com /td sha256 /i "SSL.com" "UrBackup Client $version_short$.exe" "UrBackup Client NoTray $version_short$.exe" "UrBackup Client $version_short$(x64).msi" "UrBackup Client (No tray) $version_short$(x64).msi"
 
 :skip_signing2
