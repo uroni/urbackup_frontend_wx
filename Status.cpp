@@ -82,7 +82,7 @@ namespace
 		{
 			wxLongLong_t t=ms/c_d;
 			if(!ret.empty()) ret+=" ";
-			ret+=nconvert(t)+wxT(" ")+wxPLURAL("day", "days", static_cast<size_t>(t));
+			ret+=nconvert(t)+" "+wxPLURAL("day", "days", static_cast<size_t>(t));
 			ms-=t*c_d;
 		}
 
@@ -90,7 +90,7 @@ namespace
 		{
 			wxLongLong_t t=ms/c_h;
 			if(!ret.empty()) ret+=" ";
-			ret+=nconvert(t)+wxT(" ")+wxPLURAL("hour", "hours", static_cast<size_t>(t));
+			ret+=nconvert(t)+" "+wxPLURAL("hour", "hours", static_cast<size_t>(t));
 			ms-=t*c_h;
 		}
 
@@ -98,7 +98,7 @@ namespace
 		{
 			wxLongLong_t t=ms/c_m;
 			if(!ret.empty()) ret+=" ";
-			ret+=nconvert(t)+wxT(" ")+wxPLURAL("minute", "minutes", static_cast<size_t>(t));
+			ret+=nconvert(t)+" "+wxPLURAL("minute", "minutes", static_cast<size_t>(t));
 			ms-=t*c_m;
 		}
 

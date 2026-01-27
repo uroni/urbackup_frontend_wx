@@ -301,7 +301,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 
 	if (backupid != NULL)
 	{
-		params += "&backupid=" + convert(*backupid);
+		params += "&backupid=" + nconvert(*backupid);
 	}
 
 	std::string list = getResponse("GET FILE LIST TOKENS",
@@ -343,18 +343,18 @@ SStartRestore Connector::startRestore(const std::string& path, int backupid,
 
 	std::string params = "tokens=" + tokens;
 	params += "&path=" + EscapeParamString(path);
-	params += "&backupid=" + convert(backupid);
+	params += "&backupid=" + nconvert(backupid);
 
 	for (size_t i = 0; i < map_paths.size(); ++i)
 	{
-		params += "&map_path_source" + convert(i) + "=" + EscapeParamString(map_paths[i].source);
-		params += "&map_path_target" + convert(i) + "=" + EscapeParamString(map_paths[i].target);
+		params += "&map_path_source" + nconvert(i) + "=" + EscapeParamString(map_paths[i].source);
+		params += "&map_path_target" + nconvert(i) + "=" + EscapeParamString(map_paths[i].target);
 	}
 
 	params += std::string("&clean_other=") + (clean_other ? "1" : "0");
 	params += std::string("&ignore_other_fs=") + (ignore_other_fs ? "1" : "0");
 	params += std::string("&follow_symlinks=") + (follow_symlinks ? "1" : "0");
-	params += std::string("&restore_flags=") + convert(restore_flags);
+	params += std::string("&restore_flags=") + nconvert(restore_flags);
 
 	std::string res = getResponse("DOWNLOAD FILES TOKENS",
 		params, false, NULL, 120000);
