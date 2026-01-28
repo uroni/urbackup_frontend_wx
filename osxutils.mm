@@ -125,7 +125,31 @@ extern "C" void check_full_disk_access()
         }
 //        Display dialogue
         [alert addButtonWithTitle:@"OK"];
-        (void)[alert runModal];
+        
+        // Use beginSheetModalForWindow with completion handler to avoid blocking conflicts with wxWidgets
+        __block BOOL alertDone = NO;
+        NSWindow *alertWindow = [alert window];
+        [alertWindow setLevel:NSModalPanelWindowLevel];
+        [alertWindow makeKeyAndOrderFront:nil];
+        [NSApp activateIgnoringOtherApps:YES];
+        
+        [alert beginSheetModalForWindow:alertWindow completionHandler:^(NSModalResponse returnCode) {
+            (void)returnCode;
+            alertDone = YES;
+            [NSApp stopModal];
+        }];
+        
+        // Run a local event loop until the alert is dismissed
+        while (!alertDone) {
+            NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                                untilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]
+                                                   inMode:NSDefaultRunLoopMode
+                                                  dequeue:YES];
+            if (event) {
+                [NSApp sendEvent:event];
+            }
+        }
+        [alertWindow orderOut:nil];
 //        Open System Preferences
         NSWorkspace *workspace = [[NSWorkspace alloc] init];
         [workspace openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"]];
