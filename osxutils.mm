@@ -124,7 +124,8 @@ extern "C" void check_full_disk_access()
             [alert setInformativeText:@"UrBackup needs Full Disk Access to operate.\n\nPlease try using System Preferences to allow the UrBackup Client application Full Disk Access.\n\nSystem Preferences will open when you press OK."];
         }
 //        Display dialogue
-        [alert runModal];
+        [alert addButtonWithTitle:@"OK"];
+        (void)[alert runModal];
 //        Open System Preferences
         NSWorkspace *workspace = [[NSWorkspace alloc] init];
         [workspace openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"]];
