@@ -100,8 +100,6 @@ extern "C" void check_full_disk_access()
     }
     
     NSData* data = [NSData dataWithContentsOfFile:path];
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setAlertStyle:NSAlertStyleCritical];
     if (data != nil && fileExists)
     {
 //        Full Disk Access Allowed
@@ -113,18 +111,39 @@ extern "C" void check_full_disk_access()
         {
 //        Full Disk Access Denied
             NSLog(@"[macOS] Full Disk Access Denied");
-            [alert setMessageText:@"Full Disk Access Denied"];
-            [alert setInformativeText:@"UrBackup needs Full Disk Access to operate.\n\nPlease use System Preferences to allow the UrBackup Client application Full Disk Access.\n\nSystem Preferences will open when you press OK."];
         }
         else
         {
 //        Cannot determine Full Disk Access status
             NSLog(@"[macOS] Full Disk Access cannot be determined");
-            [alert setMessageText:@"Cannot determine Full Disk Access status"];
-            [alert setInformativeText:@"UrBackup needs Full Disk Access to operate.\n\nPlease try using System Preferences to allow the UrBackup Client application Full Disk Access.\n\nSystem Preferences will open when you press OK."];
         }
 //        Display dialogue
-        [alert runModal];
+        NSString *messageText;
+        NSString *informativeText;
+        
+        if (data == nil && fileExists) {
+            messageText = @"Full Disk Access Denied";
+            informativeText = @"UrBackup needs Full Disk Access to operate.\n\nPlease use System Preferences to allow the UrBackup Client application Full Disk Access.\n\nSystem Preferences will open when you press OK.";
+        } else {
+            messageText = @"Cannot determine Full Disk Access status";
+            informativeText = @"UrBackup needs Full Disk Access to operate.\n\nPlease try using System Preferences to allow the UrBackup Client application Full Disk Access.\n\nSystem Preferences will open when you press OK.";
+        }
+        
+        // Use CFUserNotification which doesn't conflict with wxWidgets event loop
+        CFOptionFlags responseFlags;
+        CFUserNotificationDisplayAlert(
+            0,                                  // timeout (0 = no timeout)
+            kCFUserNotificationCautionAlertLevel,
+            NULL,                               // iconURL
+            NULL,                               // soundURL
+            NULL,                               // localizationURL
+            (__bridge CFStringRef)messageText,
+            (__bridge CFStringRef)informativeText,
+            CFSTR("OK"),                        // defaultButtonTitle
+            NULL,                               // alternateButtonTitle
+            NULL,                               // otherButtonTitle
+            &responseFlags
+        );
 //        Open System Preferences
         NSWorkspace *workspace = [[NSWorkspace alloc] init];
         [workspace openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"]];

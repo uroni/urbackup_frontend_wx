@@ -433,11 +433,11 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 	{
 		if (watoi(internet_server_port) == 55415 && !internet_server_url.empty())
 		{
-			internet_server_url = "urbackup://" + internet_server_url;
+			internet_server_url = L"urbackup://" + internet_server_url;
 		}
 		else if(!internet_server_url.empty() && !internet_server_port.empty())
 		{
-			internet_server_url = "urbackup://" + internet_server_url + ":" + internet_server_port;
+			internet_server_url = L"urbackup://" + internet_server_url + L":" + internet_server_port;
 		}
 	}
 
@@ -787,11 +787,11 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	std::string s_data;
 
 	s_data += std::string("internet_mode_enabled=")+nconvert(internet_mode_enabled)+"\n";
-	s_data += std::string("internet_server=")+ internet_server.ToUTF8() + "\n";
+	s_data += std::string("internet_server=")+ std::string(internet_server.ToUTF8()) + "\n";
 	s_data += std::string("internet_server_port=") + nconvert(l_internet_server_port) + "\n";
-	s_data += std::string("internet_server_proxy=") + internet_server_proxy.ToUTF8() + "\n";
-	s_data += std::string("internet_authkey=") + internet_authkey.ToUTF8() + "\n";
-	s_data += std::string("computername=") + computername.ToUTF8() + "\n";
+	s_data += std::string("internet_server_proxy=") + std::string(internet_server_proxy.ToUTF8()) + "\n";
+	s_data += std::string("internet_authkey=") + std::string(internet_authkey.ToUTF8()) + "\n";
+	s_data += std::string("computername=") + std::string(computername.ToUTF8()) + "\n";
 
 	int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
 
@@ -807,7 +807,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 				old_use!=convert(it->second.use) ) )  
 		{
 			std::string key(wxString(it->first).ToUTF8());
-			s_data += key + ".client=" + wxString(it->second.value_client).ToUTF8() + "\n";
+			s_data += key + ".client=" + std::string(wxString(it->second.value_client).ToUTF8()) + "\n";
 			s_data += key + ".use=" + nconvert(it->second.use) + "\n";
 			int64 use_lm = 0;
 			std::wstring old_use_lm_str;
@@ -988,24 +988,24 @@ void Settings::OnCtlChange(wxCommandEvent & event)
 
 std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)
 {
-	if (key == "update_freq_incr")
+	if (key == L"update_freq_incr")
 	{
 		return convert(watoi(val) / 60.f / 60.f);
 	}
-	else if (key == "update_freq_full")
+	else if (key == L"update_freq_full")
 	{
 		return convert(watoi(val) / 24 / 60 / 60);
 	}
-	else if (key == "internet_speed")
+	else if (key == L"internet_speed")
 	{
 		return convert(watoi(val) / (1024 / 8));
 	}
-	else if (key == "local_speed")
+	else if (key == L"local_speed")
 	{
 		return convert(watoi(val) / ((1024*1024) / 8));
 	}
-	else if (key == "update_freq_image_full"
-		|| key=="update_freq_image_incr")
+	else if (key == L"update_freq_image_full"
+		|| key==L"update_freq_image_incr")
 	{
 		int ret = watoi(val) * 24 * 60 * 60;
 		if (!m_checkBox1->GetValue()
@@ -1015,7 +1015,7 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 		}
 		return convert(ret);
 	}
-	else if (key == "startup_backup_delay")
+	else if (key == L"startup_backup_delay")
 	{
 		return convert(watoi(val) / 60);
 	}
@@ -1025,30 +1025,30 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 
 std::wstring Settings::transformValFromUI(const std::wstring & key, const std::wstring & val)
 {
-	if (key == "update_freq_incr")
+	if (key == L"update_freq_incr")
 	{
 		return convert(watoi(val) * 60.f * 60.f);
 	}
-	else if (key == "update_freq_full")
+	else if (key == L"update_freq_full")
 	{
 		return convert(watoi(val) * 24 * 60 * 60);
 	}
-	else if (key == "internet_speed")
+	else if (key == L"internet_speed")
 	{
 		return convert(watoi(val) * (1024 / 8) );
 	}
-	else if (key == "local_speed")
+	else if (key == L"local_speed")
 	{
 		return convert(watoi(val) * ((1024*1024) / 8));
 	}
-	else if (key == "update_freq_image_full"
-		|| key=="update_freq_image_incr")
+	else if (key == L"update_freq_image_full"
+		|| key==L"update_freq_image_incr")
 	{
 		int ret = watoi(val) * 24 * 60 * 60;
 		m_checkBox1->SetValue(ret > 0);
 		return convert(ret);
 	}
-	else if (key == "startup_backup_delay")
+	else if (key == L"startup_backup_delay")
 	{
 		return convert(watoi(val) * 60);
 	}
