@@ -34,6 +34,7 @@
 #include <wx/filename.h>
 #include <wx/log.h>
 #include <wx/socket.h>
+#include <thread>
 
 #ifndef _WIN32
 #include "../config.h"
@@ -48,6 +49,11 @@
 #include "SelectWindowsComponents.h"
 #include "SelectRestoreWindowsComponents.h"
 #include <Shlobj.h>
+#define SECURITY_WIN32
+#include <Security.h>
+#include <winnetwk.h>
+#pragma comment(lib, "Secur32.lib")
+#pragma comment(lib, "Mpr.lib")
 #endif
 
 #include <wx/apptrait.h>
@@ -585,6 +591,150 @@ namespace
 
 		return wxEmptyString;
 	}
+
+	bool smbMounted = false;
+
+	bool isSmbShareAlreadyMounted(const std::string& username)
+	{
+		// Check if \\127.0.0.1\home is already mounted to any drive letter
+		for (char letter = 'D'; letter <= 'Z'; ++letter)
+		{
+			std::string drive = std::string(1, letter) + ":";
+			wchar_t remoteName[MAX_PATH];
+			DWORD remoteNameLen = MAX_PATH;
+			DWORD result = WNetGetConnectionW(ConvertToUnicode(drive).c_str(), remoteName, &remoteNameLen);
+			if (result == NO_ERROR)
+			{
+				std::wstring remoteNameStr(remoteName);
+				// Case-insensitive compare
+				if (_wcsicmp(remoteNameStr.c_str(), L"\\\\127.0.0.1\\Remote files") == 0)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	std::string findFreeDriveLetter()
+	{
+		// Get bitmask of all logical drives
+		DWORD usedDrives = GetLogicalDrives();
+		
+		// Check from Z: down to D: for a free drive letter
+		for (char letter = 'Z'; letter >= 'D'; --letter)
+		{
+			int driveIndex = letter - 'A';
+			// Check if drive is in logical drives bitmask
+			if ((usedDrives & (1 << driveIndex)) != 0)
+			{
+				continue;
+			}
+			
+			// Also check for network mappings that might not appear in GetLogicalDrives()
+			std::wstring drive = std::wstring(1, letter) + L":";
+			wchar_t remoteName[MAX_PATH];
+			DWORD remoteNameLen = MAX_PATH;
+			DWORD result = WNetGetConnectionW(drive.c_str(), remoteName, &remoteNameLen);
+			if (result == NO_ERROR || result == ERROR_CONNECTION_UNAVAIL)
+			{
+				// Drive is mapped to a network resource
+				continue;
+			}
+			
+			return std::string(1, letter) + ":";
+		}
+		return "";
+	}
+
+	void mountSmbThread(std::string fullUsernameHex)
+	{
+		// Get password file path
+		std::string pwFilePath = "smbpw/" + fullUsernameHex + ".dat";
+		if (!FileExists(pwFilePath))
+		{
+			return;
+		}
+
+		// Find a free drive letter
+		std::string driveLetter = findFreeDriveLetter();
+		if (driveLetter.empty())
+		{
+			return;
+		}
+
+		// Get absolute path to password file
+		wchar_t currentDir[MAX_PATH];
+		GetCurrentDirectoryW(MAX_PATH, currentDir);
+		std::wstring pwFilePathAbsolute = std::wstring(currentDir) + L"\\" + ConvertToUnicode(pwFilePath);
+
+		// Build PowerShell script (escape inner quotes with \" for command-line parsing)
+		std::wstring psScript = 
+			L"$cred = Get-Content \\\"" + pwFilePathAbsolute + L"\\\" | % { $u,$p = $_ -split \\\":\\\"; New-Object PSCredential $u, (ConvertTo-SecureString $p -AsPlainText -Force) }; " +
+			L"New-SmbMapping -RemotePath \\\"\\\\127.0.0.1\\Remote files\\\" -LocalPath \\\"" + ConvertToUnicode(driveLetter) + L"\\\" -TcpPort 35624 "
+			"-Credential $cred -RequireIntegrity $false -RequirePrivacy $false -TransportType TCP -CompressNetworkTraffic $false "
+			"-Persistent $true";
+
+		// Execute PowerShell
+		STARTUPINFOW sStartInfo = {};
+		sStartInfo.cb = sizeof(STARTUPINFOW);
+		sStartInfo.wShowWindow = SW_HIDE;
+		sStartInfo.dwFlags = STARTF_USESHOWWINDOW;
+
+		PROCESS_INFORMATION sProcessInfo = {};
+
+		std::wstring cmdLine = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"" + psScript + L"\"";
+
+		CreateProcessW(nullptr, const_cast<LPWSTR>(cmdLine.c_str()),
+			nullptr, nullptr, FALSE,
+			CREATE_NO_WINDOW, nullptr, nullptr, &sStartInfo, &sProcessInfo);
+
+		if (sProcessInfo.hProcess != nullptr)
+		{
+			WaitForSingleObject(sProcessInfo.hProcess, INFINITE);
+			CloseHandle(sProcessInfo.hProcess);
+			CloseHandle(sProcessInfo.hThread);
+		}
+	}
+
+	void mountSmb()
+	{
+		if(smbMounted)
+			return;
+
+#ifdef _WIN32
+		// Get username in DOMAIN\Username or MACHINENAME\Username format
+		wchar_t fullUserName[256];
+		DWORD fullUserNameLen = 256;
+		if (!GetUserNameExW(NameSamCompatible, fullUserName, &fullUserNameLen))
+		{
+			return;
+		}
+
+		std::wstring fullUsername(fullUserName);
+
+		// Convert to UTF-8 and then to hex
+		std::string fullUsernameUtf8 = ConvertFromWchar(fullUsername);
+		std::string fullUsernameHex = bytesToHex(fullUsernameUtf8);
+
+		std::string pwFilePath = "smbpw/" + fullUsernameHex + ".dat";
+		if (!FileExists(pwFilePath))
+			return;
+
+		std::string username = getuntil(":", getFile(pwFilePath));
+
+		// Check if SMB share is already mounted from a previous run
+		if (isSmbShareAlreadyMounted(username))
+		{
+			smbMounted = true;
+			return;
+		}
+
+		smbMounted = true;
+		std::thread mountThread(mountSmbThread, fullUsernameHex);
+		mountThread.detach();
+#endif
+	}
 }
 
 void MyTimer::Notify()
@@ -793,6 +943,11 @@ void MyTimer::Notify()
 		dialog->Destroy();
 	}
 #endif
+
+	if (status.has_server)
+	{
+		mountSmb();
+	}
 }
 
 bool MyTimer::hasCapability(int capa_bit)
