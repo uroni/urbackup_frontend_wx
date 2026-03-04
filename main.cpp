@@ -622,6 +622,7 @@ namespace
 
 	std::string findFreeDriveLetter()
 	{
+#ifdef _WIN32
 		// Get bitmask of all logical drives
 		DWORD usedDrives = GetLogicalDrives();
 		
@@ -648,6 +649,7 @@ namespace
 			
 			return std::string(1, letter) + ":";
 		}
+#endif // _WIN32
 		return "";
 	}
 
