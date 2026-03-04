@@ -596,6 +596,7 @@ namespace
 
 	bool isSmbShareAlreadyMounted(const std::string& username)
 	{
+#ifdef _WIN32
 		// Check if \\127.0.0.1\home is already mounted to any drive letter
 		for (char letter = 'D'; letter <= 'Z'; ++letter)
 		{
@@ -614,6 +615,9 @@ namespace
 			}
 		}
 		return false;
+#else
+		return false;
+#endif
 	}
 
 	std::string findFreeDriveLetter()
