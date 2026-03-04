@@ -653,6 +653,9 @@ namespace
 
 	void mountSmbThread(std::string fullUsernameHex)
 	{
+#ifndef _WIN32
+		return;
+#else // _WIN32
 		// Get password file path
 		std::string pwFilePath = "smbpw/" + fullUsernameHex + ".dat";
 		if (!FileExists(pwFilePath))
@@ -699,6 +702,7 @@ namespace
 			CloseHandle(sProcessInfo.hProcess);
 			CloseHandle(sProcessInfo.hThread);
 		}
+#endif // _WIN32
 	}
 
 	void mountSmb()
