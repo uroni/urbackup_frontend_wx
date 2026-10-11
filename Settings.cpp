@@ -18,6 +18,7 @@
 
 #include "Settings.h"
 #include "stringtools.h"
+#include <wx/dir.h>
 #include "main.h"
 #include "capa_bits.h"
 #include "TranslationHelper.h"
@@ -157,17 +158,50 @@ wxTextValidator getDigitSlashValidator(void)
 	return val;
 }
 
+std::string getFacetFilePath(int facet_id, const std::string& fn)
+{
+#ifdef _DEBUG
+	std::string root = "urbackup/";
+#elif _WIN32
+	std::string root = g_res_path + "urbackup/";
+#else
+	std::string root = VARDIR "/urbackup/";
+#endif
+
+	if (facet_id <= 0)
+	{
+		//The default facet is the one with the lowest id
+		wxDir dir(wxString::FromUTF8(root.c_str()));
+		wxString name;
+		bool cont = dir.IsOpened() && dir.GetFirst(&name, wxT("data_*"), wxDIR_DIRS);
+		while (cont)
+		{
+			long curr_id;
+			if (name.Mid(5).ToLong(&curr_id)
+				&& curr_id > 0
+				&& (facet_id <= 0 || curr_id < facet_id))
+			{
+				facet_id = static_cast<int>(curr_id);
+			}
+			cont = dir.GetNext(&name);
+		}
+
+		if (facet_id <= 0)
+		{
+			//Backend without client facets
+			return root + "data/" + fn;
+		}
+	}
+
+	return root + "data_" + nconvert(facet_id) + "/" + fn;
+}
+
 namespace
 {
+	//File with the settings that are the same for all servers
 	std::string settingsFilePath(const std::string& fn)
 	{
-#ifdef _DEBUG
-		return "urbackup/data/" + fn;
-#elif _WIN32
-		return g_res_path + "urbackup/data/" + fn;
-#else
-		return VARDIR "/urbackup/data/" + fn;
-#endif
+		return getFacetFilePath(0, fn);
 	}
 }
 
@@ -247,15 +281,19 @@ Settings::Settings(wxWindow* parent, const std::string& server_ident, bool acces
 
 		if (!selected_server.empty())
 		{
-			std::string srv_fn = settingsFilePath("settings_srv_" + selected_server + ".cfg");
-			if (wxFileExists(wxString::FromUTF8(srv_fn.c_str())))
+			//The settings of a server are in the directory of its client facet
+			int facet_id = 0;
+			for (size_t i = 0; i < server_list.entries.size(); ++i)
 			{
-				if (selected_server != primary_server)
-				{
-					//Backup settings of another server than the primary one
-					delete settings;
-					settings = new CFileSettingsReader(srv_fn);
-				}
+				if (server_list.entries[i].ident == selected_server)
+					facet_id = server_list.entries[i].id;
+			}
+			std::string srv_fn = getFacetFilePath(facet_id, "settings.cfg");
+			if (facet_id > 0
+				&& wxFileExists(wxString::FromUTF8(srv_fn.c_str())))
+			{
+				delete settings;
+				settings = new CFileSettingsReader(srv_fn);
 			}
 			else
 			{

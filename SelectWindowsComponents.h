@@ -63,10 +63,10 @@ private:
 class SelectWindowsComponents : public GUIWindowsComponents, public wxTimer
 {
 public:
-	//server: change the components of this server (settings_fn: its settings file in urbackup/data).
-	//Empty: the client's (primary server's) settings
+	//server: change the components of this server (facet_id: its client facet, which has its settings).
+	//Empty: the settings of the default facet
 	SelectWindowsComponents(wxWindow* parent, const std::string& server = std::string(),
-		const std::string& settings_fn = "settings.cfg");
+		int facet_id = 0);
 	~SelectWindowsComponents();
 
 	//Saves the selection (if it was changed)

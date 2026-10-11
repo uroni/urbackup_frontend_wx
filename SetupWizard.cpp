@@ -757,7 +757,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	}
 
 	wxMilliClock_t starttime = wxGetLocalTimeMillis();
-	while(!FileExists("urbackup/data/settings.cfg")
+	while(!FileExists(getFacetFilePath(0, "settings.cfg"))
 		&& FileExists("initial_settings.cfg") 
 		&& wxGetLocalTimeMillis()-starttime<2*60*1000)
 	{
@@ -765,7 +765,7 @@ void SetupWizard::finishSetup( EFileBackupChoice fileBackupChoice, EImageBackupC
 	}
 
 	CFileSettingsReader setupSettings("setup_wizard.cfg");
-	CFileSettingsReader backupSettings("urbackup/data/settings.cfg");
+	CFileSettingsReader backupSettings(getFacetFilePath(0, "settings.cfg"));
 	std::map<std::wstring, std::wstring> new_settings;
 	std::map<std::wstring, std::wstring> new_setup_settings;
 

@@ -43,8 +43,8 @@ private:
 	std::vector<SBackupDir> dirs_group;
 	std::vector<SBackupDir> dirs_home;
 	std::vector<SBackupDir> dirs_client;
-	//With several servers: default paths of the other servers (settings.cfg only has
-	//the ones of the primary server). Shown read-only
+	//With several servers: default paths of the other servers (the settings of the default
+	//client facet only have the ones of its server). Shown read-only
 	std::vector<SBackupDir> dirs_other;
 
 	bool isOtherDir(int sel);

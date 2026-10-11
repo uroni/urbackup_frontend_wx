@@ -50,13 +50,7 @@ ConfigPath::ConfigPath(wxWindow* parent)
 	mod=false;
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
-#ifdef _DEBUG
-	CFileSettingsReader settings("urbackup/data/settings.cfg");
-#elif _WIN32
-	CFileSettingsReader settings(g_res_path + "urbackup/data/settings.cfg");
-#else
-	CFileSettingsReader settings(VARDIR "/urbackup/data/settings.cfg");
-#endif
+	CFileSettingsReader settings(getFacetFilePath(0, "settings.cfg"));
 
 	default_dirs_use = 0;
 	std::string default_dirs_use_str;

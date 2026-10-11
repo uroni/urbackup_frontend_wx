@@ -512,6 +512,12 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 			}
 			rdir.servers_from_client = dir.get("servers_from_client", false).asBool();
 
+			Json::Value also_servers = dir.get("also_servers", Json::Value(Json::arrayValue));
+			for (Json::Value::ArrayIndex j = 0; j < also_servers.size(); ++j)
+			{
+				rdir.also_servers.push_back(also_servers[j].asString());
+			}
+
 			ret.push_back(rdir);
 		}
 	}

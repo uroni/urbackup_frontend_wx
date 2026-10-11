@@ -135,7 +135,7 @@ class SelectWindowsComponents;
 class ServerComponentsPage : public wxPanel
 {
 public:
-	ServerComponentsPage(wxWindow* parent, const std::string& ident, const std::string& settings_fn, bool allow_restore);
+	ServerComponentsPage(wxWindow* parent, const std::string& ident, int facet_id, bool allow_restore);
 	~ServerComponentsPage();
 
 	//Reads the components (takes a while) the first time the page is shown
@@ -144,7 +144,7 @@ public:
 
 private:
 	std::string ident;
-	std::string settings_fn;
+	int facet_id;
 	SelectWindowsComponents* components;
 	wxStaticText* m_loading;
 };

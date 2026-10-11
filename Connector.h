@@ -40,6 +40,9 @@ struct SBackupDir
 	std::vector<std::string> servers;
 	//The servers were chosen on the client (not a server's default directory)
 	bool servers_from_client;
+	//Servers that back up the same path as their default directory (if this is a path added
+	//on the client) or as a path added on the client (if this is a default directory)
+	std::vector<std::string> also_servers;
 };
 
 struct SStatus
@@ -251,7 +254,8 @@ struct SServerList
 	std::vector<SServerListEntry> entries;
 	//Identities of servers that tried to connect but are not trusted
 	std::vector<std::string> pending;
-	//Identity of the server whose settings are in settings.cfg
+	//Identity of the server of the default client facet (it has the settings that are the
+	//same for all servers, e.g. the computer name)
 	std::string primary;
 };
 
@@ -306,7 +310,7 @@ public:
 
 	static std::string getPasswordData(bool change_command, bool set_busy);
 
-	//server: open the web interface of this server (empty: the one in settings.cfg)
+	//server: open the web interface of this server (empty: the one of the default facet)
 	static std::string getAccessParameters(const std::string& tokens, const std::string& server = std::string());
 
 private:

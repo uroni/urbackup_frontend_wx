@@ -16,7 +16,7 @@ extern wxString ico_ext;
 extern wxBitmapType ico_type;
 extern std::string g_res_path;
 
-SelectWindowsComponents::SelectWindowsComponents(wxWindow* parent, const std::string& p_server, const std::string& settings_fn)
+SelectWindowsComponents::SelectWindowsComponents(wxWindow* parent, const std::string& p_server, int facet_id)
 	: GUIWindowsComponents(parent), server(p_server), changed(false)
 {
 	SetIcon(wxIcon(res_path + wxT("backup-ok.") + ico_ext, ico_type));
@@ -39,13 +39,7 @@ SelectWindowsComponents::SelectWindowsComponents(wxWindow* parent, const std::st
 	m_treeCtrl1->AssignStateImageList(selectList);
 	m_treeCtrl1->AddRoot(_("Loading..."));
 
-#ifdef _DEBUG
-	settings = new CFileSettingsReader("urbackup/data/" + settings_fn);
-#elif _WIN32
-	settings = new CFileSettingsReader(g_res_path + "urbackup/data/" + settings_fn);
-#else
-	settings = new CFileSettingsReader(VARDIR "/urbackup/data/" + settings_fn);
-#endif
+	settings = new CFileSettingsReader(getFacetFilePath(facet_id, "settings.cfg"));
 
 	use_orig = 0;
 	std::string use_orig_str;

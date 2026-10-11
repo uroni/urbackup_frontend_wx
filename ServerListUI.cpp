@@ -615,13 +615,15 @@ void ServerPathsPage::refresh()
 		}
 		else
 		{
-			for (size_t j = 0; j < dir.servers.size(); ++j)
+			std::vector<std::string> others = dir.servers;
+			others.insert(others.end(), dir.also_servers.begin(), dir.also_servers.end());
+			for (size_t j = 0; j < others.size(); ++j)
 			{
-				if (dir.servers[j] == ident)
+				if (others[j] == ident)
 					continue;
-				std::map<std::string, wxString>::const_iterator it = model->server_names.find(dir.servers[j]);
+				std::map<std::string, wxString>::const_iterator it = model->server_names.find(others[j]);
 				if (!also.empty()) also += wxT(", ");
-				also += it != model->server_names.end() ? it->second : wxString::FromUTF8(dir.servers[j].c_str());
+				also += it != model->server_names.end() ? it->second : wxString::FromUTF8(others[j].c_str());
 			}
 			if (also.empty())
 				also = wxT("-");
@@ -794,8 +796,8 @@ void ServerPathsPage::OnRemove(wxCommandEvent& event)
 }
 
 #ifdef _WIN32
-ServerComponentsPage::ServerComponentsPage(wxWindow* parent, const std::string& ident, const std::string& settings_fn, bool allow_restore)
-	: wxPanel(parent, wxID_ANY), ident(ident), settings_fn(settings_fn), components(NULL)
+ServerComponentsPage::ServerComponentsPage(wxWindow* parent, const std::string& ident, int facet_id, bool allow_restore)
+	: wxPanel(parent, wxID_ANY), ident(ident), facet_id(facet_id), components(NULL)
 {
 	wxBoxSizer* top = new wxBoxSizer(wxVERTICAL);
 	m_loading = new wxStaticText(this, wxID_ANY, _("Loading Windows components..."));
@@ -822,7 +824,7 @@ void ServerComponentsPage::load()
 
 	initCom();
 	//The dialog stays hidden; its tree is shown on this page
-	components = new SelectWindowsComponents(NULL, ident, settings_fn);
+	components = new SelectWindowsComponents(NULL, ident, facet_id);
 	wxWindow* tree = components->takeTree(this);
 	GetSizer()->Insert(1, tree, 1, wxEXPAND | wxALL, 5);
 	m_loading->Hide();
@@ -1222,15 +1224,7 @@ void ClientSettingsDialog::selectServer(int idx)
 #ifdef _WIN32
 			if (!MyTimer::hasCapability(DONT_ALLOW_COMPONENT_CONFIG, server_capa))
 			{
-				//The primary server's settings are in settings.cfg
-				std::string settings_fn = "settings.cfg";
-				std::string srv_fn = "settings_srv_" + ident + ".cfg";
-				if (ident != primary
-					&& wxFileExists(wxString::FromUTF8((g_res_path + "urbackup/data/" + srv_fn).c_str())))
-				{
-					settings_fn = srv_fn;
-				}
-				ServerComponentsPage* components_page = new ServerComponentsPage(pages, ident, settings_fn,
+				ServerComponentsPage* components_page = new ServerComponentsPage(pages, ident, entries[idx].id,
 					!MyTimer::hasCapability(DONT_ALLOW_COMPONENT_RESTORE, server_capa)
 					&& !MyTimer::hasCapability(STATUS_NO_COMPONENTS, server_capa));
 				pages->InsertPage(pos + 1, components_page, _("Components"));
@@ -1455,7 +1449,7 @@ void ClientSettingsDialog::OnOk(wxCommandEvent& event)
 	if (!m_computername->GetValue().empty()
 		&& m_computername->GetValue() != computername_orig)
 	{
-		//settings.cfg (the primary server's file) has the computer name
+		//The settings of the default facet (the primary server's) have the computer name
 		if (!Connector::updateSettings("computername=" + std::string(m_computername->GetValue().ToUTF8()) + "\n", 5000, primary))
 		{
 			wxMessageBox(_("Saving the computer name failed."), wxT("UrBackup"), wxOK | wxICON_ERROR, this);

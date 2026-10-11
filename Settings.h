@@ -23,6 +23,10 @@
 #include "FileSettingsReader.h"
 #include "ServerListUI.h"
 
+//Path of a file of a client facet of the backend (urbackup/data_<facet id>/<fn>). Each server
+//has a facet with its settings. facet_id 0: the default facet (the one with the lowest id)
+std::string getFacetFilePath(int facet_id, const std::string& fn);
+
 namespace
 {
 	const int c_use_group = 1;
