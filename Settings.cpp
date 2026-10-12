@@ -804,16 +804,16 @@ void Settings::applyGroupedLayout()
 	{
 		SettingsGrid g(m_tab_filebackups);
 		g.heading(_("Incremental file backups"));
-		g.row(m_staticText1, m_textCtrl1, m_staticText2, m_bitmapButton1);
-		g.row(m_staticText9, m_textCtrl13, NULL, m_bitmapButton13);
-		g.row(m_staticText10, m_textCtrl131, NULL, m_bitmapButton131);
+		g.row(m_staticText1, m_textCtrl1, m_staticText2, sourceChoice(m_bitmapButton1));
+		g.row(m_staticText9, m_textCtrl13, NULL, sourceChoice(m_bitmapButton13));
+		g.row(m_staticText10, m_textCtrl131, NULL, sourceChoice(m_bitmapButton131));
 		g.heading(_("Full file backups"));
-		g.row(m_staticText3, m_textCtrl2, m_staticText4, m_bitmapButton2);
-		g.row(m_staticText11, m_textCtrl132, NULL, m_bitmapButton132);
-		g.row(m_staticText12, m_textCtrl133, NULL, m_bitmapButton133);
+		g.row(m_staticText3, m_textCtrl2, m_staticText4, sourceChoice(m_bitmapButton2));
+		g.row(m_staticText11, m_textCtrl132, NULL, sourceChoice(m_bitmapButton132));
+		g.row(m_staticText12, m_textCtrl133, NULL, sourceChoice(m_bitmapButton133));
 		g.heading(_("Files"));
-		g.row(m_staticText26, m_textCtrl16, NULL, m_bitmapButton16);
-		g.row(m_staticText261, m_textCtrl161, NULL, m_bitmapButton161);
+		g.row(m_staticText26, m_textCtrl16, NULL, sourceChoice(m_bitmapButton16));
+		g.row(m_staticText261, m_textCtrl161, NULL, sourceChoice(m_bitmapButton161));
 		m_staticText30->Hide();
 		m_staticText29->Hide();
 		m_tab_filebackups->SetSizer(g.sizer(), true);
@@ -824,15 +824,15 @@ void Settings::applyGroupedLayout()
 		SettingsGrid g(m_tab_imagebackups);
 		g.row(m_checkBox1, NULL, NULL, NULL);
 		g.heading(_("Incremental image backups"));
-		g.row(m_staticText6, m_textCtrl21, m_staticText41, m_bitmapButton21);
-		g.row(m_staticText14, m_textCtrl134, NULL, m_bitmapButton134);
-		g.row(m_staticText15, m_textCtrl135, NULL, m_bitmapButton135);
+		g.row(m_staticText6, m_textCtrl21, m_staticText41, sourceChoice(m_bitmapButton21));
+		g.row(m_staticText14, m_textCtrl134, NULL, sourceChoice(m_bitmapButton134));
+		g.row(m_staticText15, m_textCtrl135, NULL, sourceChoice(m_bitmapButton135));
 		g.heading(_("Full image backups"));
-		g.row(m_staticText7, m_textCtrl22, m_staticText42, m_bitmapButton22);
-		g.row(m_staticText16, m_textCtrl136, NULL, m_bitmapButton136);
-		g.row(m_staticText17, m_textCtrl137, NULL, m_bitmapButton137);
+		g.row(m_staticText7, m_textCtrl22, m_staticText42, sourceChoice(m_bitmapButton22));
+		g.row(m_staticText16, m_textCtrl136, NULL, sourceChoice(m_bitmapButton136));
+		g.row(m_staticText17, m_textCtrl137, NULL, sourceChoice(m_bitmapButton137));
 		g.heading(_("Volumes"));
-		g.row(m_staticText301, m_textCtrl23, NULL, m_bitmapButton23);
+		g.row(m_staticText301, m_textCtrl23, NULL, sourceChoice(m_bitmapButton23));
 		m_staticText28->Hide();
 		m_tab_imagebackups->SetSizer(g.sizer(), true);
 	}
@@ -841,10 +841,10 @@ void Settings::applyGroupedLayout()
 	{
 		SettingsGrid g(m_tab_client);
 		g.heading(_("Schedule"));
-		g.row(m_staticText27, m_textCtrl17, NULL, m_bitmapButton17);
-		g.row(m_staticText281, m_textCtrl19, m_staticText291, m_bitmapButton19);
+		g.row(m_staticText27, m_textCtrl17, NULL, sourceChoice(m_bitmapButton17));
+		g.row(m_staticText281, m_textCtrl19, m_staticText291, sourceChoice(m_bitmapButton19));
 		g.heading(_("Limits"));
-		g.row(m_staticTextLocalSpeed, m_textCtrlLocalSpeed, m_staticTextLocalSpeedUnit, m_bitmapButtonLocalSpeed);
+		g.row(m_staticTextLocalSpeed, m_textCtrlLocalSpeed, m_staticTextLocalSpeedUnit, sourceChoice(m_bitmapButtonLocalSpeed));
 		m_staticText25->Hide();
 		m_textCtrl15->Hide();
 		m_tab_client->SetSizer(g.sizer(), true);
@@ -859,11 +859,11 @@ void Settings::applyGroupedLayout()
 #ifdef _WIN32
 		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 		{
-			g.row(m_staticTextInternetImage, m_checkBoxInternetImage, NULL, m_bitmapButtonInternetImage);
+			g.row(m_staticTextInternetImage, m_checkBoxInternetImage, NULL, sourceChoice(m_bitmapButtonInternetImage));
 		}
 #endif
-		g.row(m_staticTextInternetFullFile, m_checkBoxInternetFullFile, NULL, m_bitmapButtonInternetFullFile);
-		g.row(m_staticTextInternetSpeed, m_textCtrlInternetSpeed, m_staticTextInternetSpeedUnit, m_bitmapButtonInternetSpeed);
+		g.row(m_staticTextInternetFullFile, m_checkBoxInternetFullFile, NULL, sourceChoice(m_bitmapButtonInternetFullFile));
+		g.row(m_staticTextInternetSpeed, m_textCtrlInternetSpeed, m_staticTextInternetSpeedUnit, sourceChoice(m_bitmapButtonInternetSpeed));
 		wxWindow* connection_ctrls[] = { m_staticTextInternetEnabled, m_checkBoxInternetEnabled,
 			m_staticInternetServer, m_textCtrlInternetServer, m_staticInternetServerProxy, m_textCtrlInternetServerProxy,
 			m_staticInternetServerAuthkey, m_textCtrlInternetServerAuthkey,
@@ -1442,23 +1442,98 @@ namespace
 
 void Settings::OnBitmapBtnClick(wxCommandEvent & event)
 {
-	std::wstring& key = button_ids[event.GetId()];
+	std::wstring key = button_ids[event.GetId()];
 	SSetting& setting = settings_info[key];
 
 	int use = setting.use;
 
+	//The server's value for this computer only if the server has one. Selecting it without
+	//would save a setting without a value
 	if (use == c_use_group)
-		use = c_use_value;
+		use = setting.has_home ? c_use_value : c_use_value_client;
 	else if (use == c_use_value)
 		use = c_use_value_client;
 	else
 		use = c_use_group;
+
+	setSettingSource(key, use);
+}
+
+void Settings::OnSourceChoice(wxCommandEvent & event)
+{
+	std::wstring key = choice_ids[event.GetId()];
+	SSetting& setting = settings_info[key];
+
+	int sel = event.GetSelection();
+	if (sel < 0 || sel >= static_cast<int>(setting.choice_uses.size())
+		|| setting.choice_uses[sel] == setting.use)
+		return;
+
+	setSettingSource(key, setting.choice_uses[sel]);
+}
+
+wxWindow* Settings::sourceChoice(wxBitmapButton* btn)
+{
+	std::map<wxWindowID, std::wstring>::iterator it = button_ids.find(btn->GetId());
+	if (it == button_ids.end())
+		return btn;
+
+	SSetting& setting = settings_info[it->second];
+
+	wxArrayString labels;
+	labels.Add(_("Server default"));
+	setting.choice_uses.push_back(c_use_group);
+	if (setting.has_home || setting.use == c_use_value)
+	{
+		labels.Add(_("Server, for this computer"));
+		setting.choice_uses.push_back(c_use_value);
+	}
+	labels.Add(_("Set on this computer"));
+	setting.choice_uses.push_back(c_use_value_client);
+
+	setting.choice = new wxChoice(btn->GetParent(), wxID_ANY, wxDefaultPosition, wxDefaultSize, labels);
+	setting.choice->SetToolTip(_("Where the value comes from: the server's default (the same for all clients in the group), "
+		"a value set on the server for this computer, or a value set here on this computer."));
+	for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+	{
+		if (setting.choice_uses[i] == setting.use)
+			setting.choice->SetSelection(static_cast<int>(i));
+	}
+	choice_ids[setting.choice->GetId()] = it->second;
+	setting.choice->Bind(wxEVT_CHOICE, &Settings::OnSourceChoice, this);
+	btn->Hide();
+	return setting.choice;
+}
+
+void Settings::setSettingSource(const std::wstring & key, int use)
+{
+	SSetting& setting = settings_info[key];
 
 	std::wstring val;
 	if (use == c_use_value_client)
 	{
 		setting.btn->SetBitmapLabel(fa_client_img_scaled);
 		setSourceTooltip(setting.btn, c_use_value_client);
+		if (setting.value_client.empty())
+		{
+			//No value set on this computer yet: start with the value used so far
+			setting.value_client = setting.use == c_use_value ? setting.value_home : setting.value_group;
+		}
+		if (setting.value_client.empty())
+		{
+			//Else with the value that is shown
+			wxCheckBox* shown_checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
+			if (shown_checkBox != NULL)
+			{
+				setting.value_client = convert(shown_checkBox->GetValue());
+			}
+			wxTextCtrl* shown_textCtrl = dynamic_cast<wxTextCtrl*>(setting.ctrl);
+			if (shown_textCtrl != NULL
+				&& !shown_textCtrl->GetValue().Trim().empty())
+			{
+				setting.value_client = transformValFromUI(key, shown_textCtrl->GetValue().ToStdWstring());
+			}
+		}
 		val = setting.value_client;
 	}
 	else if (use == c_use_group)
@@ -1474,8 +1549,16 @@ void Settings::OnBitmapBtnClick(wxCommandEvent & event)
 		val = setting.value_home;
 	}
 
-
 	setting.use = use;
+
+	if (setting.choice != NULL)
+	{
+		for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+		{
+			if (setting.choice_uses[i] == use)
+				setting.choice->SetSelection(static_cast<int>(i));
+		}
+	}
 
 	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
 	if (checkBox != NULL)
@@ -1515,6 +1598,15 @@ void Settings::OnCtlChange(wxCommandEvent & event)
 
 	setting.btn->SetBitmapLabel(fa_client_img_scaled);
 	setSourceTooltip(setting.btn, c_use_value_client);
+
+	if (setting.choice != NULL)
+	{
+		for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+		{
+			if (setting.choice_uses[i] == c_use_value_client)
+				setting.choice->SetSelection(static_cast<int>(i));
+		}
+	}
 }
 
 std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)
@@ -1538,9 +1630,9 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	else if (key == L"update_freq_image_full"
 		|| key==L"update_freq_image_incr")
 	{
-		int ret = watoi(val) * 24 * 60 * 60;
-		if (!m_checkBox1->GetValue()
-			&& ret>0)
+		//Seconds to days. A negative interval is a disabled one (shown by the check box)
+		int ret = watoi(val) / (24 * 60 * 60);
+		if (ret < 0)
 		{
 			ret *= -1;
 		}
@@ -1621,7 +1713,12 @@ void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, 
 	SSetting& setting = settings_info[key];
 	setting.btn = btn;
 	setting.ctrl = ctrl;
+	setting.choice = NULL;
 	setting.use = use;
+	{
+		std::wstring value_home;
+		setting.has_home = settings->getValue(key + L".home", &value_home) && !value_home.empty();
+	}
 	if (!settings->getValue(key + L".client", &setting.value_client))
 	{
 		settings->getValue(key, &setting.value_client);

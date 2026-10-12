@@ -85,15 +85,27 @@ private:
 	std::wstring transformValFromUI(const std::wstring& key, const std::wstring& val);
 
 	void setSettingsSwitch(const std::wstring& key, wxBitmapButton* btn, wxWindow* ctrl);
+	//Selects where the value of a setting comes from (c_use_*) and shows that value
+	void setSettingSource(const std::wstring& key, int use);
+	//A choice with the sources of the setting of this button, to show instead of the button
+	wxWindow* sourceChoice(wxBitmapButton* btn);
+	void OnSourceChoice(wxCommandEvent& event);
 
 	std::map<wxWindowID, std::wstring> button_ids;
 	std::map<wxWindowID, std::wstring> ctrl_ids;
+	std::map<wxWindowID, std::wstring> choice_ids;
 
 	struct SSetting
 	{
 		wxBitmapButton* btn;
 		wxWindow* ctrl;
+		//Only with the grouped layout
+		wxChoice* choice;
+		//c_use_* of each entry of choice
+		std::vector<int> choice_uses;
 		int use;
+		//The server has a value for this computer (value_home)
+		bool has_home;
 		std::wstring value_group;
 		std::wstring value_home;
 		std::wstring value_client;
