@@ -341,6 +341,7 @@
     <ClCompile Include="SelectRestoreWindowsComponents.cpp" />
     <ClCompile Include="SelectWindowsComponents.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="ServerListUI.cpp" />
     <ClCompile Include="SetupWizard.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="stringtools.cpp" />
@@ -369,6 +370,7 @@
     <ClInclude Include="SelectRestoreWindowsComponents.h" />
     <ClInclude Include="SelectWindowsComponents.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="ServerListUI.h" />
     <ClInclude Include="SetupWizard.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="stringtools.h" />

@@ -36,17 +36,29 @@ public:
 	void OnNameTextChange(wxCommandEvent &evt);
 	void OnGroupChange( wxCommandEvent& evt );
 	void OnClickSourceSwitch(wxCommandEvent& event);
+	void OnServerToggled(wxCommandEvent& event);
 	
 
 private:
 	std::vector<SBackupDir> dirs_group;
 	std::vector<SBackupDir> dirs_home;
 	std::vector<SBackupDir> dirs_client;
+	//With several servers: default paths of the other servers (the settings of the default
+	//client facet only have the ones of its server). Shown read-only
+	std::vector<SBackupDir> dirs_other;
+
+	bool isOtherDir(int sel);
 
 	void switchBitmapLabel();
 	void renderListBoxContent();
 
 	SBackupDir& getSel(int sel);
+	void renderServers();
+
+	//"Back up to": servers of the selected path, only with several servers
+	wxStaticText* servers_label;
+	wxCheckListBox* servers_list;
+	std::vector<std::string> server_idents;
 
 	std::wstring getDefaultDirname(const std::wstring &path);
 	bool findPathName(const std::wstring &pn);

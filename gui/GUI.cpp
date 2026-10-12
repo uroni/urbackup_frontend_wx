@@ -83,6 +83,8 @@ wxSize findDlgUnitY(wxWindow* parent, wxSize orig)
 
 ///////////////////////////////////////////////////////////////////////////
 
+int GUISettings::capa_override = -1;
+
 GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
@@ -94,6 +96,8 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 
 	m_tab_filebackups=new wxPanel(m_notebook, wxID_ANY);
 	m_tab_imagebackups=NULL;
+	//Only created with the image backups tab
+	m_checkBox1=NULL;
 	m_tab_client=new wxPanel(m_notebook, wxID_ANY);
 	m_tab_internet=new wxPanel(m_notebook, wxID_ANY);;
 
@@ -102,7 +106,7 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	wxBoxSizer* bSizer_client=new wxBoxSizer( wxVERTICAL );
 	wxBoxSizer* bSizer_internet=new wxBoxSizer( wxVERTICAL );
 
-	capa = timer?timer->getCapa():Connector::getCapabilities();
+	capa = capa_override >= 0 ? capa_override : (timer?timer->getCapa():Connector::getCapabilities());
 
 #ifdef _WIN32
 	if( !MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa) )
@@ -724,7 +728,10 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 GUISettings::~GUISettings()
 {
 	// Disconnect Events
-	m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
+	if (m_checkBox1 != NULL)
+	{
+		m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUISettings::OnDisableImageBackups ), NULL, this );
+	}
 	m_button1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnOkClick ), NULL, this );
 	m_button2->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUISettings::OnAbortClick ), NULL, this );
 	

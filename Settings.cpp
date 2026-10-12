@@ -18,9 +18,17 @@
 
 #include "Settings.h"
 #include "stringtools.h"
+#include <wx/dir.h>
 #include "main.h"
 #include "capa_bits.h"
 #include "TranslationHelper.h"
+#include "ConfigPath.h"
+#include "Logs.h"
+#ifdef _WIN32
+#include "SelectWindowsComponents.h"
+#include "SelectRestoreWindowsComponents.h"
+HRESULT initCom();
+#endif
 
 #include <wx/valtext.h>
 
@@ -150,29 +158,66 @@ wxTextValidator getDigitSlashValidator(void)
 	return val;
 }
 
-Settings::Settings(wxWindow* parent) : GUISettings(parent),
-	init_complete(false)
+std::string getFacetFilePath(int facet_id, const std::string& fn)
 {
-	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 #ifdef _DEBUG
-	settings=new CFileSettingsReader("urbackup/data/settings.cfg");
+	std::string root = "urbackup/";
 #elif _WIN32
-	settings=new CFileSettingsReader(g_res_path+"urbackup/data/settings.cfg");
+	std::string root = g_res_path + "urbackup/";
 #else
-	settings = new CFileSettingsReader(VARDIR "/urbackup/data/settings.cfg");
+	std::string root = VARDIR "/urbackup/";
 #endif
 
+	if (facet_id <= 0)
+	{
+		//The default facet is the one with the lowest id
+		wxDir dir(wxString::FromUTF8(root.c_str()));
+		wxString name;
+		bool cont = dir.IsOpened() && dir.GetFirst(&name, wxT("data_*"), wxDIR_DIRS);
+		while (cont)
+		{
+			long curr_id;
+			if (name.Mid(5).ToLong(&curr_id)
+				&& curr_id > 0
+				&& (facet_id <= 0 || curr_id < facet_id))
+			{
+				facet_id = static_cast<int>(curr_id);
+			}
+			cont = dir.GetNext(&name);
+		}
+
+		if (facet_id <= 0)
+		{
+			//Backend without client facets
+			return root + "data/" + fn;
+		}
+	}
+
+	return root + "data_" + nconvert(facet_id) + "/" + fn;
+}
+
+namespace
+{
+	//File with the settings that are the same for all servers
+	std::string settingsFilePath(const std::string& fn)
+	{
+		return getFacetFilePath(0, fn);
+	}
+}
+
+bool Settings::checkTrayAccessPw(wxWindow* parent)
+{
+	CFileSettingsReader settings(settingsFilePath("settings.cfg"));
 	std::wstring client_settings_tray_access_pw;
-	if (getSettingsValue(L"client_settings_tray_access_pw", &client_settings_tray_access_pw, settings)
+	if (getSettingsValue(L"client_settings_tray_access_pw", &client_settings_tray_access_pw, &settings)
 		&& !client_settings_tray_access_pw.empty())
 	{
 		do
 		{
-			wxPasswordEntryDialog* pwEntry = new wxPasswordEntryDialog(this, _("Please enter the tray access text"));
+			wxPasswordEntryDialog* pwEntry = new wxPasswordEntryDialog(parent, _("Please enter the tray access text"));
 			if (pwEntry->ShowModal() != wxID_OK)
 			{
-				Close();
-				return;
+				return false;
 			}
 
 			if (pwEntry->GetValue() == client_settings_tray_access_pw)
@@ -181,15 +226,80 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 			}
 			else
 			{
-				wxDialog* pwWrong = new wxDialog(this, -1, _("Tray access text wrong. Please retry or cancel."));
+				wxDialog* pwWrong = new wxDialog(parent, -1, _("Tray access text wrong. Please retry or cancel."));
 				if (pwWrong->ShowModal() != wxID_OK)
 				{
-					Close();
-					return;
+					return false;
 				}
 
 			}
 		} while (true);
+	}
+	return true;
+}
+
+wxString Settings::currentComputerName()
+{
+	CFileSettingsReader settings(settingsFilePath("settings.cfg"));
+	std::wstring t;
+	if (settings.getValue(L"computername", &t))
+	{
+		return t;
+	}
+	return ConvertToWX(getServerName());
+}
+
+Settings::Settings(wxWindow* parent, const std::string& server_ident, bool access_pw_checked, bool p_per_server) : GUISettings(parent),
+	init_complete(false), servers_panel(NULL), m_serverChoice(NULL), per_server(p_per_server), not_received(false)
+{
+	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
+	settings=new CFileSettingsReader(settingsFilePath("settings.cfg"));
+
+	if (!access_pw_checked && !checkTrayAccessPw(this))
+	{
+		Close();
+		return;
+	}
+
+	SServerList server_list = Connector::getServerList();
+	//The selected server has not sent its settings to this client yet
+	bool settings_not_received = false;
+	if (server_list.supported)
+	{
+		primary_server = server_list.primary;
+		selected_server = server_ident;
+		if (selected_server.empty())
+		{
+			selected_server = primary_server;
+		}
+		if (selected_server.empty())
+		{
+			//No server sent settings yet. Show the first one
+			for (size_t i = 0; i < server_list.entries.size() && selected_server.empty(); ++i)
+				selected_server = server_list.entries[i].ident;
+		}
+
+		if (!selected_server.empty())
+		{
+			//The settings of a server are in the directory of its client facet
+			int facet_id = 0;
+			for (size_t i = 0; i < server_list.entries.size(); ++i)
+			{
+				if (server_list.entries[i].ident == selected_server)
+					facet_id = server_list.entries[i].id;
+			}
+			std::string srv_fn = getFacetFilePath(facet_id, "settings.cfg");
+			if (facet_id > 0
+				&& wxFileExists(wxString::FromUTF8(srv_fn.c_str())))
+			{
+				delete settings;
+				settings = new CFileSettingsReader(srv_fn);
+			}
+			else
+			{
+				settings_not_received = true;
+			}
+		}
 	}
 
 	std::wstring t;
@@ -523,8 +633,355 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 #endif
 	m_textCtrl19->SetValidator(wxTextValidator(wxFILTER_DIGITS));
 	m_textCtrl15->SetValidator(getPathValidator());
-	Show(true);
+
+	if (server_list.supported && per_server)
+	{
+		//The server list and the computer name are in the client settings window
+		const SServerListEntry* entry = NULL;
+		for (size_t i = 0; i < server_list.entries.size(); ++i)
+		{
+			if (server_list.entries[i].ident == selected_server)
+				entry = &server_list.entries[i];
+		}
+		if (entry != NULL)
+		{
+			SetTitle(wxString::Format(_("Backup settings of %s"), ServersPanel::displayName(*entry)));
+		}
+
+		//The client settings window shows the notice and the pages of this dialog
+		not_received = settings_not_received;
+
+		applyGroupedLayout();
+
+		//Backup over internet only matters for a server reached via internet
+		if (entry != NULL && !entry->internet)
+		{
+			int internet_page = m_notebook->FindPage(m_tab_internet);
+			if (internet_page >= 0)
+				m_notebook->RemovePage(internet_page);
+			m_tab_internet->Hide();
+		}
+
+		Layout();
+		Fit();
+	}
+	else if (server_list.supported)
+	{
+		//Each server has its own connection settings in the server list. The internet
+		//tab keeps the backup settings that apply to internet backups
+		servers_panel = new ServersPanel(m_notebook, server_list);
+		int internet_page = m_notebook->FindPage(m_tab_internet);
+		m_notebook->InsertPage(internet_page >= 0 ? internet_page : m_notebook->GetPageCount(), servers_panel, _("Servers"));
+
+		wxWindow* connection_ctrls[] = { m_staticTextInternetEnabled, m_checkBoxInternetEnabled,
+			m_staticInternetServer, m_textCtrlInternetServer, m_staticInternetServerProxy, m_textCtrlInternetServerProxy,
+			m_staticInternetServerAuthkey, m_textCtrlInternetServerAuthkey,
+			m_staticTextInternetCompress, m_checkBoxInternetCompress, m_bitmapButtonInternetCompress,
+			m_staticTextInternetEncrypt, m_checkBoxInternetEncrypt, m_bitmapButtonInternetEncrypt };
+		for (size_t i = 0; i < sizeof(connection_ctrls) / sizeof(connection_ctrls[0]); ++i)
+		{
+			if (connection_ctrls[i] != NULL)
+				connection_ctrls[i]->Hide();
+		}
+		m_tab_internet->Layout();
+
+		//Backup settings (intervals, retention, directories, ...) are per server
+		std::vector<SServerListEntry> choice_entries;
+		for (size_t i = 0; i < server_list.entries.size(); ++i)
+		{
+			if (!server_list.entries[i].ident.empty())
+				choice_entries.push_back(server_list.entries[i]);
+		}
+		if (choice_entries.size() > 1)
+		{
+			wxBoxSizer* sel = new wxBoxSizer(wxHORIZONTAL);
+			sel->Add(new wxStaticText(this, wxID_ANY, _("Backup settings of:")), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+			m_serverChoice = new wxChoice(this, wxID_ANY);
+			for (size_t i = 0; i < choice_entries.size(); ++i)
+			{
+				wxString label = ServersPanel::displayName(choice_entries[i]);
+				m_serverChoice->Append(label);
+				server_choice_idents.push_back(choice_entries[i].ident);
+				if (choice_entries[i].ident == selected_server)
+					m_serverChoice->SetSelection(static_cast<int>(i));
+			}
+			sel->Add(m_serverChoice, 1, wxALL, 5);
+			GetSizer()->Insert(0, sel, 0, wxEXPAND);
+			m_serverChoice->Bind(wxEVT_CHOICE, &Settings::OnServerChoice, this);
+
+			if (settings_not_received)
+			{
+				wxStaticText* notice = new wxStaticText(this, wxID_ANY,
+					_("This server has not sent its settings to this client yet, so the values below may be "
+					"those of another server. They arrive when the client's settings are saved on the server "
+					"or the server restarts."));
+				notice->SetForegroundColour(wxColour(192, 0, 0));
+				notice->Wrap(wxDLG_UNIT(this, wxSize(330, -1)).GetWidth());
+				GetSizer()->Insert(1, notice, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 5);
+			}
+
+			if (selected_server != primary_server)
+			{
+				//The computer name applies to all servers
+				m_textCtrl15->Disable();
+			}
+		}
+
+		Layout();
+		Fit();
+	}
+
+	if (!per_server)
+	{
+		addWindowButtons();
+		Show(true);
+	}
+
 	init_complete = true;
+}
+
+namespace
+{
+	//Grouped layout of a settings page: label, control (with its unit), lock button in aligned columns
+	class SettingsGrid
+	{
+	public:
+		SettingsGrid(wxWindow* parent)
+			: parent(parent), grid(new wxFlexGridSizer(3, 0, 0)), rows(0)
+		{}
+
+		void heading(const wxString& text)
+		{
+			if (rows > 0)
+			{
+				//Space between the groups
+				for (int i = 0; i < 3; ++i)
+					grid->Add(0, 10);
+			}
+			wxStaticText* heading = new wxStaticText(parent, wxID_ANY, text);
+			wxFont font = heading->GetFont();
+			font.SetWeight(wxFONTWEIGHT_BOLD);
+			heading->SetFont(font);
+			grid->Add(heading, 0, wxLEFT | wxRIGHT | wxTOP, 5);
+			for (int i = 0; i < 2; ++i)
+				grid->Add(0, 0);
+			++rows;
+		}
+
+		void row(wxWindow* label, wxWindow* ctrl, wxWindow* unit, wxWindow* btn)
+		{
+			if (label != NULL)
+				grid->Add(label, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+			else
+				grid->Add(0, 0);
+
+			wxBoxSizer* ctrl_unit = new wxBoxSizer(wxHORIZONTAL);
+			if (ctrl != NULL)
+				ctrl_unit->Add(ctrl, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+			if (unit != NULL)
+				ctrl_unit->Add(unit, 0, wxALIGN_CENTER_VERTICAL | wxTOP | wxBOTTOM | wxRIGHT, 5);
+			grid->Add(ctrl_unit, 0, wxALIGN_CENTER_VERTICAL);
+
+			if (btn != NULL)
+				grid->Add(btn, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+			else
+				grid->Add(0, 0);
+			++rows;
+		}
+
+		wxSizer* sizer() { return grid; }
+
+	private:
+		wxWindow* parent;
+		wxFlexGridSizer* grid;
+		int rows;
+	};
+}
+
+void Settings::applyGroupedLayout()
+{
+	//File backups: interval and number of backups kept, grouped by incremental and full
+	{
+		SettingsGrid g(m_tab_filebackups);
+		g.heading(_("Incremental file backups"));
+		g.row(m_staticText1, m_textCtrl1, m_staticText2, sourceChoice(m_bitmapButton1));
+		g.row(m_staticText9, m_textCtrl13, NULL, sourceChoice(m_bitmapButton13));
+		g.row(m_staticText10, m_textCtrl131, NULL, sourceChoice(m_bitmapButton131));
+		g.heading(_("Full file backups"));
+		g.row(m_staticText3, m_textCtrl2, m_staticText4, sourceChoice(m_bitmapButton2));
+		g.row(m_staticText11, m_textCtrl132, NULL, sourceChoice(m_bitmapButton132));
+		g.row(m_staticText12, m_textCtrl133, NULL, sourceChoice(m_bitmapButton133));
+		g.heading(_("Files"));
+		g.row(m_staticText26, m_textCtrl16, NULL, sourceChoice(m_bitmapButton16));
+		g.row(m_staticText261, m_textCtrl161, NULL, sourceChoice(m_bitmapButton161));
+		m_staticText30->Hide();
+		m_staticText29->Hide();
+		m_tab_filebackups->SetSizer(g.sizer(), true);
+	}
+#ifdef _WIN32
+	if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+	{
+		SettingsGrid g(m_tab_imagebackups);
+		g.row(m_checkBox1, NULL, NULL, NULL);
+		g.heading(_("Incremental image backups"));
+		g.row(m_staticText6, m_textCtrl21, m_staticText41, sourceChoice(m_bitmapButton21));
+		g.row(m_staticText14, m_textCtrl134, NULL, sourceChoice(m_bitmapButton134));
+		g.row(m_staticText15, m_textCtrl135, NULL, sourceChoice(m_bitmapButton135));
+		g.heading(_("Full image backups"));
+		g.row(m_staticText7, m_textCtrl22, m_staticText42, sourceChoice(m_bitmapButton22));
+		g.row(m_staticText16, m_textCtrl136, NULL, sourceChoice(m_bitmapButton136));
+		g.row(m_staticText17, m_textCtrl137, NULL, sourceChoice(m_bitmapButton137));
+		g.heading(_("Volumes"));
+		g.row(m_staticText301, m_textCtrl23, NULL, sourceChoice(m_bitmapButton23));
+		m_staticText28->Hide();
+		m_tab_imagebackups->SetSizer(g.sizer(), true);
+	}
+#endif
+	//Client tab: only schedule and speed; the computer name is in the client settings window
+	{
+		SettingsGrid g(m_tab_client);
+		g.heading(_("Schedule"));
+		g.row(m_staticText27, m_textCtrl17, NULL, sourceChoice(m_bitmapButton17));
+		g.row(m_staticText281, m_textCtrl19, m_staticText291, sourceChoice(m_bitmapButton19));
+		g.heading(_("Limits"));
+		g.row(m_staticTextLocalSpeed, m_textCtrlLocalSpeed, m_staticTextLocalSpeedUnit, sourceChoice(m_bitmapButtonLocalSpeed));
+		m_staticText25->Hide();
+		m_textCtrl15->Hide();
+		m_tab_client->SetSizer(g.sizer(), true);
+		int page = m_notebook->FindPage(m_tab_client);
+		if (page >= 0)
+			m_notebook->SetPageText(page, _("Schedule & limits"));
+	}
+	//Internet tab: only what is backed up over internet; the connection is in the server list
+	{
+		SettingsGrid g(m_tab_internet);
+		g.heading(_("Backups over internet"));
+#ifdef _WIN32
+		if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
+		{
+			g.row(m_staticTextInternetImage, m_checkBoxInternetImage, NULL, sourceChoice(m_bitmapButtonInternetImage));
+		}
+#endif
+		g.row(m_staticTextInternetFullFile, m_checkBoxInternetFullFile, NULL, sourceChoice(m_bitmapButtonInternetFullFile));
+		g.row(m_staticTextInternetSpeed, m_textCtrlInternetSpeed, m_staticTextInternetSpeedUnit, sourceChoice(m_bitmapButtonInternetSpeed));
+		wxWindow* connection_ctrls[] = { m_staticTextInternetEnabled, m_checkBoxInternetEnabled,
+			m_staticInternetServer, m_textCtrlInternetServer, m_staticInternetServerProxy, m_textCtrlInternetServerProxy,
+			m_staticInternetServerAuthkey, m_textCtrlInternetServerAuthkey,
+			m_staticTextInternetCompress, m_checkBoxInternetCompress, m_bitmapButtonInternetCompress,
+			m_staticTextInternetEncrypt, m_checkBoxInternetEncrypt, m_bitmapButtonInternetEncrypt };
+		for (size_t i = 0; i < sizeof(connection_ctrls) / sizeof(connection_ctrls[0]); ++i)
+		{
+			if (connection_ctrls[i] != NULL)
+				connection_ctrls[i]->Hide();
+		}
+		m_tab_internet->SetSizer(g.sizer(), true);
+	}
+
+	//Each page as large as its content
+	m_tab_filebackups->Layout();
+	m_tab_client->Layout();
+	m_tab_internet->Layout();
+}
+
+void Settings::addWindowButtons()
+{
+	wxSizer* sizer = m_button1->GetContainingSizer();
+	if (sizer == NULL)
+		return;
+
+	size_t pos = 0;
+	if (!MyTimer::hasCapability(DONT_ALLOW_CONFIG_PATHS, capa))
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, _("Backup paths..."));
+		btn->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Settings::OnOpenPaths), NULL, this);
+		sizer->Insert(pos++, btn, 0, wxALIGN_BOTTOM | wxALL, 5);
+	}
+	if (!MyTimer::hasCapability(DONT_SHOW_LOGS, capa))
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, _("Logs..."));
+		btn->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Settings::OnOpenLogs), NULL, this);
+		sizer->Insert(pos++, btn, 0, wxALIGN_BOTTOM | wxALL, 5);
+	}
+#ifdef _WIN32
+	if (!MyTimer::hasCapability(DONT_ALLOW_COMPONENT_CONFIG, capa))
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, _("Components..."));
+		btn->SetToolTip(_("Configure components to backup"));
+		btn->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Settings::OnOpenComponents), NULL, this);
+		sizer->Insert(pos++, btn, 0, wxALIGN_BOTTOM | wxALL, 5);
+	}
+	if (!MyTimer::hasCapability(DONT_ALLOW_COMPONENT_RESTORE, capa)
+		&& !MyTimer::hasCapability(STATUS_NO_COMPONENTS, capa))
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, _("Restore components..."));
+		btn->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Settings::OnOpenRestoreComponents), NULL, this);
+		sizer->Insert(pos++, btn, 0, wxALIGN_BOTTOM | wxALL, 5);
+	}
+#endif
+	//Same height as Ok/Cancel
+	for (size_t i = 0; i < pos; ++i)
+	{
+		sizer->GetItem(i)->GetWindow()->SetMinSize(wxDLG_UNIT(this, wxSize(-1, 13)));
+	}
+	if (pos > 0)
+	{
+		Layout();
+		Fit();
+	}
+}
+
+void Settings::openPaths(wxWindow* parent)
+{
+	ConfigPath* cp = new ConfigPath(parent);
+	cp->ShowModal();
+	cp->Destroy();
+}
+
+void Settings::openLogs(wxWindow* parent)
+{
+	Logs* l = new Logs(parent);
+	l->ShowModal();
+	l->Destroy();
+}
+
+void Settings::openComponents(wxWindow* parent)
+{
+#ifdef _WIN32
+	initCom();
+	SelectWindowsComponents* cp = new SelectWindowsComponents(parent);
+	cp->ShowModal();
+	cp->Destroy();
+#endif
+}
+
+void Settings::openRestoreComponents(wxWindow* parent)
+{
+#ifdef _WIN32
+	initCom();
+	SelectRestoreComponents* cp = new SelectRestoreComponents(parent);
+	cp->ShowModal();
+	cp->Destroy();
+#endif
+}
+
+void Settings::OnOpenPaths(wxCommandEvent& event)
+{
+	openPaths(this);
+}
+
+void Settings::OnOpenLogs(wxCommandEvent& event)
+{
+	openLogs(this);
+}
+
+void Settings::OnOpenComponents(wxCommandEvent& event)
+{
+	openComponents(this);
+}
+
+void Settings::OnOpenRestoreComponents(wxCommandEvent& event)
+{
+	openRestoreComponents(this);
 }
 
 Settings::~Settings(void)
@@ -532,7 +989,7 @@ Settings::~Settings(void)
 	delete settings;
 }
 
-void Settings::OnOkClick( wxCommandEvent& event )
+bool Settings::save()
 {
 	wxString update_freq_incr=m_textCtrl1->GetValue();
 	wxString update_freq_full=m_textCtrl2->GetValue();
@@ -632,14 +1089,14 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		wxMessageBox( _("The incremental backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
-		return;
+		return false;
 	}
 	if(!update_freq_full.ToLong(&l_update_freq_full)
 		&& settings_info[L"update_freq_full"].use==c_use_value_client)
 	{
 		wxMessageBox( _("The full backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
-		return;
+		return false;
 	}
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -650,14 +1107,14 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		{
 			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl22->SetFocus();
-			return;
+			return false;
 		}
 		if(!update_freq_image_incr.ToLong(&l_update_freq_image_incr) && m_checkBox1->GetValue()
 			&& settings_info[L"update_freq_image_incr"].use == c_use_value_client)
 		{
 			wxMessageBox( _("The incremental image backup time is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl21->SetFocus();
-			return;
+			return false;
 		}
 	}
 #endif
@@ -666,28 +1123,28 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		wxMessageBox( _("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl131->SetFocus();
-		return;
+		return false;
 	}
 	if(!min_file_incr.ToLong(&l_min_file_incr)
 		&& settings_info[L"min_file_incr"].use == c_use_value_client)
 	{
 		wxMessageBox( _("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl13->SetFocus();
-		return;
+		return false;
 	}
 	if(!max_file_full.ToLong(&l_max_file_full)
 		&& settings_info[L"max_file_full"].use == c_use_value_client)
 	{
 		wxMessageBox( _("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl133->SetFocus();
-		return;
+		return false;
 	}
 	if(!min_file_full.ToLong(&l_min_file_full)
 		&& settings_info[L"min_file_full"].use == c_use_value_client)
 	{
 		wxMessageBox( _("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl132->SetFocus();
-		return;
+		return false;
 	}
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -697,28 +1154,28 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		{
 			wxMessageBox( _("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl134->SetFocus();
-			return;
+			return false;
 		}
 		if(!max_image_incr.ToLong(&l_max_image_incr)
 			&& settings_info[L"max_image_incr"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl135->SetFocus();
-			return;
+			return false;
 		}
 		if(!min_image_full.ToLong(&l_min_image_full)
 			&& settings_info[L"min_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl136->SetFocus();
-			return;
+			return false;
 		}
 		if(!max_image_full.ToLong(&l_max_image_full)
 			&& settings_info[L"max_image_full"].use == c_use_value_client)
 		{
 			wxMessageBox( _("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl137->SetFocus();
-			return;
+			return false;
 		}
 	}
 #endif
@@ -727,7 +1184,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		wxMessageBox( _("Backup delay after system start is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl19->SetFocus();
-		return;
+		return false;
 	}
 #ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -748,7 +1205,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 				{
 					wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 					m_textCtrl23->SetFocus();
-					return;
+					return false;
 				}
 				else if(hVolume!=INVALID_HANDLE_VALUE)
 				{
@@ -762,7 +1219,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	{
 		wxMessageBox( _("The server port is not valid"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrlInternetServer->SetFocus();
-		return;
+		return false;
 	}
 
 	internet_speed.ToLong(&l_internet_speed);
@@ -786,12 +1243,19 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	std::string s_data;
 
-	s_data += std::string("internet_mode_enabled=")+nconvert(internet_mode_enabled)+"\n";
-	s_data += std::string("internet_server=")+ std::string(internet_server.ToUTF8()) + "\n";
-	s_data += std::string("internet_server_port=") + nconvert(l_internet_server_port) + "\n";
-	s_data += std::string("internet_server_proxy=") + std::string(internet_server_proxy.ToUTF8()) + "\n";
-	s_data += std::string("internet_authkey=") + std::string(internet_authkey.ToUTF8()) + "\n";
-	s_data += std::string("computername=") + std::string(computername.ToUTF8()) + "\n";
+	if (servers_panel == NULL)
+	{
+		s_data += std::string("internet_mode_enabled=")+nconvert(internet_mode_enabled)+"\n";
+		s_data += std::string("internet_server=")+ std::string(internet_server.ToUTF8()) + "\n";
+		s_data += std::string("internet_server_port=") + nconvert(l_internet_server_port) + "\n";
+		s_data += std::string("internet_server_proxy=") + std::string(internet_server_proxy.ToUTF8()) + "\n";
+		s_data += std::string("internet_authkey=") + std::string(internet_authkey.ToUTF8()) + "\n";
+	}
+	if (!per_server
+		&& (selected_server.empty() || selected_server == primary_server))
+	{
+		s_data += std::string("computername=") + std::string(computername.ToUTF8()) + "\n";
+	}
 
 	int64 ctime = wxGetUTCTimeMillis().GetValue() / 1000;
 
@@ -830,7 +1294,19 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		}
 	}
 
-	Connector::updateSettings(s_data);
+	if (!s_data.empty())
+	{
+		Connector::updateSettings(s_data, 5000, selected_server);
+	}
+
+	if (servers_panel != NULL
+		&& servers_panel->isModified())
+	{
+		if (!Connector::setServerList(servers_panel->getEntries()))
+		{
+			wxMessageBox(_("Saving the server list failed."), wxT("UrBackup"), wxOK | wxICON_ERROR);
+		}
+	}
 
 	/*std::map<std::string, std::string> n_vals;
 	n_vals["update_freq_incr"]=nconvert(static_cast<float>(l_update_freq_incr*60.f*60.f));
@@ -891,7 +1367,35 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 	Connector::updateSettings(mergeNewSettings(settings, n_vals));*/
 
-	Close();
+	return true;
+}
+
+void Settings::OnOkClick( wxCommandEvent& event )
+{
+	if (save())
+	{
+		Close();
+	}
+}
+
+void Settings::OnServerChoice(wxCommandEvent& event)
+{
+	int sel = m_serverChoice->GetSelection();
+	if (sel < 0 || sel >= static_cast<int>(server_choice_idents.size())
+		|| server_choice_idents[sel] == selected_server)
+		return;
+
+	//Reopen the dialog with the settings of the selected server (unsaved changes are discarded)
+	switch_to_server = server_choice_idents[sel];
+	if (IsModal())
+	{
+		EndModal(wxID_RETRY);
+	}
+	else
+	{
+		new Settings(GetParent(), switch_to_server, true);
+		Destroy();
+	}
 }
 
 void Settings::OnAbortClick( wxCommandEvent& event )
@@ -913,39 +1417,148 @@ void Settings::OnDisableImageBackups( wxCommandEvent& event )
 	}		
 }
 
+namespace
+{
+	//Explains where the value of a setting comes from and what a click changes
+	void setSourceTooltip(wxBitmapButton* btn, int use)
+	{
+		if (use == c_use_value_client)
+		{
+			btn->SetToolTip(_("The value is set here on this computer and overrides the server. "
+				"Click to use the server's default value instead."));
+		}
+		else if (use == c_use_group)
+		{
+			btn->SetToolTip(_("The value is the server's default (the same for all clients in the group). "
+				"Click to use the value set on the server for this computer instead."));
+		}
+		else
+		{
+			btn->SetToolTip(_("The value is set on the server for this computer. "
+				"Click to set the value here on this computer instead."));
+		}
+	}
+}
+
 void Settings::OnBitmapBtnClick(wxCommandEvent & event)
 {
-	std::wstring& key = button_ids[event.GetId()];
+	std::wstring key = button_ids[event.GetId()];
 	SSetting& setting = settings_info[key];
 
 	int use = setting.use;
 
+	//The server's value for this computer only if the server has one. Selecting it without
+	//would save a setting without a value
 	if (use == c_use_group)
-		use = c_use_value;
+		use = setting.has_home ? c_use_value : c_use_value_client;
 	else if (use == c_use_value)
 		use = c_use_value_client;
 	else
 		use = c_use_group;
 
+	setSettingSource(key, use);
+}
+
+void Settings::OnSourceChoice(wxCommandEvent & event)
+{
+	std::wstring key = choice_ids[event.GetId()];
+	SSetting& setting = settings_info[key];
+
+	int sel = event.GetSelection();
+	if (sel < 0 || sel >= static_cast<int>(setting.choice_uses.size())
+		|| setting.choice_uses[sel] == setting.use)
+		return;
+
+	setSettingSource(key, setting.choice_uses[sel]);
+}
+
+wxWindow* Settings::sourceChoice(wxBitmapButton* btn)
+{
+	std::map<wxWindowID, std::wstring>::iterator it = button_ids.find(btn->GetId());
+	if (it == button_ids.end())
+		return btn;
+
+	SSetting& setting = settings_info[it->second];
+
+	wxArrayString labels;
+	labels.Add(_("Server default"));
+	setting.choice_uses.push_back(c_use_group);
+	if (setting.has_home || setting.use == c_use_value)
+	{
+		labels.Add(_("Server, for this computer"));
+		setting.choice_uses.push_back(c_use_value);
+	}
+	labels.Add(_("Set on this computer"));
+	setting.choice_uses.push_back(c_use_value_client);
+
+	setting.choice = new wxChoice(btn->GetParent(), wxID_ANY, wxDefaultPosition, wxDefaultSize, labels);
+	setting.choice->SetToolTip(_("Where the value comes from: the server's default (the same for all clients in the group), "
+		"a value set on the server for this computer, or a value set here on this computer."));
+	for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+	{
+		if (setting.choice_uses[i] == setting.use)
+			setting.choice->SetSelection(static_cast<int>(i));
+	}
+	choice_ids[setting.choice->GetId()] = it->second;
+	setting.choice->Bind(wxEVT_CHOICE, &Settings::OnSourceChoice, this);
+	btn->Hide();
+	return setting.choice;
+}
+
+void Settings::setSettingSource(const std::wstring & key, int use)
+{
+	SSetting& setting = settings_info[key];
+
 	std::wstring val;
 	if (use == c_use_value_client)
 	{
 		setting.btn->SetBitmapLabel(fa_client_img_scaled);
+		setSourceTooltip(setting.btn, c_use_value_client);
+		if (setting.value_client.empty())
+		{
+			//No value set on this computer yet: start with the value used so far
+			setting.value_client = setting.use == c_use_value ? setting.value_home : setting.value_group;
+		}
+		if (setting.value_client.empty())
+		{
+			//Else with the value that is shown
+			wxCheckBox* shown_checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
+			if (shown_checkBox != NULL)
+			{
+				setting.value_client = convert(shown_checkBox->GetValue());
+			}
+			wxTextCtrl* shown_textCtrl = dynamic_cast<wxTextCtrl*>(setting.ctrl);
+			if (shown_textCtrl != NULL
+				&& !shown_textCtrl->GetValue().Trim().empty())
+			{
+				setting.value_client = transformValFromUI(key, shown_textCtrl->GetValue().ToStdWstring());
+			}
+		}
 		val = setting.value_client;
 	}
 	else if (use == c_use_group)
 	{
 		setting.btn->SetBitmapLabel(fa_lock_img_scaled);
+		setSourceTooltip(setting.btn, c_use_group);
 		val = setting.value_group;
 	}
 	else
 	{
 		setting.btn->SetBitmapLabel(fa_home_img_scaled);
+		setSourceTooltip(setting.btn, c_use_value);
 		val = setting.value_home;
 	}
 
-
 	setting.use = use;
+
+	if (setting.choice != NULL)
+	{
+		for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+		{
+			if (setting.choice_uses[i] == use)
+				setting.choice->SetSelection(static_cast<int>(i));
+		}
+	}
 
 	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(setting.ctrl);
 	if (checkBox != NULL)
@@ -984,6 +1597,16 @@ void Settings::OnCtlChange(wxCommandEvent & event)
 	}	
 
 	setting.btn->SetBitmapLabel(fa_client_img_scaled);
+	setSourceTooltip(setting.btn, c_use_value_client);
+
+	if (setting.choice != NULL)
+	{
+		for (size_t i = 0; i < setting.choice_uses.size(); ++i)
+		{
+			if (setting.choice_uses[i] == c_use_value_client)
+				setting.choice->SetSelection(static_cast<int>(i));
+		}
+	}
 }
 
 std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)
@@ -1007,9 +1630,9 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	else if (key == L"update_freq_image_full"
 		|| key==L"update_freq_image_incr")
 	{
-		int ret = watoi(val) * 24 * 60 * 60;
-		if (!m_checkBox1->GetValue()
-			&& ret>0)
+		//Seconds to days. A negative interval is a disabled one (shown by the check box)
+		int ret = watoi(val) / (24 * 60 * 60);
+		if (ret < 0)
 		{
 			ret *= -1;
 		}
@@ -1072,14 +1695,17 @@ void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, 
 	if (use == c_use_value_client)
 	{
 		btn->SetBitmapLabel(fa_client_img_scaled);
+		setSourceTooltip(btn, c_use_value_client);
 	}
 	else if (use == c_use_group)
 	{
 		btn->SetBitmapLabel(fa_lock_img_scaled);
+		setSourceTooltip(btn, c_use_group);
 	}
 	else
 	{
 		btn->SetBitmapLabel(fa_home_img_scaled);
+		setSourceTooltip(btn, c_use_value);
 	}
 
 	ctrl_ids[ctrl->GetId()] = key;
@@ -1087,7 +1713,12 @@ void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, 
 	SSetting& setting = settings_info[key];
 	setting.btn = btn;
 	setting.ctrl = ctrl;
+	setting.choice = NULL;
 	setting.use = use;
+	{
+		std::wstring value_home;
+		setting.has_home = settings->getValue(key + L".home", &value_home) && !value_home.empty();
+	}
 	if (!settings->getValue(key + L".client", &setting.value_client))
 	{
 		settings->getValue(key, &setting.value_client);
@@ -1102,4 +1733,10 @@ void Settings::setSettingsSwitch(const std::wstring & key, wxBitmapButton* btn, 
 		if (!settings->getValue(key + L"_def", &setting.value_client))
 			settings->getValue(key, &setting.value_client);
 	}
+}
+
+wxNotebook* Settings::takePages(wxWindow* new_parent)
+{
+	m_notebook->Reparent(new_parent);
+	return m_notebook;
 }

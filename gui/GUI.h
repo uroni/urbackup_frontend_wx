@@ -168,6 +168,8 @@ class GUISettings : public wxDialog
 	
 	public:
 		
+		//>= 0: capabilities of the server whose settings are shown (instead of the ones of the last connected server)
+		static int capa_override;
 		GUISettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
 		virtual ~GUISettings();
 	
