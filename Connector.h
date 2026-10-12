@@ -218,7 +218,8 @@ struct SServerListEntry
 {
 	SServerListEntry()
 		: id(-1), local(true), internet(false), internet_compress(true),
-		internet_encrypt(true), online(false), last_backup(0), capa(-1)
+		internet_encrypt(true), online(false), last_backup(0), capa(-1),
+		backup_interval(0), no_recent_backup(-1)
 	{}
 
 	int id;
@@ -243,6 +244,10 @@ struct SServerListEntry
 	int64 last_backup;
 	//Capabilities the server sent (capa_bits.h), -1: not connected
 	int capa;
+	//Time (seconds) after which the server expects the next backup at the latest (0: not known)
+	int backup_interval;
+	//1: the last backup by this server is older than backup_interval, 0: it is not, -1: not known
+	int no_recent_backup;
 };
 
 struct SServerList

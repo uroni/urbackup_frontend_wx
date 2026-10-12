@@ -20,6 +20,7 @@
 #include "main.h"
 #include "TranslationHelper.h"
 #include "stringtools.h"
+#include "ServerListUI.h"
 
 extern wxString res_path;
 extern wxString ico_ext;
@@ -109,7 +110,7 @@ namespace
 Status* Status::instance = NULL;
 
 Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
-	: GUIStatus(parent, follow_only_process_id)
+	: GUIStatus(parent, follow_only_process_id), has_server_list(false)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
@@ -267,8 +268,67 @@ bool Status::updateStatus(int errcnt)
 		}
 	}
 
+	size_t n_servers = 0;
 	if (follow_only_process_id == 0)
 	{
+		if (!has_server_list
+			|| server_list_age.Time() > 5000)
+		{
+			server_list = Connector::getServerList();
+			has_server_list = true;
+			server_list_age.Start();
+		}
+
+		if (server_list.supported)
+		{
+			for (size_t i = 0; i < server_list.entries.size(); ++i)
+			{
+				if (!server_list.entries[i].ident.empty())
+					++n_servers;
+			}
+		}
+	}
+
+	if (n_servers > 1)
+	{
+		//Several servers: each one with its name, how it is connected and its last backup
+		wxString servers_text;
+		for (size_t i = 0; i < server_list.entries.size(); ++i)
+		{
+			const SServerListEntry& e = server_list.entries[i];
+			if (e.ident.empty())
+				continue;
+
+			if (!servers_text.empty())
+				servers_text += wxT("\n");
+
+			servers_text += ServersPanel::displayName(e) + wxT(": ") + ServersPanel::statusText(e) + wxT("\n    ");
+			if (e.last_backup > 0)
+			{
+				wxDateTime lastbackup_dt((wxLongLong)(e.last_backup * 1000));
+				servers_text += trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
+			}
+			else
+			{
+				servers_text += _("no backup yet");
+			}
+			if (e.no_recent_backup > 0)
+			{
+				servers_text += wxT(" - ") + _("backup overdue");
+			}
+		}
+
+		m_staticText37->SetLabel(wxEmptyString);
+		m_staticText32->SetLabel(_("Servers:"));
+		m_staticText33->SetLabel(servers_text);
+		m_staticText34->Show(false);
+		m_staticText35->Show(false);
+	}
+	else if (follow_only_process_id == 0)
+	{
+		m_staticText34->Show(true);
+		m_staticText35->Show(true);
+
 		if (status_details.last_backup_time>0)
 		{
 			wxDateTime lastbackup_dt((wxLongLong)(status_details.last_backup_time * 1000));

@@ -58,6 +58,8 @@ public:
 	const std::vector<SServerListEntry>& getEntries() const { return entries; }
 
 	static wxString displayName(const SServerListEntry& entry);
+	//How the server is connected at the moment
+	static wxString statusText(const SServerListEntry& entry);
 	//"urbackup://host:port" from the server/port fields (and back)
 	static wxString toUrl(const SServerListEntry& entry);
 	static void fromUrl(wxString url, SServerListEntry& entry);

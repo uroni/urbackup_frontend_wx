@@ -103,6 +103,11 @@ namespace
 	}
 }
 
+wxString ServersPanel::statusText(const SServerListEntry& entry)
+{
+	return ::statusText(entry);
+}
+
 wxString ServersPanel::displayName(const SServerListEntry& entry)
 {
 	if (!entry.name.empty())

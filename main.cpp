@@ -908,6 +908,10 @@ void MyTimer::Notify()
 			{
 				status_text += _("no backup yet");
 			}
+			if (e.no_recent_backup > 0)
+			{
+				status_text += wxT(" - ") + _("backup overdue");
+			}
 		}
 	}
 	else if(!status.lastbackupdate.Trim().empty() )

@@ -669,6 +669,9 @@ SServerList Connector::getServerList()
 		e.last_backup = atoll(values[p + "last_backup"].c_str());
 		if (!values[p + "capa"].empty())
 			e.capa = atoi(values[p + "capa"].c_str());
+		e.backup_interval = atoi(values[p + "backup_interval"].c_str());
+		if (!values[p + "no_recent_backup"].empty())
+			e.no_recent_backup = atoi(values[p + "no_recent_backup"].c_str());
 		ret.entries.push_back(e);
 	}
 
