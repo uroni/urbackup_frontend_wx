@@ -24,6 +24,7 @@
 #include "TranslationHelper.h"
 #include "ConfigPath.h"
 #include "Logs.h"
+#include "BackupSummary.h"
 #ifdef _WIN32
 #include "SelectWindowsComponents.h"
 #include "SelectRestoreWindowsComponents.h"
@@ -250,7 +251,8 @@ wxString Settings::currentComputerName()
 }
 
 Settings::Settings(wxWindow* parent, const std::string& server_ident, bool access_pw_checked, bool p_per_server) : GUISettings(parent),
-	init_complete(false), servers_panel(NULL), m_serverChoice(NULL), per_server(p_per_server), not_received(false)
+	init_complete(false), servers_panel(NULL), m_serverChoice(NULL), per_server(p_per_server), not_received(false),
+	m_fileSummary(NULL), m_imageSummary(NULL)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 	settings=new CFileSettingsReader(settingsFilePath("settings.cfg"));
@@ -738,6 +740,8 @@ Settings::Settings(wxWindow* parent, const std::string& server_ident, bool acces
 	}
 
 	init_complete = true;
+
+	updateBackupSummary();
 }
 
 namespace
@@ -816,7 +820,7 @@ void Settings::applyGroupedLayout()
 		g.row(m_staticText261, m_textCtrl161, NULL, sourceChoice(m_bitmapButton161));
 		m_staticText30->Hide();
 		m_staticText29->Hide();
-		m_tab_filebackups->SetSizer(g.sizer(), true);
+		m_fileSummary = addBackupSummary(m_tab_filebackups, g.sizer());
 	}
 #ifdef _WIN32
 	if (!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
@@ -834,7 +838,7 @@ void Settings::applyGroupedLayout()
 		g.heading(_("Volumes"));
 		g.row(m_staticText301, m_textCtrl23, NULL, sourceChoice(m_bitmapButton23));
 		m_staticText28->Hide();
-		m_tab_imagebackups->SetSizer(g.sizer(), true);
+		m_imageSummary = addBackupSummary(m_tab_imagebackups, g.sizer());
 	}
 #endif
 	//Client tab: only schedule and speed; the computer name is in the client settings window
@@ -881,6 +885,84 @@ void Settings::applyGroupedLayout()
 	m_tab_filebackups->Layout();
 	m_tab_client->Layout();
 	m_tab_internet->Layout();
+}
+
+wxTextCtrl* Settings::addBackupSummary(wxWindow* page, wxSizer* settings_sizer)
+{
+	wxTextCtrl* text = new wxTextCtrl(page, wxID_ANY, wxEmptyString, wxDefaultPosition,
+		page->FromDIP(wxSize(-1, 120)), wxTE_MULTILINE | wxTE_READONLY | wxTE_RICH2);
+	text->SetBackgroundColour(page->GetBackgroundColour());
+
+	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	sizer->Add(settings_sizer, 0);
+	sizer->Add(text, 1, wxEXPAND | wxALL, 5);
+	page->SetSizer(sizer, true);
+	return text;
+}
+
+namespace
+{
+	std::string translateSummary(const std::string& text)
+	{
+		return std::string(wxGetTranslation(wxString::FromUTF8(text.c_str())).ToUTF8().data());
+	}
+}
+
+void Settings::showBackupSummary(wxTextCtrl* text, bool image)
+{
+	if (text == NULL)
+		return;
+
+	backup_summary::SSettings s;
+	s.image = image;
+
+	wxTextCtrl* incr = image ? m_textCtrl21 : m_textCtrl1;
+	wxTextCtrl* full = image ? m_textCtrl22 : m_textCtrl2;
+	//The image backup intervals are shown without sign, the checkbox has it
+	bool disabled = image && !m_checkBox1->GetValue();
+	s.incr = backup_summary::parseInterval(incr->GetValue().ToStdString(), disabled, image ? 24 * 60 * 60 : 60 * 60);
+	s.full = backup_summary::parseInterval(full->GetValue().ToStdString(), disabled, 24 * 60 * 60);
+	s.max_full = backup_summary::parseCount((image ? m_textCtrl137 : m_textCtrl133)->GetValue().ToStdString());
+	s.min_full = backup_summary::parseCount((image ? m_textCtrl136 : m_textCtrl132)->GetValue().ToStdString());
+	s.max_incr = backup_summary::parseCount((image ? m_textCtrl135 : m_textCtrl131)->GetValue().ToStdString());
+	s.min_incr = backup_summary::parseCount((image ? m_textCtrl134 : m_textCtrl13)->GetValue().ToStdString());
+
+	//What incremental image backups are based on is set on the server
+	std::wstring style;
+	bool local_to_last = getSettingsValue(L"local_incr_image_style", &style, settings) && style == L"to-last";
+	bool internet_to_last = !getSettingsValue(L"internet_incr_image_style", &style, settings) || style != L"to-full";
+	s.to_last.push_back(local_to_last);
+	if (internet_to_last != local_to_last)
+		s.to_last.push_back(internet_to_last);
+
+	backup_summary::SSummary summary = backup_summary::describe(s, translateSummary);
+
+	wxTextAttr normal(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+	wxTextAttr warning(wxColour(192, 0, 0));
+
+	text->Freeze();
+	text->Clear();
+	text->SetDefaultStyle(normal);
+	for (size_t i = 0; i < summary.info.size(); ++i)
+	{
+		text->AppendText(wxString::FromUTF8(summary.info[i].c_str()) + wxT("\n"));
+	}
+	text->SetDefaultStyle(warning);
+	for (size_t i = 0; i < summary.warn.size(); ++i)
+	{
+		text->AppendText(wxT("\n") + _("Warning:") + wxT(" ") + wxString::FromUTF8(summary.warn[i].c_str()) + wxT("\n"));
+	}
+	text->ShowPosition(0);
+	text->Thaw();
+}
+
+void Settings::updateBackupSummary()
+{
+	if (!init_complete)
+		return;
+
+	showBackupSummary(m_fileSummary, false);
+	showBackupSummary(m_imageSummary, true);
 }
 
 void Settings::addWindowButtons()
@@ -1415,6 +1497,8 @@ void Settings::OnDisableImageBackups( wxCommandEvent& event )
 		m_textCtrl21->Enable(true);
 		m_textCtrl22->Enable(true);
 	}		
+
+	updateBackupSummary();
 }
 
 namespace
@@ -1571,6 +1655,8 @@ void Settings::setSettingSource(const std::wstring & key, int use)
 	{
 		textCtrl->ChangeValue(transformValToUI(key, val));
 	}
+
+	updateBackupSummary();
 }
 
 void Settings::OnCtlChange(wxCommandEvent & event)
@@ -1607,6 +1693,8 @@ void Settings::OnCtlChange(wxCommandEvent & event)
 				setting.choice->SetSelection(static_cast<int>(i));
 		}
 	}
+
+	updateBackupSummary();
 }
 
 std::wstring Settings::transformValToUI(const std::wstring & key, const std::wstring & val)

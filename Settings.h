@@ -77,6 +77,14 @@ public:
 private:
 	void addWindowButtons();
 	void applyGroupedLayout();
+	//Text below the interval and number of backups settings (grouped layout): what
+	//they add up to and warnings about values the server cannot keep
+	wxTextCtrl* addBackupSummary(wxWindow* page, wxSizer* settings_sizer);
+	void updateBackupSummary();
+	void showBackupSummary(wxTextCtrl* text, bool image);
+
+	wxTextCtrl* m_fileSummary;
+	wxTextCtrl* m_imageSummary;
 
 	bool per_server;
 	bool not_received;
