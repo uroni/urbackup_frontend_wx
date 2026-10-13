@@ -20,6 +20,7 @@
 #include "stringtools.h"
 #include "escape.h"
 #include <iostream>
+#include <map>
 #include "json/json.h"
 #include <stdexcept>
 #include "TrayIcon.h"
@@ -504,6 +505,19 @@ std::vector<SBackupDir> Connector::getSharedPaths(void)
 				dir["server_default"].asInt()
 			};
 
+			Json::Value servers = dir.get("servers", Json::Value(Json::arrayValue));
+			for (Json::Value::ArrayIndex j = 0; j < servers.size(); ++j)
+			{
+				rdir.servers.push_back(servers[j].asString());
+			}
+			rdir.servers_from_client = dir.get("servers_from_client", false).asBool();
+
+			Json::Value also_servers = dir.get("also_servers", Json::Value(Json::arrayValue));
+			for (Json::Value::ArrayIndex j = 0; j < also_servers.size(); ++j)
+			{
+				rdir.also_servers.push_back(also_servers[j].asString());
+			}
+
 			ret.push_back(rdir);
 		}
 	}
@@ -538,8 +552,21 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		args+="dir_"+nconvert(idx)+"="+path;
 		args+="&dir_"+nconvert(idx)+"_name="+name;
 		args+="&dir_"+nconvert(idx)+"_group="+nconvert(res[i].group);
+		if (res[i].servers_from_client && !res[i].servers.empty())
+		{
+			std::string servers;
+			for (size_t j = 0; j < res[i].servers.size(); ++j)
+			{
+				if (!servers.empty()) servers += ",";
+				servers += res[i].servers[j];
+			}
+			args += "&dir_" + nconvert(idx) + "_servers=" + EscapeParamString(servers);
+		}
 		idx += 1;
 	}
+
+	//The servers of each directory are in dir_N_servers
+	args += std::string(args.empty() ? "" : "&") + "with_servers=1";
 
 	std::string d=getResponse("SAVE BACKUP DIRS", args, true);
 
@@ -549,7 +576,7 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
-int Connector::startBackup(bool full)
+int Connector::startBackup(bool full, const std::string& server)
 {
 	std::string s;
 	if(full)
@@ -557,7 +584,7 @@ int Connector::startBackup(bool full)
 	else
 		s="START BACKUP INCR";
 
-	std::string d=getResponse(s,"", false);
+	std::string d=getResponse(s, server.empty() ? std::string() : "server="+EscapeParamString(server), false);
 
 	if(d=="RUNNING")
 		return 2;
@@ -569,7 +596,7 @@ int Connector::startBackup(bool full)
 		return 1;
 }
 
-int Connector::startImage(bool full)
+int Connector::startImage(bool full, const std::string& server)
 {
 	std::string s;
 	if(full)
@@ -577,7 +604,7 @@ int Connector::startImage(bool full)
 	else
 		s="START IMAGE INCR";
 
-	std::string d=getResponse(s,"", false);
+	std::string d=getResponse(s, server.empty() ? std::string() : "server="+EscapeParamString(server), false);
 
 	if(d=="RUNNING")
 		return 2;
@@ -589,11 +616,104 @@ int Connector::startImage(bool full)
 		return 1;
 }
 
-bool Connector::updateSettings(const std::string &ndata, size_t timeoutms)
+SServerList Connector::getServerList()
+{
+	SServerList ret;
+	//The tray icon is not elevated and cannot read the administrator password.
+	//The server list works without it (just without the internet auth keys)
+	bool admin = !getPasswordData(true, false).empty();
+	std::string d = getResponse("GET SERVER LIST", "", admin);
+
+	std::map<std::string, std::string> values;
+	int numl = linecount(d);
+	for (int i = 0; i <= numl; ++i)
+	{
+		std::string l = getline(i, d);
+		size_t eq = l.find('=');
+		if (eq != std::string::npos)
+		{
+			std::string val = l.substr(eq + 1);
+			if (!val.empty() && val[val.size() - 1] == '\r')
+				val.erase(val.size() - 1);
+			values[l.substr(0, eq)] = val;
+		}
+	}
+
+	if (values.find("count") == values.end())
+	{
+		return ret;
+	}
+
+	ret.supported = true;
+	int count = atoi(values["count"].c_str());
+	for (int i = 0; i < count; ++i)
+	{
+		std::string p = nconvert(i) + ".";
+		SServerListEntry e;
+		e.id = atoi(values[p + "id"].c_str());
+		e.name = values[p + "name"];
+		e.ident = values[p + "ident"];
+		e.endpoint = values[p + "endpoint"];
+		e.fingerprint = values[p + "fingerprint"];
+		e.local = values[p + "local"] != "false";
+		e.internet = values[p + "internet"] == "true";
+		e.internet_server = values[p + "internet_server"];
+		e.internet_server_port = values[p + "internet_server_port"];
+		e.internet_server_proxy = values[p + "internet_server_proxy"];
+		e.internet_authkey = values[p + "internet_authkey"];
+		e.internet_compress = values[p + "internet_compress"] != "false";
+		e.internet_encrypt = values[p + "internet_encrypt"] != "false";
+		e.online = values[p + "online"] == "true";
+		e.internet_status = values[p + "internet_status"];
+		e.server_url = values[p + "server_url"];
+		e.last_backup = atoll(values[p + "last_backup"].c_str());
+		if (!values[p + "capa"].empty())
+			e.capa = atoi(values[p + "capa"].c_str());
+		e.backup_interval = atoi(values[p + "backup_interval"].c_str());
+		if (!values[p + "no_recent_backup"].empty())
+			e.no_recent_backup = atoi(values[p + "no_recent_backup"].c_str());
+		ret.entries.push_back(e);
+	}
+
+	ret.primary = values["primary"];
+
+	int pending_count = atoi(values["pending_count"].c_str());
+	for (int i = 0; i < pending_count; ++i)
+	{
+		ret.pending.push_back(values["pending." + nconvert(i)]);
+	}
+
+	return ret;
+}
+
+bool Connector::setServerList(const std::vector<SServerListEntry>& entries)
+{
+	std::string data = "count=" + nconvert(entries.size()) + "\n";
+	for (size_t i = 0; i < entries.size(); ++i)
+	{
+		const SServerListEntry& e = entries[i];
+		std::string p = nconvert(i) + ".";
+		data += p + "id=" + nconvert(e.id) + "\n";
+		data += p + "name=" + e.name + "\n";
+		data += p + "local=" + std::string(e.local ? "true" : "false") + "\n";
+		data += p + "internet=" + std::string(e.internet ? "true" : "false") + "\n";
+		data += p + "internet_server=" + e.internet_server + "\n";
+		data += p + "internet_server_port=" + e.internet_server_port + "\n";
+		data += p + "internet_server_proxy=" + e.internet_server_proxy + "\n";
+		data += p + "internet_authkey=" + e.internet_authkey + "\n";
+		data += p + "internet_compress=" + std::string(e.internet_compress ? "true" : "false") + "\n";
+		data += p + "internet_encrypt=" + std::string(e.internet_encrypt ? "true" : "false") + "\n";
+	}
+
+	escapeClientMessage(data);
+	return getResponse("SET SERVER LIST " + data, "", true) == "OK";
+}
+
+bool Connector::updateSettings(const std::string &ndata, size_t timeoutms, const std::string& server)
 {
 	std::string data=ndata;
 	escapeClientMessage(data);
-	std::string d=getResponse("UPDATE SETTINGS "+data,"", true, NULL, timeoutms);
+	std::string d=getResponse("UPDATE SETTINGS "+data, server.empty() ? std::string() : "server="+EscapeParamString(server), true, NULL, timeoutms);
 
 	if(d!="OK")
 		return false;
@@ -601,9 +721,9 @@ bool Connector::updateSettings(const std::string &ndata, size_t timeoutms)
 		return true;
 }
 
-std::vector<SLogEntry> Connector::getLogEntries(void)
+std::vector<SLogEntry> Connector::getLogEntries(const std::string& server)
 {
-	std::string d=getResponse("GET LOGPOINTS", "", true);
+	std::string d=getResponse("GET LOGPOINTS", server.empty() ? std::string() : "server="+EscapeParamString(server), true);
 	int lc=linecount(d);
 	std::vector<SLogEntry> ret;
 	for(int i=0;i<lc;++i)
@@ -613,15 +733,22 @@ std::vector<SLogEntry> Connector::getLogEntries(void)
 		SLogEntry le;
 		le.logid=atoi(getuntil("-", l).c_str() );
 		std::string lt=getafter("-", l);
+		if (!server.empty())
+		{
+			//"id-time-known"
+			le.server_known = getafter("-", lt) != "0";
+			lt = getuntil("-", lt);
+		}
 		le.logtime=wxString::FromUTF8(lt.c_str());
 		ret.push_back(le);
 	}
 	return ret;
 }
 
-std::vector<SLogLine>  Connector::getLogdata(int logid, int loglevel)
+std::vector<SLogLine>  Connector::getLogdata(int logid, int loglevel, bool with_time)
 {
-	std::string d=getResponse("GET LOGDATA","logid="+nconvert(logid)+"&loglevel="+nconvert(loglevel), true);
+	std::string d=getResponse("GET LOGDATA","logid="+nconvert(logid)+"&loglevel="+nconvert(loglevel)
+		+ (with_time ? "&with_time=1" : ""), true);
 	std::vector<std::string> lines;
 	TokenizeMail(d, lines, "\n");
 	std::vector<SLogLine> ret;
@@ -631,7 +758,24 @@ std::vector<SLogLine>  Connector::getLogdata(int logid, int loglevel)
 		if(l.empty())continue;
 		SLogLine ll;
 		ll.loglevel=atoi(getuntil("-", l).c_str());
-		ll.msg=wxString::FromUTF8(getafter("-", l).c_str());
+		std::string msg = getafter("-", l);
+		if (with_time)
+		{
+			//"level-time-message"; an older backend sends "level-message"
+			std::string t = getuntil("-", msg);
+			bool isnum = !t.empty();
+			for (size_t j = 0; j < t.size(); ++j)
+			{
+				if (t[j] < '0' || t[j] > '9')
+					isnum = false;
+			}
+			if (isnum)
+			{
+				ll.ltime = atoll(t.c_str());
+				msg = getafter("-", msg);
+			}
+		}
+		ll.msg=wxString::FromUTF8(msg.c_str());
 		ret.push_back(ll);
 	}
 	return ret;
@@ -732,9 +876,10 @@ SStatusDetails Connector::getStatusDetails(SConnection* connection)
 	
 }
 
-std::string Connector::getAccessParameters( const std::string& tokens )
+std::string Connector::getAccessParameters( const std::string& tokens, const std::string& server )
 {
-	return getResponse("GET ACCESS PARAMETERS","tokens="+tokens, false);
+	return getResponse("GET ACCESS PARAMETERS","tokens="+tokens
+		+ (server.empty() ? std::string() : "&server="+EscapeParamString(server)), false);
 }
 
 int Connector::getCapabilities()

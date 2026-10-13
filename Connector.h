@@ -36,6 +36,13 @@ struct SBackupDir
 	int group;
 	wxString flags;
 	int server_default;
+	//Identities of the servers this directory is backed up to (empty: all)
+	std::vector<std::string> servers;
+	//The servers were chosen on the client (not a server's default directory)
+	bool servers_from_client;
+	//Servers that back up the same path as their default directory (if this is a path added
+	//on the client) or as a path added on the client (if this is a default directory)
+	std::vector<std::string> also_servers;
 };
 
 struct SStatus
@@ -73,14 +80,20 @@ struct SStatus
 
 struct SLogEntry
 {
+	SLogEntry() : logid(0), server_known(true) {}
 	int logid;
 	wxString logtime;
+	//False: saved before the client recorded the server of a log
+	bool server_known;
 };
 
 struct SLogLine
 {
+	SLogLine() : loglevel(0), ltime(0) {}
 	int loglevel;
 	wxString msg;
+	//Unix time of the line (0: unknown or not requested)
+	int64 ltime;
 };
 
 struct SRunningProcess
@@ -200,16 +213,73 @@ struct SStartRestore
 	int64 process_id;
 };
 
+//A server of the backend's server list
+struct SServerListEntry
+{
+	SServerListEntry()
+		: id(-1), local(true), internet(false), internet_compress(true),
+		internet_encrypt(true), online(false), last_backup(0), capa(-1),
+		backup_interval(0), no_recent_backup(-1)
+	{}
+
+	int id;
+	std::string name;
+	std::string ident;
+	std::string endpoint;
+	std::string fingerprint;
+	bool local;
+	bool internet;
+	std::string internet_server;
+	std::string internet_server_port;
+	std::string internet_server_proxy;
+	std::string internet_authkey;
+	bool internet_compress;
+	bool internet_encrypt;
+	//Has an active session (LAN or internet)
+	bool online;
+	std::string internet_status;
+	//Web interface of the server
+	std::string server_url;
+	//Last successful backup by this server (unix time, 0: none)
+	int64 last_backup;
+	//Capabilities the server sent (capa_bits.h), -1: not connected
+	int capa;
+	//Time (seconds) after which the server expects the next backup at the latest (0: not known)
+	int backup_interval;
+	//1: the last backup by this server is older than backup_interval, 0: it is not, -1: not known
+	int no_recent_backup;
+};
+
+struct SServerList
+{
+	SServerList() : supported(false) {}
+
+	//False if the backend does not support a server list (older version)
+	bool supported;
+	std::vector<SServerListEntry> entries;
+	//Identities of servers that tried to connect but are not trusted
+	std::vector<std::string> pending;
+	//Identity of the server of the default client facet (it has the settings that are the
+	//same for all servers, e.g. the computer name)
+	std::string primary;
+};
+
 class Connector
 {
 public:
+	static SServerList getServerList();
+	static bool setServerList(const std::vector<SServerListEntry>& entries);
 	static std::vector<SBackupDir> getSharedPaths(void);
 	static bool saveSharedPaths(const std::vector<SBackupDir> &res);
-	static int startBackup(bool full);
-	static int startImage(bool full);
-	static bool updateSettings(const std::string &sdata, size_t timeoutms = 5000);
-	static std::vector<SLogEntry> getLogEntries(void);
-	static std::vector<SLogLine> getLogdata(int logid, int loglevel);
+	//server: start the backup on this server (empty: any)
+	static int startBackup(bool full, const std::string& server = std::string());
+	static int startImage(bool full, const std::string& server = std::string());
+	//server: change the settings of this server only (empty: all/primary)
+	static bool updateSettings(const std::string &sdata, size_t timeoutms = 5000, const std::string& server = std::string());
+	//server: only the logs of this server (and the ones saved before the server was recorded)
+	static std::vector<SLogEntry> getLogEntries(const std::string& server = std::string());
+	//with_time: also get the time of each line (newer backends)
+	static std::vector<SLogLine> getLogdata(int logid, int loglevel, bool with_time = false);
 	static bool setPause(bool b_pause);
 	static bool addNewServer(const std::string &ident);
 	static SStatusDetails getStatusDetails(SConnection* connection = NULL);
@@ -245,7 +315,8 @@ public:
 
 	static std::string getPasswordData(bool change_command, bool set_busy);
 
-	static std::string getAccessParameters(const std::string& tokens);
+	//server: open the web interface of this server (empty: the one of the default facet)
+	static std::string getAccessParameters(const std::string& tokens, const std::string& server = std::string());
 
 private:
 	static std::string getResponse(const std::string &cmd, const std::string &args, bool change_command, SConnection* connection=NULL, size_t timeoutms=5000, bool set_busy=true);

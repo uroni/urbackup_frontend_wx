@@ -45,6 +45,9 @@
     <ClCompile Include="Settings.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ServerListUI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="stringtools.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -123,6 +126,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Settings.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerListUI.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="stringtools.h">

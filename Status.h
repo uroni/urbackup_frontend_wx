@@ -18,6 +18,7 @@
 
 #include "Connector.h"
 #include "gui/GUI.h"
+#include <wx/stopwatch.h>
 
 class Status : public GUIStatus, wxTimer
 {
@@ -40,6 +41,11 @@ private:
 	SStatusDetails last_status_details;
 
 	SConnection connection;
+
+	//With several servers: the servers with their names (refreshed every few seconds)
+	SServerList server_list;
+	bool has_server_list;
+	wxStopWatch server_list_age;
 
 	int error_count;
 };

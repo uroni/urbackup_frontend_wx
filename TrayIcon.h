@@ -40,7 +40,8 @@ public:
 	void BalloonActionUpgrade(void);
 	void BalloonActionNewServer(const std::string &ident);
 
-	static void accessBackups(wxString path);
+	//server: open the web interface of this server (empty: default)
+	static void accessBackups(wxString path, const std::string& server = std::string());
 
 private:
 	int balloon_action;

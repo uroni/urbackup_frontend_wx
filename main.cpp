@@ -96,10 +96,21 @@ IMPLEMENT_APP_NO_MAIN(MyApp)
 
 HRESULT initCom()
 {
-	HRESULT hr = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+	//Can only be done once per process (the settings window reads the components of each server)
+	static bool done = false;
+	static HRESULT hr = S_OK;
+	if (done)
+	{
+		return hr;
+	}
+	done = true;
+
+	hr = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
 		RPC_C_IMP_LEVEL_IDENTIFY, NULL, EOAC_NONE, NULL);
 
-	if (hr != S_OK)
+	//RPC_E_TOO_LATE: COM was already used in this process (e.g. by a file dialog). The
+	//components can still be read
+	if (hr != S_OK && hr != RPC_E_TOO_LATE)
 	{
 		wxMessageBox(wxString::Format(_("CoInitializeSecurity failed: %08x"), hr), wxT("UrBackup"), wxOK | wxICON_ERROR);
 	}
@@ -373,10 +384,35 @@ bool MyApp::OnInit()
 	}
 	else if(cmd==wxT("settings"))
 	{
-		Settings *s=new Settings(NULL);
-		SetTopWindow(s);
-		s->ShowModal();
-		s->Destroy();
+		SServerList server_list = Connector::getServerList();
+		if (server_list.supported)
+		{
+			//Client settings window with the server list; backup settings per server
+			if (Settings::checkTrayAccessPw(NULL))
+			{
+				ClientSettingsDialog* d = new ClientSettingsDialog(NULL, server_list, Connector::getCapabilities());
+				SetTopWindow(d);
+				d->ShowModal();
+				d->Destroy();
+			}
+			wxExit();
+			return true;
+		}
+
+		std::string server;
+		bool access_pw_checked = false;
+		while (true)
+		{
+			Settings *s=new Settings(NULL, server, access_pw_checked);
+			SetTopWindow(s);
+			int rc = s->ShowModal();
+			server = s->switch_to_server;
+			s->Destroy();
+			//Another server was selected: show its settings
+			if (rc != wxID_RETRY || server.empty())
+				break;
+			access_pw_checked = true;
+		}
 		wxExit();
 	}
 	else if(cmd==wxT("paths"))
@@ -839,7 +875,46 @@ void MyTimer::Notify()
 		backup_is_running=false;
 	}
 
-	if(!status.lastbackupdate.Trim().empty() )
+	//With several servers: the last backup of each server (server list refreshed every minute)
+	static long server_list_time = 0;
+	static SServerList server_list;
+	if (server_list_time == 0
+		|| ct - server_list_time > 60)
+	{
+		server_list = Connector::getServerList();
+		server_list_time = ct;
+	}
+	size_t n_servers = 0;
+	for (size_t i = 0; i < server_list.entries.size(); ++i)
+	{
+		if (!server_list.entries[i].ident.empty())
+			++n_servers;
+	}
+
+	if (server_list.supported && n_servers > 1)
+	{
+		for (size_t i = 0; i < server_list.entries.size(); ++i)
+		{
+			const SServerListEntry& e = server_list.entries[i];
+			if (e.ident.empty())
+				continue;
+			status_text += wxT("\n") + ServersPanel::displayName(e) + wxT(": ");
+			if (e.last_backup > 0)
+			{
+				wxDateTime lastbackup_dt((wxLongLong)(e.last_backup * 1000));
+				status_text += lastbackup_dt.Format(wxT("%x %H:%M"));
+			}
+			else
+			{
+				status_text += _("no backup yet");
+			}
+			if (e.no_recent_backup > 0)
+			{
+				status_text += wxT(" - ") + _("backup overdue");
+			}
+		}
+	}
+	else if(!status.lastbackupdate.Trim().empty() )
 	{
 		wxLongLong_t lastbackups;
 		if(status.lastbackupdate.ToLongLong(&lastbackups))
@@ -847,7 +922,7 @@ void MyTimer::Notify()
 			wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
 
 			status_text+=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
-		}	
+		}
 	}
 
 	if(status.pause && icon_type==ETrayIcon_PROGRESS)
