@@ -301,7 +301,7 @@ std::string Connector::getFileList(const std::string& path, int* backupid, EAcce
 
 	if (backupid != NULL)
 	{
-		params += "&backupid=" + convert(*backupid);
+		params += "&backupid=" + nconvert(*backupid);
 	}
 
 	std::string list = getResponse("GET FILE LIST TOKENS",
@@ -343,18 +343,18 @@ SStartRestore Connector::startRestore(const std::string& path, int backupid,
 
 	std::string params = "tokens=" + tokens;
 	params += "&path=" + EscapeParamString(path);
-	params += "&backupid=" + convert(backupid);
+	params += "&backupid=" + nconvert(backupid);
 
 	for (size_t i = 0; i < map_paths.size(); ++i)
 	{
-		params += "&map_path_source" + convert(i) + "=" + EscapeParamString(map_paths[i].source);
-		params += "&map_path_target" + convert(i) + "=" + EscapeParamString(map_paths[i].target);
+		params += "&map_path_source" + nconvert(i) + "=" + EscapeParamString(map_paths[i].source);
+		params += "&map_path_target" + nconvert(i) + "=" + EscapeParamString(map_paths[i].target);
 	}
 
 	params += std::string("&clean_other=") + (clean_other ? "1" : "0");
 	params += std::string("&ignore_other_fs=") + (ignore_other_fs ? "1" : "0");
 	params += std::string("&follow_symlinks=") + (follow_symlinks ? "1" : "0");
-	params += std::string("&restore_flags=") + convert(restore_flags);
+	params += std::string("&restore_flags=") + nconvert(restore_flags);
 
 	std::string res = getResponse("DOWNLOAD FILES TOKENS",
 		params, false, NULL, 120000);
@@ -549,6 +549,29 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
+namespace
+{
+	//Response is {"status": ..., "result": {"ok": ..., "start_id": ...}}
+	int startResponseCode(const std::string& d)
+	{
+		Json::Value root;
+		Json::Reader reader;
+		if (!reader.parse(d, root, false))
+			return 0;
+
+		std::string status = root.get("status", "").asString();
+
+		if(status=="RUNNING")
+			return 2;
+		else if(status=="NO SERVER")
+			return 3;
+		else if(status!="OK")
+			return 0;
+		else
+			return 1;
+	}
+}
+
 int Connector::startBackup(bool full)
 {
 	std::string s;
@@ -557,16 +580,7 @@ int Connector::startBackup(bool full)
 	else
 		s="START BACKUP INCR";
 
-	std::string d=getResponse(s,"", false);
-
-	if(d=="RUNNING")
-		return 2;
-	else if(d=="NO SERVER")
-		return 3;
-	else if(d!="OK")
-		return 0;
-	else
-		return 1;
+	return startResponseCode(getResponse(s,"", false));
 }
 
 int Connector::startImage(bool full)
@@ -577,16 +591,7 @@ int Connector::startImage(bool full)
 	else
 		s="START IMAGE INCR";
 
-	std::string d=getResponse(s,"", false);
-
-	if(d=="RUNNING")
-		return 2;
-	else if(d=="NO SERVER")
-		return 3;
-	else if(d!="OK")
-		return 0;
-	else
-		return 1;
+	return startResponseCode(getResponse(s,"", false));
 }
 
 bool Connector::updateSettings(const std::string &ndata, size_t timeoutms)

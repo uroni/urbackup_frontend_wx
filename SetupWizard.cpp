@@ -429,7 +429,7 @@ namespace
 					wchar_t fs_name[MAX_PATH+1];
 					if(GetVolumeInformation(new_volume.c_str(), NULL, 0, NULL, NULL, NULL,fs_name,MAX_PATH+1))
 					{
-						is_ntfs = strlower(std::wstring(fs_name))=="ntfs";
+						is_ntfs = strlower(std::wstring(fs_name))==L"ntfs";
 					}
 
 					if(is_ntfs)
