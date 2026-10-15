@@ -549,6 +549,29 @@ bool Connector::saveSharedPaths(const std::vector<SBackupDir> &res)
 		return true;
 }
 
+namespace
+{
+	//Response is {"status": ..., "result": {"ok": ..., "start_id": ...}}
+	int startResponseCode(const std::string& d)
+	{
+		Json::Value root;
+		Json::Reader reader;
+		if (!reader.parse(d, root, false))
+			return 0;
+
+		std::string status = root.get("status", "").asString();
+
+		if(status=="RUNNING")
+			return 2;
+		else if(status=="NO SERVER")
+			return 3;
+		else if(status!="OK")
+			return 0;
+		else
+			return 1;
+	}
+}
+
 int Connector::startBackup(bool full)
 {
 	std::string s;
@@ -557,16 +580,7 @@ int Connector::startBackup(bool full)
 	else
 		s="START BACKUP INCR";
 
-	std::string d=getResponse(s,"", false);
-
-	if(d=="RUNNING")
-		return 2;
-	else if(d=="NO SERVER")
-		return 3;
-	else if(d!="OK")
-		return 0;
-	else
-		return 1;
+	return startResponseCode(getResponse(s,"", false));
 }
 
 int Connector::startImage(bool full)
@@ -577,16 +591,7 @@ int Connector::startImage(bool full)
 	else
 		s="START IMAGE INCR";
 
-	std::string d=getResponse(s,"", false);
-
-	if(d=="RUNNING")
-		return 2;
-	else if(d=="NO SERVER")
-		return 3;
-	else if(d!="OK")
-		return 0;
-	else
-		return 1;
+	return startResponseCode(getResponse(s,"", false));
 }
 
 bool Connector::updateSettings(const std::string &ndata, size_t timeoutms)
