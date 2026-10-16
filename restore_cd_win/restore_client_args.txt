@@ -1,0 +1,16 @@
+--cmdline
+--plugin
+fileservplugin.dll
+--plugin
+fsimageplugin.dll
+--plugin
+cryptoplugin.dll
+--plugin
+urbackup.dll
+--no-server
+--restore_mode
+true
+--logfile
+X:\urbackup_restore\restore_client.log
+--loglevel
+debug

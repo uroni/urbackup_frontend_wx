@@ -1,0 +1,24 @@
+{
+  "policies": {
+    "DisableAppUpdate": true,
+    "SkipTermsOfUse": true,
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DontCheckDefaultBrowser": true,
+    "NoDefaultBookmarks": true,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "UserMessaging": {
+      "WhatsNew": false,
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false
+    },
+    "Homepage": {
+      "URL": "http://127.0.0.1/",
+      "StartPage": "homepage"
+    }
+  }
+}
