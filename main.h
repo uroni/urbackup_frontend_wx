@@ -36,6 +36,8 @@ private:
 	wxLocale m_locale;
 };
 
+wxString formatBackupTime(const wxDateTime& dt);
+
 class MyTimer : public wxTimer
 {
 public:

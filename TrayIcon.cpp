@@ -55,9 +55,12 @@
 #define ID_TI_UNINSTALL 114
 #define ID_TI_CONFIG_COMPONENTS 115
 #define ID_TI_RESTORE_COMPONENTS 116
+#define ID_TI_STATUS_LINE 117
+#define ID_TI_STATUS_LINE_2 118
 
 extern MyTimer *timer;
 extern bool backup_is_running;
+extern wxString last_status;
 bool b_is_pausing=false;
 extern MyTimer *timer;
 
@@ -321,6 +324,19 @@ void TrayIcon::OnClick(wxCommandEvent &evt)
 wxMenu* TrayIcon::CreatePopupMenu(void)
 {
 	wxMenu *mnu=new wxMenu();
+
+	// The current state at the top, so it can be read without hovering.
+	if(!last_status.empty())
+	{
+		wxString first_line=last_status.BeforeFirst('\n');
+		mnu->Append(ID_TI_STATUS_LINE, first_line)->Enable(false);
+		wxString second_line=last_status.AfterFirst('\n');
+		if(!second_line.empty())
+		{
+			mnu->Append(ID_TI_STATUS_LINE_2, second_line)->Enable(false);
+		}
+		mnu->AppendSeparator();
+	}
 
 	if(timer->hasCapability(ALLOW_TOKEN_AUTHENTICATION))
 	{

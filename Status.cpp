@@ -273,11 +273,11 @@ bool Status::updateStatus(int errcnt)
 		{
 			wxDateTime lastbackup_dt((wxLongLong)(status_details.last_backup_time * 1000));
 
-			m_staticText37->SetLabel(trans_1(_("Last backup on _1_"), lastbackup_dt.Format()));
+			m_staticText37->SetLabel(trans_1(_("Last backup: _1_"), formatBackupTime(lastbackup_dt)));
 		}
 		else
 		{
-			m_staticText37->SetLabel(wxEmptyString);
+			m_staticText37->SetLabel(_("Not backed up yet."));
 		}
 
 		wxString servers_text;
