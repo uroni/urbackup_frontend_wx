@@ -556,6 +556,25 @@ wxString getStatusText(wxString status)
 	return wxT("");
 }
 
+/**
+ * "today at 14:02", "yesterday at 09:10" or the date and time, for the
+ * tray tooltip and menu.
+ */
+wxString formatBackupTime(const wxDateTime& dt)
+{
+	wxDateTime today = wxDateTime::Today();
+	wxString time = dt.Format(wxT("%H:%M"));
+	if(dt.IsLaterThan(today) || dt.IsEqualTo(today))
+	{
+		return trans_1(_("today at _1_"), time);
+	}
+	if(dt.IsLaterThan(today - wxDateSpan::Day()) || dt.IsEqualTo(today - wxDateSpan::Day()))
+	{
+		return trans_1(_("yesterday at _1_"), time);
+	}
+	return dt.FormatDate()+wxT(" ")+time;
+}
+
 wxString getPercentText(wxString pcdone)
 {
 	wxString ret;
@@ -821,15 +840,11 @@ void MyTimer::Notify()
 		status.status==wxT("R_INCR") ||
 		status.status==wxT("R_FULL"))
 	{
-		status_text+=getStatusText(status.status)+wxT(" ");
-		status_text+=getPercentText(status.pcdone);
 		icon_type=ETrayIcon_PROGRESS;
 		backup_is_running=true;
-
 	}
 	else if(status.status==wxT("NO_RECENT"))
 	{	
-		status_text+=wxString(_("No current backup.")) + wxT(" ");
 		icon_type=ETrayIcon_NO_RECENT;
 		backup_is_running=false;
 	}
@@ -837,17 +852,6 @@ void MyTimer::Notify()
 	{
 		icon_type=ETrayIcon_OK;
 		backup_is_running=false;
-	}
-
-	if(!status.lastbackupdate.Trim().empty() )
-	{
-		wxLongLong_t lastbackups;
-		if(status.lastbackupdate.ToLongLong(&lastbackups))
-		{
-			wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
-
-			status_text+=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
-		}	
 	}
 
 	if(status.pause && icon_type==ETrayIcon_PROGRESS)
@@ -862,6 +866,47 @@ void MyTimer::Notify()
 		&& !status.has_server )
 	{
 		icon_type=ETrayIcon_NO_SERVER;
+	}
+
+	bool has_last_backup=false;
+	wxDateTime lastbackup_dt;
+	if(!status.lastbackupdate.Trim().empty() )
+	{
+		wxLongLong_t lastbackups;
+		if(status.lastbackupdate.ToLongLong(&lastbackups))
+		{
+			lastbackup_dt=wxDateTime((wxLongLong)(lastbackups*1000));
+			has_last_backup=true;
+		}	
+	}
+
+	// One plain sentence per tray state, then when the last backup finished.
+	switch(icon_type)
+	{
+	case ETrayIcon_PROGRESS:
+	case ETrayIcon_INDEXING:
+		status_text+=getStatusText(status.status)+wxT(" ");
+		status_text+=getPercentText(status.pcdone);
+		break;
+	case ETrayIcon_PAUSED:
+		status_text+=wxString(_("Backup paused."))+wxT(" ");
+		status_text+=getPercentText(status.pcdone);
+		break;
+	case ETrayIcon_NO_SERVER:
+		status_text+=_("No backup server found.");
+		break;
+	case ETrayIcon_NO_RECENT:
+		status_text+=_("No current backup.");
+		break;
+	default:
+		status_text+=has_last_backup ? _("Backups are up to date.") : _("Not backed up yet.");
+		break;
+	}
+	status_text.Trim();
+
+	if(has_last_backup)
+	{
+		status_text+=wxT("\n")+trans_1(_("Last backup: _1_"), formatBackupTime(lastbackup_dt));
 	}
 
 	b_is_pausing=status.pause;
