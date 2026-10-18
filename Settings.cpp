@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "Settings.h"
+#include "branding.h"
 #include "stringtools.h"
 #include "main.h"
 #include "capa_bits.h"
@@ -636,14 +637,14 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!update_freq_incr.ToCDouble(&l_update_freq_incr)
 		&& settings_info[L"update_freq_incr"].use==c_use_value_client )
 	{
-		wxMessageBox( _("The incremental backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The incremental backup interval is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl1->SetFocus();
 		return;
 	}
 	if(!update_freq_full.ToLong(&l_update_freq_full)
 		&& settings_info[L"update_freq_full"].use==c_use_value_client)
 	{
-		wxMessageBox( _("The full backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The full backup interval  is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
 		return;
 	}
@@ -653,14 +654,14 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			&& m_checkBox1_2->GetValue()
 			&& settings_info[L"update_freq_image_full"].use == c_use_value_client)
 		{
-			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("The full image backup interval  is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl22->SetFocus();
 			return;
 		}
 		if(!update_freq_image_incr.ToLong(&l_update_freq_image_incr) && m_checkBox1->GetValue()
 			&& settings_info[L"update_freq_image_incr"].use == c_use_value_client)
 		{
-			wxMessageBox( _("The incremental image backup time is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("The incremental image backup time is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl21->SetFocus();
 			return;
 		}
@@ -670,28 +671,28 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		if (!max_file_incr.ToLong(&l_max_file_incr)
 			&& settings_info[L"max_file_incr"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("The maximal number of incremental file backups  is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl131->SetFocus();
 			return;
 		}
 		if (!min_file_incr.ToLong(&l_min_file_incr)
 			&& settings_info[L"min_file_incr"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The minimal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("The minimal number of incremental file backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl13->SetFocus();
 			return;
 		}
 		if (!max_file_full.ToLong(&l_max_file_full)
 			&& settings_info[L"max_file_full"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The maximal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("The maximal number of full file backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl133->SetFocus();
 			return;
 		}
 		if (!min_file_full.ToLong(&l_min_file_full)
 			&& settings_info[L"min_file_full"].use == c_use_value_client)
 		{
-			wxMessageBox(_("Minimal number of full file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("Minimal number of full file backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl132->SetFocus();
 			return;
 		}
@@ -700,28 +701,28 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			if (!min_image_incr.ToLong(&l_min_image_incr)
 				&& settings_info[L"min_image_incr"].use == c_use_value_client)
 			{
-				wxMessageBox(_("Minimal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox(_("Minimal number of incremental image backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl134->SetFocus();
 				return;
 			}
 			if (!max_image_incr.ToLong(&l_max_image_incr)
 				&& settings_info[L"max_image_incr"].use == c_use_value_client)
 			{
-				wxMessageBox(_("Maximal number of incremental image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox(_("Maximal number of incremental image backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl135->SetFocus();
 				return;
 			}
 			if (!min_image_full.ToLong(&l_min_image_full)
 				&& settings_info[L"min_image_full"].use == c_use_value_client)
 			{
-				wxMessageBox(_("Minimal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox(_("Minimal number of full image backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl136->SetFocus();
 				return;
 			}
 			if (!max_image_full.ToLong(&l_max_image_full)
 				&& settings_info[L"max_image_full"].use == c_use_value_client)
 			{
-				wxMessageBox(_("Maximal number of full image backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox(_("Maximal number of full image backups is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 				m_textCtrl137->SetFocus();
 				return;
 			}
@@ -730,7 +731,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!startup_backup_delay.ToLong(&l_startup_backup_delay)
 		&& settings_info[L"start_backup_delay"].use == c_use_value_client)
 	{
-		wxMessageBox( _("Backup delay after system start is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("Backup delay after system start is not a number"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl19->SetFocus();
 		return;
 	}
@@ -752,7 +753,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 
 				if(hVolume==INVALID_HANDLE_VALUE && GetLastError()!=ERROR_ACCESS_DENIED)
 				{
-					wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+					wxMessageBox( trans_1(_("_1_ is not a volume"), ConvertToUnicode(img_paths[i])), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 					m_textCtrl23->SetFocus();
 					return;
 				}
@@ -766,7 +767,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 #endif
 	if(!internet_server_port.ToLong(&l_internet_server_port))
 	{
-		wxMessageBox( _("The server port is not valid"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The server port is not valid"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrlInternetServer->SetFocus();
 		return;
 	}

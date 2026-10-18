@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "Logs.h"
+#include "branding.h"
 
 extern wxString res_path;
 extern wxString ico_ext;
@@ -32,7 +33,7 @@ Logs::Logs(wxWindow* parent) : GUILogfiles(parent)
 
 	if(Connector::hasError())
 	{
-		wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
+		wxMessageBox(_("There was an error. Currently nothing can be backed up."), URBACKUP_APP_NAME, wxOK|wxICON_ERROR);
 		Hide();
 		Close();
 		return;

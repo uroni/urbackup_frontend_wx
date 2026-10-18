@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "TrayIcon.h"
+#include "branding.h"
 #include "ConfigPath.h"
 #include "main.h"
 #include "stringtools.h"
@@ -101,7 +102,7 @@ HRESULT initCom()
 
 	if (hr != S_OK)
 	{
-		wxMessageBox(wxString::Format(_("CoInitializeSecurity failed: %08x"), hr), wxT("UrBackup"), wxOK | wxICON_ERROR);
+		wxMessageBox(wxString::Format(_("CoInitializeSecurity failed: %08x"), hr), URBACKUP_APP_NAME, wxOK | wxICON_ERROR);
 	}
 
 	return hr;
@@ -357,7 +358,7 @@ bool MyApp::OnInit()
 		SetTopWindow(new TheFrame);
 
 		tray=new TrayIcon;
-		bool b=tray->SetIcon(getAppIcon(wxT("backup-ok")), wxT("UrBackup Client"));
+		bool b=tray->SetIcon(getAppIcon(wxT("backup-ok")), URBACKUP_APP_NAME_CLIENT);
 		if(!b)
 		{
 			std::cout << "Setting icon failed." << std::endl;

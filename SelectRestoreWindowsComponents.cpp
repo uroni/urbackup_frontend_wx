@@ -1,4 +1,5 @@
 #include "SelectRestoreWindowsComponents.h"
+#include "branding.h"
 #include "checked.xpm"
 #include "unchecked.xpm"
 #include <wx/filename.h>
@@ -75,7 +76,7 @@ void SelectRestoreComponents::Notify(void)
 		{
 			Stop();
 			wxMessageBox(_("Error retrieving Windows component backups: ") + 
-				accessErrorToString(retrieveComponentBackups.getAccessError()), wxT("UrBackup"), wxOK | wxICON_ERROR);
+				accessErrorToString(retrieveComponentBackups.getAccessError()), URBACKUP_APP_NAME, wxOK | wxICON_ERROR);
 			Start(200);
 			return;
 		}
@@ -113,7 +114,7 @@ void SelectRestoreComponents::Notify(void)
 			}
 			Stop();
 			wxMessageBox(_("Error retrieving Windows component configuration: ") +
-				errmsg, wxT("UrBackup"), wxOK | wxICON_ERROR);
+				errmsg, URBACKUP_APP_NAME, wxOK | wxICON_ERROR);
 			Start(200);
 			retrieveComponentConfig.reset();
 			return;
@@ -186,7 +187,7 @@ void SelectRestoreComponents::onStartRestore(wxCommandEvent & event)
 {
 	if (backupid == 0)
 	{
-		wxMessageBox(_("No backup was selected"), wxT("UrBackup"), wxOK | wxICON_ERROR);
+		wxMessageBox(_("No backup was selected"), URBACKUP_APP_NAME, wxOK | wxICON_ERROR);
 		return;
 	}
 
@@ -207,7 +208,7 @@ void SelectRestoreComponents::onStartRestore(wxCommandEvent & event)
 
 	if (selected_components.empty())
 	{
-		wxMessageBox(_("No components selected"), wxT("UrBackup"), wxOK | wxICON_ERROR);
+		wxMessageBox(_("No components selected"), URBACKUP_APP_NAME, wxOK | wxICON_ERROR);
 		return;
 	}
 

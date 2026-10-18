@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "TrayIcon.h"
+#include "branding.h"
 #include "main.h"
 #include "Connector.h"
 #include "Info.h"
@@ -181,11 +182,11 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
 			}
 			else if(rc==2)
-				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_EXCLAMATION);
+				wxMessageBox( _("A backup is already running. Could not start another one."), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_EXCLAMATION);
 			else if(rc==3)
-				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"),  wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox( _("Could not start backup, because no backup server was found."), URBACKUP_APP_NAME,  wxOK | wxCENTRE | wxICON_ERROR);
 			else
-				wxMessageBox( _("Could not start backup."), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+				wxMessageBox( _("Could not start backup."), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 
 		}break;
 	case ID_TI_SETTINGS:
@@ -206,11 +207,11 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 				SetIcon(getAppIcon(wxT("backup-progress")), _("Waiting for server..."));
 			}
 			else if(rc==2)
-				wxMessageBox( _("A backup is already running. Could not start another one."), wxT("UrBackup"), wxICON_EXCLAMATION);
+				wxMessageBox( _("A backup is already running. Could not start another one."), URBACKUP_APP_NAME, wxICON_EXCLAMATION);
 			else if(rc==3)
-				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
+				wxMessageBox( _("Could not start backup, because no backup server was found."), URBACKUP_APP_NAME, wxICON_ERROR);
 			else
-				wxMessageBox( _("Could not start backup, because no backup server was found."), wxT("UrBackup"), wxICON_ERROR);
+				wxMessageBox( _("Could not start backup, because no backup server was found."), URBACKUP_APP_NAME, wxICON_ERROR);
 		}break;
 	case ID_TI_PAUSE:
 		{
@@ -220,7 +221,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			}
 			else
 			{
-				wxMessageBox( _("Pausing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
+				wxMessageBox( _("Pausing failed: No connection to backup server."), URBACKUP_APP_NAME, wxICON_ERROR);
 			}
 		}break;
 	case ID_TI_CONTINUE:
@@ -231,7 +232,7 @@ void TrayIcon::OnPopupClick(wxCommandEvent &evt)
 			}
 			else
 			{
-				wxMessageBox( _("Continuing failed: No connection to backup server."), wxT("UrBackup"), wxICON_ERROR);
+				wxMessageBox( _("Continuing failed: No connection to backup server."), URBACKUP_APP_NAME, wxICON_ERROR);
 			}
 		}break;
 	case ID_TI_INFO:
@@ -575,7 +576,7 @@ void TrayIcon::accessBackups( wxString path )
 
 	if(tokens.empty())
 	{
-		wxMessageBox( _("No rights to access any files."), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("No rights to access any files."), URBACKUP_APP_NAME, wxICON_ERROR);
 	}
 
 	std::string params = Connector::getAccessParameters(tokens);
@@ -624,6 +625,6 @@ void TrayIcon::accessBackups( wxString path )
 	}
 	else
 	{
-		wxMessageBox( _("Error getting server URL. Cannot access files."), wxT("UrBackup"), wxICON_ERROR);
+		wxMessageBox( _("Error getting server URL. Cannot access files."), URBACKUP_APP_NAME, wxICON_ERROR);
 	}
 }

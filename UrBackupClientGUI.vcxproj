@@ -352,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="capa_bits.h" />
+    <ClInclude Include="branding.h" />
     <ClInclude Include="CbtStatus.h" />
     <ClInclude Include="ConfigPath.h" />
     <ClInclude Include="Connector.h" />

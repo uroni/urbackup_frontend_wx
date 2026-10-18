@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "Status.h"
+#include "branding.h"
 #include "main.h"
 #include "TranslationHelper.h"
 #include "stringtools.h"
@@ -148,7 +149,7 @@ bool Status::updateStatus(int errcnt)
 		if(errcnt-1<=0)
 		{
 			Stop();
-			wxMessageBox(_("There was an error. Currently nothing can be backed up."), wxT("UrBackup"), wxOK|wxICON_ERROR);
+			wxMessageBox(_("There was an error. Currently nothing can be backed up."), URBACKUP_APP_NAME, wxOK|wxICON_ERROR);
 			Close();
 		}
 		return false;

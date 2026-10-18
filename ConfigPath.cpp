@@ -17,6 +17,7 @@
 **************************************************************************/
 
 #include "ConfigPath.h"
+#include "branding.h"
 #include "stringtools.h"
 #include "FileSettingsReader.h"
 #include "Settings.h"
@@ -188,7 +189,7 @@ void ConfigPath::OnClickOk(wxCommandEvent &evt)
 		}
 		if (!Connector::saveSharedPaths(dirs_client))
 		{
-			wxMessageBox(_("Saving the changed paths to backup failed"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("Saving the changed paths to backup failed"), URBACKUP_APP_NAME, wxOK | wxCENTRE | wxICON_ERROR);
 			return;
 		}
 	}
