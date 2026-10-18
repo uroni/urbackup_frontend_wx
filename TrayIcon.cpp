@@ -342,7 +342,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		}
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_FILE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), _("Do a incremental file backup now"));
+			mnu->Append(ID_TI_BACKUP_INCR, _("Do incremental file backup"), _("Do an incremental file backup now"));
 			any_prev=true;
 		}		
 	}
@@ -356,7 +356,7 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		}
 		if(!timer->hasCapability(DONT_ALLOW_STARTING_INCR_IMAGE_BACKUPS))
 		{
-			mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), _("Do a incremental image backup now"));
+			mnu->Append(ID_TI_BACKUP_IMAGE_INCR, _("Do incremental image backup"), _("Do an incremental image backup now"));
 			any_prev=true;
 		}
 	}

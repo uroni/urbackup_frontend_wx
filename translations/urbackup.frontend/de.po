@@ -495,11 +495,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Das inkrementelle Datensicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Das vollständige Datensicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Das vollständige Abbildsicherungsintervall ist keine Zahl"
 
 #: Settings.cpp:529
@@ -507,7 +507,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Die inkrementelle Abbildsicherungszeit ist keine Zahl"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "Die maximale Anzahl an inkrementellen Dateisicherungen ist keine Zahl"
 
 #: Settings.cpp:543
@@ -693,7 +693,7 @@ msgid "Do incremental file backup"
 msgstr "Inkrementelle Dateisicherung ausführen"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Eine inkrementelle Dateisicherung jetzt ausführen"
 
 #: TrayIcon.cpp:344
@@ -709,7 +709,7 @@ msgid "Do incremental image backup"
 msgstr "Inkrementelle Abbildsicherung ausführen"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Eine inkrementelle Abbildsicherung jetzt ausführen"
 
 #: TrayIcon.cpp:377

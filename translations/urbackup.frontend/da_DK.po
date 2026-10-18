@@ -490,11 +490,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Tidsangivelse for inkremental fil-sikkerhedskopier er ikke et tal"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Tidsangivelse for komplet fil-sikkerhedskopi er ikke et tal"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Tidsangivelse for komplet spejl-sikkerhedskopi er ikke et tal"
 
 #: Settings.cpp:529
@@ -502,7 +502,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Tidsangivelse for inkremental spejl-sikkerhedskopi er ikke et tal"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "Maks. antal af inkrementale fil-sikkerhedskopier er ikke et tal"
 
 #: Settings.cpp:543
@@ -688,7 +688,7 @@ msgid "Do incremental file backup"
 msgstr "Udfør inkremental fil-sikkerhedskopi"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Foretag en inkremental filsikkerhedskopi nu"
 
 #: TrayIcon.cpp:344
@@ -704,7 +704,7 @@ msgid "Do incremental image backup"
 msgstr "Udfør inkremental spejl-sikkerhedskopi"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Foretag en inkremental spejl-sikkerhedskopi nu"
 
 #: TrayIcon.cpp:377

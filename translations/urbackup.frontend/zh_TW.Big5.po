@@ -492,11 +492,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "增量備份時間間隔需要一個數字值"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "完整備份時間間隔需要一個數字值"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "磁碟鏡像完整備份時間間隔需要一個數字值"
 
 #: Settings.cpp:529
@@ -504,7 +504,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "磁碟鏡像增量備時間需要一個數字值"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "檔案增量備份數之上限需要一個數字值"
 
 #: Settings.cpp:543
@@ -687,7 +687,7 @@ msgid "Do incremental file backup"
 msgstr "執行檔案增量備份"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr ""
 
 #: TrayIcon.cpp:344
@@ -703,7 +703,7 @@ msgid "Do incremental image backup"
 msgstr "執行磁碟鏡像增量備份"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr ""
 
 #: TrayIcon.cpp:377

@@ -490,11 +490,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Do kolonky „Interval přírůstkových záloh souborů“ vyplňte číslo"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Do kolonky „Interval úplných záloh“ vyplňte číslo"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Do kolonky „Interval úplných záloh celých svazků“ vyplňte číslo"
 
 #: Settings.cpp:529
@@ -502,7 +502,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Do kolonky „Časové rozmezí přírůstkových souborových záloh“ vyplňte číslo"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "Do kolonky „Maximální počet přírůstkových souborových záloh“ vyplňte číslo"
 
 #: Settings.cpp:543
@@ -694,7 +694,7 @@ msgid "Do incremental file backup"
 msgstr "Spustit přírůstkovou souborovou zálohu"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Spustit přírůstkovou souborovou zálohu nyní"
 
 #: TrayIcon.cpp:344
@@ -710,7 +710,7 @@ msgid "Do incremental image backup"
 msgstr "Spustit přírůstkovou zálohu celých svazků"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Spustit přírůstkovou zálohu celých svazků nyní"
 
 #: TrayIcon.cpp:377

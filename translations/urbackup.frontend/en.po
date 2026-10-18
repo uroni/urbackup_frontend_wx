@@ -514,20 +514,20 @@ msgid "The incremental backup interval is not a number"
 msgstr "The incremental backup interval is not a number"
 
 #: Settings.cpp:640
-msgid "The full backup interval  is not a number"
-msgstr "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
+msgstr "The full backup interval is not a number"
 
 #: Settings.cpp:651
-msgid "The full image backup interval  is not a number"
-msgstr "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
+msgstr "The full image backup interval is not a number"
 
 #: Settings.cpp:658
 msgid "The incremental image backup time is not a number"
 msgstr "The incremental image backup time is not a number"
 
 #: Settings.cpp:667
-msgid "The maximal number of incremental file backups  is not a number"
-msgstr "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
+msgstr "The maximal number of incremental file backups is not a number"
 
 #: Settings.cpp:674
 msgid "The minimal number of incremental file backups is not a number"
@@ -712,8 +712,8 @@ msgid "Do incremental file backup"
 msgstr "Do incremental file backup"
 
 #: TrayIcon.cpp:345
-msgid "Do a incremental file backup now"
-msgstr "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
+msgstr "Do an incremental file backup now"
 
 #: TrayIcon.cpp:354
 msgid "Do full image backup"
@@ -728,8 +728,8 @@ msgid "Do incremental image backup"
 msgstr "Do incremental image backup"
 
 #: TrayIcon.cpp:359
-msgid "Do a incremental image backup now"
-msgstr "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
+msgstr "Do an incremental image backup now"
 
 #: TrayIcon.cpp:387
 msgid "Configure components to backup"

@@ -489,11 +489,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Intervalul pentru copiile de rezervă incrementale nu este un număr"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Intervalul pentru copiile de rezervă întregi nu este un număr"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Intervalul pentru copiile de rezervă întregi imagine nu este un număr"
 
 #: Settings.cpp:529
@@ -501,7 +501,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Timpul pentru copia de rezervă incrementală imagine nu este un număr."
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "Numărul maximal al copiilor de rezervă incrementale fișier nu este un număr"
 
 #: Settings.cpp:543
@@ -690,7 +690,7 @@ msgid "Do incremental file backup"
 msgstr "Fă copie de rezervă incrementală fișier"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Fă acum o copie de rezervă incrementală fișier"
 
 #: TrayIcon.cpp:344
@@ -706,7 +706,7 @@ msgid "Do incremental image backup"
 msgstr "Fă copie de rezervă incrementală imagine"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Fă acum o copie de rezervă incrementală imagine"
 
 #: TrayIcon.cpp:377

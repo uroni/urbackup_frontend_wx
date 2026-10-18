@@ -494,11 +494,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Интервал создания инкрементальных бэкапов не является числом"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Интервал создания полных файловых бэкапов не является числом"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Интервал создания полных образов не является числом"
 
 #: Settings.cpp:529
@@ -506,7 +506,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Интервал создания инкрементальных образов не является числом"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "Максимальное количество инкрементальных бэкапов файлов не является числом"
 
 #: Settings.cpp:543
@@ -698,7 +698,7 @@ msgid "Do incremental file backup"
 msgstr "Сделать инкрементальный бэкап файлов"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Сделать инкрементальный файловый бэкап"
 
 #: TrayIcon.cpp:344
@@ -714,7 +714,7 @@ msgid "Do incremental image backup"
 msgstr "Сделать инкрементальный образ"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Сделать инкрементальный образ"
 
 #: TrayIcon.cpp:377

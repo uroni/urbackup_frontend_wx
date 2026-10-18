@@ -488,11 +488,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "Artımlı yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "Tam yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "Tam kalıp yedekleme aralığı bir rakam değil"
 
 #: Settings.cpp:529
@@ -500,7 +500,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "Artımlı kalıp yedekleme zamanı bir rakam değil"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "En fazla artımlı dosya yedekleme sayısı bir rakam değil"
 
 #: Settings.cpp:543
@@ -686,7 +686,7 @@ msgid "Do incremental file backup"
 msgstr "Artımlı dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr "Şimdi artımlı dosya yedeklemesi yap"
 
 #: TrayIcon.cpp:344
@@ -702,7 +702,7 @@ msgid "Do incremental image backup"
 msgstr "Artımlı kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr "Şimdi artımlı kalıp yedeklemesi yap"
 
 #: TrayIcon.cpp:377

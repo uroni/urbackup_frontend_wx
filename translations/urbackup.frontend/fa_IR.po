@@ -489,11 +489,11 @@ msgid "The incremental backup interval is not a number"
 msgstr "بازه پشتیبان گیری افزایشی عدد نیست"
 
 #: Settings.cpp:514
-msgid "The full backup interval  is not a number"
+msgid "The full backup interval is not a number"
 msgstr "بازه پشتیبان گیری کامل عدد نیست"
 
 #: Settings.cpp:523
-msgid "The full image backup interval  is not a number"
+msgid "The full image backup interval is not a number"
 msgstr "زمان پشتیبان گیری کامل تصویر عدد نیست"
 
 #: Settings.cpp:529
@@ -501,7 +501,7 @@ msgid "The incremental image backup time is not a number"
 msgstr "زمان پشتیبان گیری افزایشی تصویر عدد نیست"
 
 #: Settings.cpp:537
-msgid "The maximal number of incremental file backups  is not a number"
+msgid "The maximal number of incremental file backups is not a number"
 msgstr "بیشترین تعداد پشتیبان گیری افزایشی فایل عدد نیست"
 
 #: Settings.cpp:543
@@ -687,7 +687,7 @@ msgid "Do incremental file backup"
 msgstr "پشتیبان گیری افزایشی فایل"
 
 #: TrayIcon.cpp:335
-msgid "Do a incremental file backup now"
+msgid "Do an incremental file backup now"
 msgstr ""
 
 #: TrayIcon.cpp:344
@@ -703,7 +703,7 @@ msgid "Do incremental image backup"
 msgstr "پشتیبان گیری افزایشی تصویر"
 
 #: TrayIcon.cpp:349
-msgid "Do a incremental image backup now"
+msgid "Do an incremental image backup now"
 msgstr ""
 
 #: TrayIcon.cpp:377

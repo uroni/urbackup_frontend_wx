@@ -643,7 +643,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 	if(!update_freq_full.ToLong(&l_update_freq_full)
 		&& settings_info[L"update_freq_full"].use==c_use_value_client)
 	{
-		wxMessageBox( _("The full backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageBox( _("The full backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 		m_textCtrl2->SetFocus();
 		return;
 	}
@@ -653,7 +653,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 			&& m_checkBox1_2->GetValue()
 			&& settings_info[L"update_freq_image_full"].use == c_use_value_client)
 		{
-			wxMessageBox( _("The full image backup interval  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox( _("The full image backup interval is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl22->SetFocus();
 			return;
 		}
@@ -670,7 +670,7 @@ void Settings::OnOkClick( wxCommandEvent& event )
 		if (!max_file_incr.ToLong(&l_max_file_incr)
 			&& settings_info[L"max_file_incr"].use == c_use_value_client)
 		{
-			wxMessageBox(_("The maximal number of incremental file backups  is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageBox(_("The maximal number of incremental file backups is not a number"), wxT("UrBackup"), wxOK | wxCENTRE | wxICON_ERROR);
 			m_textCtrl131->SetFocus();
 			return;
 		}
