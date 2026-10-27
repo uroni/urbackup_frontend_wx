@@ -696,7 +696,13 @@ SStatusDetails Connector::getStatusDetails(SConnection* connection)
 			running_processes[i].percent_done = json_running_processes[i]["percent_done"].asInt();
 			running_processes[i].eta_ms = json_running_processes[i]["eta_ms"].asInt64();
 
-			running_processes[i].details = json_running_processes[i].get("details", std::string()).asString();
+			std::string details = json_running_processes[i].get("details", std::string()).asString();
+			//The details contain file names, which are UTF-8
+			running_processes[i].details = wxString::FromUTF8(details.c_str());
+			if (running_processes[i].details.empty() && !details.empty())
+			{
+				running_processes[i].details = wxString::From8BitData(details.c_str());
+			}
 			running_processes[i].detail_pc = json_running_processes[i].get("detail_pc", -1).asInt();
 
 			running_processes[i].process_id = json_running_processes[i].get("process_id", 0).asInt64();

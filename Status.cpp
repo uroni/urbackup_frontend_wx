@@ -29,6 +29,22 @@ const int reset_error_count=20;
 
 namespace
 {
+	//Text of a running file backup (phase, current file) as sent by the server.
+	//The server text contains file names of the client, so it is shown as plain text:
+	//'&' must not become a keyboard mnemonic of the label. Long paths are shortened in the middle.
+	wxString getFileBackupDetailsText(const wxString& details)
+	{
+		const size_t max_len = 110;
+
+		wxString text = details;
+		if (text.length() > max_len)
+		{
+			text = text.Left(max_len / 2 - 2) + wxT("...") + text.Right(max_len / 2 - 1);
+		}
+
+		return wxControl::EscapeMnemonics(text);
+	}
+
 	wxString getInternetConnectionStatus(wxString str, unsigned int last_seen)
 	{
 		if(str==wxT("initializing"))
@@ -223,6 +239,11 @@ bool Status::updateStatus(int errcnt)
 				else if (proc.action == "INCRI" || proc.action == "FULLI")
 				{
 					eta_text += trans_1(_("Volume: _1_"), proc.details);
+				}
+				else if (proc.action == "INCR" || proc.action == "FULL"
+					|| proc.action == "R_INCR" || proc.action == "R_FULL")
+				{
+					eta_text += getFileBackupDetailsText(proc.details);
 				}
 
 				if (proc.detail_pc != -1)
