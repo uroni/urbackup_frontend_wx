@@ -462,6 +462,23 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer_client->Add( bSizer331, 0, wxEXPAND, 5 );
 
 #ifdef _WIN32
+	wxBoxSizer* bSizerPreventSleep;
+	bSizerPreventSleep = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticTextPreventSleep = new wxStaticText( m_tab_client, wxID_ANY, _("Prevent sleep during backups:"), wxDefaultPosition, left_column_size, 0 );
+	m_staticTextPreventSleep->Wrap( -1 );
+	bSizerPreventSleep->Add( m_staticTextPreventSleep, 0, wxALIGN_CENTER|wxALL, 5 );
+
+	m_checkBoxPreventSleep = new wxCheckBox( m_tab_client, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerPreventSleep->Add( m_checkBoxPreventSleep, 0, wxALL, 5 );
+
+	m_bitmapButtonPreventSleep = new wxBitmapButton(m_tab_client, wxID_ANY, fa_home_img_scaled, wxPoint(-1, -1), image_button_size, 0);
+	bSizerPreventSleep->Add(m_bitmapButtonPreventSleep, 0, wxALIGN_CENTER | wxALL, 5);
+
+	bSizer_client->Add( bSizerPreventSleep, 0, wxEXPAND, 5 );
+#endif
+
+#ifdef _WIN32
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		wxBoxSizer* bSizer441;
@@ -680,6 +697,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_bitmapButton16->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton161->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	m_bitmapButton17->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+#ifdef _WIN32
+	m_bitmapButtonPreventSleep->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
+#endif
 	m_bitmapButton19->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
 	
 	m_bitmapButtonLocalSpeed->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GUISettings::OnBitmapBtnClick), NULL, this);
@@ -721,6 +741,9 @@ GUISettings::GUISettings( wxWindow* parent, wxWindowID id, const wxString& title
 	m_textCtrlInternetSpeed->Connect(wxEVT_TEXT, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_checkBoxInternetCompress->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
 	m_checkBoxInternetEncrypt->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+#ifdef _WIN32
+	m_checkBoxPreventSleep->Connect(wxEVT_CHECKBOX, wxCommandEventHandler(GUISettings::OnCtlChange), NULL, this);
+#endif
 }
 
 GUISettings::~GUISettings()

@@ -36,10 +36,19 @@ private:
 	static Status* instance;
 
 	bool updateStatus(int errcnt);
+	void updateStatusFlags();
 
 	SStatusDetails last_status_details;
 
 	SConnection connection;
+
+	SStatus status_flags;
+	bool paused;
+	int keeping_awake;
+	int prevent_sleep;
+	long long pause_until;
+	int last_keeping_awake;
+	int last_prevent_sleep;
 
 	int error_count;
 };

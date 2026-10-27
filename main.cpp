@@ -82,6 +82,7 @@ MyTimer *timer = NULL;
 wxString last_status;
 unsigned int incr_update_intervall=2*60*60+10*60;
 bool backup_is_running=false;
+long long pause_timeout_s=-1;
 extern bool b_is_pausing;
 
 #ifndef DD_RELEASE
@@ -573,6 +574,68 @@ wxString getPercentText(wxString pcdone)
 	return ret;
 }
 
+//Appends the sleep prevention state to a state text, e.g.
+//"Full file backup running. 34% done -- keeping this PC awake"
+wxString appendKeepAwakeText(wxString state, int keeping_awake, int prevent_sleep)
+{
+	wxString awake;
+	if(keeping_awake==1)
+	{
+		awake = _("keeping this PC awake");
+	}
+	else if(keeping_awake==0 && prevent_sleep==0)
+	{
+		awake = _("PC may sleep (sleep prevention off)");
+	}
+
+	if(awake.empty())
+	{
+		return state;
+	}
+
+	state.Trim();
+	if(state.EndsWith(wxT(".")))
+	{
+		state.RemoveLast();
+	}
+	return state + wxT(" ") + wxString(wxUniChar(0x2014)) + wxT(" ") + awake;
+}
+
+//"14:05", "14:05 tomorrow" or "<date> 14:05"
+wxString getResumeTimeText(long long pause_until)
+{
+	if(pause_until<=0)
+	{
+		return wxEmptyString;
+	}
+
+	wxDateTime until_dt((wxLongLong)(pause_until*1000));
+	wxDateTime today = wxDateTime::Today();
+	wxString time_str = until_dt.Format(wxT("%H:%M"));
+
+	if(until_dt.IsSameDate(today))
+	{
+		return time_str;
+	}
+	else if(until_dt.IsSameDate(today + wxDateSpan::Day()))
+	{
+		return trans_1(_("_1_ tomorrow"), time_str);
+	}
+	return until_dt.FormatDate()+wxT(" ")+time_str;
+}
+
+wxString getPauseDurationText(long long seconds)
+{
+	wxString num;
+	if(seconds%3600==0)
+	{
+		num << (seconds/3600);
+		return trans_1(_("_1_ hours"), num);
+	}
+	num << ((seconds+59)/60);
+	return trans_1(_("_1_ minutes"), num);
+}
+
 namespace
 {
 	wxString getIconName(ETrayIcon selicon)
@@ -827,6 +890,13 @@ void MyTimer::Notify()
 		backup_is_running=true;
 
 	}
+	else if(status.status==wxT("RESTORE_FILES"))
+	{
+		status_text+=getStatusText(status.status)+wxT(" ");
+		status_text+=getPercentText(status.pcdone);
+		icon_type=ETrayIcon_PROGRESS;
+		backup_is_running=false;
+	}
 	else if(status.status==wxT("NO_RECENT"))
 	{	
 		status_text+=wxString(_("No current backup.")) + wxT(" ");
@@ -839,6 +909,15 @@ void MyTimer::Notify()
 		backup_is_running=false;
 	}
 
+	bool has_awake_text = false;
+	if(icon_type==ETrayIcon_PROGRESS || status.keeping_awake==1)
+	{
+		wxString with_awake = appendKeepAwakeText(status_text, status.keeping_awake, status.prevent_sleep);
+		has_awake_text = with_awake!=status_text;
+		status_text = with_awake;
+	}
+
+	wxString last_backup_text;
 	if(!status.lastbackupdate.Trim().empty() )
 	{
 		wxLongLong_t lastbackups;
@@ -846,13 +925,22 @@ void MyTimer::Notify()
 		{
 			wxDateTime lastbackup_dt((wxLongLong)(lastbackups*1000));
 
-			status_text+=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
+			last_backup_text=trans_1(_("Last backup on _1_"), lastbackup_dt.Format());
 		}	
 	}
 
-	if(status.pause && icon_type==ETrayIcon_PROGRESS)
+	if(status.pause)
 	{
+		//Paused is shown in every state, not only while a backup is running
 		icon_type=ETrayIcon_PAUSED;
+		if(status.pause_until>0)
+		{
+			status_text=trans_1(_("Backups PAUSED, resume at _1_."), getResumeTimeText(status.pause_until))+wxT(" ")+status_text;
+		}
+		else
+		{
+			status_text=wxString(_("Backups PAUSED."))+wxT(" ")+status_text;
+		}
 	}
 	else if(icon_type==ETrayIcon_PROGRESS && status.pcdone==wxT("-1"))
 	{
@@ -864,7 +952,18 @@ void MyTimer::Notify()
 		icon_type=ETrayIcon_NO_SERVER;
 	}
 
+	if(!last_backup_text.empty())
+	{
+		wxString sep = has_awake_text ? wxString(wxT("\n")) : wxString();
+		//Windows cuts tray tooltips after 127 characters: rather leave out the last backup time than cut the state
+		if(status_text.length()+sep.length()+last_backup_text.length()<=127)
+		{
+			status_text+=sep+last_backup_text;
+		}
+	}
+
 	b_is_pausing=status.pause;
+	pause_timeout_s=status.pause_timeout;
 	
 
 	if(icon_type!=last_icon_type || last_status!=status_text || refresh)

@@ -109,7 +109,8 @@ namespace
 Status* Status::instance = NULL;
 
 Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
-	: GUIStatus(parent, follow_only_process_id)
+	: GUIStatus(parent, follow_only_process_id), paused(false), keeping_awake(-1), prevent_sleep(-1), pause_until(0),
+	last_keeping_awake(-2), last_prevent_sleep(-2)
 {
 	SetIcon(wxIcon(res_path+wxT("backup-ok.")+ico_ext, ico_type));
 
@@ -138,6 +139,53 @@ Status::Status(wxWindow* parent, wxLongLong_t follow_only_process_id)
 }
 
 
+
+void Status::updateStatusFlags()
+{
+	//STATUS DETAIL does not carry the paused state, so ask FSTATUS (the fast variant: plain STATUS answers only every 20-45s)
+	if(!status_flags.init || status_flags.hasError())
+	{
+		status_flags = Connector::initStatus(status_flags.client, true, 60000);
+	}
+
+	if(status_flags.init && status_flags.isAvailable())
+	{
+		paused = status_flags.pause;
+		keeping_awake = status_flags.keeping_awake;
+		prevent_sleep = status_flags.prevent_sleep;
+		pause_until = status_flags.pause_until;
+		status_flags.init = false;
+	}
+
+	if(follow_only_process_id != 0)
+	{
+		return;
+	}
+
+	wxString flags_text;
+	if(paused && pause_until>0)
+	{
+		flags_text = trans_1(_("Backups are PAUSED. They continue automatically at _1_, or choose \"Continue\" in the tray icon menu."), getResumeTimeText(pause_until));
+	}
+	else if(paused)
+	{
+		flags_text = _("Backups are PAUSED. Nothing is backed up until you choose \"Continue\" in the tray icon menu.");
+	}
+
+	wxFont flags_font = m_staticText36->GetFont();
+	if(paused)
+	{
+		flags_font.SetWeight(wxFONTWEIGHT_BOLD);
+		m_staticText36->SetOwnForegroundColour(*wxRED);
+	}
+	else
+	{
+		flags_font.SetWeight(wxFONTWEIGHT_NORMAL);
+		m_staticText36->SetOwnForegroundColour(wxNullColour);
+	}
+	m_staticText36->SetFont(flags_font);
+	m_staticText36->SetLabel(flags_text);
+}
 
 bool Status::updateStatus(int errcnt)
 {
@@ -170,12 +218,18 @@ bool Status::updateStatus(int errcnt)
 	}
 	
 
-	if(last_status_details == status_details)
+	updateStatusFlags();
+
+	if(last_status_details == status_details
+		&& last_keeping_awake == keeping_awake
+		&& last_prevent_sleep == prevent_sleep)
 	{
 		return true;
 	}
 
 	last_status_details = status_details;
+	last_keeping_awake = keeping_awake;
+	last_prevent_sleep = prevent_sleep;
 
 	if (!status_details.running_processes.empty())
 	{
@@ -244,7 +298,7 @@ bool Status::updateStatus(int errcnt)
 			status_text += wxT(" ");
 			status_text += getPercentText(s);
 
-			item.m_staticText31->SetLabel(status_text);
+			item.m_staticText31->SetLabel(appendKeepAwakeText(status_text, keeping_awake, prevent_sleep));
 		}
 	}
 	else
@@ -350,6 +404,11 @@ void Status::OnClose()
 	{
 		connection.client->Destroy();
 		connection.client = NULL;
+	}
+	if (status_flags.client != NULL)
+	{
+		status_flags.client->Destroy();
+		status_flags.client = NULL;
 	}
 	Destroy();
 }

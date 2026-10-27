@@ -108,6 +108,9 @@ class GUISettings : public wxDialog
 		wxBitmapButton* m_bitmapButton17;
 		wxStaticText* m_staticText281;
 		wxTextCtrl* m_textCtrl19;
+		wxStaticText* m_staticTextPreventSleep;
+		wxCheckBox* m_checkBoxPreventSleep;
+		wxBitmapButton* m_bitmapButtonPreventSleep;
 		wxBitmapButton* m_bitmapButton19;
 		wxStaticText* m_staticText291;
 		wxTextCtrl* m_textCtrl23;

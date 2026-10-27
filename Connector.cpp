@@ -905,6 +905,10 @@ bool SStatus::isAvailable()
 	Tokenize(ret, toks, "#");
 
 	pause=false;
+	keeping_awake=-1;
+	prevent_sleep=-1;
+	pause_until=0;
+	pause_timeout=-1;
 	capa=0;
 	ask_restore_ok=false;
 	if(toks.size()>0)
@@ -933,6 +937,26 @@ bool SStatus::isAvailable()
 		if(it_new_server!=params.end())
 		{
 			new_server=it_new_server->second;
+		}
+		std::map<std::string,std::string>::iterator it_keeping_awake=params.find("keeping_awake");
+		if(it_keeping_awake!=params.end())
+		{
+			keeping_awake = atoi(it_keeping_awake->second.c_str());
+		}
+		std::map<std::string,std::string>::iterator it_prevent_sleep=params.find("prevent_sleep");
+		if(it_prevent_sleep!=params.end())
+		{
+			prevent_sleep = atoi(it_prevent_sleep->second.c_str());
+		}
+		std::map<std::string,std::string>::iterator it_pause_until=params.find("pause_until");
+		if(it_pause_until!=params.end())
+		{
+			pause_until = atoll(it_pause_until->second.c_str());
+		}
+		std::map<std::string,std::string>::iterator it_pause_timeout=params.find("pause_timeout");
+		if(it_pause_timeout!=params.end())
+		{
+			pause_timeout = atoll(it_pause_timeout->second.c_str());
 		}
 		std::map<std::string,std::string>::iterator it_has_server=params.find("has_server");
 		if(it_has_server!=params.end())

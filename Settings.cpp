@@ -383,6 +383,17 @@ Settings::Settings(wxWindow* parent) : GUISettings(parent),
 		m_textCtrl19->SetValue(wxT("0"));
 	}
 	setSettingsSwitch(L"startup_backup_delay", m_bitmapButton19, m_textCtrl19);
+#ifdef _WIN32
+	if(getSettingsValue(L"prevent_sleep", &t, settings) && t==L"false")
+	{
+		m_checkBoxPreventSleep->SetValue(false);
+	}
+	else
+	{
+		m_checkBoxPreventSleep->SetValue(true);
+	}
+	setSettingsSwitch(L"prevent_sleep", m_bitmapButtonPreventSleep, m_checkBoxPreventSleep);
+#endif
 	if(!MyTimer::hasCapability(DONT_DO_IMAGE_BACKUPS, capa))
 	{
 		if(getSettingsValue(L"image_letters", &t, settings))
@@ -961,7 +972,7 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 	{
 		return convert(watoi(val) / ((1024*1024) / 8));
 	}
-	else if (key == "update_freq_image_incr")
+	else if (key == L"update_freq_image_incr")
 	{
 		int ret = watoi(val) * 24 * 60 * 60;
 		m_checkBox1->SetValue(true);
@@ -972,7 +983,7 @@ std::wstring Settings::transformValToUI(const std::wstring & key, const std::wst
 		}
 		return convert(ret);
 	}
-	else if (key == "update_freq_image_full")
+	else if (key == L"update_freq_image_full")
 	{
 		int ret = watoi(val) * 24 * 60 * 60;
 		m_checkBox1_2->SetValue(true);

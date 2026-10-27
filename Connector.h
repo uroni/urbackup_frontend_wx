@@ -41,7 +41,8 @@ struct SBackupDir
 struct SStatus
 {
 	SStatus()
-		: pause(false), capa(0), has_server(false),
+		: pause(false), keeping_awake(-1), prevent_sleep(-1), pause_until(0), pause_timeout(-1),
+		capa(0), has_server(false),
 		needs_restore_restart(0), ask_restore_ok(0),
 		error(false), init(false), restore_file(false),
 		client(NULL)
@@ -55,6 +56,10 @@ struct SStatus
 	wxString status;
 	wxString pcdone;
 	bool pause;
+	int keeping_awake; //-1 if the backend does not report it
+	int prevent_sleep; //-1 if the backend does not report it
+	long long pause_until; //unix time the pause ends, 0 if none
+	long long pause_timeout; //seconds a new pause lasts, 0 = until continued, -1 if not reported
 	int capa;
 	std::string new_server;
 	bool has_server;
