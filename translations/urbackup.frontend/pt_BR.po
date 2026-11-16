@@ -437,7 +437,7 @@ msgstr "Operação de Restauração em progresso"
 
 #: RestoreWindowsComponents.cpp:696
 msgid "Restore finished"
-msgstr "Falha na Restauração"
+msgstr "Restauração concluída"
 
 #: RestoreWindowsComponents.cpp:736
 msgid "Restoring component \"_1_\" of writer \"_2_\". Indexing..."
@@ -617,7 +617,7 @@ msgstr "Aguardando."
 
 #: Status.cpp:264
 msgid "Restore finished."
-msgstr "Falha na Restauração."
+msgstr "Restauração concluída."
 
 #: Status.cpp:292
 msgid "Yes"
