@@ -1,0 +1,62 @@
+name: build-tray
+
+on:
+  push:
+    branches: [no-about]
+  workflow_dispatch:
+
+env:
+  WX_VERSION: 3.1.7
+  WX_RUNTIME: dynamic   # switch to "static" if the link step reports LNK2038 runtime mismatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Cache wxWidgets
+        id: wxcache
+        uses: actions/cache@v4
+        with:
+          path: wx
+          key: wx-${{ env.WX_VERSION }}-x64-${{ env.WX_RUNTIME }}
+
+      - name: Download wxWidgets
+        if: steps.wxcache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest "https://github.com/wxWidgets/wxWidgets/releases/download/v$env:WX_VERSION/wxWidgets-$env:WX_VERSION.zip" -OutFile wx.zip
+          7z x wx.zip -owx -y | Out-Null
+          if (-not (Test-Path wx/include)) {
+            $inner = Get-ChildItem wx -Directory | Select-Object -First 1
+            Move-Item "$($inner.FullName)/*" wx
+          }
+          Get-ChildItem wx | Select-Object Name
+
+      - name: Build wxWidgets
+        if: steps.wxcache.outputs.cache-hit != 'true'
+        working-directory: wx/build/msw
+        run: nmake -f makefile.vc BUILD=release SHARED=0 UNICODE=1 TARGET_CPU=X64 RUNTIME_LIBS=${{ env.WX_RUNTIME }}
+
+      - name: Build tray app
+        shell: pwsh
+        run: |
+          $wx = "$env:GITHUB_WORKSPACE\wx"
+          $env:WxWidgetsIncludeDir = "$wx\include;$wx\include\msvc"
+          $env:WxWidgetsLibDir = "$wx\lib"
+          msbuild UrBackupClientGUI.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0
+
+      - name: List built exe files
+        shell: pwsh
+        run: Get-ChildItem -Recurse -Filter *.exe | Where-Object { $_.FullName -notlike "*\wx\*" } | Select-Object FullName, Length
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tray-app-x64
+          path: x64/Release/*.exe
+          if-no-files-found: warn
