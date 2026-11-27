@@ -399,7 +399,6 @@ wxMenu* TrayIcon::CreatePopupMenu(void)
 		mnu->AppendSeparator();
 		any_prev=false;
 	}
-	
 	if(backup_is_running)
 	{
 		if(b_is_pausing==false)
